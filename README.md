@@ -59,7 +59,7 @@ To run the app, ensure you have the following installed:
 - **Params**: `tweet_message` (Your tweet message)
 - **Usage**:
   ```bash
-  $(customapi.https://12345.ngrok-free.app/twitter/tweet?tweet_message=HelloWorld)
+  $(customapi.https://12345.ngrok-free.app/twitter/tweet?tweet_message=$(1:))
   ```
 
 ### `/twitch/login`
