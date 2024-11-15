@@ -130,3 +130,8 @@ nmp-stream-manager/
 2. The app will launch the Twitch login page automatically for authentication.
 
 ---
+
+## Important Notes
+
+- **StreamElements Integration**: You can use StreamElements chatbots to trigger these API endpoints via custom commands. Usage examples for StreamElements chatbot API are written in the README.
+- **Security Note**: It is highly recommended you always make your commands "Broadcaster" or "Moderator" to avoid exposing these features to the general chat audience.
