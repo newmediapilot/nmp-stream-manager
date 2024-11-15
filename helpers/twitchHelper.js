@@ -1,5 +1,5 @@
 require('dotenv').config(); // Load environment variables from .env
-const { getParam ,setParam } = require('./callbackHelper'); // Import setParam to save parameters
+const { getSecret,setSecret} = require('./callbackHelper'); // Import setParam to save parameters
 const axios = require('axios');
 
 // Function to generate the OAuth login URL and redirect the user
@@ -22,7 +22,7 @@ function twitchLogin(req, res) {
     res.redirect(oauthUrl); // Redirect the user to the Twitch login URL
 }
 
-// Function to exchange the OAuth code for an access token
+// Function to exchange the OAuth code for an access token and refresh token
 async function getOAuthTokens(code) {
     try {
         const response = await axios.post('https://id.twitch.tv/oauth2/token', null, {
@@ -35,12 +35,17 @@ async function getOAuthTokens(code) {
             },
         });
 
-        // Log the response to debug
-        console.log('OAuth token response:', response.data);
+        const accessToken = response.data.access_token;
+        const refreshToken = response.data.refresh_token;
 
-        // Store the access token and refresh token for later use
-        setParam('access_token', response.data.access_token);
-        setParam('refresh_token', response.data.refresh_token);
+        // Store the access token and refresh token in .secrets file
+        setSecret('access_token', accessToken); // Save access_token
+        setSecret('refresh_token', refreshToken); // Save refresh_token
+
+        // Log the response and tokens
+        console.log('OAuth token response:', response.data);
+        console.log('Access Token:', accessToken);
+        console.log('Refresh Token:', refreshToken);
 
         return response.data; // Return the access token and refresh token
     } catch (error) {
@@ -52,7 +57,7 @@ async function getOAuthTokens(code) {
 // Function to get the broadcaster's ID by username
 async function getBroadcasterId(username) {
     try {
-        const accessToken = getParam('access_token'); // Get the access token from setParam
+        const accessToken = getSecret('access_token'); // Get the access token from setParam
         const response = await axios.get(`https://api.twitch.tv/helix/users?login=${username}`, {
             headers: {
                 'Client-ID': process.env.TWITCH_CLIENT_ID,
@@ -71,4 +76,4 @@ async function getBroadcasterId(username) {
     }
 }
 
-module.exports = { twitchLogin, getOAuthTokens, getBroadcasterId };
+module.exports = {twitchLogin, getOAuthTokens, getBroadcasterId};

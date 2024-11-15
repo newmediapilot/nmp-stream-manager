@@ -1,4 +1,5 @@
+.idea
 .env
+.secrets
 node_modules
 package-lock.json
-.idea
