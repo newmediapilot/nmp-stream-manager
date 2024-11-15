@@ -30,7 +30,9 @@ You need a [Twitter Developer account](https://developer.twitter.com/en/apps) an
 
 ## Configuration
 
-You will need to fill out the `.secrets-env` file with the following details:
+You will need to create a the `.env` file with the following details (based on `.env-example`):
+
+> Never commit this file, avoid modifying .env-example directly, make a copy and rename it first!
 
 - **NGROK_AUTHTOKEN**: Your ngrok auth token.
 - **TWITCH_CLIENT_ID**: Your Twitch client ID.
