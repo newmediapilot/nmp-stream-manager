@@ -11,6 +11,22 @@ NMP Stream Manager is a stream utility designed for Twitch streamers. It integra
 
 ---
 
+## Configuration
+
+1. Clone the repository and install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Copy the `.env-example` file to `.env`:
+   ```bash
+   cp .env-example .env
+   ```
+
+3. Open the `.env` file and update it with your credentials for Ngrok, Twitch, Twitter, and Sensor Logger.
+
+---
+
 ## Prerequisites
 
 To run the app, ensure you have the following installed:
@@ -32,22 +48,6 @@ To run the app, ensure you have the following installed:
 
 5. **Sensor Logger App**:
    - Use the Awesome Sensor Logger app to fetch heart rate data and make sure it posts JSON data.
-
----
-
-## Configuration
-
-1. Clone the repository and install dependencies:
-   ```bash
-   npm install
-   ```
-
-2. Copy the `.env-example` file to `.env`:
-   ```bash
-   cp .env-example .env
-   ```
-
-3. Open the `.env` file and update it with your credentials for Ngrok, Twitch, Twitter, and Sensor Logger.
 
 ---
 
