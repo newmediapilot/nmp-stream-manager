@@ -1,101 +1,402 @@
 
-# Stream Utility Tool
+# NMP Stream Manager
 
-This tool is a stream utility that launches a local server compatible with OBS. It enables various integrations such as:
+NMP Stream Manager is a stream utility designed for Twitch streamers. It integrates various API endpoints to help manage your stream, including Twitter tweets, Twitch clips, and sensor data logging. This utility automatically opens the Twitch login page when launched, enabling seamless integration for the other API endpoints.
 
-- Tweeting via Twitter API
-- Creating clips on Twitch
+## Features
 
-The tool only runs locally and uses ngrok to send messages between your local server and OBS, providing reliable, local, and secure integration.
+- **Twitter Integration**: Tweet directly from the app using custom messages and hashtags.
+- **Twitch Integration**: Log in to your Twitch account and create clips for your stream.
+- **Sensor Logging**: Fetch heart rate data (or any other sensor data) and log it locally.
 
-This service only runs while the localhost is active.
+---
 
 ## Prerequisites
 
-### NPM
+To run the app, ensure you have the following installed:
 
-Make sure you have `npm` installed. You will also need to generate an API key and a static domain for ngrok. For more information, visit [ngrok](https://ngrok.com/).
+1. **Node.js and npm**:
+   - Install [Node.js](https://nodejs.org/) and npm (comes with Node.js).
 
-### Ngrok
+2. **Ngrok**:
+   - Create an [Ngrok account](https://ngrok.com/), generate your API key, and set up a static domain.
+   - Store your Ngrok API key and static domain in the `.env` file.
 
-You need an [ngrok account](https://ngrok.com/), and you will need to generate an API key and a static domain. The static domain will be used to expose your local server to the internet securely.
+3. **Twitch Developer Account**:
+   - Create a [Twitch Developer Account](https://dev.twitch.tv/console/apps) and generate a client ID, client secret, and OAuth redirect URL.
+   - Store these in the `.env` file.
 
-### Twitch API Key
+4. **Twitter Developer Account**:
+   - Create a [Twitter Developer Account](https://developer.twitter.com/en/apps) and generate your Twitter API key and secret.
+   - Store these in the `.env` file.
 
-You need a [Twitch developer account](https://dev.twitch.tv/) and create an API key and secret to enable Twitch integration.
+5. **Sensor Logger App**:
+   - Use the Awesome Sensor Logger app to fetch heart rate data and make sure it posts JSON data.
 
-### Twitter API Key
-
-You need a [Twitter Developer account](https://developer.twitter.com/en/apps) and generate your API key and secret for Twitter integration.
+---
 
 ## Configuration
 
-You will need to create a the `.env` file with the following details (based on `.env-example`):
+1. Clone the repository and install dependencies:
+   ```bash
+   npm install
+   ```
 
-> Never commit this file, avoid modifying .env-example directly, make a copy and rename it first!
+2. Copy the `.env-example` file to `.env`:
+   ```bash
+   cp .env-example .env
+   ```
 
-- **NGROK_AUTHTOKEN**: Your ngrok auth token.
-- **TWITCH_CLIENT_ID**: Your Twitch client ID.
-- **TWITCH_CLIENT_SECRET**: Your Twitch client secret.
-- **TWITCH_USERNAME**: Your Twitch username.
-- **TWITCH_REDIRECT_URL**: The ngrok-generated URL that Twitch will redirect to after authentication.
-- **TWITTER_API_KEY**: Your Twitter API key.
-- **TWITTER_API_SECRET**: Your Twitter API secret.
-- **TWITTER_ACCESS_TOKEN**: Your Twitter access token.
-- **TWITTER_ACCESS_TOKEN_SECRET**: Your Twitter access token secret.
+3. Open the `.env` file and update it with your credentials for Ngrok, Twitch, Twitter, and Sensor Logger.
+
+---
 
 ## API Endpoints
 
-### `/tweet`
+### `/twitter/tweet`
+- **Method**: `GET`
+- **Description**: Post a tweet with a custom message and hashtags.
+- **Params**: `tweet_message` (Your tweet message)
+- **Usage**:
+  ```bash
+  $(customapi.https://12345.ngrok-free.app/twitter/tweet?tweet_message=HelloWorld)
+  ```
 
-- **POST**: `$(customapi.https://12345.ngrok-free.app/tweet?m=$(1:))`
-- This endpoint posts a tweet with the message provided in the query parameter `m`.
-- It returns a success message along with the tweet content and remaining tweets in the 24-hour limit.
+### `/twitch/login`
+- **Method**: `GET`
+- **Description**: Redirects to Twitch for OAuth login.
+- **Params**: `twitch_login_intent` (Specify where to redirect after successful login)
+- **Usage**:
+  ```bash
+  $(customapi.https://12345.ngrok-free.app/twitch/login?twitch_login_intent=/twitch/login/success)
+  ```
 
-### `/twitch/clip`
+### `/twitch/clip/create`
+- **Method**: `GET`
+- **Description**: Create a clip from your Twitch stream.
+- **Params**: None
+- **Usage**:
+  ```bash
+  $(customapi.https://12345.ngrok-free.app/twitch/clip/create)
+  ```
 
-- **POST**: `$(customapi.https://12345.ngrok-free.app/twitch/clip)`
-- This endpoint creates a clip on your Twitch channel.
-- The first time you open the server, you will need to click on the link in the console to generate your access codes. These codes will be stored under a hidden file called `.secrets`.
-- Once you have a `.secrets` file, you will be able to create clips from Streamlabs while the server is up and running.
+### `/sensor/data`
+- **Method**: `GET`
+- **Description**: Fetch sensor data (e.g., heart rate) from the configured sensor logger.
+- **Params**: None
+- **Usage**:
+  ```bash
+  $(customapi.https://12345.ngrok-free.app/sensor/data)
+  ```
 
-**Console log for the first-time access**:
-
-```
-App service running locally on http://localhost:80
-TWEET: http://localhost:80/tweet?m=HelloWorld
-Twitch LOGIN: http://localhost:80/twitch/login?twitch_login_intent=/twitch/clip/create
-CLIP: http://localhost:80/twitch/clip
-```
-After clicking on the URL, you will be redirected to generate your access codes.
+---
 
 ## File Tree
 
-```
-.
+```plaintext
+nmp-stream-manager/
+│
 ├── .env-example
 ├── .gitignore
 ├── package.json
-├── src
-│   ├── index.js
-│   ├── helpers
-│   │   ├── ngrok
-│   │   │   └── launch.js
-│   │   ├── store
-│   │   │   └── manager.js
-│   │   ├── twitch
-│   │   │   ├── clip.js
-│   │   │   └── login.js
-│   │   └── twitter
-│   │       └── tweet.js
-│   └── helpers
-│       ├── util
-│       │   ├── combine.js
-│       │   └── uncombine.js
-├── .combined.json
-└── .secrets
+└── src/
+    ├── index.js
+    ├── helpers/
+    │   ├── ngrok/
+    │   │   └── launch.js
+    │   ├── sensor/
+    │   │   └── data.js
+    │   ├── store/
+    │   │   └── manager.js
+    │   ├── twitter/
+    │   │   └── tweet.js
+    │   ├── twitch/
+    │   │   ├── clip.js
+    │   │   └── login.js
+    │   └── util/
+    │       ├── combine.js
+    │       └── uncombine.js
 ```
 
-## License
+---
 
-This project is licensed under the MIT License.
+## Running the App
+
+1. Run the app with the following command:
+   ```bash
+   npm start
+   ```
+
+2. The app will launch the Twitch login page automatically for authentication.
+
+---
+
+If you have any questions or need further assistance, feel free to reach out!
+
+# NMP Stream Manager
+
+NMP Stream Manager is a stream utility designed for Twitch streamers. It integrates various API endpoints to help manage your stream, including Twitter tweets, Twitch clips, and sensor data logging. This utility automatically opens the Twitch login page when launched, enabling seamless integration for the other API endpoints.
+
+## Features
+
+- **Twitter Integration**: Tweet directly from the app using custom messages and hashtags.
+- **Twitch Integration**: Log in to your Twitch account and create clips for your stream.
+- **Sensor Logging**: Fetch heart rate data (or any other sensor data) and log it locally.
+
+---
+
+## Prerequisites
+
+To run the app, ensure you have the following installed:
+
+1. **Node.js and npm**:
+   - Install [Node.js](https://nodejs.org/) and npm (comes with Node.js).
+
+2. **Ngrok**:
+   - Create an [Ngrok account](https://ngrok.com/), generate your API key, and set up a static domain.
+   - Store your Ngrok API key and static domain in the `.env` file.
+
+3. **Twitch Developer Account**:
+   - Create a [Twitch Developer Account](https://dev.twitch.tv/console/apps) and generate a client ID, client secret, and OAuth redirect URL.
+   - Store these in the `.env` file.
+
+4. **Twitter Developer Account**:
+   - Create a [Twitter Developer Account](https://developer.twitter.com/en/apps) and generate your Twitter API key and secret.
+   - Store these in the `.env` file.
+
+5. **Sensor Logger App**:
+   - Use the Awesome Sensor Logger app to fetch heart rate data and make sure it posts JSON data.
+
+---
+
+## Configuration
+
+1. Clone the repository and install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Copy the `.env-example` file to `.env`:
+   ```bash
+   cp .env-example .env
+   ```
+
+3. Open the `.env` file and update it with your credentials for Ngrok, Twitch, Twitter, and Sensor Logger.
+
+---
+
+## API Endpoints
+
+### `/twitter/tweet`
+- **Method**: `GET`
+- **Description**: Post a tweet with a custom message and hashtags.
+- **Params**: `tweet_message` (Your tweet message)
+- **Usage**:
+  ```bash
+  $(customapi.https://12345.ngrok-free.app/twitter/tweet?tweet_message=HelloWorld)
+  ```
+
+### `/twitch/login`
+- **Method**: `GET`
+- **Description**: Redirects to Twitch for OAuth login.
+- **Params**: `twitch_login_intent` (Specify where to redirect after successful login)
+- **Usage**:
+  ```bash
+  $(customapi.https://12345.ngrok-free.app/twitch/login?twitch_login_intent=/twitch/login/success)
+  ```
+
+### `/twitch/clip/create`
+- **Method**: `GET`
+- **Description**: Create a clip from your Twitch stream.
+- **Params**: None
+- **Usage**:
+  ```bash
+  $(customapi.https://12345.ngrok-free.app/twitch/clip/create)
+  ```
+
+### `/sensor/data`
+- **Method**: `GET`
+- **Description**: Fetch sensor data (e.g., heart rate) from the configured sensor logger.
+- **Params**: None
+- **Usage**:
+  ```bash
+  $(customapi.https://12345.ngrok-free.app/sensor/data)
+  ```
+
+---
+
+## File Tree
+
+```plaintext
+nmp-stream-manager/
+│
+├── .env-example
+├── .gitignore
+├── package.json
+└── src/
+    ├── index.js
+    ├── helpers/
+    │   ├── ngrok/
+    │   │   └── launch.js
+    │   ├── sensor/
+    │   │   └── data.js
+    │   ├── store/
+    │   │   └── manager.js
+    │   ├── twitter/
+    │   │   └── tweet.js
+    │   ├── twitch/
+    │   │   ├── clip.js
+    │   │   └── login.js
+    │   └── util/
+    │       ├── combine.js
+    │       └── uncombine.js
+```
+
+---
+
+## Running the App
+
+1. Run the app with the following command:
+   ```bash
+   npm start
+   ```
+
+2. The app will launch the Twitch login page automatically for authentication.
+
+---
+
+If you have any questions or need further assistance, feel free to reach out!
+
+# NMP Stream Manager
+
+NMP Stream Manager is a stream utility designed for Twitch streamers. It integrates various API endpoints to help manage your stream, including Twitter tweets, Twitch clips, and sensor data logging. This utility automatically opens the Twitch login page when launched, enabling seamless integration for the other API endpoints.
+
+## Features
+
+- **Twitter Integration**: Tweet directly from the app using custom messages and hashtags.
+- **Twitch Integration**: Log in to your Twitch account and create clips for your stream.
+- **Sensor Logging**: Fetch heart rate data (or any other sensor data) and log it locally.
+
+---
+
+## Prerequisites
+
+To run the app, ensure you have the following installed:
+
+1. **Node.js and npm**:
+   - Install [Node.js](https://nodejs.org/) and npm (comes with Node.js).
+
+2. **Ngrok**:
+   - Create an [Ngrok account](https://ngrok.com/), generate your API key, and set up a static domain.
+   - Store your Ngrok API key and static domain in the `.env` file.
+
+3. **Twitch Developer Account**:
+   - Create a [Twitch Developer Account](https://dev.twitch.tv/console/apps) and generate a client ID, client secret, and OAuth redirect URL.
+   - Store these in the `.env` file.
+
+4. **Twitter Developer Account**:
+   - Create a [Twitter Developer Account](https://developer.twitter.com/en/apps) and generate your Twitter API key and secret.
+   - Store these in the `.env` file.
+
+5. **Sensor Logger App**:
+   - Use the Awesome Sensor Logger app to fetch heart rate data and make sure it posts JSON data.
+
+---
+
+## Configuration
+
+1. Clone the repository and install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Copy the `.env-example` file to `.env`:
+   ```bash
+   cp .env-example .env
+   ```
+
+3. Open the `.env` file and update it with your credentials for Ngrok, Twitch, Twitter, and Sensor Logger.
+
+---
+
+## API Endpoints
+
+### `/twitter/tweet`
+- **Method**: `GET`
+- **Description**: Post a tweet with a custom message and hashtags.
+- **Params**: `tweet_message` (Your tweet message)
+- **Usage**:
+  ```bash
+  $(customapi.https://12345.ngrok-free.app/twitter/tweet?tweet_message=HelloWorld)
+  ```
+
+### `/twitch/login`
+- **Method**: `GET`
+- **Description**: Redirects to Twitch for OAuth login.
+- **Params**: `twitch_login_intent` (Specify where to redirect after successful login)
+- **Usage**:
+  ```bash
+  $(customapi.https://12345.ngrok-free.app/twitch/login?twitch_login_intent=/twitch/login/success)
+  ```
+
+### `/twitch/clip/create`
+- **Method**: `GET`
+- **Description**: Create a clip from your Twitch stream.
+- **Params**: None
+- **Usage**:
+  ```bash
+  $(customapi.https://12345.ngrok-free.app/twitch/clip/create)
+  ```
+
+### `/sensor/data`
+- **Method**: `GET`
+- **Description**: Fetch sensor data (e.g., heart rate) from the configured sensor logger.
+- **Params**: None
+- **Usage**:
+  ```bash
+  $(customapi.https://12345.ngrok-free.app/sensor/data)
+  ```
+
+---
+
+## File Tree
+
+```plaintext
+nmp-stream-manager/
+│
+├── .env-example
+├── .gitignore
+├── package.json
+└── src/
+    ├── index.js
+    ├── helpers/
+    │   ├── ngrok/
+    │   │   └── launch.js
+    │   ├── sensor/
+    │   │   └── data.js
+    │   ├── store/
+    │   │   └── manager.js
+    │   ├── twitter/
+    │   │   └── tweet.js
+    │   ├── twitch/
+    │   │   ├── clip.js
+    │   │   └── login.js
+    │   └── util/
+    │       ├── combine.js
+    │       └── uncombine.js
+```
+
+---
+
+## Running the App
+
+1. Run the app with the following command:
+   ```bash
+   npm start
+   ```
+
+2. The app will launch the Twitch login page automatically for authentication.
+
+---
+
+If you have any questions or need further assistance, feel free to reach out!
