@@ -30,16 +30,16 @@ app.get('/twitch/clip', (req, res) => {
 
     if (accessToken && refreshToken) {
         // Tokens are present, proceed to redirect to the clip creation endpoint
-        console.log('Access token and refresh token found, redirecting to /twitch/redirect/clip');
-        return res.redirect('/twitch/redirect/clip');
+        console.log('Access token and refresh token found, redirecting to /twitch/clip/create');
+        return res.redirect('/twitch/clip/create');
     }
 
     // If tokens are not present, initiate the login flow
     console.log('Access token or refresh token not found, redirecting to /twitch/login');
-    res.redirect('/twitch/login?twitch_login_intent=/twitch/redirect/clip');
+    res.redirect('/twitch/login?twitch_login_intent=/twitch/clip/create');
 });
 
-app.get('/twitch/redirect/clip', (req, res) => clipHelper(req, res));
+app.get('/twitch/clip/create', (req, res) => clipHelper(req, res));
 
 async function startServices() {
     try {
@@ -48,7 +48,7 @@ async function startServices() {
         app.listen(PORT, () => {
             console.log(`App service running locally on http://localhost:${PORT}`);
             console.log(`TWEET: ${publicUrl}/tweet?m=HelloWorld`);
-            console.log(`Twitch LOGIN: ${publicUrl}/twitch/login?twitch_login_intent=/twitch/redirect/clip`);
+            console.log(`Twitch LOGIN: ${publicUrl}/twitch/login?twitch_login_intent=/twitch/clip/create`);
             console.log(`CLIP: ${publicUrl}/twitch/clip`);
         });
     } catch (err) {
