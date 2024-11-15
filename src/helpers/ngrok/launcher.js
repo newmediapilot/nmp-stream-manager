@@ -18,4 +18,4 @@ async function startNgrok(port) {
     }
 }
 
-module.exports = { startNgrok };
+module.exports = { launch };

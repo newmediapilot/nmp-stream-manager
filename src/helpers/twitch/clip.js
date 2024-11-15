@@ -1,7 +1,7 @@
 require('dotenv').config(); // Load environment variables from .env
 const axios = require('axios');
-const { getBroadcasterId } = require('./oauth'); // Import the getBroadcasterId to access stored params
-const { getSecret } = require('../store/manager'); // Import getSecret to fetch the access token
+const {getBroadcasterId} = require('./oauth'); // Import the getBroadcasterId to access stored params
+const {getSecret} = require('../store/manager'); // Import getSecret to fetch the access token
 
 async function clipHelper(req, res) {
     try {
@@ -52,4 +52,20 @@ async function clipHelper(req, res) {
     }
 }
 
-module.exports = { clipHelper };
+async function clipGateway(req, res) {
+    // Check if the 'access_token' and 'refresh_token' exist in the secret file
+    const accessToken = getSecret('access_token');
+    const refreshToken = getSecret('refresh_token');
+
+    if (accessToken && refreshToken) {
+        // Tokens are present, proceed to redirect to the clip creation endpoint
+        console.log('Access token and refresh token found, redirecting to /twitch/clip/create');
+        return res.redirect('/twitch/clip/create');
+    }
+
+    // If tokens are not present, initiate the login flow
+    console.log('Access token or refresh token not found, redirecting to /twitch/login');
+    res.redirect('/twitch/login?twitch_login_intent=/twitch/clip/create');
+}
+
+module.exports = {clipHelper, clipHelper};

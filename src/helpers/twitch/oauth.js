@@ -11,6 +11,10 @@ function twitchLogin(req, res) {
     const twitch_login_intent = req.query.twitch_login_intent || null;
     console.log(`twitchLogin called with twitch_login_intent: ${twitch_login_intent}`);
 
+    if (twitch_login_intent) {
+        setParam('twitch_login_intent', twitch_login_intent);
+    }
+
     // If no 'twitch_login_intent' is provided, stop the flow and do nothing
     if (!twitch_login_intent) {
         console.log('No twitch_login_intent provided. Stopping the flow.');
