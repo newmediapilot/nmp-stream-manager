@@ -1,5 +1,5 @@
 require('dotenv').config(); // Load environment variables from .env
-const { getSecret,setSecret,setParam} = require('../store/manager'); // Import setParam to save parameters
+const { setSecret } = require('../store/manager'); // Import setSecret to save parameters
 const axios = require('axios');
 
 // Function to generate the OAuth login URL and redirect the user
@@ -8,20 +8,7 @@ function twitchLogin(req, res) {
     const TWITCH_REDIRECT_URL = process.env.TWITCH_REDIRECT_URL;
     const TWITCH_SCOPES = 'clips:edit';
 
-    const twitch_login_intent = req.query.twitch_login_intent || null;
-    console.log(`twitchLogin called with twitch_login_intent: ${twitch_login_intent}`);
-
-    if (twitch_login_intent) {
-        setParam('twitch_login_intent', twitch_login_intent);
-    }
-
-    // If no 'twitch_login_intent' is provided, stop the flow and do nothing
-    if (!twitch_login_intent) {
-        console.log('No twitch_login_intent provided. Stopping the flow.');
-        return res.status(400).send('No valid intent provided.');
-    }
-
-    // Otherwise, proceed with the regular OAuth flow
+    // Proceed directly to the regular OAuth flow
     const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(TWITCH_REDIRECT_URL)}&response_type=code&scope=${TWITCH_SCOPES}`;
     res.redirect(oauthUrl); // Redirect the user to the Twitch login URL
 }
@@ -80,4 +67,4 @@ async function getBroadcasterId(username) {
     }
 }
 
-module.exports = {twitchLogin, getOAuthTokens, getBroadcasterId};
+module.exports = { twitchLogin, getOAuthTokens, getBroadcasterId };

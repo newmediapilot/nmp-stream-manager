@@ -27,12 +27,12 @@ async function startServices() {
 
         // Automatically open the URL for the Twitch login page with the specified intent
         console.log(`Opening Twitch login URL...`);
-        await open(`${publicUrl}/twitch/login?twitch_login_intent=/twitch/login/success`);
+        await open(`${publicUrl}/twitch/login`);
 
         app.listen(PORT, () => {
             console.log(`App service running locally on http://localhost:${PORT}`);
             console.log(`TWEET: ${publicUrl}/twitter/tweet?tweet_message=HelloWorld`);
-            console.log(`Twitch LOGIN: ${publicUrl}/twitch/login?twitch_login_intent=/twitch/login/success`);
+            console.log(`Twitch LOGIN: ${publicUrl}/twitch/login`);
             console.log(`LOGIN: ${publicUrl}/twitch/login`);
         });
     } catch (err) {
