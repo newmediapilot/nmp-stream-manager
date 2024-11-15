@@ -1,8 +1,7 @@
 require('dotenv').config(); // Load environment variables from .env
 const axios = require('axios');
-const { getBroadcasterId } = require('./twitchHelper'); // Import the getBroadcasterId to access stored params
-const { getParam } = require('./callbackHelper'); // Import the callbackHelper to access stored params
-const { getSecret } = require('./callbackHelper'); // Import getSecret to fetch the access token
+const { getBroadcasterId } = require('./oauth'); // Import the getBroadcasterId to access stored params
+const { getSecret } = require('../store/manager'); // Import getSecret to fetch the access token
 
 async function clipHelper(req, res) {
     try {

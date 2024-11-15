@@ -1,5 +1,5 @@
 require('dotenv').config(); // Load environment variables from .env
-const { getSecret,setSecret} = require('../store/callbackHelper'); // Import setParam to save parameters
+const { getSecret,setSecret} = require('../store/manager'); // Import setParam to save parameters
 const axios = require('axios');
 
 // Function to generate the OAuth login URL and redirect the user

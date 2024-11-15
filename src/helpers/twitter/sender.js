@@ -13,7 +13,7 @@ const twitterClient = new TwitterApi({
 });
 
 // Function to handle tweeting
-async function tweet(req, res) {
+async function sender(req, res) {
     try {
         const message = req.query.m; // Get the tweet message from the query parameter
         if (!message) {
@@ -34,4 +34,4 @@ async function tweet(req, res) {
     }
 }
 
-module.exports = { tweet };
+module.exports = { tweet: sender };
