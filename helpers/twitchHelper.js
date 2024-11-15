@@ -1,5 +1,5 @@
 require('dotenv').config(); // Load environment variables from .env
-const { setParam } = require('./callbackHelper'); // Import setParam to save parameters
+const { getParam ,setParam } = require('./callbackHelper'); // Import setParam to save parameters
 const axios = require('axios');
 
 // Function to generate the OAuth login URL and redirect the user
@@ -71,4 +71,4 @@ async function getBroadcasterId(username) {
     }
 }
 
-module.exports = { twitchLogin, getOAuthTokens, getBroadcasterId, refreshAccessToken };
+module.exports = { twitchLogin, getOAuthTokens, getBroadcasterId };
