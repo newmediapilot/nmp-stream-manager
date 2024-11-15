@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node src/index.js",
     "combine": "node src/helpers/util/combine.js",
+    "uncombine": "node src/helpers/util/uncombine.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
