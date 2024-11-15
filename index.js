@@ -3,8 +3,9 @@ const express = require('express');
 const { startNgrok } = require('./helpers/ngrokHelper'); // Import Ngrok helper
 const { tweet } = require('./helpers/twitterHelper'); // Import Twitter helper
 const { setParam } = require('./helpers/callbackHelper'); // Import the callbackHelper function
+const { getSecret } = require('./helpers/callbackHelper'); // Import the getSecret method
 const { twitchLogin } = require('./helpers/twitchHelper'); // Import the twitchLogin function
-const { clipHelper } = require('./helpers/clipHelper'); // Import the createClip function
+const { clipHelper } = require('./helpers/clipHelper'); // Import the clipHelper function
 
 const app = express();
 const PORT = 80; // Local port for your server
@@ -23,16 +24,18 @@ app.get('/twitch/login', (req, res) => {
 });
 
 app.get('/twitch/clip', (req, res) => {
-    const twitch_clip_title = req.query.twitch_clip_title; // Get the 'twitch_clip_title' query parameter (clip title)
+    // Check if the 'access_token' and 'refresh_token' exist in the secret file
+    const accessToken = getSecret('access_token');
+    const refreshToken = getSecret('refresh_token');
 
-    if (!twitch_clip_title) {
-        return res.status(400).send('No clip title provided.'); // Return an error if 'm' is missing
+    if (accessToken && refreshToken) {
+        // Tokens are present, proceed to redirect to the clip creation endpoint
+        console.log('Access token and refresh token found, redirecting to /twitch/redirect/clip');
+        return res.redirect('/twitch/redirect/clip');
     }
 
-    // Capture the 'm' value using setParam
-    setParam('twitch_clip_title', twitch_clip_title); // Store the clip title as 'twitch_clip_title'
-
-    // Redirect to /twitch/login with intent set to '/twitch/redirect/clip'
+    // If tokens are not present, initiate the login flow
+    console.log('Access token or refresh token not found, redirecting to /twitch/login');
     res.redirect('/twitch/login?twitch_login_intent=/twitch/redirect/clip');
 });
 
@@ -46,7 +49,7 @@ async function startServices() {
             console.log(`App service running locally on http://localhost:${PORT}`);
             console.log(`TWEET: ${publicUrl}/tweet?m=HelloWorld`);
             console.log(`Twitch LOGIN: ${publicUrl}/twitch/login?twitch_login_intent=/twitch/redirect/clip`);
-            console.log(`CLIP: ${publicUrl}/twitch/clip?twitch_clip_title=OptionalMessage`);
+            console.log(`CLIP: ${publicUrl}/twitch/clip`);
         });
     } catch (err) {
         console.error('Error initializing services:', err);
