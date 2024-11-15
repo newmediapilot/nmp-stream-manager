@@ -65,7 +65,7 @@ function getSecret(name) {
 }
 
 // Function to handle the OAuth redirect and capture query parameters
-async function callbackHelper(req, res) {
+async function manager(req, res) {
     try {
         const queryParams = req.query; // Capture all query parameters from the URL
 
@@ -82,4 +82,4 @@ async function callbackHelper(req, res) {
     }
 }
 
-module.exports = { setParam, getParam, setSecret, getSecret, callbackHelper };
+module.exports = { setParam, getParam, setSecret, getSecret, callbackHelper: manager };

@@ -1,10 +1,10 @@
 require('dotenv').config(); // Load environment variables from .env
 const express = require('express');
-const { startNgrok } = require('./helpers/ngrokHelper'); // Import Ngrok helper
-const { tweet } = require('./helpers/twitterHelper'); // Import Twitter helper
-const { setParam } = require('./helpers/callbackHelper'); // Import the callbackHelper function
-const { getSecret } = require('./helpers/callbackHelper'); // Import the getSecret method
-const { twitchLogin } = require('./helpers/twitchHelper'); // Import the twitchLogin function
+const { startNgrok } = require('./helpers/ngrok/ngrokHelper'); // Import Ngrok helper
+const { tweet } = require('./helpers/twitter/twitterHelper'); // Import Twitter helper
+const { setParam } = require('./helpers/store/callbackHelper'); // Import the callbackHelper function
+const { getSecret } = require('./helpers/store/callbackHelper'); // Import the getSecret method
+const { twitchLogin } = require('./helpers/twitch/twitchHelper'); // Import the twitchLogin function
 const { clipHelper } = require('./helpers/clipHelper'); // Import the clipHelper function
 
 const app = express();
