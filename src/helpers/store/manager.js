@@ -1,3 +1,10 @@
+/**
+ * Manages state in a primitive singleton
+ * setParam and getParam save globally accessible data to memory (synchronously) but invoked often by async functions (beware)
+ * setSecret and getSecret create a .secrets(json) file and save values there for retrieval of temp tokens etc
+ * setSecret works by writing directly and reading directly from file at point of access to ensure sync behaviour
+ */
+
 require('dotenv').config(); // Load environment variables from .env
 const chalk = require('chalk'); // Require chalk for colorizing output
 const fs = require('fs'); // Import fs module to interact with files

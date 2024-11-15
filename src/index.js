@@ -2,9 +2,9 @@ require('dotenv').config(); // Load environment variables from .env
 const express = require('express');
 const {launch} = require('./helpers/ngrok/launcher'); // Import Ngrok helper
 const {tweet} = require('./helpers/twitter/tweet'); // Import Twitter helper
-const {getSecret} = require('./helpers/store/manager'); // Import the getSecret method
 const {twitchLogin} = require('./helpers/twitch/oauth'); // Import the twitchLogin function
 const {clipHelper} = require('./helpers/twitch/clip'); // Import the clipHelper function
+const {fetchSensorData} = require('./helpers/sensor-logger/sensor'); // Import the fetchSensorData function
 
 const app = express();
 const PORT = 80; // Local port for your server
@@ -16,6 +16,9 @@ app.get('/tweet', (req, res) => tweet(req, res));
 app.get('/twitch/login', (req, res) => twitchLogin(req, res));
 app.get('/twitch/clip', (req, res) => clipGateway(req, res));
 app.get('/twitch/clip/create', (req, res) => clipHelper(req, res));
+
+// SENSOR LOGGER
+app.get('/sensor/data', (req, res) => fetchSensorData(req, res));
 
 async function startServices() {
     try {
