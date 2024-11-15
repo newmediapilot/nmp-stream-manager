@@ -13,9 +13,9 @@ const twitterClient = new TwitterApi({
 });
 
 // Function to handle tweeting
-async function sender(req, res) {
+async function twitterTweet(req, res) {
     try {
-        const message = req.query.m; // Get the tweet message from the query parameter
+        const message = req.query.tweet_message; // Get the tweet message from the query parameter
         if (!message) {
             return res.send('No message provided for tweeting.');
         }
@@ -53,4 +53,4 @@ async function sender(req, res) {
     }
 }
 
-module.exports = { tweet: sender };
+module.exports = { twitterTweet };

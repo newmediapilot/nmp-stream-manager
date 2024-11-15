@@ -2,7 +2,7 @@ require('dotenv').config(); // Load environment variables from .env
 const ngrok = require('@ngrok/ngrok');
 
 // Starts the ngrok server with static app url of env.NGROK_URL
-async function startNgrok(port) {
+async function ngrokLaunch(port) {
     try {
         // Connect to Ngrok using a specified static domain
         const tunnel = await ngrok.connect({
@@ -19,4 +19,4 @@ async function startNgrok(port) {
     }
 }
 
-module.exports = { launch };
+module.exports = { ngrokLaunch };

@@ -78,14 +78,14 @@ After clicking on the URL, you will be redirected to generate your access codes.
 │   ├── index.js
 │   ├── helpers
 │   │   ├── ngrok
-│   │   │   └── launcher.js
+│   │   │   └── launch.js
 │   │   ├── store
 │   │   │   └── manager.js
 │   │   ├── twitch
 │   │   │   ├── clip.js
-│   │   │   └── oauth.js
+│   │   │   └── login.js
 │   │   └── twitter
-│   │       └── sender.js
+│   │       └── tweet.js
 │   └── helpers
 │       ├── util
 │       │   ├── combine.js
