@@ -1,112 +1,107 @@
-# NPM Stream
 
-This tool is a stream utility that launches a local server compatible with OBS. It enables the following functionalities:
+# Stream Utility Tool
 
-- **Clip**: Create clips on Twitch using a simple API.
-- **Tweet**: Send tweets from your account through an integrated API.
-- **More integrations**: More integrations can be added as per requirements.
+## Overview
+This tool is a stream utility that launches a local server compatible with OBS. It enables us to:
+- Create Twitch clips
+- Post tweets to Twitter
+- More integrations can be added in the future
 
-The service only runs locally and uses **ngrok** to send messages between your local server and OBS. This ensures a reliable, local, and secure integration.
+This tool runs locally and uses ngrok to send messages between your local server and OBS. It allows reliable, local, and secure integration with your streaming setup.
 
-**Note**: The service only runs while the localhost is active.
+The server will only run while your localhost is active.
 
 ## Prerequisites
 
-Before you can use this tool, ensure the following:
+### npm
+You need to have **npm** installed. If it's not installed, follow the [npm installation guide](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
-1. **npm**:
-    - Install npm (Node Package Manager) on your system.
-    - Install required npm dependencies with: `npm install`.
+### Ngrok
+You will also need **ngrok** to expose your local server to the internet. You can get it from [ngrok's official site](https://ngrok.com/). After registering, you'll get an API key and a static domain.
 
-2. **Ngrok**:
-    - You'll need an **ngrok** account and a static domain.
-    - Sign up and get your ngrok API key here: [Ngrok Sign Up](https://ngrok.com/).
-    - Configure ngrok for the static domain to link your local server.
+### Twitch Developer Account
+You'll need a **Twitch Developer API key and secret**. To create your account and generate keys, follow [this link](https://dev.twitch.tv/docs/authentication/).
 
-3. **Twitch API Key**:
-    - You need a **Twitch Developer API Key** and **Client Secret**.
-    - You can get these by registering your application with Twitch here: [Twitch Developer Console](https://dev.twitch.tv/console/apps).
-
-4. **Twitter Developer API Key**:
-    - You'll need a **Twitter Developer Account** and API keys.
-    - Get your keys from the [Twitter Developer Portal](https://developer.twitter.com/en/apps).
+### Twitter Developer Account
+You'll need a **Twitter Developer API key and secret**. To apply for access, follow [this link](https://developer.twitter.com/en/docs/authentication/oauth-1-0a).
 
 ## Configuration
 
-In order to get the service running, fill out the `.secrets-env` file. Each field needs to be populated with your credentials:
-
-- **NGROK_AUTHTOKEN**: Your ngrok API token.
-- **TWITCH_CLIENT_ID**: The client ID from your Twitch developer application.
-- **TWITCH_CLIENT_SECRET**: The client secret from your Twitch developer application.
-- **TWITCH_USERNAME**: Your Twitch username.
-- **TWITCH_REDIRECT_URL**: The redirect URL that is registered with Twitch for OAuth.
-- **TWITTER_API_KEY**: The API key for your Twitter developer account.
-- **TWITTER_API_SECRET**: The API secret for your Twitter developer account.
-- **TWITTER_ACCESS_TOKEN**: Your Twitter access token.
-- **TWITTER_ACCESS_TOKEN_SECRET**: Your Twitter access token secret.
+After setting up the prerequisites, you need to fill out the `.secrets-env` file with the following fields:
+- `NGROK_AUTHTOKEN`: Your ngrok API key.
+- `TWITCH_CLIENT_ID`: Your Twitch API Client ID.
+- `TWITCH_CLIENT_SECRET`: Your Twitch API Client Secret.
+- `TWITCH_USERNAME`: Your Twitch username.
+- `TWITCH_REDIRECT_URL`: The redirect URL used in your Twitch authentication flow.
+- `TWITTER_API_KEY`: Your Twitter API key.
+- `TWITTER_API_SECRET`: Your Twitter API secret.
+- `TWITTER_ACCESS_TOKEN`: Your Twitter access token.
+- `TWITTER_ACCESS_TOKEN_SECRET`: Your Twitter access token secret.
 
 ## API Endpoints
 
-The following API endpoints are defined in the tool:
+### `/tweet`
+- **Description**: Post a tweet to Twitter.
+- **Params**:
+  - `m`: The message for the tweet.
+  
+- **Note**: This endpoint will post the provided message to Twitter.
 
-1. **/tweet**: 
-   - Sends a tweet to Twitter.
-   - **Params**: `m` (Message to tweet).
-   - Returns a confirmation message with the tweet text and rate limit information.
+### `/twitch/login`
+- **Description**: This is the initial endpoint to initiate the OAuth flow with Twitch.
+- **Params**:
+  - `twitch_login_intent`: The path you want to navigate to after successful login (e.g., `/twitch/redirect/clip`).
+  
+- **Note**: This will redirect you to the Twitch authentication page. After successful login, it will redirect to the specified `twitch_login_intent`.
 
-2. **/twitch/login**: 
-   - Initiates the Twitch OAuth flow to allow the server to access your Twitch account.
-   - **Params**: `twitch_login_intent` (The intended action after login, e.g., create a clip).
-   - Returns a redirection to the Twitch login URL.
-
-3. **/twitch/clip**:
-   - Creates a clip on Twitch.
-   - **Params**: None, but requires valid OAuth tokens (obtained from `/twitch/login`).
-   - Returns the URL of the created clip.
-
-4. **/twitch/clip/create**:
-   - An endpoint triggered to actually create a clip on Twitch.
-   - **Params**: None.
-   - Returns the URL of the created clip.
+### `/twitch/clip`
+- **Description**: This endpoint allows you to create a clip on Twitch.
+- **Params**:
+  - `twitch_clip_title`: The title for the clip you want to create.
+  
+- **Note**:
+  - The first time you run the server, you will need to click on the link generated in the console to authenticate and generate your access codes. These will be stored in a hidden file called `.secrets`. The console log will look something like this:
+  
+  ```
+  App service running locally on http://localhost:80
+  TWEET: https://12345.ngrok-free.app/tweet?m=HelloWorld
+  Twitch LOGIN: https://12345.ngrok-free.app/twitch/login?twitch_login_intent=/twitch/redirect/clip
+  CLIP: https://12345.ngrok-free.app/twitch/clip
+  ```
+  
+  - **Highlight the link** in the console: **https://12345.ngrok-free.app/twitch/login?twitch_login_intent=/twitch/redirect/clip**.
+  - After generating the `.secrets` file, you will be able to create clips from Streamlabs while the server is up and running.
 
 ## File Tree
 
-```plaintext
-.
-├── .env-example               # Example environment configuration file
-├── .gitignore                 # Git ignore file to exclude sensitive data
-├── package.json               # Node.js dependencies and scripts
-├── src
-│   ├── index.js               # Main server file that initializes the app and routes
-│   ├── helpers
-│   │   ├── ngrok              # ngrok launcher
-│   │   │   └── launcher.js    # Starts ngrok and returns the public URL
-│   │   ├── store              # Store the state and tokens
-│   │   │   └── manager.js     # Manages the secret tokens
-│   │   ├── twitch             # Twitch-related operations
-│   │   │   ├── clip.js        # Handles creating clips on Twitch
-│   │   │   └── oauth.js       # Handles Twitch OAuth flow
-│   │   └── twitter            # Twitter-related operations
-│   │       └── sender.js      # Sends tweets via Twitter API
-│   └── helpers
-│       ├── util
-│       │   ├── combine.js     # Combines files into one
-│       │   └── uncombine.js   # Uncombines files from combined JSON
-└── .combined.json             # Contains combined content of all files for easy distribution
+```
+├── .env-example
+├── .gitignore
+├── package.json
+└── src
+    ├── index.js
+    ├── helpers
+    │   ├── util
+    │   │   ├── combine.js
+    │   │   └── uncombine.js
+    │   ├── twitter
+    │   │   └── sender.js
+    │   ├── twitch
+    │   │   ├── oauth.js
+    │   │   └── clip.js
+    │   └── store
+    │       └── manager.js
+    └── helpers
+        └── ngrok
+            └── launcher.js
 ```
 
-## How to Run the Application
+## Usage
 
-1. Install the required dependencies:
-   ```bash
-   npm install
-   ```
-2. Set up your API keys and static domain as described in the configuration section.
-3. Start the server:
-   ```bash
-   npm start
-   ```
-4. Ngrok will expose your local server to a public URL. You can use this URL with OBS to send messages and interact with the tool.
-
-5. Access the endpoints for creating clips, tweeting, and more.
+1. Clone the repository.
+2. Install dependencies using `npm install`.
+3. Fill out the `.secrets-env` file with your API keys and required configuration.
+4. Run the server using `npm start`.
+5. Use ngrok to expose your local server and get a public URL.
+6. Access the API endpoints via the ngrok URL.
 
