@@ -1,1 +1,14 @@
-Hello From Twitch!
+{% extends "layouts/main.njk" %}
+
+{% block title %}Twitch Login Success{% endblock %}
+
+{% block body %}
+<h2>Welcome to the success page after Twitch login!</h2>
+<p>The message displayed above comes from the header partial: <strong>{{ message }}</strong></p>
+{% endblock %}
+
+{% block footer-scripts %}
+<script>
+    console.log("Success page specific footer script.");
+</script>
+{% endblock %}

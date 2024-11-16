@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My App{% endblock %}</title>
+    <!-- Add common head scripts here -->
+    {% block head-scripts %}
+    <link rel="stylesheet" href="/assets/style.css">
+    {% endblock %}
+</head>
+<body>
+<!-- Header -->
+{% include "partials/header.njk" %}
+
+<!-- Main content -->
+<div class="content">
+    {% block body %}{% endblock %}
+</div>
+
+<!-- Footer -->
+{% include "partials/footer.njk" %}
+
+<!-- Footer-specific scripts -->
+{% block footer-scripts %}
+<script src="/assets/footer-scripts.js"></script>
+{% endblock %}
+</body>
+</html>
