@@ -18,10 +18,7 @@ app.get('/twitch/clip/create', twitchClipCreate);
 // app.get('/sensor/data', sensorData);
 
 // Public routes
-app.get('/public/twitch/success', (rep, res) => res.render('twitch/success', {
-    title: 'Twitch Login Success',
-    message: 'This window will close automatically...',
-}));
+app.get('/public/twitch/success', (rep, res) => res.render('twitch/success', { message: 'Hello from Nunjucks!' }));
 
 // Start services with Ngrok and Handlebars configuration
 startServices(app, PORT);

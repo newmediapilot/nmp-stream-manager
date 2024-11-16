@@ -22,6 +22,7 @@
     "glob": "^11.0.0",
     "handlebars-layouts": "^3.1.4",
     "hbs": "^4.2.0",
+    "nunjucks": "^3.2.4",
     "open": "^7.0.3",
     "twitter-api-v2": "^1.18.2"
   }
