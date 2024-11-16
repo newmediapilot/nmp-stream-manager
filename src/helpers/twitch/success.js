@@ -1,9 +1,8 @@
 require('dotenv').config();
 const axios = require('axios');
 const { setSecret } = require('../store/manager'); // Import setSecret to store tokens
-const { publicTwitchSuccess } = require('../../public/twitch/success'); // Import the success page builder
 
-// Function to handle Twitch login success and return a success page
+// Function to handle Twitch login success and redirect to the success page
 async function twitchLoginSuccess(req, res) {
     const code = req.query.code; // Retrieve the 'code' parameter from the query string
 
@@ -26,10 +25,8 @@ async function twitchLoginSuccess(req, res) {
         setSecret('access_token', accessToken);
         setSecret('refresh_token', refreshToken);
 
-        console.log('OAuth token response:', response.data);
-
-        // Return the HTML page for the success
-        res.send(publicTwitchSuccess());
+        // Redirect to the success page
+        res.redirect('/public/twitch/success');
     } catch (error) {
         console.error('Error exchanging code for tokens:', error.response?.data || error.message);
         res.status(500).send('Failed to get OAuth tokens');
