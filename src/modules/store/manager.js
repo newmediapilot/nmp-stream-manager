@@ -58,7 +58,7 @@ function setSecret(name, key) {
         }
 
         secrets[name] = key; // Update the secrets object
-        setParam(name, true); // Store publicly as 'true' once set
+        setParam(`${name}_set`, true); // Store publicly as 'true' once set
 
         fs.writeFileSync('.secrets', JSON.stringify(secrets, null, 2), 'utf8');
         console.log(chalk.bgGreen.whiteBright(`Secret set for ${name}: ${key}`));
@@ -71,10 +71,8 @@ function setSecret(name, key) {
 }
 
 function hasSecret(name) {
-    if (!secrets) {
-        loadSecrets();
-    }
-    console.error(chalk.bgRed.whiteBright('hasSecret:', !!secrets[name]));
+    loadSecrets();
+    console.error(chalk.bgRed.whiteBright('hasSecret:', name, !!secrets[name]));
     return !!secrets[name];
 }
 
@@ -96,4 +94,4 @@ function getSecret(name) {
     }
 }
 
-module.exports = { setParam, getParam, getAllParams, hasSecret, setSecret, getSecret };
+module.exports = {setParam, getParam, getAllParams, hasSecret, setSecret, getSecret};

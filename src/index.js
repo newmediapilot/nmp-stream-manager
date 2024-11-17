@@ -1,10 +1,10 @@
-// src/index.js
 require('dotenv').config();
 const express = require('express');
 const { twitterTweet } = require('./modules/twitter/tweet');
 const { twitchLogin } = require('./modules/twitch/login');
 const { twitchLoginSuccess } = require('./modules/twitch/success');
 const { twitchClipCreate } = require('./modules/twitch/clip');
+const { twitchMessageCreate } = require('./modules/twitch/message'); // New import
 const { startServices } = require('./modules/start');
 const ROUTES = require('./routes');
 
@@ -18,10 +18,11 @@ app.get(ROUTES.TWITTER_TWEET, twitterTweet);
 app.get(ROUTES.TWITCH_LOGIN, twitchLogin);
 app.get(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess);
 app.get(ROUTES.TWITCH_CLIP_CREATE, twitchClipCreate);
+app.get(ROUTES.TWITCH_MESSAGE_CREATE, twitchMessageCreate); // New route
 
 // Public paths
 app.get(ROUTES.PUBLIC_INDEX, (req, res) => res.render('index'));
 app.get(ROUTES.PUBLIC_TWITCH_SUCCESS, (req, res) => res.render('twitch/success'));
-app.get(ROUTES.PUBLIC_SETTINGS, (req, res) => res.render('settings')); // Updated to use ROUTES
+app.get(ROUTES.PUBLIC_SETTINGS, (req, res) => res.render('settings'));
 
 startServices(app, PORT);
