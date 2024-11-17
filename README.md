@@ -65,10 +65,9 @@ To run the app, ensure you have the following installed:
 ### `/twitch/login`
 - **Method**: `GET`
 - **Description**: Redirects to Twitch for OAuth login.
-- **Params**: `twitch_login_intent` (Specify where to redirect after successful login)
 - **Usage**:
   ```bash
-  $(customapi.https://12345.ngrok-free.app/twitch/login?twitch_login_intent=/twitch/login/success)
+  $(customapi.https://12345.ngrok-free.app/twitch/login)
   ```
 
 ### `/twitch/clip/create`
