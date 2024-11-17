@@ -5,10 +5,11 @@ const glob = require('glob');
 
 // Specify the glob pattern for your JS files (including subdirectories)
 const jsFilePatterns = [
-    "src/**/*.js", // This will match all JS files in 'src' and subdirectories
+    "src/**/*.*",
     ".env-example",
     ".gitignore",
     "package.json",
+    "README.md",
 ];
 
 // Path to the .env and .env-example files
