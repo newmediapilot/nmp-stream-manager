@@ -35,6 +35,8 @@ function setSecret(name, key) {
 
         secrets[name] = key;
 
+        setParam(name, true);// store publicly as 'true' once set
+
         fs.writeFileSync('.secrets', JSON.stringify(secrets, null, 2), 'utf8');
         console.log(chalk.bgGreen.whiteBright(`Secret set for ${name}: ${key}`));
     } catch (error) {
