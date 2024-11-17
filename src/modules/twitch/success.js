@@ -24,8 +24,8 @@ async function twitchLoginSuccess(req, res) {
         const accessToken = response.data.access_token;
         const refreshToken = response.data.refresh_token;
 
-        setSecret('access_token', accessToken);
-        setSecret('refresh_token', refreshToken);
+        setSecret('twitch_access_token_set', accessToken);
+        setSecret('twitch_refresh_token_set', refreshToken);
 
         res.redirect('/public/twitch/success');
     } catch (error) {

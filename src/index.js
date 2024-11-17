@@ -14,13 +14,16 @@ const { startServices } = require('./modules/start'); // Import the start servic
 const app = express();
 const PORT = 80; // Local port for your server
 
+// Twitter API
 app.get('/twitter/tweet', twitterTweet);
+
+// Twitch API
 app.get('/twitch/login', twitchLogin); // Redirect to Twitch login page
 app.get('/twitch/login/success', twitchLoginSuccess); // Handle login success and return page
 app.get('/twitch/clip/create', twitchClipCreate);
 
+// Public paths
 app.get('/public/index', (rep, res) => res.render('index', { message: 'Hello from index Nunjucks!' }));
 app.get('/public/twitch/success', (rep, res) => res.render('twitch/success', { message: 'Hello from success Nunjucks!' }));
-
 
 startServices(app, PORT);
