@@ -7,6 +7,7 @@ const ROUTES = {
     TWITCH_CLIP_CREATE: '/twitch/clip/create',
     PUBLIC_INDEX: '/public/index',
     PUBLIC_TWITCH_SUCCESS: '/public/twitch/success',
+    PUBLIC_SETTINGS: '/public/settings', // New route
 };
 
 module.exports = ROUTES;

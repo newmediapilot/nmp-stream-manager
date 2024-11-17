@@ -1,3 +1,4 @@
+// src/index.js
 require('dotenv').config();
 const express = require('express');
 const { twitterTweet } = require('./modules/twitter/tweet');
@@ -21,5 +22,6 @@ app.get(ROUTES.TWITCH_CLIP_CREATE, twitchClipCreate);
 // Public paths
 app.get(ROUTES.PUBLIC_INDEX, (req, res) => res.render('index'));
 app.get(ROUTES.PUBLIC_TWITCH_SUCCESS, (req, res) => res.render('twitch/success'));
+app.get(ROUTES.PUBLIC_SETTINGS, (req, res) => res.render('settings')); // Updated to use ROUTES
 
 startServices(app, PORT);

@@ -15,10 +15,30 @@ const chalk = require('chalk'); // Require chalk for colorizing output
 const fs = require('fs'); // Import fs module to interact with files
 
 let params = {}; // This object will hold all the query parameters
+let secrets = null; // Cached secrets object
+
+// Helper function to load secrets from the .secrets file
+function loadSecrets() {
+    if (fs.existsSync('.secrets')) {
+        try {
+            secrets = JSON.parse(fs.readFileSync('.secrets', 'utf8'));
+            console.log(chalk.bgGreen.black('Secrets loaded successfully.'));
+        } catch (error) {
+            console.error(chalk.bgRed.whiteBright('Error loading secrets:', error.message));
+            secrets = {}; // Fallback to an empty object
+        }
+    } else {
+        secrets = {}; // No secrets file found, initialize as empty
+    }
+}
 
 function setParam(key, value) {
     params[key] = value; // Set the parameter in the global object
     console.log(chalk.bgBlue.whiteBright(`Set ${key} = ${value}`));
+}
+
+function getAllParams() {
+    return params;
 }
 
 function getParam(key) {
@@ -31,38 +51,43 @@ function getParam(key) {
     return value; // Return the value (undefined if not found)
 }
 
-
 function setSecret(name, key) {
     try {
-        let secrets = {};
-        if (fs.existsSync('.secrets')) {
-            secrets = JSON.parse(fs.readFileSync('.secrets', 'utf8'));
+        if (!secrets) {
+            loadSecrets();
         }
 
-        secrets[name] = key;
-
-        setParam(name, true);// store publicly as 'true' once set
+        secrets[name] = key; // Update the secrets object
+        setParam(name, true); // Store publicly as 'true' once set
 
         fs.writeFileSync('.secrets', JSON.stringify(secrets, null, 2), 'utf8');
         console.log(chalk.bgGreen.whiteBright(`Secret set for ${name}: ${key}`));
+
+        // Reset secrets so it reloads next time
+        secrets = null;
     } catch (error) {
         console.error(chalk.bgRed.whiteBright('Error setting secret:', error.message));
     }
 }
 
+function hasSecret(name) {
+    if (!secrets) {
+        loadSecrets();
+    }
+    console.error(chalk.bgRed.whiteBright('hasSecret:', !!secrets[name]));
+    return !!secrets[name];
+}
+
 function getSecret(name) {
     try {
-        if (fs.existsSync('.secrets')) {
-            const secrets = JSON.parse(fs.readFileSync('.secrets', 'utf8'));
+        if (!secrets) {
+            loadSecrets();
+        }
 
-            if (secrets[name]) {
-                return secrets[name];
-            } else {
-                console.log(chalk.bgYellow.whiteBright(`Secret ${name} not found.`));
-                return null;
-            }
+        if (secrets[name]) {
+            return secrets[name];
         } else {
-            console.log(chalk.bgYellow.whiteBright('No secrets file found.'));
+            console.log(chalk.bgYellow.whiteBright(`Secret ${name} not found.`));
             return null;
         }
     } catch (error) {
@@ -71,19 +96,4 @@ function getSecret(name) {
     }
 }
 
-async function manager(req, res) {
-    try {
-        const queryParams = req.query; // Capture all query parameters from the URL
-
-        for (const [key, value] of Object.entries(queryParams)) {
-            setParam(key, value); // Automatically set each parameter
-        }
-
-        res.send({ message: 'Query parameters captured successfully', params: queryParams });
-    } catch (error) {
-        console.error('Error handling OAuth redirect:', error);
-        res.status(500).send('Failed to capture parameters');
-    }
-}
-
-module.exports = { setParam, getParam, setSecret, getSecret, callbackHelper: manager };
+module.exports = { setParam, getParam, getAllParams, hasSecret, setSecret, getSecret };
