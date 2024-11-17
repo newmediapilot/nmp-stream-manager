@@ -1,3 +1,8 @@
+/**
+ * File: src\modules\twitch\clip.js
+ * Description: This file contains logic for managing src\modules\twitch\clip operations.
+ * Usage: Import relevant methods/functions as required.
+ */
 require('dotenv').config(); // Load environment variables from .env
 const axios = require('axios');
 const {getBroadcasterId} = require('./login'); // Import the getBroadcasterId to access stored params
@@ -12,19 +17,15 @@ const {getSecret} = require('../store/manager'); // Import getSecret to fetch th
 async function twitchClipCreate(req, res) {
     try {
 
-        // Retrieve the access token from the .secrets file
         const accessToken = getSecret('access_token');
         if (!accessToken) {
             return res.status(400).send('Access token is missing. Please authenticate first.');
         }
 
-        // Get the broadcaster's ID using the username
         const broadcasterId = await getBroadcasterId(process.env.TWITCH_USERNAME);
 
-        // Log the broadcaster ID to verify
         console.log('Broadcaster ID:', broadcasterId);
 
-        // Make the API call to create the clip
         const response = await axios.post(
             'https://api.twitch.tv/helix/clips',
             {
@@ -47,7 +48,6 @@ async function twitchClipCreate(req, res) {
 
         res.send(`Clip created successfully: ${clipUrl}`); // Return the clip URL
     } catch (error) {
-        // Log detailed error for debugging
         console.error('Error creating clip:', error.response?.data || error.message);
 
         if (error.response?.data?.message === 'Clipping is not possible for an offline channel.') {

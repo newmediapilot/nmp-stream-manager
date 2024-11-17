@@ -1,10 +1,13 @@
+/**
+ * File: src\modules\ngrok\launch.js
+ * Description: This file contains logic for managing src\modules\ngrok\launch operations.
+ * Usage: Import relevant methods/functions as required.
+ */
 require('dotenv').config(); // Load environment variables from .env
 const ngrok = require('@ngrok/ngrok');
 
-// Starts the ngrok server with static app url of env.NGROK_URL
 async function ngrokLaunch(port) {
     try {
-        // Connect to Ngrok using a specified static domain
         const tunnel = await ngrok.connect({
             addr: port,
             authtoken: process.env.NGROK_AUTHTOKEN,

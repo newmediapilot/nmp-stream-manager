@@ -1,18 +1,20 @@
+/**
+ * File: src\modules\twitch\login.js
+ * Description: This file contains logic for managing src\modules\twitch\login operations.
+ * Usage: Import relevant methods/functions as required.
+ */
 require('dotenv').config(); // Load environment variables from .env
 const axios = require('axios');
 
-// Function to generate the OAuth login URL and redirect the user
 function twitchLogin(req, res) {
     const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
     const TWITCH_REDIRECT_URL = process.env.TWITCH_REDIRECT_URL;
     const TWITCH_SCOPES = 'clips:edit';
 
-    // Proceed directly to the regular OAuth flow
     const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(TWITCH_REDIRECT_URL)}&response_type=code&scope=${TWITCH_SCOPES}`;
     res.redirect(oauthUrl); // Redirect the user to the Twitch login URL
 }
 
-// Function to get the broadcaster's ID by username
 async function getBroadcasterId(username) {
     try {
         const accessToken = getSecret('access_token'); // Get the access token from setParam

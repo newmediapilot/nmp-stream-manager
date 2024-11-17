@@ -1,13 +1,16 @@
+/**
+ * File: src\modules\twitch\success.js
+ * Description: This file contains logic for managing src\modules\twitch\success operations.
+ * Usage: Import relevant methods/functions as required.
+ */
 require('dotenv').config();
 const axios = require('axios');
 const { setSecret } = require('../store/manager'); // Import setSecret to store tokens
 
-// Function to handle Twitch login success and redirect to the success page
 async function twitchLoginSuccess(req, res) {
     const code = req.query.code; // Retrieve the 'code' parameter from the query string
 
     try {
-        // Exchange the code for the OAuth tokens
         const response = await axios.post('https://id.twitch.tv/oauth2/token', null, {
             params: {
                 client_id: process.env.TWITCH_CLIENT_ID,
@@ -21,11 +24,9 @@ async function twitchLoginSuccess(req, res) {
         const accessToken = response.data.access_token;
         const refreshToken = response.data.refresh_token;
 
-        // Store the access token and refresh token in the .secrets file
         setSecret('access_token', accessToken);
         setSecret('refresh_token', refreshToken);
 
-        // Redirect to the success page
         res.redirect('/public/twitch/success');
     } catch (error) {
         console.error('Error exchanging code for tokens:', error.response?.data || error.message);

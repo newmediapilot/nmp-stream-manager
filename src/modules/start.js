@@ -1,25 +1,33 @@
+/**
+ * File: src\modules\start.js
+ * Description: This file contains logic for managing src\modules\start operations.
+ * Usage: Import relevant methods/functions as required.
+ */
 const open = require('open');
 const express = require('express');
 const { ngrokLaunch } = require('./ngrok/launch'); // Import Ngrok helper
 const nunjucks = require('nunjucks');
 
+/**
+ * startServices: entry point for the server, it contains
+ * boot procedures sets the initial open URL, and configures Nunjucks
+ * @param app
+ * @param PORT
+ * @returns {Promise<void>}
+ */
 async function startServices(app, PORT) {
     try {
         const publicUrl = await ngrokLaunch(PORT);
 
-        // Set up Nunjucks as the templating engine
         nunjucks.configure('src/views', {  // Path to your views folder
             autoescape: true,  // Escape HTML in variables to prevent XSS
             express: app,      // Bind Nunjucks to Express app
         });
 
-        // Tell Express to use Nunjucks
         app.set('view engine', 'html');
 
-        // Serve static files (CSS, JS, images) from the 'src/public/assets/' folder
         app.use(express.static('src/assets'));
 
-        // Automatically open the URL for the Twitch login page with the specified intent
         console.log(`Opening Twitch login URL...`);
         await open(`${publicUrl}/public/index`);
 
