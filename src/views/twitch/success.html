@@ -2,12 +2,16 @@
 
 {% block title %}Twitch Login Success{% endblock %}
 
+{% block headScripts %}
+<link rel="stylesheet" href="/assets/twitch/success.css"> <!-- Add the CSS file for the success page -->
+{% endblock %}
+
 {% block body %}
 <h2>Welcome to the success page after Twitch login!</h2>
 <p>The message displayed above comes from the header partial: <strong>{{ message }}</strong></p>
 {% endblock %}
 
-{% block footer-scripts %}
+{% block footerScripts %}
 <script>
     console.log("Success page specific footer script.");
 </script>
