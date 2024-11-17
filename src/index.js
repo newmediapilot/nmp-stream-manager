@@ -1,29 +1,25 @@
-/**
- * File: src\index.js
- * Description: This file contains logic for managing src\index operations.
- * Usage: Import relevant methods/functions as required.
- */
-require('dotenv').config(); // Load environment variables from .env
+require('dotenv').config();
 const express = require('express');
-const { twitterTweet } = require('./modules/twitter/tweet'); // Import Twitter helper
-const { twitchLogin } = require('./modules/twitch/login'); // Import the Twitch login handler
-const { twitchLoginSuccess } = require('./modules/twitch/success'); // Import the Twitch login success handler
-const { twitchClipCreate } = require('./modules/twitch/clip'); // Import the clip helper function
-const { startServices } = require('./modules/start'); // Import the start services function
+const { twitterTweet } = require('./modules/twitter/tweet');
+const { twitchLogin } = require('./modules/twitch/login');
+const { twitchLoginSuccess } = require('./modules/twitch/success');
+const { twitchClipCreate } = require('./modules/twitch/clip');
+const { startServices } = require('./modules/start');
+const ROUTES = require('./routes');
 
 const app = express();
-const PORT = 80; // Local port for your server
+const PORT = 80;
 
 // Twitter API
-app.get('/twitter/tweet', twitterTweet);
+app.get(ROUTES.TWITTER_TWEET, twitterTweet);
 
 // Twitch API
-app.get('/twitch/login', twitchLogin); // Redirect to Twitch login page
-app.get('/twitch/login/success', twitchLoginSuccess); // Handle login success and return page
-app.get('/twitch/clip/create', twitchClipCreate);
+app.get(ROUTES.TWITCH_LOGIN, twitchLogin);
+app.get(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess);
+app.get(ROUTES.TWITCH_CLIP_CREATE, twitchClipCreate);
 
 // Public paths
-app.get('/public/index', (rep, res) => res.render('index', { message: 'Hello from index Nunjucks!' }));
-app.get('/public/twitch/success', (rep, res) => res.render('twitch/success', { message: 'Hello from success Nunjucks!' }));
+app.get(ROUTES.PUBLIC_INDEX, (req, res) => res.render('index'));
+app.get(ROUTES.PUBLIC_TWITCH_SUCCESS, (req, res) => res.render('twitch/success'));
 
 startServices(app, PORT);

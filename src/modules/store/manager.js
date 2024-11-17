@@ -22,9 +22,15 @@ function setParam(key, value) {
 }
 
 function getParam(key) {
-    console.log(chalk.bgBlue.whiteBright(`Get ${key} = ${params[key]}`));
-    return params[key]; // Return the value for the provided key
+    const value = params[key]; // Retrieve the value
+    if (value === undefined) {
+        console.warn(chalk.bgYellow.black(`Warning: Attempted to get ${key}, but it is undefined.`));
+    } else {
+        console.log(chalk.bgBlue.whiteBright(`Get ${key} = ${value}`));
+    }
+    return value; // Return the value (undefined if not found)
 }
+
 
 function setSecret(name, key) {
     try {
