@@ -1,10 +1,10 @@
 require('dotenv').config(); // Load environment variables from .env
 const express = require('express');
-const { twitterTweet } = require('./helpers/twitter/tweet'); // Import Twitter helper
-const { twitchLogin } = require('./helpers/twitch/login'); // Import the Twitch login handler
-const { twitchLoginSuccess } = require('./helpers/twitch/success'); // Import the Twitch login success handler
-const { twitchClipCreate } = require('./helpers/twitch/clip'); // Import the clip helper function
-const { startServices } = require('./helpers/start'); // Import the start services function
+const { twitterTweet } = require('./modules/twitter/tweet'); // Import Twitter helper
+const { twitchLogin } = require('./modules/twitch/login'); // Import the Twitch login handler
+const { twitchLoginSuccess } = require('./modules/twitch/success'); // Import the Twitch login success handler
+const { twitchClipCreate } = require('./modules/twitch/clip'); // Import the clip helper function
+const { startServices } = require('./modules/start'); // Import the start services function
 // const { sensorData } = require('./helpers/sensor/data'); // Import the sensor data handler
 
 const app = express();
@@ -18,7 +18,8 @@ app.get('/twitch/clip/create', twitchClipCreate);
 // app.get('/sensor/data', sensorData);
 
 // Public routes
-app.get('/public/twitch/success', (rep, res) => res.render('twitch/success', { message: 'Hello from Nunjucks!' }));
+app.get('/public/index', (rep, res) => res.render('index', { message: 'Hello from index Nunjucks!' }));
+app.get('/public/twitch/success', (rep, res) => res.render('twitch/success', { message: 'Hello from success Nunjucks!' }));
 
 // Start services with Ngrok and Handlebars configuration
 startServices(app, PORT);
