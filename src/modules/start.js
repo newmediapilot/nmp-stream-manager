@@ -1,7 +1,5 @@
 // src/modules/start.js
-const open = require('open');
-const express = require('express');
-const { setParam, getParam, hasSecret } = require('./store/manager');
+const { setParam, hasSecret } = require('./store/manager');
 const { ngrokLaunch } = require('./ngrok/launch'); // Import Ngrok helper
 const { configureNunjucks } = require('./nunjucks/config'); // Import Nunjucks configuration
 
@@ -12,10 +10,9 @@ const { configureNunjucks } = require('./nunjucks/config'); // Import Nunjucks c
  */
 async function startServices(app, PORT) {
     try {
-        const publicUrl = await ngrokLaunch(PORT);
 
-        // Some setup
-        setParam('public_url', publicUrl);
+        // Store public proxy url
+        setParam('public_url',  await ngrokLaunch(PORT));
 
         // Set statuses
         setParam('twitch_access_token_set', hasSecret('twitch_access_token'));
@@ -24,9 +21,7 @@ async function startServices(app, PORT) {
         // Configure Nunjucks
         configureNunjucks(app);
 
-        // Open the public URL
-        await open(`${getParam('public_url')}/public/index`);
-
+        // Start
         app.listen(PORT);
 
     } catch (err) {

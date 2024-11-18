@@ -1,8 +1,9 @@
 require('dotenv').config();
 const axios = require('axios');
 const { getSecret } = require('../store/manager');
-const ROUTES = require('../../routes');
+const {getBroadcasterId} = require('./login');
 
+const ROUTES = require('../../routes');
 /**
  * Sends a message to a Twitch channel.
  * @param {object} req - The Express request object.
@@ -10,11 +11,7 @@ const ROUTES = require('../../routes');
  */
 async function twitchMessageCreate(req, res) {
     try {
-        const accessToken = getSecret('access_token');
-        if (!accessToken) {
-            console.warn('Access token is missing.');
-            return res.redirect(ROUTES.TWITCH_LOGIN);
-        }
+        const accessToken = getSecret('twitch_access_token');
 
         // Retrieve the message from the query string
         const message = req.query.message || 'Hello from Twitch API!'; // Default message if not provided
@@ -23,17 +20,19 @@ async function twitchMessageCreate(req, res) {
             return res.status(400).send('Message parameter is required.');
         }
 
-        const channelId = process.env.TWITCH_CHANNEL_ID; // Example: Replace with actual channel ID logic
+        const broadcasterId = await getBroadcasterId(process.env.TWITCH_USERNAME);
 
         const response = await axios.post(
             `https://api.twitch.tv/helix/chat/messages`, // Replace with actual Twitch API endpoint
             {
-                channel_id: channelId,
-                content: message,
+                broadcaster_id: broadcasterId,
+                sender_id: broadcasterId,
+                message,
+                "color": "purple"
             },
             {
                 headers: {
-                    'Client-ID': process.env.TWITCH_CLIENT_ID,
+                    'Client-Id': process.env.TWITCH_CLIENT_ID,
                     Authorization: `Bearer ${accessToken}`,
                 },
             }

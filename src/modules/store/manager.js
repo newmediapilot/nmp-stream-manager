@@ -22,7 +22,6 @@ function loadSecrets() {
     if (fs.existsSync('.secrets')) {
         try {
             secrets = JSON.parse(fs.readFileSync('.secrets', 'utf8'));
-            console.log(chalk.bgGreen.black('Secrets loaded successfully.'));
         } catch (error) {
             console.error(chalk.bgRed.whiteBright('Error loading secrets:', error.message));
             secrets = {}; // Fallback to an empty object
@@ -53,18 +52,18 @@ function getParam(key) {
 
 function setSecret(name, key) {
     try {
-        if (!secrets) {
-            loadSecrets();
-        }
+        loadSecrets();
 
         secrets[name] = key; // Update the secrets object
         setParam(`${name}_set`, true); // Store publicly as 'true' once set
 
-        fs.writeFileSync('.secrets', JSON.stringify(secrets, null, 2), 'utf8');
-        console.log(chalk.bgGreen.whiteBright(`Secret set for ${name}: ${key}`));
+        const secretsJSON =JSON.stringify(secrets, null, 2);
 
         // Reset secrets so it reloads next time
         secrets = null;
+
+        fs.writeFileSync('.secrets', secretsJSON, 'utf8');
+        console.log(chalk.bgGreen.whiteBright(`Secret set for ${name}: ${key}`));
     } catch (error) {
         console.error(chalk.bgRed.whiteBright('Error setting secret:', error.message));
     }
@@ -72,15 +71,12 @@ function setSecret(name, key) {
 
 function hasSecret(name) {
     loadSecrets();
-    console.error(chalk.bgRed.whiteBright('hasSecret:', name, !!secrets[name]));
     return !!secrets[name];
 }
 
 function getSecret(name) {
     try {
-        if (!secrets) {
-            loadSecrets();
-        }
+        loadSecrets()
 
         if (secrets[name]) {
             return secrets[name];

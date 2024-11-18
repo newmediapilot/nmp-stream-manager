@@ -18,13 +18,12 @@ async function twitchClipCreate(req, res) {
     try {
 
         const accessToken = getSecret('access_token');
+
         if (!accessToken) {
             return res.status(400).send('Access token is missing. Please authenticate first.');
         }
 
         const broadcasterId = await getBroadcasterId(process.env.TWITCH_USERNAME);
-
-        console.log('Broadcaster ID:', broadcasterId);
 
         const response = await axios.post(
             'https://api.twitch.tv/helix/clips',
