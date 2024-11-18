@@ -1,6 +1,6 @@
 // src/modules/start.js
 const { setParam, hasSecret } = require('./store/manager');
-const { getCommands } = require('./twitch/commands');
+const { twitchCommandsGet } = require('./twitch/commands');
 const { ngrokLaunch } = require('./ngrok/launch'); // Import Ngrok helper
 const { configureNunjucks } = require('./nunjucks/config'); // Import Nunjucks configuration
 const ROUTES = require('../routes');
@@ -22,7 +22,7 @@ async function startServices(app, PORT) {
         setParam('twitch_refresh_token_set', hasSecret('twitch_refresh_token'));
 
         // Set commands
-        setParam('twitch_commands', getCommands())
+        setParam('twitch_commands', twitchCommandsGet())
 
         // Configure Nunjucks
         configureNunjucks(app);
