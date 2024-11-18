@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block headScripts %}
-    {% endblock %}
+    <link rel="stylesheet" href="/css/main.css">
+    {% block headScripts %}{% endblock %}
 </head>
 <body>
-
-<!-- Main content -->
 <div class="content">
     {% block body %}{% endblock %}
 </div>
-
-<!-- Footer-specific scripts -->
-{% block footerScripts %}
-{% endblock %}
-
+{% block footerScripts %}{% endblock %}
 </body>
 </html>

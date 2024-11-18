@@ -1,4 +1,7 @@
-async function form_loop({event, ctx}) {
+// npms namespace is required
+const nmps = (document.nmps = document.nmps || {});
+
+nmps.form_loop = async function form_loop({ event, ctx }) {
     event.preventDefault(); // Prevent default action
 
     // Extract data-onclick-* attributes
@@ -17,8 +20,14 @@ async function form_loop({event, ctx}) {
     // Use the decorator element if it exists, otherwise fallback to ctx
     const decoratorEl = document.querySelector(decorator) || ctx;
 
-    // Remove both classes when the AJAX call starts
-    decoratorEl.classList.remove('warn', 'error');
+    // Add loading class and disable button
+    decoratorEl.classList.add('loading');
+    ctx.classList.add('loading');
+    ctx.disabled = true;
+
+    // Remove warn, error, and success classes at the start
+    decoratorEl.classList.remove('warn', 'error', 'success');
+    ctx.classList.remove('warn', 'error', 'success');
 
     try {
         // Send a POST request to the command URL
@@ -41,13 +50,22 @@ async function form_loop({event, ctx}) {
         // Add class based on the AJAX response
         if (result.success) {
             console.log(`Command successful: ${result.message}`);
+            decoratorEl.classList.add('success'); // Add success class on success
+            ctx.classList.add('success'); // Add success class on success
         } else {
-            decoratorEl.classList.add('warn');
+            decoratorEl.classList.add('warn'); // Add warn class on failure
+            ctx.classList.add('warn'); // Add warn class on failure
             console.log(`Command failed: ${result.message}`);
         }
     } catch (error) {
         // Handle errors and append error class
-        decoratorEl.classList.add('error');
+        decoratorEl.classList.add('error'); // Add error class on error
+        ctx.classList.add('error'); // Add error class on error
         console.error('Error sending command:', error);
+    } finally {
+        // Always remove the loading class and re-enable the button
+        decoratorEl.classList.remove('loading');
+        ctx.classList.remove('loading');
+        ctx.disabled = false;
     }
-}
+};
