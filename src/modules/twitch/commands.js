@@ -48,7 +48,7 @@ async function twitchCommandUnset(req, res) {
             params: { message: removeMessage },
         });
 
-        if (removeResponse.status !== 200 || !removeResponse.data.success) {
+        if (removeResponse.status !== 200) {
             console.error('Error in removeResponse:', {
                 status: removeResponse.status,
                 data: removeResponse.data,
@@ -94,7 +94,7 @@ async function twitchCommandSet(req, res) {
             params: { message: addMessage },
         });
 
-        if (addResponse.status !== 200 || !addResponse.data.success) {
+        if (addResponse.status !== 200) {
             console.error('Error in addResponse:', {
                 status: addResponse.status,
                 data: addResponse.data,

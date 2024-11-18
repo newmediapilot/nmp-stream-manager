@@ -14,8 +14,18 @@ require('dotenv').config(); // Load environment variables from .env
 const chalk = require('chalk'); // Require chalk for colorizing output
 const fs = require('fs'); // Import fs module to interact with files
 
-let params = {}; // This object will hold all the query parameters
+let paramsState = {}; // This object will hold all the query parameters
 let secrets = null; // Cached secrets object
+
+// In order to keep runaway params from being set, we must register any usage of setParam
+// This ensures that a param isn't set and forgotten, we must only store what we need!
+const allowedParams = [
+    'public_url',
+    'public_routes',
+    'twitch_access_token_set',
+    'twitch_refresh_token_set',
+    'twitch_commands',
+];
 
 // Helper function to load secrets from the .secrets file
 function loadSecrets() {
@@ -32,17 +42,25 @@ function loadSecrets() {
 }
 
 function setParam(key, value) {
-    params[key] = value; // Set the parameter in the global object
-    console.log(chalk.bgBlueBright.whiteBright(`Set ${key} =`));
-    console.log(chalk.bgBlue.whiteBright(`${JSON.stringify(value, null, 4)}`));
+    if (!allowedParams.includes(key)) {
+        console.error(
+            chalk.bgRed.whiteBright(
+                `WARNING: Attempted to set a parameter (${key}) that is not registered in allowedParams.`
+            )
+        );
+    } else {
+        paramsState[key] = value; // Set the parameter in the global object
+        console.log(chalk.bgBlueBright.whiteBright(`Set ${key} =`));
+        console.log(chalk.bgBlue.whiteBright(`${JSON.stringify(value, null, 4)}`));
+    }
 }
 
 function getAllParams() {
-    return params;
+    return paramsState;
 }
 
 function getParam(key) {
-    const value = params[key]; // Retrieve the value
+    const value = paramsState[key]; // Retrieve the value
     if (value === undefined) {
         console.warn(chalk.bgYellow.black(`Warning: Attempted to get ${key}, but it is undefined.`));
     } else {
@@ -77,7 +95,7 @@ function hasSecret(name) {
 
 function getSecret(name) {
     try {
-        loadSecrets()
+        loadSecrets();
 
         if (secrets[name]) {
             return secrets[name];
@@ -91,4 +109,4 @@ function getSecret(name) {
     }
 }
 
-module.exports = {setParam, getParam, getAllParams, hasSecret, setSecret, getSecret};
+module.exports = { setParam, getParam, getAllParams, hasSecret, setSecret, getSecret };
