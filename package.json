@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
-    "reset": "rm -rf node_modules && npm i",
+    "reset": "rm -rf .secrets && rm -rf node_modules && npm i",
     "start": "node src/index.js",
     "combine": "node src/modules/util/combine.js",
     "uncombine": "node src/modules/util/uncombine.js"

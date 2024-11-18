@@ -10,7 +10,7 @@ const { getSecret } = require('../store/manager');
 
 function twitchLogin(req, res) {
     const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
-    const TWITCH_SCOPES = process.env.TWITCH_SCOPES;
+    const TWITCH_SCOPES = process.env.TWITCH_SCOPES || "clips:edit user:write:chat";
     const TWITCH_REDIRECT_URL = process.env.TWITCH_REDIRECT_URL;
 
     console.log(chalk.green('TWITCH_CLIENT_ID:'), chalk.cyan(TWITCH_CLIENT_ID));

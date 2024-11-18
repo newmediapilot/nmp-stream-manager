@@ -33,7 +33,8 @@ function loadSecrets() {
 
 function setParam(key, value) {
     params[key] = value; // Set the parameter in the global object
-    console.log(chalk.bgBlue.whiteBright(`Set ${key} = ${value}`));
+    console.log(chalk.bgBlueBright.whiteBright(`Set ${key} =`));
+    console.log(chalk.bgBlue.whiteBright(`${JSON.stringify(value, null, 4)}`));
 }
 
 function getAllParams() {
@@ -57,7 +58,7 @@ function setSecret(name, key) {
         secrets[name] = key; // Update the secrets object
         setParam(`${name}_set`, true); // Store publicly as 'true' once set
 
-        const secretsJSON =JSON.stringify(secrets, null, 2);
+        const secretsJSON = JSON.stringify(secrets, null, 2);
 
         // Reset secrets so it reloads next time
         secrets = null;

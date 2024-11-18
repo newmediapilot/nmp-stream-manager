@@ -17,7 +17,7 @@ const {getSecret} = require('../store/manager'); // Import getSecret to fetch th
 async function twitchClipCreate(req, res) {
     try {
 
-        const accessToken = getSecret('access_token');
+        const accessToken = getSecret('twitch_access_token');
 
         if (!accessToken) {
             return res.status(400).send('Access token is missing. Please authenticate first.');
@@ -45,7 +45,7 @@ async function twitchClipCreate(req, res) {
         const clipId = response.data.data[0].id;
         const clipUrl = `https://clips.twitch.tv/${clipId}`;
 
-        res.send(`Clip created successfully: ${clipUrl}`); // Return the clip URL
+        return res.status(200).send(`Clip created successfully: ${clipUrl}`);// Return the clip URL
     } catch (error) {
         console.error('Error creating clip:', error.response?.data || error.message);
 
@@ -53,7 +53,7 @@ async function twitchClipCreate(req, res) {
             return res.status(404).send('Clipping is not possible for an offline channel. Please make sure the channel is online and try again.');
         }
 
-        res.send('Failed to create clip: ' + error.message); // Return an error if something goes wrong
+        return res.status(500).send(`Failed to create clip: ${error.message}`);
     }
 }
 

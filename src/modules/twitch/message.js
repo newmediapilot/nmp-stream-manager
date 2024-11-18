@@ -37,11 +37,10 @@ async function twitchMessageCreate(req, res) {
                 },
             }
         );
-
-        res.send(`Message sent successfully: "${message}"`);
+        return res.status(200).send(`Message sent successfully: "${message}"`);
     } catch (error) {
         console.error('Error sending message:', error.response?.data || error.message);
-        res.status(500).send('Failed to send message.');
+        return res.status(500).send('Failed to send message.');
     }
 }
 
