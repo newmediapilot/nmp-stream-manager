@@ -1,11 +1,11 @@
-{% macro form_loop_el(command, decorator) %}
+{% macro form_loop_el(label, command, decorator) %}
     <div>
         <button
             onclick="javascript:nmps.form_loop({event,ctx:this})"
             data-onclick-command="{{ command }}"
             data-onclick-decorator="{{ decorator }}"
         >
-            Set Command
+            {{ label }}
         </button>
     </div>
 {% endmacro %}

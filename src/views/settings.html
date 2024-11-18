@@ -24,7 +24,7 @@
         <td>{{ key }}</td>
         <td>{{ details.description }}</td>
         <td>
-            {{ form_loop_el(public_routes.TWITCH_COMMAND_CREATE ~ '?command=' ~ key, '#decorator-' ~ key) }}
+            {{ form_loop_el('Set Command', public_routes.TWITCH_COMMAND_CREATE ~ '?command=' ~ key, '#decorator-' ~ key) }}
         </td>
     </tr>
     {% endfor %}
