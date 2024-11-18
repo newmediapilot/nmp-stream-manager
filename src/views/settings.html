@@ -17,14 +17,14 @@
     {% set twitch_commands = 'twitch_commands' | getParam %}
     {% set public_routes = 'public_routes' | getParam %}
     {% for key, details in twitch_commands %}
-    <tr>
+    <tr id="decorator">
         <td>{{ key }}</td>
         <td>{{ details.description }}</td>
         <td>
-            <button
-                    onclick="javascript:form_loop(this, event)"
+            <button onclick="javascript:form_loop({event,ctx:this})"
                     data-onclick-command="{{ public_routes.TWITCH_COMMAND_CREATE }}?command={{ key }}"
-                    data-onclick-decorator="#decorator">
+                    data-onclick-decorator="#decorator"
+            >
                 Set Command
             </button>
         </td>
@@ -32,13 +32,11 @@
     {% endfor %}
     </tbody>
 </table>
-<!-- Static decorator element -->
-<div id="decorator"></div>
 {% endblock %}
 
 {% block footerScripts %}
 <script>
-    async function form_loop(ctx, event) {
+    async function form_loop({event, ctx}) {
         event.preventDefault(); // Prevent default action
 
         // Extract data-onclick-* attributes
