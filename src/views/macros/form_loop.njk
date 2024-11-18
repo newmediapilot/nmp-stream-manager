@@ -1,0 +1,15 @@
+{% macro form_loop_el(command, decorator) %}
+    <button
+            onclick="javascript:form_loop({event,ctx:this})"
+            data-onclick-command="{{ command }}"
+            data-onclick-decorator="{{ decorator }}"
+            aria-label="Set Twitch command"
+            title="Set the command"
+    >
+        Set Command
+    </button>
+{% endmacro %}
+
+{% macro form_loop_js() %}
+    <script src="/js/form_loop.js" typeof="text/javascript"></script>
+{% endmacro %}

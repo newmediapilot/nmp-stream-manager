@@ -1,6 +1,9 @@
 <!-- src/views/settings.html -->
 {% extends "layouts/main.njk" %}
 
+{% from "macros/form_loop.njk" import form_loop_el %}
+{% from "macros/form_loop.njk" import form_loop_js %}
+
 {% block title %}Settings{% endblock %}
 
 {% block body %}
@@ -21,13 +24,7 @@
         <td>{{ key }}</td>
         <td>{{ details.description }}</td>
         <td>
-            <button
-                    onclick="javascript:form_loop({event,ctx:this})"
-                    data-onclick-command="{{ public_routes.TWITCH_COMMAND_CREATE }}?command={{ key }}"
-                    data-onclick-decorator="#decorator-{{ key }}"
-            >
-                Set Command
-            </button>
+            {{ form_loop_el(public_routes.TWITCH_COMMAND_CREATE ~ '?command=' ~ key, '#decorator-' ~ key) }}
         </td>
     </tr>
     {% endfor %}
@@ -36,5 +33,5 @@
 {% endblock %}
 
 {% block footerScripts %}
-<script src="/js/form_loop.js" typeof="text/javascript"></script>
+{{ form_loop_js() }}
 {% endblock %}
