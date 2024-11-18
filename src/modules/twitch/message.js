@@ -17,7 +17,7 @@ async function twitchMessageCreate(req, res) {
         const message = req.query.message || 'Hello from Twitch API!'; // Default message if not provided
 
         if (!message.trim()) {
-            return res.status(400).send('Message parameter is required.');
+            return res.status(400).json('Message parameter is required.');
         }
 
         const broadcasterId = await getBroadcasterId(process.env.TWITCH_USERNAME);
@@ -37,10 +37,10 @@ async function twitchMessageCreate(req, res) {
                 },
             }
         );
-        return res.status(200).send(`Message sent successfully: "${message}"`);
+        return res.status(200).json(`Message sent successfully: "${message}"`);
     } catch (error) {
         console.error('Error sending message:', error.response?.data || error.message);
-        return res.status(500).send('Failed to send message.');
+        return res.status(500).json('Failed to send message.');
     }
 }
 

@@ -18,3 +18,5 @@ I will upload the JSON file and i want you to analyze it.
 Please tell me what you analyze in this file, understand it fully.
 
 Then log the file-tree.
+
+Just say Ready.

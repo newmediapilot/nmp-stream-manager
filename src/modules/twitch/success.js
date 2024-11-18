@@ -28,10 +28,10 @@ async function twitchLoginSuccess(req, res) {
         setSecret('twitch_refresh_token', refreshToken);
 
         // Return a success response
-        return res.status(200).send('OAuth tokens retrieved successfully');
+        return res.status(200).json('OAuth tokens retrieved successfully');
     } catch (error) {
         console.error('Error exchanging code for tokens:', error.response?.data || error.message);
-        return res.status(500).send('Failed to get OAuth tokens');
+        return res.status(500).json('Failed to get OAuth tokens');
     }
 }
 
