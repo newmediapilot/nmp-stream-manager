@@ -15,19 +15,16 @@ nmps.form_loop = async function form_loop({ event, ctx }) {
         }, {});
 
     const command = dataAttributes.command;
-    const decorator = dataAttributes.decorator;
 
     // Use the decorator element if it exists, otherwise fallback to ctx
-    const decoratorEl = document.querySelector(decorator) || ctx;
+    const decoratorEl = ctx.parentElement || ctx;
 
     // Add loading class and disable button
     decoratorEl.classList.add('loading');
-    ctx.classList.add('loading');
     ctx.disabled = true;
 
     // Remove warn, error, and success classes at the start
     decoratorEl.classList.remove('warn', 'error', 'success');
-    ctx.classList.remove('warn', 'error', 'success');
 
     try {
         // Send a POST request to the command URL
@@ -51,21 +48,17 @@ nmps.form_loop = async function form_loop({ event, ctx }) {
         if (result.success) {
             console.log(`Command successful: ${result.message}`);
             decoratorEl.classList.add('success'); // Add success class on success
-            ctx.classList.add('success'); // Add success class on success
         } else {
             decoratorEl.classList.add('warn'); // Add warn class on failure
-            ctx.classList.add('warn'); // Add warn class on failure
             console.log(`Command failed: ${result.message}`);
         }
     } catch (error) {
         // Handle errors and append error class
         decoratorEl.classList.add('error'); // Add error class on error
-        ctx.classList.add('error'); // Add error class on error
         console.error('Error sending command:', error);
     } finally {
         // Always remove the loading class and re-enable the button
         decoratorEl.classList.remove('loading');
-        ctx.classList.remove('loading');
         ctx.disabled = false;
     }
 };

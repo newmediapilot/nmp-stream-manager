@@ -1,13 +1,13 @@
 {% macro form_loop_el(command, decorator) %}
-    <button
+    <div>
+        <button
             onclick="javascript:nmps.form_loop({event,ctx:this})"
             data-onclick-command="{{ command }}"
             data-onclick-decorator="{{ decorator }}"
-            aria-label="Set Twitch command"
-            title="Set the command"
-    >
-        Set Command
-    </button>
+        >
+            Set Command
+        </button>
+    </div>
 {% endmacro %}
 
 {% macro form_loop_js() %}
