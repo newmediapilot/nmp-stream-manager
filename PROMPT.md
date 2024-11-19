@@ -15,7 +15,13 @@ The JSON format follows a convention of:
 
 I will upload the JSON file and i want you to analyze it.
 
-Please tell me what you analyze in this file, understand it fully.
+Analyze each file and remember what it does.
+Understand how each file relates to eachother.
+Understand how the application works.
+Understand the APIs the app has exposed.
+Understand all the comments.
+Understand all the console logs.
+Understand the difference between API endpoints (src/modules) and HTML endpoints(src/views)
 
 Then log the file-tree.
 
