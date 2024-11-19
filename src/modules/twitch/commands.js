@@ -66,7 +66,7 @@ async function twitchCommandUnset(req, res) {
         });
     } catch (error) {
         console.error('Error in twitchCommandUnset:', error);
-        return res.status(500).json({
+        return res.status(error.status).json({
             success: false,
             message: 'An error occurred while unsetting the command.',
         });
@@ -112,7 +112,7 @@ async function twitchCommandSet(req, res) {
         });
     } catch (error) {
         console.error('Error in twitchCommandSet:', error);
-        return res.status(500).json({
+        return res.status(error.status).json({
             success: false,
             message: 'An error occurred while setting the command.',
         });
@@ -178,7 +178,7 @@ async function twitchCommandCreate(req, res) {
         });
     } catch (error) {
         console.error('Error in twitchCommandCreate:', error);
-        return res.status(500).json({
+        return res.status(error.status).json({
             success: false,
             message: 'An error occurred while creating the command.',
         });

@@ -53,7 +53,7 @@ async function twitchClipCreate(req, res) {
             return res.status(404).json('Clipping is not possible for an offline channel. Please make sure the channel is online and try again.');
         }
 
-        return res.status(500).json(`Failed to create clip: ${error.message}`);
+        return res.status(error.status).json(`Failed to create clip: ${error.message}`);
     }
 }
 

@@ -31,7 +31,7 @@ async function twitchLoginSuccess(req, res) {
         return res.status(200).json('OAuth tokens retrieved successfully');
     } catch (error) {
         console.error('Error exchanging code for tokens:', error.response?.data || error.message);
-        return res.status(500).json('Failed to get OAuth tokens');
+        return res.status(error.status).json('Failed to get OAuth tokens');
     }
 }
 
