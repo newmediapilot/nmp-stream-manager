@@ -9,12 +9,12 @@ const path = require('path');
 const glob = require('glob');
 
 const jsFilePatterns = [
-    "src/**/*.*",
+    "src/**/*.{js,css,njk,html,md,!gif}",
     ".env-example",
     ".gitignore",
     "package.json",
     "README.md",
-];
+]
 
 const envFilePath = path.join(process.cwd(), '.env'); // Path to the .env file
 const envExamplePath = path.join(process.cwd(), '.env-example'); // Path to the .env-example file
