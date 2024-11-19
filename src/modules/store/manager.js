@@ -21,10 +21,13 @@ let secrets = null; // Cached secrets object
 // This ensures that a param isn't set and forgotten, we must only store what we need!
 const allowedParams = [
     'public_url',
+    'twitch_commands',
+    'twitch_username',
     'public_routes',
+    // Secrets
     'twitch_access_token_set',
     'twitch_refresh_token_set',
-    'twitch_commands',
+    'twitch_broadcaster_id_set',
 ];
 
 // Helper function to load secrets from the .secrets file
@@ -48,11 +51,10 @@ function setParam(key, value) {
                 `WARNING: Attempted to set a parameter (${key}) that is not registered in allowedParams.`
             )
         );
-    } else {
-        paramsState[key] = value; // Set the parameter in the global object
-        console.log(chalk.bgBlueBright.whiteBright(`Set ${key} =`));
-        console.log(chalk.bgBlue.whiteBright(`${JSON.stringify(value, null, 4)}`));
     }
+    paramsState[key] = value; // Set the parameter in the global object
+    console.log(chalk.bgBlueBright.whiteBright(`Set ${key} =`));
+    console.log(chalk.bgBlue.whiteBright(`${JSON.stringify(value, null, 4)}`));
 }
 
 function getAllParams() {

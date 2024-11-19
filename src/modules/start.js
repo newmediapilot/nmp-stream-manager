@@ -13,16 +13,13 @@ const ROUTES = require('../routes');
 async function startServices(app, PORT) {
     try {
 
-        // Store public proxy url
+        // Store paths
         setParam('public_url',  await ngrokLaunch(PORT));
         setParam('public_routes', ROUTES);
 
-        // Set statuses
-        setParam('twitch_access_token_set', hasSecret('twitch_access_token'));
-        setParam('twitch_refresh_token_set', hasSecret('twitch_refresh_token'));
-
-        // Set commands
-        setParam('twitch_commands', twitchCommandsGet())
+        // Set twitch data
+        setParam('twitch_username', process.env.TWITCH_USERNAME);
+        setParam('twitch_commands', twitchCommandsGet());
 
         // Configure Nunjucks
         configureNunjucks(app);

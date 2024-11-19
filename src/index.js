@@ -1,8 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const { twitterTweet } = require('./modules/twitter/tweet');
-const { twitchLogin } = require('./modules/twitch/login');
-const { twitchLoginSuccess } = require('./modules/twitch/success');
+const { twitchLogin, twitchLoginSuccess } = require('./modules/twitch/login');
 const { twitchClipCreate } = require('./modules/twitch/clip');
 const { twitchCommandCreate, twitchCommandSet, twitchCommandUnset } = require('./modules/twitch/commands');
 const { twitchMessageCreate } = require('./modules/twitch/message'); // New import

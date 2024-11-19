@@ -1,7 +1,8 @@
 <!-- src/views/settings.html -->
 {% extends "layouts/main.njk" %}
 
-{% from "macros/form_loop.njk" import form_loop_el %}
+{% from "macros/form_loop.njk" import form_button_el %}
+{% from "macros/form_loop.njk" import form_href_el %}
 {% from "macros/form_loop.njk" import form_loop_js %}
 
 {% block title %}Settings{% endblock %}
@@ -23,7 +24,7 @@
         <td>login</td>
         <td>/twitch/login</td>
         <td>
-            {{ form_loop_el('Login', public_routes.TWITCH_LOGIN, '#decorator-login') }}
+            {{ form_href_el('Login', public_routes.TWITCH_LOGIN) }}
         </td>
     </tr>
     {% for key, details in twitch_commands %}
@@ -31,7 +32,7 @@
         <td>{{ key }}</td>
         <td>{{ details.description }}</td>
         <td>
-            {{ form_loop_el('Set Command', public_routes.TWITCH_COMMAND_CREATE ~ '?command=' ~ key, '#decorator-' ~ key) }}
+            {{ form_button_el('Set Command', public_routes.TWITCH_COMMAND_CREATE ~ '?command=' ~ key, '#decorator-' ~ key) }}
         </td>
     </tr>
     {% endfor %}
