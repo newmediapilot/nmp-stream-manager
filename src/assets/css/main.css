@@ -1,3 +1,8 @@
+table,
+button {
+    width: 100%;
+}
+
 .loading:after {
     background-image: url('/loading.gif');
 }

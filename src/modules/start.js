@@ -1,5 +1,5 @@
 // src/modules/start.js
-const { setParam, hasSecret } = require('./store/manager');
+const { setParam } = require('./store/manager');
 const { twitchCommandsGet } = require('./twitch/commands');
 const { ngrokLaunch } = require('./ngrok/launch'); // Import Ngrok helper
 const { configureNunjucks } = require('./nunjucks/config'); // Import Nunjucks configuration

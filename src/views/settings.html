@@ -8,6 +8,7 @@
 {% block title %}Settings{% endblock %}
 
 {% block body %}
+
 <h3>Twitch Commands</h3>
 <table>
     <thead>
@@ -22,7 +23,7 @@
     {% set public_routes = 'public_routes' | getParam %}
     <tr id="decorator-login">
         <td>login</td>
-        <td>/twitch/login</td>
+        <td>Connect Twitch</td>
         <td>
             {{ form_href_el('Login', public_routes.TWITCH_LOGIN) }}
         </td>
