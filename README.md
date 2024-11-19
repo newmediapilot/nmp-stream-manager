@@ -1,13 +1,17 @@
 
 # NMP Stream Manager
 
-NMP Stream Manager is a stream utility designed for Twitch streamers. It integrates various API endpoints to help manage your stream, including Twitter tweets, Twitch clips, and sensor data logging. This utility automatically opens the Twitch login page when launched, enabling seamless integration for the other API endpoints.
+NMP Stream Manager is a comprehensive utility designed for Twitch streamers. It integrates multiple API endpoints to enhance your streaming experience, including Twitter integration, Twitch clip creation, command management, and sensor data logging. The application also features a simple HTML interface for managing Twitch commands.
 
 ## Features
 
-- **Twitter Integration**: Tweet directly from the app using custom messages and hashtags.
-- **Twitch Integration**: Log in to your Twitch account and create clips for your stream.
-- **Sensor Logging**: Fetch heart rate data (or any other sensor data) and log it locally.
+- **Twitter Integration**: Post tweets directly from the app with customizable messages and predefined hashtags.
+- **Twitch Integration**:
+  - Authenticate using Twitch OAuth.
+  - Create clips for your stream.
+  - Manage Twitch chat commands dynamically (add, remove, or update commands).
+- **Sensor Logging**: Fetch sensor data (e.g., heart rate) via a Sensor Logger app and log it locally or use it in-stream.
+- **Customizable Interface**: Modify Twitch commands through a settings page built using Nunjucks templates.
 
 ---
 
@@ -23,7 +27,7 @@ NMP Stream Manager is a stream utility designed for Twitch streamers. It integra
    cp .env-example .env
    ```
 
-3. Open the `.env` file and update it with your credentials for Ngrok, Twitch, Twitter, and Sensor Logger.
+3. Open the `.env` file and update it with your credentials for Ngrok, Twitch, Twitter, and the Sensor Logger.
 
 ---
 
@@ -47,60 +51,61 @@ To run the app, ensure you have the following installed:
    - Store these in the `.env` file.
 
 5. **Sensor Logger App**:
-   - Use the Awesome Sensor Logger app to fetch heart rate data and make sure it posts JSON data.
+   - Use the Awesome Sensor Logger app to fetch heart rate data and ensure it posts JSON data.
 
 ---
 
 ## API Endpoints
 
-### `/twitter/tweet`
-- **Method**: `GET`
-- **Description**: Post a tweet with a custom message and hashtags.
-- **Params**: `tweet_message` (Your tweet message)
-- **Usage**:
-  ```bash
-  $(customapi.https://12345.ngrok-free.app/twitter/tweet?tweet_message=$(1:))
-  ```
+### Twitter
+- **`/twitter/tweet`**
+  - **Method**: `GET`
+  - **Description**: Post a tweet with a custom message and predefined hashtags.
+  - **Params**: `tweet_message` (Your tweet message)
 
-### `/twitch/login`
-- **Method**: `GET`
-- **Description**: Redirects to Twitch for OAuth login.
-- **Usage**:
-  ```bash
-  $(customapi.https://12345.ngrok-free.app/twitch/login)
-  ```
+### Twitch
+- **`/twitch/login`**
+  - **Method**: `GET`
+  - **Description**: Redirects to Twitch for OAuth login.
 
-### `/twitch/clip/create`
-- **Method**: `GET`
-- **Description**: Create a clip from your Twitch stream.
-- **Params**: None
-- **Usage**:
-  ```bash
-  $(customapi.https://12345.ngrok-free.app/twitch/clip/create)
-  ```
+- **`/twitch/login/success`**
+  - **Method**: `GET`
+  - **Description**: Handles the OAuth redirect and captures the access token.
 
-### `/sensor/data`
-- **Method**: `GET`
-- **Description**: Fetch sensor data (e.g., heart rate) from the configured sensor logger.
-- **Params**: None
-- **Usage**:
-  ```bash
-  $(customapi.https://12345.ngrok-free.app/sensor/data)
-  ```
+- **`/twitch/clip/create`**
+  - **Method**: `GET`
+  - **Description**: Create a clip from your Twitch stream.
+
+- **`/twitch/command/set`**
+  - **Method**: `GET`
+  - **Description**: Add a Twitch command to the chatbot.
+
+- **`/twitch/command/unset`**
+  - **Method**: `GET`
+  - **Description**: Remove a Twitch command from the chatbot.
+
+- **`/twitch/command/create`**
+  - **Method**: `GET`
+  - **Description**: Replace an existing Twitch command with a new one.
+
+### Sensor Logger
+- **`/sensor/data`**
+  - **Method**: `GET`
+  - **Description**: Fetch sensor data from the configured Sensor Logger.
 
 ---
 
-## File Tree
+## File Structure
 
 ```plaintext
 nmp-stream-manager/
-│
 ├── .env-example
 ├── .gitignore
 ├── package.json
+├── README.md
 └── src/
     ├── index.js
-    ├── helpers/
+    ├── modules/
     │   ├── ngrok/
     │   │   └── launch.js
     │   ├── sensor/
@@ -111,17 +116,36 @@ nmp-stream-manager/
     │   │   └── tweet.js
     │   ├── twitch/
     │   │   ├── clip.js
-    │   │   └── login.js
+    │   │   ├── commands.js
+    │   │   ├── login.js
+    │   │   └── success.js
+    │   ├── nunjucks/
+    │   │   └── config.js
     │   └── util/
     │       ├── combine.js
     │       └── uncombine.js
+    ├── routes.js
+    ├── views/
+    │   ├── layouts/
+    │   │   └── main.njk
+    │   ├── partials/
+    │   │   ├── footer.njk
+    │   │   └── header.njk
+    │   ├── macros/
+    │   │   └── form_loop.njk
+    │   └── settings.html
+    └── assets/
+        ├── css/
+        │   └── main.css
+        └── js/
+            └── form_loop.js
 ```
 
 ---
 
 ## Running the App
 
-1. Run the app with the following command:
+1. Start the app:
    ```bash
    npm start
    ```
@@ -132,5 +156,9 @@ nmp-stream-manager/
 
 ## Important Notes
 
-- **StreamElements Integration**: You can use StreamElements chatbots to trigger these API endpoints via custom commands. Usage examples for StreamElements chatbot API are written in the README.
-- **Security Note**: It is highly recommended you always make your commands "Broadcaster" or "Moderator" to avoid exposing these features to the general chat audience.
+- **StreamElements Integration**: Use StreamElements chatbots to trigger API endpoints via custom commands. Refer to API examples for command setup.
+- **Security**: Ensure API commands are restricted to "Broadcaster" or "Moderator" roles to prevent unauthorized access.
+- **Dynamic Command Updates**: Commands like `/clip` and `/tweet` are dynamically added and managed via the app.
+
+---
+
