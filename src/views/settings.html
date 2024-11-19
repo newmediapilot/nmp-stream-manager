@@ -19,6 +19,13 @@
     <tbody>
     {% set twitch_commands = 'twitch_commands' | getParam %}
     {% set public_routes = 'public_routes' | getParam %}
+    <tr id="decorator-login">
+        <td>login</td>
+        <td>/twitch/login</td>
+        <td>
+            {{ form_loop_el('Login', public_routes.TWITCH_LOGIN, '#decorator-login') }}
+        </td>
+    </tr>
     {% for key, details in twitch_commands %}
     <tr id="decorator-{{key}}">
         <td>{{ key }}</td>
