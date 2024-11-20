@@ -39,13 +39,13 @@ async function twitchClipCreate(req, res) {
         );
 
         if (response.data.error === 'Not Found' && response.data.message === 'Clipping is not possible for an offline channel.') {
-            return res.status(404).json('Clipping is not possible for an offline channel. Please make sure the channel is online and try again.');
+            return res.status(404).send('Clipping is not possible for an offline channel. Please make sure the channel is online and try again.');
         }
 
         const clipId = response.data.data[0].id;
         const clipUrl = `https://clips.twitch.tv/${clipId}`;
 
-        return res.status(200).json(`Clip created successfully: ${clipUrl}`);// Return the clip URL
+        return res.status(200).send(`Clip created: ${clipUrl}`);// Return the clip URL
     } catch (error) {
         console.error('Error creating clip:', error.response?.data || error.message);
 
