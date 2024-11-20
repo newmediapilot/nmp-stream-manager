@@ -20,11 +20,14 @@ let secrets = null; // Cached secrets object
 // In order to keep runaway params from being set, we must register any usage of setParam
 // This ensures that a param isn't set and forgotten, we must only store what we need!
 const allowedParams = [
+    // Public
     'public_url',
     'twitch_commands',
     'twitch_username',
     'public_routes',
-    // Secrets
+    // Temporary
+    'twitch_login_referrer',
+    // Secret
     'twitch_access_token_set',
     'twitch_refresh_token_set',
     'twitch_broadcaster_id_set',
