@@ -1,6 +1,7 @@
 require('dotenv').config();
 const axios = require('axios');
-const {getParam, getSecret} = require('../store/manager');
+const {getSecret} = require('../store/manager');
+const {twitchHeaderValidate} = require('../twitch/commands');
 
 /**
  * Sends a message to a Twitch channel.
@@ -8,15 +9,8 @@ const {getParam, getSecret} = require('../store/manager');
  * @param {object} res - The Express response object.
  */
 async function twitchMessageCreate(req, res) {
-
     try {
-
-        // if (getParam('twitch_channel_headers_set')) {
-        //     const headers = getSecret('twitch_channel_headers');
-        //     Object.keys(headers).forEach(key => {
-        //         console.log(`Header: ${key} : ${headers[key]} ~ ${req.headers[key]}`);
-        //     });
-        // }
+        twitchHeaderValidate(req);
 
         const accessToken = getSecret('twitch_access_token');
         const broadcasterId = getSecret('twitch_broadcaster_id');

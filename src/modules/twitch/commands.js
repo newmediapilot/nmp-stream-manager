@@ -1,4 +1,4 @@
-const { getParam, hasSecret, setSecret } = require('../store/manager');
+const {getParam, hasSecret, setSecret, getSecret} = require('../store/manager');
 const ROUTES = require('../../routes');
 const axios = require('axios');
 const chalk = require('chalk');
@@ -44,13 +44,13 @@ async function twitchCommandCreate(req, res) {
 
         if (!commandKey || !commands[commandKey]) {
             console.log(chalk.red('Invalid or missing command.'));
-            return res.status(400).json({ success: false, message: 'Invalid or missing command.' });
+            return res.status(400).json({success: false, message: 'Invalid or missing command.'});
         }
 
         console.log(chalk.blue(`Starting command creation. Unsetting command: ${chalk.cyan(commandKey)}`));
 
         const unsetResponse = await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_UNSET}`, {
-            params: { command: commandKey },
+            params: {command: commandKey},
         });
 
         if (unsetResponse.status !== 200) {
@@ -66,7 +66,7 @@ async function twitchCommandCreate(req, res) {
         console.log(chalk.green(`Unsetting command completed. Setting new command: ${chalk.cyan(commandKey)}`));
 
         const setResponse = await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_SET}`, {
-            params: { command: commandKey },
+            params: {command: commandKey},
         });
 
         if (setResponse.status !== 200) {
@@ -113,7 +113,7 @@ async function twitchCommandUnset(req, res) {
         console.log(chalk.yellow(`Attempting to unset command: ${chalk.cyan(commandKey)} with message: ${chalk.magenta(removeMessage)}`));
 
         const unsetResponse = await axios.get(`http://localhost${ROUTES.TWITCH_MESSAGE_CREATE}`, {
-            params: { message: removeMessage },
+            params: {message: removeMessage},
         });
 
         if (unsetResponse.status !== 200) {
@@ -148,14 +148,14 @@ async function twitchCommandSet(req, res) {
 
         if (!commandKey || !commands[commandKey]) {
             console.log(chalk.red('Invalid or missing command.'));
-            return res.status(400).json({ success: false, message: 'Invalid or missing command.' });
+            return res.status(400).json({success: false, message: 'Invalid or missing command.'});
         }
 
         const addMessage = commands[commandKey].add;
         console.log(chalk.yellow(`Attempting to set command: ${chalk.cyan(commandKey)} with message: ${chalk.magenta(addMessage)}`));
 
         const setResponse = await axios.get(`http://localhost${ROUTES.TWITCH_MESSAGE_CREATE}`, {
-            params: { message: addMessage },
+            params: {message: addMessage},
         });
 
         if (setResponse.status !== 200) {
@@ -184,12 +184,24 @@ async function twitchCommandSet(req, res) {
  * Pings chat to retrieve headers which we will verify against subsequent requests.
  */
 async function twitchMessageConfigureSetup() {
-    console.log(chalk.blue('Starting twitchMessageConfigureSetup...'));
+
+    console.log('twitchMessageConfigureSetup');
+
     try {
-        await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_CREATE}`, { params: { command: 'configure' } });
-        console.log(chalk.green('Setup complete.'));
+
+        console.log(chalk.green('twitchMessageConfigureSetup.start'));
+
+        await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_CREATE}`, {params: {command: 'configure'}});
+        await axios.get(`http://localhost${ROUTES.TWITCH_MESSAGE_CREATE}`, {params: {message: '!configure'}});
+        await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_UNSET}`, {params: {command: 'configure'}});
+
+        console.log(chalk.green('twitchMessageConfigureSetup.removed !configure'));
+
     } catch (error) {
-        console.error(chalk.red('Error in twitchMessageConfigureSetup:'), error.message);
+
+        console.log(chalk.green('Error in twitchCommandSetup:', error.status));
+        throw Error(error);
+
     }
 }
 
@@ -197,7 +209,9 @@ async function twitchMessageConfigureSetup() {
  * Used to extract chatbot configuration information.
  */
 async function twitchMessageConfigure(req, res) {
+
     console.log(chalk.blue('Starting twitchMessageConfigure...'));
+
     if (hasSecret('twitch_channel_headers')) {
         console.log(chalk.yellow('twitchMessageConfigure already set, skipping...'));
         return;
@@ -216,7 +230,17 @@ async function twitchMessageConfigure(req, res) {
     console.log(chalk.green('twitchMessageConfigure completed successfully.'));
 }
 
+function twitchHeaderValidate(req) {
+    if (hasSecret('twitch_channel_headers')) {
+        const headers = getSecret('twitch_channel_headers');
+        Object.keys(headers).forEach(key =>
+            console.log(`Header: ${key} : ${headers[key]} ~ ${req.headers[key]}`)
+        );
+    }
+}
+
 module.exports = {
+    twitchHeaderValidate,
     twitchMessageConfigureSetup,
     twitchMessageConfigure,
     twitchCommandsGet,
