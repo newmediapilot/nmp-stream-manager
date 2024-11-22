@@ -1,6 +1,6 @@
 require('dotenv').config();
 const axios = require('axios');
-const {hasSecret, getSecret} = require('../store/manager');
+const {getParam, getSecret} = require('../store/manager');
 
 /**
  * Sends a message to a Twitch channel.
@@ -10,17 +10,13 @@ const {hasSecret, getSecret} = require('../store/manager');
 async function twitchMessageCreate(req, res) {
 
     try {
-        if (hasSecret('twitch_channel_headers')) {
-            const headers = getSecret('twitch_channel_headers');
-            Object.keys(headers).forEach(key => {
-                if (req.headers[key] !== headers[key]) throw Error(`Header mismatch: ${key} : ${headers[key]} ~ ${req.headers[key]}`);
-            });
-        }
-    } catch (e) {
-        return res.status(403).json('Not allowed to send from here.');
-    }
 
-    try {
+        // if (getParam('twitch_channel_headers_set')) {
+        //     const headers = getSecret('twitch_channel_headers');
+        //     Object.keys(headers).forEach(key => {
+        //         console.log(`Header: ${key} : ${headers[key]} ~ ${req.headers[key]}`);
+        //     });
+        // }
 
         const accessToken = getSecret('twitch_access_token');
         const broadcasterId = getSecret('twitch_broadcaster_id');

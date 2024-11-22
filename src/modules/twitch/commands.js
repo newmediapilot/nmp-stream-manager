@@ -1,6 +1,7 @@
-const {getParam, hasSecret, setSecret} = require('../store/manager');
+const { getParam, hasSecret, setSecret } = require('../store/manager');
 const ROUTES = require('../../routes');
 const axios = require('axios');
+const chalk = require('chalk');
 
 // Timeout before next action
 const TIMEOUT_WAIT = 2000;
@@ -10,10 +11,9 @@ const TIMEOUT_WAIT = 2000;
  * @returns {object} - An object with all commands mapped to their composed URLs.
  */
 function twitchCommandsGet() {
-
     const publicUrl = getParam('public_url');
 
-    if (!publicUrl) throw new Error('Public URL is not set. Please initialize the application correctly.');
+    if (!publicUrl) throw new Error(chalk.red.bold('Public URL is not set. Please initialize the application correctly.'));
 
     return {
         configure: {
@@ -36,70 +36,57 @@ function twitchCommandsGet() {
 
 /**
  * Creates or updates a Twitch command by removing the old one and adding a new one.
- * Uses `twitchCommandUnset` to handle the removal process.
- * @param {object} req - Express request object.
- * @param {object} res - Express response object.
  */
 async function twitchCommandCreate(req, res) {
     try {
-
         const commands = twitchCommandsGet();
         const commandKey = req.query.command;
 
         if (!commandKey || !commands[commandKey]) {
-            return res.status(400).json({success: false, message: 'Invalid or missing command.'});
+            console.log(chalk.red('Invalid or missing command.'));
+            return res.status(400).json({ success: false, message: 'Invalid or missing command.' });
         }
 
-        // Step 1: Remove the existing command
-        console.log(`Starting command creation. Unsetting command: ${commandKey}`);
+        console.log(chalk.blue(`Starting command creation. Unsetting command: ${chalk.cyan(commandKey)}`));
 
         const unsetResponse = await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_UNSET}`, {
-            params: {command: commandKey},
+            params: { command: commandKey },
         });
 
         if (unsetResponse.status !== 200) {
-            console.error('Error in unsetResponse during twitchCommandCreate:', {
-                status: unsetResponse.status,
-                data: unsetResponse.data,
-            });
+            console.error(chalk.red('Error in unsetResponse during twitchCommandCreate:'), unsetResponse.data);
             return res.status(unsetResponse.status).send({
                 success: false,
                 message: `Command '${commandKey}' unset failed.`,
             });
         }
 
-        // Wait for command manually, actual removal is async from here
         await new Promise(resolve => setTimeout(resolve, TIMEOUT_WAIT));
 
-        // Step 2: Add the new command
-        console.log(`Unsetting command completed. Setting new command: ${commandKey}`);
+        console.log(chalk.green(`Unsetting command completed. Setting new command: ${chalk.cyan(commandKey)}`));
+
         const setResponse = await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_SET}`, {
-            params: {command: commandKey},
+            params: { command: commandKey },
         });
 
         if (setResponse.status !== 200) {
-            console.error('Error in setResponse during twitchCommandCreate:', {
-                status: setResponse.status,
-                data: setResponse.data,
-            });
+            console.error(chalk.red('Error in setResponse during twitchCommandCreate:'), setResponse.data);
             return res.status(setResponse.status).json({
                 success: false,
                 message: `Command '${commandKey}' set failed.`,
             });
         }
 
-        // Wait for command again before allowing next push
         await new Promise(resolve => setTimeout(resolve, TIMEOUT_WAIT));
 
-        console.log(`Command '${commandKey}' created successfully.`);
+        console.log(chalk.green.bold(`Command '${commandKey}' created successfully.`));
         return res.status(setResponse.status).json({
             success: true,
             message: `Command '${commandKey}' created successfully.`,
         });
     } catch (error) {
-        console.error('Error in twitchCommandCreate:', error.message);
-
-        return res.status(error.status).json({
+        console.error(chalk.red('Error in twitchCommandCreate:'), error.message);
+        return res.status(500).json({
             success: false,
             message: 'An error occurred while creating the command.',
         });
@@ -108,44 +95,43 @@ async function twitchCommandCreate(req, res) {
 
 /**
  * Handles the removal of a Twitch command.
- * @param {object} req - Express request object.
- * @param {object} res - Express response object.
  */
 async function twitchCommandUnset(req, res) {
     try {
         const commandKey = req.query.command;
         const commands = twitchCommandsGet();
 
-        if (!commandKey || !commands[commandKey]) return res.status(400).json({
-            success: false,
-            message: 'Invalid or missing command.'
-        });
+        if (!commandKey || !commands[commandKey]) {
+            console.log(chalk.red('Invalid or missing command.'));
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid or missing command.',
+            });
+        }
 
         const removeMessage = commands[commandKey].remove;
+        console.log(chalk.yellow(`Attempting to unset command: ${chalk.cyan(commandKey)} with message: ${chalk.magenta(removeMessage)}`));
 
-        console.log(`Attempting to unset command: ${commandKey} with message: ${removeMessage}`);
-
-        const unsetResponse = await axios.get(`http://localhost${ROUTES.TWITCH_MESSAGE_CREATE}`, {params: {message: removeMessage}});
+        const unsetResponse = await axios.get(`http://localhost${ROUTES.TWITCH_MESSAGE_CREATE}`, {
+            params: { message: removeMessage },
+        });
 
         if (unsetResponse.status !== 200) {
-            console.error('Error in unsetResponse:', {
-                status: unsetResponse.status,
-                data: unsetResponse.data,
-            });
+            console.error(chalk.red('Error in unsetResponse:'), unsetResponse.data);
             return res.status(unsetResponse.status).json({
                 success: false,
                 message: `Failed to unset command: ${unsetResponse.data.message || unsetResponse.statusText}`,
             });
         }
 
-        console.log(`Command unset successfully: ${commandKey}`);
+        console.log(chalk.green(`Command unset successfully: ${chalk.cyan(commandKey)}`));
         return res.status(unsetResponse.status).json({
             success: true,
             message: `Command unset successfully: ${removeMessage}`,
         });
     } catch (error) {
-        console.error('Error in twitchCommandUnset:', error.message);
-        return res.status(error.status).json({
+        console.error(chalk.red('Error in twitchCommandUnset:'), error.message);
+        return res.status(500).json({
             success: false,
             message: 'An error occurred while unsetting the command.',
         });
@@ -154,8 +140,6 @@ async function twitchCommandUnset(req, res) {
 
 /**
  * Handles the adding of a Twitch command.
- * @param {object} req - Express request object.
- * @param {object} res - Express response object.
  */
 async function twitchCommandSet(req, res) {
     try {
@@ -163,39 +147,33 @@ async function twitchCommandSet(req, res) {
         const commands = twitchCommandsGet();
 
         if (!commandKey || !commands[commandKey]) {
-            return res.status(400).json({success: false, message: 'Invalid or missing command.'});
+            console.log(chalk.red('Invalid or missing command.'));
+            return res.status(400).json({ success: false, message: 'Invalid or missing command.' });
         }
 
         const addMessage = commands[commandKey].add;
-        console.log(`Attempting to set command: ${commandKey} with message: ${addMessage}`);
+        console.log(chalk.yellow(`Attempting to set command: ${chalk.cyan(commandKey)} with message: ${chalk.magenta(addMessage)}`));
 
         const setResponse = await axios.get(`http://localhost${ROUTES.TWITCH_MESSAGE_CREATE}`, {
-            params: {message: addMessage},
+            params: { message: addMessage },
         });
 
-        if (setResponse.status === 401) {
-            console.log(`setResponse.status`, setResponse.status);
-        }
-
         if (setResponse.status !== 200) {
-            console.error('Error in setResponse:', {
-                status: setResponse.status,
-                data: setResponse.data,
-            });
+            console.error(chalk.red('Error in setResponse:'), setResponse.data);
             return res.status(setResponse.status).json({
                 success: false,
                 message: `Failed to set command: ${setResponse.data.message || setResponse.statusText}`,
             });
         }
 
-        console.log(`Command set successfully: ${commandKey}`);
+        console.log(chalk.green(`Command set successfully: ${chalk.cyan(commandKey)}`));
         return res.status(setResponse.status).json({
             success: true,
             message: `Command set successfully: ${addMessage}`,
         });
     } catch (error) {
-        console.error('Error in twitchCommandSet:', error.message);
-        return res.status(error.status).json({
+        console.error(chalk.red('Error in twitchCommandSet:'), error.message);
+        return res.status(500).json({
             success: false,
             message: 'An error occurred while setting the command.',
         });
@@ -203,44 +181,25 @@ async function twitchCommandSet(req, res) {
 }
 
 /**
- * Pings chat to retrieve headers which we will verify against subsequent requests
- * Ensures no other source can connect
- * @returns {boolean}
+ * Pings chat to retrieve headers which we will verify against subsequent requests.
  */
 async function twitchMessageConfigureSetup() {
-    console.log('twitchMessageConfigureSetup');
+    console.log(chalk.blue('Starting twitchMessageConfigureSetup...'));
     try {
-        console.log('twitchMessageConfigureSetup.create !configure');
-        await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_CREATE}`, {
-            params: {command: 'configure'},
-        });
-        console.log('twitchMessageConfigureSetup.call !configure');
-        await axios.get(`http://localhost${ROUTES.TWITCH_MESSAGE_CREATE}`, {
-            params: {message: '!configure'},
-        });
-        console.log('twitchMessageConfigureSetup.unset !configure');
-        await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_UNSET}`, {
-            params: {message: 'configure'},
-        });
-        console.log('twitchMessageConfigureSetup.called !configure');
+        await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_CREATE}`, { params: { command: 'configure' } });
+        console.log(chalk.green('Setup complete.'));
     } catch (error) {
-        console.log('Error in twitchCommandSetup:', error.status);
-        throw Error(error);
+        console.error(chalk.red('Error in twitchMessageConfigureSetup:'), error.message);
     }
 }
 
-/** Used to extract chatbot configuration information
- * We store the chatbot identity and prevent others from pinging the api
- * @param req
- * @param res
- * @returns {Promise<void>}
+/**
+ * Used to extract chatbot configuration information.
  */
 async function twitchMessageConfigure(req, res) {
-
-    console.log('twitchCommandConfigure');
-
+    console.log(chalk.blue('Starting twitchMessageConfigure...'));
     if (hasSecret('twitch_channel_headers')) {
-        console.log('twitchCommandConfigure already set! skipping...');
+        console.log(chalk.yellow('twitchMessageConfigure already set, skipping...'));
         return;
     }
 
@@ -254,8 +213,7 @@ async function twitchMessageConfigure(req, res) {
         'x-streamelements-channel': req.headers['x-streamelements-channel']
     });
 
-    console.log('twitchCommandConfigure done.');
-
+    console.log(chalk.green('twitchMessageConfigure completed successfully.'));
 }
 
 module.exports = {
