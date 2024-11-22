@@ -1,20 +1,30 @@
 require('dotenv').config();
 const axios = require('axios');
-const { getSecret, getParam } = require('../store/manager');
+const {hasSecret, getSecret} = require('../store/manager');
 
-const ROUTES = require('../../routes');
 /**
  * Sends a message to a Twitch channel.
  * @param {object} req - The Express request object.
  * @param {object} res - The Express response object.
  */
 async function twitchMessageCreate(req, res) {
+
     try {
+        if (hasSecret('twitch_channel_headers')) {
+            const headers = getSecret('twitch_channel_headers');
+            Object.keys(headers).forEach(key => {
+                if (req.headers[key] !== headers[key]) throw Error(`Header mismatch: ${key} : ${headers[key]} ~ ${req.headers[key]}`);
+            });
+        }
+    } catch (e) {
+        return res.status(403).json('Not allowed to send from here.');
+    }
+
+    try {
+
         const accessToken = getSecret('twitch_access_token');
         const broadcasterId = getSecret('twitch_broadcaster_id');
-
-        // Retrieve the message from the query string
-        const message = req.query.message || 'Default message not provided'; // Default message if not provided
+        const message = req.query.message;
 
         if (!message.trim()) {
             return res.status(400).json('Message parameter is required.');
@@ -42,4 +52,4 @@ async function twitchMessageCreate(req, res) {
     }
 }
 
-module.exports = { twitchMessageCreate };
+module.exports = {twitchMessageCreate};

@@ -1,9 +1,38 @@
-const { getParam } = require('../store/manager');
+const {getParam, hasSecret, setSecret} = require('../store/manager');
 const ROUTES = require('../../routes');
 const axios = require('axios');
 
 // Timeout before next action
 const TIMEOUT_WAIT = 2000;
+
+/**
+ * Retrieves all available Twitch commands.
+ * @returns {object} - An object with all commands mapped to their composed URLs.
+ */
+function twitchCommandsGet() {
+
+    const publicUrl = getParam('public_url');
+
+    if (!publicUrl) throw new Error('Public URL is not set. Please initialize the application correctly.');
+
+    return {
+        configure: {
+            description: `Adds command "/configure" to chat bot`,
+            remove: `!command remove configure`,
+            add: `!command add configure $(customapi.${publicUrl}${ROUTES.TWITCH_MESSAGE_CONFIGURE})`,
+        },
+        tweet: {
+            description: `Adds command "/tweet tweet_message" to chat bot`,
+            remove: `!command remove tweet`,
+            add: `!command add tweet $(customapi.${publicUrl}${ROUTES.TWITTER_TWEET}?tweet_message=$(1:))`,
+        },
+        clip: {
+            description: `Adds command "/clip" to chat bot`,
+            remove: `!command remove clip`,
+            add: `!command add clip $(customapi.${publicUrl}${ROUTES.TWITCH_CLIP_CREATE})`,
+        },
+    };
+}
 
 /**
  * Creates or updates a Twitch command by removing the old one and adding a new one.
@@ -18,14 +47,14 @@ async function twitchCommandCreate(req, res) {
         const commandKey = req.query.command;
 
         if (!commandKey || !commands[commandKey]) {
-            return res.status(400).json({ success: false, message: 'Invalid or missing command.' });
+            return res.status(400).json({success: false, message: 'Invalid or missing command.'});
         }
 
         // Step 1: Remove the existing command
         console.log(`Starting command creation. Unsetting command: ${commandKey}`);
 
         const unsetResponse = await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_UNSET}`, {
-            params: { command: commandKey },
+            params: {command: commandKey},
         });
 
         if (unsetResponse.status !== 200) {
@@ -33,7 +62,7 @@ async function twitchCommandCreate(req, res) {
                 status: unsetResponse.status,
                 data: unsetResponse.data,
             });
-            return res.status(unsetResponse.status).json({
+            return res.status(unsetResponse.status).send({
                 success: false,
                 message: `Command '${commandKey}' unset failed.`,
             });
@@ -45,7 +74,7 @@ async function twitchCommandCreate(req, res) {
         // Step 2: Add the new command
         console.log(`Unsetting command completed. Setting new command: ${commandKey}`);
         const setResponse = await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_SET}`, {
-            params: { command: commandKey },
+            params: {command: commandKey},
         });
 
         if (setResponse.status !== 200) {
@@ -78,32 +107,6 @@ async function twitchCommandCreate(req, res) {
 }
 
 /**
- * Retrieves all available Twitch commands.
- * @returns {object} - An object with all commands mapped to their composed URLs.
- */
-function twitchCommandsGet() {
-
-    const publicUrl = getParam('public_url');
-
-    if (!publicUrl) {
-        throw new Error('Public URL is not set. Please initialize the application correctly.');
-    }
-
-    return {
-        tweet: {
-            description: `Adds command "/tweet tweet_message" to chat bot`,
-            remove: `!command remove tweet`,
-            add: `!command add tweet $(customapi.${publicUrl}${ROUTES.TWITTER_TWEET}?tweet_message=$(1:))`,
-        },
-        clip: {
-            description: `Adds command "/clip" to chat bot`,
-            remove: `!command remove clip`,
-            add: `!command add clip $(customapi.${publicUrl}${ROUTES.TWITCH_CLIP_CREATE})`,
-        },
-    };
-}
-
-/**
  * Handles the removal of a Twitch command.
  * @param {object} req - Express request object.
  * @param {object} res - Express response object.
@@ -113,16 +116,16 @@ async function twitchCommandUnset(req, res) {
         const commandKey = req.query.command;
         const commands = twitchCommandsGet();
 
-        if (!commandKey || !commands[commandKey]) {
-            return res.status(400).json({ success: false, message: 'Invalid or missing command.' });
-        }
+        if (!commandKey || !commands[commandKey]) return res.status(400).json({
+            success: false,
+            message: 'Invalid or missing command.'
+        });
 
         const removeMessage = commands[commandKey].remove;
+
         console.log(`Attempting to unset command: ${commandKey} with message: ${removeMessage}`);
 
-        const unsetResponse = await axios.get(`http://localhost${ROUTES.TWITCH_MESSAGE_CREATE}`, {
-            params: { message: removeMessage },
-        });
+        const unsetResponse = await axios.get(`http://localhost${ROUTES.TWITCH_MESSAGE_CREATE}`, {params: {message: removeMessage}});
 
         if (unsetResponse.status !== 200) {
             console.error('Error in unsetResponse:', {
@@ -160,17 +163,17 @@ async function twitchCommandSet(req, res) {
         const commands = twitchCommandsGet();
 
         if (!commandKey || !commands[commandKey]) {
-            return res.status(400).json({ success: false, message: 'Invalid or missing command.' });
+            return res.status(400).json({success: false, message: 'Invalid or missing command.'});
         }
 
         const addMessage = commands[commandKey].add;
         console.log(`Attempting to set command: ${commandKey} with message: ${addMessage}`);
 
         const setResponse = await axios.get(`http://localhost${ROUTES.TWITCH_MESSAGE_CREATE}`, {
-            params: { message: addMessage },
+            params: {message: addMessage},
         });
 
-        if(setResponse.status === 401){
+        if (setResponse.status === 401) {
             console.log(`setResponse.status`, setResponse.status);
         }
 
@@ -199,7 +202,65 @@ async function twitchCommandSet(req, res) {
     }
 }
 
+/**
+ * Pings chat to retrieve headers which we will verify against subsequent requests
+ * Ensures no other source can connect
+ * @returns {boolean}
+ */
+async function twitchMessageConfigureSetup() {
+    console.log('twitchMessageConfigureSetup');
+    try {
+        console.log('twitchMessageConfigureSetup.create !configure');
+        await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_CREATE}`, {
+            params: {command: 'configure'},
+        });
+        console.log('twitchMessageConfigureSetup.call !configure');
+        await axios.get(`http://localhost${ROUTES.TWITCH_MESSAGE_CREATE}`, {
+            params: {message: '!configure'},
+        });
+        console.log('twitchMessageConfigureSetup.unset !configure');
+        await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_UNSET}`, {
+            params: {message: 'configure'},
+        });
+        console.log('twitchMessageConfigureSetup.called !configure');
+    } catch (error) {
+        console.log('Error in twitchCommandSetup:', error.status);
+        throw Error(error);
+    }
+}
+
+/** Used to extract chatbot configuration information
+ * We store the chatbot identity and prevent others from pinging the api
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function twitchMessageConfigure(req, res) {
+
+    console.log('twitchCommandConfigure');
+
+    if (hasSecret('twitch_channel_headers')) {
+        console.log('twitchCommandConfigure already set! skipping...');
+        return;
+    }
+
+    setSecret('twitch_channel_headers', {
+        'host': process.env.NGROK_URL,
+        'user-agent': 'StreamElements Bot',
+        'cf-connecting-ip': req.headers['cf-connecting-ip'],
+        'cf-ray': req.headers['cf-ray'],
+        'cf-worker': req.headers['cf-worker'],
+        'x-forwarded-host': process.env.NGROK_URL,
+        'x-streamelements-channel': req.headers['x-streamelements-channel']
+    });
+
+    console.log('twitchCommandConfigure done.');
+
+}
+
 module.exports = {
+    twitchMessageConfigureSetup,
+    twitchMessageConfigure,
     twitchCommandsGet,
     twitchCommandCreate,
     twitchCommandSet,

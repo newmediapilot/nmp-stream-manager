@@ -12,19 +12,27 @@ const twitterClient = new TwitterApi({
     appKey: process.env.TWITTER_API_KEY,
     appSecret: process.env.TWITTER_API_SECRET,
     accessToken: process.env.TWITTER_ACCESS_TOKEN,
-    accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+    accessSecret: process.env.TWITTER_ACCESS_SECRET,
 });
 
 async function twitterTweet(req, res) {
     try {
+        // Test API call to verify credentials
+        const me = await twitterClient.v2.me();
+        console.log('Authenticated user info:', me);
+
         const message = req.query.tweet_message; // Get the tweet message from the query parameter
+
         if (!message) {
             return res.send('No message provided for tweeting.');
         }
 
         const tweetMessage = `${message} ${HASHTAGS}`;
+        console.log('twitterTweet.tweetMessage...', tweetMessage);
 
-        const tweetResponse = await twitterClient.v2.tweet(tweetMessage);
+        const tweetResponse = await twitterClient.v2.tweet({
+            text: tweetMessage
+        });
 
         const rateLimitRemaining = tweetResponse.headers['x-app-limit-24hour-remaining'];
         const rateLimitLimit = tweetResponse.headers['x-app-limit-24hour-limit'];
@@ -32,8 +40,18 @@ async function twitterTweet(req, res) {
         console.log(`Tweets remaining: ${rateLimitRemaining}/${rateLimitLimit}`);
 
         res.send(`Tweet posted successfully: ${tweetResponse.data.text}. ${rateLimitRemaining}/${rateLimitLimit} tweets remaining.`);
+
     } catch (error) {
-        console.error('Error posting tweet:', error);
+
+        // Log full error details for debugging
+        if (error.response) {
+            console.error('Response Status:', error.status);
+            console.error('Response Data:', error.data);
+            console.error('Response Headers:', error.headers);
+            console.error('Response Status:', error.response.status);
+            console.error('Response Data:', error.response.data);
+            console.error('Response Headers:', error.response.headers);
+        }
 
         if (error.code === 429) {
             const rateLimitRemaining = error.headers['x-app-limit-24hour-remaining'];

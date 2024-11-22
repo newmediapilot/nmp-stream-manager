@@ -31,6 +31,8 @@ const allowedParams = [
     'twitch_access_token_set',
     'twitch_refresh_token_set',
     'twitch_broadcaster_id_set',
+    'twitch_channel_id_set',
+    'twitch_channel_headers_set',
 ];
 
 // Helper function to load secrets from the .secrets file
@@ -87,7 +89,7 @@ function setSecret(name, key) {
         secrets = null;
 
         fs.writeFileSync('.secrets', secretsJSON, 'utf8');
-        console.log(chalk.bgGreen.whiteBright(`Secret set for ${name}: ${key}`));
+        console.log(chalk.bgGreen.whiteBright(`Secret set for ${name}: ${String('X').repeat(key.length)}`));
     } catch (error) {
         console.error(chalk.bgRed.whiteBright('Error setting secret:', error.message));
     }
@@ -95,7 +97,9 @@ function setSecret(name, key) {
 
 function hasSecret(name) {
     loadSecrets();
-    return !!secrets[name];
+    const secret = secrets[name];
+    console.log(chalk.bgYellow.whiteBright(`Secret exist check ${secret}.`));
+    return secret;
 }
 
 function getSecret(name) {
