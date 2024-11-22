@@ -221,7 +221,6 @@ async function twitchMessageConfigure(req, res) {
         'host': process.env.NGROK_URL,
         'user-agent': 'StreamElements Bot',
         'cf-connecting-ip': req.headers['cf-connecting-ip'],
-        'cf-ray': req.headers['cf-ray'],
         'cf-worker': req.headers['cf-worker'],
         'x-forwarded-host': process.env.NGROK_URL,
         'x-streamelements-channel': req.headers['x-streamelements-channel']
@@ -230,17 +229,30 @@ async function twitchMessageConfigure(req, res) {
     console.log(chalk.green('twitchMessageConfigure completed successfully.'));
 }
 
-function twitchHeaderValidate(req) {
+/**
+ * Compare the request header with the configured bot header
+ * If they don't match stop the request
+ * @param req
+ */
+function twitchHeaderValid(req, res) {
     if (hasSecret('twitch_channel_headers')) {
         const headers = getSecret('twitch_channel_headers');
-        Object.keys(headers).forEach(key =>
-            console.log(`Header: ${key} : ${headers[key]} ~ ${req.headers[key]}`)
-        );
+        const mapped = Object.keys(headers).map(key => {
+            const a = headers[key]
+            const b = req.headers[key];
+            const c = a === b;
+            console.log(`twitchHeaderValid [${c}] ${a} => ${b}`);
+            return c;
+        });
+        const result = false === mapped.includes(false);
+        return result;
+    } else {
+        return true;
     }
 }
 
 module.exports = {
-    twitchHeaderValidate,
+    twitchHeaderValid,
     twitchMessageConfigureSetup,
     twitchMessageConfigure,
     twitchCommandsGet,

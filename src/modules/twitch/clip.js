@@ -5,7 +5,7 @@
  */
 require('dotenv').config(); // Load environment variables from .env
 const axios = require('axios');
-const {twitchHeaderValidate} = require('./commands');
+const {twitchHeaderValid} = require('./commands');
 const {getBroadcasterId} = require('./login'); // Import the getBroadcasterId to access stored params
 const {getSecret} = require('../store/manager'); // Import getSecret to fetch the access token
 
@@ -17,7 +17,9 @@ const {getSecret} = require('../store/manager'); // Import getSecret to fetch th
  */
 async function twitchClipCreate(req, res) {
     try {
-        twitchHeaderValidate(req);
+
+        // Validate if request is coming from chatbot
+        if(!twitchHeaderValid(req)) return res.status(500).send(`Invalid agent.`);
 
         const accessToken = getSecret('twitch_access_token');
 

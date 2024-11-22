@@ -1,7 +1,7 @@
 require('dotenv').config();
 const axios = require('axios');
 const {getSecret} = require('../store/manager');
-const {twitchHeaderValidate} = require('../twitch/commands');
+const {twitchHeaderValid} = require('../twitch/commands');
 
 /**
  * Sends a message to a Twitch channel.
@@ -10,7 +10,9 @@ const {twitchHeaderValidate} = require('../twitch/commands');
  */
 async function twitchMessageCreate(req, res) {
     try {
-        twitchHeaderValidate(req);
+
+        // Validate if request is coming from chatbot
+        if(!twitchHeaderValid(req)) return res.status(500).send(`Invalid agent.`);
 
         const accessToken = getSecret('twitch_access_token');
         const broadcasterId = getSecret('twitch_broadcaster_id');
