@@ -76,6 +76,15 @@ function getParam(key) {
     return value; // Return the value (undefined if not found)
 }
 
+function resetSecrets() {
+    fs.rmSync("/secrets.js", {
+        force: true,
+    });
+    console.error(chalk.bgRed.whiteBright('Removing secrets...'));
+    console.error(chalk.bgRed.whiteBright('Removing secrets...'));
+    console.error(chalk.bgRed.whiteBright('Removing secrets...'));
+}
+
 function setSecret(name, key) {
     try {
         loadSecrets();
@@ -118,4 +127,4 @@ function getSecret(name) {
     }
 }
 
-module.exports = { setParam, getParam, getAllParams, hasSecret, setSecret, getSecret };
+module.exports = { setParam, getParam, getAllParams, hasSecret, setSecret, getSecret, resetSecrets };

@@ -6,9 +6,14 @@
 require('dotenv').config(); // Load environment variables from .env
 const axios = require('axios');
 const chalk = require('chalk'); // Import chalk for colorized logs
-const {getSecret, setSecret, getParam, setParam} = require('../store/manager');
-const {twitchMessageConfigureSetup} = require('./commands');
+const {getSecret, setSecret, getParam, setParam, resetSecrets} = require('../store/manager');
+const {twitchCommandSetup} = require('./commands');
 
+/**
+ * Initiates the login flow
+ * @param req
+ * @param res
+ */
 function twitchLogin(req, res) {
     const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
     const TWITCH_SCOPES = process.env.TWITCH_SCOPES || "clips:edit user:write:chat";
@@ -29,8 +34,17 @@ function twitchLogin(req, res) {
     res.redirect(oauthUrl); // Redirect the user to the Twitch login URL
 }
 
-
+/**
+ * Redirected here from Twitch on login success
+ * We perform a series of post-connection fetches and configs
+ * @param req
+ * @param res
+ * @returns {Promise<*|void|Response>}
+ */
 async function twitchLoginSuccess(req, res) {
+
+    resetSecrets();
+
     const code = req.query.code; // Retrieve the 'code' parameter from the query string
 
     try {
@@ -55,11 +69,12 @@ async function twitchLoginSuccess(req, res) {
         // Set channel ID for other ops
         await getChannelId();
         // Set chatbot identity
-        await twitchMessageConfigureSetup();
+        await twitchCommandSetup();
 
         // Jump to next referrer if its set
         const referrer = getParam('twitch_login_referrer');
-        if(referrer) {
+
+        if (referrer) {
             setParam('twitch_login_referrer', undefined);
             return res.redirect(referrer)
         }
@@ -73,6 +88,10 @@ async function twitchLoginSuccess(req, res) {
     }
 }
 
+/**
+ * Gets the broadcaster id for the Twitch API
+ * @returns {Promise<boolean|*>}
+ */
 async function getBroadcasterId() {
     try {
         const username = getParam('twitch_username');
@@ -112,7 +131,6 @@ async function getChannelId() {
 
         // Fetch access token from secrets
         const accessToken = getSecret('twitch_access_token');
-        console.log(chalk.green('Access Token:'), chalk.cyan(accessToken));
 
         // Make the API request
         const response = await axios.get(`https://api.twitch.tv/helix/users?login=${username}`, {

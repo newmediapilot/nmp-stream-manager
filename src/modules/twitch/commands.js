@@ -183,19 +183,19 @@ async function twitchCommandSet(req, res) {
 /**
  * Pings chat to retrieve headers which we will verify against subsequent requests.
  */
-async function twitchMessageConfigureSetup() {
+async function twitchCommandSetup() {
 
-    console.log('twitchMessageConfigureSetup');
+    console.log('twitchCommandSetup');
 
     try {
 
-        console.log(chalk.green('twitchMessageConfigureSetup.start'));
+        console.log(chalk.green('twitchCommandSetup.start'));
 
-        await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_CREATE}`, {params: {command: 'configure'}});
+        await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_SET}`, {params: {command: 'configure'}});
         await axios.get(`http://localhost${ROUTES.TWITCH_MESSAGE_CREATE}`, {params: {message: '!configure'}});
         await axios.get(`http://localhost${ROUTES.TWITCH_COMMAND_UNSET}`, {params: {command: 'configure'}});
 
-        console.log(chalk.green('twitchMessageConfigureSetup.removed !configure'));
+        console.log(chalk.green('twitchCommandSetup.removed !configure'));
 
     } catch (error) {
 
@@ -207,53 +207,55 @@ async function twitchMessageConfigureSetup() {
 
 /**
  * Used to extract chatbot configuration information.
+ * Only the chatbot may use this API endpoint
+ * Once the headers are captured we use them to
+ * Gatekeep any follow-up requests
  */
 async function twitchMessageConfigure(req, res) {
 
     console.log(chalk.blue('Starting twitchMessageConfigure...'));
 
-    if (hasSecret('twitch_channel_headers')) {
-        console.log(chalk.yellow('twitchMessageConfigure already set, skipping...'));
-        return;
+    if (
+        req.headers['host'] === process.env.NGROK_URL &&
+        req.headers['user-agent'] === 'StreamElements Bot'
+    ) {
+        setSecret('twitch_channel_headers', {
+                'host': process.env.NGROK_URL,
+                'user-agent': 'StreamElements Bot',
+                'cf-connecting-ip': req.headers['cf-connecting-ip'],
+                'cf-worker': req.headers['cf-worker'],
+                'x-forwarded-host': process.env.NGROK_URL,
+                'x-streamelements-channel': req.headers['x-streamelements-channel']
+            }
+        );
+        return res.status(200).send(`Configure done`);
     }
 
-    setSecret('twitch_channel_headers', {
-        'host': process.env.NGROK_URL,
-        'user-agent': 'StreamElements Bot',
-        'cf-connecting-ip': req.headers['cf-connecting-ip'],
-        'cf-worker': req.headers['cf-worker'],
-        'x-forwarded-host': process.env.NGROK_URL,
-        'x-streamelements-channel': req.headers['x-streamelements-channel']
-    });
-
-    console.log(chalk.green('twitchMessageConfigure completed successfully.'));
+    // We only allow configure form the official bot source
+    // And from our NGROK instance
+    return res.status(403).send(`Configure forbidden`);
 }
 
 /**
- * Compare the request header with the configured bot header
+ * Compare the request header with the configured header
  * If they don't match stop the request
  * @param req
  */
-function twitchHeaderValid(req, res) {
-    if (hasSecret('twitch_channel_headers')) {
-        const headers = getSecret('twitch_channel_headers');
-        const mapped = Object.keys(headers).map(key => {
-            const a = headers[key]
-            const b = req.headers[key];
-            const c = a === b;
-            console.log(`twitchHeaderValid [${c}] ${a} => ${b}`);
-            return c;
-        });
-        const result = false === mapped.includes(false);
-        return result;
-    } else {
-        return true;
-    }
+function twitchCommandHeaderValidate(req) {
+    const headers = getSecret('twitch_channel_headers');
+    const mapped = Object.keys(headers).map(key => {
+        const a = headers[key]
+        const b = req.headers[key];
+        const c = a === b;
+        console.log(`twitchCommandHeaderValidate [${c}] ${a} => ${b}`);
+        return c;
+    });
+    return false === mapped.includes(false);
 }
 
 module.exports = {
-    twitchHeaderValid,
-    twitchMessageConfigureSetup,
+    twitchCommandHeaderValidate,
+    twitchCommandSetup,
     twitchMessageConfigure,
     twitchCommandsGet,
     twitchCommandCreate,
