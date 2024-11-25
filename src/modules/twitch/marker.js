@@ -39,7 +39,7 @@ async function twitchMarkerCreate(description) {
 
         console.log(
             chalk.green.bold('Marker created successfully:'),
-            chalk.cyan(`"${response.data.data[0]?.description || 'No description'}"`)
+            chalk.cyan(`"${response.data.data[0]?.description}"`)
         );
 
         return true;

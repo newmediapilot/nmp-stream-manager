@@ -57,9 +57,6 @@ async function twitchClipCreate(req, res) {
         console.log('Error creating clip:', error.response?.data || error.message);
 
         return res.send(`Failed to create clip. ${404 === error.status ? "You appear to be offline." : ""}`);
-    } finally {
-        // Set the title back to original after creating a clip!
-        await setBroadcastTitle(getParam('broadcast_title'));
     }
 }
 
