@@ -32,7 +32,7 @@ const allowedParams = [
     'twitch_refresh_token_set',
     'twitch_broadcaster_id_set',
     'twitch_channel_id_set',
-    'twitch_channel_headers_set',
+    'twitch_bot_headers_set',
 ];
 
 // Helper function to load secrets from the .secrets file

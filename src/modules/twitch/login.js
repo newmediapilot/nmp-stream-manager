@@ -7,7 +7,7 @@
 const axios = require('axios');
 const chalk = require('chalk'); // Import chalk for colorized logs
 const {getSecret, setSecret, getParam, setParam, resetSecrets} = require('../store/manager');
-const {twitchCommandSetup} = require('./commands');
+const {twitchCommandSetup} = require('./configure');
 
 /**
  * Initiates the login flow
@@ -15,6 +15,7 @@ const {twitchCommandSetup} = require('./commands');
  * @param res
  */
 function twitchLogin(req, res) {
+
     const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
     const TWITCH_SCOPES = process.env.TWITCH_SCOPES || "clips:edit user:write:chat";
     const TWITCH_REDIRECT_URL = process.env.TWITCH_REDIRECT_URL;

@@ -4,7 +4,7 @@
  * Usage: Import relevant methods/functions as required.
  */
 
-const {twitchCommandHeaderValidate} = require('../twitch/commands');
+const {twitchCommandHeaderValidate} = require('../twitch/configure');
 const {TwitterApi} = require('twitter-api-v2');
 
 const HASHTAGS = '#twitch #twitchstreamer #gaming #gamer #streamer #youtube #twitchaffiliate #twitchtv #livefromtwitch #live';
@@ -17,8 +17,6 @@ const twitterClient = new TwitterApi({
 });
 
 async function twitterTweet(req, res) {
-
-    if (!twitchCommandHeaderValidate(req)) return res.status(403).json('Invalid agent.');
 
     try {
         // Test API call to verify credentials

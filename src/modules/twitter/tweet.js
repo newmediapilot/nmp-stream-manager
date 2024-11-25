@@ -4,9 +4,7 @@
  * Usage: Import relevant methods/functions as required.
  */
 
-const {twitchCommandHeaderValidate} = require('../twitch/commands');
 const {TwitterApi} = require('twitter-api-v2');
-
 const HASHTAGS = '#twitch #twitchstreamer #gaming #gamer #streamer #youtube #twitchaffiliate #twitchtv #livefromtwitch #live';
 
 const twitterClient = new TwitterApi({
@@ -18,51 +16,24 @@ const twitterClient = new TwitterApi({
 
 async function twitterTweet(req, res) {
 
-    // if (!twitchCommandHeaderValidate(req)) return res.status(403).json('Invalid agent.');
-
     try {
-        // Test API call to verify credentials
         const me = await twitterClient.v2.me();
-        console.log('Authenticated user info:', me);
 
         const message = req.query.tweet_message; // Get the tweet message from the query parameter
 
-        if (!message) {
-            return res.send('No message provided for tweeting.');
-        }
+        if (!message) return res.send('No message provided for tweeting.');
 
-        const tweetMessage = `${message} ${HASHTAGS}`;
-        console.log('twitterTweet.tweetMessage...', tweetMessage);
+        const text = `${message} ${HASHTAGS}`;
 
-        const tweetResponse = await twitterClient.v2.tweet({
-            text: tweetMessage
-        });
+        console.log('twitterTweet.tweetMessage...', message);
 
-        const rateLimitRemaining = tweetResponse.headers['x-app-limit-24hour-remaining'];
-        const rateLimitLimit = tweetResponse.headers['x-app-limit-24hour-limit'];
+        const tweetResponse = await twitterClient.v2.tweet({text});
 
-        console.log(`Tweets remaining: ${rateLimitRemaining}/${rateLimitLimit}`);
-
-        res.send(`Tweet posted successfully: ${tweetResponse.data.text}. ${rateLimitRemaining}/${rateLimitLimit} tweets remaining.`);
+        res.send(`Tweet posted successfully: ${tweetResponse.data.text}.`);
 
     } catch (error) {
 
-        // Log full error details for debugging
-        if (error.response) {
-            console.error('Response Status:', error.status);
-            console.error('Response Data:', error.data);
-            console.error('Response Headers:', error.headers);
-            console.error('Response Status:', error.response.status);
-            console.error('Response Data:', error.response.data);
-            console.error('Response Headers:', error.response.headers);
-        }
-
-        if (error.code === 429) {
-            const rateLimitRemaining = error.headers['x-app-limit-24hour-remaining'];
-            const rateLimitLimit = error.headers['x-app-limit-24hour-limit'];
-
-            return res.send(`Too many tweets. ${rateLimitRemaining}/${rateLimitLimit} tweets remaining.`);
-        }
+        if (error.code === 429) return res.send(`Too many tweets.`);
 
         res.send('Failed to post tweet: ' + error.message);
     }

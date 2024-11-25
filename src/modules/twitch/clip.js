@@ -5,7 +5,6 @@
  */
 
 const axios = require('axios');
-const {twitchCommandHeaderValidate} = require('./commands');
 const {getBroadcasterId} = require('./login'); // Import the getBroadcasterId to access stored params
 const {getSecret} = require('../store/manager'); // Import getSecret to fetch the access token
 
@@ -17,15 +16,11 @@ const {getSecret} = require('../store/manager'); // Import getSecret to fetch th
  */
 async function twitchClipCreate(req, res) {
 
-    if (twitchCommandHeaderValidate(req)) return res.status(403).json('Invalid agent.');
-
     try {
 
         const accessToken = getSecret('twitch_access_token');
 
-        if (!accessToken) {
-            return res.status(400).json('Access token is missing. Please authenticate first.');
-        }
+        if (!accessToken) return res.status(400).json('Access token is missing. Please authenticate first.');
 
         const broadcasterId = await getBroadcasterId(process.env.TWITCH_USERNAME);
 

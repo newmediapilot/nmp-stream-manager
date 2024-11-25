@@ -116,7 +116,7 @@ nmp-stream-manager/
     │   │   └── tweet.js
     │   ├── twitch/
     │   │   ├── clip.js
-    │   │   ├── commands.js
+    │   │   ├── configure.js
     │   │   ├── login.js
     │   │   └── success.js
     │   ├── nunjucks/

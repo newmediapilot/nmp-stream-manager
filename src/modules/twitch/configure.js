@@ -83,13 +83,13 @@ async function twitchMessageConfigure(req, res) {
 
     console.log(chalk.blue('Start configure'));
 
-    if (hasConfigured) return res.status(409).send(`Configure recall forbidden.`);
+    if (hasConfigured) return res.send(`Configure recall forbidden.`);
 
     if (
         req.headers['host'] === process.env.NGROK_URL &&
         req.headers['user-agent'] === 'StreamElements Bot'
     ) {
-        setSecret('twitch_channel_headers', {
+        setSecret('twitch_bot_headers', {
                 'host': process.env.NGROK_URL,
                 'user-agent': 'StreamElements Bot',
                 'cf-connecting-ip': req.headers['cf-connecting-ip'],
@@ -101,31 +101,13 @@ async function twitchMessageConfigure(req, res) {
 
         hasConfigured = true;
 
-        return res.status(200).send(`Configure ready`);
+        return res.send(`Configure ready`);
     }
 
-    return res.status(403).send(`Configure forbidden.`);
-}
-
-/**
- * Compare the request header with the configured header
- * If they don't match stop the request
- * @param req
- */
-function twitchCommandHeaderValidate(req) {
-    const headers = getSecret('twitch_channel_headers');
-    const mapped = Object.keys(headers).map(key => {
-        const a = headers[key]
-        const b = req.headers[key];
-        const c = a === b;
-        console.log(`twitchCommandHeaderValidate [${c}] ${a} => ${b}`);
-        return c;
-    });
-    return false === mapped.includes(false);
+    return res.send(`Configure forbidden.`);
 }
 
 module.exports = {
-    twitchCommandHeaderValidate,
     twitchCommandSetup,
     twitchMessageConfigure,
 };
