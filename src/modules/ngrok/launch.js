@@ -17,7 +17,7 @@ async function ngrokLaunch(port) {
         const publicUrl = await tunnel.url(); // Access the public URL
         return publicUrl;
     } catch (err) {
-        console.error('Error starting Ngrok:', err);
+        console.log('Error starting Ngrok:', err);
         throw err;
     }
 }

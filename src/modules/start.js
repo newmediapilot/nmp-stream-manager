@@ -26,7 +26,7 @@ async function startServices(app, PORT) {
         app.listen(PORT);
 
     } catch (err) {
-        console.error('Error initializing services:', err);
+        console.log('Error initializing services:', err);
     }
 }
 

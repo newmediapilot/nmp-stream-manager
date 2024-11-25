@@ -47,12 +47,12 @@ async function twitterTweet(req, res) {
 
         // Log full error details for debugging
         if (error.response) {
-            console.error('Response Status:', error.status);
-            console.error('Response Data:', error.data);
-            console.error('Response Headers:', error.headers);
-            console.error('Response Status:', error.response.status);
-            console.error('Response Data:', error.response.data);
-            console.error('Response Headers:', error.response.headers);
+            console.log('Response Status:', error.status);
+            console.log('Response Data:', error.data);
+            console.log('Response Headers:', error.headers);
+            console.log('Response Status:', error.response.status);
+            console.log('Response Data:', error.response.data);
+            console.log('Response Headers:', error.response.headers);
         }
 
         if (error.code === 429) {

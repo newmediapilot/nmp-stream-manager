@@ -43,7 +43,7 @@ async function twitchClipCreate(req, res) {
         return res.status(response.status).send(`Clip created: ${clipUrl}`);
 
     } catch (error) {
-        console.error('Error creating clip:', error.response?.data || error.message);
+        console.log('Error creating clip:', error.response?.data || error.message);
 
         return res.send(`Failed to create clip. ${404 === error.status ? "You appear to be offline." : ""}`);
     }

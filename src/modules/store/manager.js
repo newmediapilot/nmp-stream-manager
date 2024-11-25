@@ -41,7 +41,7 @@ function loadSecrets() {
         try {
             secrets = JSON.parse(fs.readFileSync('.secrets', 'utf8'));
         } catch (error) {
-            console.error(chalk.bgRed.whiteBright('Error loading secrets:', error.message));
+            console.log(chalk.bgRed.whiteBright('Error loading secrets:', error.message));
             secrets = {}; // Fallback to an empty object
         }
     } else {
@@ -51,7 +51,7 @@ function loadSecrets() {
 
 function setParam(key, value) {
     if (!allowedParams.includes(key)) {
-        console.error(
+        console.log(
             chalk.bgRed.whiteBright(
                 `WARNING: Attempted to set a parameter (${key}) that is not registered in allowedParams.`
             )
@@ -80,9 +80,9 @@ function resetSecrets() {
     fs.rmSync("/secrets.js", {
         force: true,
     });
-    console.error(chalk.bgRed.whiteBright('Removing secrets...'));
-    console.error(chalk.bgRed.whiteBright('Removing secrets...'));
-    console.error(chalk.bgRed.whiteBright('Removing secrets...'));
+    console.log(chalk.bgRed.whiteBright('Removing secrets...'));
+    console.log(chalk.bgRed.whiteBright('Removing secrets...'));
+    console.log(chalk.bgRed.whiteBright('Removing secrets...'));
 }
 
 function setSecret(name, key) {
@@ -100,7 +100,7 @@ function setSecret(name, key) {
         fs.writeFileSync('.secrets', secretsJSON, 'utf8');
         console.log(chalk.bgGreen.whiteBright(`Secret set for ${name}: ${String('X').repeat(key.length)}`));
     } catch (error) {
-        console.error(chalk.bgRed.whiteBright('Error setting secret:', error.message));
+        console.log(chalk.bgRed.whiteBright('Error setting secret:', error.message));
     }
 }
 
@@ -122,7 +122,7 @@ function getSecret(name) {
             return null;
         }
     } catch (error) {
-        console.error(chalk.bgRed.whiteBright('Error getting secret:', error.message));
+        console.log(chalk.bgRed.whiteBright('Error getting secret:', error.message));
         return null;
     }
 }

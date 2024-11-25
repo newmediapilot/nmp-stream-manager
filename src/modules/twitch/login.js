@@ -79,7 +79,7 @@ async function twitchLoginSuccess(req, res) {
         return res.status(200).json('OAuth tokens retrieved successfully');
 
     } catch (error) {
-        console.error('Error exchanging code for tokens:', error.response?.data || error.message);
+        console.log('Error exchanging code for tokens:', error.response?.data || error.message);
         return res.status(error.status).json('Failed to get OAuth tokens');
     }
 }
@@ -112,7 +112,7 @@ async function getBroadcasterId() {
         }
     } catch (error) {
         setSecret('twitch_broadcaster_id', undefined);
-        console.error(chalk.red('Error fetching broadcaster ID:'), chalk.redBright(error));
+        console.log(chalk.red('Error fetching broadcaster ID:'), chalk.redBright(error));
         return false;
     }
 }
@@ -147,7 +147,7 @@ async function getChannelId() {
         }
     } catch (error) {
         setSecret('twitch_channel_id', undefined);
-        console.error(chalk.red('Error fetching Channel ID:'), chalk.redBright(error));
+        console.log(chalk.red('Error fetching Channel ID:'), chalk.redBright(error));
         return false;
     }
 }

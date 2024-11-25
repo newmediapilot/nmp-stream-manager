@@ -36,7 +36,7 @@ async function twitchMessageCreate(message) {
         return true;
 
     } catch (error) {
-        console.error(chalk.red('Error sending message:'), error.response?.data || error.message);
+        console.log(chalk.red('Error sending message:'), error.response?.data || error.message);
         return false;
     }
 }

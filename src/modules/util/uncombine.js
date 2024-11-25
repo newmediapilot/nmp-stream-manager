@@ -32,7 +32,7 @@ function uncombine() {
 
         console.log('Uncombining completed successfully.');
     } catch (error) {
-        console.error('Error during uncombine process:', error);
+        console.log('Error during uncombine process:', error);
     }
 }
 

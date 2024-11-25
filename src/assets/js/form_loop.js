@@ -55,7 +55,7 @@ nmps.form_loop = async function form_loop({ event, ctx }) {
     } catch (error) {
         // Handle errors and append error class
         decoratorEl.classList.add('error'); // Add error class on error
-        console.error('Error sending command:', error);
+        console.log('Error sending command:', error);
     } finally {
         // Always remove the loading class and re-enable the button
         decoratorEl.classList.remove('loading');
