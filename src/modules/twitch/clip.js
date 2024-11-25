@@ -3,7 +3,7 @@
  * Description: This file contains logic for managing src\modules\twitch\clip operations.
  * Usage: Import relevant methods/functions as required.
  */
-require('dotenv').config(); // Load environment variables from .env
+
 const axios = require('axios');
 const {twitchCommandHeaderValidate} = require('./commands');
 const {getBroadcasterId} = require('./login'); // Import the getBroadcasterId to access stored params

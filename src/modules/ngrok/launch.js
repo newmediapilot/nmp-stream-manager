@@ -3,7 +3,7 @@
  * Description: This file contains logic for managing src\modules\ngrok\launch operations.
  * Usage: Import relevant methods/functions as required.
  */
-require('dotenv').config(); // Load environment variables from .env
+
 const ngrok = require('@ngrok/ngrok');
 
 async function ngrokLaunch(port) {

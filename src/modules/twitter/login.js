@@ -3,7 +3,7 @@
  * Description: This file contains logic for managing src\modules\twitter\tweet operations.
  * Usage: Import relevant methods/functions as required.
  */
-require('dotenv').config(); // Load environment variables from .env
+
 const {twitchCommandHeaderValidate} = require('../twitch/commands');
 const {TwitterApi} = require('twitter-api-v2');
 

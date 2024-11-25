@@ -3,7 +3,7 @@
  * Description: This file contains logic for managing src\modules\util\combine operations.
  * Usage: Import relevant methods/functions as required.
  */
-require('dotenv').config(); // Load environment variables from .env
+
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');

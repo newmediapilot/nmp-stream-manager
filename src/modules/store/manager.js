@@ -10,7 +10,7 @@
  * setSecret works by writing directly and reading directly from file at point of access to ensure sync behaviour
  */
 
-require('dotenv').config(); // Load environment variables from .env
+
 const chalk = require('chalk'); // Require chalk for colorizing output
 const fs = require('fs'); // Import fs module to interact with files
 

@@ -3,7 +3,7 @@
  * Description: This file contains logic for managing src\modules\twitter\tweet operations.
  * Usage: Import relevant methods/functions as required.
  */
-require('dotenv').config(); // Load environment variables from .env
+
 const {twitchCommandHeaderValidate} = require('../twitch/commands');
 const {TwitterApi} = require('twitter-api-v2');
 
@@ -18,7 +18,7 @@ const twitterClient = new TwitterApi({
 
 async function twitterTweet(req, res) {
 
-    if (!twitchCommandHeaderValidate(req)) return res.status(403).json('Invalid agent.');
+    // if (!twitchCommandHeaderValidate(req)) return res.status(403).json('Invalid agent.');
 
     try {
         // Test API call to verify credentials

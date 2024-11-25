@@ -3,7 +3,7 @@
  * Description: This file contains logic for managing src\modules\twitch\login operations.
  * Usage: Import relevant methods/functions as required.
  */
-require('dotenv').config(); // Load environment variables from .env
+
 const axios = require('axios');
 const chalk = require('chalk'); // Import chalk for colorized logs
 const {getSecret, setSecret, getParam, setParam, resetSecrets} = require('../store/manager');
