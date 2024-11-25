@@ -5,6 +5,7 @@ const ROUTES = {
     TWITCH_LOGIN: '/twitch/login',
     TWITCH_LOGIN_SUCCESS: '/twitch/login/success',
     TWITCH_CLIP_CREATE: '/twitch/clip/create',
+    TWITCH_MARKER_CREATE: '/twitch/marker/create',
     TWITCH_MESSAGE_CREATE: '/twitch/message/create',
     TWITCH_MESSAGE_CONFIGURE: '/twitch/message/configure',
     // Custom commands

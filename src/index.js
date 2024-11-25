@@ -7,6 +7,7 @@ const {twitchLogin, twitchLoginSuccess} = require('./modules/twitch/login');
 const {validateBot} = require('./modules/twitch/validate');
 const {twipCreate} = require('./modules/twip/create');
 const {twitchClipCreate} = require('./modules/twitch/clip');
+const {twitchMarkerCreate} = require('./modules/twitch/marker');
 const {twitchMessageConfigure} = require('./modules/twitch/configure');
 const {twitterTweet} = require('./modules/twitter/tweet');
 
