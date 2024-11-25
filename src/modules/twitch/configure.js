@@ -30,6 +30,11 @@ async function twitchCommandSetup(req, res) {
             remove: `!command remove clip`,
             add: `!command add clip $(customapi.${getParam('public_url')}${ROUTES.TWITCH_CLIP_CREATE})`,
         },
+        twip: {
+            call: `!twip`,
+            remove: `!command remove twip`,
+            add: `!command add twip $(customapi.${getParam('public_url')}${ROUTES.TWIP_CREATE})`,
+        },
     }
 
     try {
@@ -63,6 +68,15 @@ async function twitchCommandSetup(req, res) {
         await twitchMessageCreate(COMMANDS.tweet.add, res);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::tweet => DONE'));
+        console.log('');
+
+        // twip
+        console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::twip => START'));
+        await twitchMessageCreate(COMMANDS.twip.remove, res);
+        await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
+        await twitchMessageCreate(COMMANDS.twip.add, res);
+        await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
+        console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::twip => DONE'));
         console.log('');
 
     } catch (error) {

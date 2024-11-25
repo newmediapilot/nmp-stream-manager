@@ -7,6 +7,8 @@ const ROUTES = {
     TWITCH_CLIP_CREATE: '/twitch/clip/create',
     TWITCH_MESSAGE_CREATE: '/twitch/message/create',
     TWITCH_MESSAGE_CONFIGURE: '/twitch/message/configure',
+    // Custom commands
+    TWIP_CREATE: '/twip/create',
     // Public HTML
     PUBLIC_SETTINGS: '/public/settings',
 };

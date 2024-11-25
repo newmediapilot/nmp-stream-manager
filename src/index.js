@@ -1,11 +1,11 @@
 require('dotenv').config();
-const chalkStyles = require('./chalk');
 const ROUTES = require('./routes');
 const express = require('express');
 const {requestLogger} = require('./logger');
 const {startServices} = require('./modules/start');
 const {twitchLogin, twitchLoginSuccess} = require('./modules/twitch/login');
 const {validateBot} = require('./modules/twitch/validate');
+const {twipCreate} = require('./modules/twip/create');
 const {twitchClipCreate} = require('./modules/twitch/clip');
 const {twitchMessageConfigure} = require('./modules/twitch/configure');
 const {twitterTweet} = require('./modules/twitter/tweet');
@@ -20,6 +20,7 @@ app.use(requestLogger);
 app.all(ROUTES.TWITCH_MESSAGE_CONFIGURE, twitchMessageConfigure);
 app.all(ROUTES.TWITCH_CLIP_CREATE, validateBot(twitchClipCreate));
 app.all(ROUTES.TWITTER_TWEET,  validateBot(twitterTweet));
+app.all(ROUTES.TWIP_CREATE, validateBot(twipCreate));
 
 // Twitch API Start
 app.all(ROUTES.TWITCH_LOGIN, twitchLogin);
