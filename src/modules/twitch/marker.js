@@ -1,14 +1,23 @@
 const axios = require('axios');
 const chalk = require('chalk');
-const { getSecret } = require('../store/manager');
+const {getSecret} = require('../store/manager');
 
 /**
- * Creates a marker on a Twitch stream.
+ * Creates a marker on a Twitch stream. Internal use only.
  * @param {string} description - The description of the marker.
  * @returns {boolean} - True if the marker was created successfully, otherwise false.
  */
 async function twitchMarkerCreate(description) {
+
+    if (!description?.length) {
+
+        console.log('No marker description provided. Skipping...');
+        return true;
+
+    }
+
     try {
+
         const accessToken = getSecret('twitch_access_token');
         const broadcasterId = getSecret('twitch_broadcaster_id');
 
@@ -32,12 +41,15 @@ async function twitchMarkerCreate(description) {
             chalk.green.bold('Marker created successfully:'),
             chalk.cyan(`"${response.data.data[0]?.description || 'No description'}"`)
         );
+
         return true;
 
     } catch (error) {
+
         console.log(chalk.red('Error creating marker:'), error.response?.data || error.message);
         return false;
+
     }
 }
 
-module.exports = { twitchMarkerCreate };
+module.exports = {twitchMarkerCreate};

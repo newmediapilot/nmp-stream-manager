@@ -19,7 +19,7 @@ async function twitterTweet(req, res) {
     try {
         const me = await twitterClient.v2.me();
 
-        const message = req.query.tweet_message; // Get the tweet message from the query parameter
+        const message = req.query.description; // Get the tweet message from the query parameter
 
         if (!message) return res.send('No message provided for tweeting.');
 

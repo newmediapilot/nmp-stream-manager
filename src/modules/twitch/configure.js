@@ -1,4 +1,4 @@
-const {getParam, setSecret, getSecret} = require('../store/manager');
+const {getParam, setSecret} = require('../store/manager');
 const {twitchMessageCreate} = require('./message');
 const ROUTES = require('../../routes');
 const chalk = require('chalk');
@@ -10,9 +10,12 @@ const TIMEOUT_WAIT = 2000;
 let hasConfigured = false;
 
 /**
- * Pings chat to retrieve headers which we will verify against subsequent requests.
+ * Used to extract chatbot configuration information.
+ * Only the chatbot may use this API endpoint
+ * Once the headers are captured we use them to
+ * Gatekeep any follow-up requests
  */
-async function twitchCommandSetup(req, res) {
+async function twitchCommandSetup() {
 
     const COMMANDS = {
         configure: {
@@ -23,12 +26,12 @@ async function twitchCommandSetup(req, res) {
         tweet: {
             call: `!tweet`,
             remove: `!command remove tweet`,
-            add: `!command add tweet $(customapi.${getParam('public_url')}${ROUTES.TWITTER_TWEET}?tweet_message=$(1:))`,
+            add: `!command add tweet $(customapi.${getParam('public_url')}${ROUTES.TWITTER_TWEET}?description=$(1:))`,
         },
         clip: {
             call: `!clip`,
             remove: `!command remove clip`,
-            add: `!command add clip $(customapi.${getParam('public_url')}${ROUTES.TWITCH_CLIP_CREATE})`,
+            add: `!command add clip $(customapi.${getParam('public_url')}${ROUTES.TWITCH_CLIP_CREATE}?description=$(1:))`,
         },
         twip: {
             call: `!twip`,
@@ -46,6 +49,8 @@ async function twitchCommandSetup(req, res) {
 
         // configure
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::configure => START'));
+        await twitchMessageCreate("Configuration starting");
+        await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
         await twitchMessageCreate(COMMANDS.configure.remove);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
         await twitchMessageCreate(COMMANDS.configure.add);
@@ -55,7 +60,6 @@ async function twitchCommandSetup(req, res) {
         await twitchMessageCreate(COMMANDS.configure.remove);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::configure => DONE'));
-        console.log('');
 
         // clip
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::clip => START'));
@@ -64,7 +68,6 @@ async function twitchCommandSetup(req, res) {
         await twitchMessageCreate(COMMANDS.clip.add);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::clip => DONE'));
-        console.log('');
 
         // tweet
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::tweet => START'));
@@ -73,7 +76,6 @@ async function twitchCommandSetup(req, res) {
         await twitchMessageCreate(COMMANDS.tweet.add);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::tweet => DONE'));
-        console.log('');
 
         // twip
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::twip => START'));
@@ -82,7 +84,6 @@ async function twitchCommandSetup(req, res) {
         await twitchMessageCreate(COMMANDS.twip.add);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::twip => DONE'));
-        console.log('');
 
         // so
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::so => START'));
@@ -91,12 +92,7 @@ async function twitchCommandSetup(req, res) {
         await twitchMessageCreate(COMMANDS.so.add);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::so => DONE'));
-        console.log('');
-
-        // clear chat
-        console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start:: clearing chat => START'));
-        await twitchMessageCreate('/clear');
-        console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start:: clearing chat => DONE'));
+        await twitchMessageCreate("Configuration complete! Stream your dreams.");
 
     } catch (error) {
 
@@ -106,12 +102,6 @@ async function twitchCommandSetup(req, res) {
     }
 }
 
-/**
- * Used to extract chatbot configuration information.
- * Only the chatbot may use this API endpoint
- * Once the headers are captured we use them to
- * Gatekeep any follow-up requests
- */
 async function twitchMessageConfigure(req, res) {
 
     console.log(chalk.blue('Start configure'));

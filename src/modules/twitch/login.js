@@ -9,12 +9,17 @@ const chalk = require('chalk'); // Import chalk for colorized logs
 const {getSecret, setSecret, getParam, setParam, resetSecrets} = require('../store/manager');
 const {twitchCommandSetup} = require('./configure');
 
+// Prevent multiple login attempts on the same session
+let sessionRedirectComplete = false;
+
 /**
  * Initiates the login flow
  * @param req
  * @param res
  */
 function twitchLogin(req, res) {
+
+    if (sessionRedirectComplete) return res.sent('You can only login once per session.');
 
     const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
     const TWITCH_SCOPES = process.env.TWITCH_SCOPES || "clips:edit user:write:chat";
@@ -30,6 +35,8 @@ function twitchLogin(req, res) {
     const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(TWITCH_REDIRECT_URL)}&response_type=code&scope=${TWITCH_SCOPES}`;
 
     console.log(chalk.yellow('OAuth URL generated:'), chalk.blue(oauthUrl));
+
+    sessionRedirectComplete = true;
 
     res.redirect(oauthUrl); // Redirect the user to the Twitch login URL
 }
@@ -152,4 +159,4 @@ async function getChannelId() {
     }
 }
 
-module.exports = {twitchLogin, twitchLoginSuccess, getBroadcasterId};
+module.exports = {twitchLogin, twitchLoginSuccess};
