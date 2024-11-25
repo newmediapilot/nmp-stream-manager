@@ -35,52 +35,68 @@ async function twitchCommandSetup(req, res) {
             remove: `!command remove twip`,
             add: `!command add twip $(customapi.${getParam('public_url')}${ROUTES.TWIP_CREATE})`,
         },
+        so: {
+            call: `!so`,
+            remove: `!command remove so`,
+            add: `!command add !so Check out \${user \${1}} at https://twitch.tv/\${1}! They were last seen playing \${game ${1}}.`,
+        },
     }
 
     try {
 
         // configure
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::configure => START'));
-        await twitchMessageCreate(COMMANDS.configure.remove, res, true);
+        await twitchMessageCreate(COMMANDS.configure.remove);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
-        await twitchMessageCreate(COMMANDS.configure.add, res, true);
+        await twitchMessageCreate(COMMANDS.configure.add);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
-        await twitchMessageCreate(COMMANDS.configure.call, res, true);
+        await twitchMessageCreate(COMMANDS.configure.call);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
-        await twitchMessageCreate(COMMANDS.configure.remove, res);
+        await twitchMessageCreate(COMMANDS.configure.remove);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::configure => DONE'));
         console.log('');
 
         // clip
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::clip => START'));
-        await twitchMessageCreate(COMMANDS.clip.remove, res);
+        await twitchMessageCreate(COMMANDS.clip.remove);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
-        await twitchMessageCreate(COMMANDS.clip.add, res);
+        await twitchMessageCreate(COMMANDS.clip.add);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::clip => DONE'));
         console.log('');
 
         // tweet
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::tweet => START'));
-        await twitchMessageCreate(COMMANDS.tweet.remove, res);
+        await twitchMessageCreate(COMMANDS.tweet.remove);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
-        await twitchMessageCreate(COMMANDS.tweet.add, res);
+        await twitchMessageCreate(COMMANDS.tweet.add);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::tweet => DONE'));
         console.log('');
 
         // twip
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::twip => START'));
-        await twitchMessageCreate(COMMANDS.twip.remove, res);
+        await twitchMessageCreate(COMMANDS.twip.remove);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
-        await twitchMessageCreate(COMMANDS.twip.add, res);
+        await twitchMessageCreate(COMMANDS.twip.add);
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::twip => DONE'));
         console.log('');
 
-        // deletes all history
-        await twitchMessageCreate('/clear', res);
+        // so
+        console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::so => START'));
+        await twitchMessageCreate(COMMANDS.so.remove);
+        await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
+        await twitchMessageCreate(COMMANDS.so.add);
+        await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
+        console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::so => DONE'));
+        console.log('');
+
+        // clear chat
+        console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start:: clearing chat => START'));
+        await twitchMessageCreate('/clear');
+        console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start:: clearing chat => DONE'));
 
     } catch (error) {
 

@@ -98,7 +98,7 @@ function setSecret(name, key) {
         secrets = null;
 
         fs.writeFileSync('.secrets', secretsJSON, 'utf8');
-        console.log(chalk.bgGreen.whiteBright(`Secret set for ${name}: ${String('X').repeat(key.length)}`));
+        console.log(chalk.bgGreen.whiteBright(`Secret set for ${name} : ${String('X').repeat(String(key).length)}`));
     } catch (error) {
         console.log(chalk.bgRed.whiteBright('Error setting secret:', error.message));
     }
