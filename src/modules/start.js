@@ -13,7 +13,7 @@ async function startServices(app, PORT) {
     try {
 
         // Store paths
-        // setParam('public_url',  await ngrokLaunch(PORT));
+        setParam('public_url',  await ngrokLaunch(PORT));
         setParam('public_routes', ROUTES);
 
         // Set twitch data
