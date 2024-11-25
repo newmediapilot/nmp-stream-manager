@@ -14,7 +14,7 @@ const {getSecret} = require('../store/manager'); // Import getSecret to fetch th
  * @param res
  * @returns {Promise<TwitterResponse<any>|*|void>}
  */
-async function twipClipCreate(req, res) {
+async function twitchClipCreate(req, res) {
 
     try {
 
