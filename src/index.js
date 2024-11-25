@@ -1,4 +1,5 @@
 require('dotenv').config();
+const chalkStyles = require('./chalk');
 const ROUTES = require('./routes');
 const express = require('express');
 const {requestLogger} = require('./logger');
