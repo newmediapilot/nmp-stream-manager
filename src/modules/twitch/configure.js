@@ -79,6 +79,9 @@ async function twitchCommandSetup(req, res) {
         console.log(chalk.bgBlackBright.cyanBright('twitchCommandSetup.start::twip => DONE'));
         console.log('');
 
+        // deletes all history
+        await twitchMessageCreate('/clear', res);
+
     } catch (error) {
 
         console.log(chalk.green('Error in twitchCommandSetup:', error.status));
