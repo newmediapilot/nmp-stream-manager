@@ -1,29 +1,20 @@
 require('dotenv').config();
 const axios = require('axios');
-const {getSecret, getParam} = require('../store/manager');
-const {twitchCommandHeaderValidate} = require('../twitch/commands');
+const chalk = require('chalk');
+const { getSecret } = require('../store/manager');
 
 /**
  * Sends a message to a Twitch channel.
- * @param {object} req - The Express request object.
- * @param {object} res - The Express response object.
+ * @param {string} message - The message to send to the Twitch channel.
+ * @returns {boolean} - True if the message was sent successfully, otherwise false.
  */
-async function twitchMessageCreate(req, res) {
+async function twitchMessageCreate(message) {
+
     try {
-
-        if (getParam('twitch_channel_headers_set')) {
-            if (!twitchCommandHeaderValidate(req)) {
-                return res.status(500).send(`Invalid agent.`);
-            }
-        }
-
         const accessToken = getSecret('twitch_access_token');
         const broadcasterId = getSecret('twitch_broadcaster_id');
-        const message = req.query.message;
 
-        if (!message.trim()) {
-            return res.status(400).json('Message parameter is required.');
-        }
+        console.log(chalk.green('Sending message:'), chalk.cyan(message));
 
         const response = await axios.post(
             `https://api.twitch.tv/helix/chat/messages`, // Replace with actual Twitch API endpoint
@@ -31,7 +22,7 @@ async function twitchMessageCreate(req, res) {
                 broadcaster_id: broadcasterId,
                 sender_id: broadcasterId,
                 message,
-                "color": "purple"
+                color: 'purple',
             },
             {
                 headers: {
@@ -40,11 +31,14 @@ async function twitchMessageCreate(req, res) {
                 },
             }
         );
-        return res.status(response.status).json(`Message sent successfully: "${message}"`);
+
+        console.log(chalk.green.bold('Message sent successfully:'), chalk.cyan(`"${message}"`));
+        return true;
+
     } catch (error) {
-        console.error('Error sending message:', error.response?.data || error.message);
-        return res.status(error.status).json('Failed to send message.');
+        console.error(chalk.red('Error sending message:'), error.response?.data || error.message);
+        return false;
     }
 }
 
-module.exports = {twitchMessageCreate};
+module.exports = { twitchMessageCreate };

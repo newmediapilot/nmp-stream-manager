@@ -20,7 +20,6 @@ function twitchLogin(req, res) {
     const TWITCH_REDIRECT_URL = process.env.TWITCH_REDIRECT_URL;
 
     console.log(chalk.blueBright('twitchLogin start...'));
-    // console.log(chalk.green('TWITCH_CLIENT_ID:'), chalk.cyan(TWITCH_CLIENT_ID));
     console.log(chalk.green('TWITCH_SCOPES:'), chalk.cyan(TWITCH_SCOPES));
     console.log(chalk.green('TWITCH_REDIRECT_URL:'), chalk.cyan(TWITCH_REDIRECT_URL));
 
@@ -45,9 +44,10 @@ async function twitchLoginSuccess(req, res) {
 
     resetSecrets();
 
-    const code = req.query.code; // Retrieve the 'code' parameter from the query string
+    const code = req.query.code;
 
     try {
+
         const response = await axios.post('https://id.twitch.tv/oauth2/token', null, {
             params: {
                 client_id: process.env.TWITCH_CLIENT_ID,
@@ -64,14 +64,10 @@ async function twitchLoginSuccess(req, res) {
         setSecret('twitch_access_token', accessToken);
         setSecret('twitch_refresh_token', refreshToken);
 
-        // Set broadcaster ID for other ops
         await getBroadcasterId();
-        // Set channel ID for other ops
         await getChannelId();
-        // Set chatbot identity
         await twitchCommandSetup();
 
-        // Jump to next referrer if its set
         const referrer = getParam('twitch_login_referrer');
 
         if (referrer) {
@@ -79,7 +75,6 @@ async function twitchLoginSuccess(req, res) {
             return res.redirect(referrer)
         }
 
-        // Return a success response
         return res.status(200).json('OAuth tokens retrieved successfully');
 
     } catch (error) {

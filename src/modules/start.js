@@ -19,7 +19,6 @@ async function startServices(app, PORT) {
 
         // Set twitch data
         setParam('twitch_username', process.env.TWITCH_USERNAME);
-        setParam('twitch_commands', twitchCommandsGet());
 
         // Configure Nunjucks
         configureNunjucks(app);
