@@ -1,21 +1,3 @@
-{% macro form_button_el(label, command, decorator) %}
-    <div>
-        <button
-            onclick="javascript:nmps.form_loop({event,ctx:this})"
-            data-onclick-command="{{ command }}"
-            data-onclick-decorator="{{ decorator }}"
-        >
-            {{ label }}
-        </button>
-    </div>
-{% endmacro %}
-
 {% macro form_href_el(label, href) %}
-    <div>
-        <a href="{{ href }}"><button>{{ label }}</button></a>
-    </div>
-{% endmacro %}
-
-{% macro form_loop_js() %}
-    <script src="/js/form_loop.js" typeof="text/javascript"></script>
+    <a href="{{ href }}">{{ label }}></a>
 {% endmacro %}
