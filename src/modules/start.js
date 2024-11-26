@@ -1,7 +1,6 @@
 // src/modules/start.js
-const { setParam } = require('./store/manager');
-const { ngrokLaunch } = require('./ngrok/launch'); // Import Ngrok helper
 const { configureNunjucks } = require('./nunjucks/config'); // Import Nunjucks configuration
+const { setParam } = require('./store/manager');
 const ROUTES = require('../routes');
 
 /**
@@ -12,8 +11,6 @@ const ROUTES = require('../routes');
 async function startServices(app, PORT) {
     try {
 
-        // Store paths
-        setParam('public_url',  await ngrokLaunch(PORT));
         setParam('public_routes', ROUTES);
 
         // Set twitch data

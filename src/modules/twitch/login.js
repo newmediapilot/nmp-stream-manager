@@ -7,7 +7,7 @@
 const axios = require('axios');
 const chalk = require('chalk'); // Import chalk for colorized logs
 const {getSecret, setSecret, getParam, setParam, resetSecrets} = require('../store/manager');
-const {twitchCommandSetup} = require('./configure');
+const {watchMessages} = require('./stream');
 
 // Prevent multiple login attempts on the same session
 let sessionRedirectComplete = false;
@@ -74,7 +74,7 @@ async function twitchLoginSuccess(req, res) {
 
         await getBroadcasterId();
         await getChannelId();
-        await twitchCommandSetup();
+        await watchMessages();
 
         const referrer = getParam('twitch_login_referrer');
 
@@ -83,11 +83,11 @@ async function twitchLoginSuccess(req, res) {
             return res.redirect(referrer)
         }
 
-        return res.status(200).json('OAuth tokens retrieved successfully');
+        return res.send('OAuth tokens retrieved successfully');
 
     } catch (error) {
         console.log('Error exchanging code for tokens:', error.response?.data || error.message);
-        return res.status(error.status).json('Failed to get OAuth tokens');
+        return res.send('Failed to get OAuth tokens');
     }
 }
 
