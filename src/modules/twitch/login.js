@@ -19,7 +19,7 @@ let sessionRedirectComplete = false;
  */
 function twitchLogin(req, res) {
 
-    if (sessionRedirectComplete) return res.sent('You can only login once per session.');
+    if (sessionRedirectComplete) return res.send('You can only login once per session.');
 
     const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
     const TWITCH_SCOPES = process.env.TWITCH_SCOPES || "clips:edit user:write:chat";
