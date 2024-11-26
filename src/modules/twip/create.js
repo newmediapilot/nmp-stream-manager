@@ -1,5 +1,6 @@
 const {twitchMarkerCreate} = require('../twitch/marker');
 const {setBroadcastTitle} = require('../twitch/broadcast');
+const {twitchClipCreate} = require('../twitch/clip');
 const {twitterTweet} = require('../twitter/tweet');
 
 const TIMEOUT_WAIT = 2000;

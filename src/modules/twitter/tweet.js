@@ -7,6 +7,8 @@
 const {TwitterApi} = require('twitter-api-v2');
 const HASHTAGS = '#twitch #twitchstreamer #gaming #gamer #streamer #youtube #twitchaffiliate #twitchtv #livefromtwitch #live';
 
+let tweetResponses = [];
+
 const twitterClient = new TwitterApi({
     appKey: process.env.TWITTER_API_KEY,
     appSecret: process.env.TWITTER_API_SECRET,
@@ -31,6 +33,8 @@ async function twitterTweet(description) {
         const tweetResponse = await twitterClient.v2.tweet({text});
 
         console.log(`Tweet posted successfully: ${tweetResponse.data.text}.`);
+
+        tweetResponses.push({tes});
 
         return tweetResponse.data.text;
 
