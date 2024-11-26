@@ -7,7 +7,7 @@
 const axios = require('axios');
 const {twitchMarkerCreate} = require('./marker');
 const {setBroadcastTitle} = require('./broadcast');
-const {getSecret, getParam} = require('../store/manager'); // Import getSecret to fetch the access token
+const {getSecret} = require('../store/manager'); // Import getSecret to fetch the access token
 
 // Timeout before next action
 const TIMEOUT_WAIT = 2000;
@@ -19,7 +19,7 @@ const TIMEOUT_WAIT = 2000;
  * @param res
  * @returns {Promise<TwitterResponse<any>|*|void>}
  */
-async function twitchClipCreate(req, res) {
+async function twitchClipCreate(description) {
 
     try {
         const accessToken = getSecret('twitch_access_token');
@@ -28,8 +28,8 @@ async function twitchClipCreate(req, res) {
         if (!broadcasterId || !accessToken) return res.send('Please authenticate first.');
 
         // Conditional based on req.query.description param
-        await twitchMarkerCreate(req.query.description);
-        await setBroadcastTitle(req.query.description);
+        await twitchMarkerCreate(description);
+        await setBroadcastTitle(description);
 
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
 
@@ -51,12 +51,11 @@ async function twitchClipCreate(req, res) {
 
         console.log(`Clip created: ${clipUrl}`);
 
-        return res.status(response.status).send(`Clip created: ${clipUrl}`);
+        return true;
 
     } catch (error) {
-        console.log('Error creating clip:', error.response?.data || error.message);
-
-        return res.send(`Failed to create clip. ${404 === error.status ? "You appear to be offline." : ""}`);
+        console.log(`Failed to create clip. ${404 === error.status ? "You appear to be offline." : error.message}`);
+        return false;
     }
 }
 

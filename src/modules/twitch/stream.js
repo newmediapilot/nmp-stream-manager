@@ -1,7 +1,7 @@
 const tmi = require('tmi.js');
 const chalk = require('chalk');
 const {getSecret} = require('../store/manager');
-const {parseCommand} = require('../commands');
+const {parseCommand} = require('./commands');
 
 /**
  * Initializes and starts listening for Twitch chat messages.
@@ -12,7 +12,6 @@ async function watchMessages() {
     const token = getSecret('twitch_access_token');
     const channel = getSecret('twitch_channel_id');
 
-    // Create a new tmi.js client instance
     const client = new tmi.Client({
         options: {debug: true},
         connection: {reconnect: true, secure: true},
@@ -23,15 +22,11 @@ async function watchMessages() {
         channels: [channel]
     });
 
-    // Connect to Twitch IRC
     client.connect()
         .then(() => console.log(chalk.greenBright(`Connected to Twitch chat for channel: ${channel}`)))
         .catch(err => console.error(chalk.red('Error connecting to Twitch chat:'), err));
 
-    // Listen for chat messages
     client.on('message', (channel, tags, message) => checkAndLogCommandReceived(tags) && parseCommand(message));
-
-    // Handle disconnects
     client.on('disconnected', (reason) => console.log(chalk.yellowBright(`Disconnected from Twitch chat: ${reason}`)));
 }
 
