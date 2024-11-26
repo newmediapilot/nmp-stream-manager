@@ -19,7 +19,7 @@ async function setBroadcastTitle(title) {
         const broadcasterId = getSecret('twitch_broadcaster_id')
 
         if (!accessToken || !broadcasterId) {
-            console.error(chalk.red('Missing access token or broadcaster ID. Ensure authentication.'));
+            console.log(chalk.red('Missing access token or broadcaster ID. Ensure authentication.'));
             return false;
         }
 
@@ -43,7 +43,7 @@ async function setBroadcastTitle(title) {
             console.log('Stream title updated successfully.');
             return true;
         } else {
-            console.error(`Failed to update stream title. Status: ${response.status}`);
+            console.log(`Failed to update stream title. Status: ${response.status}`);
             return false;
         }
     } catch (error) {

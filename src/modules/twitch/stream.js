@@ -24,7 +24,7 @@ async function watchMessages() {
 
     client.connect()
         .then(() => console.log(`Connected to Twitch chat for channel: ${channel}`))
-        .catch(err => console.error('Error connecting to Twitch chat:', err));
+        .catch(err => console.log('Error connecting to Twitch chat:', err));
 
     client.on('message', (channel, tags, message) => checkAndLogCommandReceived(tags) && parseCommand(message));
     client.on('disconnected', (reason) => console.log(`Disconnected from Twitch chat: ${reason}`));

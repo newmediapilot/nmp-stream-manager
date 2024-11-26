@@ -7,12 +7,9 @@ const chalk = require('chalk');
  */
 requestLogger = (req, res, next) => {
 
-    console.log(
-        chalk.green('REQUEST =>'),
-        chalk.cyan(req.path),
-    );
-
+    console.log('REQUEST =>', req.path);
     next();
+    
 };
 
 module.exports = {requestLogger};
