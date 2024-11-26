@@ -11,7 +11,7 @@ async function twitchMarkerCreate(description) {
 
     if (!description?.length) {
 
-        console.log2(process.cwd(),'No marker description provided. Skipping...');
+        console.err2(process.cwd(),'No marker description provided. Skipping...');
         return true;
 
     }
@@ -43,7 +43,7 @@ async function twitchMarkerCreate(description) {
 
     } catch (error) {
 
-        console.log2(process.cwd(),'Error creating marker:', error.response?.data || error.message);
+        console.err2(process.cwd(),'Error creating marker:', error.response?.data || error.message);
         return false;
 
     }

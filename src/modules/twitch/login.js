@@ -120,7 +120,7 @@ async function getBroadcasterId() {
         }
     } catch (error) {
         setSecret('twitch_broadcaster_id', undefined);
-        console.log2(process.cwd(),'Error fetching broadcaster ID:', error);
+        console.err2(process.cwd(),'Error fetching broadcaster ID:', error);
         return false;
     }
 }
@@ -155,7 +155,7 @@ async function getChannelId() {
         }
     } catch (error) {
         setSecret('twitch_channel_id', undefined);
-        console.log2(process.cwd(),'Error fetching Channel ID:', error);
+        console.err2(process.cwd(),'Error fetching Channel ID:', error);
         return false;
     }
 }

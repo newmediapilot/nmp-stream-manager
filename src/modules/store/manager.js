@@ -65,9 +65,9 @@ function getAllParams() {
 function getParam(key) {
     const value = paramsState[key];
     if (value === undefined) {
-        console.warn(chalk.bgYellow.black(`Warning: Attempted to get ${key}, but it is undefined.`));
+        console.warn2(chalk.bgYellow.black(`Warning: Attempted to get ${key}, but it is undefined.`));
     } else {
-        console.log2(process.cwd(),`Get ${key} = ${value}`);
+        console.err2(process.cwd(),`Get ${key} = ${value}`);
     }
     return value;
 }
@@ -76,8 +76,8 @@ function resetSecrets() {
     fs.rmSync("/secrets.js", {
         force: true,
     });
-    console.log2(process.cwd(),'Removing secrets...');
-}
+    console.err2(process.cwd(),'Removing secrets...');
+e
 
 function setSecret(name, key) {
     try {
@@ -94,7 +94,7 @@ function setSecret(name, key) {
         fs.writeFileSync('.secrets', secretsJSON, 'utf8');
         console.log2(process.cwd(),`Secret set for ${name} : ${String('X').repeat(String(key).length)}`);
     } catch (error) {
-        console.log2(process.cwd(),'Error setting secret:', error.message);
+        console.err2(process.cwd(),'Error setting secret:', error.message);
     }
 }
 
@@ -109,7 +109,7 @@ function getSecret(name) {
             return null;
         }
     } catch (error) {
-        console.log2(process.cwd(),'Error getting secret:', error.message);
+        console.err2(process.cwd(),'Error getting secret:', error.message);
         return null;
     }
 }

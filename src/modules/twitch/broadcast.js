@@ -9,19 +9,14 @@ const {getSecret} = require('../store/manager')
  */
 async function setBroadcastTitle(title) {
 
-    if (!title?.length) {
-        console.log2(process.cwd(),'No title provided. Skipping update.');
+    if (title) {
+        console.err2(process.cwd(),'No title provided. Skipping update.');
         return false;
     }
 
     try {
         const accessToken = getSecret('twitch_access_token')
         const broadcasterId = getSecret('twitch_broadcaster_id')
-
-        if (!accessToken || !broadcasterId) {
-            console.log2(process.cwd(),chalk.red('Missing access token or broadcaster ID. Ensure authentication.'));
-            return false;
-        }
 
         console.log2(process.cwd(),`Setting stream title to: "${title}"`);
 
@@ -43,11 +38,11 @@ async function setBroadcastTitle(title) {
             console.log2(process.cwd(),'Stream title updated successfully.');
             return true;
         } else {
-            console.log2(process.cwd(),`Failed to update stream title. Status: ${response.status}`);
+            console.err2(process.cwd(),`Failed to update stream title. Status: ${response.status}`);
             return false;
         }
     } catch (error) {
-        console.log2(process.cwd(),'Error updating stream title:', error.response?.data || error.message);
+        console.err2(process.cwd(),'Error updating stream title:', error.response?.data || error.message);
         return false;
     }
 }

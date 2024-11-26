@@ -1,18 +1,20 @@
 const axios = require('axios');
-const {setParam, getParam} = require('../store/manager');
+const {setParam} = require('../store/manager');
 const {twitchMarkerCreate} = require('./marker');
 const {setBroadcastTitle} = require('./broadcast');
 const {getSecret} = require('../store/manager');
 
+const TIMEOUT_WAIT = 2000;
 let clipResponses = [];
 
 async function twitchClipCreate(description) {
     try {
+
         const accessToken = getSecret('twitch_access_token');
         const broadcasterId = getSecret('twitch_broadcaster_id');
 
         await twitchMarkerCreate(description || '');
-        await setBroadcastTitle(description || '');
+        !!description && await setBroadcastTitle(description);
 
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
 
@@ -32,9 +34,11 @@ async function twitchClipCreate(description) {
         setParam('broadcast_clips', clipResponses);
 
         console.log2(process.cwd(), `Clip created: ${url}`);
-        return true;
+
+        return url;
+
     } catch (error) {
-        console.log2(process.cwd(), `Failed to create clip: ${error.message}`);
+        console.err2(process.cwd(), `Failed to create clip: ${error.message}`);
         return false;
     }
 }

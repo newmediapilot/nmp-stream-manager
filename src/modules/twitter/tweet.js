@@ -14,28 +14,31 @@ const twitterClient = new TwitterApi({
     accessSecret: process.env.TWITTER_ACCESS_SECRET,
 });
 
-async function twitterTweet(req, res) {
+async function twitterTweet(description) {
 
     try {
-        const me = await twitterClient.v2.me();
+        if (!description) {
+            console.log2(process.cwd(),chalk.red('Missing description.'));
+            return false;
+        }
 
-        const message = req.query.description;
+        await twitterClient.v2.me();
 
-        if (!message) return res.send('No message provided for tweeting.');
+        const text = `${description} ${HASHTAGS}`;
 
-        const text = `${message} ${HASHTAGS}`;
-
-        console.log2(process.cwd(),'twitterTweet.tweetMessage...', message);
+        console.log2(process.cwd(),'twitterTweet...', description);
 
         const tweetResponse = await twitterClient.v2.tweet({text});
 
-        res.send(`Tweet posted successfully: ${tweetResponse.data.text}.`);
+        console.log(`Tweet posted successfully: ${tweetResponse.data.text}.`);
+
+        return tweetResponse.data.text;
 
     } catch (error) {
 
-        if (error.code === 429) return res.send(`Too many tweets.`);
+        console.err2(process.cwd(), `Error tweeting`, error);
 
-        res.send('Failed to post tweet: ' + error.message);
+        return false;
     }
 }
 
