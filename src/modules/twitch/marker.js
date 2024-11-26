@@ -21,7 +21,7 @@ async function twitchMarkerCreate(description) {
         const accessToken = getSecret('twitch_access_token');
         const broadcasterId = getSecret('twitch_broadcaster_id');
 
-        console.log(chalk.green('Creating marker:'), chalk.cyan(description));
+        console.log('Creating marker:', description);
 
         const response = await axios.post(
             `https://api.twitch.tv/helix/streams/markers`,
@@ -37,16 +37,13 @@ async function twitchMarkerCreate(description) {
             }
         );
 
-        console.log(
-            chalk.green.bold('Marker created successfully:'),
-            chalk.cyan(`"${response.data.data[0]?.description}"`)
-        );
+        console.log('Marker created successfully:',`${response.data.data[0]?.description}`);
 
         return true;
 
     } catch (error) {
 
-        console.log(chalk.red('Error creating marker:'), error.response?.data || error.message);
+        console.log('Error creating marker:', error.response?.data || error.message);
         return false;
 
     }

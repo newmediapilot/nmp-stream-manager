@@ -14,7 +14,7 @@ async function twitchMessageCreate(message) {
         const accessToken = getSecret('twitch_access_token');
         const broadcasterId = getSecret('twitch_broadcaster_id');
 
-        console.log(chalk.green('Sending message:'), chalk.cyan(message));
+        console.log('Sending message:', message);
 
         const response = await axios.post(
             `https://api.twitch.tv/helix/chat/messages`, // Replace with actual Twitch API endpoint
@@ -32,7 +32,7 @@ async function twitchMessageCreate(message) {
             }
         );
 
-        console.log(chalk.green.bold('Message sent successfully:'), chalk.cyan(`"${message}"`));
+        console.log('Message sent successfully:', message);
         return true;
 
     } catch (error) {

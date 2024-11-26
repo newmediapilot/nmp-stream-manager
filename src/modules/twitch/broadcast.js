@@ -1,6 +1,6 @@
 const axios = require('axios');
 const chalk = require('chalk');
-const { getSecret } = require('../store/manager'); // Fetch secrets from your store
+const {getSecret} = require('../store/manager'); // Fetch secrets from your store
 
 /**
  * Updates the stream title using Twitch API.
@@ -10,7 +10,7 @@ const { getSecret } = require('../store/manager'); // Fetch secrets from your st
 async function setBroadcastTitle(title) {
 
     if (!title?.length) {
-        console.log(chalk.yellow('No title provided. Skipping update.'));
+        console.log('No title provided. Skipping update.');
         return false;
     }
 
@@ -23,14 +23,14 @@ async function setBroadcastTitle(title) {
             return false;
         }
 
-        console.log(chalk.green(`Setting stream title to: "${title}"`));
+        console.log(`Setting stream title to: "${title}"`);
 
         // Make the API request to update the stream title
         const response = await axios.patch(
             'https://api.twitch.tv/helix/channels',
-            { title }, // JSON body
+            {title}, // JSON body
             {
-                params: { broadcaster_id: broadcasterId },
+                params: {broadcaster_id: broadcasterId},
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                     'Client-Id': process.env.TWITCH_CLIENT_ID,
@@ -40,19 +40,16 @@ async function setBroadcastTitle(title) {
         );
 
         if (response.status === 204) {
-            console.log(chalk.green('Stream title updated successfully.'));
+            console.log('Stream title updated successfully.');
             return true;
         } else {
-            console.error(chalk.red(`Failed to update stream title. Status: ${response.status}`));
+            console.error(`Failed to update stream title. Status: ${response.status}`);
             return false;
         }
     } catch (error) {
-        console.error(
-            chalk.red('Error updating stream title:'),
-            error.response?.data || error.message
-        );
+        console.log('Error updating stream title:', error.response?.data || error.message);
         return false;
     }
 }
 
-module.exports = { setBroadcastTitle };
+module.exports = {setBroadcastTitle};

@@ -41,7 +41,7 @@ function loadSecrets() {
         try {
             secrets = JSON.parse(fs.readFileSync('.secrets', 'utf8'));
         } catch (error) {
-            console.log(chalk.bgRed.whiteBright('Error loading secrets:', error.message));
+            console.log('Error loading secrets:', error.message);
             secrets = {}; // Fallback to an empty object
         }
     } else {
@@ -51,15 +51,11 @@ function loadSecrets() {
 
 function setParam(key, value) {
     if (!allowedParams.includes(key)) {
-        console.log(
-            chalk.bgRed.whiteBright(
-                `WARNING: Attempted to set a parameter (${key}) that is not registered in allowedParams.`
-            )
-        );
+        console.log(`WARNING: Attempted to set a parameter (${key}) that is not registered in allowedParams.`);
     }
     paramsState[key] = value; // Set the parameter in the global object
-    console.log(chalk.bgBlueBright.whiteBright(`Set ${key} =`));
-    console.log(chalk.bgBlue.whiteBright(`${JSON.stringify(value, null, 4)}`));
+    console.log(`Set ${key} =`);
+    console.log(`${JSON.stringify(value, null, 4)}`);
 }
 
 function getAllParams() {
@@ -71,7 +67,7 @@ function getParam(key) {
     if (value === undefined) {
         console.warn(chalk.bgYellow.black(`Warning: Attempted to get ${key}, but it is undefined.`));
     } else {
-        console.log(chalk.bgBlue.whiteBright(`Get ${key} = ${value}`));
+        console.log(`Get ${key} = ${value}`);
     }
     return value; // Return the value (undefined if not found)
 }
@@ -80,9 +76,7 @@ function resetSecrets() {
     fs.rmSync("/secrets.js", {
         force: true,
     });
-    console.log(chalk.bgRed.whiteBright('Removing secrets...'));
-    console.log(chalk.bgRed.whiteBright('Removing secrets...'));
-    console.log(chalk.bgRed.whiteBright('Removing secrets...'));
+    console.log('Removing secrets...');
 }
 
 function setSecret(name, key) {
@@ -98,17 +92,10 @@ function setSecret(name, key) {
         secrets = null;
 
         fs.writeFileSync('.secrets', secretsJSON, 'utf8');
-        console.log(chalk.bgGreen.whiteBright(`Secret set for ${name} : ${String('X').repeat(String(key).length)}`));
+        console.log(`Secret set for ${name} : ${String('X').repeat(String(key).length)}`);
     } catch (error) {
-        console.log(chalk.bgRed.whiteBright('Error setting secret:', error.message));
+        console.log('Error setting secret:', error.message);
     }
-}
-
-function hasSecret(name) {
-    loadSecrets();
-    const secret = secrets[name];
-    console.log(chalk.bgYellow.whiteBright(`Secret exist check ${secret}.`));
-    return secret;
 }
 
 function getSecret(name) {
@@ -118,13 +105,13 @@ function getSecret(name) {
         if (secrets[name]) {
             return secrets[name];
         } else {
-            console.log(chalk.bgYellow.whiteBright(`Secret ${name} not found.`));
+            console.log(`Secret ${name} not found.`);
             return null;
         }
     } catch (error) {
-        console.log(chalk.bgRed.whiteBright('Error getting secret:', error.message));
+        console.log('Error getting secret:', error.message);
         return null;
     }
 }
 
-module.exports = { setParam, getParam, getAllParams, hasSecret, setSecret, getSecret, resetSecrets };
+module.exports = { setParam, getParam, getAllParams, setSecret, getSecret, resetSecrets };

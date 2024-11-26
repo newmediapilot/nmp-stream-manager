@@ -25,16 +25,16 @@ function twitchLogin(req, res) {
     const TWITCH_SCOPES = process.env.TWITCH_SCOPES || "clips:edit user:write:chat";
     const TWITCH_REDIRECT_URL = process.env.TWITCH_REDIRECT_URL;
 
-    console.log(chalk.blueBright('twitchLogin start...'));
-    console.log(chalk.green('TWITCH_SCOPES:'), chalk.cyan(TWITCH_SCOPES));
-    console.log(chalk.green('TWITCH_REDIRECT_URL:'), chalk.cyan(TWITCH_REDIRECT_URL));
+    console.log('twitchLogin start...');
+    console.log('TWITCH_SCOPES:',TWITCH_SCOPES);
+    console.log('TWITCH_REDIRECT_URL:',TWITCH_REDIRECT_URL);
 
     // Store referrer for later
     setParam('twitch_login_referrer', '/public/settings');
 
     const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(TWITCH_REDIRECT_URL)}&response_type=code&scope=${TWITCH_SCOPES}`;
 
-    console.log(chalk.yellow('OAuth URL generated:'), chalk.blue(oauthUrl));
+    console.log('OAuth URL generated:', oauthUrl);
 
     sessionRedirectComplete = true;
 
@@ -100,7 +100,7 @@ async function getBroadcasterId() {
         const username = getParam('twitch_username');
 
         const accessToken = getSecret('twitch_access_token'); // Get the access token from setParam
-        console.log(chalk.green('Access Token:'), chalk.cyan(String('X').repeat(accessToken.length)));
+        console.log('Access Token:', String('X').repeat(accessToken.length));
         const response = await axios.get(`https://api.twitch.tv/helix/users?login=${username}`, {
             headers: {
                 'Client-ID': process.env.TWITCH_CLIENT_ID,
@@ -110,7 +110,7 @@ async function getBroadcasterId() {
 
         if (response.data.data && response.data.data.length > 0) {
             const broadcasterId = response.data.data[0].id;
-            console.log(chalk.green('Broadcaster ID fetched:'), chalk.cyan(String('X').repeat(broadcasterId.length)));
+            console.log('Broadcaster ID fetched:', String('X').repeat(broadcasterId.length));
             setSecret('twitch_broadcaster_id', broadcasterId);
             return broadcasterId; // Return the broadcaster ID
         } else {
@@ -119,7 +119,7 @@ async function getBroadcasterId() {
         }
     } catch (error) {
         setSecret('twitch_broadcaster_id', undefined);
-        console.log(chalk.red('Error fetching broadcaster ID:'), chalk.redBright(error));
+        console.log('Error fetching broadcaster ID:', error);
         return false;
     }
 }
@@ -145,7 +145,7 @@ async function getChannelId() {
 
         if (response.data.data && response.data.data.length > 0) {
             const channelId = response.data.data[0].login; // Fetch the broadcaster's channel ID
-            console.log(chalk.green('Channel ID fetched:'), chalk.cyan(channelId));
+            console.log('Channel ID fetched:', channelId);
             setSecret('twitch_channel_id', channelId); // Save it for later use
             return channelId; // Return the channel ID
         } else {
@@ -154,7 +154,7 @@ async function getChannelId() {
         }
     } catch (error) {
         setSecret('twitch_channel_id', undefined);
-        console.log(chalk.red('Error fetching Channel ID:'), chalk.redBright(error));
+        console.log('Error fetching Channel ID:', error);
         return false;
     }
 }
