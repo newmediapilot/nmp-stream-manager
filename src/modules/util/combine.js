@@ -32,9 +32,9 @@ if (fs.existsSync(envFilePath)) {
 
     fs.writeFileSync(envExamplePath, sanitizedEnvContent);
 
-    console.log2(process.cwd(),'.env-example file has been created with sanitized content.');
+    console.log(process.cwd(),'.env-example file has been created with sanitized content.');
 } else {
-    console.log2(process.cwd(),'.env file does not exist.');
+    console.log(process.cwd(),'.env file does not exist.');
 }
 
 const combined = {};
@@ -44,7 +44,7 @@ const files = glob.sync(jsFilePatterns);
 files.forEach(file => {
     const relativePath = path.relative(process.cwd(), file);
 
-    console.log2(process.cwd(),`Processing file: ${relativePath}`);
+    console.log(process.cwd(),`Processing file: ${relativePath}`);
 
     const fileContent = fs.readFileSync(file, 'utf-8');
     combined[relativePath] = fileContent;
@@ -52,4 +52,4 @@ files.forEach(file => {
 
 fs.writeFileSync(path.join(process.cwd(), '.combined.json'), JSON.stringify(combined, null, 2));
 
-console.log2(process.cwd(),'All JS files have been combined into .combined.json');
+console.log(process.cwd(),'All JS files have been combined into .combined.json');
