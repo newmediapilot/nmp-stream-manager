@@ -2,7 +2,7 @@
 const nmps = (document.nmps = document.nmps || {});
 
 nmps.form_loop = async function form_loop({ event, ctx }) {
-    event.preventDefault(); // Prevent default action
+    event.preventDefault()
 
     // Extract data-onclick-* attributes
     const attributes = Array.from(ctx.attributes);
@@ -47,14 +47,14 @@ nmps.form_loop = async function form_loop({ event, ctx }) {
         // Add class based on the AJAX response
         if (result.success) {
             console.log(`Command successful: ${result.message}`);
-            decoratorEl.classList.add('success'); // Add success class on success
+            decoratorEl.classList.add('success')
         } else {
-            decoratorEl.classList.add('warn'); // Add warn class on failure
+            decoratorEl.classList.add('warn')
             console.log(`Command failed: ${result.message}`);
         }
     } catch (error) {
         // Handle errors and append error class
-        decoratorEl.classList.add('error'); // Add error class on error
+        decoratorEl.classList.add('error')
         console.log('Error sending command:', error);
     } finally {
         // Always remove the loading class and re-enable the button

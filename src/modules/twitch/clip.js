@@ -7,7 +7,7 @@
 const axios = require('axios');
 const {twitchMarkerCreate} = require('./marker');
 const {setBroadcastTitle} = require('./broadcast');
-const {getSecret} = require('../store/manager'); // Import getSecret to fetch the access token
+const {getSecret} = require('../store/manager')
 
 // Timeout before next action
 const TIMEOUT_WAIT = 2000;

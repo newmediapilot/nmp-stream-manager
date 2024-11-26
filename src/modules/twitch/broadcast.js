@@ -1,6 +1,6 @@
 const axios = require('axios');
 const chalk = require('chalk');
-const {getSecret} = require('../store/manager'); // Fetch secrets from your store
+const {getSecret} = require('../store/manager')
 
 /**
  * Updates the stream title using Twitch API.
@@ -15,8 +15,8 @@ async function setBroadcastTitle(title) {
     }
 
     try {
-        const accessToken = getSecret('twitch_access_token'); // Access token
-        const broadcasterId = getSecret('twitch_broadcaster_id'); // Broadcaster ID
+        const accessToken = getSecret('twitch_access_token')
+        const broadcasterId = getSecret('twitch_broadcaster_id')
 
         if (!accessToken || !broadcasterId) {
             console.error(chalk.red('Missing access token or broadcaster ID. Ensure authentication.'));

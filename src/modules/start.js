@@ -1,7 +1,7 @@
 // src/modules/start.js
 const fs = require('fs');
 const https = require('https');
-const { configureNunjucks } = require('./nunjucks/config'); // Import Nunjucks configuration
+const { configureNunjucks } = require('./nunjucks/config')
 const { setParam } = require('./store/manager');
 const ROUTES = require('../routes');
 

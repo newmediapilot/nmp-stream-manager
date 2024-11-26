@@ -5,7 +5,7 @@
  */
 
 const axios = require('axios');
-const chalk = require('chalk'); // Import chalk for colorized logs
+const chalk = require('chalk');
 const {getSecret, setSecret, getParam, setParam, resetSecrets} = require('../store/manager');
 const {watchMessages} = require('./stream');
 
@@ -38,7 +38,7 @@ function twitchLogin(req, res) {
 
     sessionRedirectComplete = true;
 
-    res.redirect(oauthUrl); // Redirect the user to the Twitch login URL
+    res.redirect(oauthUrl)
 }
 
 /**
@@ -99,7 +99,7 @@ async function getBroadcasterId() {
     try {
         const username = getParam('twitch_username');
 
-        const accessToken = getSecret('twitch_access_token'); // Get the access token from setParam
+        const accessToken = getSecret('twitch_access_token')
         console.log('Access Token:', String('X').repeat(accessToken.length));
         const response = await axios.get(`https://api.twitch.tv/helix/users?login=${username}`, {
             headers: {
@@ -112,7 +112,7 @@ async function getBroadcasterId() {
             const broadcasterId = response.data.data[0].id;
             console.log('Broadcaster ID fetched:', String('X').repeat(broadcasterId.length));
             setSecret('twitch_broadcaster_id', broadcasterId);
-            return broadcasterId; // Return the broadcaster ID
+            return broadcasterId
         } else {
             setSecret('twitch_broadcaster_id', undefined);
             throw new Error('No broadcaster found');
@@ -144,10 +144,10 @@ async function getChannelId() {
         });
 
         if (response.data.data && response.data.data.length > 0) {
-            const channelId = response.data.data[0].login; // Fetch the broadcaster's channel ID
+            const channelId = response.data.data[0].login
             console.log('Channel ID fetched:', channelId);
-            setSecret('twitch_channel_id', channelId); // Save it for later use
-            return channelId; // Return the channel ID
+            setSecret('twitch_channel_id', channelId)
+            return channelId
         } else {
             setSecret('twitch_channel_id', undefined);
             throw new Error('No channel found');

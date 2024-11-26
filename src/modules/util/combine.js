@@ -16,18 +16,18 @@ const jsFilePatterns = [
     "README.md",
 ]
 
-const envFilePath = path.join(process.cwd(), '.env'); // Path to the .env file
-const envExamplePath = path.join(process.cwd(), '.env-example'); // Path to the .env-example file
+const envFilePath = path.join(process.cwd(), '.env');
+const envExamplePath = path.join(process.cwd(), '.env-example');
 
 if (fs.existsSync(envFilePath)) {
     const envContent = fs.readFileSync(envFilePath, 'utf-8');
 
     const sanitizedEnvContent = envContent.split('\n').map(line => {
-        const [key] = line.split('='); // Get the key part before "="
+        const [key] = line.split('=');
         if (key) {
             return `${key}="1234567890_${key}"`;
         }
-        return ''; // If no key, return empty line
+        return '';
     }).join('\n');
 
     fs.writeFileSync(envExamplePath, sanitizedEnvContent);
@@ -44,7 +44,7 @@ const files = glob.sync(jsFilePatterns);
 files.forEach(file => {
     const relativePath = path.relative(process.cwd(), file);
 
-    console.log(`Processing file: ${relativePath}`); // Log the relative path
+    console.log(`Processing file: ${relativePath}`);
 
     const fileContent = fs.readFileSync(file, 'utf-8');
     combined[relativePath] = fileContent;

@@ -11,11 +11,11 @@
  */
 
 
-const chalk = require('chalk'); // Require chalk for colorizing output
-const fs = require('fs'); // Import fs module to interact with files
+const chalk = require('chalk');
+const fs = require('fs');
 
-let paramsState = {}; // This object will hold all the query parameters
-let secrets = null; // Cached secrets object
+let paramsState = {};
+let secrets = null;
 
 // In order to keep runaway params from being set, we must register any usage of setParam
 // This ensures that a param isn't set and forgotten, we must only store what we need!
@@ -42,10 +42,10 @@ function loadSecrets() {
             secrets = JSON.parse(fs.readFileSync('.secrets', 'utf8'));
         } catch (error) {
             console.log('Error loading secrets:', error.message);
-            secrets = {}; // Fallback to an empty object
+            secrets = {};
         }
     } else {
-        secrets = {}; // No secrets file found, initialize as empty
+        secrets = {};
     }
 }
 
@@ -53,7 +53,7 @@ function setParam(key, value) {
     if (!allowedParams.includes(key)) {
         console.log(`WARNING: Attempted to set a parameter (${key}) that is not registered in allowedParams.`);
     }
-    paramsState[key] = value; // Set the parameter in the global object
+    paramsState[key] = value;
     console.log(`Set ${key} =`);
     console.log(`${JSON.stringify(value, null, 4)}`);
 }
@@ -63,13 +63,13 @@ function getAllParams() {
 }
 
 function getParam(key) {
-    const value = paramsState[key]; // Retrieve the value
+    const value = paramsState[key];
     if (value === undefined) {
         console.warn(chalk.bgYellow.black(`Warning: Attempted to get ${key}, but it is undefined.`));
     } else {
         console.log(`Get ${key} = ${value}`);
     }
-    return value; // Return the value (undefined if not found)
+    return value;
 }
 
 function resetSecrets() {
@@ -83,8 +83,8 @@ function setSecret(name, key) {
     try {
         loadSecrets();
 
-        secrets[name] = key; // Update the secrets object
-        setParam(`${name}_set`, true); // Store publicly as 'true' once set
+        secrets[name] = key;
+        setParam(`${name}_set`, true);
 
         const secretsJSON = JSON.stringify(secrets, null, 2);
 
