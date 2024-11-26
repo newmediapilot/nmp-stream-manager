@@ -1,4 +1,5 @@
 // src/modules/start.js
+require('./console');
 const fs = require('fs');
 const https = require('https');
 const { configureNunjucks } = require('./nunjucks/config')

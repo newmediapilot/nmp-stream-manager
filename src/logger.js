@@ -9,7 +9,7 @@ requestLogger = (req, res, next) => {
 
     console.log('REQUEST =>', req.path);
     next();
-    
+
 };
 
 module.exports = {requestLogger};
