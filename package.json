@@ -4,7 +4,6 @@
   "main": "src/index.js",
   "scripts": {
     "reset": "rm -rf .secrets && rm -rf node_modules && npm i",
-    "lint": "eslint src/**/*.js",
     "cert": "openssl req -nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
     "start": "node src/index.js",
     "combine": "node src/modules/util/combine.js",
@@ -15,7 +14,6 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@eslint/js": "^9.15.0",
     "axios": "^1.7.7",
     "chalk": "^2.4.2",
     "dotenv": "^16.4.5",
