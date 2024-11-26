@@ -3,7 +3,8 @@ const ROUTES = {
     TWITCH_LOGIN: '/twitch/login',
     TWITCH_LOGIN_SUCCESS: '/twitch/login/success',
     // Public HTML
-    PUBLIC_SETTINGS: '/public/settings',
+    PUBLIC_INDEX: '/',
 };
 
 module.exports = ROUTES;
+
