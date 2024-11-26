@@ -1,43 +1,24 @@
-/**
- * File: src\modules\twitch\clip.js
- * Description: This file contains logic for managing src\modules\twitch\clip operations.
- * Usage: Import relevant methods/functions as required.
- */
-
 const axios = require('axios');
+const {setParam, getParam} = require('../store/manager');
 const {twitchMarkerCreate} = require('./marker');
 const {setBroadcastTitle} = require('./broadcast');
-const {getSecret} = require('../store/manager')
+const {getSecret} = require('../store/manager');
 
-// Timeout before next action
-const TIMEOUT_WAIT = 2000;
+let clipResponses = [];
 
-/**
- * Attempts to create a clip on twitch
- * If query.description is provided it will be used to also create a marker
- * @param req
- * @param res
- * @returns {Promise<TwitterResponse<any>|*|void>}
- */
 async function twitchClipCreate(description) {
-
     try {
         const accessToken = getSecret('twitch_access_token');
         const broadcasterId = getSecret('twitch_broadcaster_id');
 
-        if (!broadcasterId || !accessToken) return res.send('Please authenticate first.');
-
-        // Conditional based on req.query.description param
-        await twitchMarkerCreate(description);
-        await setBroadcastTitle(description);
+        await twitchMarkerCreate(description || '');
+        await setBroadcastTitle(description || '');
 
         await new Promise(r => setTimeout(r, TIMEOUT_WAIT));
 
         const response = await axios.post(
             'https://api.twitch.tv/helix/clips',
-            {
-                broadcaster_id: broadcasterId, // Use the broadcaster ID obtained
-            },
+            {broadcaster_id: broadcasterId},
             {
                 headers: {
                     'Client-ID': process.env.TWITCH_CLIENT_ID,
@@ -46,15 +27,14 @@ async function twitchClipCreate(description) {
             }
         );
 
-        const clipId = response.data.data[0].id;
-        const clipUrl = `https://clips.twitch.tv/${clipId}`;
+        const url = `https://clips.twitch.tv/${response.data.data[0].id}`;
+        clipResponses.push({url, data: response.data});
+        setParam('broadcast_clips', clipResponses);
 
-        console.log2(process.cwd(),`Clip created: ${clipUrl}`);
-
+        console.log2(process.cwd(), `Clip created: ${url}`);
         return true;
-
     } catch (error) {
-        console.log2(process.cwd(),`Failed to create clip. ${404 === error.status ? "You appear to be offline." : error.message}`);
+        console.log2(process.cwd(), `Failed to create clip: ${error.message}`);
         return false;
     }
 }
