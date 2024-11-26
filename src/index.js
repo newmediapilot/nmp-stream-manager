@@ -6,7 +6,6 @@ const {startServices} = require('./modules/start');
 const {twitchLogin, twitchLoginSuccess} = require('./modules/twitch/login');
 
 const app = express();
-const PORT = 80;
 
 // Create logger for requests to API
 app.use(requestLogger);
@@ -19,4 +18,4 @@ app.all(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess);
 app.all(ROUTES.PUBLIC_SETTINGS, (req, res) => res.render('settings'));
 
 // Start
-startServices(app, PORT);
+startServices(app);

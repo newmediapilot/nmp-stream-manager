@@ -1,31 +1,58 @@
+const axios = require('axios');
 const chalk = require('chalk');
-const {twitchMessageCreate} = require('./message');
+const { getSecret } = require('../store/manager'); // Fetch secrets from your store
 
 /**
- * Updates the broadcast title. Internal use only.
- * @param {string} title - The title of the broadcast.
+ * Updates the stream title using Twitch API.
+ * @param {string} title - The title to set for the stream.
  * @returns {boolean} - True if the title was updated successfully, otherwise false.
  */
 async function setBroadcastTitle(title) {
 
     if (!title?.length) {
-
-        console.log('No broadcast title provided. Skipping...');
-        return true;
-
+        console.log(chalk.yellow('No title provided. Skipping update.'));
+        return false;
     }
 
     try {
+        const accessToken = getSecret('twitch_access_token'); // Access token
+        const broadcasterId = getSecret('twitch_broadcaster_id'); // Broadcaster ID
 
-        await twitchMessageCreate(`!settitle ${title}`);
-        return true;
+        if (!accessToken || !broadcasterId) {
+            console.error(chalk.red('Missing access token or broadcaster ID. Ensure authentication.'));
+            return false;
+        }
 
+        console.log(chalk.green(`Setting stream title to: "${title}"`));
+
+        // Make the API request to update the stream title
+        const response = await axios.patch(
+            'https://api.twitch.tv/helix/channels',
+            { title }, // JSON body
+            {
+                params: { broadcaster_id: broadcasterId },
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    'Client-Id': process.env.TWITCH_CLIENT_ID,
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+
+        if (response.status === 204) {
+            console.log(chalk.green('Stream title updated successfully.'));
+            return true;
+        } else {
+            console.error(chalk.red(`Failed to update stream title. Status: ${response.status}`));
+            return false;
+        }
     } catch (error) {
-
-        console.log(chalk.red('Error updating broadacast title'), error.response?.data || error.message);
+        console.error(
+            chalk.red('Error updating stream title:'),
+            error.response?.data || error.message
+        );
         return false;
-
     }
 }
 
-module.exports = {setBroadcastTitle};
+module.exports = { setBroadcastTitle };

@@ -1,30 +1,26 @@
 const tmi = require('tmi.js');
 const chalk = require('chalk');
-const { getSecret, setParam } = require('../store/manager');
+const {getSecret} = require('../store/manager');
+const {parseCommand} = require('../commands');
 
 /**
  * Initializes and starts listening for Twitch chat messages.
  * @returns {Promise<void>}
  */
 async function watchMessages() {
-    // Get Twitch credentials from secrets
+
     const token = getSecret('twitch_access_token');
     const channel = getSecret('twitch_channel_id');
 
-    if (!token || !channel) {
-        console.log(chalk.redBright('Missing Twitch credentials. Ensure access token and channel ID are set in secrets.'));
-        return;
-    }
-
     // Create a new tmi.js client instance
     const client = new tmi.Client({
-        options: { debug: true },
-        connection: { reconnect: true, secure: true },
+        options: {debug: true},
+        connection: {reconnect: true, secure: true},
         identity: {
-            username: channel, // Twitch channel name
-            password: `oauth:${token}` // OAuth token
+            username: channel,
+            password: `oauth:${token}`
         },
-        channels: [channel] // Channel to connect to
+        channels: [channel]
     });
 
     // Connect to Twitch IRC
@@ -33,20 +29,31 @@ async function watchMessages() {
         .catch(err => console.error(chalk.red('Error connecting to Twitch chat:'), err));
 
     // Listen for chat messages
-    client.on('message', (channel, tags, message, self) => {
-        if (self) return; // Ignore bot's own messages
-
-        // Log the incoming message
-        console.log(chalk.cyanBright(`${tags['display-name']}: ${message}`));
-
-        // Example: Store the message or trigger custom logic
-        setParam('last_message', { user: tags['display-name'], message });
-    });
+    client.on('message', (channel, tags, message) => checkAndLogCommandReceived(tags) && parseCommand(message));
 
     // Handle disconnects
-    client.on('disconnected', (reason) => {
-        console.log(chalk.yellowBright(`Disconnected from Twitch chat: ${reason}`));
-    });
+    client.on('disconnected', (reason) => console.log(chalk.yellowBright(`Disconnected from Twitch chat: ${reason}`)));
 }
 
-module.exports = { watchMessages };
+/**
+ * Logs "Command received" if all specified conditions are true for the payload.
+ * ie. Verify message authority is broadcaster who is in this app right now
+ * @param {Object} tags - The payload to validate.
+ */
+function checkAndLogCommandReceived(tags) {
+
+    // Retrieve secrets
+    const broadcasterId = getSecret('twitch_broadcaster_id');
+    const channelId = getSecret('twitch_channel_id');
+
+    // Verify message authority
+    const isBroadcaster = tags.badges.broadcaster === '1';
+    const isUserIdMatch = tags['user-id'] === broadcasterId;
+    const isRoomIdMatch = tags['room-id'] === broadcasterId;
+    const isUsernameMatch = tags.username === channelId;
+    const isDisplayNameMatch = tags['display-name'] === channelId;
+
+    return (isBroadcaster && isUserIdMatch && isRoomIdMatch && isUsernameMatch && isDisplayNameMatch);
+}
+
+module.exports = {watchMessages};
