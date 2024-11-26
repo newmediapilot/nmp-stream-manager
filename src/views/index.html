@@ -6,17 +6,11 @@
 {% from "macros/form_loop.njk" import form_loop_js %}
 {% set public_routes = 'public_routes' | getParam %}
 
-{% block title %}Settings{% endblock %}
 {% block body %}
-
 <div class="grid">
-    <h3>Twitch Commands</h3>
-    <div class="col-1-3"><b>Command</b></div>
-    <div class="col-1-3"><b>Description</b></div>
-    <div class="col-1-3"><b>Action</b></div>
-    <div class="col-1-3">Login</div>
-    <div class="col-1-3">Connects Twitch</div>
-    <div class="col-1-3">{{ form_href_el('Login', public_routes.TWITCH_LOGIN) }}</div>
+    <div class="col-1-3">
+        {{ form_href_el('Login', public_routes.TWITCH_LOGIN) }}
+    </div>
 </div>
 {% endblock %}
 
