@@ -25,7 +25,7 @@ async function twitterTweet(req, res) {
 
         const text = `${message} ${HASHTAGS}`;
 
-        console.log('twitterTweet.tweetMessage...', message);
+        console.log2(process.cwd(),'twitterTweet.tweetMessage...', message);
 
         const tweetResponse = await twitterClient.v2.tweet({text});
 

@@ -7,7 +7,7 @@ const chalk = require('chalk');
  */
 requestLogger = (req, res, next) => {
 
-    console.log('REQUEST =>', req.path);
+    console.log2(process.cwd(),'REQUEST =>', req.path);
     next();
 
 };

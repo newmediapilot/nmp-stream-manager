@@ -6,6 +6,7 @@
 
 const axios = require('axios');
 const chalk = require('chalk');
+const ROUTES = require('../../routes');
 const {getSecret, setSecret, getParam, setParam, resetSecrets} = require('../store/manager');
 const {watchMessages} = require('./stream');
 
@@ -25,16 +26,16 @@ function twitchLogin(req, res) {
     const TWITCH_SCOPES = process.env.TWITCH_SCOPES || "clips:edit user:write:chat";
     const TWITCH_REDIRECT_URL = process.env.TWITCH_REDIRECT_URL;
 
-    console.log('twitchLogin start...');
-    console.log('TWITCH_SCOPES:',TWITCH_SCOPES);
-    console.log('TWITCH_REDIRECT_URL:',TWITCH_REDIRECT_URL);
+    console.log2(process.cwd(),'twitchLogin start...');
+    console.log2(process.cwd(),'TWITCH_SCOPES:',TWITCH_SCOPES);
+    console.log2(process.cwd(),'TWITCH_REDIRECT_URL:',TWITCH_REDIRECT_URL);
 
     // Store referrer for later
-    setParam('twitch_login_referrer', '/public/settings');
+    setParam('twitch_login_referrer', ROUTES.PUBLIC_DASHBOARD);
 
     const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(TWITCH_REDIRECT_URL)}&response_type=code&scope=${TWITCH_SCOPES}`;
 
-    console.log('OAuth URL generated:', oauthUrl);
+    console.log2(process.cwd(),'OAuth URL generated:', oauthUrl);
 
     sessionRedirectComplete = true;
 
@@ -86,7 +87,7 @@ async function twitchLoginSuccess(req, res) {
         return res.send('OAuth tokens retrieved successfully');
 
     } catch (error) {
-        console.log('Error exchanging code for tokens:', error.response?.data || error.message);
+        console.log2(process.cwd(),'Error exchanging code for tokens:', error.response?.data || error.message);
         return res.send('Failed to get OAuth tokens');
     }
 }
@@ -100,7 +101,7 @@ async function getBroadcasterId() {
         const username = getParam('twitch_username');
 
         const accessToken = getSecret('twitch_access_token')
-        console.log('Access Token:', String('X').repeat(accessToken.length));
+        console.log2(process.cwd(),'Access Token:', String('X').repeat(accessToken.length));
         const response = await axios.get(`https://api.twitch.tv/helix/users?login=${username}`, {
             headers: {
                 'Client-ID': process.env.TWITCH_CLIENT_ID,
@@ -110,7 +111,7 @@ async function getBroadcasterId() {
 
         if (response.data.data && response.data.data.length > 0) {
             const broadcasterId = response.data.data[0].id;
-            console.log('Broadcaster ID fetched:', String('X').repeat(broadcasterId.length));
+            console.log2(process.cwd(),'Broadcaster ID fetched:', String('X').repeat(broadcasterId.length));
             setSecret('twitch_broadcaster_id', broadcasterId);
             return broadcasterId
         } else {
@@ -119,7 +120,7 @@ async function getBroadcasterId() {
         }
     } catch (error) {
         setSecret('twitch_broadcaster_id', undefined);
-        console.log('Error fetching broadcaster ID:', error);
+        console.log2(process.cwd(),'Error fetching broadcaster ID:', error);
         return false;
     }
 }
@@ -145,7 +146,7 @@ async function getChannelId() {
 
         if (response.data.data && response.data.data.length > 0) {
             const channelId = response.data.data[0].login
-            console.log('Channel ID fetched:', channelId);
+            console.log2(process.cwd(),'Channel ID fetched:', channelId);
             setSecret('twitch_channel_id', channelId)
             return channelId
         } else {
@@ -154,7 +155,7 @@ async function getChannelId() {
         }
     } catch (error) {
         setSecret('twitch_channel_id', undefined);
-        console.log('Error fetching Channel ID:', error);
+        console.log2(process.cwd(),'Error fetching Channel ID:', error);
         return false;
     }
 }

@@ -16,6 +16,7 @@ app.all(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess);
 
 // Public HTML
 app.all(ROUTES.PUBLIC_INDEX, (req, res) => res.render('index'));
+app.all(ROUTES.PUBLIC_DASHBOARD, (req, res) => res.render('dashboard'));
 
 // Start
 startServices(app);

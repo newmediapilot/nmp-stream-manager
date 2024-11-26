@@ -20,7 +20,7 @@ async function twitterTweet(req, res) {
     try {
         // Test API call to verify credentials
         const me = await twitterClient.v2.me();
-        console.log('Authenticated user info:', me);
+        console.log2(process.cwd(),'Authenticated user info:', me);
 
         const message = req.query.description
 
@@ -29,7 +29,7 @@ async function twitterTweet(req, res) {
         }
 
         const tweetMessage = `${message} ${HASHTAGS}`;
-        console.log('twitterTweet.tweetMessage...', tweetMessage);
+        console.log2(process.cwd(),'twitterTweet.tweetMessage...', tweetMessage);
 
         const tweetResponse = await twitterClient.v2.tweet({
             text: tweetMessage
@@ -38,7 +38,7 @@ async function twitterTweet(req, res) {
         const rateLimitRemaining = tweetResponse.headers['x-app-limit-24hour-remaining'];
         const rateLimitLimit = tweetResponse.headers['x-app-limit-24hour-limit'];
 
-        console.log(`Tweets remaining: ${rateLimitRemaining}/${rateLimitLimit}`);
+        console.log2(process.cwd(),`Tweets remaining: ${rateLimitRemaining}/${rateLimitLimit}`);
 
         res.send(`Tweet posted successfully: ${tweetResponse.data.text}. ${rateLimitRemaining}/${rateLimitLimit} tweets remaining.`);
 
@@ -46,12 +46,12 @@ async function twitterTweet(req, res) {
 
         // Log full error details for debugging
         if (error.response) {
-            console.log('Response Status:', error.status);
-            console.log('Response Data:', error.data);
-            console.log('Response Headers:', error.headers);
-            console.log('Response Status:', error.response.status);
-            console.log('Response Data:', error.response.data);
-            console.log('Response Headers:', error.response.headers);
+            console.log2(process.cwd(),'Response Status:', error.status);
+            console.log2(process.cwd(),'Response Data:', error.data);
+            console.log2(process.cwd(),'Response Headers:', error.headers);
+            console.log2(process.cwd(),'Response Status:', error.response.status);
+            console.log2(process.cwd(),'Response Data:', error.response.data);
+            console.log2(process.cwd(),'Response Headers:', error.response.headers);
         }
 
         if (error.code === 429) {

@@ -11,7 +11,7 @@ async function twitchMarkerCreate(description) {
 
     if (!description?.length) {
 
-        console.log('No marker description provided. Skipping...');
+        console.log2(process.cwd(),'No marker description provided. Skipping...');
         return true;
 
     }
@@ -21,7 +21,7 @@ async function twitchMarkerCreate(description) {
         const accessToken = getSecret('twitch_access_token');
         const broadcasterId = getSecret('twitch_broadcaster_id');
 
-        console.log('Creating marker:', description);
+        console.log2(process.cwd(),'Creating marker:', description);
 
         const response = await axios.post(
             `https://api.twitch.tv/helix/streams/markers`,
@@ -37,13 +37,13 @@ async function twitchMarkerCreate(description) {
             }
         );
 
-        console.log('Marker created successfully:',`${response.data.data[0]?.description}`);
+        console.log2(process.cwd(),'Marker created successfully:',`${response.data.data[0]?.description}`);
 
         return true;
 
     } catch (error) {
 
-        console.log('Error creating marker:', error.response?.data || error.message);
+        console.log2(process.cwd(),'Error creating marker:', error.response?.data || error.message);
         return false;
 
     }

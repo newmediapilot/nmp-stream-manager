@@ -49,12 +49,12 @@ async function twitchClipCreate(description) {
         const clipId = response.data.data[0].id;
         const clipUrl = `https://clips.twitch.tv/${clipId}`;
 
-        console.log(`Clip created: ${clipUrl}`);
+        console.log2(process.cwd(),`Clip created: ${clipUrl}`);
 
         return true;
 
     } catch (error) {
-        console.log(`Failed to create clip. ${404 === error.status ? "You appear to be offline." : error.message}`);
+        console.log2(process.cwd(),`Failed to create clip. ${404 === error.status ? "You appear to be offline." : error.message}`);
         return false;
     }
 }

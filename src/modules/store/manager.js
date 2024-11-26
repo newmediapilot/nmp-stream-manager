@@ -41,7 +41,7 @@ function loadSecrets() {
         try {
             secrets = JSON.parse(fs.readFileSync('.secrets', 'utf8'));
         } catch (error) {
-            console.log('Error loading secrets:', error.message);
+            console.log2(process.cwd(),'Error loading secrets:', error.message);
             secrets = {};
         }
     } else {
@@ -51,11 +51,11 @@ function loadSecrets() {
 
 function setParam(key, value) {
     if (!allowedParams.includes(key)) {
-        console.log(`WARNING: Attempted to set a parameter (${key}) that is not registered in allowedParams.`);
+        console.log2(process.cwd(),`WARNING: Attempted to set a parameter (${key}) that is not registered in allowedParams.`);
     }
     paramsState[key] = value;
-    console.log(`Set ${key} =`);
-    console.log(`${JSON.stringify(value, null, 4)}`);
+    console.log2(process.cwd(),`Set ${key} =`);
+    console.log2(process.cwd(),`${JSON.stringify(value, null, 4)}`);
 }
 
 function getAllParams() {
@@ -67,7 +67,7 @@ function getParam(key) {
     if (value === undefined) {
         console.warn(chalk.bgYellow.black(`Warning: Attempted to get ${key}, but it is undefined.`));
     } else {
-        console.log(`Get ${key} = ${value}`);
+        console.log2(process.cwd(),`Get ${key} = ${value}`);
     }
     return value;
 }
@@ -76,7 +76,7 @@ function resetSecrets() {
     fs.rmSync("/secrets.js", {
         force: true,
     });
-    console.log('Removing secrets...');
+    console.log2(process.cwd(),'Removing secrets...');
 }
 
 function setSecret(name, key) {
@@ -92,9 +92,9 @@ function setSecret(name, key) {
         secrets = null;
 
         fs.writeFileSync('.secrets', secretsJSON, 'utf8');
-        console.log(`Secret set for ${name} : ${String('X').repeat(String(key).length)}`);
+        console.log2(process.cwd(),`Secret set for ${name} : ${String('X').repeat(String(key).length)}`);
     } catch (error) {
-        console.log('Error setting secret:', error.message);
+        console.log2(process.cwd(),'Error setting secret:', error.message);
     }
 }
 
@@ -105,11 +105,11 @@ function getSecret(name) {
         if (secrets[name]) {
             return secrets[name];
         } else {
-            console.log(`Secret ${name} not found.`);
+            console.log2(process.cwd(),`Secret ${name} not found.`);
             return null;
         }
     } catch (error) {
-        console.log('Error getting secret:', error.message);
+        console.log2(process.cwd(),'Error getting secret:', error.message);
         return null;
     }
 }

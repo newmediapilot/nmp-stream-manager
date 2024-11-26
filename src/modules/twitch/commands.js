@@ -12,7 +12,7 @@ const COMMANDS = {
  */
 async function parseCommand(message) {
 
-    console.log('Message: ', message);
+    console.log2(process.cwd(),'Message: ', message);
 
     const match = Object.keys(COMMANDS).find(key => message.startsWith(key));
 
@@ -24,12 +24,12 @@ async function parseCommand(message) {
     if (match) {
 
         const description = message.split(match)[1];
-        console.log(`Match: ${match}, Description: ${description}`);
+        console.log2(process.cwd(),`Match: ${match}, Description: ${description}`);
         await COMMANDS[match](description);
         return true;
 
     } else {
-        console.log('No matching command found', match);
+        console.log2(process.cwd(),'No matching command found', match);
         return false;
     }
 

@@ -17,22 +17,22 @@ function uncombine() {
             const absoluteFilePath = path.join(process.cwd(), filePath);
 
             if (fs.existsSync(absoluteFilePath)) {
-                console.log(`Warning: File already exists at ${absoluteFilePath}. It will be overwritten.`);
+                console.log2(process.cwd(),`Warning: File already exists at ${absoluteFilePath}. It will be overwritten.`);
             }
 
             const dirPath = path.dirname(absoluteFilePath);
             if (!fs.existsSync(dirPath)) {
                 fs.mkdirSync(dirPath, { recursive: true });
-                console.log(`Created directory: ${dirPath}`);
+                console.log2(process.cwd(),`Created directory: ${dirPath}`);
             }
 
             fs.writeFileSync(absoluteFilePath, content, 'utf-8');
-            console.log(`File written: ${absoluteFilePath}`);
+            console.log2(process.cwd(),`File written: ${absoluteFilePath}`);
         }
 
-        console.log('Uncombining completed successfully.');
+        console.log2(process.cwd(),'Uncombining completed successfully.');
     } catch (error) {
-        console.log('Error during uncombine process:', error);
+        console.log2(process.cwd(),'Error during uncombine process:', error);
     }
 }
 

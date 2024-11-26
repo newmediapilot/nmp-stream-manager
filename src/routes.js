@@ -4,6 +4,7 @@ const ROUTES = {
     TWITCH_LOGIN_SUCCESS: '/twitch/login/success',
     // Public HTML
     PUBLIC_INDEX: '/',
+    PUBLIC_DASHBOARD: '/public/dashboard',
 };
 
 module.exports = ROUTES;
