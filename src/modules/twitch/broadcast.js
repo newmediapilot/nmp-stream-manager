@@ -9,7 +9,7 @@ const {getSecret} = require('../store/manager')
  */
 async function setBroadcastTitle(title) {
 
-    if (title) {
+    if (!title) {
         console.err2(process.cwd(),'No title provided. Skipping update.');
         return false;
     }
@@ -36,7 +36,7 @@ async function setBroadcastTitle(title) {
 
         if (response.status === 204) {
             console.log2(process.cwd(),'Stream title updated successfully.');
-            return true;
+            return title;
         } else {
             console.err2(process.cwd(),`Failed to update stream title. Status: ${response.status}`);
             return false;
