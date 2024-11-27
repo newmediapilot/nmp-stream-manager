@@ -30,7 +30,8 @@ async function parseCommand(message) {
   }
 
   if (match) {
-    const description = message.split(match)[1];
+    const splitPoint = match.length;
+    const description = message.slice(splitPoint);
     console.log2(process.cwd(), "Match", match, "Description:", description);
     await COMMANDS[match](description);
     return true;

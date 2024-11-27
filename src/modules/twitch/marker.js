@@ -12,7 +12,7 @@ const { getSecret } = require("../store/manager");
  * @returns {boolean} - True if the marker was created successfully, otherwise false.
  */
 async function twitchMarkerCreate(description) {
-  if (!description?.length) {
+  if (!description) {
     console.err2(process.cwd(), "No marker description provided. Skipping...");
     return true;
   }

@@ -34,6 +34,8 @@ async function twitterTweet(description) {
 
     console.log(`Tweet posted successfully: ${tweetResponse.data.text}.`);
 
+    // TODO: make it post a chat command too
+
     tweetResponses.push({ text });
 
     return tweetResponse.data.text;

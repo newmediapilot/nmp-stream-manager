@@ -39,6 +39,8 @@ async function twitchClipCreate(description) {
 
     console.log2(process.cwd(), "Clip created:", url);
 
+    // TODO: make it post a chat command too
+
     return url;
   } catch (error) {
     console.err2(process.cwd(), "Failed to create clip:", error.message);
