@@ -20,7 +20,7 @@ async function twitchTwipCreate(description) {
     await new Promise((r) => setTimeout(r, TIMEOUT_WAIT));
     const url = await twitchClipCreate(description);
     await new Promise((r) => setTimeout(r, TIMEOUT_WAIT));
-    await twitterTweet([description, url], join(" "));
+    await twitterTweet([description, url].join(" "));
 
     return true;
   } catch (error) {

@@ -21,9 +21,14 @@ const SIGNAL_COMMANDS = {
 async function testSignalCreate(req, res) {
     const description = req.query.description;
 
+    console.log('req.query.description', req.query.description);
+
     // Validate the description
-    if (!description || !SIGNAL_COMMANDS[description]) {
-        return res.status(400).send("Invalid or missing description parameter.");
+    if (!description) {
+        return res.status(400).send("Missing parameter. " + description);
+    }
+    if (!SIGNAL_COMMANDS[description]) {
+        return res.status(400).send("Invalid parameter. " + description);
     }
 
     // Retrieve the corresponding message
