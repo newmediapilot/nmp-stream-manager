@@ -38,7 +38,7 @@ async function startServices(app) {
       );
 
     // ♥♡♡♡♡♡♡♡♡♡♡♡
-    app.listen(8000, "192.168.1.99/data", (data) =>
+    app.listen(8000, "192.168.1.99", (data) =>
       console.log("Listening on http://192.168.1.99:8000/data", data),
     );
   } catch (err) {
