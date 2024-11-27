@@ -6,7 +6,7 @@
 
 const { TwitterApi } = require("twitter-api-v2");
 const { twitchMessageCreate } = require("../twitch/message");
-const HASHTAGS = "#twitch #live #aaknotstreams";
+const HASHTAGS = "#aaknotstreams #live #twitch";
 
 let tweetResponses = [];
 
