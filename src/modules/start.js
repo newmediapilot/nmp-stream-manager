@@ -38,12 +38,18 @@ async function startServices(app) {
       .createServer(certs, app)
       .listen(
         443,
-        console.log2(process.cwd(), "Server running on 443 at https://localhost")
+        console.log2(
+          process.cwd(),
+          "Server running on 443 at https://localhost",
+        ),
       );
 
     // Heart Rate Server
     app.listen(
-        console.log2(process.cwd(), "Server running on 3476 at https://localhost")
+      console.log2(
+        process.cwd(),
+        "Server running on 3476 at https://localhost",
+      ),
     );
 
     // Launch server exe file
@@ -51,7 +57,6 @@ async function startServices(app) {
 
     // Open and login
     await open(`https://localhost${ROUTES.TWITCH_LOGIN}`);
-
   } catch (err) {
     console.log2(process.cwd(), "Error initializing services:", err);
   }

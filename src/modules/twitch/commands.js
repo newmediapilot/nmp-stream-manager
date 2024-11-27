@@ -68,7 +68,9 @@ async function parseCommand(channel, tags, message) {
   if (currentCommand === COMMANDS.shout) {
     const username = currentMessage;
     const twitchURL = `https://twitch.tv/${username}`;
-    await twitchMessageCreate(`📡 Shoutout to @${username}! Check them out and show them some love: ${twitchURL} 💜`);
+    await twitchMessageCreate(
+      `📡 Shoutout to @${username}! Check them out and show them some love: ${twitchURL} 💜`,
+    );
     return true;
   }
 
