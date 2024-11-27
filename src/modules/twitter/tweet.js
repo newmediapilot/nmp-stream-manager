@@ -1,10 +1,5 @@
 /**
  * File: src\modules\twitter\tweet.js
- * Description: Logic and operations for src\modules\twitter\tweet.js.
- */
-
-/**
- * File: src\modules\twitter\tweet.js
  * Description: This file contains logic for managing src\modules\twitter\tweet operations.
  * Usage: Import relevant methods/functions as required.
  */
