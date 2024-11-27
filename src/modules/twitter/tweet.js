@@ -19,26 +19,29 @@ const twitterClient = new TwitterApi({
 
 async function twitterTweet(description) {
   try {
+
     if (!description) {
       console.err2(process.cwd(), "Missing description.");
       return false;
     }
 
-    await twitterClient.v2.me();
+    const me = await twitterClient.v2.me();
+    const username = me.data.username;
 
     const text = `${description} ${HASHTAGS}`;
 
     console.log2(process.cwd(), "twitterTweet...", description);
 
     const tweetResponse = await twitterClient.v2.tweet({ text });
+    const tweetURL = `https://twitter.com/${username}/status/${tweetResponse.data.id}`;
 
     console.log2(
       process.cwd(),
       "Tweet posted successfully:",
-      tweetResponse.data.text,
+        tweetURL,
     );
 
-    await twitchMessageCreate("🤖 Tweet ready: " + tweetResponse.data.text);
+    await twitchMessageCreate("🤖 Tweet ready: " + tweetURL);
 
     // TODO: make it post a chat command too
 
