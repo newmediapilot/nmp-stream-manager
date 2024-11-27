@@ -38,7 +38,7 @@ async function twitterTweet(description) {
       tweetResponse.data.text,
     );
 
-    await twitchMessageCreate("🤖 Tweet ready:" + tweetResponse.data.text);
+    await twitchMessageCreate("🤖 Tweet ready: " + tweetResponse.data.text);
 
     // TODO: make it post a chat command too
 

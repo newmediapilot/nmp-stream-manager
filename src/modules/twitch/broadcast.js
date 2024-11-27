@@ -39,7 +39,6 @@ async function setBroadcastTitle(title) {
 
     if (response.status === 204) {
       console.log2(process.cwd(), "Stream title updated successfully.");
-      await twitchMessageCreate("🤖 Title ready: " + title);
       return title;
     } else {
       console.err2(
