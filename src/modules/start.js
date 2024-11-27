@@ -29,7 +29,6 @@ async function startServices(app) {
     https.createServer(certs, app).listen(443, () => {
       console.log2(process.cwd(), "Server running at https://localhost");
     });
-
   } catch (err) {
     console.log2(process.cwd(), "Error initializing services:", err);
   }
