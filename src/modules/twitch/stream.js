@@ -58,7 +58,7 @@ function checkAndLogCommandReceived(tags) {
   const channelId = getSecret("twitch_channel_id");
 
   // Verify message authority
-  const isBroadcaster = tags.badges.broadcaster === "1";
+  const isBroadcaster = tags?.badge?.broadcaster === "1";
   const isUserIdMatch = tags["user-id"] === broadcasterId;
   const isRoomIdMatch = tags["room-id"] === broadcasterId;
   const isUsernameMatch = tags.username === channelId;
