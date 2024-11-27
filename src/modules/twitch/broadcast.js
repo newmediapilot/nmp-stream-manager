@@ -5,7 +5,6 @@
 
 const axios = require("axios");
 const { getSecret } = require("../store/manager");
-const { twitchMessageCreate } = require("./message");
 
 /**
  * Updates the stream title using Twitch API.

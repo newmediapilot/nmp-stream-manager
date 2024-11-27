@@ -2,51 +2,75 @@
  * File: src\modules\twitch\commands.js
  * Description: Logic and operations for src\modules\twitch\commands.js.
  */
-
-const { twitchClipCreate } = require("./clip");
-const { twitchTwipCreate } = require("../twip/create");
-const { twitterTweet } = require("../twitter/tweet");
-const { twitchMessageCreate } = require("./message");
-const { twitchMarkerCreate } = require("./marker");
-
-const COMMANDS = {
-  "#clip ": twitchClipCreate,
-  "#twip ": twitchTwipCreate,
-  "#tweet ": twitterTweet,
-  "#mark ": twitchMarkerCreate,
-  "#test ": () => twitchMessageCreate("testing beep boop!"),
-};
+const {getSecret} = require("../store/manager");
+const {twitchClipCreate} = require("./clip");
+const {twitchTwipCreate} = require("../twip/create");
+const {twitterTweet} = require("../twitter/tweet");
+const {twitchMessageCreate} = require("./message");
+const {twitchMarkerCreate} = require("./marker");
 
 /**
  * Feeds the command to the appropriate handler.
- * @param {string} command - The extracted command keyword.
+ * @param channel
+ * @param tags
+ * @param message
  */
-async function parseCommand(message) {
-  console.log2(process.cwd(), "Message: ", message);
+async function parseCommand(channel, tags, message) {
 
-  const match = Object.keys(COMMANDS).find((key) => message.startsWith(key));
+    console.log2(process.cwd(), "Message: ", message);
 
-  if ("#test" === message.trim()) {
-    await twitchMessageCreate("🤖 Testing beep boop!");
-    return true;
-  }
+    const isBroadcaster = tags["user-id"] === getSecret("twitch_broadcaster_id");
 
-  if (match) {
-    const splitPoint = match.length;
-    const description = message.slice(splitPoint);
-    console.log2(process.cwd(), "Match", match, "Description:", description);
-    await COMMANDS[match](description);
-    return true;
-  } else {
-    console.err2(
-      process.cwd(),
-      "No matching command found",
-      message,
-      "::",
-      match,
-    );
-    return false;
-  }
+    const COMMANDS = {
+        "test": "test/",
+        "clip": "clip/",
+        "twip": "twip/",
+        "tweet": "tweet/",
+        "mark": "mark/",
+        "shout": "shout/",
+    };
+
+    let currentCommand;
+    let currentMessage;
+
+    // Catch command messages
+    for (const [key, value] of Object.entries(COMMANDS)) {
+        if (message.startsWith(value)) {
+            currentCommand = value;
+            currentMessage = message.slice(value.length);
+            break;
+        }
+    }
+
+    // Exit early if no commands
+    if (!currentCommand) {
+        console.warn2(process.cwd(), "Skipping no command found for:", message.substr(0, 20), "...");
+        return false;
+    } else {
+        console.log2(process.cwd(), "Found command:", currentCommand, "with message", currentMessage);
+    }
+
+    // Command gauntlet, edit cautiously
+    if (isBroadcaster) {
+        console.log2(process.cwd(), "BROADCASTER command:", currentCommand, "with message", currentMessage);
+        if (currentCommand === COMMANDS.test) await twitchMessageCreate("🤖 Testing beep boop!");
+        if (currentCommand === COMMANDS.mark) await twitchMarkerCreate(currentMessage);
+        if (currentCommand === COMMANDS.clip) await twitchClipCreate(currentMessage);
+        if (currentCommand === COMMANDS.tweet) await twitterTweet(currentMessage);
+        if (currentCommand === COMMANDS.twip) await twitchTwipCreate(currentMessage);
+        return true;
+    } else {
+        console.log2(process.cwd(), "VIEWER command:", currentCommand, "with message", currentMessage);
+
+        if (currentCommand === COMMANDS.shout) {
+            await twitchMessageCreate("🤖 Check out", );
+        }
+
+        // TODO: creates a shoutout
+        // TODO: tweets a screenshot
+        // TODO: logs heart rate
+        return true;
+    }
 }
 
-module.exports = { parseCommand };
+module.exports = {parseCommand};
