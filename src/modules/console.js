@@ -1,3 +1,8 @@
+/**
+ * File: src\modules\console.js
+ * Description: Logic and operations for src\modules\console.js.
+ */
+
 const chalk = require("chalk");
 
 console.log2 = function (dir, ...args) {

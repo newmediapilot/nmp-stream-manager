@@ -1,3 +1,8 @@
+/**
+ * File: src\modules\twitch\commands.js
+ * Description: Logic and operations for src\modules\twitch\commands.js.
+ */
+
 const { twitchClipCreate } = require("./clip");
 const { twitchTwipCreate } = require("../twip/create");
 const { twitchMessageCreate } = require("./message");
@@ -8,6 +13,10 @@ const COMMANDS = {
   "#test ": () => twitchMessageCreate("testing beep boop!"),
 };
 
+/**
+ * Feeds the command to the appropriate handler.
+ * @param {string} command - The extracted command keyword.
+ */
 async function parseCommand(message) {
   console.log2(process.cwd(), "Message: ", message);
 

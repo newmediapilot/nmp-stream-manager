@@ -1,3 +1,8 @@
+/**
+ * File: src\modules\twitch\clip.js
+ * Description: Logic and operations for src\modules\twitch\clip.js.
+ */
+
 const axios = require("axios");
 const { setParam } = require("../store/manager");
 const { twitchMarkerCreate } = require("./marker");

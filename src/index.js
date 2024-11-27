@@ -1,3 +1,8 @@
+/**
+ * File: src\index.js
+ * Description: Logic and operations for src\index.js.
+ */
+
 require("dotenv").config();
 const ROUTES = require("./routes");
 const express = require("express");
@@ -9,9 +14,11 @@ const app = express();
 
 app.use(requestLogger);
 
+// Twitch API Start
 app.all(ROUTES.TWITCH_LOGIN, twitchLogin);
 app.all(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess);
 
+// Public HTML
 app.all(ROUTES.PUBLIC_INDEX, (req, res) => res.render("index"));
 app.all(ROUTES.PUBLIC_DASHBOARD, (req, res) => res.render("dashboard"));
 

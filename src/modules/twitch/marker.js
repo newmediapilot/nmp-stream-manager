@@ -1,6 +1,16 @@
+/**
+ * File: src\modules\twitch\marker.js
+ * Description: Logic and operations for src\modules\twitch\marker.js.
+ */
+
 const axios = require("axios");
 const { getSecret } = require("../store/manager");
 
+/**
+ * Creates a marker on a Twitch stream. Internal use only.
+ * @param {string} description - The description of the marker.
+ * @returns {boolean} - True if the marker was created successfully, otherwise false.
+ */
 async function twitchMarkerCreate(description) {
   if (!description?.length) {
     console.err2(process.cwd(), "No marker description provided. Skipping...");

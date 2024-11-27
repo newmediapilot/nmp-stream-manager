@@ -1,3 +1,8 @@
+/**
+ * File: src\modules\twip\create.js
+ * Description: Logic and operations for src\modules\twip\create.js.
+ */
+
 const { twitchMarkerCreate } = require("../twitch/marker");
 const { setBroadcastTitle } = require("../twitch/broadcast");
 const { twitchClipCreate } = require("../twitch/clip");
