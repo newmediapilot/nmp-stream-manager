@@ -1,10 +1,10 @@
 // src/modules/start.js
-require('./console');
-const fs = require('fs');
-const https = require('https');
-const { configureNunjucks } = require('./nunjucks/config')
-const { setParam } = require('./store/manager');
-const ROUTES = require('../routes');
+require("./console");
+const fs = require("fs");
+const https = require("https");
+const { configureNunjucks } = require("./nunjucks/config");
+const { setParam } = require("./store/manager");
+const ROUTES = require("../routes");
 
 /**
  * Initializes and starts the application services.
@@ -12,30 +12,28 @@ const ROUTES = require('../routes');
  * @param {number} PORT - The port number for the server.
  */
 async function startServices(app) {
-    try {
+  try {
+    // Export public routes
+    setParam("public_routes", ROUTES);
 
-        // Export public routes
-        setParam('public_routes', ROUTES);
+    // Set twitch data
+    setParam("twitch_username", process.env.TWITCH_USERNAME);
 
-        // Set twitch data
-        setParam('twitch_username', process.env.TWITCH_USERNAME);
+    // Configure Nunjucks
+    configureNunjucks(app);
 
-        // Configure Nunjucks
-        configureNunjucks(app);
+    const certs = {
+      key: fs.readFileSync("./localhost.key"),
+      cert: fs.readFileSync("./localhost.crt"),
+    };
 
-        const certs = {
-            key: fs.readFileSync('./localhost.key'),
-            cert: fs.readFileSync('./localhost.crt'),
-        };
-
-        // Start
-        https.createServer(certs, app).listen(443, () => {
-            console.log2(process.cwd(),'Server running at https://localhost');
-        });
-
-    } catch (err) {
-        console.log2(process.cwd(),'Error initializing services:', err);
-    }
+    // Start
+    https.createServer(certs, app).listen(443, () => {
+      console.log2(process.cwd(), "Server running at https://localhost");
+    });
+  } catch (err) {
+    console.log2(process.cwd(), "Error initializing services:", err);
+  }
 }
 
 module.exports = { startServices };

@@ -4,8 +4,6 @@
  * Usage: Import relevant methods/functions as required.
  */
 
-
-async function data() {
-}
+async function data() {}
 
 module.exports = { data };
