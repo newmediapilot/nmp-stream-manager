@@ -4,12 +4,13 @@
   "main": "src/index.js",
   "scripts": {
     "reset": "rm -rf .secrets && rm -rf node_modules && npm i",
-    "bundle": "",
     "prettier": "prettier --write src/**/*.js",
+    "curl": "mkdir bin 2>nul & curl -L -o bin/hds_desktop_windows.exe https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe",
     "cert": "openssl req -nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
     "start": "node src/index.js",
     "combine": "node src/modules/util/combine.js",
-    "uncombine": "node src/modules/util/uncombine.js"
+    "uncombine": "node src/modules/util/uncombine.js",
+    "postinstall": "npm run curl"
   },
   "keywords": [],
   "author": "",
