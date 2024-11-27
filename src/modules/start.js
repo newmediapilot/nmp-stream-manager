@@ -40,6 +40,15 @@ async function startServices(app) {
         console.log2(process.cwd(), "Server running at https://localhost"),
       );
 
+    // Start the server
+    app.listen(8000, "192.168.1.99", () => {
+      console.log("Listening for data from watch on port 8000");
+    });
+    app.post("/data", (req, res) => {
+      console.log("Data received from watch:", req.body);
+      res.status(200).send("Data received");
+    });
+
     // Open and login
     await open(`https://localhost${ROUTES.TWITCH_LOGIN}`);
   } catch (err) {
