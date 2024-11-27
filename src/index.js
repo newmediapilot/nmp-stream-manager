@@ -7,7 +7,6 @@ const { twitchLogin, twitchLoginSuccess } = require("./modules/twitch/login");
 
 const app = express();
 
-// Create logger for requests to API
 app.use(requestLogger);
 
 // Twitch API Start
@@ -18,5 +17,4 @@ app.all(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess);
 app.all(ROUTES.PUBLIC_INDEX, (req, res) => res.render("index"));
 app.all(ROUTES.PUBLIC_DASHBOARD, (req, res) => res.render("dashboard"));
 
-// Start
 startServices(app);

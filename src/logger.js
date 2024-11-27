@@ -1,5 +1,3 @@
-//
-
 /**
  * Middleware to log request details with colorful output
  * @param {Object} app - The Express application instance

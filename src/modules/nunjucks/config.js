@@ -1,4 +1,3 @@
-// src/modules/nunjucks/config.js
 const nunjucks = require("nunjucks");
 const express = require("express");
 const { getParam, getAllParams } = require("../store/manager");
@@ -13,7 +12,6 @@ function configureNunjucks(app) {
     express: app,
   });
 
-  // Add custom filters
   nunjucksEnv.addFilter("getParam", getParam);
   nunjucksEnv.addFilter("getAllParams", getAllParams);
 

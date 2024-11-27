@@ -15,7 +15,6 @@ const {
 } = require("../store/manager");
 const { watchMessages } = require("./stream");
 
-// Prevent multiple login attempts on the same session
 let sessionRedirectComplete = false;
 
 /**
@@ -36,7 +35,6 @@ function twitchLogin(req, res) {
   console.log2(process.cwd(), "TWITCH_SCOPES:", TWITCH_SCOPES);
   console.log2(process.cwd(), "TWITCH_REDIRECT_URL:", TWITCH_REDIRECT_URL);
 
-  // Store referrer for later
   setParam("twitch_login_referrer", ROUTES.PUBLIC_DASHBOARD);
 
   const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(TWITCH_REDIRECT_URL)}&response_type=code&scope=${TWITCH_SCOPES}`;
@@ -154,11 +152,8 @@ async function getBroadcasterId() {
 async function getChannelId() {
   try {
     const username = getParam("twitch_username");
-
-    // Fetch access token from secrets
     const accessToken = getSecret("twitch_access_token");
 
-    // Make the API request
     const response = await axios.get(
       `https://api.twitch.tv/helix/users?login=${username}`,
       {

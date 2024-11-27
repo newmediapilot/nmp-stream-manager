@@ -49,7 +49,7 @@ async function watchMessages() {
  * @param {Object} tags - The payload to validate.
  */
 function checkAndLogCommandReceived(tags) {
-  // Retrieve secrets
+
   const broadcasterId = getSecret("twitch_broadcaster_id");
   const channelId = getSecret("twitch_channel_id");
 

@@ -18,10 +18,9 @@ async function setBroadcastTitle(title) {
 
     console.log2(process.cwd(), "Setting stream title to:", title);
 
-    // Make the API request to update the stream title
     const response = await axios.patch(
       "https://api.twitch.tv/helix/channels",
-      { title }, // JSON body
+      { title },
       {
         params: { broadcaster_id: broadcasterId },
         headers: {

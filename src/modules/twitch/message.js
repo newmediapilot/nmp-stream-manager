@@ -14,7 +14,7 @@ async function twitchMessageCreate(message) {
     console.log2(process.cwd(), "Sending message:", message);
 
     const response = await axios.post(
-      `https://api.twitch.tv/helix/chat/messages`, // Replace with actual Twitch API endpoint
+      `https://api.twitch.tv/helix/chat/messages`,
       {
         broadcaster_id: broadcasterId,
         sender_id: broadcasterId,

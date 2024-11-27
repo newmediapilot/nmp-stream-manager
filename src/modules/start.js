@@ -1,4 +1,3 @@
-// src/modules/start.js
 require("./console");
 const fs = require("fs");
 const https = require("https");
@@ -27,10 +26,10 @@ async function startServices(app) {
       cert: fs.readFileSync("./localhost.crt"),
     };
 
-    // Start
     https.createServer(certs, app).listen(443, () => {
       console.log2(process.cwd(), "Server running at https://localhost");
     });
+
   } catch (err) {
     console.log2(process.cwd(), "Error initializing services:", err);
   }
