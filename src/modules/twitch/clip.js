@@ -6,6 +6,7 @@
 const axios = require("axios");
 const { setParam } = require("../store/manager");
 const { twitchMarkerCreate } = require("./marker");
+const { twitchMessageCreate } = require("./message");
 const { setBroadcastTitle } = require("./broadcast");
 const { getSecret } = require("../store/manager");
 
@@ -39,7 +40,7 @@ async function twitchClipCreate(description) {
 
     console.log2(process.cwd(), "Clip created:", url);
 
-    // TODO: make it post a chat command too
+    await twitchMessageCreate("🤖 Clip ready: " + url);
 
     return url;
   } catch (error) {

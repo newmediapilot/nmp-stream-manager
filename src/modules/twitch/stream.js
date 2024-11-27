@@ -64,10 +64,7 @@ function checkAndLogCommandReceived(tags) {
   const isDisplayNameMatch = tags["display-name"] === channelId;
 
   return (
-    isUserIdMatch &&
-    isRoomIdMatch &&
-    isUsernameMatch &&
-    isDisplayNameMatch
+    isUserIdMatch && isRoomIdMatch && isUsernameMatch && isDisplayNameMatch
   );
 }
 
