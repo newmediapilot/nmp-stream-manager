@@ -19,7 +19,6 @@ const twitterClient = new TwitterApi({
 
 async function twitterTweet(description) {
   try {
-
     if (!description) {
       console.err2(process.cwd(), "Missing description.");
       return false;
@@ -35,11 +34,7 @@ async function twitterTweet(description) {
     const tweetResponse = await twitterClient.v2.tweet({ text });
     const tweetURL = `https://twitter.com/${username}/status/${tweetResponse.data.id}`;
 
-    console.log2(
-      process.cwd(),
-      "Tweet posted successfully:",
-        tweetURL,
-    );
+    console.log2(process.cwd(), "Tweet posted successfully:", tweetURL);
 
     await twitchMessageCreate("🤖 Tweet ready: " + tweetURL);
 
