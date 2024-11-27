@@ -2,7 +2,7 @@
  * File: src\modules\twitch\commands.js
  * Description: Logic and operations for src\modules\twitch\commands.js.
  */
-const { getSecret } = require("../store/manager");
+const { getSecret, getParam } = require("../store/manager");
 const { twitchClipCreate } = require("./clip");
 const { twitchTwipCreate } = require("../twip/create");
 const { twitterTweet } = require("../twitter/tweet");
@@ -29,6 +29,7 @@ async function parseCommand(channel, tags, message) {
     mark: "mark/",
     shout: "shout/",
     title: "title/",
+    heart: "heart/",
   };
 
   let currentCommand;
@@ -62,16 +63,22 @@ async function parseCommand(channel, tags, message) {
     );
   }
 
-  // General commands
+  // Public commands
+
   if (currentCommand === COMMANDS.shout) {
     const username = currentMessage;
     const twitchURL = `https://twitch.tv/${username}`;
-    await twitchMessageCreate(
-      `📡 Shoutout to @${username}! Check them out and show them some love: ${twitchURL} 💜`,
-    );
+    await twitchMessageCreate(`📡 Shoutout to @${username}! Check them out and show them some love: ${twitchURL} 💜`);
+    return true;
   }
 
-  // Broadcaster command gauntlet, edit cautiously
+  if (currentCommand === COMMANDS.heart) {
+    const heartRate = getParam("sensor_heart_rate");
+    await twitchMessageCreate(`💜 Heart rate is ${heartRate}`);
+    return true;
+  }
+
+  // Broadcaster commands
   if (isBroadcaster) {
     console.log2(
       process.cwd(),
