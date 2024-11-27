@@ -71,6 +71,7 @@ async function parseCommand(channel, tags, message) {
       "with message",
       currentMessage,
     );
+
     if (currentCommand === COMMANDS.test)
       await twitchMessageCreate("🤖 Testing beep boop!");
     if (currentCommand === COMMANDS.mark)
