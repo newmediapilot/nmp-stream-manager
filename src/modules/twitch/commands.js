@@ -8,6 +8,7 @@ const {twitchTwipCreate} = require("../twip/create");
 const {twitterTweet} = require("../twitter/tweet");
 const {twitchMessageCreate} = require("./message");
 const {twitchMarkerCreate} = require("./marker");
+const {setBroadcastTitle} = require("./broadcast");
 
 /**
  * Feeds the command to the appropriate handler.
@@ -28,6 +29,7 @@ async function parseCommand(channel, tags, message) {
         "tweet": "tweet/",
         "mark": "mark/",
         "shout": "shout/",
+        "title": "title/",
     };
 
     let currentCommand;
@@ -58,17 +60,15 @@ async function parseCommand(channel, tags, message) {
         if (currentCommand === COMMANDS.clip) await twitchClipCreate(currentMessage);
         if (currentCommand === COMMANDS.tweet) await twitterTweet(currentMessage);
         if (currentCommand === COMMANDS.twip) await twitchTwipCreate(currentMessage);
-        return true;
-    } else {
-        console.log2(process.cwd(), "VIEWER command:", currentCommand, "with message", currentMessage);
+        if (currentCommand === COMMANDS.title) await setBroadcastTitle(currentMessage);
 
-        if (currentCommand === COMMANDS.shout) {
-            await twitchMessageCreate("🤖 Check out", );
+        // Create shoutout
+        if( currentCommand === COMMANDS.shout) {
+            const username = currentMessage;
+            const twitchURL = `https://twitch.tv/${username}`;
+            await twitchMessageCreate(`📡 Shoutout to @${username}! Check them out and show them some love: ${twitchURL} 💜`);
         }
 
-        // TODO: creates a shoutout
-        // TODO: tweets a screenshot
-        // TODO: logs heart rate
         return true;
     }
 }
