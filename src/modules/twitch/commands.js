@@ -62,7 +62,7 @@ async function parseCommand(channel, tags, message) {
     );
   }
 
-  // Create shoutout
+  // General commands
   if (currentCommand === COMMANDS.shout) {
     const username = currentMessage;
     const twitchURL = `https://twitch.tv/${username}`;
@@ -71,7 +71,7 @@ async function parseCommand(channel, tags, message) {
     );
   }
 
-  // Command gauntlet, edit cautiously
+  // Broadcaster command gauntlet, edit cautiously
   if (isBroadcaster) {
     console.log2(
       process.cwd(),
