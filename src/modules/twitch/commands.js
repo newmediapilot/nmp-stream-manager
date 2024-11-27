@@ -62,6 +62,15 @@ async function parseCommand(channel, tags, message) {
     );
   }
 
+  // Create shoutout
+  if (currentCommand === COMMANDS.shout) {
+    const username = currentMessage;
+    const twitchURL = `https://twitch.tv/${username}`;
+    await twitchMessageCreate(
+      `📡 Shoutout to @${username}! Check them out and show them some love: ${twitchURL} 💜`,
+    );
+  }
+
   // Command gauntlet, edit cautiously
   if (isBroadcaster) {
     console.log2(
@@ -72,25 +81,23 @@ async function parseCommand(channel, tags, message) {
       currentMessage,
     );
 
-    if (currentCommand === COMMANDS.test)
+    if (currentCommand === COMMANDS.test) {
       await twitchMessageCreate("🤖 Testing beep boop!");
-    if (currentCommand === COMMANDS.mark)
+    }
+    if (currentCommand === COMMANDS.mark) {
       await twitchMarkerCreate(currentMessage);
-    if (currentCommand === COMMANDS.clip)
+    }
+    if (currentCommand === COMMANDS.clip) {
       await twitchClipCreate(currentMessage);
-    if (currentCommand === COMMANDS.tweet) await twitterTweet(currentMessage);
-    if (currentCommand === COMMANDS.twip)
+    }
+    if (currentCommand === COMMANDS.tweet) {
+      await twitterTweet(currentMessage);
+    }
+    if (currentCommand === COMMANDS.twip) {
       await twitchTwipCreate(currentMessage);
-    if (currentCommand === COMMANDS.title)
+    }
+    if (currentCommand === COMMANDS.title) {
       await setBroadcastTitle(currentMessage);
-
-    // Create shoutout
-    if (currentCommand === COMMANDS.shout) {
-      const username = currentMessage;
-      const twitchURL = `https://twitch.tv/${username}`;
-      await twitchMessageCreate(
-        `📡 Shoutout to @${username}! Check them out and show them some love: ${twitchURL} 💜`,
-      );
     }
 
     return true;
