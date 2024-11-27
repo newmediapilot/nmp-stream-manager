@@ -9,6 +9,7 @@ const fs = require("fs");
 const https = require("https");
 const { configureNunjucks } = require("./nunjucks/config");
 const { setParam } = require("./store/manager");
+const { createHeartRateServer } = require("./sensor/listen");
 const ROUTES = require("../routes");
 
 /**
@@ -32,7 +33,7 @@ async function startServices(app) {
       cert: fs.readFileSync("./localhost.crt"),
     };
 
-    // Create main server
+    // HTTPS
     https
       .createServer(certs, app)
       .listen(
@@ -40,9 +41,12 @@ async function startServices(app) {
         console.log2(process.cwd(), "Server running at https://localhost"),
       );
 
+    // Launch server exe file
+    await createHeartRateServer();
+
     // Open and login
     await open(`https://localhost${ROUTES.TWITCH_LOGIN}`);
-    
+
   } catch (err) {
     console.log2(process.cwd(), "Error initializing services:", err);
   }
