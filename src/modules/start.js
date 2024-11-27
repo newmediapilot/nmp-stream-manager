@@ -4,7 +4,7 @@
  */
 
 require("./console");
-const open = require('open');
+const open = require("open");
 const fs = require("fs");
 const https = require("https");
 const { configureNunjucks } = require("./nunjucks/config");
@@ -33,11 +33,15 @@ async function startServices(app) {
     };
 
     // Create main server
-    https.createServer(certs, app).listen(443, console.log2(process.cwd(), "Server running at https://localhost"));
+    https
+      .createServer(certs, app)
+      .listen(
+        443,
+        console.log2(process.cwd(), "Server running at https://localhost"),
+      );
 
     // Open and login
     await open(`https://localhost${ROUTES.TWITCH_LOGIN}`);
-
   } catch (err) {
     console.log2(process.cwd(), "Error initializing services:", err);
   }
