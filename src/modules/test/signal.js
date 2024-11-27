@@ -15,7 +15,7 @@ const SIGNAL_COMMANDS = {
     "#clip": "#clip Testing #clip command!",
     "#test": "#test Running a #test signal!",
     "#twip": "#twip This is the #twip command!",
-    "#marker": "#marker This is the #marker command!",
+    "#mark": "#mark This is the #mark command!",
 };
 
 async function testSignalCreate(req, res) {
