@@ -5,7 +5,7 @@
 
 const axios = require("axios");
 const { getSecret } = require("../store/manager");
-const { twitchMessageCreate } = require('./message');
+const { twitchMessageCreate } = require("./message");
 
 /**
  * Updates the stream title using Twitch API.
@@ -13,14 +13,12 @@ const { twitchMessageCreate } = require('./message');
  * @returns {boolean} - True if the title was updated successfully, otherwise false.
  */
 async function setBroadcastTitle(title) {
-
   if (!title) {
     console.err2(process.cwd(), "No title provided. Skipping update.");
     return false;
   }
 
   try {
-
     const accessToken = getSecret("twitch_access_token");
     const broadcasterId = getSecret("twitch_broadcaster_id");
 

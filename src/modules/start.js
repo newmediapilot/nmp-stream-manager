@@ -31,9 +31,16 @@ async function startServices(app) {
       cert: fs.readFileSync("./localhost.crt"),
     };
 
-    https.createServer(certs, app).listen(443, () => {
-      console.log2(process.cwd(), "Server running at https://localhost");
-    });
+    https
+      .createServer(certs, app)
+      .listen(443, () =>
+        console.log2(process.cwd(), "Server running at https://localhost"),
+      );
+
+    // ♥♡♡♡♡♡♡♡♡♡♡♡
+    app.listen(8000, "192.168.1.99/data", (data) =>
+      console.log("Listening on http://192.168.1.99:8000/data", data),
+    );
   } catch (err) {
     console.log2(process.cwd(), "Error initializing services:", err);
   }
