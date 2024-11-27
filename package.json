@@ -6,7 +6,7 @@
     "reset": "rm -rf .secrets && rm -rf node_modules && npm i",
     "prettier": "prettier --write src/**/*.js",
     "cert": "openssl req -nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
-    "start": "node src/index.js",
+    "start": "node --trace-deprecation src/index.js",
     "combine": "node src/modules/util/combine.js",
     "uncombine": "node src/modules/util/uncombine.js"
   },
