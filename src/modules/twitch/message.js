@@ -1,11 +1,6 @@
 const axios = require("axios");
 const { getSecret } = require("../store/manager");
 
-/**
- * Sends a message to a Twitch channel.
- * @param {string} message - The message to send to the Twitch channel.
- * @returns {boolean} - True if the message was sent successfully, otherwise false.
- */
 async function twitchMessageCreate(message) {
   try {
     const accessToken = getSecret("twitch_access_token");

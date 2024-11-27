@@ -1,8 +1,3 @@
-/**
- * File: src\modules\util\uncombine.js
- * Description: This file contains logic for managing src\modules\util\uncombine operations.
- * Usage: Import relevant methods/functions as required.
- */
 const fs = require("fs");
 const path = require("path");
 

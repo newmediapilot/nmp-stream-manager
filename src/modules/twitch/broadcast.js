@@ -1,11 +1,6 @@
 const axios = require("axios");
 const { getSecret } = require("../store/manager");
 
-/**
- * Updates the stream title using Twitch API.
- * @param {string} title - The title to set for the stream.
- * @returns {boolean} - True if the title was updated successfully, otherwise false.
- */
 async function setBroadcastTitle(title) {
   if (!title) {
     console.err2(process.cwd(), "No title provided. Skipping update.");

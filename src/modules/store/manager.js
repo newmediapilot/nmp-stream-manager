@@ -1,22 +1,9 @@
-/**
- * File: src\modules\store\manager.js
- * Description: This file contains logic for managing src\modules\store\manager operations.
- * Usage: Import relevant methods/functions as required.
- */
-/**
- * Manages state in a primitive singleton
- * setParam and getParam save globally accessible data to memory (synchronously) but invoked often by async functions (beware)
- * setSecret and getSecret create a .secrets(json) file and save values there for retrieval of temp tokens etc
- * setSecret works by writing directly and reading directly from file at point of access to ensure sync behaviour
- */
 
 const fs = require("fs");
 
 let paramsState = {};
 let secrets = null;
 
-// Register setParam to capture any unexpected behaviour
-// Light debugging effort
 const allowedParams = [];
 
 function loadSecrets() {
@@ -80,7 +67,6 @@ function setSecret(name, key) {
 
     const secretsJSON = JSON.stringify(secrets, null, 2);
 
-    // Reset secrets so it reloads next time
     secrets = null;
 
     fs.writeFileSync(".secrets", secretsJSON, "utf8");

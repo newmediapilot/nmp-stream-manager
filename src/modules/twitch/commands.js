@@ -8,10 +8,6 @@ const COMMANDS = {
   "#test ": () => twitchMessageCreate("testing beep boop!"),
 };
 
-/**
- * Feeds the command to the appropriate handler.
- * @param {string} command - The extracted command keyword.
- */
 async function parseCommand(message) {
   console.log2(process.cwd(), "Message: ", message);
 

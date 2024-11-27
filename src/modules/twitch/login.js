@@ -1,8 +1,3 @@
-/**
- * File: src\modules\twitch\login.js
- * Description: This file contains logic for managing src\modules\twitch\login operations.
- * Usage: Import relevant methods/functions as required.
- */
 
 const axios = require("axios");
 const ROUTES = require("../../routes");
@@ -17,11 +12,6 @@ const { watchMessages } = require("./stream");
 
 let sessionRedirectComplete = false;
 
-/**
- * Initiates the login flow
- * @param req
- * @param res
- */
 function twitchLogin(req, res) {
   if (sessionRedirectComplete)
     return res.send("You can only login once per session.");
@@ -46,13 +36,6 @@ function twitchLogin(req, res) {
   res.redirect(oauthUrl);
 }
 
-/**
- * Redirected here from Twitch on login success
- * We perform a series of post-connection fetches and configs
- * @param req
- * @param res
- * @returns {Promise<*|void|Response>}
- */
 async function twitchLoginSuccess(req, res) {
   resetSecrets();
 
@@ -101,10 +84,6 @@ async function twitchLoginSuccess(req, res) {
   }
 }
 
-/**
- * Gets the broadcaster id for the Twitch API
- * @returns {Promise<boolean|*>}
- */
 async function getBroadcasterId() {
   try {
     const username = getParam("twitch_username");
@@ -145,10 +124,6 @@ async function getBroadcasterId() {
   }
 }
 
-/**
- * Fetches the Broadcaster's Channel ID (Twitch username/login)
- * @returns {Promise<string|boolean>} - The broadcaster's channel ID or `false` on failure
- */
 async function getChannelId() {
   try {
     const username = getParam("twitch_username");

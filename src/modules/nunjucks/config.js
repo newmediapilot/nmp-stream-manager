@@ -2,10 +2,6 @@ const nunjucks = require("nunjucks");
 const express = require("express");
 const { getParam, getAllParams } = require("../store/manager");
 
-/**
- * Configures Nunjucks for the provided Express app.
- * @param {object} app - The Express app instance.
- */
 function configureNunjucks(app) {
   const nunjucksEnv = nunjucks.configure("src/views", {
     autoescape: true,

@@ -1,8 +1,3 @@
-/**
- * File: src\modules\twitter\tweet.js
- * Description: This file contains logic for managing src\modules\twitter\tweet operations.
- * Usage: Import relevant methods/functions as required.
- */
 
 const { TwitterApi } = require("twitter-api-v2");
 const HASHTAGS =

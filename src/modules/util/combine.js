@@ -1,8 +1,3 @@
-/**
- * File: src\modules\util\combine.js
- * Description: This file contains logic for managing src\modules\util\combine operations.
- * Usage: Import relevant methods/functions as required.
- */
 
 const fs = require("fs");
 const path = require("path");
