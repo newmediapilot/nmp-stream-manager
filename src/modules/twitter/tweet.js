@@ -39,7 +39,7 @@ async function twitterTweet(description) {
 
     console.log(`Tweet posted successfully: ${tweetResponse.data.text}.`);
 
-    tweetResponses.push({ tes });
+    tweetResponses.push({ text });
 
     return tweetResponse.data.text;
   } catch (error) {
