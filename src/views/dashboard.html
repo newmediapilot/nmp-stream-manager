@@ -6,6 +6,23 @@
 
 {% block body %}
 <div class="grid">
+    <table>
+        <thead>
+        <tr>
+            <th>Command</th>
+            <th>Usage</th>
+            <th>Test</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Command</td>
+            <td>Usage</td>
+            <td>Test</td>
+        </tr>
+        </tbody>
+    </table>
+
     <div class="col-1-3">
         {{ form_href_el('Login to Twitch', public_routes.TWITCH_LOGIN) }}
     </div>

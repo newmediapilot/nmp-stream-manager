@@ -6,10 +6,12 @@
 const { twitchClipCreate } = require("./clip");
 const { twitchTwipCreate } = require("../twip/create");
 const { twitchMessageCreate } = require("./message");
+const { twitchMarkerCreate } = require("./marker");
 
 const COMMANDS = {
   "#clip ": twitchClipCreate,
   "#twip ": twitchTwipCreate,
+  "#marker ": twitchMarkerCreate,
   "#test ": () => twitchMessageCreate("testing beep boop!"),
 };
 
