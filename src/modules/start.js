@@ -4,6 +4,7 @@
  */
 
 require("./console");
+const open = require('open');
 const fs = require("fs");
 const https = require("https");
 const { configureNunjucks } = require("./nunjucks/config");
@@ -31,16 +32,12 @@ async function startServices(app) {
       cert: fs.readFileSync("./localhost.crt"),
     };
 
-    https
-      .createServer(certs, app)
-      .listen(443, () =>
-        console.log2(process.cwd(), "Server running at https://localhost"),
-      );
+    // Create main server
+    https.createServer(certs, app).listen(443, console.log2(process.cwd(), "Server running at https://localhost"));
 
-    // ♥♡♡♡♡♡♡♡♡♡♡♡
-    app.listen(8000, "192.168.1.99", (data) =>
-      console.log("Listening on http://192.168.1.99:8000/data", data),
-    );
+    // Open and login
+    await open(`https://localhost${ROUTES.TWITCH_LOGIN}`);
+
   } catch (err) {
     console.log2(process.cwd(), "Error initializing services:", err);
   }
