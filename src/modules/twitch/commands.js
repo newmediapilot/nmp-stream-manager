@@ -24,6 +24,7 @@ async function parseCommand(channel, tags, message) {
 
   const COMMANDS = {
     test: "test/",
+    ad: "ad/",
     clip: "clip/",
     twip: "twip/",
     tweet: "tweet/",
@@ -92,6 +93,9 @@ async function parseCommand(channel, tags, message) {
 
     if (currentCommand === COMMANDS.test) {
       await twitchMessageCreate("🤖 Testing beep boop!");
+    }
+    if (currentCommand === COMMANDS.ad) {
+      await twitchAdCreate(currentMessage);
     }
     if (currentCommand === COMMANDS.mark) {
       await twitchMarkerCreate(currentMessage);
