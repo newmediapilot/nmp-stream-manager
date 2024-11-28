@@ -19,24 +19,25 @@
     --button-purple: #9b5de5;
     --button-bloodorange: #ff4500;
     --button-deepyellow: #ffc300;
+    --button-green: #14532d; /* Darker shade of green */
 }
 
 body {
     margin: 0;
-    padding: 0;
+    padding: 5px; /* Add 5px padding around the interface */
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+    width: calc(100vw - 10px); /* Adjust for padding */
+    height: calc(100vh - 10px); /* Adjust for padding */
     background-color: #f0f0f0;
     overflow: hidden; /* Prevents extra scrolling for the body */
 }
 
 .buttons {
     display: grid;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     gap: 10px;
     overflow-y: auto; /* Enables scrolling if more than 20 buttons are present */
     margin: 0; /* Removes additional margin */
@@ -65,16 +66,24 @@ body {
     overflow: hidden; /* Prevents text overflow */
 }
 
+.button img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
 .button button {
     width: 100%;
     height: 100%;
-    font-size: clamp(16px, 3vw, 32px);
+    font-size: clamp(28px, 3vw, 56px); /* Dynamically sized font for larger appearance */
     color: var(--text-color-light);
     border: none;
     border-radius: var(--border-radius);
     cursor: pointer;
     opacity: 1;
     transition: opacity 0.2s ease, background-color 0.2s ease;
+    padding: 10px; /* Ensure sufficient padding inside buttons */
+    box-sizing: border-box; /* Include padding in width/height calculations */
 }
 
 .button button:hover {
@@ -127,11 +136,12 @@ body {
     color: var(--text-color-dark);
 }
 
-/* Button states */
-.button button[data-state="idle"] {
-    background-color: var(--color-idle);
+.button-green button {
+    background-color: var(--button-green);
+    color: var(--text-color-light);
 }
 
+/* Button states */
 .button button[data-state="loading"] {
     background-color: var(--color-loading);
     color: var(--text-color-dark);
