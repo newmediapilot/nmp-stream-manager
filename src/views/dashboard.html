@@ -2,29 +2,32 @@
 {% extends "layouts/main.njk" %}
 
 {% from "macros/form_loop.njk" import form_href_el %}
-{% set public_routes = 'public_routes' | getParam %}
 
 {% block body %}
 <div class="grid">
-    <table>
-        <thead>
-        <tr>
-            <th>Command</th>
-            <th>Usage</th>
-            <th>Test</th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>mark</td>
-                <td><code>mark Title of my marker</code></td>
-                <td><a href="/signal/create?type=mark&description=game_start">Game Start</a></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="col-1-3">
-        {{ form_href_el('Login to Twitch', public_routes.TWITCH_LOGIN) }}
+    <div class="row">
+        <div><a href="/signal/create?type=mark&description={{ 'game:start' | urlencode }}">Match Start</a></div>
+    </div>
+    <div class="row">
+        <div><a href="/signal/create?type=mark&description={{ 'game:enter' | urlencode }}">Match Enter</a></div>
+    </div>
+    <div class="row">
+        <div><a href="/signal/create?type=mark&description={{ 'game:fight:start' | urlencode }}">Fight Start</a></div>
+    </div>
+    <div class="row">
+        <div><a href="/signal/create?type=mark&description={{ 'game:fight:end' | urlencode }}">Fight End</a></div>
+    </div>
+    <div class="row">
+        <div><a href="/signal/create?type=mark&description={{ 'game:travel:start' | urlencode }}">Travel Start</a></div>
+    </div>
+    <div class="row">
+        <div><a href="/signal/create?type=mark&description={{ 'game:travel:end' | urlencode }}">Travel End</a></div>
+    </div>
+    <div class="row">
+        <div><a href="/signal/create?type=mark&description={{ 'game:end:win' | urlencode }}">Match Win</a></div>
+    </div>
+    <div class="row">
+        <div><a href="/signal/create?type=mark&description={{ 'game:end:lose' | urlencode }}">Match Lose</a></div>
     </div>
 </div>
 {% endblock %}
