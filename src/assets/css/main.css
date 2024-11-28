@@ -19,19 +19,24 @@
     --button-purple: #9b5de5;
     --button-bloodorange: #ff4500;
     --button-deepyellow: #ffc300;
-    --button-green: #14532d; /* Darker shade of green */
+    --button-green: #14532d;
+
+    /* Body padding as a variable */
+    --body-padding: 50px;
 }
 
 body {
     margin: 0;
-    padding: 5px; /* Add 5px padding around the interface */
+    padding: var(--body-padding);
     display: flex;
     justify-content: center;
     align-items: center;
-    width: calc(100vw - 10px); /* Adjust for padding */
-    height: calc(100vh - 10px); /* Adjust for padding */
+    width: calc(100vw - (2 * var(--body-padding)));
+    height: calc(100vh - (2 * var(--body-padding)));
     background-color: #f0f0f0;
-    overflow: hidden; /* Prevents extra scrolling for the body */
+    overflow: hidden;
+    background: url("/media/assets-from-space.webp");
+    background-size: cover;
 }
 
 .buttons {
@@ -39,11 +44,10 @@ body {
     width: 100%;
     height: 100%;
     gap: 10px;
-    overflow-y: auto; /* Enables scrolling if more than 20 buttons are present */
-    margin: 0; /* Removes additional margin */
+    overflow-y: auto;
+    margin: 0;
 }
 
-/* Grid for horizontal screens (5x4) */
 @media (min-aspect-ratio: 1/1) {
     .buttons {
         grid-template-columns: repeat(5, 1fr);
@@ -51,7 +55,6 @@ body {
     }
 }
 
-/* Grid for vertical screens (4x5) */
 @media (max-aspect-ratio: 1/1) {
     .buttons {
         grid-template-columns: repeat(4, 1fr);
@@ -63,7 +66,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Prevents text overflow */
+    overflow: hidden;
 }
 
 .button img {
@@ -103,10 +106,9 @@ body {
 }
 
 .button button:active::after {
-    mix-blend-mode:  color-burn;
+    mix-blend-mode: color-burn;
 }
 
-/* Custom Button Variations */
 .button-red button {
     background-color: var(--button-red);
     color: var(--text-color-light);
@@ -157,7 +159,6 @@ body {
     color: var(--text-color-light);
 }
 
-/* Button states */
 .button button[data-state="loading"] {
     background-color: var(--color-loading);
     color: var(--text-color-dark);
