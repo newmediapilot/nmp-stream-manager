@@ -2,7 +2,8 @@
  * File: src\modules\twitch\commands.js
  * Description: Logic and operations for src\modules\twitch\commands.js.
  */
-const { getSecret, getParam } = require("../store/manager");
+const { getSecret } = require("../store/manager");
+const { getHeartRateMessage } = require("../sensor/listen");
 const { twitchClipCreate } = require("./clip");
 const { twitchTwipCreate } = require("../twip/create");
 const { twitterTweet } = require("../twitter/tweet");
@@ -75,8 +76,7 @@ async function parseCommand(channel, tags, message) {
   }
 
   if (currentCommand === COMMANDS.heart) {
-    const heartRate = getParam("sensor_heart_rate");
-    await twitchMessageCreate(heartRate ? `🤖 💜 Heart rate is ${heartRate}`: `🤖 💜 Heart rate is not detected.`);
+    await twitchMessageCreate(getHeartRateMessage());
     return true;
   }
 

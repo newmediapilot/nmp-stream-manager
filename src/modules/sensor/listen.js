@@ -43,4 +43,15 @@ async function createHeartRateServer(
   child.on("close", (code) => console.log(`Process exited with code ${code}`));
 }
 
-module.exports = { createHeartRateServer };
+/**
+ * Generates heart rate message based on sensor_heart_rate
+ * @returns {string}
+ */
+const getHeartRateMessage = () => {
+  const heartRate = getParam("sensor_heart_rate");
+  return heartRate
+    ? `🤖 💜 Heart rate is ${heartRate}`
+    : `🤖 💜 Heart rate is not detected.`;
+};
+
+module.exports = { createHeartRateServer, getHeartRateMessage };
