@@ -5,102 +5,85 @@
 
 {% block body %}
 <div class="buttons">
-
     <div class="button">
         <img src="/media/qrcode.png">
     </div>
-    <div class="button">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="3000"
-                data-href="/public/signal/create?type=ad&description=30"
+    <div class="button button-orange">
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="30000"
                 onclick="javascript:sendSignal(this)">Start Ad (30s)
         </button>
     </div>
-    <div class="button">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="3000"
-                data-href="/public/signal/create?type=ad&description=60"
+    <div class="button button-orange">
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="30000"
                 onclick="javascript:sendSignal(this)">Start Ad (60s)
         </button>
     </div>
-    <div class="button">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="3000"
-                data-href="/public/signal/create?type=ad&description=120"
+    <div class="button button-orange">
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="30000"
                 onclick="javascript:sendSignal(this)">Start Ad (2min)
         </button>
     </div>
-    <div class="button">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="3000"
-                data-href="/public/signal/create?type=ad&description=600"
+    <div class="button button-orange">
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="30000"
                 onclick="javascript:sendSignal(this)">Start Ad (5min)
         </button>
     </div>
-    <div class="button">
+    <div class="button button-aqua">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=heart&description=heart"
                 onclick="javascript:sendSignal(this)">Heart Rate
         </button>
     </div>
-    <div class="button">
+    <div class="button button-blue">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'lobby:start' | urlencode }}"
                 onclick="javascript:sendSignal(this)">Lobby Start
         </button>
     </div>
-    <div class="button">
+    <div class="button button-purple">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:start' | urlencode }}"
                 onclick="javascript:sendSignal(this)">Game Start
         </button>
     </div>
-    <div class="button">
+    <div class="button button-purple">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:enter' | urlencode }}"
                 onclick="javascript:sendSignal(this)">Game Enter
         </button>
     </div>
-    <div class="button">
+    <div class="button button-pink">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:fight:start' | urlencode }}"
                 onclick="javascript:sendSignal(this)">Fight Start
         </button>
     </div>
-    <div class="button">
+    <div class="button button-pink">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:fight:end' | urlencode }}"
                 onclick="javascript:sendSignal(this)">Fight End
         </button>
     </div>
-    <div class="button">
+    <div class="button button-deepyellow">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:travel:start' | urlencode }}"
                 onclick="javascript:sendSignal(this)">Travel Start
         </button>
     </div>
-    <div class="button">
-        <button data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:travel:end' | urlencode }}"
+    <div class="button button-deepyellow">
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
                 onclick="javascript:sendSignal(this)">Travel End
         </button>
     </div>
-    <div class="button">
-        <button data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:win' | urlencode }}"
+    <div class="button button-green">
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
                 onclick="javascript:sendSignal(this)">Match Win
         </button>
     </div>
-    <div class="button">
-        <button data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:lose' | urlencode }}"
+    <div class="button button-red">
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
                 onclick="javascript:sendSignal(this)">Match Lose
         </button>
     </div>
-
 </div>
 {% endblock %}
 
 {% block fscripts %}
 <script>
     const sendSignal = (el) => {
-
         const initialText = el.innerText;
         const waitDefault = 3000;
         const waitInput = el.getAttribute('data-wait') || 3000;
