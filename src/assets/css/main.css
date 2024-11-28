@@ -19,35 +19,45 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: #f0f0f0;
+    overflow: hidden; /* Prevents extra scrolling for the body */
 }
 
 .buttons {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* 6 equal columns */
-    grid-template-rows: repeat(auto-fill, 33.3vh); /* Rows always 33.3vh */
+    width: 100vw;
+    height: 100vh;
     gap: 10px;
-    margin: 40px; /* Added margin around the container */
-    width: calc(100vw - 80px); /* Account for horizontal margins */
-    height: calc(100vh - 80px); /* Account for vertical margins */
-    overflow: auto; /* Allows scrolling if content overflows vertically */
+    overflow-y: auto; /* Enables scrolling if more than 20 buttons are present */
+    margin: 0; /* Removes additional margin */
+}
+
+/* Grid for horizontal screens (5x4) */
+@media (min-aspect-ratio: 1/1) {
+    .buttons {
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+    }
+}
+
+/* Grid for vertical screens (4x5) */
+@media (max-aspect-ratio: 1/1) {
+    .buttons {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+    }
 }
 
 .button {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.button img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    overflow: hidden; /* Prevents text overflow */
 }
 
 button {
     width: 100%;
     height: 100%;
-    font-size: 3rem;
+    font-size: calc(2vw + 2vh); /* Self-sizing font based on viewport */
     background-color: var(--color-idle);
     color: var(--text-color-light);
     border: none;
@@ -57,7 +67,8 @@ button {
 }
 
 button:hover {
-    opacity: 0.5;
+    opacity: 0.8; /* Slight hover effect */
+    transition: opacity 0.2s ease, background-color 0.2s ease;
 }
 
 button[data-state="idle"] {
