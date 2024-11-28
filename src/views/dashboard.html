@@ -9,31 +9,41 @@
     <div class="button">
         <img src="/media/qrcode.png">
     </div>
-
+    <div class="button">
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="3000"
+                data-href="/public/signal/create?type=ad&description=30"
+                onclick="javascript:sendSignal(this)">Start Ad (30s)
+        </button>
+    </div>
     <div class="button">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
                 data-href="/public/signal/create?type=heart&description=heart"
-                onclick="javascript:sendSignal(this)">Heart Rate</button>
+                onclick="javascript:sendSignal(this)">Heart Rate
+        </button>
     </div>
     <div class="button">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
                 data-href="/public/signal/create?type=mark&description={{ 'lobby:start' | urlencode }}"
-                onclick="javascript:sendSignal(this)">Lobby Start</button>
+                onclick="javascript:sendSignal(this)">Lobby Start
+        </button>
     </div>
     <div class="button">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
                 data-href="/public/signal/create?type=mark&description={{ 'match:start' | urlencode }}"
-                onclick="javascript:sendSignal(this)">Game Start</button>
+                onclick="javascript:sendSignal(this)">Game Start
+        </button>
     </div>
     <div class="button">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
                 data-href="/public/signal/create?type=mark&description={{ 'match:enter' | urlencode }}"
-                onclick="javascript:sendSignal(this)">Game Enter</button>
+                onclick="javascript:sendSignal(this)">Game Enter
+        </button>
     </div>
     <div class="button">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
                 data-href="/public/signal/create?type=mark&description={{ 'match:fight:start' | urlencode }}"
-                onclick="javascript:sendSignal(this)">Fight Start</button>
+                onclick="javascript:sendSignal(this)">Fight Start
+        </button>
     </div>
     <div class="button">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
@@ -44,57 +54,75 @@
     <div class="button">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
                 data-href="/public/signal/create?type=mark&description={{ 'match:travel:start' | urlencode }}"
-                onclick="javascript:sendSignal(this)">Travel Start</button>
+                onclick="javascript:sendSignal(this)">Travel Start
+        </button>
     </div>
     <div class="button">
         <button data-sending="Sending..." data-error="Error!" data-success="Success!"
                 data-href="/public/signal/create?type=mark&description={{ 'match:travel:end' | urlencode }}"
-                onclick="javascript:sendSignal(this)">Travel End</button>
+                onclick="javascript:sendSignal(this)">Travel End
+        </button>
     </div>
     <div class="button">
         <button data-sending="Sending..." data-error="Error!" data-success="Success!"
                 data-href="/public/signal/create?type=mark&description={{ 'match:win' | urlencode }}"
-                onclick="javascript:sendSignal(this)">Match Win</button>
+                onclick="javascript:sendSignal(this)">Match Win
+        </button>
     </div>
     <div class="button">
         <button data-sending="Sending..." data-error="Error!" data-success="Success!"
                 data-href="/public/signal/create?type=mark&description={{ 'match:lose' | urlencode }}"
-                onclick="javascript:sendSignal(this)">Match Lose</button>
+                onclick="javascript:sendSignal(this)">Match Lose
+        </button>
     </div>
 
 </div>
 {% endblock %}
+
 {% block fscripts %}
 <script>
     const sendSignal = (el) => {
 
         const initialText = el.innerText;
+        const waitDefault = 3000;
+        const waitInput = el.getAttribute('data-wait') || 3000;
         const sendingText = el.getAttribute('data-sending');
         const errorText = el.getAttribute('data-error');
         const successText = el.getAttribute('data-success');
 
+        console.log('sendSignal : initialText : ', initialText);
+        console.log('sendSignal : waitDefault : ', waitDefault);
+        console.log('sendSignal : waitInput : ', waitInput);
+        console.log('sendSignal : sendingText : ', sendingText);
+        console.log('sendSignal : errorText : ', errorText);
+        console.log('sendSignal : successText : ', successText);
+
         el.innerText = sendingText;
         el.disabled = true;
-        el.setAttribute('data-state' , 'loading');
+        el.setAttribute('data-state', 'loading');
+
+        const reEnable = () => {
+            el.disabled = false;
+            el.innerText = initialText;
+            el.setAttribute('data-state', 'idle');
+        };
 
         axios.get(el.getAttribute('data-href'))
             .then(response => {
                 el.innerText = successText;
-                el.setAttribute('data-state' , 'success');
-                console.error('Success:', response);
+                el.setAttribute('data-state', 'success');
+                console.log('Success:', response);
+                setTimeout(() => reEnable(), waitDefault);
             })
             .catch(error => {
                 el.innerText = errorText;
-                el.setAttribute('data-state' , 'error');
+                el.setAttribute('data-state', 'error');
                 console.error('Error:', error.message);
+                setTimeout(() => reEnable(), waitDefault);
             })
             .finally(() => {
-                setTimeout(() => {
-                    el.disabled = false;
-                    el.innerText = initialText;
-                    el.setAttribute('data-state' , 'idle');
-                }, 3000);
-                console.log('Fetch completed.');
+                setTimeout(() => reEnable(), waitInput);
+                console.info('Fetch completed.');
             });
     }
 </script>

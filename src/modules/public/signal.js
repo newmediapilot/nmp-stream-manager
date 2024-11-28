@@ -8,52 +8,51 @@
  *   @param {object} res - The HTTP response object used to send the response.
  */
 
-const {twitchMarkerCreate} = require("../twitch/marker");
-const {twitchMessageCreate} = require("../twitch/message");
-const {getHeartRateMessage} = require("../sensor/listen");
+const { twitchMarkerCreate } = require("../twitch/marker");
+const { twitchMessageCreate } = require("../twitch/message");
+const { getHeartRateMessage } = require("../sensor/listen");
 
 let isCreating = false;
 
 async function signalCreate(req, res) {
+  if (isCreating) {
+    return res.status(503).send("Busy");
+  }
 
-    if (isCreating) {
-        return res.status(503).send("Busy");
+  isCreating = true;
+  const type = req.query.type;
+  const description = req.query.description;
+
+  try {
+    if (!description || !type) {
+      throw Error("query missing");
     }
 
-    isCreating = true;
-    const type = req.query.type;
-    const description = req.query.description;
+    let result = false;
 
-    try {
-
-        if (!description || !type) {
-            throw Error("query missing");
-        }
-
-        let result = false;
-
-        if ("mark" === type) {
-            result = await twitchMarkerCreate(description);
-        }
-
-        if ("heart" === type) {
-            result = await twitchMessageCreate(getHeartRateMessage());
-        }
-
-        if (!result) {
-            isCreating = false;
-            return res.status(400).send("Error: " + type);
-        }
-
-        isCreating = false;
-        return res.send("Success");
-
-    } catch (error) {
-
-        isCreating = false;
-        return res.status(400).send("Error: " + error);
-
+    if ("mark" === type) {
+      result = await twitchMarkerCreate(description);
     }
+
+    if ("heart" === type) {
+      result = await twitchMessageCreate(getHeartRateMessage());
+    }
+
+    if ("ad" === type) {
+      result = await twitchAdCreate();
+    }
+
+    if (!result) {
+      isCreating = false;
+      return res.status(400).send("Error: " + type);
+    }
+
+    isCreating = false;
+    return res.send("Success");
+  } catch (error) {
+    isCreating = false;
+    return res.status(400).send("Error: " + error);
+  }
 }
 
-module.exports = {signalCreate};
+module.exports = { signalCreate };

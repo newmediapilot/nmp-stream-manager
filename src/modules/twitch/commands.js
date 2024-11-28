@@ -4,6 +4,7 @@
  */
 const { getSecret } = require("../store/manager");
 const { getHeartRateMessage } = require("../sensor/listen");
+const { twitchAdCreate } = require("./ads");
 const { twitchClipCreate } = require("./clip");
 const { twitchTwipCreate } = require("../twip/create");
 const { twitterTweet } = require("../twitter/tweet");

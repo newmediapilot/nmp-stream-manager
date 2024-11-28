@@ -8,7 +8,13 @@
  * @param {Object} app - The Express application instance
  */
 requestLogger = (req, res, next) => {
-  console.info2(process.cwd(), "REQUEST =>", req.path);
+  console.info2(
+    process.cwd(),
+    "REQUEST =>",
+    req.path,
+    "PARAMS =>",
+    JSON.stringify(req.query || {}, null, 4),
+  );
   next();
 };
 

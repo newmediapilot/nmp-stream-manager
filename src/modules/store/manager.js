@@ -22,7 +22,7 @@ let secrets = null;
 
 // Register setParam to capture any unexpected behaviour
 // Light debugging effort
-const allowedParams = [];
+const allowedParams = ["sensor_heart_rate"];
 
 function loadSecrets() {
   if (fs.existsSync(".secrets")) {

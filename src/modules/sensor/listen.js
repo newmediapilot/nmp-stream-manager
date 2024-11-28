@@ -40,7 +40,7 @@ async function createHeartRateServer(
   child.on("error", (err) =>
     console.error(`Failed to start process: ${err.message}`),
   );
-  child.on("close", (code) => console.log(`Process exited with code ${code}`));
+  child.on("close", (code) => console.log2(`Process exited with code ${code}`));
 }
 
 /**
