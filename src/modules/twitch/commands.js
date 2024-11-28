@@ -76,7 +76,7 @@ async function parseCommand(channel, tags, message) {
 
   if (currentCommand === COMMANDS.heart) {
     const heartRate = getParam("sensor_heart_rate");
-    await twitchMessageCreate(`🤖 💜 Heart rate is ${heartRate}`);
+    await twitchMessageCreate(heartRate ? `🤖 💜 Heart rate is ${heartRate}`: `🤖 💜 Heart rate is not detected.`);
     return true;
   }
 
