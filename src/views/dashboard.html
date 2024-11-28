@@ -4,30 +4,98 @@
 {% from "macros/form_loop.njk" import form_href_el %}
 
 {% block body %}
-<div class="grid">
-    <div class="row">
-        <div><a href="/signal/create?type=mark&description={{ 'game:start' | urlencode }}">Match Start</a></div>
+<div class="buttons">
+
+    <div class="button">
+        <img src="/media/qrcode.png">
     </div>
-    <div class="row">
-        <div><a href="/signal/create?type=mark&description={{ 'game:enter' | urlencode }}">Match Enter</a></div>
+    
+    <div class="button">
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
+                data-href="/public/signal/create?type=heart&description=heart"
+                onclick="javascript:sendSignal(this)">Heart Rate</button>
     </div>
-    <div class="row">
-        <div><a href="/signal/create?type=mark&description={{ 'game:fight:start' | urlencode }}">Fight Start</a></div>
+    <div class="button">
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
+                data-href="/public/signal/create?type=mark&description={{ 'lobby:start' | urlencode }}"
+                onclick="javascript:sendSignal(this)">Lobby Start</button>
     </div>
-    <div class="row">
-        <div><a href="/signal/create?type=mark&description={{ 'game:fight:end' | urlencode }}">Fight End</a></div>
+    <div class="button">
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
+                data-href="/public/signal/create?type=mark&description={{ 'match:start' | urlencode }}"
+                onclick="javascript:sendSignal(this)">Game Start</button>
     </div>
-    <div class="row">
-        <div><a href="/signal/create?type=mark&description={{ 'game:travel:start' | urlencode }}">Travel Start</a></div>
+    <div class="button">
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
+                data-href="/public/signal/create?type=mark&description={{ 'match:enter' | urlencode }}"
+                onclick="javascript:sendSignal(this)">Game Enter</button>
     </div>
-    <div class="row">
-        <div><a href="/signal/create?type=mark&description={{ 'game:travel:end' | urlencode }}">Travel End</a></div>
+    <div class="button">
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
+                data-href="/public/signal/create?type=mark&description={{ 'match:fight:start' | urlencode }}"
+                onclick="javascript:sendSignal(this)">Fight Start</button>
     </div>
-    <div class="row">
-        <div><a href="/signal/create?type=mark&description={{ 'game:end:win' | urlencode }}">Match Win</a></div>
+    <div class="button">
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
+                data-href="/public/signal/create?type=mark&description={{ 'match:fight:end' | urlencode }}"
+                onclick="javascript:sendSignal(this)">Fight End
+        </button>
     </div>
-    <div class="row">
-        <div><a href="/signal/create?type=mark&description={{ 'game:end:lose' | urlencode }}">Match Lose</a></div>
+    <div class="button">
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
+                data-href="/public/signal/create?type=mark&description={{ 'match:travel:start' | urlencode }}"
+                onclick="javascript:sendSignal(this)">Travel Start</button>
     </div>
+    <div class="button">
+        <button data-sending="Sending..." data-error="Error!" data-success="Success!"
+                data-href="/public/signal/create?type=mark&description={{ 'match:travel:end' | urlencode }}"
+                onclick="javascript:sendSignal(this)">Travel End</button>
+    </div>
+    <div class="button">
+        <button data-sending="Sending..." data-error="Error!" data-success="Success!"
+                data-href="/public/signal/create?type=mark&description={{ 'match:win' | urlencode }}"
+                onclick="javascript:sendSignal(this)">Match Win</button>
+    </div>
+    <div class="button">
+        <button data-sending="Sending..." data-error="Error!" data-success="Success!"
+                data-href="/public/signal/create?type=mark&description={{ 'match:lose' | urlencode }}"
+                onclick="javascript:sendSignal(this)">Match Lose</button>
+    </div>
+
 </div>
+{% endblock %}
+{% block fscripts %}
+<script>
+    const sendSignal = (el) => {
+
+        const initialText = el.innerText;
+        const sendingText = el.getAttribute('data-sending');
+        const errorText = el.getAttribute('data-error');
+        const successText = el.getAttribute('data-success');
+
+        el.innerText = sendingText;
+        el.disabled = true;
+        el.setAttribute('data-state' , 'loading');
+
+        axios.get(el.getAttribute('data-href'))
+            .then(response => {
+                el.innerText = successText;
+                el.setAttribute('data-state' , 'success');
+                console.error('Success:', response);
+            })
+            .catch(error => {
+                el.innerText = errorText;
+                el.setAttribute('data-state' , 'error');
+                console.error('Error:', error.message);
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    el.disabled = false;
+                    el.innerText = initialText;
+                    el.setAttribute('data-state' , 'idle');
+                }, 3000);
+                console.log('Fetch completed.');
+            });
+    }
+</script>
 {% endblock %}

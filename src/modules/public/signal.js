@@ -8,7 +8,6 @@
  *   @param {object} res - The HTTP response object used to send the response.
  */
 
-const {setParam} = require("../store/manager");
 const {twitchMarkerCreate} = require("../twitch/marker");
 const {twitchMessageCreate} = require("../twitch/message");
 const {getHeartRateMessage} = require("../sensor/listen");
@@ -18,29 +17,42 @@ let isCreating = false;
 async function signalCreate(req, res) {
 
     if (isCreating) {
-        return res.status(400).send("Busy");
+        return res.status(503).send("Busy");
     }
 
     isCreating = true;
     const type = req.query.type;
     const description = req.query.description;
 
-    if (!description || !type) {
-        return res.status(400).send("Query missing");
-    }
-
     try {
+
+        if (!description || !type) {
+            throw Error("query missing");
+        }
+
+        let result = false;
+
         if ("mark" === type) {
-            await twitchMarkerCreate(description);
+            result = await twitchMarkerCreate(description);
         }
+
         if ("heart" === type) {
-            await twitchMessageCreate(getHeartRateMessage());
+            result = await twitchMessageCreate(getHeartRateMessage());
         }
+
+        if (!result) {
+            isCreating = false;
+            return res.status(400).send("Error: " + type);
+        }
+
         isCreating = false;
         return res.send("Success");
+
     } catch (error) {
+
         isCreating = false;
-        return res.status(400).send("Error" + error);
+        return res.status(400).send("Error: " + error);
+
     }
 }
 

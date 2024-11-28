@@ -1,4 +1,75 @@
-html, body {
+:root {
+    --color-idle: #007bff;
+    --color-hover: #0056b3;
+    --color-active: #003f7f;
+    --color-loading: #ffc107;
+    --color-success: #28a745;
+    --color-error: #dc3545;
+    --text-color-light: white;
+    --text-color-dark: black;
+    --border-radius: 12px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 equal columns */
+    grid-template-rows: repeat(auto-fill, 33.3vh); /* Rows always 33.3vh */
+    gap: 10px;
+    margin: 40px; /* Added margin around the container */
+    width: calc(100vw - 80px); /* Account for horizontal margins */
+    height: calc(100vh - 80px); /* Account for vertical margins */
+    overflow: auto; /* Allows scrolling if content overflows vertically */
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
     width: 100%;
     height: 100%;
+    font-size: 3rem;
+    background-color: var(--color-idle);
+    color: var(--text-color-light);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    opacity: 1;
+}
+
+button:hover {
+    opacity: 0.5;
+}
+
+button[data-state="idle"] {
+    background-color: var(--color-idle);
+}
+
+button[data-state="loading"] {
+    background-color: var(--color-loading);
+    color: var(--text-color-dark);
+    cursor: progress;
+}
+
+button[data-state="success"] {
+    background-color: var(--color-success);
+    color: var(--text-color-light);
+}
+
+button[data-state="error"] {
+    background-color: var(--color-error);
+    color: var(--text-color-light);
 }
