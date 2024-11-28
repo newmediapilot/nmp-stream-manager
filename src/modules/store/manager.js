@@ -37,7 +37,7 @@ function loadSecrets() {
   }
 }
 
-function setParam(key, value) {
+function setParam(key, value, log=true) {
   if (!allowedParams.includes(key)) {
     console.warn2(
       process.cwd(),
@@ -48,7 +48,7 @@ function setParam(key, value) {
     );
   }
   paramsState[key] = value;
-  console.log2(process.cwd(), "Set", key, "::", value);
+  log && console.log2(process.cwd(), "Set", key, "::", value);
 }
 
 function getAllParams() {

@@ -10,6 +10,7 @@
 
 const { twitchMarkerCreate } = require("../twitch/marker");
 const { twitchMessageCreate } = require("../twitch/message");
+const { twitchAdCreate } = require("../twitch/ads");
 const { getHeartRateMessage } = require("../sensor/listen");
 
 let isCreating = false;
@@ -39,7 +40,7 @@ async function signalCreate(req, res) {
     }
 
     if ("ad" === type) {
-      result = await twitchAdCreate();
+      result = await twitchAdCreate(description);
     }
 
     if (!result) {

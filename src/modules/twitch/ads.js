@@ -28,6 +28,10 @@ async function twitchAdCreate(length) {
     const accessToken = getSecret("twitch_access_token");
     const broadcasterId = getSecret("twitch_broadcaster_id");
 
+    await twitchMessageCreate(
+        `🤖 Get ready, we're running a ${roundedLength} second ad!`,
+    );
+
     const response = await axios.post(
       `https://api.twitch.tv/helix/channels/commercial`,
       {
@@ -42,33 +46,13 @@ async function twitchAdCreate(length) {
       },
     );
 
-    await twitchMessageCreate(
-      `🤖 Get ready, we're running a ${roundedLength} second ad!`,
-    );
+    return true;
 
-    if (response.status === 204) {
-      console.log2(
-        process.cwd(),
-        "Advertisement started successfully for",
-        roundedLength,
-        "seconds",
-      );
-      return true;
-    } else {
-      console.err2(
-        process.cwd(),
-        "Failed to start advertisement:",
-        response.status,
-      );
-      return false;
-    }
   } catch (error) {
-    console.log2(JSON.stringify(error, null, 4));
     console.err2(
       process.cwd(),
       "Error starting advertisement:",
-      error,
-      error.response?.data || error.message,
+      error
     );
     return false;
   }

@@ -5,9 +5,11 @@
 const { setParam, getParam } = require("../store/manager");
 const { spawn } = require("child_process");
 
+
 async function createHeartRateServer(
   exePath = "./bin/hds_desktop_windows.exe",
 ) {
+  let MAX_REPORT = 5; // Don't keep logging
   const child = spawn(exePath, [], { detached: false });
 
   // Capture log and save sensor_heart_rate
@@ -18,7 +20,8 @@ async function createHeartRateServer(
 
     log.startsWith(pref) &&
       !isNaN(heartRate) &&
-      setParam("sensor_heart_rate", heartRate);
+
+      setParam("sensor_heart_rate", heartRate, --MAX_REPORT>0);
   });
 
   // Clean up
