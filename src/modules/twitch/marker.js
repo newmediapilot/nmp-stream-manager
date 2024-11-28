@@ -5,6 +5,7 @@
 
 const axios = require("axios");
 const { getSecret } = require("../store/manager");
+const { createMessage } = require("../twitch/message");
 
 /**
  * Creates a marker on a Twitch stream. Internal use only.
@@ -48,7 +49,8 @@ async function twitchMarkerCreate(description) {
     console.err2(
       process.cwd(),
       "Error creating marker:",
-      error.response?.data || error.message,
+        error.status,
+        error?.message?.message
     );
     return false;
   }
