@@ -68,7 +68,7 @@ body {
 .button button {
     width: 100%;
     height: 100%;
-    font-size: clamp(12px, 2vw, 24px); /* Dynamically sized font */
+    font-size: clamp(16px, 3vw, 32px);
     color: var(--text-color-light);
     border: none;
     border-radius: var(--border-radius);
