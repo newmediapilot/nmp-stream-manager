@@ -19,6 +19,7 @@ function configureNunjucks(app) {
 
   nunjucksEnv.addFilter("getParam", getParam);
   nunjucksEnv.addFilter("getAllParams", getAllParams);
+  nunjucksEnv.addFilter("urlencode", encodeURIComponent);
 
   app.set("view engine", "html");
   app.use(express.static("src/assets"));
