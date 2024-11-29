@@ -1,4 +1,4 @@
-const send_signal = (el) => {
+const sendSignal = (el) => {
 
     const initialText = el.innerText;
     const waitDefault = 3000;
@@ -7,13 +7,6 @@ const send_signal = (el) => {
     const sendingText = el.getAttribute('data-sending');
     const errorText = el.getAttribute('data-error');
     const successText = el.getAttribute('data-success');
-
-    console.log('sendSignal : initialText : ', initialText);
-    console.log('sendSignal : waitDefault : ', waitDefault);
-    console.log('sendSignal : waitInput : ', waitInput);
-    console.log('sendSignal : sendingText : ', sendingText);
-    console.log('sendSignal : errorText : ', errorText);
-    console.log('sendSignal : successText : ', successText);
 
     el.innerText = sendingText;
     el.disabled = true;
@@ -37,6 +30,7 @@ const send_signal = (el) => {
             el.setAttribute('data-state', 'error');
             console.error('Error:', error.message);
             setTimeout(() => reEnable(), waitDefault);
+            showDialog('generic_dialog', 'Oops', 'Looks like we had an error', 'Continue')
         })
         .finally(() => {
             setTimeout(() => reEnable(), waitInput);

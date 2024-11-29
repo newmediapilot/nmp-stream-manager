@@ -17,7 +17,7 @@
                 data-success="Success"
                 data-wait="{{ config.wait }}"
                 data-href="{{ public_routes.PUBLIC_SIGNAL_CREATE }}?type={{ config.type }}&description={{ config.description }}"
-                onclick="javascript:send_signal(this)"
+                onclick="javascript:sendSignal(this)"
         >
             {{ config.label }}
         </button>
@@ -26,9 +26,10 @@
     <div class="button">
         <img src="/media/qrcode.png">
     </div>
+    <div class="button">
+        {{ generic_dialog("generic_dialog") }}
+    </div>
 </div>
-<!---->
-{{ generic_dialog("generic-dialog") }}
 <!---->
 {% endblock %}
 <!---->

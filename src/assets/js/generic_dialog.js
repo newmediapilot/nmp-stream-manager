@@ -1,19 +1,16 @@
 const dialog = document.getElementById('generic-dialog');
 
-function showDialog(title, body) {
-    
-    const titleElement = document.getElementById('dialog-title');
-    const bodyElement = document.getElementById('dialog-body');
-    titleElement.innerText = title
-    bodyElement.innerText = body;
-
+function showDialog(id, title, body) {
+    const dialog = document.getElementById(id);
+    dialog.querySelector('.dialog--title').innerText = title;
+    dialog.querySelector('.dialog--body').innerText = body;
     dialog.showModal();
+}
+
+function clickDialog(id) {
+    document.getElementById(id).close();
 }
 
 function closeDialog(id) {
     document.getElementById(id).close();
-}
-
-function confirmDialog() {
-    closeDialog();
 }
