@@ -54,7 +54,7 @@ const getHeartRateMessage = () => {
   const heartRate = getParam("sensor_heart_rate");
   return heartRate
     ? `🤖 💜 Heart rate is ${heartRate}`
-    : `🤖 💜 Heart rate is not detected.`;
+    : `🤖 💜 Monitor is off.`;
 };
 
 module.exports = { createHeartRateServer, getHeartRateMessage };
