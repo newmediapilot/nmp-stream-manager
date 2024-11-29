@@ -20,30 +20,15 @@
     --button-bloodorange: #ff4500;
     --button-deepyellow: #ffc300;
     --button-green: #14532d;
-
-    /* Body padding as a variable */
-    --body-padding: 1%;
 }
 
 html {
     background: url("/media/assets-from-space.webp");
     background-size: cover;
-    width: 100%;
-    height: 100%;
-    display: block;
 }
 
 body {
-    margin: 0;
-    padding: var(--body-padding);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: calc(100vw - (2 * var(--body-padding)));
-    height: calc(100vh - (2 * var(--body-padding)));
     background: none;
-    overflow: hidden;
-    background-size: cover;
 }
 
 .buttons {
@@ -51,7 +36,6 @@ body {
     width: 100%;
     height: 100%;
     gap: 10px;
-    overflow-y: auto;
     margin: 0;
 }
 
@@ -74,6 +58,8 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    border-radius: var(--border-radius);
+    box-shadow: 8px 8px 15px 0px rgba(0,0,0,0.75);
 }
 
 .button img {
@@ -88,7 +74,6 @@ body {
     font-size: clamp(24px, 3vw, 48px);
     color: var(--text-color-light);
     border: 8px dashed rgba(255,255,255,0.55);
-    border-radius: var(--border-radius);
     text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
     overflow: hidden;
     cursor: pointer;

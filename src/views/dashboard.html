@@ -5,7 +5,6 @@
 {% from "macros/generic_dialog.njk" import generic_dialog %}
 <!---->
 {% block body %}
-<!---->
 <div class="buttons">
     {% set public_routes = 'public_routes' | getParam %}
     {% for config in 'dashboard_signals_config' | getParam %}
@@ -23,17 +22,12 @@
         </button>
     </div>
     {% endfor %}
-    <div class="button">
-        <img src="/media/qrcode.png">
-    </div>
-    <div class="button">
-        {{ generic_dialog("generic_dialog") }}
-    </div>
 </div>
-<!---->
+<br>
+<img src="/media/qrcode.png">
 {% endblock %}
 <!---->
 {% block fscripts %}
-<script src="/js/generic_dialog.js" type="text/javascript"></script>
+{{ generic_dialog("generic_dialog") }}
 <script src="/js/send_signal.js" type="text/javascript"></script>
 {% endblock %}
