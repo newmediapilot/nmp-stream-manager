@@ -15,19 +15,22 @@ const sendSignal = (el) => {
 
     setState(sendingText, true, 'loading');
 
-    axios.get(el.getAttribute('data-href'))
-        .then(response => {
-            console.log('Success:', response);
-            setState(successText, true, 'success');
-            setTimeout(() => setState(initialText, true, 'idle'), waitInput);
-        })
-        .catch(error => {
-            console.log('Error:', error);
-            showDialog('generic_dialog', 'Oops', 'Looks like we had an error', 'Continue');
-            setState(errorText, true, 'error');
-            setTimeout(() => setState(initialText, true, 'idle'), waitDefault);
-        })
-        .finally(() => {
-            console.info('Complete.');
-        });
+    const getRes = axios.get(el.getAttribute('data-href'));
+
+    getRes.then(getRes => {
+        console.log('Success:', getRes);
+        setState(successText, true, 'success');
+        setTimeout(() => setState(initialText, true, 'idle'), waitInput);
+    });
+
+    getRes.catch(error => {
+        console.log('Error:', error);
+        // showDialog('generic_dialog', 'Oops', `Looks like we had an error ${error}`, 'Continue');
+        setState(errorText, true, 'error');
+        setTimeout(() => setState(initialText, true, 'idle'), waitDefault);
+    });
+
+    getRes.finally(() => {
+        console.info('Complete.');
+    });
 };
