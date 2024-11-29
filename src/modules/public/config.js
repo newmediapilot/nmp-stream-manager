@@ -48,14 +48,6 @@ export const signalsConfig = [
         label: "Start",
     },
     {
-        theme: "purple",
-        type: "mark",
-        description: "match:enter",
-        wait: "3000",
-        emoji: "🏁", // Racing flag for "Enter"
-        label: "Enter",
-    },
-    {
         theme: "pink",
         type: "mark",
         description: "match:fight",
