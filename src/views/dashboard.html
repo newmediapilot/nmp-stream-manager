@@ -19,7 +19,7 @@
                 data-href="{{ public_routes.PUBLIC_SIGNAL_CREATE }}?type={{ config.type }}&description={{ config.description }}"
                 onclick="javascript:sendSignal(this)"
         >
-            {{ config.label }}
+            {{ config.emoji }}&nbsp;{{ config.label }}
         </button>
     </div>
     {% endfor %}

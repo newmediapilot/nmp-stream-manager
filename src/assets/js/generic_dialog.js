@@ -7,10 +7,6 @@ function showDialog(id, title, body) {
     dialog.showModal();
 }
 
-function clickDialog(id) {
-    document.getElementById(id).close();
-}
-
 function closeDialog(id) {
     document.getElementById(id).close();
 }
