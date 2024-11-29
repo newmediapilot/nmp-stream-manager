@@ -1,0 +1,10 @@
+{% macro generic_dialog(id) %}
+    <dialog class="dialog-container" id="{{id}}">
+        <div class="dialog--title">Default Title</div>
+        <div class="dialog--body">This is the default body content of the dialog.</div>
+        <div class="dialog--footer">
+            <button onclick="closeDialog({{id}})">Close</button>
+            <button onclick="confirmDialog({{id}})">OK</button>
+        </div>
+    </dialog>
+{% endmacro %}

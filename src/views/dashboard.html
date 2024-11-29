@@ -1,144 +1,31 @@
 <!-- src/views/settings.html -->
 {% extends "layouts/main.njk" %}
-
+<!---->
 {% from "macros/form_loop.njk" import form_href_el %}
-
+{% from "macros/generic_dialog.njk" import generic_dialog %}
+<!---->
 {% block body %}
+<!---->
 <div class="buttons">
+    {% for config in 'dashboard_signals_config' | getParam %}
+    <div class="button button-{{ config.theme }}">
+        <button data-state="idle" data-sending="Sending" data-error="Error" data-success="Success"
+                data-wait="{{ config.wait }}" data-href="{{ config.href }}"
+                onclick="javascript:send_signal(this)">
+            {{ config.label }}
+        </button>
+    </div>
+    {% endfor %}
     <div class="button">
         <img src="/media/qrcode.png">
     </div>
-    <div class="button button-orange">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="30000"
-                data-href="/public/signal/create?type=ad&description=30"
-                onclick="javascript:sendSignal(this)">📢 Start Ad (30s)
-        </button>
-    </div>
-    <div class="button button-orange">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="60000"
-                data-href="/public/signal/create?type=ad&description=60"
-                onclick="javascript:sendSignal(this)">📢 Start Ad (60s)
-        </button>
-    </div>
-    <div class="button button-orange">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="120000"
-                data-href="/public/signal/create?type=ad&description=120"
-                onclick="javascript:sendSignal(this)">📢 Start Ad (2min)
-        </button>
-    </div>
-    <div class="button button-orange">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="180000"
-                data-href="/public/signal/create?type=ad&description=180"
-                onclick="javascript:sendSignal(this)">📢 Start Ad (3min)
-        </button>
-    </div>
-    <div class="button button-aqua">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=heart&description=heart"
-                onclick="javascript:sendSignal(this)">❤️ Heart Rate
-        </button>
-    </div>
-    <div class="button button-blue">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'lobby:start' | urlencode }}"
-                onclick="javascript:sendSignal(this)">🏰 Enter Lobby
-        </button>
-    </div>
-    <div class="button button-purple">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:start' | urlencode }}"
-                onclick="javascript:sendSignal(this)">📡 Join Match
-        </button>
-    </div>
-    <div class="button button-purple">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:enter' | urlencode }}"
-                onclick="javascript:sendSignal(this)">🌎 Enter Match
-        </button>
-    </div>
-    <div class="button button-pink">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:fight:start' | urlencode }}"
-                onclick="javascript:sendSignal(this)">🥊 Fight
-        </button>
-    </div>
-    <div class="button button-pink">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:fight:end' | urlencode }}"
-                onclick="javascript:sendSignal(this)">🌟 Clear
-        </button>
-    </div>
-    <div class="button button-deepyellow">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:travel:start' | urlencode }}"
-                onclick="javascript:sendSignal(this)">🏃 Travel
-        </button>
-    </div>
-    <div class="button button-deepyellow">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:travel:end' | urlencode }}"
-                onclick="javascript:sendSignal(this)">🧍 Idle
-        </button>
-    </div>
-    <div class="button button-green">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:win' | urlencode }}"
-                onclick="javascript:sendSignal(this)">🏆 Win
-        </button>
-    </div>
-    <div class="button button-red">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                data-href="/public/signal/create?type=mark&description={{ 'match:lose' | urlencode }}"
-                onclick="javascript:sendSignal(this)">🤕 Lose
-        </button>
-    </div>
 </div>
+<!---->
+{% generic_dialog("generic_dialog") %}
+<!---->
 {% endblock %}
-
+<!---->
 {% block fscripts %}
-<script>
-    const sendSignal = (el) => {
-        const initialText = el.innerText;
-        const waitDefault = 3000;
-        const waitInput = el.getAttribute('data-wait') || 3000;
-        const sendingText = el.getAttribute('data-sending');
-        const errorText = el.getAttribute('data-error');
-        const successText = el.getAttribute('data-success');
-
-        console.log('sendSignal : initialText : ', initialText);
-        console.log('sendSignal : waitDefault : ', waitDefault);
-        console.log('sendSignal : waitInput : ', waitInput);
-        console.log('sendSignal : sendingText : ', sendingText);
-        console.log('sendSignal : errorText : ', errorText);
-        console.log('sendSignal : successText : ', successText);
-
-        el.innerText = sendingText;
-        el.disabled = true;
-        el.setAttribute('data-state', 'loading');
-
-        const reEnable = () => {
-            el.disabled = false;
-            el.innerText = initialText;
-            el.setAttribute('data-state', 'idle');
-        };
-
-        axios.get(el.getAttribute('data-href'))
-            .then(response => {
-                el.innerText = successText;
-                el.setAttribute('data-state', 'success');
-                console.log('Success:', response);
-                setTimeout(() => reEnable(), waitDefault);
-            })
-            .catch(error => {
-                el.innerText = errorText;
-                el.setAttribute('data-state', 'error');
-                console.error('Error:', error.message);
-                setTimeout(() => reEnable(), waitDefault);
-            })
-            .finally(() => {
-                setTimeout(() => reEnable(), waitInput);
-                console.info('Fetch completed.');
-            });
-    }
-</script>
+<script src="/js/generic_dialog.js" type="text/javascript"></script>
+<script src="/js/send_signal.js" type="text/javascript"></script>
 {% endblock %}

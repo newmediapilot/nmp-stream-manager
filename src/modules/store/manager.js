@@ -22,7 +22,14 @@ let secrets = null;
 
 // Register setParam to capture any unexpected behaviour
 // Light debugging effort
-const allowedParams = ["sensor_heart_rate"];
+const allowedParams = [
+  "twitch_login_referrer",
+  "twitch_broadcaster_id_set",
+  "twitch_access_token_set",
+  "twitch_refresh_token_set",
+  "twitch_channel_id_set",
+  "sensor_heart_rate",
+];
 
 function loadSecrets() {
   if (fs.existsSync(".secrets")) {
@@ -66,7 +73,7 @@ function getParam(key) {
       value,
     );
   } else {
-    console.err2(process.cwd(), "Get", key, "::", value);
+    console.info2(process.cwd(), "Get", key, "::", value);
   }
   return value;
 }
