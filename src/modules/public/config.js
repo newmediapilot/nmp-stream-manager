@@ -66,10 +66,10 @@ export const signalsConfig = [
     {
         theme: "deepyellow",
         type: "mark",
-        description: "match:point-of-interest",
+        description: "match:checkpoint",
         wait: "3000",
         emoji: "📸", // Represents "Interesting" as a picture or photo
-        label: "Interesting",
+        label: "Checkpoint",
     },
     {
         theme: "deepyellow",

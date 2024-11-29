@@ -7,9 +7,9 @@ const sendSignal = (el) => {
     const errorText = el.getAttribute('data-error');
     const successText = el.getAttribute('data-success');
 
-    const setState = (label, active, state) => {
+    const setState = (label, disabled, state) => {
         el.innerText = label;
-        el.disabled = active;
+        el.disabled = disabled;
         el.setAttribute('data-state', state);
     };
 
@@ -28,6 +28,7 @@ const sendSignal = (el) => {
         // showDialog('generic_dialog', 'Oops', `Looks like we had an error ${error}`, 'Continue');
         setState(errorText, true, 'error');
         setTimeout(() => setState(initialText, true, 'idle'), waitDefault);
+        el.blur();
     });
 
     getRes.finally(() => {

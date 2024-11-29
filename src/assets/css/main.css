@@ -41,14 +41,14 @@ body {
 
 @media (min-aspect-ratio: 1/1) {
     .buttons {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(auto, 1fr);
     }
 }
 
 @media (max-aspect-ratio: 1/1) {
     .buttons {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(auto, 1fr);
     }
 }
