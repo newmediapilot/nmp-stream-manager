@@ -68,31 +68,23 @@ export const signalsConfig = [
         type: "mark",
         description: "match:checkpoint",
         wait: "3000",
-        emoji: "📸", // Represents "Interesting" as a picture or photo
-        label: "Checkpoint",
+        emoji: "👀", // Eye represents "Look"
+        label: "Look",
     },
     {
         theme: "deepyellow",
         type: "mark",
         description: "match:idle",
         wait: "3000",
-        emoji: "🧍", // Works for "Idle"
-        label: "Bored",
-    },
-    {
-        theme: "green",
-        type: "mark",
-        description: "match:win",
-        wait: "3000",
-        emoji: "🏆", // Perfectly represents "Win"
-        label: "Win",
+        emoji: "🎬", // Clapperboard for "Clip"
+        label: "Clip",
     },
     {
         theme: "red",
         type: "mark",
-        description: "match:lose",
+        description: "match:complete",
         wait: "3000",
-        emoji: "🤕", // Keeping as it was for "Lose"
-        label: "Lose",
+        emoji: "👾", // Skull for "Game Over"
+        label: "Game Over",
     },
 ];
