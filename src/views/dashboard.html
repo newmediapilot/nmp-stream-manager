@@ -10,72 +10,86 @@
     </div>
     <div class="button button-orange">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="30000"
-                onclick="javascript:sendSignal(this)">Start Ad (30s)
+                data-href="/public/signal/create?type=ad&description=30"
+                onclick="javascript:sendSignal(this)">📢 Start Ad (30s)
         </button>
     </div>
     <div class="button button-orange">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="30000"
-                onclick="javascript:sendSignal(this)">Start Ad (60s)
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="60000"
+                data-href="/public/signal/create?type=ad&description=60"
+                onclick="javascript:sendSignal(this)">📢 Start Ad (60s)
         </button>
     </div>
     <div class="button button-orange">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="30000"
-                onclick="javascript:sendSignal(this)">Start Ad (2min)
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="120000"
+                data-href="/public/signal/create?type=ad&description=120"
+                onclick="javascript:sendSignal(this)">📢 Start Ad (2min)
         </button>
     </div>
     <div class="button button-orange">
-        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="30000"
-                onclick="javascript:sendSignal(this)">Start Ad (5min)
+        <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!" data-wait="180000"
+                data-href="/public/signal/create?type=ad&description=180"
+                onclick="javascript:sendSignal(this)">📢 Start Ad (3min)
         </button>
     </div>
     <div class="button button-aqua">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                onclick="javascript:sendSignal(this)">Heart Rate
+                data-href="/public/signal/create?type=heart&description=heart"
+                onclick="javascript:sendSignal(this)">❤️ Heart Rate
         </button>
     </div>
     <div class="button button-blue">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                onclick="javascript:sendSignal(this)">Lobby Start
+                data-href="/public/signal/create?type=mark&description={{ 'lobby:start' | urlencode }}"
+                onclick="javascript:sendSignal(this)">🏰 Enter Lobby
         </button>
     </div>
     <div class="button button-purple">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                onclick="javascript:sendSignal(this)">Game Start
+                data-href="/public/signal/create?type=mark&description={{ 'match:start' | urlencode }}"
+                onclick="javascript:sendSignal(this)">📡 Join Match
         </button>
     </div>
     <div class="button button-purple">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                onclick="javascript:sendSignal(this)">Game Enter
+                data-href="/public/signal/create?type=mark&description={{ 'match:enter' | urlencode }}"
+                onclick="javascript:sendSignal(this)">🌎 Enter Match
         </button>
     </div>
     <div class="button button-pink">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                onclick="javascript:sendSignal(this)">Fight Start
+                data-href="/public/signal/create?type=mark&description={{ 'match:fight:start' | urlencode }}"
+                onclick="javascript:sendSignal(this)">🥊 Fight
         </button>
     </div>
     <div class="button button-pink">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                onclick="javascript:sendSignal(this)">Fight End
+                data-href="/public/signal/create?type=mark&description={{ 'match:fight:end' | urlencode }}"
+                onclick="javascript:sendSignal(this)">🌟 Clear
         </button>
     </div>
     <div class="button button-deepyellow">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                onclick="javascript:sendSignal(this)">Travel Start
+                data-href="/public/signal/create?type=mark&description={{ 'match:travel:start' | urlencode }}"
+                onclick="javascript:sendSignal(this)">🏃 Travel
         </button>
     </div>
     <div class="button button-deepyellow">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                onclick="javascript:sendSignal(this)">Travel End
+                data-href="/public/signal/create?type=mark&description={{ 'match:travel:end' | urlencode }}"
+                onclick="javascript:sendSignal(this)">🧍 Idle
         </button>
     </div>
     <div class="button button-green">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                onclick="javascript:sendSignal(this)">Match Win
+                data-href="/public/signal/create?type=mark&description={{ 'match:win' | urlencode }}"
+                onclick="javascript:sendSignal(this)">🏆 Win
         </button>
     </div>
     <div class="button button-red">
         <button data-state="idle" data-sending="Sending..." data-error="Error!" data-success="Success!"
-                onclick="javascript:sendSignal(this)">Match Lose
+                data-href="/public/signal/create?type=mark&description={{ 'match:lose' | urlencode }}"
+                onclick="javascript:sendSignal(this)">🤕 Lose
         </button>
     </div>
 </div>
