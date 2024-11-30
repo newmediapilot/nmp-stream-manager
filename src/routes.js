@@ -10,7 +10,8 @@ const ROUTES = {
   // Public HTML
   PUBLIC_INDEX: "/",
   PUBLIC_DASHBOARD: "/public/dashboard",
-  PUBLIC_SIGNAL_CREATE: "/public/signal/create",
+  PUBLIC_SIGNAL_CREATE: "/public/signal/update",
+  PUBLIC_CONFIG_UPDATE: "/public/config/create",
 };
 
 module.exports = ROUTES;

@@ -65,8 +65,8 @@ const PUBLIC_CONFIGS = {
             type: "mark",
             description: "match:checkpoint",
             wait: "3000",
-            emoji: "👀",
-            label: "Look",
+            emoji: "✔️",
+            label: "Tick",
         },
         {
             theme: "deepyellow",
@@ -126,29 +126,32 @@ const getConfig = (key) => {
     }
 };
 
+const signalsApplyUpdates = (payload) => {
+    //putConfig('signals', payload);
+}
+
 // Parse incoming configuration update request
 const parseConfig = (req, res) => {
-    const { key, payload } = req.query;
+    const {key, payload} = req.query;
 
     if (!key) {
-        return res.status(400).json({ error: "Key is missing from the request" });
+        return res.status(400).json({error: "Key is missing from the request"});
     }
 
     if (!PUBLIC_CONFIGS[key] && !payload) {
-        return res.status(400).json({ error: "Invalid key:", key, "and payload is missing" });
+        return res.status(400).json({error: ("Invalid key: " + key + " and payload is missing")});
     }
 
     try {
         if (key === "signals") {
-            const parsedPayload = JSON.parse(payload);
-            putConfig(key, parsedPayload);
-            res.status(200).json({ message: "Configuration for '", key, "' updated successfully." });
+            signalsApplyUpdates(JSON.parse(payload));
+            res.status(200).json({message: ("Configuration for '" + key + "' updated successfully.")});
         } else {
-            res.status(400).json({ error: "Unsupported key:", key });
+            res.status(400).json({error: "Unsupported key:" + key});
         }
     } catch (error) {
         console.err2("Error processing configuration:", error.message);
-        res.status(500).json({ error: error.message });
+        res.status(500).json({error: error.message});
     }
 };
 
