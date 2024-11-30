@@ -23,6 +23,7 @@ let secrets = null;
 // Register setParam to capture any unexpected behaviour
 // Light debugging effort
 const allowedParams = [
+  "dashboard_signals_config",
   "twitch_login_referrer",
   "twitch_broadcaster_id_set",
   "twitch_access_token_set",
