@@ -116,17 +116,15 @@ const applySignalsPayload = (payloadJSON) => {
     const payload = payloadJSON ? JSON.parse(payloadJSON) : [];
     const signals = PUBLIC_CONFIGS.signals.slice();
 
-    // The most inefficient way possible...
     while (payload.length) {
         const [from, to] = payload.splice(0, 2);
-
-        const fromSignal = JSON.parse(JSON.stringify(signals[from]));
-        const toSignal = JSON.parse(JSON.stringify(signals[to]));
-        signals[from] = toSignal;
-        signals[to] = fromSignal;
+        const fromEl = JSON.parse(JSON.stringify(signals[from]));
+        const toEl = JSON.parse(JSON.stringify(signals[to]));
+        signals[from] = toEl;
+        signals[to] = fromEl;
     }
 
-    return signals;
+    return signals.slice();
 };
 
 // Parse incoming configuration update request
