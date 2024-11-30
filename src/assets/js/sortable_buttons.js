@@ -1,4 +1,4 @@
-const sortableContainer = (draggableEl, toggleEl) => {
+const sortableContainer = (type, containerEl, toggleEl) => {
 
     let payload = [];// Updates to send
 
@@ -10,12 +10,11 @@ const sortableContainer = (draggableEl, toggleEl) => {
 
     toggleEl.innerText = states[0];
 
-    const sortable = new Sortable(draggableEl, {
+    const sortable = new Sortable(containerEl, {
         animation: 333,
         ghostClass: 'pointer-events-none',
         onEnd: (event) => {
-            // Save to payload for sending
-            payload.push(event.oldIndex);
+            payload.push(event.oldIndex);// Save to payload for sending
             payload.push(event.newIndex);
         },
     });
@@ -33,13 +32,22 @@ const sortableContainer = (draggableEl, toggleEl) => {
         toggleEl.innerText = isDisabled ? states[0] : states[1];
 
         if (isDisabled) {
-            console.log('sent!', payload);
+
+            axios.get('/public/config/create', {
+                params: {
+                    type,
+                    payload: JSON.stringify(payload),
+                },
+            });
+
             payload = []; // Reset payload
         }
     });
 
 };
+
 sortableContainer(
+    "signals",
     document.querySelector('.button-grid'),
-    document.querySelector('#button-grid--toggle'),
+    document.querySelector('#button-grid--toggle')
 );
