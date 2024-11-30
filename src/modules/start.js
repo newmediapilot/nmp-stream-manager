@@ -10,7 +10,7 @@ const https = require("https");
 const { configureNunjucks } = require("./nunjucks/config");
 const { setParam } = require("./store/manager");
 const { createHeartRateServer } = require("./sensor/listen");
-const { signalsConfig } = require("./public/config");
+const { getConfig } = require("./public/config");
 const ROUTES = require("../routes");
 
 /**
@@ -27,7 +27,7 @@ async function startServices(app) {
     setParam("twitch_username", process.env.TWITCH_USERNAME);
 
     // Set buttons data
-    setParam("dashboard_signals_config", signalsConfig);
+    setParam("dashboard_signals_config", getConfig("signals"));
 
     // Configure Nunjucks
     configureNunjucks(app);
