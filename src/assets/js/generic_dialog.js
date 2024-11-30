@@ -1,5 +1,3 @@
-const dialog = document.getElementById('generic-dialog');
-
 function showDialog(id, title, body) {
     const dialog = document.getElementById(id);
     dialog.querySelector('.dialog--title').innerText = title;

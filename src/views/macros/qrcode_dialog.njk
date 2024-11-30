@@ -1,0 +1,8 @@
+{% macro qrcode_dialog(id) %}
+    <dialog class="dialog-container" id="{{ id }}">
+        <div class="dialog--title">Default Title</div>
+        <div class="dialog--body">This is the default body content of the dialog.</div>
+        <button onclick="javascript:closeDialog('{{ id }}')">Close</button>
+        <img src="/media/qrcode.png">
+    </dialog>
+{% endmacro %}
