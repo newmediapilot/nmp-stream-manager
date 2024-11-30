@@ -1,12 +1,14 @@
 const sortableContainer = (draggableEl, toggleEl) => {
 
-    const payload = [];
+    let payload = [];// Updates to send
 
     const notifyEl = document.documentElement;
     const states = [
         "✏️Enable Edit",
         "✅Done Editing"
     ];
+
+    toggleEl.innerText = states[0];
 
     const sortable = new Sortable(draggableEl, {
         animation: 333,
@@ -18,19 +20,23 @@ const sortableContainer = (draggableEl, toggleEl) => {
         },
     });
 
+    sortable.option("disabled", true);
+
     toggleEl.addEventListener('click', () => {
 
+        // Flip editable state
         sortable.option("disabled", !sortable.option("disabled"));
-        toggleEl.innerText = sortable.option("disabled") ? states[0] : states[1];
+
         notifyEl.classList.toggle('edit-active');
 
+        const isDisabled = sortable.option("disabled");
+        toggleEl.innerText = isDisabled ? states[0] : states[1];
 
-
-
+        if (isDisabled) {
+            console.log('sent!', payload);
+            payload = []; // Reset payload
+        }
     });
-
-    toggleEl.innerText = states[0];
-    sortable.option("disabled", true);
 
 };
 sortableContainer(
