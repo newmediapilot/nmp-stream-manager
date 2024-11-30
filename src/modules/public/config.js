@@ -126,28 +126,33 @@ const getConfig = (key) => {
     }
 };
 
-const signalsApplyUpdates = (payload) => {
-    //putConfig('signals', payload);
-}
+// Parse updates and apply the swaps to the written file
+// Pairs of before & after sent sequentially as saved by FE
+const applySignalsPayload = (payloadJSON) => {
+
+    const payload = payloadJSON ? JSON.parse(payloadJSON) : [];
+    const signals = PUBLIC_CONFIGS.signals.slice();
+
+    for (let s = 0; s < payload.length; s += 2) {
+        const i1 = s;
+        const i2 = s + 1;
+        signals[i1] = signals[i2];
+    }
+
+    putConfig('signals', signals);
+};
 
 // Parse incoming configuration update request
+// Sort by type into handlers
 const parseConfig = (req, res) => {
     const {key, payload} = req.query;
 
-    if (!key) {
-        return res.status(400).json({error: "Key is missing from the request"});
-    }
-
-    if (!PUBLIC_CONFIGS[key] && !payload) {
-        return res.status(400).json({error: ("Invalid key: " + key + " and payload is missing")});
-    }
+    if (!PUBLIC_CONFIGS[key]) return res.status(400).json({error: ("Invalid key: " + key + "")});
 
     try {
         if (key === "signals") {
-            signalsApplyUpdates(JSON.parse(payload));
+            applySignalsPayload(payload);
             res.status(200).json({message: ("Configuration for '" + key + "' updated successfully.")});
-        } else {
-            res.status(400).json({error: "Unsupported key:" + key});
         }
     } catch (error) {
         console.err2("Error processing configuration:", error.message);
