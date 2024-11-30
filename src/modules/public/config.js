@@ -1,4 +1,4 @@
-const CONFIGS = {
+const PUBLIC_CONFIGS = {
     signals: [
         {
             theme: "orange",
@@ -84,7 +84,7 @@ const CONFIGS = {
 };
 
 const putConfig = (key) => {
-    if(!Object.keys(CONFIGS).includes(key)){
+    if (!Object.keys(PUBLIC_CONFIGS).includes(key)) {
         // error key incorrect
     }
     const fileName = `.${key}`;
@@ -92,16 +92,22 @@ const putConfig = (key) => {
 };
 
 const getConfig = (key) => {
-    if(!Object.keys(CONFIGS).includes(key)){
+    if (!Object.keys(PUBLIC_CONFIGS).includes(key)) {
         // error key incorrect
     }
     const fileName = `.${key}`;
     // fs load sync
-    CONFIGS[key] = JSON.parse(config);
-    return CONFIGS[key];
+    PUBLIC_CONFIGS[key] = JSON.parse(config);
+    return PUBLIC_CONFIGS[key];
 };
+
+async function parseConfig(req, res) {
+// TODO: consume query params key and payloadJSON
+}
 
 module.exports = {
     putConfig,
     getConfig,
+    parseConfig,
+    PUBLIC_CONFIGS,
 };
