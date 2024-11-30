@@ -15,6 +15,7 @@ const sortableContainer = (draggableEl, toggleEl) => {
         toggleEl.innerText = sortable.option("disabled") ? states[0] : states[1];
     });
     toggleEl.innerText = states[0];
+    sortable.option("disabled", true);
 };
 sortableContainer(
     document.querySelector('.button-grid'),
