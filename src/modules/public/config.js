@@ -98,8 +98,10 @@ const initializePublicConfigs = async (type) => {
     if (!fs.existsSync(fileName)) {
       setParam("dashboard_signals_config", PUBLIC_CONFIGS.signals);
       putConfig("signals", PUBLIC_CONFIGS.signals);
+      console.log('initializePublicConfigs :: new file');
     } else {
       setParam("dashboard_signals_config", getConfig("signals"));
+      console.log('initializePublicConfigs :: load file');
     }
     console.log('initializePublicConfigs :: success');
     return true;
@@ -121,7 +123,7 @@ const putConfig = (type, config) => {
 // Load configuration from a file (synchronous)
 const getConfig = (type) => {
   const fileName = path.resolve(`.${type}.json`);
-  console.log('getConfig :: file:',fileName);
+  console.log('getConfig :: file:', fileName);
   return JSON.parse(fs.readFileSync(fileName, 'utf-8'));
 };
 
@@ -142,6 +144,9 @@ const applySignalsPayload = (payloadJSON) => {
 
   console.log('applySignalsPayload :: signalsOrigin ::', signalsOrigin.map(t=>t.label));
   console.log('applySignalsPayload :: signalsTarget ::', signalsTarget.map(t=>t.label));
+
+  // Save to memory
+  setParam("dashboard_signals_config",signalsTarget);
 
   return signalsTarget;
 };
