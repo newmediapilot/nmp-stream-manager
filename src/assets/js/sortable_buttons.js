@@ -1,19 +1,20 @@
 const sortableContainer = (draggableEl, toggleEl) => {
+    const states = [
+        "✏️Enable Edit",
+        "✅Done Editing"
+    ];
     const sortable = new Sortable(draggableEl, {
         animation: 333,
         ghostClass: 'pointer-events-none',
         onEnd: (event) => {
-
             console.log(`Moved button from index ${event.oldIndex} to ${event.newIndex}`);
         },
     });
     toggleEl.addEventListener('click', () => {
         sortable.option("disabled", !sortable.option("disabled"));
-        toggleEl.innerText = sortable.option("disabled")
-            ? "Enable Edit"
-            : "Done Editing";
+        toggleEl.innerText = sortable.option("disabled") ? states[0] : states[1];
     });
-    toggleEl.innerText = "Enable Edit";
+    toggleEl.innerText = states[0];
 };
 sortableContainer(
     document.querySelector('.button-grid'),

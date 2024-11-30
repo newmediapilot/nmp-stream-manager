@@ -31,6 +31,21 @@ body {
     background: none;
 }
 
+.header {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.header button {
+    font-size: clamp(24px, 3vw, 48px);
+    color: var(--text-color-dark);
+    border: 8px solid var(--button-aqua);
+    background-color: var(--color-hover);
+    display:block;
+}
+
 .button-grid {
     display: grid;
     width: 100%;
