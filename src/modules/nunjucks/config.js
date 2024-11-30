@@ -28,4 +28,4 @@ const configureNunjucks = (app) => {
   appRef = app;
 };
 
-module.exports = { configureNunjucks, renderNunjucks };
+module.exports = { configureNunjucks };
