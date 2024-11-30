@@ -29,7 +29,7 @@ async function twitchAdCreate(length) {
     const broadcasterId = getSecret("twitch_broadcaster_id");
 
     await twitchMessageCreate(
-        `🤖 Get ready, we're running a ${roundedLength} second ad!`,
+      `🤖 Get ready, we're running a ${roundedLength} second ad!`,
     );
 
     const response = await axios.post(
@@ -47,13 +47,8 @@ async function twitchAdCreate(length) {
     );
 
     return true;
-
   } catch (error) {
-    console.err2(
-      process.cwd(),
-      "Error starting advertisement:",
-      error
-    );
+    console.err2(process.cwd(), "Error starting advertisement:", error);
     return false;
   }
 }

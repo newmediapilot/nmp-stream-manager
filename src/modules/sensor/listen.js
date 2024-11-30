@@ -8,7 +8,6 @@ const { spawn } = require("child_process");
 async function createHeartRateServer(
   exePath = "./bin/hds_desktop_windows.exe",
 ) {
-  
   let MAX_REPORT = 5; // Don't keep logging
   const child = spawn(exePath, [], { detached: false });
 
@@ -20,8 +19,7 @@ async function createHeartRateServer(
 
     log.startsWith(pref) &&
       !isNaN(heartRate) &&
-
-      setParam("sensor_heart_rate", heartRate, --MAX_REPORT>0);
+      setParam("sensor_heart_rate", heartRate, --MAX_REPORT > 0);
   });
 
   // Clean up
@@ -52,9 +50,7 @@ async function createHeartRateServer(
  */
 const getHeartRateMessage = () => {
   const heartRate = getParam("sensor_heart_rate");
-  return heartRate
-    ? `🤖 💜 ${heartRate}`
-    : `🤖 💜 Dunno.`;
+  return heartRate ? `🤖 💜 ${heartRate}` : `🤖 💜 Dunno.`;
 };
 
 module.exports = { createHeartRateServer, getHeartRateMessage };

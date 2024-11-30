@@ -49,8 +49,8 @@ async function twitchMarkerCreate(description) {
     console.err2(
       process.cwd(),
       "Error creating marker:",
-        error.status,
-        error?.message?.message
+      error.status,
+      error?.message?.message,
     );
     return false;
   }

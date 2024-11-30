@@ -44,7 +44,7 @@ function loadSecrets() {
   }
 }
 
-function setParam(key, value, log=true) {
+function setParam(key, value, log = true) {
   if (!allowedParams.includes(key)) {
     console.warn2(
       process.cwd(),
