@@ -88,40 +88,44 @@ const PUBLIC_CONFIGS = {
 };
 
 // Save configuration to a file (synchronous)
-const putConfig = (key, payload) => {
-    if (!PUBLIC_CONFIGS[key] && !payload) {
-        throw new Error("Invalid key:", key);
-    }
+const putConfig = (type, config) => {
 
-    const fileName = path.resolve(`.${key}.json`);
+    const fileName = path.resolve(`.${type}.json`);
+
+    console.log('putConfig.type', type);
+    console.log('putConfig.config', config);
 
     try {
-        fs.writeFileSync(fileName, JSON.stringify(payload || PUBLIC_CONFIGS[key], null, 2));
-        PUBLIC_CONFIGS[key] = payload; // Update in-memory config
-        console.log2("Configuration saved successfully for:", key);
+
+        fs.writeFileSync(fileName, JSON.stringify(config || PUBLIC_CONFIGS[type], null, 2));
+
+        PUBLIC_CONFIGS[type] = config;
+
+        console.log2(process.cwd(), "Configuration saved successfully for:", type);
+
     } catch (error) {
-        console.err2("Failed to save config for:", key, error);
+        console.err2(process.cwd(),"Failed to save config for:", type, error);
         throw error;
     }
 };
 
 // Load configuration from a file (synchronous)
-const getConfig = (key) => {
-    const fileName = path.resolve(`.${key}.json`);
+const getConfig = (type) => {
+    const fileName = path.resolve(`.${type}.json`);
 
-    if (!PUBLIC_CONFIGS[key]) {
-        throw new Error("Invalid key:", key);
+    if (!PUBLIC_CONFIGS[type]) {
+        throw new Error("Invalid type:", type);
     }
 
     try {
-        if (!fs.existsSync(fileName)) putConfig(key, PUBLIC_CONFIGS[key]);
+        if (!fs.existsSync(fileName)) putConfig(type, PUBLIC_CONFIGS[type]);
 
         const config = JSON.parse(fs.readFileSync(fileName, 'utf-8'));
-        PUBLIC_CONFIGS[key] = config;
-        console.log2("Configuration loaded successfully for:", key, PUBLIC_CONFIGS[key]);
+        PUBLIC_CONFIGS[type] = config;
+        console.log2(process.cwd(), "Configuration loaded successfully for:", type, PUBLIC_CONFIGS[type]);
         return config;
     } catch (error) {
-        console.err2("Failed to load config for:", key, error);
+        console.err2(process.cwd(),"Failed to load config for:", type, error);
         throw error;
     }
 };
@@ -144,18 +148,22 @@ const applySignalsPayload = (payloadJSON) => {
 
 // Parse incoming configuration update request
 // Sort by type into handlers
-const parseConfig = (req, res) => {
-    const {key, payload} = req.query;
+const publicConfigUpdate = (req, res) => {
 
-    if (!PUBLIC_CONFIGS[key]) return res.status(400).json({error: ("Invalid key: " + key + "")});
+    const {type, payload} = req.query;
+
+    console.log2(process.cwd(),'publicConfigUpdate.type', type);
+    console.log2(process.cwd(),'publicConfigUpdate.payload', payload);
+
+    if (!PUBLIC_CONFIGS[type]) return res.status(400).json({error: ("Invalid type: " + type + "")});
 
     try {
-        if (key === "signals") {
+        if (type === "signals") {
             applySignalsPayload(payload);
-            res.status(200).json({message: ("Configuration for '" + key + "' updated successfully.")});
         }
+        res.status(200).json({message: ("Configuration for '" + type + "' updated successfully.")});
     } catch (error) {
-        console.err2("Error processing configuration:", error.message);
+        console.err2(process.cwd(),"Error processing configuration:", error.message);
         res.status(500).json({error: error.message});
     }
 };
@@ -164,6 +172,6 @@ const parseConfig = (req, res) => {
 module.exports = {
     putConfig,
     getConfig,
-    parseConfig,
+    publicConfigUpdate,
     PUBLIC_CONFIGS,
 };
