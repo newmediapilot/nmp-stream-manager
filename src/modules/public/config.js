@@ -89,44 +89,23 @@ const PUBLIC_CONFIGS = {
 
 // Save configuration to a file (synchronous)
 const putConfig = (type, config) => {
-
-    const fileName = path.resolve(`.${type}.json`);
-
-    console.log('putConfig.type', type);
-    console.log('putConfig.config', config);
-
-    try {
-
-        fs.writeFileSync(fileName, JSON.stringify(config || PUBLIC_CONFIGS[type], null, 2));
-
-        PUBLIC_CONFIGS[type] = config;
-
-        console.log2(process.cwd(), "Configuration saved successfully for:", type);
-
-    } catch (error) {
-        console.err2(process.cwd(),"Failed to save config for:", type, error);
-        throw error;
+    if (!PUBLIC_CONFIGS[type] || !config) {
+        throw new Error("Invalid type or config:", type, config);
     }
+    const fileName = path.resolve(`.${type}.json`);
+    fs.writeFileSync(fileName, JSON.stringify(config, null, 2));
 };
 
 // Load configuration from a file (synchronous)
 const getConfig = (type) => {
-    const fileName = path.resolve(`.${type}.json`);
-
     if (!PUBLIC_CONFIGS[type]) {
         throw new Error("Invalid type:", type);
     }
-
-    try {
-        if (!fs.existsSync(fileName)) putConfig(type, PUBLIC_CONFIGS[type]);
-
-        const config = JSON.parse(fs.readFileSync(fileName, 'utf-8'));
-        PUBLIC_CONFIGS[type] = config;
-        console.log2(process.cwd(), "Configuration loaded successfully for:", type, PUBLIC_CONFIGS[type]);
-        return config;
-    } catch (error) {
-        console.err2(process.cwd(),"Failed to load config for:", type, error);
-        throw error;
+    const fileName = path.resolve(`.${type}.json`);
+    if (!fs.existsSync(fileName)) {
+        return PUBLIC_CONFIGS[type];
+    } else {
+        return JSON.parse(fs.readFileSync(fileName, 'utf-8'));
     }
 };
 
@@ -137,13 +116,17 @@ const applySignalsPayload = (payloadJSON) => {
     const payload = payloadJSON ? JSON.parse(payloadJSON) : [];
     const signals = PUBLIC_CONFIGS.signals.slice();
 
-    for (let s = 0; s < payload.length; s += 2) {
-        const i1 = s;
-        const i2 = s + 1;
-        signals[i1] = signals[i2];
+    // The most inefficient way possible...
+    while (payload.length) {
+        const [from, to] = payload.splice(0, 2);
+
+        const fromSignal = JSON.parse(JSON.stringify(signals[from]));
+        const toSignal = JSON.parse(JSON.stringify(signals[to]));
+        signals[from] = toSignal;
+        signals[to] = fromSignal;
     }
 
-    putConfig('signals', signals);
+    return signals;
 };
 
 // Parse incoming configuration update request
@@ -152,18 +135,18 @@ const publicConfigUpdate = (req, res) => {
 
     const {type, payload} = req.query;
 
-    console.log2(process.cwd(),'publicConfigUpdate.type', type);
-    console.log2(process.cwd(),'publicConfigUpdate.payload', payload);
+    console.log2(process.cwd(), 'publicConfigUpdate.type', type);
+    console.log2(process.cwd(), 'publicConfigUpdate.payload', payload);
 
     if (!PUBLIC_CONFIGS[type]) return res.status(400).json({error: ("Invalid type: " + type + "")});
 
     try {
         if (type === "signals") {
-            applySignalsPayload(payload);
+            putConfig("signals", applySignalsPayload(payload));
         }
         res.status(200).json({message: ("Configuration for '" + type + "' updated successfully.")});
     } catch (error) {
-        console.err2(process.cwd(),"Error processing configuration:", error.message);
+        console.err2(process.cwd(), "Error processing configuration:", error.message);
         res.status(500).json({error: error.message});
     }
 };
