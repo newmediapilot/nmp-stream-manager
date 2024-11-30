@@ -133,15 +133,14 @@ const publicConfigUpdate = (req, res) => {
 
     const {type, payload} = req.query;
 
-    console.log2(process.cwd(), 'publicConfigUpdate.type', type);
-    console.log2(process.cwd(), 'publicConfigUpdate.payload', payload);
-
     if (!PUBLIC_CONFIGS[type]) return res.status(400).json({error: ("Invalid type: " + type + "")});
 
     try {
+
         if (type === "signals") {
             putConfig("signals", applySignalsPayload(payload));
         }
+
         res.status(200).json({message: ("Configuration for '" + type + "' updated successfully.")});
     } catch (error) {
         console.err2(process.cwd(), "Error processing configuration:", error.message);
