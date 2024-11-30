@@ -9,6 +9,7 @@ const express = require("express");
 const { requestLogger } = require("./logger");
 const { startServices } = require("./modules/start");
 const { signalCreate } = require("./modules/public/signal");
+const { publicConfigUpdate } = require("./modules/public/config");
 const { twitchLogin, twitchLoginSuccess } = require("./modules/twitch/login");
 
 const app = express();
@@ -23,5 +24,6 @@ app.all(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess);
 app.all(ROUTES.PUBLIC_INDEX, (req, res) => res.render("index"));
 app.all(ROUTES.PUBLIC_DASHBOARD, (req, res) => res.render("dashboard"));
 app.all(ROUTES.PUBLIC_SIGNAL_CREATE, signalCreate);
+app.all(ROUTES.PUBLIC_CONFIG_UPDATE, publicConfigUpdate);
 
 startServices(app);
