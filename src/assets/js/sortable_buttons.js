@@ -42,5 +42,5 @@ const sortableContainer = (type, containerEl, toggleEl) => {
 sortableContainer(
   "signals",
   document.querySelector(".button-grid"),
-  document.querySelector("#button-grid--toggle"),
+  document.querySelector("#header-grid--toggle"),
 );
