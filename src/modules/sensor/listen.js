@@ -53,8 +53,8 @@ async function createHeartRateServer(
 const getHeartRateMessage = () => {
   const heartRate = getParam("sensor_heart_rate");
   return heartRate
-    ? `🤖 💜 Heart rate is ${heartRate}`
-    : `🤖 💜 Monitor is off.`;
+    ? `🤖 💜 ${heartRate}`
+    : `🤖 💜 Dunno.`;
 };
 
 module.exports = { createHeartRateServer, getHeartRateMessage };
