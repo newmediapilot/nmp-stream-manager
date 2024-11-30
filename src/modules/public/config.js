@@ -1,4 +1,4 @@
-export const signalsConfig = [
+const signals = [
     {
         theme: "orange",
         type: "ad",
@@ -80,3 +80,19 @@ export const signalsConfig = [
         label: "Game Over",
     },
 ];
+
+const putDashboardConfig = () => {
+
+};
+
+const getDashboardConfig = () => {
+
+
+
+    return signals;
+};
+
+module.exports = {
+    putDashboardConfig,
+    getDashboardConfig,
+};

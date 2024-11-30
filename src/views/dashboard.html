@@ -16,14 +16,13 @@
     {% for config in 'dashboard_signals_config' | getParam %}
     <div class="button button-{{ config.theme }}">
         <button
-                data-state="idle"
-                data-sending="Sending"
-                data-error="Error"
-                data-success="Success"
-                data-wait="{{ config.wait }}"
-                data-href="{{ public_routes.PUBLIC_SIGNAL_CREATE }}?type={{ config.type }}&description={{ config.description }}"
-                onclick="javascript:sendSignal(this)"
-        >
+            data-state="idle"
+            data-sending="Sending"
+            data-error="Error"
+            data-success="Success"
+            data-wait="{{ config.wait }}"
+            data-href="{{ public_routes.PUBLIC_SIGNAL_CREATE }}?type={{ config.type }}&description={{ config.description }}"
+            onclick="javascript:sendSignal(this)">
             {{ config.emoji }} {{ config.label }}
         </button>
     </div>

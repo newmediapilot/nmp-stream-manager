@@ -27,15 +27,26 @@ html {
     background-size: cover;
 }
 
+html.edit-active {
+    background: url("/media/blueprint.webp");
+    background-size: cover;
+}
+
 body {
     background: none;
+}
+
+button {
+    cursor: pointer;
 }
 
 .header {
     margin-bottom: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    gap: 20px;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .header button {
@@ -43,7 +54,9 @@ body {
     color: var(--text-color-dark);
     border: 8px solid var(--button-aqua);
     background-color: var(--color-hover);
-    display:block;
+    display: block;
+    flex-grow: 1;
+    text-align: center;
 }
 
 .button-grid {
@@ -74,7 +87,7 @@ body {
     align-items: center;
     overflow: hidden;
     border-radius: var(--border-radius);
-    box-shadow: 8px 8px 15px 0px rgba(0,0,0,0.75);
+    box-shadow: 8px 8px 15px 0px rgba(0, 0, 0, 0.75);
 }
 
 .button img {
@@ -88,14 +101,17 @@ body {
     height: 100%;
     font-size: clamp(24px, 3vw, 48px);
     color: var(--text-color-light);
-    border: 8px dashed rgba(255,255,255,0.55);
+    border: 16px solid rgba(255, 255, 255, 0.55);
     text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
     overflow: hidden;
-    cursor: pointer;
     opacity: 1;
     padding: 5%;
     box-sizing: border-box;
     position: relative;
+}
+
+html.edit-active .button button {
+    border: 16px dashed rgba(255, 255, 255, 0.55);
 }
 
 .button button::after {
@@ -105,7 +121,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    box-shadow: inset 0px 0px 50px 25px rgba(0,0,0,0.75);
+    box-shadow: inset 0px 0px 50px 25px rgba(0, 0, 0, 0.75);
     mix-blend-mode: screen;
 }
 
