@@ -3,7 +3,7 @@
  * Description: Handles the creation of test signals for Twitch chat. Accepts a description parameter to identify the command
  * and sends a predefined message to Twitch chat via the Twitch API.
  * @returns {void} - Sends a message to Twitch chat and returns a success or failure response.
- * @method signalCreate(req, res) - Processes the signal creation based on the description parameter.
+ * @method publicSignalCreate(req, res) - Processes the signal creation based on the description parameter.
  *   @param {object} req - The HTTP request object containing the query parameter `description`.
  *   @param {object} res - The HTTP response object used to send the response.
  */
@@ -15,7 +15,7 @@ const { getHeartRateMessage } = require("../sensor/listen");
 
 let isCreating = false;
 
-async function signalCreate(req, res) {
+async function publicSignalCreate(req, res) {
   if (isCreating) {
     return res.status(503).send("Busy");
   }
@@ -56,4 +56,4 @@ async function signalCreate(req, res) {
   }
 }
 
-module.exports = { signalCreate };
+module.exports = { publicSignalCreate };

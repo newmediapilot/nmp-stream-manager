@@ -60,7 +60,7 @@ async function startServices(app) {
     await createHeartRateServer();
 
     // Open and login
-    await open(`https://localhost${ROUTES.TWITCH_LOGIN}`);
+    // await open(`https://localhost${ROUTES.TWITCH_LOGIN}`);
   } catch (err) {
     console.log2(process.cwd(), "Error initializing services:", err);
   }
