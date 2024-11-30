@@ -15,6 +15,7 @@ const configureNunjucks = (app) => {
   const nunjucksEnv = nunjucks.configure("src/views", {
     autoescape: true,
     express: app,
+    noCache: true // refresh on reload!
   });
 
   nunjucksEnv.addFilter("getParam", getParam);
