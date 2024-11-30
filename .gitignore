@@ -2,7 +2,7 @@ bin
 .idea
 .env
 .secrets
-.signals
+.signals.json
 node_modules
 package-lock.json
 .combined.json
