@@ -1,11 +1,13 @@
 <!-- src/views/settings.html -->
 {% extends "layouts/main.njk" %}
-<!---->
 {% from "macros/form_loop.njk" import form_href_el %}
 {% from "macros/generic_dialog.njk" import generic_dialog %}
-<!---->
+{% block hscripts %}
+<script defer src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+{% endblock %}
 {% block body %}
-<div class="buttons">
+{% include "partials/controls.njk" %}
+<div class="button-grid">
     {% set public_routes = 'public_routes' | getParam %}
     {% for config in 'dashboard_signals_config' | getParam %}
     <div class="button button-{{ config.theme }}">
@@ -23,13 +25,11 @@
     </div>
     {% endfor %}
 </div>
-<br>
 <img src="/media/qrcode.png">
 {% endblock %}
-<!---->
 {% block fscripts %}
-
 {{ generic_dialog("generic_dialog") }}
-<script src="/js/generic_dialog.js" type="text/javascript"></script>
-<script src="/js/send_signal.js" type="text/javascript"></script>
+<script defer src="/js/generic_dialog.js" type="text/javascript"></script>
+<script defer src="/js/send_signal.js" type="text/javascript"></script>
+<script defer src="/js/sortable_buttons.js" type="text/javascript"></script>
 {% endblock %}

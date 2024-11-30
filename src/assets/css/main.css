@@ -31,7 +31,7 @@ body {
     background: none;
 }
 
-.buttons {
+.button-grid {
     display: grid;
     width: 100%;
     height: 100%;
@@ -40,14 +40,14 @@ body {
 }
 
 @media (min-aspect-ratio: 1/1) {
-    .buttons {
+    .button-grid {
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(auto, 1fr);
     }
 }
 
 @media (max-aspect-ratio: 1/1) {
-    .buttons {
+    .button-grid {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(auto, 1fr);
     }
@@ -165,4 +165,8 @@ body {
 .button button[data-state="error"] {
     background-color: var(--color-error);
     color: var(--text-color-light);
+}
+
+.pointer-events-none {
+    pointer-events: none;
 }
