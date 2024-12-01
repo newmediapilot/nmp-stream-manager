@@ -124,12 +124,12 @@ const initializePublicConfigs = async (type) => {
 // Save configuration to a file (synchronous)
 const putConfig = (type, config) => {
   const fileName = path.resolve(`.${type}.json`);
-  console.log(
-    "putConfig :: file:",
-    fileName,
-    ":: contents :",
-    config.map((c) => c.label),
-  );
+  // console.log(
+  //   "putConfig :: file:",
+  //   fileName,
+  //   ":: contents :",
+  //   config.map((c) => c.label),
+  // );
   fs.writeFileSync(fileName, JSON.stringify(config, null, 2));
 };
 
@@ -148,28 +148,17 @@ const applyFeaturePayload = (payloadJSON) =>{
 // Parse updates and apply the swaps to the written file
 // Pairs of before & after sent sequentially as saved by FE
 const applySignalsPayload = (payloadJSON) => {
+
   const payloadAction = payloadJSON ? JSON.parse(payloadJSON) : [];
-  const signalsOrigin = getParam("dashboard_signals_config").slice();
-  const signalsTarget = signalsOrigin.slice();
+  const signalsTarget =  JSON.parse(JSON.stringify(getParam("dashboard_signals_config")));
 
   while (payloadAction.length > 0) {
     const [from, to] = payloadAction.splice(0, 2);
-    const actionFrom = JSON.parse(JSON.stringify(signalsOrigin[from]));
-    const actionTo = JSON.parse(JSON.stringify(signalsOrigin[to]));
-    signalsTarget[from] = actionTo;
-    signalsTarget[to] = actionFrom;
+    const fromEl = signalsTarget.splice(from, 1)[0];
+    signalsTarget.splice(to, 0,fromEl);
   }
 
-  console.log(
-    "applySignalsPayload :: signalsOrigin ::",
-    signalsOrigin.map((t) => t.label),
-  );
-  console.log(
-    "applySignalsPayload :: signalsTarget ::",
-    signalsTarget.map((t) => t.label),
-  );
-
-  // Save to memory
+  // Also save to memory
   setParam("dashboard_signals_config", signalsTarget);
 
   return signalsTarget;

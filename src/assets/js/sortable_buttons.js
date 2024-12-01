@@ -2,7 +2,7 @@ const sortableContainer = (type, containerEl, toggleEl) => {
   let payload = [];
 
   const notifyEl = document.documentElement;
-  const states = ["✏️Enable Edit", "✅Done Editing"];
+  const states = ["✏Edit", "✅Done"];
 
   toggleEl.innerText = states[0];
 
