@@ -1,19 +1,40 @@
 <!-- src/views/embed.html -->
 {% extends "layouts/main.njk" %}
 {% block hscripts %}
+<script defer src="/js/socket_connect.js" type="text/javascript"></script>
 <link rel="stylesheet" href="/css/embed.css">
 {% endblock %}
 {% block body %}
-<!--<iframe-->
-<!--        src="https://player.twitch.tv/?channel={{channel}}&parent=localhost&muted=false"-->
-<!--        frameborder="0"-->
-<!--        allowfullscreen="true"-->
-<!--        scrolling="no"-->
-<!--        height="100%"-->
-<!--        width="100%">-->
-<!--</iframe>-->
+<iframe
+        id="twitch-embed"
+        src="https://player.twitch.tv/?channel=litchiglimmer&parent=localhost&muted=false"
+        frameborder="0"
+        allowfullscreen="true"
+        scrolling="no"
+        height="100%"
+        width="100%">
+</iframe>
 {% endblock %}
-<script src="/assets/js/socket_connect.js"></script>
 {% block fscripts %}
-<script></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const iframe = document.querySelector('#twitch-embed');
+        iframe.style.display = 'none';
+        socketConnect((payload) => {
+            //
+            console.log('socket receive', payload);
+            if('feature:toggle' === payload) {
+                console.log('match!', payload);
+            }
+            if (iframe.style.display === 'inline') {
+                iframe.style.display = 'none';
+                return;
+            }
+            if (iframe.style.display === 'none') {
+                iframe.style.display = 'inline';
+                return;
+            }
+        });
+    });
+</script>
 {% endblock %}

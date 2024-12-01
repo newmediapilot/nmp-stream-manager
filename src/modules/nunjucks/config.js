@@ -12,6 +12,7 @@ const { getParam, getAllParams } = require("../store/manager");
  * @param {object} app - The Express app instance.
  */
 const configureNunjucks = (app) => {
+
   const nunjucksEnv = nunjucks.configure("src/views", {
     autoescape: true,
     express: app,
@@ -27,6 +28,7 @@ const configureNunjucks = (app) => {
   app.use(express.static("src/assets"));
 
   appRef = app;
+
 };
 
 module.exports = { configureNunjucks };
