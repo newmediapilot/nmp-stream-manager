@@ -10,6 +10,7 @@ const ROUTES = {
   // Public HTML
   PUBLIC_INDEX: "/",
   PUBLIC_DASHBOARD: "/public/dashboard",
+  PUBLIC_EMBED: "/public/embed",
   PUBLIC_SIGNAL_CREATE: "/public/signal/update",
   PUBLIC_CONFIG_UPDATE: "/public/config/create",
 };

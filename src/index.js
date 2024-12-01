@@ -23,6 +23,7 @@ app.all(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess);
 // Public HTML
 app.all(ROUTES.PUBLIC_INDEX, (req, res) => res.render("index"));
 app.all(ROUTES.PUBLIC_DASHBOARD, (req, res) => res.render("dashboard"));
+app.all(ROUTES.PUBLIC_EMBED, (req, res) => res.render("embed"));
 app.all(ROUTES.PUBLIC_SIGNAL_CREATE, publicSignalCreate);
 app.all(ROUTES.PUBLIC_CONFIG_UPDATE, publicConfigUpdate);
 

@@ -1,9 +1,10 @@
-<!-- src/views/settings.html -->
+<!-- src/views/dashboard.html -->
 {% extends "layouts/main.njk" %}
 {% from "macros/form_loop.njk" import form_href_el %}
 {% from "macros/generic_dialog.njk" import generic_dialog %}
 {% from "macros/qrcode_dialog.njk" import qrcode_dialog %}
 {% block hscripts %}
+<link rel="stylesheet" href="/css/dashboard.css">
 <script defer src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script defer src="/js/generic_dialog.js" type="text/javascript"></script>
 <script defer src="/js/send_signal.js" type="text/javascript"></script>
