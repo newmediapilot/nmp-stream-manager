@@ -1,0 +1,28 @@
+.header-grid {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+@media (min-aspect-ratio: 1/1) {
+    .header-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(auto, 1fr);
+    }
+}
+
+@media (max-aspect-ratio: 1/1) {
+    .header-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(auto, 1fr);
+    }
+}
+
+.header-grid button {
+    font-size: clamp(24px, 3vw, 48px);
+    color: var(--text-color-dark);
+    display: block;
+    text-align: center;
+}
