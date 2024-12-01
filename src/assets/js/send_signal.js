@@ -1,6 +1,7 @@
 const sendSignal = (el) => {
 
     const initialText = el.innerText;
+    const waitSetting = Number(el.getAttribute('data-wait'));
     const waitDefault = 3000;
     const sendingText = el.getAttribute('data-sending');
     const errorText = el.getAttribute('data-error');
@@ -18,13 +19,11 @@ const sendSignal = (el) => {
     getRes.then(getRes => {
         console.log('Success:', getRes);
         setState(successText, true, 'success');
-        setTimeout(() => setState(initialText, false, 'idle'), waitDefault);
     });
 
     getRes.catch(error => {
         console.log('Error:', error);
         setState(errorText, true, 'error');
-        setTimeout(() => setState(initialText, false, 'idle'), waitDefault);
     });
 
     getRes.finally(() => {
@@ -32,7 +31,7 @@ const sendSignal = (el) => {
         setTimeout(() => {
             setState(initialText, false, 'idle');
             el.blur();
-        }, waitDefault);
+        }, waitSetting || waitDefault);
     });
 
 };
