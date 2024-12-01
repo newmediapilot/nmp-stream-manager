@@ -1,6 +1,6 @@
 const socketConnect = () => {
     const socket = io();
-    socket.on("customEvent", (payload) => {
+    socket.on("payload", (payload) => {
         console.log("Received payload:", payload);
     });
     socket.on("connect_error", (err) => {

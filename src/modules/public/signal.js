@@ -11,6 +11,7 @@
 const { twitchMarkerCreate } = require("../twitch/marker");
 const { twitchMessageCreate } = require("../twitch/message");
 const { twitchAdCreate } = require("../twitch/ads");
+const { sendPayload } = require("../helper/socket");
 const { getHeartRateMessage } = require("../sensor/listen");
 
 let isCreating = false;
@@ -41,6 +42,10 @@ async function publicSignalCreate(req, res) {
 
     if ("ad" === type) {
       result = await twitchAdCreate(description);
+    }
+
+    if ("feature" === type) {
+      result = await sendPayload(description);
     }
 
     if (!result) {

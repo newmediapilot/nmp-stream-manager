@@ -140,6 +140,11 @@ const getConfig = (type) => {
   return JSON.parse(fs.readFileSync(fileName, "utf-8"));
 };
 
+// Send signal to socket (toggle)
+const applyFeaturePayload = (payloadJSON) =>{
+  console.log('applyFeaturePayload', payloadJSON);
+};
+
 // Parse updates and apply the swaps to the written file
 // Pairs of before & after sent sequentially as saved by FE
 const applySignalsPayload = (payloadJSON) => {
@@ -182,6 +187,9 @@ const publicConfigUpdate = (req, res) => {
   try {
     if (type === "signals") {
       putConfig("signals", applySignalsPayload(payload));
+    }
+    if (type === "feature") {
+      putConfig("signals", applyFeaturePayload(payload));
     }
     res.status(200).json({
       message: "Configuration for " + type + " updated successfully.",

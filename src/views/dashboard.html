@@ -1,12 +1,9 @@
 <!-- src/views/dashboard.html -->
 {% extends "layouts/main.njk" %}
 {% from "macros/form_loop.njk" import form_href_el %}
-{% from "macros/generic_dialog.njk" import generic_dialog %}
 {% from "macros/qrcode_dialog.njk" import qrcode_dialog %}
 {% block hscripts %}
 <link rel="stylesheet" href="/css/dashboard.css">
-<script defer src="/js/send_signal.js" type="text/javascript"></script>
-<script defer src="/js/sortable_buttons.js" type="text/javascript"></script>
 {% endblock %}
 {% block body %}
 {% include "partials/controls.njk" %}
@@ -29,6 +26,14 @@
 </div>
 {% endblock %}
 {% block fscripts %}
-{{ generic_dialog("generic_dialog") }}
 {{ qrcode_dialog("qrcode_dialog") }}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        sortableContainer(
+            "signals",
+            document.querySelector(".button-grid"),
+            document.querySelector("#header-grid--toggle"),
+        );
+    });
+</script>
 {% endblock %}

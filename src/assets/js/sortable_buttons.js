@@ -1,5 +1,5 @@
 const sortableContainer = (type, containerEl, toggleEl) => {
-  let payload = []; // Updates to send
+  let payload = [];
 
   const notifyEl = document.documentElement;
   const states = ["✏️Enable Edit", "✅Done Editing"];
@@ -37,9 +37,3 @@ const sortableContainer = (type, containerEl, toggleEl) => {
     }
   });
 };
-
-sortableContainer(
-  "signals",
-  document.querySelector(".button-grid"),
-  document.querySelector("#header-grid--toggle"),
-);
