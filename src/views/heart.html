@@ -4,13 +4,11 @@
 <link rel="stylesheet" href="/css/heart.css">
 {% endblock %}
 {% block body %}
-{% include "partials/controls.njk" %}
 <div class="heart-container">
     ♥
 </div>
 {% endblock %}
 {% block fscripts %}
-{{ qrcode_dialog("qrcode_dialog") }}
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         // TODO: ping the heart rate ping server every 100ms
