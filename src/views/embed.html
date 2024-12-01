@@ -7,34 +7,25 @@
 {% block body %}
 <iframe
         id="twitch-embed"
-        src="https://player.twitch.tv/?channel=litchiglimmer&parent=localhost&muted=false"
         frameborder="0"
         allowfullscreen="true"
         scrolling="no"
         height="100%"
-        width="100%">
+        width="100%"
+>
 </iframe>
 {% endblock %}
 {% block fscripts %}
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const iframe = document.querySelector('#twitch-embed');
-        iframe.style.display = 'none';
-        socketConnect((payload) => {
-            //
-            console.log('socket receive', payload);
-            if('feature:toggle' === payload) {
-                console.log('match!', payload);
-            }
-            if (iframe.style.display === 'inline') {
-                iframe.style.display = 'none';
-                return;
-            }
-            if (iframe.style.display === 'none') {
-                iframe.style.display = 'inline';
-                return;
-            }
-        });
+        let embedActive = false;
+        const twitchEmbed = document.querySelector('#twitch-embed');
+        const toggleEmbed = (bool) => {
+            twitchEmbed.src = bool ? "https://player.twitch.tv/?channel=stonerkat_&parent=localhost&muted=false" : "";
+            embedActive = bool;
+        };
+        socketConnect((payload) => ('feature:toggle' === payload) && toggleEmbed(!embedActive));
+        toggleEmbed(false);
     });
 </script>
 {% endblock %}
