@@ -1,0 +1,24 @@
+<!-- src/views/dashboard.html -->
+{% extends "layouts/main.njk" %}
+{% block hscripts %}
+<link rel="stylesheet" href="/css/heart.css">
+{% endblock %}
+{% block body %}
+{% include "partials/controls.njk" %}
+<div class="heart-container">
+
+</div>
+{% endblock %}
+{% block fscripts %}
+{{ qrcode_dialog("qrcode_dialog") }}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // ping the heart rate ping server every 100ms
+        // extract the number into a variable
+        // measure from min 70 max 120 as a percentage
+        // multiply that percentage by 1000ms and then have the hart rate change at that interval
+        // reset the interval each time we ping so we get a new speed
+        // rotate between primary colors
+    });
+</script>
+{% endblock %}
