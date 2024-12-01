@@ -10,7 +10,7 @@ const sortableContainer = (type, containerEl, toggleEl) => {
     animation: 333,
     ghostClass: "pointer-events-none",
     onEnd: (event) => {
-      payload.push(event.oldIndex); // Save to payload for sending
+      payload.push(event.oldIndex);
       payload.push(event.newIndex);
     },
   });
@@ -18,7 +18,7 @@ const sortableContainer = (type, containerEl, toggleEl) => {
   sortable.option("disabled", true);
 
   toggleEl.addEventListener("click", () => {
-    // Flip editable state
+
     sortable.option("disabled", !sortable.option("disabled"));
 
     notifyEl.classList.toggle("edit-active");
@@ -33,8 +33,7 @@ const sortableContainer = (type, containerEl, toggleEl) => {
           payload: JSON.stringify(payload),
         },
       });
-
-      payload = []; // Reset payload
+      payload = [];
     }
   });
 };

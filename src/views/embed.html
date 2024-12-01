@@ -4,14 +4,16 @@
 <link rel="stylesheet" href="/css/embed.css">
 {% endblock %}
 {% block body %}
-<iframe src="https://player.twitch.tv/?channel={{channel}}&parent=localhost&muted=false"
-        frameborder="0"
-        allowfullscreen="true"
-        scrolling="no"
-        height="100%"
-        width="100%">
-</iframe>
+<!--<iframe-->
+<!--        src="https://player.twitch.tv/?channel={{channel}}&parent=localhost&muted=false"-->
+<!--        frameborder="0"-->
+<!--        allowfullscreen="true"-->
+<!--        scrolling="no"-->
+<!--        height="100%"-->
+<!--        width="100%">-->
+<!--</iframe>-->
 {% endblock %}
+<script src="/assets/js/socket_connect.js"></script>
 {% block fscripts %}
 <script></script>
 {% endblock %}

@@ -1,6 +1,14 @@
 // Define public configurations
 const PUBLIC_CONFIGS = {
-  signals: [
+    signals: [
+     {
+       theme: "aqua",
+       type: "feature",
+       description: "feature",
+       wait: "3000",
+       emoji: "✨",
+       label: "Feature",
+     },
     {
       theme: "orange",
       type: "ad",

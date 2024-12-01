@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- PRELOADS :: START -->
-    <!-- TODO: let's add a glob + preload generator here-->
-    <link rel="preload" priority="high" href="/media/assets-from-space.webp" as="image">
-    <link rel="preload" priority="high" href="/media/blueprint.webp" as="image">
-    <!-- PRELOADS :: END -->
+
+    <script defer src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script defer src="/js/generic_dialog.js" type="text/javascript"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jaro:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            font-family: "Jaro", sans-serif;
-        }
-    </style>
-    <link rel="stylesheet" href="/css/dialog.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jaro:wght@400;500;600;700&display=swap">
+
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/generic_dialog.css">
+
     {% block hscripts %}{% endblock %}
+
 </head>
 <body>
+
 {% block body %}{% endblock %}
 {% block fscripts %}{% endblock %}
-<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </body>
 </html>
