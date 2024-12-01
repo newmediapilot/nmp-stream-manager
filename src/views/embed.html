@@ -1,8 +1,17 @@
 <!-- src/views/embed.html -->
 {% extends "layouts/main.njk" %}
 {% block hscripts %}
-<!--<link rel="stylesheet" href="/css/dashboard.css">-->
+<link rel="stylesheet" href="/css/embed.css">
 {% endblock %}
 {% block body %}
-<!--<iframe src="https://player.twitch.tv/?channel=kittykosmos&parent=localhost" frameborder="0" allowfullscreen="true" scrolling="no" height="100%" width="100%"></iframe>-->
+<iframe src="https://player.twitch.tv/?channel={{channel}}&parent=localhost&muted=false"
+        frameborder="0"
+        allowfullscreen="true"
+        scrolling="no"
+        height="100%"
+        width="100%">
+</iframe>
+{% endblock %}
+{% block fscripts %}
+<script></script>
 {% endblock %}
