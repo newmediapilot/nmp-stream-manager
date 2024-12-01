@@ -1,3 +1,20 @@
-/* TODO create heart-container which is 100vw 100vh */
-/* TODO create a container heart emoji which is centered in a 200px x 200px box */
-/* TODO colorize the heart based on a --css-var (applied in heart.html)
+#heart-rate {
+    font-family: sans-serif;
+    font-weight: bolder;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: red;
+    text-align: center;
+    line-height: 1;
+    white-space: nowrap; /* Prevents text wrapping */
+}
+
+#heart-rate:after {
+    content: "♥";
+    display: inline;
+    color: red;
+    font-size: 120%;
+    margin-left: 3%;
+}

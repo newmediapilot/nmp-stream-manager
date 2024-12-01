@@ -1,23 +1,41 @@
-<!-- src/views/dashboard.html -->
+<!-- src/views/heart.html -->
 {% extends "layouts/main.njk" %}
 {% block hscripts %}
 <link rel="stylesheet" href="/css/heart.css">
 {% endblock %}
 {% block body %}
-<div class="heart-container">
-    ♥
-</div>
+<div id="heart-rate"></div>
 {% endblock %}
 {% block fscripts %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        // TODO: ping the heart rate ping server every 100ms
-        // TODO: extract the number into a variable
-        // TODO: measure from min 70 max 120 as a percentage
-        // TODO: multiply that percentage by 1000ms and then have the hart rate change at that interval
-        // TODO: reset the interval each time we ping so we get a new speed
-        // TODO: rotate between primary colors
-        // TODO: on error just put ... as the
+
+        const heartRateElement = document.querySelector('#heart-rate');
+
+        // Poll function
+        setInterval(async () => {
+            try {
+                const response = await axios.get("/public/heart/ping");
+                const heartRate = response.data;
+                heartRateElement.textContent = heartRate ? `${heartRate}` : '...';
+                console.log("Fetch heart rate:", heartRate);
+            } catch (error) {
+                heartRateElement.textContent = "...";
+                console.error("Failed to fetch heart rate:", error);
+            }
+            resizeHeartRate();
+        }, 1000);
+
+        // Resize function
+        function resizeHeartRate() {
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const fontSize = Math.min(viewportWidth, viewportHeight) * 0.5;
+            heartRateElement.style.fontSize = `${fontSize}px`;
+            console.error("resizeHeartRate:", viewportWidth,viewportHeight,heartRateElement.style.fontSize);
+        }
+
     });
 </script>
 {% endblock %}

@@ -6,8 +6,8 @@ require("./console"); // Set up console, keep!
 const open = require("open");
 const fs = require("fs");
 const https = require("https");
-const { configureNunjucks } = require("./nunjucks/config");
 const { setParam } = require("./store/manager");
+const { configureNunjucks } = require("./nunjucks/config");
 const { createHeartRateServer } = require("./sensor/listen");
 const { initializePublicConfigs } = require("./public/config");
 const { configureSocket } = require("./helper/socket"); // Use configureSocket for socket setup

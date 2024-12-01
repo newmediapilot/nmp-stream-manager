@@ -188,9 +188,6 @@ const publicConfigUpdate = (req, res) => {
     if (type === "signals") {
       putConfig("signals", applySignalsPayload(payload));
     }
-    if (type === "feature") {
-      putConfig("signals", applyFeaturePayload(payload));
-    }
     res.status(200).json({
       message: "Configuration for " + type + " updated successfully.",
     });
