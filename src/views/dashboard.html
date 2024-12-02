@@ -36,8 +36,7 @@
             document.querySelector("#button-grid--toggle"),
         );
 
-        const dataURL = document.querySelector("#qr-code-dialog-canvas").getAttribute('data-url');
-        generateQrCode(`https://${dataURL}`, "qr-code-dialog-canvas");
+        generateQrCode(document.querySelector("#qr-code-dialog-canvas").getAttribute('data-url'), "qr-code-dialog-canvas");
 
     });
 </script>
