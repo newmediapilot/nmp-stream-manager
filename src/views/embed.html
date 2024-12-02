@@ -13,15 +13,28 @@
         width="100%"
 >
 </iframe>
+
 {% endblock %}
 {% block fscripts %}
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         let embedActive = false;
+        let streamers = [
+            "deejaymakina",
+            "toenailcentral",
+            "djcristianadematos",
+            "avacrown_",
+            "djmissshelton",
+            "djmissshelton",
+            "djmikemorino",
+            "dirkneuenfels",
+        ];
         const twitchEmbed = document.querySelector('#twitch-embed');
         const toggleEmbed = (bool) => {
-            twitchEmbed.src = bool ? "https://player.twitch.tv/?channel=stonerkat_&parent=localhost&muted=false" : "";
+            const streamer = streamers[Math.floor(Math.random()*streamers.length)];
+            twitchEmbed.src = bool ? `https://player.twitch.tv/?channel=${toenailcentral}&parent=localhost&muted=false` : "";
             embedActive = bool;
+            streamers.push(streamers.shift());
         };
         socketConnect((payload) => ('feature:toggle' === payload) && toggleEmbed(!embedActive));
         toggleEmbed(false);
