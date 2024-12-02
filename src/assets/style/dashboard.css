@@ -28,13 +28,40 @@ body {
     align-content: stretch;
     justify-items: stretch;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(auto-fit, calc(25vh));
+    grid-template-rows: repeat(auto-fit, calc(20vh));
+    position: relative;
+}
+
+html.edit-active .button-grid {
+    padding-right: 50px;
+}
+
+.button-grid::after {
+    pointer-events: none;
+    width: 0px;
+    height: 100vh;
+    content: "";
+    display: block;
+    position: fixed;
+    right:0;
+    bottom:0;
+}
+
+html.edit-active .button-grid::after {
+    width: 50px;
+    background:
+            repeating-linear-gradient(45deg, rgba(0,0,0,0.5), rgba(75, 75, 75, 0.8) 8px),
+            repeating-linear-gradient(45deg, rgba(75, 75, 75, 0.8), rgba(0,0,0,0.5) 8px),
+            repeating-linear-gradient(-45deg, rgba(0,0,0,0.5), rgba(75, 75, 75, 0.8) 8px),
+            repeating-linear-gradient(-45deg, rgba(75, 75, 75, 0.8), rgba(0,0,0,0.5) 8px);
+    mix-blend-mode: multiply;
 }
 
 @media (min-aspect-ratio: 1/1) {
     .button-grid {
         width: 50%;
         margin-left: 25%;
+        grid-template-rows: repeat(auto-fit, calc(40vh));
     }
 }
 
@@ -45,7 +72,13 @@ body {
     overflow: hidden;
     border-radius: var(--border-radius);
     box-shadow: 8px 8px 15px 0px rgba(0, 0, 0, 0.75);
-    min-height: 25vh;
+    min-height: 20vh;
+}
+
+@media (min-aspect-ratio: 1/1) {
+    .button {
+        min-height: 40vh;
+    }
 }
 
 .button-grid img {
