@@ -1,0 +1,41 @@
+/* Disable text selection globally */
+* {
+    user-select: none; /* Prevent text selection */
+    -webkit-user-select: none; /* For Safari */
+    -ms-user-select: none; /* For older versions of IE */
+}
+
+/* Remove focus outlines and highlights */
+*:focus {
+    outline: none; /* Disable default focus outlines */
+    box-shadow: none; /* Remove any focus shadows */
+}
+
+/* Disable pointer events on focusable elements */
+*:focus-visible {
+    outline: none;
+}
+
+/* Disable tap highlight on mobile browsers */
+body {
+    -webkit-tap-highlight-color: transparent; /* For iOS and Android browsers */
+}
+
+/* Remove default browser styling for inputs and buttons */
+input, button, select, textarea {
+    border: none;
+    outline: none;
+    background: none;
+    appearance: none;
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* Prevent default drag-and-drop behavior */
+img, a {
+    -webkit-user-drag: none; /* Disable drag for images and links */
+    user-drag: none;
+}
