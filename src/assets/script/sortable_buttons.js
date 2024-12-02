@@ -3,12 +3,17 @@ const sortableContainer = (type, containerEl, toggleEl) => {
   let payload = [];
 
   const notifyEl = document.documentElement;
-  const states = ["✏Edit", "✅Done"];
+  const states = [
+    "<span><em>✏</em>Edit</span>",
+    "<span><em>✅</em>Done</span>",
+  ];
 
-  toggleEl.innerText = states[0];
+  toggleEl.innerHTML = states[0];
 
   const sortable = new Sortable(containerEl, {
     animation: 333,
+    forceFallback : true,
+    removeCloneOnHide: true,
     ghostClass: "pointer-events-none",
     onEnd: (event) => {
       payload.push(event.oldIndex);
@@ -25,7 +30,7 @@ const sortableContainer = (type, containerEl, toggleEl) => {
     notifyEl.classList.toggle("edit-active");
 
     const isDisabled = sortable.option("disabled");
-    toggleEl.innerText = isDisabled ? states[0] : states[1];
+    toggleEl.innerHTML = isDisabled ? states[0] : states[1];
 
     if (isDisabled) {
 
@@ -34,7 +39,10 @@ const sortableContainer = (type, containerEl, toggleEl) => {
           type,
           payload: JSON.stringify(payload),
         },
-      }).finally(socketEmitReload);
+      }).finally(()=>{
+        socketEmitReload();
+        document.querySelector("#menu-toggle").checked= false;
+      });
 
       payload = [];
     }
