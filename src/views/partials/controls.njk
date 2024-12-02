@@ -1,8 +1,17 @@
-{% set public_routes = 'public_routes' | getParam %}
+<div class="header">
+    <!-- Checkbox for toggling the menu -->
+    <input type="checkbox" id="menu-toggle" class="header--checkbox">
 
-<header class="header-grid">
-{#    <button class="header-grid--spare1">📦 Feature 3</button>#}
-{#    <button class="header-grid--spare2">🎁 Feature 4</button>#}
-    <button id="header-grid--qrcode" onclick="showDialog('qrcode_dialog', '🚀 QR Device Link', 'Opens this page on your mobile device.📱')">▨ Show Link</button>
-    <button id="header-grid--toggle"></button>
-</header>
+    <!-- Label acts as the toggle button -->
+    <label for="menu-toggle" class="header--toggle" aria-label="Toggle menu">⚙️</label>
+
+    <!-- Descendant Items (Menu) -->
+    <div class="header--items">
+        <button id="button-grid--qrcode" onclick="showDialog('qrcode_dialog', '🚀 QR Device Link', 'Opens this page on your mobile device.📱')">
+            ▨ Show Link
+        </button>
+        <button id="button-grid--toggle">Toggle Feature</button>
+        <button class="button-grid--spare1">📦 Feature 3</button>
+        <button class="button-grid--spare2">🎁 Feature 4</button>
+    </div>
+</div>

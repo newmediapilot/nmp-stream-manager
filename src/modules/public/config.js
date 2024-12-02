@@ -5,7 +5,7 @@ const PUBLIC_CONFIGS = {
        theme: "aqua",
        type: "feature",
        description: "feature:toggle",
-       wait: "100",
+       wait: "700",
        emoji: "✨",
        label: "Feature",
      },
