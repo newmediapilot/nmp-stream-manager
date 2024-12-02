@@ -39,3 +39,7 @@ img, a {
     -webkit-user-drag: none; /* Disable drag for images and links */
     user-drag: none;
 }
+
+button {
+    cursor: pointer;
+}
