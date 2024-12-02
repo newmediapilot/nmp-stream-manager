@@ -96,52 +96,52 @@ html.edit-active .button button {
 }
 
 .button-red button {
-    background-color: var(--button-red);
+    background: radial-gradient(circle, var(--button-red) 3px, #fff 3px) 50% 65%;
     color: var(--text-color-light);
 }
 
 .button-pink button {
-    background-color: var(--button-pink);
+    background: radial-gradient(circle, var(--button-pink) 3px, #fff 3px) 50% 65%;
     color: var(--text-color-light);
 }
 
 .button-blue button {
-    background-color: var(--button-blue);
+    background: radial-gradient(circle, var(--button-blue) 3px, #fff 3px) 50% 65%;
     color: var(--text-color-light);
 }
 
 .button-aqua button {
-    background-color: var(--button-aqua);
+    background: radial-gradient(circle, var(--button-aqua) 3px, #fff 3px) 50% 65%;
     color: var(--text-color-dark);
 }
 
 .button-black button {
-    background-color: var(--button-black);
+    background: radial-gradient(circle, var(--button-black) 3px, #fff 3px) 50% 65%;
     color: var(--text-color-light);
 }
 
 .button-orange button {
-    background-color: var(--button-orange);
+    background: radial-gradient(circle, var(--button-orange) 3px, #fff 3px) 50% 65%;
     color: var(--text-color-dark);
 }
 
 .button-purple button {
-    background-color: var(--button-purple);
+    background: radial-gradient(circle, var(--button-purple) 3px, #fff 3px) 50% 65%;
     color: var(--text-color-light);
 }
 
 .button-bloodorange button {
-    background-color: var(--button-bloodorange);
+    background: radial-gradient(circle, var(--button-bloodorange) 3px, #fff 3px) 50% 65%;
     color: var(--text-color-light);
 }
 
 .button-deepyellow button {
-    background-color: var(--button-deepyellow);
+    background: radial-gradient(circle, var(--button-deepyellow) 3px, #fff 3px) 50% 65%;
     color: var(--text-color-dark);
 }
 
 .button-green button {
-    background-color: var(--button-green);
+    background: radial-gradient(circle, var(--button-green) 3px, #fff 3px) 50% 65%;
     color: var(--text-color-light);
 }
 
