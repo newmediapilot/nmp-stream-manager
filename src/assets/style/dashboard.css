@@ -21,10 +21,15 @@
     --button-green: #14532d;
 }
 
+html, body {
+    overscroll-behavior: contain;
+}
+
 html {
     background: url("/image/assets-from-space.webp");
     background-size: cover;
     background-attachment: fixed;
+    overflow-y: scroll;
 }
 
 html.edit-active {
@@ -34,9 +39,10 @@ html.edit-active {
 }
 
 body {
-    background: none;
-    min-height: 100vh;
+    scroll-snap-type: y mandatory;
     overflow-x: hidden;
+    overflow-y: scroll;
+    background: none;
     padding:0;
     margin:0;
 }
