@@ -18,10 +18,10 @@
             try {
                 const response = await axios.get("/public/heart/ping");
                 const heartRate = response.data;
-                heartRateElement.textContent = heartRate ? `${heartRate}` : '...';
+                heartRateElement.textContent = heartRate ? `${heartRate}` : 'BPM';
                 console.log("Fetch heart rate:", heartRate);
             } catch (error) {
-                heartRateElement.textContent = "...";
+                heartRateElement.textContent = "BPM";
                 console.error("Failed to fetch heart rate:", error);
             }
             resizeHeartRate();
