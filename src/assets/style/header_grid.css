@@ -19,17 +19,16 @@
 .header--toggle {
     position: relative;
     background: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2.5rem;
     line-height: 2.5rem;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
 }
 
 /* Menu Items (Initially Hidden) */
@@ -37,16 +36,20 @@
     display: none;
     flex-direction: column;
     background: #fff;
-    border: none;
     border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: absolute;
     bottom: 80px;
     left: 50%;
     transform: translateX(-50%);
     min-width: 200px;
     text-align: left;
+}
+
+.header--items em {
+    font-style: normal;
+    display:inline-block;
+    min-width: 1.5em;
+    text-align: center;
 }
 
 /* Show menu when checkbox is checked */
@@ -57,16 +60,24 @@
 /* Menu Appearing Above */
 .header--items {
     bottom: calc(100% + 10px);
+    padding: 10px;
 }
 
 /* Individual Menu Buttons */
 .header--items button {
-    background: none;
     border: none;
     text-align: left;
     font-size: 1.5rem;
-    padding: 10px 20px;
     width: 100%;
     cursor: pointer;
-    transition: background-color 0.2s;
+    padding: 5px 0;
+}
+
+/* Hide dropdown when `edit-active` */
+html.edit-active .header--items {
+    min-width: auto;
+}
+html.edit-active .header--toggle,
+html.edit-active .header--items button:not(#button-grid--toggle) {
+    display: none;
 }
