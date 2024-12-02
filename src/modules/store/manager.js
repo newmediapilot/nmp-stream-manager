@@ -24,12 +24,13 @@ let secrets = null;
 // Light debugging effort
 const allowedParams = [
   "dashboard_signals_config",
+  "device_ip",
+  "sensor_heart_rate",
   "twitch_login_referrer",
   "twitch_broadcaster_id_set",
   "twitch_access_token_set",
   "twitch_refresh_token_set",
   "twitch_channel_id_set",
-  "sensor_heart_rate",
 ];
 
 function loadSecrets() {

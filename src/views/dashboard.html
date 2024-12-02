@@ -29,11 +29,16 @@
 {{ qrcode_dialog("qrcode_dialog") }}
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+
         sortableContainer(
             "signals",
             document.querySelector(".button-grid"),
             document.querySelector("#button-grid--toggle"),
         );
+
+        const dataURL = document.querySelector("#qr-code-dialog-canvas").getAttribute('data-url');
+        generateQrCode(`https://${dataURL}`, "qr-code-dialog-canvas");
+
     });
 </script>
 {% endblock %}

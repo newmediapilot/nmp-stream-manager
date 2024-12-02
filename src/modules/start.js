@@ -6,6 +6,7 @@ require("./console"); // Set up console, keep!
 const open = require("open");
 const fs = require("fs");
 const https = require("https");
+const { getIp } = require("./helper/ip");
 const { setParam } = require("./store/manager");
 const { configureNunjucks } = require("./nunjucks/config");
 const { createHeartRateServer } = require("./sensor/listen");
@@ -19,6 +20,9 @@ const ROUTES = require("../routes");
  */
 async function startServices(app) {
   try {
+    // Store internal IP
+    setParam("device_ip", getIp());
+
     // Export public routes
     setParam("public_routes", ROUTES);
 
