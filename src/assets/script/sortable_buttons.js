@@ -1,13 +1,5 @@
 const sortableContainer = (type, containerEl, toggleEl) => {
 
-  function roundBodyHeightToNearest25vh() {
-    const clientHeight = document.body.clientHeight;
-    const containerHeight = containerEl.clientHeight;
-    console.log('clientHeight', clientHeight);
-    console.log('containerHeight', containerHeight);
-    // document.body.style.height = `${roundedHeight}px`;
-  }
-
   let payload = [];
 
   const notifyEl = document.documentElement;
@@ -44,11 +36,5 @@ const sortableContainer = (type, containerEl, toggleEl) => {
       });
       payload = [];
     }
-
-    // Necessary hack
-    roundBodyHeightToNearest25vh();
-
   });
-
-  roundBodyHeightToNearest25vh();
 };
