@@ -1,0 +1,22 @@
+:root {
+    --color-idle: #4b4b4b;
+    --color-hover: #0056b3;
+    --color-active: #003f7f;
+    --color-loading: #ffc107;
+    --color-success: #28a745;
+    --color-error: #dc3545;
+    --text-color-light: white;
+    --text-color-dark: black;
+    --border-radius: 15px;
+
+    --button-red: #e63946;
+    --button-pink: #ff79c6;
+    --button-blue: #4a90e2;
+    --button-aqua: #56cfe1;
+    --button-black: #222;
+    --button-orange: #f77f00;
+    --button-purple: #9b5de5;
+    --button-bloodorange: #ff4500;
+    --button-deepyellow: #ffc300;
+    --button-green: #14532d;
+}
