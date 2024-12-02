@@ -19,7 +19,7 @@
             data-wait="{{ config.wait }}"
             data-href="{{ public_routes.PUBLIC_SIGNAL_CREATE }}?type={{ config.type }}&description={{ config.description }}"
             onclick="javascript:sendSignal(this)">
-            {{ config.emoji }} {{ config.label }}
+            <div>{{ config.emoji }} {{ config.label }}</div>
         </button>
     </div>
     {% endfor %}
