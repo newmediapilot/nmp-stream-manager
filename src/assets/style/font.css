@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Jaro:wght@400;500;600;700&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Jaro:wght@400;500;600;700&display=swap');*/
 
 * {
-    font-family: "Jaro", sans-serif;
+    font-family: sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     font-smooth: always;
+    font-weight: bolder;
 }
