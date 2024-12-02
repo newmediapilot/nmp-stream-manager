@@ -92,7 +92,7 @@ html.edit-active .button button {
 }
 
 .button button:active::after {
-    mix-blend-mode: multiply;
+    box-shadow: inset 0px 0px 50px 25px rgba(255, 255, 255, 1);
 }
 
 .button-red button {
