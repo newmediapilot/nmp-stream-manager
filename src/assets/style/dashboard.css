@@ -23,12 +23,12 @@
 }
 
 html {
-    background: url("/media/assets-from-space.webp");
+    background: url("/image/assets-from-space.webp");
     background-size: cover;
 }
 
 html.edit-active {
-    background: url("/media/blueprint.webp");
+    background: url("/image/blueprint.webp");
     background-size: cover;
 }
 

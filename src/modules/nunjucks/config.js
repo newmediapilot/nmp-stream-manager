@@ -6,6 +6,7 @@
 const nunjucks = require("nunjucks");
 const express = require("express");
 const { getParam, getAllParams } = require("../store/manager");
+const { generateAssetLinks } = require("../nunjucks/preload.filter");
 
 /**
  * Configures Nunjucks for the provided Express app.
@@ -22,6 +23,7 @@ const configureNunjucks = (app) => {
   nunjucksEnv.addFilter("getParam", getParam);
   nunjucksEnv.addFilter("getAllParams", getAllParams);
   nunjucksEnv.addFilter("urlencode", encodeURIComponent);
+  nunjucksEnv.addFilter("generateAssetLinks", generateAssetLinks);
 
   app.set("view engine", "html");
 
