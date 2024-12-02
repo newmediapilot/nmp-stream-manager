@@ -15,7 +15,7 @@ const PUBLIC_CONFIGS = {
       description: "30",
       wait: "30000",
       emoji: "📢",
-      label: "Start Ad (30s)",
+      label: "30s",
     },
     {
       theme: "orange",
@@ -23,7 +23,7 @@ const PUBLIC_CONFIGS = {
       description: "60",
       wait: "60000",
       emoji: "📢",
-      label: "Start Ad (60s)",
+      label: "60s",
     },
     {
       theme: 'orange',
@@ -31,7 +31,7 @@ const PUBLIC_CONFIGS = {
       description: '120',
       wait: '120000',
       emoji: '📢',
-      label: 'Start Ad (2min)',
+      label: '2min',
     },
     {
       theme: 'orange',
@@ -39,15 +39,15 @@ const PUBLIC_CONFIGS = {
       description: '180',
       wait: '180000',
       emoji: '📢',
-      label: 'Start Ad (3min)',
+      label: '3min',
     },
     {
       theme: 'aqua',
       type: 'heart',
       description: 'heart',
       wait: '100',
-      emoji: '❤️',
-      label: 'Heart Rate',
+      emoji: '❤',
+      label: 'Heart',
     },
     {
       theme: 'purple',
@@ -70,8 +70,8 @@ const PUBLIC_CONFIGS = {
       type: 'mark',
       description: 'match:checkpoint',
       wait: '100',
-      emoji: '✔️',
-      label: 'Tick',
+      emoji: '🧐',
+      label: 'Ping',
     },
     {
       theme: 'deepyellow',
@@ -87,7 +87,7 @@ const PUBLIC_CONFIGS = {
       description: 'match:complete',
       wait: '100',
       emoji: '👾',
-      label: 'Game Over',
+      label: 'Exit',
     },
   ],
 };
