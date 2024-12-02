@@ -30,6 +30,7 @@ html {
 html.edit-active {
     background: url("/image/blueprint.webp");
     background-size: cover;
+    background-attachment: fixed;
 }
 
 body {
@@ -47,12 +48,10 @@ button {
 
 .button-grid {
     display: grid;
-    width: 100%;
-    min-height: 100vh;
     margin: 0;
-    align-items: stretch;
+    align-content: stretch;
     justify-items: stretch;
-    grid-template-rows: repeat(auto-fill, 25vh);
+    grid-template-rows: repeat(auto-fit, calc(25vh - 1px));
 }
 
 @media (min-aspect-ratio: 1/1) {
@@ -74,7 +73,7 @@ button {
     overflow: hidden;
     border-radius: var(--border-radius);
     box-shadow: 8px 8px 15px 0px rgba(0, 0, 0, 0.75);
-    margin: 3%;
+    min-height: 25vh;
 }
 
 .button-grid img {
@@ -88,7 +87,7 @@ button {
     height: 100%;
     font-size: clamp(24px, 3vw, 48px);
     color: var(--text-color-light);
-    border: 0px solid rgba(255, 255, 255, 0.55);
+    border: 10px solid rgba(255, 255, 255, 0.55);
     border-radius: var(--border-radius);
     text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
     overflow: hidden;
