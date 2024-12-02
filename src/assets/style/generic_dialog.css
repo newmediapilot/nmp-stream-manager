@@ -8,8 +8,6 @@ dialog[open].dialog-container {
     box-shadow: 8px 8px 15px 0px rgba(0, 0, 0, 0.75);
     z-index: 1001;
     overflow: hidden;
-    margin-left: 24px;
-    margin-right: 24px;
 }
 
 dialog:-internal-dialog-in-top-layer::backdrop {
