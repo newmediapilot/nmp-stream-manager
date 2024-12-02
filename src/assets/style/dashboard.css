@@ -57,7 +57,7 @@ button {
     margin: 0;
     align-content: stretch;
     justify-items: stretch;
-    grid-template-rows: repeat(auto-fit, calc(25vh - 1px));
+    grid-template-rows: repeat(auto-fit, calc(25dvh - 1px));
 }
 
 @media (min-aspect-ratio: 1/1) {
@@ -79,7 +79,7 @@ button {
     overflow: hidden;
     border-radius: var(--border-radius);
     box-shadow: 8px 8px 15px 0px rgba(0, 0, 0, 0.75);
-    min-height: 25vh;
+    min-height: 25dvh;
 }
 
 .button-grid img {
