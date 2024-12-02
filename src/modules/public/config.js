@@ -47,7 +47,7 @@ const PUBLIC_CONFIGS = {
       description: 'heart',
       wait: '100',
       emoji: '❤',
-      label: 'Heart',
+      label: 'BPM',
     },
     {
       theme: 'purple',
