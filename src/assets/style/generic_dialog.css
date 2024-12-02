@@ -1,3 +1,42 @@
-.dialog-container {
-    /* TODO: style dialog to be less sketchy */
+dialog[open].dialog-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: 30px;
+    border-width: 10px;
+    border-color: #000000;
+    border-style: solid;
+    box-shadow: 8px 8px 15px 0px rgba(0, 0, 0, 0.75);
+    z-index: 1001;
+    overflow: hidden;
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+dialog:-internal-dialog-in-top-layer::backdrop {
+    background: #000;
+    opacity: .8;
+}
+
+.dialog-container .dialog--title {
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.dialog-container .dialog--body {
+    text-align: center;
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+.dialog-container canvas {
+    margin: 0 auto;
+    width: 280px;
+    height: 280px;
+}
+
+.dialog-container button {
+    align-self: end;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 24px;
 }

@@ -8,7 +8,7 @@
 
     <meta name="viewport" content="width=device-width">
 
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="manifest" href="/manifest.json">
 
@@ -29,9 +29,9 @@
     <script defer src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 
     <!-- LOCAL -->
-    {% set assetLinks = "" | generateAssetLinks %}
-    {% for link in assetLinks %}<link rel="preload" as="{{ link.type }}" href="{{ link.href | safe }}">
-    {% endfor %}
+{#    {% set assetLinks = "" | generateAssetLinks %}#}
+{#    {% for link in assetLinks %}<link rel="preload" as="{{ link.type }}" href="{{ link.href | safe }}">#}
+{#    {% endfor %}#}
 
     <script defer src="/script/generate_qr_code.js?={{cache_buster}}" type="text/javascript"></script>
     <script defer src="/script/generic_dialog.js?={{cache_buster}}" type="text/javascript"></script>

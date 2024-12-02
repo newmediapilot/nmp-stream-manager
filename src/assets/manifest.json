@@ -17,7 +17,6 @@
   ],
   "orientation": "portrait",
   "display": "standalone",
-  "dir": "left",
   "lang": "en-US",
   "name": "StreamDream",
   "short_name": "StreamDream",

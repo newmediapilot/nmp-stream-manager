@@ -1,11 +1,11 @@
 function showDialog(id, title, body) {
-  const dialog = document.getElementById(id);
+  const dialog = document.querySelector(`#${id}`)
   document.querySelector("#menu-toggle").checked= false;
-  dialog.querySelector(".dialog--title").innerText = title;
-  dialog.querySelector(".dialog--body").innerText = body;
+  dialog.querySelector(".dialog--title").innerHTML = title;
+  dialog.querySelector(".dialog--body").innerHTML = body;
   dialog.showModal();
 }
 
 function closeDialog(id) {
-  document.getElementById(id).close();
+  document.querySelector(`#${id}`).close();
 }
