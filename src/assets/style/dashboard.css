@@ -55,6 +55,13 @@ body {
     grid-template-rows: repeat(auto-fit, calc(25vh));
 }
 
+@media (min-aspect-ratio: 1/1) {
+    .button-grid {
+        width: 50%;
+        margin-left: 25%;
+    }
+}
+
 .button {
     display: flex;
     justify-content: center;
