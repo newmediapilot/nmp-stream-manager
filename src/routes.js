@@ -14,7 +14,7 @@ const ROUTES = {
   PUBLIC_EMBED: "/public/embed",
   PUBLIC_HEART_EMBED: "/public/heart/embed",
   PUBLIC_HEART_PING: "/public/heart/ping",
-  PUBLIC_SIGNAL_CREATE: "/public/signal/update",
+  PUBLIC_SIGNAL_CREATE: "/public/signal/create",
   PUBLIC_CONFIG_UPDATE: "/public/config/create",
 };
 

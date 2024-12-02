@@ -3,7 +3,7 @@ const sortableContainer = (type, containerEl, toggleEl) => {
   let payload = [];
 
   const notifyEl = document.documentElement;
-  const states = ["✏ Edit", "✅ Done"];
+  const states = ["✏Edit", "✅Done"];
 
   toggleEl.innerText = states[0];
 
@@ -28,13 +28,16 @@ const sortableContainer = (type, containerEl, toggleEl) => {
     toggleEl.innerText = isDisabled ? states[0] : states[1];
 
     if (isDisabled) {
+
       axios.get("/public/config/create", {
         params: {
           type,
           payload: JSON.stringify(payload),
         },
-      });
+      }).finally(socketEmitReload);
+
       payload = [];
     }
   });
+
 };

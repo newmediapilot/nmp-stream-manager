@@ -14,6 +14,7 @@ const sendSignal = (el) => {
     };
 
     setState(sendingText, true, 'loading');
+
     const getRes = axios.get(el.getAttribute('data-href'));
 
     getRes.then(getRes => {

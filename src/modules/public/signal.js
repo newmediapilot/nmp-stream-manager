@@ -48,6 +48,10 @@ async function publicSignalCreate(req, res) {
       result = await sendPayload(description);
     }
 
+    if ("browser" === type) {
+      if ("reload" === description) result = await sendPayload([type, description].join(":"));
+    }
+
     if (!result) {
       isCreating = false;
       return res.status(400).send("Error: " + type);
