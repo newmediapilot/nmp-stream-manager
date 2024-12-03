@@ -8,7 +8,7 @@
     color: red;
     text-align: center;
     line-height: 1;
-    white-space: nowrap; /* Prevents text wrapping */
+    white-space: nowrap;
 }
 
 #heart-rate:after {
