@@ -1,41 +1,45 @@
 {% extends "layouts/main.njk" %}
 {% set cache_buster = "" | currentTime %}
 {% block hscripts %}
-<link rel="stylesheet" href="/css/settings.csscb={{cache_buster}}">
+<link rel="stylesheet" href="/style/settings.css?cb={{cache_buster}}">
 {% endblock %}
 {% block body %}
 {% include "partials/controls.njk" %}
+<nav class="settings-nav">
+    <ul>
+        <li><a href="#feature">Featured Streamers</a></li>
+        <li><a href="#ad">Ads</a></li>
+        <li><a href="#heart">Heart rate</a></li>
+        <li><a href="#mark">Markers</a></li>
+    </ul>
+</nav>
 <ul class="settings-container">
     {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "feature" %}
-    <li id="{{ signal.type }}">Featured Streamers:</li>
+    <li class="settings-container--header" id="{{ signal.type }}">Featured Streamers:</li>
     <li>
         <strong>Label:</strong> {{ signal.label }} <br>
-        <strong>Type:</strong> {{ signal.type }} <br>
         <strong>Theme:</strong> {{ signal.theme }} <br>
         <strong>Emoji:</strong> {{ signal.emoji }}
     </li>
     {% elseif signal.type == "ad" %}
-    <li id="{{ signal.type }}">Advertisements:</li>
+    <li class="settings-container--header" id="{{ signal.type }}">Ads:</li>
     <li>
         <strong>Label:</strong> {{ signal.label }} <br>
-        <strong>Type:</strong> {{ signal.type }} <br>
         <strong>Theme:</strong> {{ signal.theme }} <br>
         <strong>Emoji:</strong> {{ signal.emoji }}
     </li>
     {% elseif signal.type == "heart" %}
-    <li id="{{ signal.type }}">Heart rate:</li>
+    <li class="settings-container--header" id="{{ signal.type }}">Heart rate:</li>
     <li>
         <strong>Label:</strong> {{ signal.label }} <br>
-        <strong>Type:</strong> {{ signal.type }} <br>
         <strong>Theme:</strong> {{ signal.theme }} <br>
         <strong>Emoji:</strong> {{ signal.emoji }}
     </li>
     {% elseif signal.type == "mark" %}
-    <li id="{{ signal.type }}">Markers:</li>
+    <li class="settings-container--header" id="{{ signal.type }}">Markers:</li>
     <li>
         <strong>Label:</strong> {{ signal.label }} <br>
-        <strong>Type:</strong> {{ signal.type }} <br>
         <strong>Theme:</strong> {{ signal.theme }} <br>
         <strong>Emoji:</strong> {{ signal.emoji }}
     </li>
