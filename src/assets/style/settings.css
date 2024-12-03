@@ -1,3 +1,10 @@
 .settings-container {
     
 }
+
+@media (min-aspect-ratio: 1/1) {
+    .settings-container {
+        width: 50%;
+        margin-left: 25%;
+    }
+}
