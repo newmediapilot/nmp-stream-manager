@@ -16,31 +16,68 @@
 <ul class="settings-container">
     {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "feature" %}
-    <li class="settings-container--header" id="{{ signal.type }}">Featured Streamers:</li>
-    <li>
-        <strong>Label:</strong> {{ signal.label }} <br>
-        <strong>Theme:</strong> {{ signal.theme }} <br>
-        <strong>Emoji:</strong> {{ signal.emoji }}
+    <li class="settings-container--header" id="{{ signal.type }}">
+        Featured Streamers:
+        <button>Add Streamer</button>
+        <button>Edit Theme</button>
     </li>
-    {% elseif signal.type == "ad" %}
+    <li>
+        <input type="text" value="{{ signal.label }}"><input>
+        <input type="text" value="{{ signal.emoji }}"><input>
+        <div>Online Status: On/Off</div>
+        <button>Edit</button>
+        <button>Delete</button>
+    </li>
+    {% endif %}
+    {% endfor %}
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <!---->
+    <!---->
+    <!---->
+    {% for signal in "dashboard_signals_config" | getParam %}
+    {% if signal.type == "ad" %}
     <li class="settings-container--header" id="{{ signal.type }}">Ads:</li>
     <li>
         <strong>Label:</strong> {{ signal.label }} <br>
-        <strong>Theme:</strong> {{ signal.theme }} <br>
         <strong>Emoji:</strong> {{ signal.emoji }}
     </li>
-    {% elseif signal.type == "heart" %}
+    {% endif %}
+    {% endfor %}
+    <!---->
+    <!---->
+    <!---->
+    {% for signal in "dashboard_signals_config" | getParam %}
+    {% if signal.type == "heart" %}
     <li class="settings-container--header" id="{{ signal.type }}">Heart rate:</li>
     <li>
         <strong>Label:</strong> {{ signal.label }} <br>
-        <strong>Theme:</strong> {{ signal.theme }} <br>
         <strong>Emoji:</strong> {{ signal.emoji }}
     </li>
-    {% elseif signal.type == "mark" %}
+    {% endif %}
+    {% endfor %}
+    <!---->
+    <!---->
+    <!---->
+    {% for signal in "dashboard_signals_config" | getParam %}
+    {% if signal.type == "mark" %}
     <li class="settings-container--header" id="{{ signal.type }}">Markers:</li>
     <li>
         <strong>Label:</strong> {{ signal.label }} <br>
-        <strong>Theme:</strong> {{ signal.theme }} <br>
         <strong>Emoji:</strong> {{ signal.emoji }}
     </li>
     {% endif %}
