@@ -28,6 +28,6 @@ div::after {
     font-size: 4rem;
     right:60px;
     bottom:60px;
-    background: white
+    background: white;
     padding: 10px 0 10px 0;
 }
