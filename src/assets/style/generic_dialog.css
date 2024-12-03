@@ -2,7 +2,7 @@ dialog[open].dialog-container {
     display: grid;
     grid-template-columns: 1fr;
     border-radius: 30px;
-    border-width: 10px;
+    border-width: 30px;
     border-color: #000000;
     border-style: solid;
     box-shadow: 8px 8px 15px 0px rgba(0, 0, 0, 0.75);
