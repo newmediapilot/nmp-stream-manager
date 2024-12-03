@@ -1,14 +1,9 @@
 <div class="header">
-    <!-- Checkbox for toggling the menu -->
     <input type="checkbox" id="menu-toggle" class="header--checkbox">
-
-    <!-- Label acts as the toggle button -->
     <label for="menu-toggle" class="header--toggle" aria-label="Toggle menu">⚙</label>
-
-    <!-- Descendant Items (Menu) -->
     <div class="header--items">
-        <button id="button-grid--qrcode" onclick="showDialog('qrcode_dialog', '🚀 QR Device Link', 'Opens this page on your mobile device.📱')">
-            <em>▨</em>Show Link
+        <button id="button-grid--qrcode" onclick="showDialog('qrcode_dialog', '📱 QR Device Link', 'Use your camera to open this dashboard on any device.')">
+            <em>📱</em>Show Link
         </button>
         <button id="button-grid--toggle">Toggle Feature</button>
         <button class="button-grid--spare1" onclick="javascript:window.location.href='/twitch/login'"><em>👤</em>Login</button>
