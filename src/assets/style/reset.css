@@ -1,14 +1,14 @@
 /* Disable text selection globally */
 * {
-    user-select: none; /* Prevent text selection */
-    -webkit-user-select: none; /* For Safari */
-    -ms-user-select: none; /* For older versions of IE */
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 /* Remove focus outlines and highlights */
 *:focus {
-    outline: none; /* Disable default focus outlines */
-    box-shadow: none; /* Remove any focus shadows */
+    outline: none;
+    box-shadow: none; /* Disable default focus outlines */
 }
 
 /* Disable pointer events on focusable elements */
@@ -18,7 +18,7 @@
 
 /* Disable tap highlight on mobile browsers */
 body {
-    -webkit-tap-highlight-color: transparent; /* For iOS and Android browsers */
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* Remove default browser styling for inputs and buttons */
@@ -27,8 +27,8 @@ input, button, select, textarea {
     outline: none;
     background: none;
     appearance: none;
-    -webkit-appearance: none; /* For Safari */
-    -moz-appearance: none; /* For Firefox */
+    -webkit-appearance: none;
+    -moz-appearance: none;
     padding: 0;
     margin: 0;
     box-shadow: none;
@@ -36,8 +36,13 @@ input, button, select, textarea {
 
 /* Prevent default drag-and-drop behavior */
 img, a {
-    -webkit-user-drag: none; /* Disable drag for images and links */
+    -webkit-user-drag: none;
     user-drag: none;
+}
+
+p {
+    margin: 0;
+    padding: 0;
 }
 
 button {
