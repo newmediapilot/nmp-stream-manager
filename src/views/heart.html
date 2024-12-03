@@ -31,7 +31,7 @@
         function resizeHeartRate() {
             const viewportWidth = window.innerWidth;
             const viewportHeight = window.innerHeight;
-            const fontSize = Math.min(viewportWidth, viewportHeight) * 0.5;
+            const fontSize = Math.min(viewportWidth, viewportHeight) * 0.3;
             heartRateElement.style.fontSize = `${fontSize}px`;
             console.error("resizeHeartRate:", viewportWidth,viewportHeight,heartRateElement.style.fontSize);
         }
