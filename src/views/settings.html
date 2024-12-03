@@ -1,44 +1,15 @@
 <!-- src/views/settings.html -->
 {% extends "layouts/main.njk" %}
-{% from "macros/form_loop.njk" import form_href_el %}
-{% from "macros/qrcode_dialog.njk" import qrcode_dialog %}
 {% block hscripts %}
 <link rel="stylesheet" href="/style/settings.css">
 {% endblock %}
 {% block body %}
-{% include "partials/controls.njk" %}
 <div class="button-grid">
     {% set public_routes = 'public_routes' | getParam %}
-    {% for config in 'dashboard_signals_config' | getParam %}
-    <div class="button button-{{ config.theme }}">
-        <button
-                data-state="idle"
-                data-sending="Sending"
-                data-error="Error"
-                data-success="Success"
-                data-wait="{{ config.wait }}"
-                data-href="{{ public_routes.PUBLIC_SIGNAL_CREATE }}?type={{ config.type }}&description={{ config.description }}"
-                onclick="javascript:sendSignal(this)">
-            <div>{{ config.emoji }} {{ config.label }}</div>
-        </button>
-    </div>
-    {% endfor %}
+    {% set dashboard_signals_config = 'dashboard_signals_config' | getParam %}
 </div>
 {% endblock %}
 {% block fscripts %}
-{{ qrcode_dialog("qrcode_dialog") }}
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-
-        sortableContainer(
-            "signals",
-            document.querySelector(".button-grid"),
-            document.querySelector("#button-grid--toggle"),
-        );
-
-        generateQrCode(document.querySelector("#qr-code-dialog-canvas").getAttribute('data-url'), "qr-code-dialog-canvas");
-
-        socketWatchReload();
-    });
 </script>
 {% endblock %}
