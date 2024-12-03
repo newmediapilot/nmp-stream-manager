@@ -4,14 +4,12 @@
 <link rel="stylesheet" href="/style/embed.css">
 {% endblock %}
 {% block body %}
-<iframe
-        id="twitch-embed"
+<iframe id="twitch-embed"
         frameborder="0"
         allowfullscreen="true"
         scrolling="no"
         height="100%"
-        width="100%"
->
+        width="100%">
 </iframe>
 <div>
     <canvas id="streamer-qr-code"></canvas>
@@ -32,13 +30,19 @@
             "lionastone",
         ];
         const twitchEmbed = document.querySelector('#twitch-embed');
+        const qrCode = document.getElementById('streamer-qr-code');
         const toggleEmbed = (bool, streamerName) => {
-            const streamer = streamerName || streamers[Math.floor(Math.random()*streamers.length)];
+            const streamer = streamerName || streamers[Math.floor(Math.random() * streamers.length)];
             const URL = `https://player.twitch.tv/?channel=${streamer}&parent=localhost&muted=false`;
             twitchEmbed.src = bool ? URL : "";
-            embedActive = bool;
             streamers.push(streamers.shift());
-            generateQrCode(URL, 'streamer-qr-code');
+            if (bool) {
+                generateQrCode(URL, 'streamer-qr-code');
+                qrCode.style.display = 'initial';
+            } else {
+                qrCode.style.display = 'none';
+            }
+            embedActive = bool;
         };
         socketConnect((payload) => ('feature:toggle' === payload) && toggleEmbed(!embedActive));
         toggleEmbed(true, 'aaknot');
