@@ -18,34 +18,21 @@
 {% block fscripts %}
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        let embedActive = false;
-        let streamers = [
-            "stonerkat_",
-            "toenailcentral",
-            "machoot",
-            "kittykosmos",
-            "djcristianadematos",
-            "avacrown_",
-            "vera_vex",
-            "lionastone",
-        ];
         const twitchEmbed = document.querySelector('#twitch-embed');
-        const qrCode = document.getElementById('streamer-qr-code');
-        const toggleEmbed = (bool, streamerName) => {
+        const reloadEmbed = (bool, streamerName) => {
             const streamer = streamerName || streamers[Math.floor(Math.random() * streamers.length)];
             const URL = `https://player.twitch.tv/?channel=${streamer}&parent=localhost&muted=false`;
-            twitchEmbed.src = bool ? URL : "";
-            streamers.push(streamers.shift());
             if (bool) {
+                twitchEmbed.src = URL;
                 generateQrCode(URL, 'streamer-qr-code');
-                qrCode.style.display = 'initial';
             } else {
-                qrCode.style.display = 'none';
+                document.documentElement.style.display = 'none';
+                twitchEmbed.src = "";
             }
             embedActive = bool;
         };
-        socketConnect((payload) => ('feature:toggle' === payload) && toggleEmbed(!embedActive));
-        toggleEmbed(true, 'aaknot');
+        socketConnect((payload) => ('feature:toggle' === payload) && reloadEmbed(!embedActive));
+        reloadEmbed(true, 'aaknot');
     });
 </script>
 {% endblock %}
