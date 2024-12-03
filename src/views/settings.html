@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="/css/settings.css">
 {% endblock %}
 {% block body %}
+{% include "partials/controls.njk" %}
 <ul class="settings-container">
     {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "feature" %}
