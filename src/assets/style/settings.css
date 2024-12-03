@@ -5,6 +5,7 @@
     overflow-y: scroll;
     position: relative;
     margin: 0;
+    padding: 0;
     font-size: 300%;
 }
 
@@ -21,7 +22,6 @@
     border-bottom: 20px solid rgba(255, 255, 255, 0.1);
     border-left: 20px solid rgba(255, 255, 255, 0.4);
     position: sticky;
-    background: white;
     height: 5vh;
     top: 0;
     display: flex;
@@ -46,5 +46,49 @@
 }
 
 .settings-editor {
+    display: grid;
+    grid-template-columns: repeat(6, calc(100%/6));
+    background: blue;
+    min-height: 5vh;
+}
 
+.settings-editor * {
+    font-size: 25px;
+}
+
+.settings-editor > [type="text"] {
+    grid-column: span 2;
+}
+
+.settings-editor > :not([type="text"]){
+    grid-column: span 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 0;
+}
+
+.settings-editor button:nth-of-type(1) {
+    background: orange;
+}
+
+.settings-editor button:nth-of-type(2) {
+    background: red;
+}
+
+#emoji-widget {
+    margin:0;
+    padding:0;
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+}
+
+#emoji-widget li {
+    box-shadow: inset 0 0 5px 5px gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 0;
+    height: 10vh;
+    border-radius: 5px;
 }
