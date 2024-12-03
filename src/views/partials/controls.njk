@@ -3,13 +3,13 @@
     <input type="checkbox" id="menu-toggle" class="header--checkbox">
     <label for="menu-toggle" class="header--toggle" aria-label="Toggle menu">⚙</label>
     <div class="header--items">
-        <button id="button-grid--qrcode" onclick="showDialog('qrcode_dialog', '📱 QR Device Link', 'Use your camera to open this dashboard on any device.')">
+        <button id="dashboard--qrcode" onclick="showDialog('qrcode_dialog', '📱 QR Device Link', 'Use your camera to open this dashboard on any device.')">
             <em>📱</em>Show Link
         </button>
-        <button id="button-grid--toggle">Toggle Feature</button>
-        <button class="button-grid--spare1" onclick="javascript:socketEmitReload()"><em>🔄</em>Reload</button>
-        <button class="button-grid--spare2" onclick="javascript:window.location.href='{{public_routes.TWITCH_LOGIN}}'"><em>👤</em>Login</button>
-        <button class="button-grid--spare2" onclick="javascript:window.location.href='{{public_routes.PUBLIC_SETTINGS}}'"><em>👤</em>Settings</button>
-        <button class="button-grid--spare2" onclick="javascript:window.location.href='{{public_routes.PUBLIC_DASHBOARD}}'"><em>👤</em>Dashboard</button>
+        <button id="dashboard--toggle">Toggle Feature</button>
+        <button class="dashboard--spare1" onclick="javascript:socketEmitReload()"><em>🔄</em>Reload</button>
+        <button class="dashboard--spare2" onclick="javascript:window.location.href='{{public_routes.TWITCH_LOGIN}}'"><em>👤</em>Login</button>
+        <button class="dashboard--spare2" onclick="javascript:window.location.href='{{public_routes.PUBLIC_SETTINGS}}'"><em>👤</em>Settings</button>
+        <button class="dashboard--spare2" onclick="javascript:window.location.href='{{public_routes.PUBLIC_DASHBOARD}}'"><em>👤</em>Dashboard</button>
     </div>
 </div>

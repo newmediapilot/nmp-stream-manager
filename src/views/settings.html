@@ -16,69 +16,22 @@
 <ul class="settings-container">
     {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "feature" %}
-    <li class="settings-container--header" id="{{ signal.type }}">
-        Featured Streamers:
-        <button>Add Streamer</button>
-        <button>Edit Theme</button>
+    <li class="settings-container--header {{ signal.theme }}" id="{{ signal.type }}">
+        <h2>Guest Streamers</h2>
+        <div>
+            <button>Add</button>
+            <button>Theme</button>
+        </div>
     </li>
     <li>
-        <input type="text" value="{{ signal.label }}"><input>
-        <input type="text" value="{{ signal.emoji }}"><input>
-        <div>Online Status: On/Off</div>
-        <button>Edit</button>
-        <button>Delete</button>
-    </li>
-    {% endif %}
-    {% endfor %}
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <!---->
-    <!---->
-    <!---->
-    {% for signal in "dashboard_signals_config" | getParam %}
-    {% if signal.type == "ad" %}
-    <li class="settings-container--header" id="{{ signal.type }}">Ads:</li>
-    <li>
-        <strong>Label:</strong> {{ signal.label }} <br>
-        <strong>Emoji:</strong> {{ signal.emoji }}
-    </li>
-    {% endif %}
-    {% endfor %}
-    <!---->
-    <!---->
-    <!---->
-    {% for signal in "dashboard_signals_config" | getParam %}
-    {% if signal.type == "heart" %}
-    <li class="settings-container--header" id="{{ signal.type }}">Heart rate:</li>
-    <li>
-        <strong>Label:</strong> {{ signal.label }} <br>
-        <strong>Emoji:</strong> {{ signal.emoji }}
-    </li>
-    {% endif %}
-    {% endfor %}
-    <!---->
-    <!---->
-    <!---->
-    {% for signal in "dashboard_signals_config" | getParam %}
-    {% if signal.type == "mark" %}
-    <li class="settings-container--header" id="{{ signal.type }}">Markers:</li>
-    <li>
-        <strong>Label:</strong> {{ signal.label }} <br>
-        <strong>Emoji:</strong> {{ signal.emoji }}
+        <div class="settings-editor">
+            <input type="text" value="{{ signal.label }}"><input>
+            <input type="text" value="{{ signal.emoji }}"><input>
+            <div>{{ signal.theme }}</div>
+            <div>Online Status: On/Off</div>
+            <button>Edit</button>
+            <button>Delete</button>
+        </div>
     </li>
     {% endif %}
     {% endfor %}

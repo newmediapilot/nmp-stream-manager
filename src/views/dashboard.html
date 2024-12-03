@@ -9,7 +9,7 @@
 {% endblock %}
 {% block body %}
 {% include "partials/controls.njk" %}
-<div class="button-grid">
+<div class="dashboard">
     {% for config in 'dashboard_signals_config' | getParam %}
     <div class="button button-{{ config.theme }}">
         <button
@@ -33,8 +33,8 @@
 
         sortableContainer(
             "signals",
-            document.querySelector(".button-grid"),
-            document.querySelector("#button-grid--toggle"),
+            document.querySelector(".dashboard"),
+            document.querySelector("#dashboard--toggle"),
         );
 
         generateQrCode(document.querySelector("#qr-code-dialog-canvas").getAttribute('data-url'), "qr-code-dialog-canvas");

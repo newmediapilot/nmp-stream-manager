@@ -78,9 +78,9 @@ html.edit-active .header--items {
     min-width: auto;
 }
 html.edit-active .header--toggle,
-html.edit-active .header--items button:not(#button-grid--toggle) {
+html.edit-active .header--items button:not(#dashboard--toggle) {
     display: none;
 }
-html.edit-active #button-grid--toggle {
+html.edit-active #dashboard--toggle {
     width: max-content;
 }

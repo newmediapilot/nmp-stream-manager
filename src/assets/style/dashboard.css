@@ -1,20 +1,16 @@
 html {
     background: url("/image/assets-from-space.webp");
-    background-size: cover;
-    background-attachment: fixed;
-    max-width: 100vw;
 }
 
 html.edit-active {
     background: url("/image/blueprint.webp");
-    background-size: cover;
-    background-attachment: fixed;
 }
 
-.button-grid {
+.dashboard {
     display: grid;
     max-width: 100vw;
-    max-height: 100vh;
+    height: 100vh;
+    overflow-x: hidden;
     overflow-y: scroll;
     align-content: stretch;
     justify-items: stretch;
@@ -23,11 +19,11 @@ html.edit-active {
     position: relative;
 }
 
-html.edit-active .button-grid {
+html.edit-active .dashboard {
     padding-right: 50px;
 }
 
-.button-grid::after {
+.dashboard::after {
     pointer-events: none;
     width: 0px;
     height: 100vh;
@@ -38,7 +34,7 @@ html.edit-active .button-grid {
     bottom:0;
 }
 
-html.edit-active .button-grid::after {
+html.edit-active .dashboard::after {
     width: 50px;
     background:
             repeating-linear-gradient(45deg, rgba(0,0,0,0.5), rgba(75, 75, 75, 0.8) 8px),
@@ -49,7 +45,7 @@ html.edit-active .button-grid::after {
 }
 
 @media (min-aspect-ratio: 1/1) {
-    .button-grid {
+    .dashboard {
         width: 50%;
         margin-left: 25%;
         grid-template-rows: repeat(auto-fit, calc(40vh));
@@ -72,7 +68,7 @@ html.edit-active .button-grid::after {
     }
 }
 
-.button-grid img {
+.dashboard img {
     object-fit: contain;
     width: 100%;
     height: 100%;

@@ -1,8 +1,27 @@
 body {
     overflow-x: hidden;
     overflow-y: hidden;
-    max-width: 100vw;
+    width: 100vw;
     background: none;
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    background-size: cover;
+    background-attachment: fixed;
+    max-width: 100vw;
+    height: 100vh;
+}
+
+ul {
+    list-style: none;
+}
+
+.dashboard,
+.settings-nav {
+    scroll-snap-type: y proximity;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    scroll-snap-points-y: repeat(100vh);
 }
