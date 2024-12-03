@@ -1,5 +1,23 @@
 .settings-container {
-    
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow-y: scroll;
+    position: relative;
+    margin:0;
+    font-size: 300%;
+}
+
+.settings-nav {
+    position: fixed;
+    right:0;
+    top:0;
+    height: 100vh;
+}
+
+.settings-container--header {
+    position: sticky;
+    top:0;
+    background: white;
 }
 
 @media (min-aspect-ratio: 1/1) {
