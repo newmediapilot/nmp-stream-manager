@@ -24,7 +24,7 @@ const configureNunjucks = (app) => {
   nunjucksEnv.addFilter("getAllParams", getAllParams);
   nunjucksEnv.addFilter("urlencode", encodeURIComponent);
   nunjucksEnv.addFilter("generateAssetLinks", generateAssetLinks);
-  nunjucksEnv.addFilter("currentTime", ()=> new Date().getTime());
+  nunjucksEnv.addFilter("currentTime", ()=>new Date().getTime().toString());
 
   app.set("view engine", "html");
 
