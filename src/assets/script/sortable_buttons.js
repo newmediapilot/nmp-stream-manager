@@ -1,11 +1,13 @@
 const sortableContainer = (type, containerEl, toggleEl) => {
 
   let payload = [];
+  const editLabel = toggleEl.getAttribute('data-edit');
+  const doneLabel = toggleEl.getAttribute('data-done');
 
   const notifyEl = document.documentElement;
   const states = [
-    "<span><em>✏</em>Edit</span>",
-    "<span><em>✅</em>Done</span>",
+    `<span><em>✏</em>Edit</span>`,
+    `<span><em>✅</em>Done</span>`,
   ];
 
   toggleEl.innerHTML = states[0];
