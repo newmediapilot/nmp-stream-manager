@@ -5,6 +5,7 @@
 
 const nunjucks = require("nunjucks");
 const express = require("express");
+const lodash = require("lodash");
 const { getParam, getAllParams } = require("../store/manager");
 const { generateAssetLinks } = require("../nunjucks/preload.filter");
 

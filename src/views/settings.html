@@ -1,15 +1,51 @@
-<!-- src/views/settings.html -->
 {% extends "layouts/main.njk" %}
 {% block hscripts %}
-<link rel="stylesheet" href="/style/settings.css">
+<link rel="stylesheet" href="/css/settings.css">
 {% endblock %}
 {% block body %}
-<div class="button-grid">
-    {% set public_routes = 'public_routes' | getParam %}
-    {% set dashboard_signals_config = 'dashboard_signals_config' | getParam %}
-</div>
-{% endblock %}
-{% block fscripts %}
-<script>
-</script>
+<ul class="settings-container">
+    {% for signal in "dashboard_signals_config" | getParam %}
+    {% if signal.type == "feature" %}
+    <li>
+        <strong>Label:</strong> {{ signal.label }} <br>
+        <strong>Type:</strong> {{ signal.type }} <br>
+        <strong>Wait:</strong> {{ signal.wait }} <br>
+        <strong>Theme:</strong> {{ signal.theme }}
+        {# Handle feature signal logic here #}
+    </li>
+    {% elseif signal.type == "ad" %}
+    <li>
+        <strong>Label:</strong> {{ signal.label }} <br>
+        <strong>Type:</strong> {{ signal.type }} <br>
+        <strong>Wait:</strong> {{ signal.wait }} <br>
+        <strong>Theme:</strong> {{ signal.theme }}
+        {# Handle ad signal logic here #}
+    </li>
+    {% elseif signal.type == "heart" %}
+    <li>
+        <strong>Label:</strong> {{ signal.label }} <br>
+        <strong>Type:</strong> {{ signal.type }} <br>
+        <strong>Wait:</strong> {{ signal.wait }} <br>
+        <strong>Theme:</strong> {{ signal.theme }}
+        {# Handle heart rate signal logic here #}
+    </li>
+    {% elseif signal.type == "mark" %}
+    <li>
+        <strong>Label:</strong> {{ signal.label }} <br>
+        <strong>Type:</strong> {{ signal.type }} <br>
+        <strong>Wait:</strong> {{ signal.wait }} <br>
+        <strong>Theme:</strong> {{ signal.theme }}
+        {# Handle mark signal logic here #}
+    </li>
+    {% else %}
+    <li>
+        <strong>Label:</strong> {{ signal.label }} <br>
+        <strong>Type:</strong> {{ signal.type }} <br>
+        <strong>Wait:</strong> {{ signal.wait }} <br>
+        <strong>Theme:</strong> {{ signal.theme }}
+        {# Handle other signal types here #}
+    </li>
+    {% endif %}
+    {% endfor %}
+</ul>
 {% endblock %}
