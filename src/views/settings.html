@@ -5,33 +5,49 @@
 {% endblock %}
 {% block body %}
 {% include "partials/controls.njk" %}
-<nav class="settings-nav">
-    <ul>
-        <li><a href="#feature">Featured Streamers</a></li>
-        <li><a href="#ad">Ads</a></li>
-        <li><a href="#heart">Heart rate</a></li>
-        <li><a href="#mark">Markers</a></li>
-    </ul>
-</nav>
+<!--<nav class="settings-nav">-->
+<!--    <ul>-->
+<!--        <li><a href="#feature">Featured Streamers</a></li>-->
+<!--        <li><a href="#ad">Ads</a></li>-->
+<!--        <li><a href="#heart">Heart rate</a></li>-->
+<!--        <li><a href="#mark">Markers</a></li>-->
+<!--    </ul>-->
+<!--</nav>-->
 <ul class="settings-container">
     {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "feature" %}
     <li class="settings-container--header {{ signal.theme }}" id="{{ signal.type }}">
         <p>Guest Streamers</p>
-        <div>
-            <button>Add</button>
-            <button>Theme</button>
-        </div>
+<!--        <div>-->
+<!--            <button>Add</button>-->
+<!--            <button>Theme</button>-->
+<!--        </div>-->
     </li>
     <li>
         <div class="settings-editor">
-            <input type="text" value="{{ signal.label }}"><input>
-            <input type="text" value="{{ signal.emoji }}"><input>
-            <div>{{ signal.theme }}</div>
-            <div>Online Status: On/Off</div>
-            <button>Edit</button>
-            <button>Delete</button>
+            <label>
+                <input type="checkbox" checked/>🟢
+            </label>
+            <input type="text" value="{{ signal.label }}"/>
+            <button>✏</button>
+            <label>
+                <input type="checkbox" checked/>{{ signal.emoji }}
+            </label>
+            <button>🗑️</button>
+<!--            <button>Sure?</button>-->
         </div>
+        <ul id="emoji-widget">
+            <li>✨</li>
+            <li>📢</li>
+            <li>❤</li>
+            <li>⏰</li>
+            <li>🥊</li>
+            <li>🧐</li>
+            <li>🎬</li>
+            <li>👾</li>
+            <li>🌟</li>
+            <li>🍕</li>
+        </ul>
     </li>
     {% endif %}
     {% endfor %}
