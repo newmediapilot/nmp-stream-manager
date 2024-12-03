@@ -8,44 +8,36 @@
 <ul class="settings-container">
     {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "feature" %}
+    <li id="{{ signal.type }}">Featured Streamers:</li>
     <li>
         <strong>Label:</strong> {{ signal.label }} <br>
         <strong>Type:</strong> {{ signal.type }} <br>
-        <strong>Wait:</strong> {{ signal.wait }} <br>
-        <strong>Theme:</strong> {{ signal.theme }}
-        {# Handle feature signal logic here #}
+        <strong>Theme:</strong> {{ signal.theme }} <br>
+        <strong>Emoji:</strong> {{ signal.emoji }}
     </li>
     {% elseif signal.type == "ad" %}
+    <li id="{{ signal.type }}">Advertisements:</li>
     <li>
         <strong>Label:</strong> {{ signal.label }} <br>
         <strong>Type:</strong> {{ signal.type }} <br>
-        <strong>Wait:</strong> {{ signal.wait }} <br>
-        <strong>Theme:</strong> {{ signal.theme }}
-        {# Handle ad signal logic here #}
+        <strong>Theme:</strong> {{ signal.theme }} <br>
+        <strong>Emoji:</strong> {{ signal.emoji }}
     </li>
     {% elseif signal.type == "heart" %}
+    <li id="{{ signal.type }}">Heart rate:</li>
     <li>
         <strong>Label:</strong> {{ signal.label }} <br>
         <strong>Type:</strong> {{ signal.type }} <br>
-        <strong>Wait:</strong> {{ signal.wait }} <br>
-        <strong>Theme:</strong> {{ signal.theme }}
-        {# Handle heart rate signal logic here #}
+        <strong>Theme:</strong> {{ signal.theme }} <br>
+        <strong>Emoji:</strong> {{ signal.emoji }}
     </li>
     {% elseif signal.type == "mark" %}
+    <li id="{{ signal.type }}">Markers:</li>
     <li>
         <strong>Label:</strong> {{ signal.label }} <br>
         <strong>Type:</strong> {{ signal.type }} <br>
-        <strong>Wait:</strong> {{ signal.wait }} <br>
-        <strong>Theme:</strong> {{ signal.theme }}
-        {# Handle mark signal logic here #}
-    </li>
-    {% else %}
-    <li>
-        <strong>Label:</strong> {{ signal.label }} <br>
-        <strong>Type:</strong> {{ signal.type }} <br>
-        <strong>Wait:</strong> {{ signal.wait }} <br>
-        <strong>Theme:</strong> {{ signal.theme }}
-        {# Handle other signal types here #}
+        <strong>Theme:</strong> {{ signal.theme }} <br>
+        <strong>Emoji:</strong> {{ signal.emoji }}
     </li>
     {% endif %}
     {% endfor %}
