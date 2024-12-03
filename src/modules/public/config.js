@@ -42,7 +42,7 @@ const PUBLIC_CONFIGS = {
       label: '3min',
     },
     {
-      theme: 'aqua',
+      theme: 'deepyellow',
       type: 'heart',
       description: 'heart',
       wait: '100',
@@ -58,7 +58,7 @@ const PUBLIC_CONFIGS = {
       label: 'Start',
     },
     {
-      theme: 'pink',
+      theme: 'purple',
       type: 'mark',
       description: 'match:fight',
       wait: '100',
@@ -66,7 +66,7 @@ const PUBLIC_CONFIGS = {
       label: 'Fight',
     },
     {
-      theme: 'deepyellow',
+      theme: 'purple',
       type: 'mark',
       description: 'match:checkpoint',
       wait: '100',
@@ -74,7 +74,7 @@ const PUBLIC_CONFIGS = {
       label: 'Ping',
     },
     {
-      theme: 'deepyellow',
+      theme: 'purple',
       type: 'mark',
       description: 'match:idle',
       wait: '100',
@@ -82,7 +82,7 @@ const PUBLIC_CONFIGS = {
       label: 'Clip',
     },
     {
-      theme: 'red',
+      theme: 'purple',
       type: 'mark',
       description: 'match:complete',
       wait: '100',
