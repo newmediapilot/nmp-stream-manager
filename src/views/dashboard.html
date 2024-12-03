@@ -10,7 +10,6 @@
 {% block body %}
 {% include "partials/controls.njk" %}
 <div class="button-grid">
-    {% set public_routes = 'public_routes' | getParam %}
     {% for config in 'dashboard_signals_config' | getParam %}
     <div class="button button-{{ config.theme }}">
         <button
