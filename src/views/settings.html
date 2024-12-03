@@ -1,6 +1,7 @@
 {% extends "layouts/main.njk" %}
+{% set cache_buster = "" | currentTime %}
 {% block hscripts %}
-<link rel="stylesheet" href="/css/settings.css">
+<link rel="stylesheet" href="/css/settings.csscb={{cache_buster}}">
 {% endblock %}
 {% block body %}
 {% include "partials/controls.njk" %}
