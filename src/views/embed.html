@@ -13,7 +13,9 @@
         width="100%"
 >
 </iframe>
-
+<div>
+    <canvas id="streamer-qr-code"></canvas>
+</div>
 {% endblock %}
 {% block fscripts %}
 <script>
@@ -27,11 +29,13 @@
             "djcristianadematos",
             "avacrown_",
             "vera_vex",
+            "lionastone",
         ];
         const twitchEmbed = document.querySelector('#twitch-embed');
         const toggleEmbed = (bool) => {
             const streamer = streamers[Math.floor(Math.random()*streamers.length)];
-            twitchEmbed.src = bool ? `https://player.twitch.tv/?channel=${toenailcentral}&parent=localhost&muted=false` : "";
+            const URL = `https://player.twitch.tv/?channel=${streamer}&parent=localhost&muted=false`;
+            twitchEmbed.src = bool ? URL : "";
             embedActive = bool;
             streamers.push(streamers.shift());
         };
