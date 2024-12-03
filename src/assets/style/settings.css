@@ -16,16 +16,22 @@
 }
 
 .settings-container--header {
+    border-top: 20px solid rgba(255, 255, 255, 0.6);
+    border-right: 20px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 20px solid rgba(255, 255, 255, 0.1);
+    border-left: 20px solid rgba(255, 255, 255, 0.4);
     position: sticky;
     background: white;
+    height: 5vh;
     top: 0;
     display: flex;
-    padding: 15px;
+    align-items: center;
 }
 
-.settings-container--header h2 {
-    font-size: 28px;
+.settings-container--header p {
     flex-grow: 1;
+    font-size: 30px;
+    margin-left: 10px;
 }
 
 .settings-container--header.aqua {
