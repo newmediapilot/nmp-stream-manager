@@ -11,15 +11,6 @@ html.edit-active {
     background-attachment: fixed;
 }
 
-body {
-    overflow-x: hidden;
-    overflow-y: hidden;
-    max-width: 100vw;
-    background: none;
-    padding:0;
-    margin:0;
-}
-
 .button-grid {
     display: grid;
     max-width: 100vw;
