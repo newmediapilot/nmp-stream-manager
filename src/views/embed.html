@@ -4,12 +4,14 @@
 <link rel="stylesheet" href="/style/embed.css">
 {% endblock %}
 {% block body %}
-<iframe id="twitch-embed"
+<iframe
+        id="twitch-embed"
         frameborder="0"
         allowfullscreen="true"
         scrolling="no"
         height="100%"
-        width="100%">
+        width="100%"
+>
 </iframe>
 <div>
     <canvas id="streamer-qr-code"></canvas>
@@ -18,21 +20,18 @@
 {% block fscripts %}
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const twitchEmbed = document.querySelector('#twitch-embed');
-        const reloadEmbed = (bool, streamerName) => {
-            const streamer = streamerName || streamers[Math.floor(Math.random() * streamers.length)];
+        let embedActive = false;
+        const toggleEmbed = (bool) => {
+            const streamer = "lionastone";
             const URL = `https://player.twitch.tv/?channel=${streamer}&parent=localhost&muted=false`;
-            if (bool) {
-                twitchEmbed.src = URL;
-                generateQrCode(URL, 'streamer-qr-code');
-            } else {
-                document.documentElement.style.display = 'none';
-                twitchEmbed.src = "";
-            }
+            const twitchEmbed = document.querySelector('#twitch-embed');
+            twitchEmbed.src = bool ? URL : "";
+            generateQrCode(URL, 'streamer-qr-code');
+            document.documentElement.style.visibility = !bool ? 'hidden' : 'visible';
             embedActive = bool;
         };
-        socketConnect((payload) => ('feature:toggle' === payload) && reloadEmbed(!embedActive));
-        reloadEmbed(true, 'aaknot');
+        socketConnect((payload) => ('feature:toggle' === payload) && toggleEmbed(!embedActive));
+        document.documentElement.style.visibility = 'hidden';
     });
 </script>
 {% endblock %}
