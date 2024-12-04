@@ -35,7 +35,7 @@
             document.documentElement.style.visibility = !bool ? 'hidden' : 'visible';
             embedActive = bool;
         };
-        socketConnect((payload) => ('feature:toggle' === payload) && toggleEmbed(!embedActive));
+        socketConnect((payload) => ('feature:set' === payload) && toggleEmbed(!embedActive));
         document.documentElement.style.visibility = 'hidden';
     });
 </script>
