@@ -8,7 +8,7 @@ const sendSignal = (el) => {
   const successText = el.getAttribute("data-success");
 
   const setState = (label, isDisabled, state) => {
-    el.innerText = label;
+    el.querySelector('div').innerHTML = label;
     el.disabled = isDisabled;
     el.setAttribute("data-state", state);
   };
