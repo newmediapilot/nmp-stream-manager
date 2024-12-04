@@ -5,14 +5,6 @@
 {% endblock %}
 {% block body %}
 {% include "partials/controls.njk" %}
-<!--<nav class="settings-nav">-->
-<!--    <ul>-->
-<!--        <li><a href="#feature">Featured Streamers</a></li>-->
-<!--        <li><a href="#ad">Ads</a></li>-->
-<!--        <li><a href="#heart">Heart rate</a></li>-->
-<!--        <li><a href="#mark">Markers</a></li>-->
-<!--    </ul>-->
-<!--</nav>-->
 <ul class="settings-container">
 
     {% set rendered_feature = false %}
@@ -28,29 +20,36 @@
     {% endif %}
 
     <li>
-        <div class="settings-editor" data-editor-id="{{ loop.index }}">
-            <label>
-                <input type="checkbox" checked/>🟢
-            </label>
-            <label>
-                <input type="checkbox" checked/>{{ signal.emoji }}
-            </label>
+        <div class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
+            <label><input type="checkbox" checked/>🟢</label>
+            <button/>
+            {{ signal.emoji }}</button>
             <input type="text" value="{{ signal.label }}"/>
         </div>
-        <ul id="emoji-widget">
-            <li>✨</li>
-            <li>📢</li>
-            <li>❤</li>
-            <li>⏰</li>
-            <li>🥊</li>
-            <li>🧐</li>
-            <li>🎬</li>
-            <li>👾</li>
-            <li>🌟</li>
-            <li>🍕</li>
-        </ul>
     </li>
+
     {% endif %}
+
     {% endfor %}
+
 </ul>
+<ul id="emoji-widget">
+    <li>✨</li>
+    <li>📢</li>
+    <li>❤</li>
+    <li>⏰</li>
+    <li>🥊</li>
+    <li>🧐</li>
+    <li>🎬</li>
+    <li>👾</li>
+    <li>🌟</li>
+    <li>🍕</li>
+</ul>
+{% endblock %}
+{% block fscripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        socketWatchReload();
+    });
+</script>
 {% endblock %}
