@@ -1,3 +1,7 @@
+ul + #emoji-widget {
+    display: none;
+}
+
 .settings-container {
     width: 100vw;
     height: 100vh;
@@ -50,7 +54,7 @@
 .settings-editor {
     display: grid;
     grid-template-columns: repeat(5, calc(100% / 5));
-    min-height: 5vh;
+    min-height: 8vh;
 }
 
 .settings-editor * {
