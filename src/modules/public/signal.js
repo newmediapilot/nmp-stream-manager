@@ -53,8 +53,13 @@ async function publicSignalCreate(req, res) {
         result = await sendPayload([type, description].join(":"));
     }
 
+    // User friendly errors here
     if (!result) {
       isCreating = false;
+      if ("mark" === type) return res.status(400).send("Could not create marker. Are you online?");
+      if ("ad" === type) return res.status(400).send("Could not create ad. Are you online? Did you just run an ad?");
+      if ("heart" === type) return res.status(400).send("There was a problem BPM. Are you online? Is the app configured?");
+      if ("feature" === type) return res.status(400).send("There was a problem requesting a streamer. Is the name correct?");
       return res.status(400).send("Error: " + type);
     }
 
