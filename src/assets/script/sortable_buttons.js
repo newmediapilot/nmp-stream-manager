@@ -36,7 +36,7 @@ const sortableContainer = (type, containerEl, toggleEl) => {
 
     if (isDisabled) {
 
-      axios.get("/public/config/create", {
+      axios.get("/public/config/update", {
         params: {
           type,
           payload: JSON.stringify(payload),
