@@ -105,6 +105,7 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         socketWatchReload();
+        document.querySelectorAll(".settings-editor").forEach(initSettingsEditor);
     });
 </script>
 {% endblock %}

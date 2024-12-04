@@ -82,5 +82,3 @@ const initSettingsEditor = (editorEl) => {
         }
     });
 };
-
-document.querySelectorAll(".settings-editor").forEach(initSettingsEditor);
