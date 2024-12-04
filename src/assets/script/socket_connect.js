@@ -7,8 +7,9 @@ const socketConnect = (callback) => {
   socket.on("connect", () => console.log("Connected to the socket server"));
 };
 
-const socketEmitReload = () =>
+const socketEmitReload = () => {
   axios.get("/public/signal/create?type=browser&description=reload");
+};
 
 const socketWatchReload = () => {
   socketConnect(
