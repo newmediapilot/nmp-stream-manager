@@ -7,7 +7,7 @@ const PUBLIC_CONFIGS = {
       description: "feature:set",
       wait: "700",
       emoji: "✨",
-      label: "Feature 1",
+      label: "aaknot",
     },
     {
       theme: "aqua",
@@ -15,7 +15,7 @@ const PUBLIC_CONFIGS = {
       description: "feature:set",
       wait: "700",
       emoji: "✨",
-      label: "Feature 2",
+      label: "mysterycapybara",
     },
     {
       theme: "aqua",
@@ -23,7 +23,7 @@ const PUBLIC_CONFIGS = {
       description: "feature:set",
       wait: "700",
       emoji: "✨",
-      label: "Feature 3",
+      label: "stonerkat_",
     },
     {
       theme: "aqua",
@@ -31,7 +31,7 @@ const PUBLIC_CONFIGS = {
       description: "feature:set",
       wait: "700",
       emoji: "✨",
-      label: "Feature 4",
+      label: "machoot",
     },
     {
       theme: "aqua",
@@ -39,7 +39,7 @@ const PUBLIC_CONFIGS = {
       description: "feature:set",
       wait: "700",
       emoji: "✨",
-      label: "Feature 5",
+      label: "theo",
     },
     {
       theme: "aqua",
@@ -47,7 +47,7 @@ const PUBLIC_CONFIGS = {
       description: "feature:set",
       wait: "700",
       emoji: "✨",
-      label: "Feature 6",
+      label: "kittykosmos",
     },
     {
       theme: "orange",
