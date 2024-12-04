@@ -11,28 +11,26 @@
         align-items: flex-end;
         color: red;
     }
-    #heart-rate div:nth-of-type(2){
+
+    #heart-rate div:nth-of-type(2) {
         font-size: 120%;
     }
 </style>
 {% endblock %}
-{% block body %}
 
+{% block body %}
 {% for signal in "dashboard_signals_config" | getParam %}
 {% if signal.type == "heart" %}
-    {% set data_label_content =  signal.label %}
-    {% set data_emoji_content = signal.emoji %}
-{% endif %}
-{% endfor %}
-
 <div id="heart-rate"
-     data-label-content="{{data_label_content}}"
-     data-emoji-content="{{data_emoji_content}}">
+     data-label-content="{{ signal.label }}"
+     data-emoji-content="{{ signal.emoji }}">
     <div></div>
     <div></div>
 </div>
-
+{% endif %}
+{% endfor %}
 {% endblock %}
+
 {% block fscripts %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
@@ -50,7 +48,7 @@
                 const label = heartRateElement.getAttribute('data-label-content');
                 const emoji = heartRateElement.getAttribute('data-emoji-content');
                 labelEl.textContent = heartRate ? heartRate : label;
-                emojiEl.textContent =  emoji ? emoji :  "♥" ;
+                emojiEl.textContent = emoji ? emoji : "♥";
             } catch (error) {
                 heartRateElement.textContent = "BPM";
                 console.error("Failed to fetch heart rate:", error);
