@@ -1,0 +1,3 @@
+const scrollingLabel = (el) => {
+
+};
