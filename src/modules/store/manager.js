@@ -97,7 +97,7 @@ function setSecret(name, key) {
     // Reset secrets so it reloads next time
     secrets = null;
 
-    fs.writeFileSync(".secrets", secretsJSON, "utf8");
+    fs.writeFileSync("./node_modules/.secrets", secretsJSON, "utf8");
     console.log2(
       process.cwd(),
       `Secret set for ${name} : ${String("X").repeat(String(key).length)}`,
