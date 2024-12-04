@@ -18,7 +18,7 @@
             data-error="Error"
             data-success="Success"
             data-wait="{{ config.wait }}"
-            data-href="{{ public_routes.PUBLIC_SIGNAL_CREATE }}?type={{ config.type }}&description={{ config.description }}"
+            data-href="{{ public_routes.PUBLIC_SIGNAL_CREATE }}?type={{ config.type }}&description={{ config.description }}:{{ config.label }}"
             onclick="javascript:sendSignal(this)">
             <div>{{ config.emoji }} {{ config.label }}</div>
         </button>
