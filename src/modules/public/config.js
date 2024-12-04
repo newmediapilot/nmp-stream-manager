@@ -42,6 +42,14 @@ const PUBLIC_CONFIGS = {
       label: "Feature 5",
     },
     {
+      theme: "aqua",
+      type: "feature",
+      description: "feature:toggle",
+      wait: "700",
+      emoji: "✨",
+      label: "Feature 6",
+    },
+    {
       theme: "orange",
       type: "ad",
       description: "30",
@@ -74,7 +82,7 @@ const PUBLIC_CONFIGS = {
       label: "3min",
     },
     {
-      theme: "deepyellow",
+      theme: "bloodorange",
       type: "heart",
       description: "heart",
       wait: "100",
