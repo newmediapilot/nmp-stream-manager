@@ -48,7 +48,7 @@ html.edit-active .dashboard::after {
     .dashboard {
         width: 50%;
         margin-left: 25%;
-        grid-template-rows: repeat(auto-fit, calc(40vh));
+        grid-template-rows: repeat(auto-fit, calc(25vh));
     }
 }
 
@@ -65,7 +65,7 @@ html.edit-active .dashboard::after {
 
 @media (min-aspect-ratio: 1/1) {
     .dashboard .button {
-        min-height: 40vh;
+        min-height: 25vh;
     }
 }
 
