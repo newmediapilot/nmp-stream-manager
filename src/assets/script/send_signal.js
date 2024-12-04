@@ -1,4 +1,5 @@
 const sendSignal = (el) => {
+  const dataHref = el.getAttribute("data-href");
   const initialText = el.innerText;
   const waitSetting = Number(el.getAttribute("data-wait"));
   const waitDefault = 3000;
@@ -14,7 +15,8 @@ const sendSignal = (el) => {
 
   setState(sendingText, true, "loading");
 
-  const getRes = axios.get(el.getAttribute("data-href"));
+
+  const getRes = axios.get(dataHref);
 
   getRes.then((getRes) => {
     console.log("Success:", getRes);
