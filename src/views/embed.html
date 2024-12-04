@@ -25,18 +25,39 @@
 {% block fscripts %}
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        let embedActive = false;
-        const toggleEmbed = (bool) => {
-            const streamer = "lionastone";
-            const URL = `https://player.twitch.tv/?channel=${streamer}&parent=localhost&muted=false`;
-            const twitchEmbed = document.querySelector('#twitch-embed');
-            twitchEmbed.src = bool ? URL : "";
+
+        // Read query param of streamerName
+        // Load streamerName into the embed
+        // If signal re-sends the same name, hide everything
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const streamerQueryParam = urlParams.get('streamerName');
+
+        if (!streamerQueryParam) {
+            console.log('No streamer found');
+        } else {
+            const URL = `https://player.twitch.tv/?channel=${streamerQueryParam}&parent=localhost&muted=false`;
             generateQrCode(URL, 'streamer-qr-code');
-            document.documentElement.style.visibility = !bool ? 'hidden' : 'visible';
-            embedActive = bool;
-        };
-        socketConnect((payload) => ('feature:set' === payload) && toggleEmbed(!embedActive));
-        document.documentElement.style.visibility = 'hidden';
+            const twitchEmbed = document.querySelector('#twitch-embed');
+            twitchEmbed.src = URL;
+        }
+
+        socketConnect((payload) => {
+            if (payload.startsWith('feature:set:')) {
+                const streamerName = payload.split(':').pop();
+                const isOpen = (streamerQueryParam === streamerName);
+                if (isOpen) {
+                    try {
+                        document.documentElement.remove();
+                    } catch (e) {
+                        window.location.reload();
+                    }
+                } else {
+                    window.location.href = `${window.location.origin}${window.location.pathname}?streamerName=${streamerName}`;
+                }
+            }
+        });
+
     });
 </script>
 {% endblock %}
