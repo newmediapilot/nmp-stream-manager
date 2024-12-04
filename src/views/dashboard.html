@@ -12,10 +12,10 @@
 <div class="dashboard">
     {% for config in 'dashboard_signals_config' | getParam %}
 
-    {% if signal.type == "feature" %}
-        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label %}
+    {% if config.type == "feature" %}
+        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=feature&type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label %}
     {% else %}
-        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description %}
+        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~ config.description %}
     {% endif %}
 
     <div class="button button-{{ config.theme }}" href="{{data_href}}">
