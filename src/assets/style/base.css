@@ -17,11 +17,3 @@ html {
 ul {
     list-style: none;
 }
-
-.dashboard,
-.settings-nav {
-    scroll-snap-type: y proximity;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    scroll-snap-points-y: repeat(100vh);
-}
