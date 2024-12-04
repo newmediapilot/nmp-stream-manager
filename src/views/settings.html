@@ -16,31 +16,26 @@
 <ul class="settings-container">
 
     {% set rendered_feature = false %}
-    
+
     {% for signal in "dashboard_signals_config" | getParam %}
 
     {% if signal.type == "feature" %}
 
-        {% if not  rendered_feature %}{% set rendered_feature = true %}
-            <li class="settings-container--header {{ signal.theme }}">
-                <p>Guest Streamers</p>
-        <!--        <div>-->
-        <!--            <button>Add</button>-->
-        <!--            <button>Theme</button>-->
-        <!--        </div>-->
-            </li>
-        {% endif %}
+    {% if not rendered_feature %}{% set rendered_feature = true %}
+    <li class="settings-container--header {{ signal.theme }}">
+        <p>Featured</p>
+    </li>
+    {% endif %}
 
     <li>
         <div class="settings-editor" data-editor-id="{{ loop.index }}">
             <label>
                 <input type="checkbox" checked/>🟢
             </label>
-            <input type="text" value="{{ signal.label }}"/>
-            <button>✏</button>
             <label>
                 <input type="checkbox" checked/>{{ signal.emoji }}
             </label>
+            <input type="text" value="{{ signal.label }}"/>
         </div>
         <ul id="emoji-widget">
             <li>✨</li>
