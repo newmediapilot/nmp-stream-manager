@@ -156,11 +156,6 @@ const getConfig = (type) => {
   return JSON.parse(fs.readFileSync(fileName, "utf-8"));
 };
 
-// Send signal to socket (toggle)
-const applyFeaturePayload = (payloadJSON) =>{
-  console.log('applyFeaturePayload', payloadJSON);
-};
-
 // Parse updates and apply the swaps to the written file
 // Pairs of before & after sent sequentially as saved by FE
 const applySignalsOrder = (payloadJSON) => {
@@ -185,7 +180,7 @@ const applySignalsField = (payloadJSON) => {
   console.log('applySignalsField', payloadJSON);
   const signalsTarget =  JSON.parse(JSON.stringify(getParam("dashboard_signals_config")));
   const {id, field, value} = JSON.parse(payloadJSON);
-  signalsTarget[id][field] = value;
+  signalsTarget[Number(id)][field] = value;
   // Also save to memory
   setParam("dashboard_signals_config", signalsTarget);
   return signalsTarget;
@@ -195,6 +190,7 @@ const applySignalsField = (payloadJSON) => {
 // Sort by type into handlers
 const publicConfigUpdate = (req, res) => {
   const { type, payload } = req.query;
+  console.log('publicConfigUpdate', type, payload);
   try {
     if (type === "signals:order") {
       putConfig("signals", applySignalsOrder(payload));

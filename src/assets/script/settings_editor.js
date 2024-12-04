@@ -16,7 +16,19 @@ const initSettingsEditor = (editorEl) => {
 
     const textEditorElBlur = () => {
         if (textEditorEl.value !== textEditorValue) {
-            console.log('textEditorElBlur', id, textEditorEl.value);
+            const payload = {
+                id,
+                field: 'label',
+                value: textEditorEl.value,
+            };
+            axios.get("/public/config/update", {
+                params: {
+                    type: "signals:field",
+                    payload: JSON.stringify(payload),
+                },
+            }).finally(
+                () => socketEmitReload()
+            );
         }
         textEditorEl.disabled = true;
         setTimeout(() => {
