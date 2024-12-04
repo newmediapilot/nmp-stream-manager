@@ -8,6 +8,7 @@
 <ul class="settings-container">
 
     {% set rendered_feature = false %}
+    {% set rendered_marker = false %}
 
     {% for signal in "dashboard_signals_config" | getParam %}
 
@@ -21,7 +22,24 @@
 
     <li>
         <div class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
-            <label><input type="checkbox" checked/>🟢</label>
+            <button/>
+            {{ signal.emoji }}</button>
+            <input type="text" value="{{ signal.label }}"/>
+        </div>
+    </li>
+
+    {% endif %}
+
+    {% if signal.type == "mark" %}
+
+    {% if not rendered_marker %}{% set rendered_marker = true %}
+    <li class="settings-container--header {{ signal.theme }}">
+        <p>Markers</p>
+    </li>
+    {% endif %}
+
+    <li>
+        <div class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
             <button/>
             {{ signal.emoji }}</button>
             <input type="text" value="{{ signal.label }}"/>
