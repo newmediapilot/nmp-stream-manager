@@ -7,7 +7,7 @@ const PUBLIC_CONFIGS = {
       description: "feature:toggle",
       wait: "700",
       emoji: "✨",
-      label: "Feature1",
+      label: "Feature 1",
     },
     {
       theme: "aqua",
@@ -15,7 +15,7 @@ const PUBLIC_CONFIGS = {
       description: "feature:toggle",
       wait: "700",
       emoji: "✨",
-      label: "Feature2",
+      label: "Feature 2",
     },
     {
       theme: "aqua",
@@ -23,7 +23,7 @@ const PUBLIC_CONFIGS = {
       description: "feature:toggle",
       wait: "700",
       emoji: "✨",
-      label: "Feature3",
+      label: "Feature 3",
     },
     {
       theme: "aqua",
@@ -31,7 +31,7 @@ const PUBLIC_CONFIGS = {
       description: "feature:toggle",
       wait: "700",
       emoji: "✨",
-      label: "Feature3",
+      label: "Feature 4",
     },
     {
       theme: "aqua",
@@ -39,7 +39,7 @@ const PUBLIC_CONFIGS = {
       description: "feature:toggle",
       wait: "700",
       emoji: "✨",
-      label: "Feature3",
+      label: "Feature 5",
     },
     {
       theme: "orange",
