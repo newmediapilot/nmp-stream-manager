@@ -15,7 +15,6 @@ const sendSignal = (el) => {
 
   setState(sendingText, true, "loading");
 
-
   const getRes = axios.get(dataHref);
 
   getRes.then((getRes) => {
@@ -24,8 +23,8 @@ const sendSignal = (el) => {
   });
 
   getRes.catch((error) => {
-    console.log("Error:", error);
     setState(errorText, true, "error");
+    console.log("Error:", error.response.data);
   });
 
   getRes.finally(() => {
