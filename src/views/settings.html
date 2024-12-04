@@ -6,80 +6,87 @@
 {% block body %}
 {% include "partials/controls.njk" %}
 <ul class="settings-container">
-
-    {% set rendered_feature = false %}
-    {% set rendered_marker = false %}
-
+    <!---->
+    <!---->
+    <!---->
+    {% set feature_title_set = false %}
     {% for signal in "dashboard_signals_config" | getParam %}
-
-
-
     {% if signal.type == "feature" %}
-    {% if not rendered_feature %}{% set rendered_feature = true %}
+    {% if not feature_title_set %}{% set feature_title_set = true %}
     <li class="settings-container--header {{ signal.theme }}">
         <p>Featured</p>
     </li>
     {% endif %}
     <li>
         <div class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
-            <button/>{{ signal.emoji }}</button>
+            <button/>
+            {{ signal.emoji }}</button>
             <input type="text" value="{{ signal.label }}"/>
         </div>
     </li>
     {% endif %}
-
-
-
+    {% endfor %}
+    <!---->
+    <!---->
+    <!---->
+    {% set feature_title_set = false %}
+    {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "mark" %}
-    {% if not rendered_marker %}{% set rendered_marker = true %}
+    {% if not feature_title_set %}{% set feature_title_set = true %}
     <li class="settings-container--header {{ signal.theme }}">
         <p>Markers</p>
     </li>
     {% endif %}
     <li>
         <div class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
-            <button/>{{ signal.emoji }}</button>
+            <button/>
+            {{ signal.emoji }}</button>
             <input type="text" value="{{ signal.label }}"/>
         </div>
     </li>
     {% endif %}
-
-
-
+    {% endfor %}
+    <!---->
+    <!---->
+    <!---->
+    {% set feature_title_set = false %}
+    {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "ad" %}
-    {% if not rendered_ad %}{% set rendered_ad = true %}
+    {% if not feature_title_set %}{% set feature_title_set = true %}
     <li class="settings-container--header {{ signal.theme }}">
         <p>Ads</p>
     </li>
     {% endif %}
-    <li>
         <div class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
-            <button/>{{ signal.emoji }}</button>
+            <button/>
+            {{ signal.emoji }}</button>
             <input type="text" disabled value="{{ signal.label }}"/>
         </div>
     </li>
     {% endif %}
-
-
-
+    {% endfor %}
+    <!---->
+    <!---->
+    <!---->
+    {% set feature_title_set = false %}
+    {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "heart" %}
-    {% if not rendered_heart %}{% set rendered_heart = true %}
+    {% if not feature_title_set %}{% set feature_title_set = true %}
     <li class="settings-container--header {{ signal.theme }}">
         <p>BPM Display</p>
     </li>
     {% endif %}
-    <li>
         <div class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
-            <button/>{{ signal.emoji }}</button>
+            <button/>
+            {{ signal.emoji }}</button>
             <input type="text" value="{{ signal.label }}"/>
         </div>
     </li>
     {% endif %}
-
-
-
     {% endfor %}
-
+    <!---->
+    <!---->
+    <!---->
 </ul>
 <ul id="emoji-widget">
     <li>✨</li>
