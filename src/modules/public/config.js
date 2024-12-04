@@ -138,14 +138,14 @@ const initializePublicConfigs = async (type) => {
 };
 
 // Save configuration to a file (synchronous)
-const putConfig = (type, config) => {
-  const fileName = path.resolve(`.${type}.json`);
-  // console.log(
-  //   "putConfig :: file:",
-  //   fileName,
-  //   ":: contents :",
-  //   config.map((c) => c.label),
-  // );
+const putConfig = (filePath, config) => {
+  const fileName = path.resolve(`.${filePath}.json`);
+  console.log(
+    "putConfig :: file:",
+    fileName,
+    ":: contents :",
+    config.map((c) => c.label),
+  );
   fs.writeFileSync(fileName, JSON.stringify(config, null, 2));
 };
 
@@ -163,7 +163,7 @@ const applyFeaturePayload = (payloadJSON) =>{
 
 // Parse updates and apply the swaps to the written file
 // Pairs of before & after sent sequentially as saved by FE
-const applySignalsPayload = (payloadJSON) => {
+const applySignalsOrder = (payloadJSON) => {
 
   const payloadAction = payloadJSON ? JSON.parse(payloadJSON) : [];
   const signalsTarget =  JSON.parse(JSON.stringify(getParam("dashboard_signals_config")));
@@ -180,18 +180,27 @@ const applySignalsPayload = (payloadJSON) => {
   return signalsTarget;
 };
 
+// Parse updates and apply an update to a single field
+const applySignalsField = (payloadJSON) => {
+  console.log('applySignalsField', payloadJSON);
+  const signalsTarget =  JSON.parse(JSON.stringify(getParam("dashboard_signals_config")));
+  const {id, field, value} = JSON.parse(payloadJSON);
+  signalsTarget[id][field] = value;
+  // Also save to memory
+  setParam("dashboard_signals_config", signalsTarget);
+  return signalsTarget;
+};
+
 // Parse incoming configuration update request
 // Sort by type into handlers
 const publicConfigUpdate = (req, res) => {
   const { type, payload } = req.query;
-
-  if (!PUBLIC_CONFIGS[type]) {
-    return res.status(400).json({ error: "Invalid type: " + type + "" });
-  }
-
   try {
-    if (type === "signals") {
-      putConfig("signals", applySignalsPayload(payload));
+    if (type === "signals:order") {
+      putConfig("signals", applySignalsOrder(payload));
+    }
+    if (type === "signals:field") {
+      putConfig("signals", applySignalsField(payload));
     }
     res.status(200).json({
       message: "Configuration for " + type + " updated successfully.",

@@ -50,10 +50,10 @@ const initSettingsEditor = (editorEl) => {
                     axios.get("/public/config/update", {
                         params: {
                             type: "signals:field",
-                            description: JSON.stringify(payload),
+                            payload: JSON.stringify(payload),
                         },
                     }).finally(
-                        // () => socketEmitReload()
+                        () => socketEmitReload()
                     );
                 });
             });
