@@ -14,6 +14,8 @@
 
     {% if config.type == "feature" %}
         {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=feature&type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label %}
+    {% elif config.type == "mark" %}
+        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~ config.label %}
     {% else %}
         {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~ config.description %}
     {% endif %}
@@ -47,6 +49,12 @@
         generateQrCode(document.querySelector("#qr-code-dialog-canvas").getAttribute('data-url'), "qr-code-dialog-canvas");
 
         socketWatchReload();
+
+        const snapToDescendant = (el) =>{
+            document.documentElement.addEventListener('mouseup', ()=>{
+
+            });
+        };
     });
 </script>
 {% endblock %}
