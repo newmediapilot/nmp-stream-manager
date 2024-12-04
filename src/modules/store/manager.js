@@ -75,7 +75,7 @@ function getParam(key) {
       value,
     );
   } else {
-    console.info2(process.cwd(), "Get", key, "::", value);
+    // console.info2(process.cwd(), "Get", key, "::", value);
   }
   return value;
 }
