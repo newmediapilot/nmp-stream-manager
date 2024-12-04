@@ -1,8 +1,7 @@
 const sortableContainer = (type, containerEl, toggleEl) => {
-
   let payload = [];
-  const editLabel = toggleEl.getAttribute('data-edit');
-  const doneLabel = toggleEl.getAttribute('data-done');
+  const editLabel = toggleEl.getAttribute("data-edit");
+  const doneLabel = toggleEl.getAttribute("data-done");
 
   const notifyEl = document.documentElement;
   const states = [
@@ -14,7 +13,7 @@ const sortableContainer = (type, containerEl, toggleEl) => {
 
   const sortable = new Sortable(containerEl, {
     animation: 333,
-    forceFallback : true,
+    forceFallback: true,
     removeCloneOnHide: true,
     ghostClass: "pointer-events-none",
     onEnd: (event) => {
@@ -26,7 +25,6 @@ const sortableContainer = (type, containerEl, toggleEl) => {
   sortable.option("disabled", true);
 
   toggleEl.addEventListener("click", () => {
-
     sortable.option("disabled", !sortable.option("disabled"));
 
     notifyEl.classList.toggle("edit-active");
@@ -35,19 +33,19 @@ const sortableContainer = (type, containerEl, toggleEl) => {
     toggleEl.innerHTML = isDisabled ? states[0] : states[1];
 
     if (isDisabled) {
-
-      axios.get("/public/config/update", {
-        params: {
-          type,
-          payload: JSON.stringify(payload),
-        },
-      }).finally(()=>{
-        socketEmitReload();
-        document.querySelector("#menu-toggle").checked= false;
-      });
+      axios
+        .get("/public/config/update", {
+          params: {
+            type,
+            payload: JSON.stringify(payload),
+          },
+        })
+        .finally(() => {
+          socketEmitReload();
+          document.querySelector("#menu-toggle").checked = false;
+        });
 
       payload = [];
     }
   });
-
 };

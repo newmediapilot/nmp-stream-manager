@@ -6,12 +6,12 @@ const { getParam } = require("../store/manager");
  * @param {Object} res - The Express response object.
  */
 function publicHeartPing(req, res) {
-    const heartRate = getParam("sensor_heart_rate");
-    if (heartRate !== undefined && heartRate !== null) {
-        res.send(String(heartRate));
-    } else {
-        res.send("null");
-    }
+  const heartRate = getParam("sensor_heart_rate");
+  if (heartRate !== undefined && heartRate !== null) {
+    res.send(String(heartRate));
+  } else {
+    res.send("null");
+  }
 }
 
 module.exports = { publicHeartPing };

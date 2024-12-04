@@ -42,10 +42,7 @@ async function startServices(app) {
 
     // HTTPS server (on port 443)
     const httpsServer = https.createServer(certs, app).listen(443, () => {
-      console.log2(
-          process.cwd(),
-          "Server running on 443 at https://localhost"
-      );
+      console.log2(process.cwd(), "Server running on 443 at https://localhost");
     });
 
     // Configure Socket.IO for the HTTPS server
@@ -53,7 +50,10 @@ async function startServices(app) {
 
     // Heart Rate Server
     app.listen(3476, () => {
-      console.log2(process.cwd(), "Server running on 3476 at https://localhost");
+      console.log2(
+        process.cwd(),
+        "Server running on 3476 at https://localhost",
+      );
     });
 
     // Launch heart rate server

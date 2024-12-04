@@ -1,38 +1,36 @@
 const sendSignal = (el) => {
+  const initialText = el.innerText;
+  const waitSetting = Number(el.getAttribute("data-wait"));
+  const waitDefault = 3000;
+  const sendingText = el.getAttribute("data-sending");
+  const errorText = el.getAttribute("data-error");
+  const successText = el.getAttribute("data-success");
 
-    const initialText = el.innerText;
-    const waitSetting = Number(el.getAttribute('data-wait'));
-    const waitDefault = 3000;
-    const sendingText = el.getAttribute('data-sending');
-    const errorText = el.getAttribute('data-error');
-    const successText = el.getAttribute('data-success');
+  const setState = (label, isDisabled, state) => {
+    el.innerText = label;
+    el.disabled = isDisabled;
+    el.setAttribute("data-state", state);
+  };
 
-    const setState = (label, isDisabled, state) => {
-        el.innerText = label;
-        el.disabled = isDisabled;
-        el.setAttribute('data-state', state);
-    };
+  setState(sendingText, true, "loading");
 
-    setState(sendingText, true, 'loading');
+  const getRes = axios.get(el.getAttribute("data-href"));
 
-    const getRes = axios.get(el.getAttribute('data-href'));
+  getRes.then((getRes) => {
+    console.log("Success:", getRes);
+    setState(successText, true, "success");
+  });
 
-    getRes.then(getRes => {
-        console.log('Success:', getRes);
-        setState(successText, true, 'success');
-    });
+  getRes.catch((error) => {
+    console.log("Error:", error);
+    setState(errorText, true, "error");
+  });
 
-    getRes.catch(error => {
-        console.log('Error:', error);
-        setState(errorText, true, 'error');
-    });
-
-    getRes.finally(() => {
-        console.info('Complete.');
-        setTimeout(() => {
-            setState(initialText, false, 'idle');
-            el.blur();
-        }, waitSetting || waitDefault);
-    });
-
+  getRes.finally(() => {
+    console.info("Complete.");
+    setTimeout(() => {
+      setState(initialText, false, "idle");
+      el.blur();
+    }, waitSetting || waitDefault);
+  });
 };

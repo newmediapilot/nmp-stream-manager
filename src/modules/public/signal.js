@@ -49,7 +49,8 @@ async function publicSignalCreate(req, res) {
     }
 
     if ("browser" === type) {
-      if ("reload" === description) result = await sendPayload([type, description].join(":"));
+      if ("reload" === description)
+        result = await sendPayload([type, description].join(":"));
     }
 
     if (!result) {

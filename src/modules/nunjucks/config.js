@@ -14,7 +14,6 @@ const { generateAssetLinks } = require("../nunjucks/preload.filter");
  * @param {object} app - The Express app instance.
  */
 const configureNunjucks = (app) => {
-
   const nunjucksEnv = nunjucks.configure("src/views", {
     autoescape: true,
     express: app,
@@ -25,14 +24,13 @@ const configureNunjucks = (app) => {
   nunjucksEnv.addFilter("getAllParams", getAllParams);
   nunjucksEnv.addFilter("urlencode", encodeURIComponent);
   nunjucksEnv.addFilter("generateAssetLinks", generateAssetLinks);
-  nunjucksEnv.addFilter("currentTime", ()=>new Date().getTime().toString());
+  nunjucksEnv.addFilter("currentTime", () => new Date().getTime().toString());
 
   app.set("view engine", "html");
 
   app.use(express.static("src/assets"));
 
   appRef = app;
-
 };
 
 module.exports = { configureNunjucks };
