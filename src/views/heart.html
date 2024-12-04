@@ -1,10 +1,37 @@
 <!-- src/views/heart.html -->
 {% extends "layouts/main.njk" %}
 {% block hscripts %}
-<link rel="stylesheet" href="/style/heart.css">
+<style>
+    #heart-rate {
+        font-size: 50px;
+        font-family: sans-serif;
+        font-weight: bolder;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        line-height: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: red;
+    }
+    #heart-rate div:nth-of-type(2){
+        font-size: 120%;
+        line-height: 0;
+        transform: translateY(-3px);
+    }
+</style>
 {% endblock %}
 {% block body %}
-<div id="heart-rate"></div>
+{% set data_label_content = "bpm..." %}
+{% set data_emoji_content = "%" %}
+<div id="heart-rate"
+     data-label-content="{{data_label_content}}"
+     data-emoji-content="{{data_emoji_content}}">
+    <div></div>
+    <div></div>
+</div>
 {% endblock %}
 {% block fscripts %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -12,30 +39,23 @@
     document.addEventListener("DOMContentLoaded", () => {
 
         const heartRateElement = document.querySelector('#heart-rate');
+        const labelEl = heartRateElement.querySelector('div:nth-of-type(1)');
+        const emojiEl = heartRateElement.querySelector('div:nth-of-type(2)');
 
         // Poll function
         setInterval(async () => {
             try {
                 const response = await axios.get("/public/heart/ping");
                 const heartRate = response.data;
-                heartRateElement.textContent = heartRate ? `${heartRate}` : 'BPM';
-                console.log("Fetch heart rate:", heartRate);
+                const label = heartRateElement.getAttribute('data-label-content');
+                const emoji = heartRateElement.getAttribute('data-emoji-content');
+                labelEl.textContent = heartRate ? heartRate : label;
+                emojiEl.textContent =  emoji ? emoji :  "♥" ;
             } catch (error) {
                 heartRateElement.textContent = "BPM";
                 console.error("Failed to fetch heart rate:", error);
             }
-            resizeHeartRate();
         }, 1000);
-
-        // Resize function
-        function resizeHeartRate() {
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-            const fontSize = Math.min(viewportWidth, viewportHeight) * 0.3;
-            heartRateElement.style.fontSize = `${fontSize}px`;
-            console.error("resizeHeartRate:", viewportWidth,viewportHeight,heartRateElement.style.fontSize);
-        }
-
     });
 </script>
 {% endblock %}
