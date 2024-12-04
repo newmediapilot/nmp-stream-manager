@@ -30,6 +30,7 @@ ul + #emoji-widget {
     top: 0;
     display: flex;
     align-items: center;
+    z-index: 1;
 }
 
 .settings-container--header p {
@@ -38,11 +39,32 @@ ul + #emoji-widget {
     margin-left: 10px;
 }
 
+/** themes start **/
 .settings-editor.aqua,
 .settings-container--header.aqua,
 .settings-editor.aqua + #emoji-widget {
     background: var(--button-aqua);
 }
+
+.settings-editor.orange,
+.settings-container--header.orange,
+.settings-editor.orange + #emoji-widget {
+    background: var(--button-orange);
+}
+
+.settings-editor.bloodorange,
+.settings-container--header.bloodorange,
+.settings-editor.bloodorange + #emoji-widget {
+    background: var(--button-bloodorange);
+}
+
+.settings-editor.purple,
+.settings-container--header.purple,
+.settings-editor.purple + #emoji-widget {
+    background: var(--button-purple);
+}
+
+/** themes end **/
 
 @media (min-aspect-ratio: 1/1) {
     .settings-container {
