@@ -11,14 +11,21 @@
 {% include "partials/controls.njk" %}
 <div class="dashboard">
     {% for config in 'dashboard_signals_config' | getParam %}
-    <div class="button button-{{ config.theme }}">
+
+    {% if signal.type == "feature" %}
+        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label %}
+    {% else %}
+        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description %}
+    {% endif %}
+
+    <div class="button button-{{ config.theme }}" href="{{data_href}}">
         <button
             data-state="idle"
             data-sending="Sending"
             data-error="Error"
             data-success="Success"
             data-wait="{{ config.wait }}"
-            data-href="{{ public_routes.PUBLIC_SIGNAL_CREATE }}?type={{ config.type }}&description={{ config.description }}:{{ config.label }}"
+            data-href="{{ data_href }}"
             onclick="javascript:sendSignal(this)">
             <div>{{ config.emoji }} {{ config.label }}</div>
         </button>
