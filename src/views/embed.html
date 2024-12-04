@@ -6,6 +6,31 @@
     html {
         /*transform: perspective(600px) rotateY(-5deg) scale(0.8);*/
     }
+
+    html,
+    body,
+    iframe {
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+        background-color: transparent;
+        overflow: hidden;
+    }
+
+    :root {
+        --streamer-qr-size: 500px;
+    }
+
+    #streamer-qr-code {
+        height: var(--streamer-qr-size) !important;
+        width: var(--streamer-qr-size) !important;
+        position: fixed;
+        right: 0px;
+        bottom: 0px;
+        object-fit: contain;
+        background: white;
+        display: none;
+    }
 </style>
 {% endblock %}
 {% block body %}
@@ -26,26 +51,27 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
-        // Read query param of streamerName
-        // Load streamerName into the embed
+        // Read query param of featuredName
+        // Load featuredName into the embed
         // If signal re-sends the same name, hide everything
 
         const urlParams = new URLSearchParams(window.location.search);
-        const streamerQueryParam = urlParams.get('streamerName');
+        const streamerQueryParam = urlParams.get('featuredName');
 
         if (!streamerQueryParam) {
             console.log('No streamer found');
         } else {
             const URL = `https://player.twitch.tv/?channel=${streamerQueryParam}&parent=localhost&muted=false`;
             generateQrCode(URL, 'streamer-qr-code');
+            document.querySelector('#streamer-qr-code').style.display = 'block';
             const twitchEmbed = document.querySelector('#twitch-embed');
             twitchEmbed.src = URL;
         }
 
         socketConnect((payload) => {
             if (payload.startsWith('feature:set:')) {
-                const streamerName = payload.split(':').pop();
-                const isOpen = (streamerQueryParam === streamerName);
+                const featuredName = payload.split(':').pop();
+                const isOpen = (streamerQueryParam === featuredName);
                 if (isOpen) {
                     try {
                         document.documentElement.remove();
@@ -53,7 +79,7 @@
                         window.location.reload();
                     }
                 } else {
-                    window.location.href = `${window.location.origin}${window.location.pathname}?streamerName=${streamerName}`;
+                    window.location.href = `${window.location.origin}${window.location.pathname}?featuredName=${featuredName}`;
                 }
             }
         });
