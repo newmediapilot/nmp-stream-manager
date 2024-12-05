@@ -41,7 +41,9 @@
 </div>
 {% endblock %}
 {% block fscripts %}
+<!-- dialogs start -->
 {{ qrcode_dialog("qrcode_dialog", public_routes.PUBLIC_DASHBOARD) }}
+<!-- dialogs end -->
 <script>
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => scrollSnap('.dashboard'));
