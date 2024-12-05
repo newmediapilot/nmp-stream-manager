@@ -49,15 +49,13 @@
 {% endblock %}
 {% block fscripts %}
 <script>
+    document.addEventListener("DOMContentLoaded", socketWatchReload)
     document.addEventListener("DOMContentLoaded", () => {
-
         // Read query param of featuredName
         // Load featuredName into the embed
         // If signal re-sends the same name, hide everything
-
         const urlParams = new URLSearchParams(window.location.search);
         const streamerQueryParam = urlParams.get('featuredName');
-
         if (!streamerQueryParam) {
             console.log('No streamer found');
         } else {
@@ -67,7 +65,6 @@
             const twitchEmbed = document.querySelector('#twitch-embed');
             twitchEmbed.src = URL;
         }
-
         socketConnect((payload) => {
             if (payload.startsWith('feature:set:')) {
                 const featuredName = payload.split(':').pop();
@@ -83,9 +80,6 @@
                 }
             }
         });
-
-        socketWatchReload();
-
     });
 </script>
 {% endblock %}
