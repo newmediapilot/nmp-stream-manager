@@ -39,6 +39,7 @@ ul + #emoji-widget {
     flex-grow: 1;
     font-size: 30px;
     margin-left: 10px;
+    background: repeating-linear-gradient(45deg, rgba(0, 0, 0, .05) 0px, rgba(0, 0, 0, .05) 2px, rgba(255, 255, 255, .05) 2px, rgba(255, 255, 255, .05) 4px);
 }
 
 /** themes start **/
