@@ -90,13 +90,6 @@ html.edit-active .dashboard::after {
     opacity: 0.98;
 }
 
-.dashboard .button button div {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    z-index: 1;
-}
-
 html.edit-active .dashboard .button button {
     border-style: dashed;
 }
