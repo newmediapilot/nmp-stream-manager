@@ -12,6 +12,7 @@
 <style>
     .module {
         overflow: hidden;
+        transition: height 333ms linear;
     }
     .module .title p {
         flex-grow: 1;
@@ -20,26 +21,41 @@
         background: repeating-linear-gradient(45deg, rgba(0, 0, 0, .05) 0px, rgba(0, 0, 0, .05) 2px, rgba(255, 255, 255, .05) 2px, rgba(255, 255, 255, .05) 4px);
     }
     .module .title button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border-radius: 10px;
-        margin: 3px;
         font-size: 30px;
-        background: var(--button-deepyellow);
-        text-shadow:
-                0 0 2px rgba(0,0,0,1),
-                0 0 3px rgba(0,0,0,1),
-                0 0 4px rgba(0,0,0,1);
+        margin: 3px;
+        width: 40px;
+        background: repeating-linear-gradient(-45deg, rgba(0, 0, 0, .05) 0px, rgba(0, 0, 0, .05) 2px, rgba(255, 255, 255, .05) 2px, rgba(255, 255, 255, .05) 4px);
     }
-    .module .title button:nth-of-type(2) {
-        background: var(--button-orange);
+    .module .title input[type="checkbox"] {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        font-size: 30px;
+        margin: 3px;
+        width: 40px;
+        background: repeating-linear-gradient(-45deg, rgba(0, 0, 0, .05) 0px, rgba(0, 0, 0, .05) 2px, rgba(255, 255, 255, .05) 2px, rgba(255, 255, 255, .05) 4px);
+    }
+    .module .title input[type="checkbox"]:after {
+        content:"✏";
+    }
+    .module .title input[type="checkbox"]:checked:after{
+        content: "☑";
     }
 </style>
 {% set public_routes = 'public_routes' | getParam %}
 {{ public_module_styles() }}
 <div class="modules">
+    {% for a in [1, 2, 3] %}
     <div class="module aqua">
         <div class="title">
             <p>BPM</p>
             <button onclick="javascript:showPanelQR('#heart_embed_qrcode_dialog', 'BPM')">🔗</button>
+            <input onclick="javascript:togglePanelPreview(this, 'BPM')" type="checkbox">
         </div>
         <div class="preview">
             <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_HEART_EMBED}}"></iframe>
@@ -67,18 +83,18 @@
             </div>
         </div>
     </div>
+    {% endfor %}
 </div>
 {% endblock %}
 {% block fscripts %}
 {{ qrcode_dialog("heart_embed_qrcode_dialog", public_routes.PUBLIC_HEART_EMBED ) }}
 generateQrCode(document.querySelector("#qr-code-dialog-canvas").getAttribute('data-url'), "#qr-code-dialog-canvas")
 <script>
-    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => setupCssVariable('.preview', 'width', '--js-module-preview-width'));
+    document.addEventListener("DOMContentLoaded", () => setupCssVariable('.title', 'height', '--js-module-title-height'));
     document.addEventListener("DOMContentLoaded", () => setupCssVariable('.module', 'height', '--js-module-module-height'));
+    document.addEventListener("DOMContentLoaded", () => initPanelPreview());
     document.addEventListener("DOMContentLoaded", () => applyStyleUpdates());
-    document.addEventListener("DOMContentLoaded", () => {
-
-    });
+    // document.addEventListener("DOMContentLoaded", () => socketWatchReload());
 </script>
 {% endblock %}

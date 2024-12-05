@@ -14,6 +14,7 @@ const pushStyleUpdates = () => {
             console.log('pushStyleUpdates::socketEmitReload');
         });
 };
+
 // Reads checkboxes and sets checked based on whether css contains their value
 const applyStyleUpdates = () => {
     const radioEls = Array.from(document.querySelectorAll('input[type="radio"]'));
@@ -22,6 +23,7 @@ const applyStyleUpdates = () => {
         el.checked = styleString.innerText.includes(el.value);
     });
 };
+
 // Shows QR code for a given panel
 const showPanelQR = (dialogQuerySelector, type) => {
     const dialogQuerySelectorCanvas = `${dialogQuerySelector} #qr-code-dialog-canvas`;
@@ -34,4 +36,23 @@ const showPanelQR = (dialogQuerySelector, type) => {
         URL,
         dialogQuerySelectorCanvas
     );
+};
+
+// Sets initial visibility of panels
+const initPanelPreview = () => {
+    document.querySelectorAll('.module').forEach(el => {
+        el.style.height = getComputedStyle(document.documentElement).getPropertyValue('--js-module-title-height') + 'px';
+    });
+};
+
+// Toggles panels via checkbox
+const togglePanelPreview = (contextEl) => {
+    const openHeight = getComputedStyle(document.documentElement).getPropertyValue('--js-module-module-height');
+    const closedHeight = getComputedStyle(document.documentElement).getPropertyValue('--js-module-title-height');
+    const checkboxEls = Array.from(document.querySelectorAll('.modules input[type="checkbox"]'));
+    checkboxEls.forEach((el,index) => {
+        const moduleEl = document.querySelectorAll('.module')[index];
+        el.checked = contextEl === el;
+        moduleEl.style.height = (el.checked ? openHeight : closedHeight) + 'px';
+    });
 };
