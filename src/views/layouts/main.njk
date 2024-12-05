@@ -38,6 +38,7 @@
 {#    {% for link in assetLinks %}<link rel="preload" as="{{ link.type }}" href="{{ link.href | safe }}">#}
 {#    {% endfor %}#}
 
+    <script defer src="/script/router.js?={{cache_buster}}" type="text/javascript"></script>
     <script defer src="/script/settings_editor.js?={{cache_buster}}" type="text/javascript"></script>
     <script defer src="/script/generate_qr_code.js?={{cache_buster}}" type="text/javascript"></script>
     <script defer src="/script/generic_dialog.js?={{cache_buster}}" type="text/javascript"></script>
@@ -58,7 +59,7 @@
 
 </head>
 <body>
-<div style="position: fixed; left:0; top:0; z-index: 100000">{{ cache_buster }}</div>
+{#<div style="position: fixed; left:0; top:0; z-index: 100000">{{ cache_buster }}</div>#}
 {% block body %}{% endblock %}
 {% block fscripts %}{% endblock %}
 

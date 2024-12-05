@@ -1,3 +1,7 @@
+html {
+    background: url("/image/blueprint.webp");
+}
+
 ul + #emoji-widget {
     display: none;
 }
