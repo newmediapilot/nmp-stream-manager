@@ -138,7 +138,7 @@ const putConfig = (filePath, config) => {
     ":: contents :",
     config.map((c) => c.label),
   );
-  fs.writeFileSync(fileName, JSON.stringify(config, null, 2));
+  fs.writeFileSync(fileName, JSON.stringify(config, null, 2), {encoding: "utf-8"});
 };
 
 // Load configuration from a file (synchronous)

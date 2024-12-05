@@ -72,6 +72,8 @@
 
 </style>
 {% set public_routes = 'public_routes' | getParam %}
+{% set public_module_styles = 'public_module_styles' | getParam %}
+<style>{{ public_module_styles }}</style>
 <div class="modules">
     <div class="module">
         <div class="preview">
@@ -82,7 +84,7 @@
                  data-module-payload="heart:alignment"
                  class="module-9x9-selector">
                 <ul>
-                    <li><input type="radio" name="group1" value="1"></li>
+                    <li><input type="radio" name="group1" value="--"></li>
                     <li><input type="radio" name="group1" value="2"></li>
                     <li><input type="radio" name="group1" value="3"></li>
                     <li><input type="radio" name="group1" value="4"></li>

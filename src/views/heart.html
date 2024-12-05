@@ -12,7 +12,6 @@
         color: red;
         padding: 20px;
     }
-
     #heart-rate div:nth-of-type(2) {
         font-size: 120%;
     }
@@ -27,17 +26,17 @@
     }
 
     :root {
-        --module-container-grid-column-start: 1;
-        --module-container-grid-column-end: 2;
-        --module-container-align-self: flex-start;
-        --module-container-justify-self: flex-start;
+        --heart-grid-column-start: 1;
+        --heart-grid-column-end: 2;
+        --heart-align-self: flex-start;
+        --heart-justify-self: flex-start;
     }
 
     #module-container > div {
-        grid-column-start: var(--module-container-grid-column-start);
-        grid-column-end: var(--module-container-grid-column-end);
-        align-self: var(--module-container-grid-column-start);
-        justify-self: var(--module-container-grid-column-start);
+        grid-column-start: var(--heart-grid-column-start);
+        grid-column-end: var(--heart-grid-column-end);
+        align-self: var(--heart-grid-column-start);
+        justify-self: var(--heart-grid-column-start);
     }
 
 </style>
@@ -53,10 +52,13 @@
         <div></div>
     </div>
 </div>
+<style>
+    {% set public_module_styles = 'public_module_styles' | getParam %}
+    {{ public_module_styles }}
+</style>
 {% endif %}
 {% endfor %}
 {% endblock %}
-
 {% block fscripts %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>

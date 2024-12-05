@@ -38,7 +38,7 @@ if (fs.existsSync(envFilePath)) {
     })
     .join("\n");
 
-  fs.writeFileSync(envExamplePath, sanitizedEnvContent);
+  fs.writeFileSync(envExamplePath, sanitizedEnvContent, {encoding: "utf-8"});
 
   console.log(
     process.cwd(),
@@ -63,8 +63,7 @@ files.forEach((file) => {
 
 fs.writeFileSync(
   path.join(process.cwd(), ".combined.json"),
-  JSON.stringify(combined, null, 2),
-);
+  JSON.stringify(combined, null, 2), {encoding: "utf-8"});
 
 console.log(
   process.cwd(),

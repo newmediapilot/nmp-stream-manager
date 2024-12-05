@@ -31,21 +31,21 @@ const putStyle = (filePath, styleStringCSS) => {
         ":: contents :",
         styleStringCSS,
     );
-    fs.writeFileSync(fileName, styleStringCSS);
+    fs.writeFileSync(fileName, styleStringCSS, {encoding: "utf-8"});
 };
 
 // Load style from a file (synchronous)
 const getStyle = (type) => {
-    const fileName = path.resolve(`.${filePath}.css`);
+    const fileName = path.resolve(`.${type}.css`);
     console.log2(process.cwd(), "getStyle :: file:", fileName);
-    return JSON.parse(fs.readFileSync(fileName, "utf-8"));
+    return fs.readFileSync(fileName, "utf-8");
 };
 
 const publicStyleUpdate = (req, res) => {
     const {type, payload} = req.query;
-    console.log2(process.cwd(),"publicStyleUpdate", type, payload);
+    console.log2(process.cwd(), "publicStyleUpdate", type, payload);
     if ("heart" === type) {
-        console.log2(process.cwd(),"publicStyleUpdate :: heart");
+        console.log2(process.cwd(), "publicStyleUpdate :: heart");
     }
     try {
     } catch (error) {
