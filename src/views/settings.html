@@ -106,6 +106,7 @@
     document.addEventListener("DOMContentLoaded", () => {
         socketWatchReload();
         document.querySelectorAll(".settings-editor").forEach(initSettingsEditor);
+        scrollSnap('.settings-container');
     });
 </script>
 {% endblock %}
