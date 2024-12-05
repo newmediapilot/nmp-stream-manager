@@ -1,7 +1,6 @@
 <!-- src/views/embed.html -->
 {% extends "layouts/main.njk" %}
 {% block hscripts %}
-<link rel="stylesheet" href="/style/embed.css">
 <style>
     html,
     body,
@@ -49,7 +48,7 @@
 {% endblock %}
 {% block fscripts %}
 <script>
-    document.addEventListener("DOMContentLoaded", socketWatchReload)
+    document.addEventListener("DOMContentLoaded", () => socketWatchReload);
     document.addEventListener("DOMContentLoaded", () => {
         // Read query param of featuredName
         // Load featuredName into the embed
