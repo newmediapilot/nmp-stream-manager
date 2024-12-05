@@ -41,13 +41,15 @@
     bottom: 80px;
     left: 50%;
     transform: translateX(-50%);
-    min-width: 200px;
+    min-width: 250px;
+    padding: 20px;
     text-align: left;
+    bottom: calc(100% + 10px);
 }
 
 .header--items em {
     font-style: normal;
-    display:inline-block;
+    display: inline-block;
     min-width: 1.5em;
     text-align: center;
 }
@@ -57,30 +59,31 @@
     display: flex;
 }
 
-/* Menu Appearing Above */
-.header--items {
-    bottom: calc(100% + 10px);
-    padding: 10px;
-}
-
 /* Individual Menu Buttons */
 .header--items button {
     border: none;
     text-align: left;
-    font-size: 1.5rem;
+    font-size: 2rem;
     width: 100%;
     cursor: pointer;
     padding: 6px 11px 8px 6px;
+}
+
+.header--items button:hover,
+.header--items button:active {
+    background: repeating-linear-gradient(45deg, rgba(0, 0, 0, .15) 0px, rgba(0, 0, 0, .15) 2px, rgba(255, 255, 255, .15) 2px, rgba(255, 255, 255, .15) 4px);
 }
 
 /* Hide dropdown when `edit-active` */
 html.edit-active .header--items {
     min-width: auto;
 }
+
 html.edit-active .header--toggle,
 html.edit-active .header--items button:not(#dashboard--toggle) {
     display: none;
 }
+
 html.edit-active #dashboard--toggle {
     width: max-content;
 }
