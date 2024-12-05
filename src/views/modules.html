@@ -69,7 +69,7 @@
         transform-origin: 0 0;
     }
 
-    .module .title  {
+    .module .title {
         border-top: 20px solid rgba(255, 255, 255, 0.6);
         border-right: 20px solid rgba(255, 255, 255, 0.2);
         border-bottom: 20px solid rgba(255, 255, 255, 0.1);
@@ -89,23 +89,22 @@
 
     /** themes start **/
     .module.aqua,
-    .module.aqua .title
-    {
+    .module.aqua .title {
         background: var(--button-aqua);
     }
+
     .module.orange,
-    .module.orange .title
-    {
+    .module.orange .title {
         background: var(--button-orange);
     }
+
     .module.bloodorange,
-    .module.bloodorange .title
-    {
+    .module.bloodorange .title {
         background: var(--button-bloodorange);
     }
+
     .module.purple,
-    .module.purple .title
-    {
+    .module.purple .title {
         background: var(--button-purple);
     }
 
@@ -155,17 +154,25 @@
             const payload = Array.from(document.querySelectorAll('input[type="radio"]:checked')).map(el => el.value).join("");
             console.log('pushStyleUpdates::payload', payload);
             payload && axios.get("/public/style/update", {
-                    params: {
-                        type: "style",
-                        payload
-                    },
-                })
+                params: {
+                    type: "style",
+                    payload
+                },
+            })
                 .finally(() => {
                     socketEmitReload();
                     console.log('pushStyleUpdates::socketEmitReload');
                 });
 
         };
+        document.applyStyleUpdates = () => {
+            const radioEls = Array.from(document.querySelectorAll('input[type="radio"]'));
+            const styleString = document.querySelector('#public_module_styles');
+            radioEls.forEach(el => {
+                el.checked = styleString.innerText.includes(el.value);
+            });
+        };
+        document.applyStyleUpdates();
     });
 </script>
 {% endblock %}
