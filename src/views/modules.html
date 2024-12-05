@@ -1,7 +1,6 @@
 <!-- src/views/dashboard.html -->
 {% extends "layouts/main.njk" %}
-{% from "macros/form_loop.njk" import form_href_el %}
-{% from "macros/qrcode_dialog.njk" import qrcode_dialog %}
+{% from "macros/public_module_styles.njk" import public_module_styles %}
 {% set cache_buster = "" | currentTime %}
 {% set public_routes = 'public_routes' | getParam %}
 {% block hscripts %}
@@ -19,6 +18,10 @@
         --selector-cell-height: var(--selector-cell-width);
         --selector-width: calc(3 * var(--selector-cell-width));
         --selector-height: calc(3 * var(--selector-cell-height));
+    }
+
+    .module .controls {
+        display: flex;
     }
 
     .module .module-9x9-selector ul {
@@ -60,7 +63,7 @@
     }
 
     .module .preview iframe {
-        transform: scale(calc(var(--js-module-preview-width)/1920));
+        transform: scale(calc(var(--js-module-preview-width) / 1920));
         pointer-events: none;
         border: none;
         background: none;
@@ -72,32 +75,36 @@
 
 </style>
 {% set public_routes = 'public_routes' | getParam %}
-{% set public_module_styles = 'public_module_styles' | getParam %}
-<style>{{ public_module_styles }}</style>
+{{ public_module_styles() }}
 <div class="modules">
     <div class="module">
+        <div class="title"><h2>BPM</h2></div>
         <div class="preview">
             <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_HEART_EMBED}}"></iframe>
         </div>
         <div class="controls">
-            <div data-module-selector="heart:alignment"
-                 data-module-payload="heart:alignment"
-                 class="module-9x9-selector">
+            <div class="module-9x9-selector">
                 <ul>
-                    <li><input type="radio" name="group1" value="--"></li>
-                    <li><input type="radio" name="group1" value="2"></li>
-                    <li><input type="radio" name="group1" value="3"></li>
-                    <li><input type="radio" name="group1" value="4"></li>
-                    <li><input type="radio" name="group1" value="5"></li>
-                    <li><input type="radio" name="group1" value="6"></li>
-                    <li><input type="radio" name="group1" value="7"></li>
-                    <li><input type="radio" name="group1" value="8"></li>
-                    <li><input type="radio" name="group1" value="9"></li>
+                    {% for r1 in [1, 2, 3] %}{% for c1 in [1, 2, 3] %}
+                    <li>
+                        <input onclick="javascript:pushStyleUpdates({{public_routes.PUBLIC_STYLE_UPDATE}})" type="radio" name="group1"
+                               value="--heart-grid-column-start:{{ c1 }}; --heart-grid-column-end:{{ c1 + 1 }};--heart-grid-row-start:{{ r1 }}; --heart-grid-row-end:{{ r1 + 1 }};">
+                    </li>
+                    {% endfor %}{% endfor %}
+                </ul>
+            </div>
+            <div class="module-9x9-selector">
+                <ul>
+                    {% for r1 in ['flex-start', 'center', 'end'] %}{% for c1 in ['flex-start', 'center', 'end'] %}
+                    <li>
+                        <input onclick="javascript:pushStyleUpdates({{public_routes.PUBLIC_STYLE_UPDATE}})" type="radio" name="group2"
+                               value="--heart-align-self:{{ r1 }}; --heart-justify-self:{{ c1 }};">
+                    </li>
+                    {% endfor %}{% endfor %}
                 </ul>
             </div>
         </div>
     </div>
-
 </div>
 {% endblock %}
 {% block fscripts %}
@@ -105,7 +112,10 @@
     document.addEventListener("DOMContentLoaded", () => setupCssVariable('.preview', 'width', '--js-module-preview-width'));
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => {
-
+        document.pushStyleUpdates = () => {
+            const datas = Array.from(document.querySelectorAll('input[type="radio"]:checked')).map(el => el.value);
+            console.log('datas', datas);
+        };
     });
 </script>
 {% endblock %}

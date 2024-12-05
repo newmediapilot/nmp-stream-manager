@@ -17,6 +17,7 @@ const ROUTES = {
   PUBLIC_HEART_PING: "/public/heart/ping",
   PUBLIC_SIGNAL_CREATE: "/public/signal/create",
   PUBLIC_CONFIG_UPDATE: "/public/config/update",
+  PUBLIC_STYLE_UPDATE: "/public/style/update",
 };
 
 module.exports = ROUTES;
