@@ -13,22 +13,25 @@
     {% for config in 'dashboard_signals_config' | getParam %}
 
     {% if config.type == "feature" %}
-        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=feature&type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label %}
+    {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=feature&type=" ~ config.type ~ "&description=" ~
+    config.description ~ ":" ~ config.label %}
     {% elif config.type == "mark" %}
-        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~ config.label %}
+    {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~
+    config.label %}
     {% else %}
-        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~ config.description %}
+    {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~
+    config.description %}
     {% endif %}
 
     <div class="button button-{{ config.theme }}" href="{{data_href}}">
         <button
-            data-state="idle"
-            data-sending="Sending"
-            data-error="Error"
-            data-success="Success"
-            data-wait="{{ config.wait }}"
-            data-href="{{ data_href }}"
-            onclick="javascript:sendSignal(this)">
+                data-state="idle"
+                data-sending="Sending"
+                data-error="Error"
+                data-success="Success"
+                data-wait="{{ config.wait }}"
+                data-href="{{ data_href }}"
+                onclick="javascript:sendSignal(this)">
             <div>{{ config.emoji }} {{ config.label }}</div>
         </button>
     </div>
@@ -50,30 +53,30 @@
 
         socketWatchReload();
 
-        const snapToDescendant = (el, snapToEls) => {
-
-            const events = [
-                'mouseup',
-                'touchend',
-                'pointerup',
-                'pointercancel',
-                'touchcancel',
-                'mouseleave'
-            ];
-
-            events.forEach(event => {
-                document.documentElement.addEventListener(event, () => {
-                    console.log(`${event} triggered`);
-                });
-            });
-
+        const scrollSnap = (elQueryString) => {
+            let to = null;
+            let anim = null;
+            let duration = 333;
+            let containerEl = document.querySelector(elQueryString);
+            const height = containerEl.children[0].getBoundingClientRect().height;
+            const scrollFunct = () => {
+                to && clearTimeout(to);
+                to = setTimeout(() => {
+                    const scrollTop = Math.round(containerEl.scrollTop / height) * height;
+                    anim && anime.remove('.dashboard');
+                    anim = anime({
+                        scrollTop,
+                        duration,
+                        targets: elQueryString,
+                        easing: 'easeInOutQuad'
+                    });
+                }, duration);
+            };
+            document.documentElement.addEventListener('mouseup', scrollFunct);
+            document.documentElement.addEventListener('wheel', scrollFunct);
         };
 
-        snapToDescendant(
-            document.querySelector(".dashboard"),
-            document.querySelector(".dashboard > .button"),
-        );
-
+        scrollSnap('.dashboard');
     });
 </script>
 {% endblock %}
