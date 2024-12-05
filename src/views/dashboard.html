@@ -50,11 +50,30 @@
 
         socketWatchReload();
 
-        const snapToDescendant = (el) =>{
-            document.documentElement.addEventListener('mouseup', ()=>{
+        const snapToDescendant = (el, snapToEls) => {
 
+            const events = [
+                'mouseup',
+                'touchend',
+                'pointerup',
+                'pointercancel',
+                'touchcancel',
+                'mouseleave'
+            ];
+
+            events.forEach(event => {
+                document.documentElement.addEventListener(event, () => {
+                    console.log(`${event} triggered`);
+                });
             });
+
         };
+
+        snapToDescendant(
+            document.querySelector(".dashboard"),
+            document.querySelector(".dashboard > .button"),
+        );
+
     });
 </script>
 {% endblock %}
