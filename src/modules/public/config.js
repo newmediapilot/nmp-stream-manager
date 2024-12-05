@@ -23,6 +23,22 @@ const PUBLIC_CONFIGS = {
       description: "feature:set",
       wait: "700",
       emoji: "✨",
+      label: "mizukichigy",
+    },
+    {
+      theme: "aqua",
+      type: "feature",
+      description: "feature:set",
+      wait: "700",
+      emoji: "✨",
+      label: "chiyo",
+    },
+    {
+      theme: "aqua",
+      type: "feature",
+      description: "feature:set",
+      wait: "700",
+      emoji: "✨",
       label: "djcristianadematos",
     },
     {
