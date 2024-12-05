@@ -41,7 +41,7 @@
 {% block fscripts %}
 {{ qrcode_dialog("qrcode_dialog") }}
 <script>
-    document.addEventListener("DOMContentLoaded", socketWatchReload);
+    document.addEventListener("DOMContentLoaded", () =>socketWatchReload);
     document.addEventListener("DOMContentLoaded", () => scrollSnap('.dashboard'));
     document.addEventListener("DOMContentLoaded", () => generateQrCode(document.querySelector("#qr-code-dialog-canvas").getAttribute('data-url'), "qr-code-dialog-canvas"));
     document.addEventListener("DOMContentLoaded", () => sortableContainer(
