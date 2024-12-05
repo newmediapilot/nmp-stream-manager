@@ -11,6 +11,7 @@ const { setParam } = require("./store/manager");
 const { configureNunjucks } = require("./nunjucks/config");
 const { createHeartRateServer } = require("./sensor/listen");
 const { initializePublicConfigs } = require("./public/config");
+const { initializePublicStyles } = require("./public/style");
 const { configureSocket } = require("./helper/socket"); // Use configureSocket for socket setup
 const ROUTES = require("../routes");
 
@@ -31,6 +32,9 @@ async function startServices(app) {
 
     // Initialize dashboard data
     await initializePublicConfigs("signals");
+
+    // Initialize module styling
+    await initializePublicStyles("styles");
 
     // Configure Nunjucks
     configureNunjucks(app);
