@@ -9,14 +9,68 @@
 {% endblock %}
 {% block body %}
 {% include "partials/controls.njk" %}
-<div class="modules">
+<style>
+    .modules {
+        background: cadetblue;
+    }
+    ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        list-style-type: none;
+        padding: 0;
+    }
 
+    li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    input[type="radio"] {
+        width: 40px;
+        height: 40px;
+        border: 2px solid var(--color-idle);
+        border-radius: var(--border-radius);
+        background-color: #f0f0f0;
+        outline: none;
+        cursor: pointer;
+    }
+
+    input[type="radio"]:checked {
+        border-color: var(--color-success);
+        background-color: var(--button-green);
+    }
+
+    input[type="radio"]:not(:checked) {
+        border-color: var(--color-idle);
+    }
+
+    input[type="radio"]:hover {
+        border-color: var(--color-hover);
+    }
+</style>
+<div class="modules">
+    <div>
+        <ul>
+            <li><input type="radio" name="group1" value="1"></li>
+            <li><input type="radio" name="group1" value="2"></li>
+            <li><input type="radio" name="group1" value="3"></li>
+            <li><input type="radio" name="group1" value="4"></li>
+            <li><input type="radio" name="group1" value="5"></li>
+            <li><input type="radio" name="group1" value="6"></li>
+            <li><input type="radio" name="group1" value="7"></li>
+            <li><input type="radio" name="group1" value="8"></li>
+            <li><input type="radio" name="group1" value="9"></li>
+        </ul>
+    </div>
 </div>
 {% endblock %}
 {% block fscripts %}
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        socketWatchReload();
+    document.addEventListener("DOMContentLoaded", socketWatchReload);
+    document.addEventListener("DOMContentLoaded", ()=>{
+        
     });
 </script>
 {% endblock %}
