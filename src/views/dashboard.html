@@ -41,20 +41,13 @@
 {% block fscripts %}
 {{ qrcode_dialog("qrcode_dialog") }}
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-
-        sortableContainer(
-            "signals:order",
-            document.querySelector(".dashboard"),
-            document.querySelector("#dashboard--toggle"),
-        );
-
-        scrollSnap('.dashboard');
-
-        generateQrCode(document.querySelector("#qr-code-dialog-canvas").getAttribute('data-url'), "qr-code-dialog-canvas");
-
-        socketWatchReload();
-
-    });
+    document.addEventListener("DOMContentLoaded", socketWatchReload);
+    document.addEventListener("DOMContentLoaded", () => scrollSnap('.dashboard'));
+    document.addEventListener("DOMContentLoaded", () => generateQrCode(document.querySelector("#qr-code-dialog-canvas").getAttribute('data-url'), "qr-code-dialog-canvas"));
+    document.addEventListener("DOMContentLoaded", () => sortableContainer(
+        "signals:order",
+        document.querySelector(".dashboard"),
+        document.querySelector("#dashboard--toggle"),
+    ));
 </script>
 {% endblock %}
