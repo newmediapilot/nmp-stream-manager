@@ -27,6 +27,9 @@ Understand all the functions logs.
 Understand all the functions required modules.
 Understand the package.json file.
 Understand what this app is, its features, what it does.
-Then log the file-tree.
+Then log the file-tree and say ready.
 
-Just say Ready.
+When I ask you for code output, never add inline comments to explain things.
+Please keep explanations short but always warn if there is a gotcha or 
+something that could cause a bug or crash or is generally not recommended
+because of some danger.
