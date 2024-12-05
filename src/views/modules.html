@@ -1,0 +1,22 @@
+<!-- src/views/dashboard.html -->
+{% extends "layouts/main.njk" %}
+{% from "macros/form_loop.njk" import form_href_el %}
+{% from "macros/qrcode_dialog.njk" import qrcode_dialog %}
+{% set cache_buster = "" | currentTime %}
+{% set public_routes = 'public_routes' | getParam %}
+{% block hscripts %}
+<link rel="stylesheet" href="/style/modules.css?cb={{cache_buster}}">
+{% endblock %}
+{% block body %}
+{% include "partials/controls.njk" %}
+<div class="modules">
+
+</div>
+{% endblock %}
+{% block fscripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        socketWatchReload();
+    });
+</script>
+{% endblock %}

@@ -11,6 +11,7 @@ const ROUTES = {
   PUBLIC_INDEX: "/",
   PUBLIC_DASHBOARD: "/public/dashboard",
   PUBLIC_SETTINGS: "/public/settings",
+  PUBLIC_MODULES: "/public/modules",
   PUBLIC_EMBED: "/public/embed",
   PUBLIC_HEART_EMBED: "/public/heart/embed",
   PUBLIC_HEART_PING: "/public/heart/ping",
