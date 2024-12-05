@@ -19,17 +19,12 @@ const {
   resetSecrets,
 } = require("../store/manager");
 const { watchMessages } = require("./stream");
-
-let sessionRedirectComplete = false;
-
 /**
  * Initiates the login flow
  * @param req
  * @param res
  */
 function twitchLogin(req, res) {
-  if (sessionRedirectComplete)
-    return res.send("You can only login once per session.");
 
   const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
   const TWITCH_SCOPES =
@@ -45,8 +40,6 @@ function twitchLogin(req, res) {
   const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(TWITCH_REDIRECT_URL)}&response_type=code&scope=${TWITCH_SCOPES}`;
 
   console.log2(process.cwd(), "OAuth URL generated:", oauthUrl);
-
-  sessionRedirectComplete = true;
 
   res.redirect(oauthUrl);
 }
