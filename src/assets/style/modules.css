@@ -1,0 +1,20 @@
+html {
+    background: url("/image/blueprint.webp");
+}
+
+.modules {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+@media (min-aspect-ratio: 1/1) {
+    .modules {
+        width: 50%;
+        margin-left: 25%;
+    }
+}
