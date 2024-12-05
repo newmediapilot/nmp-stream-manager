@@ -73,19 +73,26 @@
         transform-origin: 0 0;
     }
 
+    .module .title label {
+        width: 100%;
+        height: 100%;
+    }
+
 </style>
 {% set public_routes = 'public_routes' | getParam %}
 {{ public_module_styles() }}
 <div class="modules">
     <div class="module">
-        <div class="title"><h2>BPM</h2></div>
+        <div class="title">
+            <h2>BPM</h2>
+        </div>
         <div class="preview">
             <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_HEART_EMBED}}"></iframe>
         </div>
         <div class="controls">
             <div class="module-9x9-selector">
                 <ul>
-                    {% for c1 in [1, 2, 3] %}{% for r1 in [1, 2, 3] %}
+                    {% for r1 in [1, 2, 3] %}{% for c1 in [1, 2, 3] %}
                     <li>
                         <input onclick="javascript:pushStyleUpdates()" type="radio" name="group1"
                                value="--heart-grid-column-start:{{ c1 }}; --heart-grid-column-end:{{ c1 + 1 }};--heart-grid-row-start:{{ r1 }}; --heart-grid-row-end:{{ r1 + 1 }};">

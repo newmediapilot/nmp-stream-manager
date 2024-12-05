@@ -1,5 +1,6 @@
 <!-- src/views/heart.html -->
 {% extends "layouts/main.njk" %}
+{% from "macros/public_module_styles.njk" import public_module_styles %}
 {% block hscripts %}
 <style>
     #heart-rate {
@@ -45,6 +46,7 @@
     }
 
 </style>
+{{ public_module_styles() }}
 {% endblock %}
 {% block body %}
 {% for signal in "dashboard_signals_config" | getParam %}
@@ -57,23 +59,6 @@
         <div></div>
     </div>
 </div>
-<style>
-    {
-    %
-    set
-    public_module_styles
-    =
-    'public_module_styles'
-    |
-    getParam
-    %
-    }
-    {
-    {
-        public_module_styles
-    }
-    }
-</style>
 {% endif %}
 {% endfor %}
 {% endblock %}
