@@ -109,6 +109,11 @@ ul + #emoji-widget {
     grid-template-columns: repeat(5, calc(100% / 5));
 }
 
+.emoji-widget-instance,
+.emoji-widget-instance-trigger{
+    background: green !important;
+}
+
 #emoji-widget li {
     display: flex;
     justify-content: center;

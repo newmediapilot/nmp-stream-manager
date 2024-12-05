@@ -47,11 +47,21 @@ const initSettingsEditor = (editorEl) => {
     );
 
     emojiWidgetTriggerEl.addEventListener("click", () => {
+
+        // cleanup anything existing first
+        document.querySelectorAll('.emoji-widget-instance')
+            .forEach(el => el.remove());
+        document.querySelectorAll('.emoji-widget-instance-trigger')
+            .forEach(el => el.classList.remove('emoji-widget-instance-trigger'));
+
+        emojiWidgetTriggerEl.classList.remove("add");
+
         if (emojiWidgetInstanceEl) {
-            emojiWidgetInstanceEl.remove();
             emojiWidgetInstanceEl = null;
         } else {
             emojiWidgetInstanceEl = emojiWidgetEl.cloneNode(true);
+            emojiWidgetInstanceEl.classList.add('emoji-widget-instance');
+            emojiWidgetTriggerEl.classList.add("emoji-widget-instance-trigger");
             editorEl.insertAdjacentElement("afterend", emojiWidgetInstanceEl);
 
             const emojiEls = emojiWidgetInstanceEl.querySelectorAll("li");
