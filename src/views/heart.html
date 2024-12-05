@@ -10,22 +10,48 @@
         justify-content: flex-end;
         align-items: flex-end;
         color: red;
+        padding: 20px;
     }
 
     #heart-rate div:nth-of-type(2) {
         font-size: 120%;
     }
 </style>
-{% endblock %}
+<style>
 
+    #module-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        height: 100vh;
+    }
+
+    :root {
+        --module-container-grid-column-start: 1;
+        --module-container-grid-column-end: 2;
+        --module-container-align-self: flex-start;
+        --module-container-justify-self: flex-start;
+    }
+
+    #module-container > div {
+        grid-column-start: var(--module-container-grid-column-start);
+        grid-column-end: var(--module-container-grid-column-end);
+        align-self: var(--module-container-grid-column-start);
+        justify-self: var(--module-container-grid-column-start);
+    }
+
+</style>
+{% endblock %}
 {% block body %}
 {% for signal in "dashboard_signals_config" | getParam %}
 {% if signal.type == "heart" %}
-<div id="heart-rate"
-     data-label-content="{{ signal.label }}"
-     data-emoji-content="{{ signal.emoji }}">
-    <div></div>
-    <div></div>
+<div id="module-container">
+    <div id="heart-rate"
+         data-label-content="{{ signal.label }}"
+         data-emoji-content="{{ signal.emoji }}">
+        <div></div>
+        <div></div>
+    </div>
 </div>
 {% endif %}
 {% endfor %}
