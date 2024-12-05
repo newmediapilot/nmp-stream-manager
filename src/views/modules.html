@@ -149,30 +149,9 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => setupCssVariable('.preview', 'width', '--js-module-preview-width'));
+    document.addEventListener("DOMContentLoaded", () => applyStyleUpdates());
     document.addEventListener("DOMContentLoaded", () => {
-        document.pushStyleUpdates = () => {
-            const payload = Array.from(document.querySelectorAll('input[type="radio"]:checked')).map(el => el.value).join("");
-            console.log('pushStyleUpdates::payload', payload);
-            payload && axios.get("/public/style/update", {
-                params: {
-                    type: "style",
-                    payload
-                },
-            })
-                .finally(() => {
-                    socketEmitReload();
-                    console.log('pushStyleUpdates::socketEmitReload');
-                });
 
-        };
-        document.applyStyleUpdates = () => {
-            const radioEls = Array.from(document.querySelectorAll('input[type="radio"]'));
-            const styleString = document.querySelector('#public_module_styles');
-            radioEls.forEach(el => {
-                el.checked = styleString.innerText.includes(el.value);
-            });
-        };
-        document.applyStyleUpdates();
     });
 </script>
 {% endblock %}
