@@ -44,8 +44,11 @@ const getStyle = (type) => {
 const publicStyleUpdate = (req, res) => {
     const {type, payload} = req.query;
     console.log2(process.cwd(), "publicStyleUpdate", type, payload);
-    if ("heart" === type) {
-        console.log2(process.cwd(), "publicStyleUpdate :: heart");
+    if ("style" === type) {
+        console.log2(process.cwd(), "publicStyleUpdate :: style");
+        const style =`:root{${payload}}`;
+        setParam("public_module_styles", style);
+        putStyle(type, style);
     }
     try {
     } catch (error) {

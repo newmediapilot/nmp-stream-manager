@@ -3,7 +3,7 @@ bin
 .env
 .secrets
 .signals.json
-.styles.css
+.style.css
 node_modules
 package-lock.json
 .combined.json

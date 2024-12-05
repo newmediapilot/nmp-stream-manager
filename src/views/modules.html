@@ -87,7 +87,7 @@
                 <ul>
                     {% for r1 in [1, 2, 3] %}{% for c1 in [1, 2, 3] %}
                     <li>
-                        <input onclick="javascript:pushStyleUpdates({{public_routes.PUBLIC_STYLE_UPDATE}})" type="radio" name="group1"
+                        <input onclick="javascript:pushStyleUpdates()" type="radio" name="group1"
                                value="--heart-grid-column-start:{{ c1 }}; --heart-grid-column-end:{{ c1 + 1 }};--heart-grid-row-start:{{ r1 }}; --heart-grid-row-end:{{ r1 + 1 }};">
                     </li>
                     {% endfor %}{% endfor %}
@@ -97,7 +97,7 @@
                 <ul>
                     {% for r1 in ['flex-start', 'center', 'end'] %}{% for c1 in ['flex-start', 'center', 'end'] %}
                     <li>
-                        <input onclick="javascript:pushStyleUpdates({{public_routes.PUBLIC_STYLE_UPDATE}})" type="radio" name="group2"
+                        <input onclick="javascript:pushStyleUpdates()" type="radio" name="group2"
                                value="--heart-align-self:{{ r1 }}; --heart-justify-self:{{ c1 }};">
                     </li>
                     {% endfor %}{% endfor %}
@@ -109,12 +109,23 @@
 {% endblock %}
 {% block fscripts %}
 <script>
-    document.addEventListener("DOMContentLoaded", () => setupCssVariable('.preview', 'width', '--js-module-preview-width'));
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => setupCssVariable('.preview', 'width', '--js-module-preview-width'));
     document.addEventListener("DOMContentLoaded", () => {
         document.pushStyleUpdates = () => {
-            const datas = Array.from(document.querySelectorAll('input[type="radio"]:checked')).map(el => el.value);
-            console.log('datas', datas);
+            const payload = Array.from(document.querySelectorAll('input[type="radio"]:checked')).map(el => el.value).join("");
+            console.log('pushStyleUpdates::payload', payload);
+            payload && axios.get("/public/style/update", {
+                    params: {
+                        type: "style",
+                        payload
+                    },
+                })
+                .finally(() => {
+                    socketEmitReload();
+                    console.log('pushStyleUpdates::socketEmitReload');
+                });
+
         };
     });
 </script>
