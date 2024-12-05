@@ -210,7 +210,5 @@ const publicConfigUpdate = (req, res) => {
 module.exports = {
   PUBLIC_CONFIGS,
   initializePublicConfigs,
-  getConfig,
-  putConfig,
   publicConfigUpdate,
 };
