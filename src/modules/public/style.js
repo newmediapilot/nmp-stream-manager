@@ -27,7 +27,7 @@ const putStyle = (filePath, styleStringCSS) => {
     const fileName = path.resolve(`.${filePath}.css`);
     console.log2(process.cwd(),
         "putStyle :: file:",
-        fileName,
+        fileName.substr(-10),
         ":: contents :",
         styleStringCSS,
     );
