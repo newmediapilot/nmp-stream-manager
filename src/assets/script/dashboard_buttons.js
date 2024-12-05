@@ -12,6 +12,7 @@ const sortableContainer = (type, containerEl, toggleEl) => {
   toggleEl.innerHTML = states[0];
 
   const sortable = new Sortable(containerEl, {
+    // swap: true, TODO: rewrite interpreter to use this!
     animation: 333,
     forceFallback: true,
     removeCloneOnHide: true,

@@ -42,33 +42,6 @@ ul + #emoji-widget {
     background: repeating-linear-gradient(45deg, rgba(0, 0, 0, .05) 0px, rgba(0, 0, 0, .05) 2px, rgba(255, 255, 255, .05) 2px, rgba(255, 255, 255, .05) 4px);
 }
 
-/** themes start **/
-.settings-editor.aqua,
-.settings-container--header.aqua,
-.settings-editor.aqua + #emoji-widget {
-    background: var(--button-aqua);
-}
-
-.settings-editor.orange,
-.settings-container--header.orange,
-.settings-editor.orange + #emoji-widget {
-    background: var(--button-orange);
-}
-
-.settings-editor.bloodorange,
-.settings-container--header.bloodorange,
-.settings-editor.bloodorange + #emoji-widget {
-    background: var(--button-bloodorange);
-}
-
-.settings-editor.purple,
-.settings-container--header.purple,
-.settings-editor.purple + #emoji-widget {
-    background: var(--button-purple);
-}
-
-/** themes end **/
-
 @media (min-aspect-ratio: 1/1) {
     .settings-container {
         width: 50%;
@@ -130,3 +103,29 @@ ul + #emoji-widget {
 #emoji-widget li.active {
     box-shadow: inset 0 0 8px 8px var(--button-deepyellow);
 }
+
+/** themes start **/
+.settings-editor.aqua,
+.settings-container--header.aqua,
+.settings-editor.aqua + #emoji-widget {
+    background: var(--button-aqua);
+}
+
+.settings-editor.orange,
+.settings-container--header.orange,
+.settings-editor.orange + #emoji-widget {
+    background: var(--button-orange);
+}
+
+.settings-editor.bloodorange,
+.settings-container--header.bloodorange,
+.settings-editor.bloodorange + #emoji-widget {
+    background: var(--button-bloodorange);
+}
+
+.settings-editor.purple,
+.settings-container--header.purple,
+.settings-editor.purple + #emoji-widget {
+    background: var(--button-purple);
+}
+/** themes end **/

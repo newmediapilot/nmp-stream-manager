@@ -1,6 +1,7 @@
 <!-- src/views/dashboard.html -->
 {% extends "layouts/main.njk" %}
 {% from "macros/public_module_styles.njk" import public_module_styles %}
+{% from "macros/qrcode_dialog.njk" import qrcode_dialog %}
 {% set cache_buster = "" | currentTime %}
 {% set public_routes = 'public_routes' | getParam %}
 {% block hscripts %}
@@ -9,113 +10,30 @@
 {% block body %}
 {% include "partials/controls.njk" %}
 <style>
-
-    :root {
-        --selector-cell-width: 30px;
-        --selector-cell-height: var(--selector-cell-width);
-        --selector-width: calc(3 * var(--selector-cell-width));
-        --selector-height: calc(3 * var(--selector-cell-height));
-    }
-
-    .module .controls {
-        display: flex;
-    }
-
-    .module .module-9x9-selector ul {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        width: var(--selector-width);
-        height: var(--selector-height);
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .module .module-9x9-selector li {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .module .module-9x9-selector input[type="radio"] {
-        border-radius: 0;
-        width: var(--selector-cell-width);
-        height: var(--selector-cell-height);
-        border: 2px solid var(--button-bloodorange);
-        background: var(--button-orange);
-    }
-
-    .module .module-9x9-selector input[type="radio"]:checked {
-        border-width: 10px;
-        background: var(--button-deepyellow);
-    }
-
-    .module .preview {
-        width: 100%;
-        height: 0;
-        padding-top: 56.25%;
-        background-color: var(--button-black);
-        position: relative;
-    }
-
-    .module .preview iframe {
-        transform: scale(calc(var(--js-module-preview-width) / 1920));
-        pointer-events: none;
-        border: none;
-        background: none;
-        position: absolute;
-        left: 0;
-        top: 0;
-        transform-origin: 0 0;
-    }
-
-    .module .title {
-        border-top: 20px solid rgba(255, 255, 255, 0.6);
-        border-right: 20px solid rgba(255, 255, 255, 0.2);
-        border-bottom: 20px solid rgba(255, 255, 255, 0.1);
-        border-left: 20px solid rgba(255, 255, 255, 0.4);
-        height: 5vh;
-        display: flex;
-        align-items: center;
-        z-index: 1;
-    }
-
     .module .title p {
         flex-grow: 1;
         font-size: 30px;
         margin-left: 10px;
         background: repeating-linear-gradient(45deg, rgba(0, 0, 0, .05) 0px, rgba(0, 0, 0, .05) 2px, rgba(255, 255, 255, .05) 2px, rgba(255, 255, 255, .05) 4px);
     }
-
-    /** themes start **/
-    .module.aqua,
-    .module.aqua .title {
-        background: var(--button-aqua);
+    .module .title button {
+        border-radius: 10px;
+        margin: 3px;
+        font-size: 30px;
+        background: var(--button-deepyellow);
+        text-shadow:
+                0 0 2px rgba(0,0,0,1),
+                0 0 3px rgba(0,0,0,1),
+                0 0 4px rgba(0,0,0,1);
     }
-
-    .module.orange,
-    .module.orange .title {
-        background: var(--button-orange);
-    }
-
-    .module.bloodorange,
-    .module.bloodorange .title {
-        background: var(--button-bloodorange);
-    }
-
-    .module.purple,
-    .module.purple .title {
-        background: var(--button-purple);
-    }
-
 </style>
 {% set public_routes = 'public_routes' | getParam %}
 {{ public_module_styles() }}
 <div class="modules">
-
     <div class="module aqua">
         <div class="title">
             <p>BPM</p>
+            <button onclick="showDialog('qrcode_dialog', '🔗 BPM Link', 'This link will open the BPM<br>display on any device on your network.')">🔗</button>
         </div>
         <div class="preview">
             <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_HEART_EMBED}}"></iframe>
@@ -146,6 +64,7 @@
 </div>
 {% endblock %}
 {% block fscripts %}
+{{ qrcode_dialog("qrcode_dialog") }}
 <script>
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => setupCssVariable('.preview', 'width', '--js-module-preview-width'));
