@@ -50,6 +50,9 @@ const publicStyleUpdate = (req, res) => {
         setParam("public_module_styles", style);
         putStyle(type, style);
     }
+    res.status(200).json({
+        message: "Style for " + type + " updated successfully.",
+    });
     try {
     } catch (error) {
         console.err2(

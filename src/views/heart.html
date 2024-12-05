@@ -12,6 +12,7 @@
         color: red;
         padding: 20px;
     }
+
     #heart-rate div:nth-of-type(2) {
         font-size: 120%;
     }
@@ -28,6 +29,8 @@
     :root {
         --heart-grid-column-start: 1;
         --heart-grid-column-end: 2;
+        --heart-grid-row-start: 1;
+        --heart-grid-row-end: 2;
         --heart-align-self: flex-start;
         --heart-justify-self: flex-start;
     }
@@ -35,8 +38,10 @@
     #module-container > div {
         grid-column-start: var(--heart-grid-column-start);
         grid-column-end: var(--heart-grid-column-end);
-        align-self: var(--heart-grid-column-start);
-        justify-self: var(--heart-grid-column-start);
+        grid-row-start: var(--heart-grid-row-start);
+        grid-row-end: var(--heart-grid-row-end);
+        align-self: var(--heart-align-self);
+        justify-self: var(--heart-justify-self);
     }
 
 </style>
@@ -53,8 +58,21 @@
     </div>
 </div>
 <style>
-    {% set public_module_styles = 'public_module_styles' | getParam %}
-    {{ public_module_styles }}
+    {
+    %
+    set
+    public_module_styles
+    =
+    'public_module_styles'
+    |
+    getParam
+    %
+    }
+    {
+    {
+        public_module_styles
+    }
+    }
 </style>
 {% endif %}
 {% endfor %}
@@ -67,6 +85,19 @@
         const heartRateElement = document.querySelector('#heart-rate');
         const labelEl = heartRateElement.querySelector('div:nth-of-type(1)');
         const emojiEl = heartRateElement.querySelector('div:nth-of-type(2)');
+        const heartPing = async () => {
+            try {
+                const response = await axios.get("/public/heart/ping");
+                const heartRate = response.data;
+                const label = heartRateElement.getAttribute('data-label-content');
+                const emoji = heartRateElement.getAttribute('data-emoji-content');
+                labelEl.textContent = heartRate ? heartRate : label;
+                emojiEl.textContent = emoji ? emoji : "♥";
+            } catch (error) {
+                heartRateElement.textContent = "BPM";
+                console.error("Failed to fetch heart rate:", error);
+            }
+        }
 
         // Poll function
         setInterval(async () => {
@@ -81,7 +112,7 @@
                 heartRateElement.textContent = "BPM";
                 console.error("Failed to fetch heart rate:", error);
             }
-        }, 15000);
+        }, 1000);
 
         socketWatchReload();
 
