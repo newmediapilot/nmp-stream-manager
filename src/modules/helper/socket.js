@@ -15,20 +15,20 @@ const configureSocket = (server) => {
 
   // Handle connection events
   io.on("connection", (socket) => {
-    console.log("Client connected");
+    console.log2(process.cwd(),"Client connected");
 
     // Listen for custom events from clients
     socket.on("message", (data) => {
-      console.log("Received message from client:", data);
+      console.log2(process.cwd(),"Received message from client:", data);
     });
 
     // Handle client disconnections
     socket.on("disconnect", () => {
-      console.log("Client disconnected");
+      console.log2(process.cwd(),"Client disconnected");
     });
   });
 
-  console.log("Socket.IO configured and attached to server.");
+  console.log2(process.cwd(),"Socket.IO configured and attached to server.");
 };
 
 /**

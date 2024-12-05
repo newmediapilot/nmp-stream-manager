@@ -7,8 +7,8 @@ const initializePublicStyles = async (type) => {
     const fileName = path.resolve(`.${type}.css`);
     try {
         if (!fs.existsSync(fileName)) {
-            putStyle(type, ':root {}');
             console.log2(process.cwd(), "initializePublicStyles :: new file");
+            putStyle(type, ':root {}');
         } else {
             setParam("public_module_styles", getStyle(type));
             console.log2(process.cwd(), "initializePublicStyles :: load file");
@@ -24,14 +24,14 @@ const initializePublicStyles = async (type) => {
 };
 
 const putStyle = (filePath, styleStringCSS) => {
-    // const fileName = path.resolve(`.${filePath}.css`);
-    console.log(
+    const fileName = path.resolve(`.${filePath}.css`);
+    console.log2(process.cwd(),
         "putStyle :: file:",
         fileName,
         ":: contents :",
         styleStringCSS,
     );
-    // fs.writeFileSync(fileName, styleStringCSS);
+    fs.writeFileSync(fileName, styleStringCSS);
 };
 
 // Load style from a file (synchronous)
@@ -43,9 +43,9 @@ const getStyle = (type) => {
 
 const publicStyleUpdate = (req, res) => {
     const {type, payload} = req.query;
-    console.log("publicStyleUpdate", type, payload);
+    console.log2(process.cwd(),"publicStyleUpdate", type, payload);
     if ("heart" === type) {
-        console.log("publicStyleUpdate :: heart");
+        console.log2(process.cwd(),"publicStyleUpdate :: heart");
     }
     try {
     } catch (error) {

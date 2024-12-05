@@ -15,7 +15,7 @@ function generateAssetLinks() {
       type: filePath.split("/")[1],
     };
   });
-  console.log("files", files);
+  console.log2(process.cwd(),"files", files);
   return files;
 }
 

@@ -32,7 +32,10 @@
                 data-wait="{{ config.wait }}"
                 data-href="{{ data_href }}"
                 onclick="javascript:sendSignal(this)">
-            <label>{{ config.emoji }} {{ config.label }}</label>
+            <label>
+                {{ config.emoji }}
+                {{ config.label }}
+            </label>
         </button>
     </div>
     {% endfor %}

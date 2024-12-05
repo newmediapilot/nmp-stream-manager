@@ -132,7 +132,7 @@ const initializePublicConfigs = async (type) => {
 // Save configuration to a file (synchronous)
 const putConfig = (filePath, config) => {
   const fileName = path.resolve(`.${filePath}.json`);
-  console.log(
+  console.log2(process.cwd(),
     "putConfig :: file:",
     fileName,
     ":: contents :",
@@ -170,7 +170,7 @@ const applySignalsOrder = (payloadJSON) => {
 
 // Parse updates and apply an update to a single field
 const applySignalsField = (payloadJSON) => {
-  console.log("applySignalsField", payloadJSON);
+  console.log2(process.cwd(),"applySignalsField", payloadJSON);
   const signalsTarget = JSON.parse(
     JSON.stringify(getParam("dashboard_signals_config")),
   );
@@ -185,7 +185,7 @@ const applySignalsField = (payloadJSON) => {
 // Sort by type into handlers
 const publicConfigUpdate = (req, res) => {
   const { type, payload } = req.query;
-  console.log("publicConfigUpdate", type, payload);
+  console.log2(process.cwd(),"publicConfigUpdate", type, payload);
   try {
     if (type === "signals:order") {
       putConfig("signals", applySignalsOrder(payload));
