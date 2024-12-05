@@ -9,9 +9,6 @@
 {% block body %}
 {% include "partials/controls.njk" %}
 <style>
-    .modules {
-        background: cadetblue;
-    }
 
     :root {
         --selector-cell-width: 30px;
@@ -73,18 +70,54 @@
         transform-origin: 0 0;
     }
 
-    .module .title label {
-        width: 100%;
-        height: 100%;
+    .module .title  {
+        border-top: 20px solid rgba(255, 255, 255, 0.6);
+        border-right: 20px solid rgba(255, 255, 255, 0.2);
+        border-bottom: 20px solid rgba(255, 255, 255, 0.1);
+        border-left: 20px solid rgba(255, 255, 255, 0.4);
+        height: 5vh;
+        display: flex;
+        align-items: center;
+        z-index: 1;
+    }
+
+    .module .title p {
+        flex-grow: 1;
+        font-size: 30px;
+        margin-left: 10px;
+        background: repeating-linear-gradient(45deg, rgba(0, 0, 0, .05) 0px, rgba(0, 0, 0, .05) 2px, rgba(255, 255, 255, .05) 2px, rgba(255, 255, 255, .05) 4px);
+    }
+
+    /** themes start **/
+    .module.aqua,
+    .module.aqua .title
+    {
+        background: var(--button-aqua);
+    }
+    .module.orange,
+    .module.orange .title
+    {
+        background: var(--button-orange);
+    }
+    .module.bloodorange,
+    .module.bloodorange .title
+    {
+        background: var(--button-bloodorange);
+    }
+    .module.purple,
+    .module.purple .title
+    {
+        background: var(--button-purple);
     }
 
 </style>
 {% set public_routes = 'public_routes' | getParam %}
 {{ public_module_styles() }}
 <div class="modules">
-    <div class="module">
+
+    <div class="module aqua">
         <div class="title">
-            <h2>BPM</h2>
+            <p>BPM</p>
         </div>
         <div class="preview">
             <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_HEART_EMBED}}"></iframe>
@@ -116,7 +149,7 @@
 {% endblock %}
 {% block fscripts %}
 <script>
-    // document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => setupCssVariable('.preview', 'width', '--js-module-preview-width'));
     document.addEventListener("DOMContentLoaded", () => {
         document.pushStyleUpdates = () => {
