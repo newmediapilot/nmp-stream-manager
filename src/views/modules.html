@@ -10,6 +10,9 @@
 {% block body %}
 {% include "partials/controls.njk" %}
 <style>
+    .module {
+        overflow: hidden;
+    }
     .module .title p {
         flex-grow: 1;
         font-size: 30px;
@@ -36,7 +39,7 @@
     <div class="module aqua">
         <div class="title">
             <p>BPM</p>
-            <button onclick="showDialog('qrcode_dialog', '🔗 BPM Link', 'This link will open the BPM<br>display on any device on your network.')">🔗</button>
+            <button onclick="javascript:showPanelQR('#heart_embed_qrcode_dialog', 'BPM')">🔗</button>
         </div>
         <div class="preview">
             <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_HEART_EMBED}}"></iframe>
@@ -67,10 +70,12 @@
 </div>
 {% endblock %}
 {% block fscripts %}
-{{ qrcode_dialog("qrcode_dialog") }}
+{{ qrcode_dialog("heart_embed_qrcode_dialog", public_routes.PUBLIC_HEART_EMBED ) }}
+generateQrCode(document.querySelector("#qr-code-dialog-canvas").getAttribute('data-url'), "#qr-code-dialog-canvas")
 <script>
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => setupCssVariable('.preview', 'width', '--js-module-preview-width'));
+    document.addEventListener("DOMContentLoaded", () => setupCssVariable('.module', 'height', '--js-module-module-height'));
     document.addEventListener("DOMContentLoaded", () => applyStyleUpdates());
     document.addEventListener("DOMContentLoaded", () => {
 

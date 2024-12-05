@@ -22,3 +22,16 @@ const applyStyleUpdates = () => {
         el.checked = styleString.innerText.includes(el.value);
     });
 };
+// Shows QR code for a given panel
+const showPanelQR = (dialogQuerySelector, type) => {
+    const dialogQuerySelectorCanvas = `${dialogQuerySelector} #qr-code-dialog-canvas`;
+    const URL = document.querySelector(dialogQuerySelectorCanvas).getAttribute('data-url');
+    showDialog(
+        dialogQuerySelector,
+        `🔗 ${type} Link`, `This link will open the ${type}<br>display on any device on your network.`
+    );
+    generateQrCode(
+        URL,
+        dialogQuerySelectorCanvas
+    );
+};

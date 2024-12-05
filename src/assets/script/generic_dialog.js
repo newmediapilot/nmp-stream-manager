@@ -1,11 +1,10 @@
-function showDialog(id, ...args) {
-  const dialog = document.querySelector(`#${id}`);
+function showDialog(dialogQuerySelector, ...args) {
   const title = args[0];
   const body = args[1];
-  document.querySelector("#menu-toggle").checked = false;
-  dialog.querySelector(".dialog--title").innerHTML = title;
-  dialog.querySelector(".dialog--body").innerHTML = body;
-  dialog.showModal();
+  document.querySelector("#menu-toggle").checked = false;// Close nav!
+  document.querySelector(dialogQuerySelector).querySelector(".dialog--title").innerHTML = title;
+  document.querySelector(dialogQuerySelector).querySelector(".dialog--body").innerHTML = body;
+  document.querySelector(dialogQuerySelector).showModal();
 }
 
 function closeDialog(id) {

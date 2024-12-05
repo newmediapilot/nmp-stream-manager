@@ -41,11 +41,11 @@
 </div>
 {% endblock %}
 {% block fscripts %}
-{{ qrcode_dialog("qrcode_dialog") }}
+{{ qrcode_dialog("qrcode_dialog", public_routes.PUBLIC_DASHBOARD) }}
 <script>
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => scrollSnap('.dashboard'));
-    document.addEventListener("DOMContentLoaded", () => generateQrCode(document.querySelector("#qr-code-dialog-canvas").getAttribute('data-url'), "qr-code-dialog-canvas"));
+    document.addEventListener("DOMContentLoaded", () => generateQrCode(document.querySelector("#qrcode_dialog canvas").getAttribute('data-url'), "#qr-code-dialog-canvas"));
     document.addEventListener("DOMContentLoaded", () => sortableContainer(
         "signals:order",
         document.querySelector(".dashboard"),
