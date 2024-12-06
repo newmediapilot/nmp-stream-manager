@@ -19,40 +19,90 @@
     }
 
     .pages {
-        width: 300%;
-        height: 100%;
         overflow-x: hidden;
         overflow-y: hidden;
         position: relative;
         margin: 0;
         padding: 0;
         background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
+
         display: grid;
-        grid-template-columns: repeat(auto-fill, 100vw);
+        grid-template-columns: repeat(3, 100vw);
+        grid-template-rows: repeat(3, 100vh);
         grid-gap: 0;
+
+        width: 300vw;
+        height: 300vh;
+
+        transform: translateX(-100vw) translateY(-100vh);
     }
 
-    .pages iframe {
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
+    .pages > * {
         border: none;
-        background: transparent;
+        width: 100%;
+        height: 100%;
+    }
+
+    .pages iframe:nth-child(1) {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .pages iframe:nth-child(2) {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .pages iframe:nth-child(3) {
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+    .pages iframe:nth-child(4) {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .pages iframe:nth-child(5) {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .pages iframe:nth-child(6) {
+        grid-column: 3;
+        grid-row: 2;
+    }
+
+    .pages iframe:nth-child(7) {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .pages iframe:nth-child(8) {
+        grid-column: 2;
+        grid-row: 3;
+    }
+
+    .pages iframe:nth-child(9) {
+        grid-column: 3;
+        grid-row: 3;
     }
 
 </style>
 {% endblock %}
 {% block body %}
 <div class="pages">
-    <iframe src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
-    <iframe src="{{public_routes.PUBLIC_SETTINGS}}"></iframe>
-    <iframe src="{{public_routes.PUBLIC_MODULES}}"></iframe>
+    <iframe src="#not_a_real_source_just_placehold"></iframe><iframe src="#not_a_real_source_just_placehold"></iframe><iframe src="#not_a_real_source_just_placehold"></iframe>
+    <iframe src="{{public_routes.PUBLIC_SETTINGS}}"></iframe><iframe src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe><iframe src="{{public_routes.PUBLIC_MODULES}}"></iframe>
+    <iframe src="#not_a_real_source_just_placehold"></iframe><iframe src="#not_a_real_source_just_placehold"></iframe><iframe src="#not_a_real_source_just_placehold"></iframe>
 </div>
 {% endblock %}
 {% block fscripts %}
 <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer
         type="text/javascript"></script>
 <script defer crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" defer
+        type="text/javascript"></script>
+<script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" defer
         type="text/javascript"></script>
 <script defer src="/script/socket_connect.js?={{cache_buster}}" type="text/javascript"></script>
 <script>
@@ -66,11 +116,16 @@
                 const iframeEl = Array.from(document.querySelectorAll("iframe")).find(el => {
                     return el.getAttribute('src') === path.trim();
                 });
-                const left = iframeEl.parentElement.getBoundingClientRect().left - iframeEl.getBoundingClientRect().left;
-                console.log('left', left);
-
-                // Apply translateX to the .pages element
-                document.querySelector('.pages').style.transform = `translateX(${left}px)`;
+                anime({
+                    targets: '.pages',
+                    translateX: iframeEl.parentElement.getBoundingClientRect().left - iframeEl.getBoundingClientRect().left,
+                    duration: 333,
+                    complete: function () {
+                        document.querySelectorAll("iframe").forEach(iframe => {
+                            (iframe !== iframeEl) && iframe.contentWindow.location.reload()
+                        });
+                    }
+                });
             }
         });
     });
