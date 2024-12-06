@@ -14,33 +14,28 @@
     body {
         margin: 0;
         padding: 0;
+        overflow-x: hidden;
+        overflow-y: hidden;
     }
 
     .pages {
-        width: 100vw;
-        height: 100vh;
+        width: 300%;
+        height: 100%;
         overflow-x: hidden;
         overflow-y: hidden;
         position: relative;
         margin: 0;
         padding: 0;
         background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
-    }
-
-    @media (min-aspect-ratio: 1/1) {
-        .pages {
-            width: 50%;
-            margin-left: 25%;
-        }
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 100vw);
+        grid-gap: 0;
     }
 
     .pages iframe {
-        position: absolute;
         width: 100%;
-        height: 100%;
+        height: 100vh;
         overflow: hidden;
-        left: 0;
-        top: 0;
         border: none;
         background: transparent;
     }
@@ -49,9 +44,9 @@
 {% endblock %}
 {% block body %}
 <div class="pages">
-    <iframe id="{{public_routes.PUBLIC_SETTINGS}}" src="{{public_routes.PUBLIC_SETTINGS}}"></iframe>
-    <iframe id="{{public_routes.PUBLIC_MODULES}}" src="{{public_routes.PUBLIC_MODULES}}"></iframe>
-    <iframe id="{{public_routes.PUBLIC_DASHBOARD}}" src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
+    <iframe src="{{public_routes.PUBLIC_SETTINGS}}"></iframe>
+    <iframe src="{{public_routes.PUBLIC_MODULES}}"></iframe>
+    <iframe src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
 </div>
 {% endblock %}
 {% block fscripts %}
@@ -67,26 +62,13 @@
     document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('message', function (e) {
             if (window.origin === window.location.origin && e.data.type === "path") {
-                const iframeReady = () => {
-                    iframe.style.display = 'none';
-                    iframe.removeEventListener('load', iframeReady);
-                    iframe.parentElement.appendChild(iframe);
-                    iframe.style.display = 'block';
-                    window.location.hash = iframe.getAttribute('id');
-                };
-                const iframe = document.querySelector(`[src="${e.data.message}"]`);
-                iframe.addEventListener('load', iframeReady);
-                socketEmitReload();
+                const path = e.data.message;
+                const iframeEl = Array.from(document.querySelectorAll("iframe")).find(el => {
+                    return el.getAttribute('src') === path.trim();
+                });
+                iframeEl && iframeEl.scrollIntoView();
             }
         });
-        // Onload check if we saved a state
-        const hash = window.location.hash;
-        if (hash) {
-            console.log('hash', hash);
-            const iframe = document.querySelector(`iframe#${window.location.hash}`);
-            console.log('iframe', iframe);
-            iframe.parentElement.appendChild(iframe);
-        }
     });
 </script>
 {% endblock %}

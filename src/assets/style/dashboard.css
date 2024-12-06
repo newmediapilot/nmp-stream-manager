@@ -20,14 +20,6 @@ html.edit-active {
     background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
 }
 
-@media (min-aspect-ratio: 1/1) {
-    html:not(.iframe) .dashboard {
-        width: 50%;
-        margin-left: 25%;
-        grid-template-rows: repeat(auto-fit, calc(25vh));
-    }
-}
-
 .dashboard:after {
     content: "";
     height: 130px;
