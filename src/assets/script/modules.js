@@ -38,21 +38,15 @@ const showPanelQR = (dialogQuerySelector, type) => {
     );
 };
 
-// Sets initial visibility of panels, height is offset to match the height of the title, set by js as well
-const initPanelPreview = () => {
-    document.querySelectorAll('.module').forEach(el => {
-        el.style.height = getComputedStyle(document.documentElement).getPropertyValue('--js-module-title-height') + 'px';
-    });
-};
-
 // Toggles panels via checkbox
 const togglePanelPreview = (contextEl) => {
-    const openHeight = getComputedStyle(document.documentElement).getPropertyValue('--js-module-module-height');
-    const closedHeight = getComputedStyle(document.documentElement).getPropertyValue('--js-module-title-height');
+    const contentHeight = getComputedStyle(document.documentElement).getPropertyValue('--js-module-content-height');
+    const titleHeight = getComputedStyle(document.documentElement).getPropertyValue('--js-module-title-height');
     const checkboxEls = Array.from(document.querySelectorAll('.modules input[type="checkbox"]'));
+    console.log('togglePanelPreview', contentHeight, titleHeight);
     checkboxEls.forEach((el,index) => {
         const moduleEl = document.querySelectorAll('.module')[index];
         el.checked = contextEl === el;
-        moduleEl.style.height = (el.checked ? openHeight : closedHeight) + 'px';
+        moduleEl.style.height = (el.checked ? contentHeight : titleHeight);
     });
 };

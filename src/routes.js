@@ -12,7 +12,7 @@ const ROUTES = {
   PUBLIC_DASHBOARD: "/public/dashboard",
   PUBLIC_SETTINGS: "/public/settings",
   PUBLIC_MODULES: "/public/modules",
-  PUBLIC_EMBED: "/public/embed",
+  PUBLIC_FEATURE_EMBED: "/public/feature/embed",
   PUBLIC_HEART_EMBED: "/public/heart/embed",
   PUBLIC_HEART_PING: "/public/heart/ping",
   PUBLIC_SIGNAL_CREATE: "/public/signal/create",
