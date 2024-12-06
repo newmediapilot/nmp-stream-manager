@@ -23,8 +23,8 @@ html {
 .modules:after {
     content: "";
     height: 130px;
-    background:transparent;
-    width:100%;
+    background: transparent;
+    width: 100%;
     display: block;
 }
 
@@ -39,9 +39,15 @@ html {
     display: grid;
     grid-template-columns: auto;
     grid-auto-flow: column;
-    gap: 10px;
-    margin-left: 10px;
+    gap: 12px;
+    margin: 12px;
     width: fit-content;
+    min-height: 110px;
+}
+
+.module .module-9x9-selector {
+    align-self: center;
+    margin-top: 20px;
 }
 
 .module .module-9x9-selector ul {
@@ -58,6 +64,7 @@ html {
 .module .module-9x9-selector:nth-child(1) ul:after {
     content: "Large";
 }
+
 .module .module-9x9-selector:nth-child(2) ul:after {
     content: "Small";
 }
@@ -99,10 +106,9 @@ html {
     width: 100%;
     height: 0;
     padding-top: 56.25%;
-    background:
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.95) 70%),
-            radial-gradient(circle, rgba(0, 0, 0, 0.0) 0%, rgba(0, 0, 0, 0) 60%),
-            url("/image/stage.webp");
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.95) 70%),
+    radial-gradient(circle, rgba(0, 0, 0, 0.0) 0%, rgba(0, 0, 0, 0) 60%),
+    url("/image/stage.webp");
     background-size: cover;
     position: relative;
 }
@@ -149,4 +155,5 @@ html {
 .module.purple .title {
     background: var(--button-purple);
 }
+
 /** themes end **/
