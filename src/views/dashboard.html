@@ -56,33 +56,32 @@
         const withEls = (selectorAll, caller) => {
             Array.from(document.querySelectorAll(selectorAll)).forEach((e) => caller(e));
         };
-        withEls('.dashboard button', (targets) => {
+        withEls('.dashboard button', (targets=[]) => {
             anime({
                 targets,
                 delay: anime.stagger(720),
                 duration: 7200,
                 loop: 999,
                 filter: 'hue-rotate(360deg)',
+                easing: 'easeInElastic(1, .6)',
             });
         });
         // All button down behaviours
         const downButton = () => {
-            withEls('.dashboard button:not(:active)', (targets) => {
+            withEls('.dashboard button', (targets) => {
                 anime({
                     targets,
-                    delay: anime.stagger(333),
-                    duration: 333,
                     filter: 'brightness(1.1)',
                 });
             });
         };
         // All button up behaviours
         const upButton = ({currentTarget: buttonEl}) => {
-            anime({
-                targets,
-                delay: anime.stagger(333),
-                duration: 333,
-                filter: 'brightness(1)',
+            withEls('.dashboard button', (targets) => {
+                anime({
+                    targets,
+                    filter: 'brightness(1.0)',
+                });
             });
         };
         document.querySelectorAll('button').forEach(buttonEl => {
