@@ -46,6 +46,7 @@
 <!-- dialogs end -->
 <script>
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => scrollSnap('.dashboard'));
     document.addEventListener("DOMContentLoaded", () => generateQrCode(document.querySelector("#qrcode_dialog canvas").getAttribute('data-url'), "#qr-code-dialog-canvas"));
     document.addEventListener("DOMContentLoaded", () => dashboardButtons(

@@ -56,10 +56,12 @@
             if (window.origin === window.location.origin && e.data.type === "path") {
                 const iframeReady = () => {
                     iframe.removeEventListener('load', iframeReady);
+                    iframe.parentElement.appendChild(iframe);
+                    console.log('iframeReady');
                 };
                 const iframe = document.querySelector(`[src="${e.data.message}"]`);
-                iframe.parentElement.appendChild(iframe);
                 iframe.addEventListener('load', iframeReady);
+                socketEmitReload();
             }
         });
     });
