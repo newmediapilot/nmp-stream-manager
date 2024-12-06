@@ -2,19 +2,57 @@
 {% extends "layouts/main.njk" %}
 {% set public_routes = 'public_routes' | getParam %}
 {% block hscripts %}
+<style>
+
+    html {
+        background: url("/image/assets-from-space.webp");
+    }
+
+    .pages {
+        width: 100vw;
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
+    }
+
+    @media (min-aspect-ratio: 1/1) {
+        .pages {
+            width: 50%;
+            margin-left: 25%;
+        }
+    }
+
+    .pages iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        left: 0;
+        top: 0;
+        border: none;
+        background: transparent;
+    }
+
+</style>
 {% endblock %}
 {% block body %}
-{% include "partials/controls.njk" %}
-<div class="index">
-    <iframe src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
-    <iframe src="{{public_routes.PUBLIC_SETTINGS}}"></iframe>
-    <iframe src="{{public_routes.PUBLIC_MODULES}}"></iframe>
-    <iframe src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
+<div class="pages">
+    <iframe scrolling="no" src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
+    <iframe scrolling="no" src="{{public_routes.PUBLIC_SETTINGS}}"></iframe>
+    <iframe scrolling="no" src="{{public_routes.PUBLIC_MODULES}}"></iframe>
+    <iframe scrolling="no" src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
 </div>
 {% endblock %}
 {% block fscripts %}
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+        const onResize = () => {
+
+        };
         window.addEventListener('message', function (event) {
             console.log('Message from iframe:', event.data);
         });

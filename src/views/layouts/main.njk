@@ -11,11 +11,9 @@
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width">
-
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="manifest" href="/manifest.json">
-
     <!-- CDN -->
     <link crossorigin="anonymous" href="https://fonts.gstatic.com/s/jaro/v6/ea8DadQwV_r_Rv3-7zZMCGhQgVr1SmCkPvzlpQ.woff2" rel="preload" as="font">
     <link crossorigin="anonymous" href="https://fonts.gstatic.com/s/jaro/v6/ea8DadQwV_r_Rv3-7zZMCGhQgVr1SmCrPvw.woff2" rel="preload" as="font">
@@ -31,13 +29,10 @@
     <script defer crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" defer type="text/javascript"></script>
     <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js" defer></script>
     <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" defer></script>
-
-
     <!-- LOCAL -->
 {#    {% set assetLinks = "" | generateAssetLinks %}#}
 {#    {% for link in assetLinks %}<link rel="preload" as="{{ link.type }}" href="{{ link.href | safe }}">#}
 {#    {% endfor %}#}
-
     <script defer src="/script/router.js?={{cache_buster}}" type="text/javascript"></script>
     <script defer src="/script/settings_editor.js?={{cache_buster}}" type="text/javascript"></script>
     <script defer src="/script/generate_qr_code.js?={{cache_buster}}" type="text/javascript"></script>
@@ -48,7 +43,6 @@
     <script defer src="/script/scroll_snap.js?={{cache_buster}}" type="text/javascript"></script>
     <script defer src="/script/css_variables.js?={{cache_buster}}" type="text/javascript"></script>
     <script defer src="/script/modules.js?={{cache_buster}}" type="text/javascript"></script>
-
     <link rel="stylesheet" href="/style/font.css?cb={{cache_buster}}">
     <link rel="stylesheet" href="/style/reset.css?cb={{cache_buster}}">
     <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
@@ -56,14 +50,10 @@
     <link rel="stylesheet" href="/style/scrollbar.css?cb={{cache_buster}}">
     <link rel="stylesheet" href="/style/generic_dialog.css?cb={{cache_buster}}">
     <link rel="stylesheet" href="/style/controls.css?cb={{cache_buster}}">
-
     {% block hscripts %}{% endblock %}
-
 </head>
 <body>
-{#<div style="position: fixed; left:0; top:0; z-index: 100000">{{ cache_buster }}</div>#}
 {% block body %}{% endblock %}
 {% block fscripts %}{% endblock %}
-
 </body>
 </html>
