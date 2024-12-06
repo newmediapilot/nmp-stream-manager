@@ -92,9 +92,15 @@
 {% endblock %}
 {% block body %}
 <div class="pages">
-    <iframe src="#not_a_real_source_just_placehold"></iframe><iframe src="#not_a_real_source_just_placehold"></iframe><iframe src="#not_a_real_source_just_placehold"></iframe>
-    <iframe src="{{public_routes.PUBLIC_SETTINGS}}"></iframe><iframe src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe><iframe src="{{public_routes.PUBLIC_MODULES}}"></iframe>
-    <iframe src="#not_a_real_source_just_placehold"></iframe><iframe src="#not_a_real_source_just_placehold"></iframe><iframe src="#not_a_real_source_just_placehold"></iframe>
+    <iframe></iframe>
+    <iframe></iframe>
+    <iframe></iframe>
+    <iframe src="{{public_routes.PUBLIC_SETTINGS}}"></iframe>
+    <iframe src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
+    <iframe src="{{public_routes.PUBLIC_MODULES}}"></iframe>
+    <iframe></iframe>
+    <iframe></iframe>
+    <iframe></iframe>
 </div>
 {% endblock %}
 {% block fscripts %}
@@ -119,7 +125,8 @@
                 anime({
                     targets: '.pages',
                     translateX: iframeEl.parentElement.getBoundingClientRect().left - iframeEl.getBoundingClientRect().left,
-                    duration: 500
+                    duration: 1000,
+                    easing: 'linear',
                 });
             }
         });
