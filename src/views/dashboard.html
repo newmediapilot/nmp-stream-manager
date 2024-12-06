@@ -24,11 +24,6 @@
 
     <div class="button button-{{ config.theme }}" href="{{data_href}}">
         <button
-                data-state="idle"
-                data-sending="Sending"
-                data-error="Error"
-                data-success="Success"
-                data-wait="{{ config.wait }}"
                 data-href="{{ data_href }}"
                 onclick="javascript:sendSignal(this)">
             <label>
@@ -42,7 +37,7 @@
 {% endblock %}
 {% block fscripts %}
 <!-- dialogs start -->
-{{ qrcode_dialog("qrcode_dialog", public_routes.PUBLIC_DASHBOARD) }}
+{{ qrcode_dialog("qrcode_dialog", public_routes.PUBLIC_INDEX) }}
 <!-- dialogs end -->
 <script>
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
@@ -54,5 +49,49 @@
         document.querySelector(".dashboard"),
         document.querySelector("#dashboard--toggle"),
     ));
+    //
+    //
+    //
+    document.addEventListener("DOMContentLoaded", () => {
+        const withEls = (selectorAll, caller) => {
+            Array.from(document.querySelectorAll(selectorAll)).forEach((e) => caller(e));
+        };
+        withEls('.dashboard button', (targets) => {
+            anime({
+                targets,
+                delay: anime.stagger(720),
+                duration: 7200,
+                loop: 999,
+                filter: 'hue-rotate(360deg)',
+            });
+        });
+        // All button down behaviours
+        const downButton = () => {
+            withEls('.dashboard button:not(:active)', (targets) => {
+                anime({
+                    targets,
+                    delay: anime.stagger(333),
+                    duration: 333,
+                    filter: 'brightness(1.1)',
+                });
+            });
+        };
+        // All button up behaviours
+        const upButton = ({currentTarget: buttonEl}) => {
+            anime({
+                targets,
+                delay: anime.stagger(333),
+                duration: 333,
+                filter: 'brightness(1)',
+            });
+        };
+        document.querySelectorAll('button').forEach(buttonEl => {
+            buttonEl.addEventListener('mousedown', downButton);
+            buttonEl.addEventListener('touchstart', downButton);
+            buttonEl.addEventListener('mouseup', upButton);
+            buttonEl.addEventListener('touchend', upButton);
+        });
+    });
+    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
 </script>
 {% endblock %}

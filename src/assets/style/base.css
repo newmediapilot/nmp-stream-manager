@@ -3,7 +3,7 @@ body {
     overflow: hidden !important;
     background: none !important;
     padding: 0 !important;
-    margin: 0; !important;
+    margin: 0 !important;
     width: 100vw !important;
 }
 
@@ -17,4 +17,8 @@ html {
 
 ul {
     list-style: none;
+}
+
+* {
+    transform: translate3d(0, 0, 0);
 }
