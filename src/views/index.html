@@ -1,11 +1,19 @@
 <!-- src/views/index.html -->
 {% extends "layouts/main.njk" %}
 {% set public_routes = 'public_routes' | getParam %}
+{% block cdn %}<!-- noscript -->{% endblock %}
+{% block local %}<!-- style -->{% endblock %}
 {% block hscripts %}
 <style>
 
     html {
         background: url("/image/assets-from-space.webp");
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
     }
 
     .pages {
@@ -41,12 +49,17 @@
 {% endblock %}
 {% block body %}
 <div class="pages">
-    <iframe src="{{public_routes.PUBLIC_SETTINGS}}"></iframe>
-    <iframe src="{{public_routes.PUBLIC_MODULES}}"></iframe>
-    <iframe src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
+    <iframe id="{{public_routes.PUBLIC_SETTINGS}}" src="{{public_routes.PUBLIC_SETTINGS}}"></iframe>
+    <iframe id="{{public_routes.PUBLIC_MODULES}}" src="{{public_routes.PUBLIC_MODULES}}"></iframe>
+    <iframe id="{{public_routes.PUBLIC_DASHBOARD}}" src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
 </div>
 {% endblock %}
 {% block fscripts %}
+<script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer
+        type="text/javascript"></script>
+<script defer crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" defer
+        type="text/javascript"></script>
+<script defer src="/script/socket_connect.js?={{cache_buster}}" type="text/javascript"></script>
 <script>
     // If an iframe requests a URL we will find the frame with that path and switch to it
     // Form submissions will usually emit a reload on all frames other than the focused one
@@ -55,15 +68,25 @@
         window.addEventListener('message', function (e) {
             if (window.origin === window.location.origin && e.data.type === "path") {
                 const iframeReady = () => {
+                    iframe.style.display = 'none';
                     iframe.removeEventListener('load', iframeReady);
                     iframe.parentElement.appendChild(iframe);
-                    console.log('iframeReady');
+                    iframe.style.display = 'block';
+                    window.location.hash = iframe.getAttribute('id');
                 };
                 const iframe = document.querySelector(`[src="${e.data.message}"]`);
                 iframe.addEventListener('load', iframeReady);
                 socketEmitReload();
             }
         });
+        // Onload check if we saved a state
+        const hash = window.location.hash;
+        if (hash) {
+            console.log('hash', hash);
+            const iframe = document.querySelector(`iframe#${window.location.hash}`);
+            console.log('iframe', iframe);
+            iframe.parentElement.appendChild(iframe);
+        }
     });
 </script>
 {% endblock %}

@@ -16,7 +16,9 @@ const socketEmitReload = () => {
 // If the token expires the page will reload on the next request
 const socketWatchReload = () => {
 
-    const timeout = 1000;
+    // If a page is inactive for 3seconds it will become inactive
+    // A page only becomes active on events below
+    const timeout = 3000;
     let to = null;
 
     const setFocusToken = () => {
@@ -26,20 +28,16 @@ const socketWatchReload = () => {
     };
 
     // TODO: rewrite this as a utility
-    document.documentElement.querySelectorAll('*').forEach((e)=>e.addEventListener('wheel', setFocusToken));
-    document.documentElement.querySelectorAll('*').forEach((e)=>e.addEventListener('keydown', setFocusToken));
-    document.documentElement.querySelectorAll('*').forEach((e)=>e.addEventListener('keyup', setFocusToken));
-    document.documentElement.querySelectorAll('*').forEach((e)=>e.addEventListener('touchstart', setFocusToken));
-    document.documentElement.querySelectorAll('*').forEach((e)=>e.addEventListener('mousedown', setFocusToken));
-    document.documentElement.querySelectorAll('*').forEach((e)=>e.addEventListener('focus', setFocusToken));
-    document.documentElement.querySelectorAll('*').forEach((e)=>e.addEventListener('blur', setFocusToken));
-    document.documentElement.querySelectorAll('*').forEach((e)=>e.addEventListener('scroll', setFocusToken));
+    document.documentElement.querySelectorAll('*').forEach((e) => e.addEventListener('touchstart', setFocusToken));
+    document.documentElement.querySelectorAll('*').forEach((e) => e.addEventListener('touchend', setFocusToken));
+    document.documentElement.querySelectorAll('*').forEach((e) => e.addEventListener('mousedown', setFocusToken));
+    document.documentElement.querySelectorAll('*').forEach((e) => e.addEventListener('mouseup', setFocusToken));
 
     socketConnect(
         (payload) => {
-            if("browser:reload" === payload){
-              const isFocusedActiveWindow = document.documentElement.classList.contains('focus');
-              !isFocusedActiveWindow && window.location.reload();
+            if ("browser:reload" === payload) {
+                const isFocusedActiveWindow = document.documentElement.classList.contains('focus');
+                !isFocusedActiveWindow && window.location.reload();
             }
         },
     );

@@ -20,6 +20,14 @@ html.edit-active {
     background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
 }
 
+@media (min-aspect-ratio: 1/1) {
+    html:not(.iframe) .dashboard {
+        width: 50%;
+        margin-left: 25%;
+        grid-template-rows: repeat(auto-fit, calc(25vh));
+    }
+}
+
 .dashboard:after {
     content: "";
     height: 130px;
@@ -40,14 +48,6 @@ html.edit-active .dashboard::after {
             repeating-linear-gradient(-45deg, rgba(0,0,0,0.5), rgba(75, 75, 75, 0.8) 8px),
             repeating-linear-gradient(-45deg, rgba(75, 75, 75, 0.8), rgba(0,0,0,0.5) 8px);
     mix-blend-mode: multiply;
-}
-
-@media (min-aspect-ratio: 1/1) {
-    .dashboard {
-        width: 50%;
-        margin-left: 25%;
-        grid-template-rows: repeat(auto-fit, calc(25vh));
-    }
 }
 
 .dashboard .button {
