@@ -68,21 +68,21 @@
         });
         // All button down behaviours
         const downButton = () => {
-            withEls('.dashboard button', (targets) => {
-                anime({
-                    targets,
-                    filter: 'brightness(1.1)',
-                });
-            });
+            // withEls('.dashboard button', (targets) => {
+            //     anime({
+            //         targets,
+            //         filter: 'brightness(1.1)',
+            //     });
+            // });
         };
         // All button up behaviours
         const upButton = ({currentTarget: buttonEl}) => {
-            withEls('.dashboard button', (targets) => {
-                anime({
-                    targets,
-                    filter: 'brightness(1.0)',
-                });
-            });
+            // withEls('.dashboard button', (targets) => {
+            //     anime({
+            //         targets,
+            //         filter: 'brightness(1.0)',
+            //     });
+            // });
         };
         document.querySelectorAll('button').forEach(buttonEl => {
             buttonEl.addEventListener('mousedown', downButton);
