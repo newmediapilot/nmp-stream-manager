@@ -1,0 +1,23 @@
+<!-- src/views/index.html -->
+{% extends "layouts/main.njk" %}
+{% set public_routes = 'public_routes' | getParam %}
+{% block hscripts %}
+{% endblock %}
+{% block body %}
+{% include "partials/controls.njk" %}
+<div class="index">
+    <iframe src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
+    <iframe src="{{public_routes.PUBLIC_SETTINGS}}"></iframe>
+    <iframe src="{{public_routes.PUBLIC_MODULES}}"></iframe>
+    <iframe src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
+</div>
+{% endblock %}
+{% block fscripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        window.addEventListener('message', function (event) {
+            console.log('Message from iframe:', event.data);
+        });
+    });
+</script>
+{% endblock %}
