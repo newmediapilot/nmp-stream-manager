@@ -103,6 +103,8 @@
 {% endblock %}
 {% block fscripts %}
 <script>
+    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => scrollSnap('.settings-container'));
     document.addEventListener("DOMContentLoaded", () => {
         socketWatchReload();
         document.querySelectorAll(".settings-editor").forEach(initSettingsEditor);
