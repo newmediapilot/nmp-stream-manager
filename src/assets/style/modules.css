@@ -36,7 +36,12 @@ html {
 }
 
 .module .controls {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto;
+    grid-auto-flow: column;
+    gap: 10px;
+    margin-left: 10px;
+    width: fit-content;
 }
 
 .module .module-9x9-selector ul {
@@ -47,6 +52,28 @@ html {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    position: relative;
+}
+
+.module .module-9x9-selector:nth-child(1) ul:after {
+    content: "Large";
+}
+.module .module-9x9-selector:nth-child(2) ul:after {
+    content: "Small";
+}
+
+.module .module-9x9-selector ul:after {
+    background: white;
+    width: 90px;
+    position: absolute;
+    left: 0;
+    top: -20px;
+    z-index: 100;
+    border: 2px solid var(--button-bloodorange);
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: none;
 }
 
 .module .module-9x9-selector li {

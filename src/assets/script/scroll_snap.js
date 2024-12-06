@@ -3,15 +3,27 @@ const scrollSnap = (elQueryString) => {
     let anim = null;
     let duration = 1000;
     let containerEl = document.querySelector(elQueryString);
-    const height = containerEl.children[0].getBoundingClientRect().height;
     const scrollFunct = () => {
         to && clearTimeout(to);
         to = setTimeout(() => {
-            const scrollTop = Math.floor(containerEl.scrollTop / height) * height;
-            anim && anime.remove('.dashboard');
+
+            const closestToTopEls = Array.from(containerEl.children);
+
+            console.log('closestToTopEls', closestToTopEls);
+            console.log('closestToTopEls', closestToTopEls.length);
+
+
+            const closestToTopEl = closestToTopEls[0];
+            const closestToTopElOffset = closestToTopEl.getBoundingClientRect().top;
+            const containerElOffset = containerEl.scrollTop;
+            console.log('containerEl', containerEl);
+            console.log('closestToTopEl', closestToTopEl);
+            console.log('closestToTopElOffset', closestToTopElOffset);
+            console.log('containerElOffset', containerElOffset);
+            anim && anime.remove();
             anim = anime({
-                scrollTop,
-                duration:333,
+                // scrollTop: closestToTopElOffset -containerElOffset,
+                duration: 333,
                 targets: elQueryString,
                 easing: 'easeInOutQuad'
             });

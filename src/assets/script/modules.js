@@ -38,7 +38,7 @@ const showPanelQR = (dialogQuerySelector, type) => {
     );
 };
 
-// Sets initial visibility of panels
+// Sets initial visibility of panels, height is offset to match the height of the title, set by js as well
 const initPanelPreview = () => {
     document.querySelectorAll('.module').forEach(el => {
         el.style.height = getComputedStyle(document.documentElement).getPropertyValue('--js-module-title-height') + 'px';

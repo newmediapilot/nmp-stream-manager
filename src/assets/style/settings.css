@@ -70,7 +70,7 @@ ul + #emoji-widget {
 
 .settings-editor > [type="text"] {
     grid-column: span 3;
-    padding: 0 5px;
+    padding: 0 15px;
 }
 
 .settings-editor > [type="text"]:disabled {
@@ -79,6 +79,7 @@ ul + #emoji-widget {
 
 .settings-editor > [type="text"]:focus {
     background: var(--button-deepyellow);
+    border-radius: 10px;
 }
 
 .settings-editor > :not([type="text"]) {
