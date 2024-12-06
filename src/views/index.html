@@ -119,12 +119,7 @@
                 anime({
                     targets: '.pages',
                     translateX: iframeEl.parentElement.getBoundingClientRect().left - iframeEl.getBoundingClientRect().left,
-                    duration: 333,
-                    complete: function () {
-                        document.querySelectorAll("iframe").forEach(iframe => {
-                            (iframe !== iframeEl) && iframe.contentWindow.location.reload()
-                        });
-                    }
+                    duration: 500
                 });
             }
         });
