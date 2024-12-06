@@ -8,18 +8,19 @@ const scrollSnap = (elQueryString) => {
         to = setTimeout(() => {
 
             const closestToTopEls = Array.from(containerEl.children);
-
-            console.log('closestToTopEls', closestToTopEls);
-            console.log('closestToTopEls', closestToTopEls.length);
-
-
+            const closestToTopElsOffsets = closestToTopEls.map(el=>el.getBoundingClientRect().top).sort(top=>Math.abs(top));
             const closestToTopEl = closestToTopEls[0];
             const closestToTopElOffset = closestToTopEl.getBoundingClientRect().top;
             const containerElOffset = containerEl.scrollTop;
+
+
+            console.log('closestToTopElsOffsets', closestToTopElsOffsets);
             console.log('containerEl', containerEl);
             console.log('closestToTopEl', closestToTopEl);
             console.log('closestToTopElOffset', closestToTopElOffset);
             console.log('containerElOffset', containerElOffset);
+
+
             anim && anime.remove();
             anim = anime({
                 // scrollTop: closestToTopElOffset -containerElOffset,
