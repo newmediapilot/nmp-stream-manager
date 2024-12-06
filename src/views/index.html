@@ -61,12 +61,16 @@
     // This means the next click will likely already be past the unload heap
     document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('message', function (e) {
-            if (window.origin === window.location.origin && e.data.type === "path") {
+            if (e.origin === window.location.origin && e.data.type === "path") {
                 const path = e.data.message;
                 const iframeEl = Array.from(document.querySelectorAll("iframe")).find(el => {
                     return el.getAttribute('src') === path.trim();
                 });
-                iframeEl && iframeEl.scrollIntoView();
+                const left = iframeEl.parentElement.getBoundingClientRect().left - iframeEl.getBoundingClientRect().left;
+                console.log('left', left);
+
+                // Apply translateX to the .pages element
+                document.querySelector('.pages').style.transform = `translateX(${left}px)`;
             }
         });
     });
