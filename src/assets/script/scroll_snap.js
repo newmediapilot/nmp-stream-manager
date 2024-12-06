@@ -7,11 +7,11 @@ const scrollSnap = (elQueryString) => {
     const scrollFunct = () => {
         to && clearTimeout(to);
         to = setTimeout(() => {
-            const scrollTop = Math.round(containerEl.scrollTop / height) * height;
+            const scrollTop = Math.floor(containerEl.scrollTop / height) * height;
             anim && anime.remove('.dashboard');
             anim = anime({
                 scrollTop,
-                duration:100,
+                duration:333,
                 targets: elQueryString,
                 easing: 'easeInOutQuad'
             });
@@ -19,7 +19,7 @@ const scrollSnap = (elQueryString) => {
     };
     document.documentElement.addEventListener('touchstart', ()=>clearTimeout(to));
     document.documentElement.addEventListener('mousedown', ()=>clearTimeout(to));
-    document.documentElement.addEventListener('touchend', scrollFunct);
-    document.documentElement.addEventListener('mouseup', scrollFunct);
-    document.documentElement.addEventListener('wheel', scrollFunct);
+    document.documentElement.addEventListener('touchend', () =>scrollFunct());
+    document.documentElement.addEventListener('mouseup', () =>scrollFunct());
+    document.documentElement.addEventListener('wheel', () =>scrollFunct());
 };

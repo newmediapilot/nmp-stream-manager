@@ -17,21 +17,19 @@ html.edit-active {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(auto-fit, calc(20vh));
     position: relative;
+    background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
+}
+
+.dashboard:after {
+    content: "";
+    height: 130px;
+    background:transparent;
+    width:100%;
+    display: block;
 }
 
 html.edit-active .dashboard {
     padding-right: 50px;
-}
-
-.dashboard::after {
-    pointer-events: none;
-    width: 0px;
-    height: 100vh;
-    content: "";
-    display: block;
-    position: fixed;
-    right:0;
-    bottom:0;
 }
 
 html.edit-active .dashboard::after {

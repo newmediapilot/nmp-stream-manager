@@ -17,12 +17,12 @@ html {
     position: relative;
     margin: 0;
     padding: 0;
-    background: repeating-linear-gradient(-45deg, #020202, #4f4f4f 15px);
+    background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
 }
 
 .modules:after {
     content: "";
-    height: 20vh;
+    height: 130px;
     background:transparent;
     width:100%;
     display: block;

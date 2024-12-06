@@ -15,6 +15,15 @@ ul + #emoji-widget {
     margin: 0;
     padding: 0;
     font-size: 300%;
+    background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
+}
+
+.settings-container:after {
+    content: "";
+    height: 130px;
+    background:transparent;
+    width:100%;
+    display: block;
 }
 
 .settings-nav {

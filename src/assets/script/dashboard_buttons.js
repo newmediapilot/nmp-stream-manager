@@ -1,4 +1,4 @@
-const sortableContainer = (type, containerEl, toggleEl) => {
+const dashboardButtons = (type, containerEl, toggleEl) => {
   let payload = [];
   const editLabel = toggleEl.getAttribute("data-edit");
   const doneLabel = toggleEl.getAttribute("data-done");
