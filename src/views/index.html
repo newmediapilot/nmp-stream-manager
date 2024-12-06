@@ -50,9 +50,6 @@
 {% block fscripts %}
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const onResize = () => {
-
-        };
         window.addEventListener('message', function (event) {
             console.log('Message from iframe:', event.data);
         });
