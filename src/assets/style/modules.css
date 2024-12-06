@@ -22,7 +22,7 @@ html {
 
 .modules:after {
     content: "";
-    height: 130px;
+    height: 50vh;
     background: transparent;
     width: 100%;
     display: block;
