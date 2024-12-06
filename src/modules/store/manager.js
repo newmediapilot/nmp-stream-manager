@@ -67,13 +67,13 @@ function getAllParams() {
 function getParam(key) {
   const value = paramsState[key];
   if (value === undefined) {
-    console.warn2(
-      process.cwd(),
-      "Warning: Attempted to get",
-      key,
-      "failed with",
-      value,
-    );
+    // console.warn2(
+    //   process.cwd(),
+    //   "Warning: Attempted to get",
+    //   key,
+    //   "failed with",
+    //   value,
+    // );
   } else {
     // console.info2(process.cwd(), "Get", key, "::", value);
   }

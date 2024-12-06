@@ -9,7 +9,7 @@ const scrollSnap = (elQueryString) => {
         }
         to = setTimeout(() => {
             const closestToTopEls = Array.from(containerEl.children).map(el=>el.getBoundingClientRect().top);
-            console.log('closestToTopEls',JSON.stringify(closestToTopEls));
+            // console.log('closestToTopEls',JSON.stringify(closestToTopEls));
             // TODO: figure out perfection scrollsnap
             anim && anime.remove();
             anim = anime({

@@ -41,17 +41,26 @@
 {% endblock %}
 {% block body %}
 <div class="pages">
-    <iframe scrolling="no" src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
-    <iframe scrolling="no" src="{{public_routes.PUBLIC_SETTINGS}}"></iframe>
-    <iframe scrolling="no" src="{{public_routes.PUBLIC_MODULES}}"></iframe>
-    <iframe scrolling="no" src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
+    <iframe src="{{public_routes.PUBLIC_SETTINGS}}"></iframe>
+    <iframe src="{{public_routes.PUBLIC_MODULES}}"></iframe>
+    <iframe src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
 </div>
 {% endblock %}
 {% block fscripts %}
 <script>
+    // If an iframe requests a URL we will find the frame with that path and switch to it
+    // Form submissions will usually emit a reload on all frames other than the focused one
+    // This means the next click will likely already be past the unload heap
     document.addEventListener("DOMContentLoaded", () => {
-        window.addEventListener('message', function (event) {
-            console.log('Message from iframe:', event.data);
+        window.addEventListener('message', function (e) {
+            if (window.origin === window.location.origin && e.data.type === "path") {
+                const iframeReady = () => {
+                    iframe.removeEventListener('load', iframeReady);
+                };
+                const iframe = document.querySelector(`[src="${e.data.message}"]`);
+                iframe.parentElement.appendChild(iframe);
+                iframe.addEventListener('load', iframeReady);
+            }
         });
     });
 </script>

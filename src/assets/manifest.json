@@ -20,5 +20,5 @@
   "lang": "en-US",
   "name": "StreamDream",
   "short_name": "StreamDream",
-  "start_url": "/public/dashboard"
+  "start_url": "/"
 }
