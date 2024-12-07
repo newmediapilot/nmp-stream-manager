@@ -53,33 +53,33 @@
         const withEls = (selectorAll, caller) => {
             Array.from(document.querySelectorAll(selectorAll)).forEach((e) => caller(e));
         };
+        // Rotate hues
         withEls('.dashboard button', (targets=[]) => {
             anime({
                 targets,
-                delay: anime.stagger(720),
-                duration: 7200,
+                delay: anime.stagger(777),
+                duration: 7777,
                 loop: 999,
                 filter: 'hue-rotate(360deg)',
+                easing: 'easeInElastic(1, .6)',
+            });
+            // Bounce borders
+            anime({
+                targets,
+                delay: anime.stagger(333),
+                duration: 3333,
+                loop: 999,
+                borderWidth: ['0px', '150%'],
                 easing: 'easeInElastic(1, .6)',
             });
         });
         // All button down behaviours
         const downButton = () => {
-            // withEls('.dashboard button', (targets) => {
-            //     anime({
-            //         targets,
-            //         filter: 'brightness(1.1)',
-            //     });
-            // });
+
         };
         // All button up behaviours
-        const upButton = ({currentTarget: buttonEl}) => {
-            // withEls('.dashboard button', (targets) => {
-            //     anime({
-            //         targets,
-            //         filter: 'brightness(1.0)',
-            //     });
-            // });
+        const upButton = () => {
+
         };
         document.querySelectorAll('button').forEach(buttonEl => {
             buttonEl.addEventListener('mousedown', downButton);
