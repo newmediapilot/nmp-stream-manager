@@ -22,9 +22,12 @@ html.edit-active {
 
 .dashboard:after {
     content: "";
+}
+
+html:not(.edit-active) .dashboard:after {
+    width:100%;
     height: 130px;
     background:transparent;
-    width:100%;
     display: block;
 }
 
@@ -32,8 +35,9 @@ html.edit-active .dashboard {
     padding-right: 50px;
 }
 
-html.edit-active .dashboard::after {
+html.edit-active .dashboard:after {
     width: 50px;
+    height: 100%;
     background:
             repeating-linear-gradient(45deg, rgba(0,0,0,0.5), rgba(75, 75, 75, 0.8) 8px),
             repeating-linear-gradient(45deg, rgba(75, 75, 75, 0.8), rgba(0,0,0,0.5) 8px),
@@ -67,7 +71,7 @@ html.edit-active .dashboard::after {
 .dashboard .button button {
     width: 100%;
     height: 100%;
-    word-break: break-all;
+    word-break: keep-all;
     font-size: clamp(24px, 3vw, 48px);
     color: var(--text-color-light);
     border-top: 20px solid rgba(255, 255, 255, 0.6);
@@ -89,7 +93,7 @@ html.edit-active .dashboard .button button {
     border: 4px solid rgba(255, 255, 255, 1);
 }
 
-.dashboard .button button::after {
+.dashboard .button button:after {
     content: '';
     position: absolute;
     top: 0;
