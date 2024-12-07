@@ -34,9 +34,9 @@ const allowedParams = [
 ];
 
 function loadSecrets() {
-  if (fs.existsSync(".secrets")) {
+  if (fs.existsSync(".secrets.json")) {
     try {
-      secrets = JSON.parse(fs.readFileSync(".secrets", "utf8"));
+      secrets = JSON.parse(fs.readFileSync(".secrets.json", "utf8"));
     } catch (error) {
       console.log2(process.cwd(), "Error loading secrets:", error.message);
       secrets = {};
@@ -81,7 +81,7 @@ function getParam(key) {
 }
 
 function resetSecrets() {
-  fs.rmSync("/secrets.js", { force: true });
+  fs.rmSync(".secrets.json", { force: true });
   console.warn2(process.cwd(), "Removing secrets");
 }
 
@@ -97,7 +97,7 @@ function setSecret(name, key) {
     // Reset secrets so it reloads next time
     secrets = null;
 
-    fs.writeFileSync("./node_modules/.secrets", secretsJSON, "utf8");
+    fs.writeFileSync(".secrets.json", secretsJSON, "utf8");
     console.log2(
       process.cwd(),
       `Secret set for ${name} : ${String("X").repeat(String(key).length)}`,
