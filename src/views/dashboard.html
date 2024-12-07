@@ -61,6 +61,24 @@
                 setTimeout(anim.play, 7000);
             }
         });
+        anime({
+            targets: '.dashboard label',
+            duration: 8000,
+            delay: anime.stagger(50),
+            loop: true,
+            translateX: ['100%', '-100%'],
+            easing: 'easeInOutSine'
+        });
+        anime({
+            targets: '.dashboard button',
+            duration: 3000,
+            delay: anime.stagger(50),
+            easing: 'easeInElastic(1, .6)',
+            filter: 'hue-rotate(360deg)',
+            loopBegin: function(anim) {
+                setTimeout(anim.play, 7000);
+            }
+        });
         // anime({
         //     targets: '.dashboard button',
         //     duration: 1500,
