@@ -6,7 +6,7 @@ const PUBLIC_CONFIGS = {
       type: "feature",
       description: "feature:set",
       wait: "700",
-      emoji: "✨",
+      emoji: "👉",
       label: "aaknot",
     },
     {
@@ -14,7 +14,7 @@ const PUBLIC_CONFIGS = {
       type: "feature",
       description: "feature:set",
       wait: "700",
-      emoji: "✨",
+      emoji: "👉",
       label: "stonerkat_",
     },
     {
@@ -22,7 +22,7 @@ const PUBLIC_CONFIGS = {
       type: "feature",
       description: "feature:set",
       wait: "700",
-      emoji: "✨",
+      emoji: "👉",
       label: "mizukichigy",
     },
     {
@@ -30,7 +30,7 @@ const PUBLIC_CONFIGS = {
       type: "feature",
       description: "feature:set",
       wait: "700",
-      emoji: "✨",
+      emoji: "👉",
       label: "chiyo",
     },
     {
@@ -38,7 +38,7 @@ const PUBLIC_CONFIGS = {
       type: "feature",
       description: "feature:set",
       wait: "700",
-      emoji: "✨",
+      emoji: "👉",
       label: "djcristianadematos",
     },
     {
@@ -46,7 +46,7 @@ const PUBLIC_CONFIGS = {
       type: "ad",
       description: "30",
       wait: "30000",
-      emoji: "📢",
+      emoji: "👉",
       label: "30s",
     },
     {
@@ -54,7 +54,7 @@ const PUBLIC_CONFIGS = {
       type: "ad",
       description: "60",
       wait: "60000",
-      emoji: "📢",
+      emoji: "👉",
       label: "60s",
     },
     {
@@ -62,7 +62,7 @@ const PUBLIC_CONFIGS = {
       type: "ad",
       description: "120",
       wait: "120000",
-      emoji: "📢",
+      emoji: "👉",
       label: "2min",
     },
     {
@@ -78,7 +78,7 @@ const PUBLIC_CONFIGS = {
       type: "mark",
       description: "match:start",
       wait: "700",
-      emoji: "⏰",
+      emoji: "👉",
       label: "Start",
     },
     {
@@ -86,7 +86,7 @@ const PUBLIC_CONFIGS = {
       type: "mark",
       description: "match:fight",
       wait: "700",
-      emoji: "🥊",
+      emoji: "👉",
       label: "Fight",
     },
     {
@@ -94,7 +94,7 @@ const PUBLIC_CONFIGS = {
       type: "mark",
       description: "match:checkpoint",
       wait: "700",
-      emoji: "🧐",
+      emoji: "👉",
       label: "Ping",
     },
   ],
