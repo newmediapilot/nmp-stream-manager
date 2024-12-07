@@ -1,7 +1,7 @@
 bin
 .idea
 .env
-.secrets
+.secrets.json
 .signals.json
 .style.css
 node_modules
