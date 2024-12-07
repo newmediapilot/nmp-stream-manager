@@ -33,6 +33,7 @@ dialog:-internal-dialog-in-top-layer::backdrop {
 }
 
 .dialog-container button {
+    color: var(--button-black);
     align-self: end;
     padding: 10px 20px;
     cursor: pointer;
