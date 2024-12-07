@@ -75,10 +75,10 @@ html.edit-active .dashboard:after {
 }
 
 .dashboard .button button {
+    --clampy:clamp(24px, 4vw, 48px);
     width: 100%;
     height: 100%;
-    font-size: clamp(25px, 3vw, 45px);
-    padding: 0 clamp(25px, 3vw, 45px);
+    font-size: var(--clampy);
     color: var(--text-color-light);
     border-top: 20px solid rgba(255, 255, 255, 0.6);
     border-right: 20px solid rgba(255, 255, 255, 0.2);
@@ -99,7 +99,6 @@ html.edit-active .dashboard:after {
 .dashboard .button button label {
     width: 100%;
     text-align: center;
-    font-size: clamp(40px, 8vw, 60px);
 }
 
 .dashboard .button button label:nth-of-type(1) {
