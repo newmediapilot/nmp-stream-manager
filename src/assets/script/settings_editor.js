@@ -66,14 +66,20 @@ const initSettingsEditor = (editorEl) => {
 
             const emojiEls = emojiWidgetInstanceEl.querySelectorAll("li");
 
-            emojiEls.forEach(
-                (el) =>
-                    emojiWidgetTriggerEl.innerText === el.innerText &&
-                    el.classList.add("active"),
-            );
+            const emojiElsClick = (evt) => {
+                console.log('emojiElsClick', evt);
+                emojiEls.forEach(
+                    (el) =>
+                        emojiWidgetTriggerEl.innerText === el.innerText &&
+                        el.classList.add("active"),
+                );
+            };
 
             emojiEls.forEach((el) => {
-                el.addEventListener("click", () => {
+                el.addEventListener("click", ()=>{
+                    emojiElsClick();
+                });
+                el.addEventListener("click", (evt) => {
                     const payload = {
                         id,
                         field: "emoji",
@@ -86,7 +92,9 @@ const initSettingsEditor = (editorEl) => {
                                 payload: JSON.stringify(payload),
                             },
                         })
-                        .finally(() => socketEmitReload());
+                        .finally(() => {
+                            socketEmitReload();
+                        });
                 });
             });
         }
