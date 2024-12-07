@@ -67,19 +67,24 @@ const initSettingsEditor = (editorEl) => {
             const emojiEls = emojiWidgetInstanceEl.querySelectorAll("li");
 
             const emojiElsClick = (evt) => {
-                console.log('emojiElsClick', evt);
                 emojiEls.forEach(
-                    (el) =>
-                        emojiWidgetTriggerEl.innerText === el.innerText &&
-                        el.classList.add("active"),
+                    (el) =>{
+                        (emojiWidgetTriggerEl.innerText === el.innerText) ?
+                            el.classList.add("active") :
+                            el.classList.remove("active");
+                    }
                 );
             };
+
+            emojiElsClick();
 
             emojiEls.forEach((el) => {
                 el.addEventListener("click", ()=>{
                     emojiElsClick();
                 });
                 el.addEventListener("click", (evt) => {
+                    emojiWidgetTriggerEl.innerText = el.innerText;
+                    emojiElsClick();
                     const payload = {
                         id,
                         field: "emoji",
