@@ -15,7 +15,7 @@ html.edit-active {
     align-content: stretch;
     justify-items: stretch;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(auto-fit, calc(20vh));
+    grid-template-rows: repeat(auto-fit);
     position: relative;
     background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
 }
