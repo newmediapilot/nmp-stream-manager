@@ -8,7 +8,8 @@
                 onclick="showDialog('#qrcode_dialog', '🔗 Dashboard Link', 'This link will open the dashboard<br>on any device on your network.')">
             <em>🔗</em>Show QR
         </button>
-        <button onclick="javascript:window.location.href='{{ public_routes.PUBLIC_DASHBOARD }}'"><em>🥷</em>Dev</button>
+        <button onclick="javascript:window.parent.location.href='{{ public_routes.PUBLIC_DASHBOARD }}'"><em>🥷</em>Dev</button>
+        <button onclick="javascript:window.parent.location.href='{{ public_routes.PUBLIC_INDEX }}'"><em>🧑</em>User</button>
         <button onclick="javascript:socketEmitReload()"><em>🔄</em>Reload</button>
         <button onclick="javascript:getURL('{{ public_routes.TWITCH_LOGIN }}')"><em>🔒</em>Login</button>
         <button onclick="javascript:getURL('{{ public_routes.PUBLIC_MODULES }}')"><em>🎬️</em>Displays</button>
