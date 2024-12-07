@@ -22,14 +22,15 @@
 {% endblock %}
 {% block fscripts %}
 <script defer src="/script/socket_connect.js?={{cache_buster}}" type="text/javascript"></script>
+<script defer src="/script/press_hold.js?={{cache_buster}}" type="text/javascript"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         detectPressHold(
             ()=>{
-                console.log('press:hold');
+                console.log('DOMContentLoaded:detectPressHold:hold');
             },
             ()=>{
-                console.log('press:release');
+                console.log('DOMContentLoaded:detectPressHold:release');
             }
         );
     });
