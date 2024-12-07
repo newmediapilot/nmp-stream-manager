@@ -6,8 +6,8 @@
 const ROUTES = {
     // Twitch API
     TWITCH_LOGIN: "/twitch/login",
-    TWITCH_LOGIN_SUCCESS: "/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/",
     TWITCH_REDIRECT_URL: process.env.TWITCH_REDIRECT_URL,
+    TWITCH_LOGIN_SUCCESS: process.env.TWITCH_REDIRECT_URL.split('https://localhost')[1],
     // Public HTML
     PUBLIC_INDEX: "/",
     PUBLIC_DASHBOARD: "/public/dashboard",
