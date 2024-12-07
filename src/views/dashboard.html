@@ -26,10 +26,8 @@
         <button
                 data-href="{{ data_href }}"
                 onclick="javascript:sendSignal(this)">
-            <label>
-                {{ config.emoji }}
-                {{ config.label }}
-            </label>
+            <label>{{ config.emoji }}</label>
+            <label>{{ config.label }}</label>
         </button>
     </div>
     {% endfor %}
@@ -61,14 +59,17 @@
                 setTimeout(anim.play, 7000);
             }
         });
-        anime({
-            targets: '.dashboard label',
-            duration: 8000,
-            delay: anime.stagger(50),
-            loop: true,
-            translateX: ['100%', '-100%'],
-            easing: 'easeInOutSine'
-        });
+        // anime({
+        //     targets: '.dashboard label:nth-of-type(2)',
+        //     duration: 5000,
+        //     loop: true,
+        //     direction: 'alternate',
+        //     translateX: ['0%', '-80%'],
+        //     easing: 'linear',
+        //     loopBegin: function(anim) {
+        //         setTimeout(anim.play, 6000);
+        //     }
+        // });
         anime({
             targets: '.dashboard button',
             duration: 3000,
