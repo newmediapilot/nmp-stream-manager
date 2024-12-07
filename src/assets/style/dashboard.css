@@ -18,6 +18,7 @@ html.edit-active {
     grid-template-rows: repeat(auto-fit);
     position: relative;
     background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
+    transition: padding-right 333ms linear;
 }
 
 .dashboard:after {
@@ -25,9 +26,9 @@ html.edit-active {
 }
 
 html:not(.edit-active) .dashboard:after {
-    width:100%;
+    width: 100%;
     height: 130px;
-    background:transparent;
+    background: transparent;
     display: block;
 }
 
@@ -37,17 +38,21 @@ html.edit-active .dashboard {
 
 html.edit-active .dashboard:after {
     width: 50px;
-    height: 100%;
-    background:
-            repeating-linear-gradient(45deg, rgba(0,0,0,0.5), rgba(75, 75, 75, 0.8) 8px),
-            repeating-linear-gradient(45deg, rgba(75, 75, 75, 0.8), rgba(0,0,0,0.5) 8px),
-            repeating-linear-gradient(-45deg, rgba(0,0,0,0.5), rgba(75, 75, 75, 0.8) 8px),
-            repeating-linear-gradient(-45deg, rgba(75, 75, 75, 0.8), rgba(0,0,0,0.5) 8px);
+    height: 200%;
+    margin-top: -50%;
+    background: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(75, 75, 75, 0.8) 8px),
+    repeating-linear-gradient(45deg, rgba(75, 75, 75, 0.8), rgba(0, 0, 0, 0.5) 8px),
+    repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.5), rgba(75, 75, 75, 0.8) 8px),
+    repeating-linear-gradient(-45deg, rgba(75, 75, 75, 0.8), rgba(0, 0, 0, 0.5) 8px);
     mix-blend-mode: multiply;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: -1;
 }
 
 .dashboard .button {
-    --button-height:20vh;
+    --button-height: 20vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,21 +73,34 @@ html.edit-active .dashboard:after {
     width: 100%;
     height: 100%;
 }
+
 .dashboard .button button {
     width: 100%;
     height: 100%;
-    word-break: keep-all;
-    font-size: clamp(24px, 3vw, 48px);
+    font-size: clamp(40px, 10vw, 80px);
+    padding-left: clamp40px, 10vw, 80px);
     color: var(--text-color-light);
     border-top: 20px solid rgba(255, 255, 255, 0.6);
     border-right: 20px solid rgba(255, 255, 255, 0.2);
     border-bottom: 20px solid rgba(255, 255, 255, 0.1);
     border-left: 20px solid rgba(255, 255, 255, 0.4);
     border-radius: var(--border-radius);
-    text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
     overflow: hidden;
     position: relative;
-    opacity: 0.98;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard .button button label {
+    white-space: nowrap;
+    word-wrap: normal;
+    word-break: keep-all;
+    width: 100%;
+}
+
+.dashboard .button button label::-webkit-scrollbar {
+    display: none;
 }
 
 html.edit-active .dashboard .button button {
