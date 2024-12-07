@@ -1,10 +1,10 @@
-bin
+package-lock.json
+node_modules
 .idea
+.bin
 .env
 .secrets.json
 .signals.json
 .style.css
-node_modules
-package-lock.json
 .combined.json
 .styles.css
