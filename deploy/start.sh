@@ -1,3 +1,3 @@
 #!/bin/bash
 
-bash ./get-node.sh
+bash .deploy/get-node.sh
