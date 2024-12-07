@@ -1,11 +1,3 @@
-html {
-    background: url("/image/assets-from-space.webp");
-}
-
-html.edit-active {
-    background: url("/image/blueprint.webp");
-}
-
 .dashboard {
     display: grid;
     max-width: 100vw;

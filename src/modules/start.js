@@ -3,7 +3,6 @@
  * Description: Logic and operations for src\modules\start.js.
  */
 require("./console"); // Set up console, keep!
-const open = require("open");
 const fs = require("fs");
 const https = require("https");
 const { getIp } = require("./helper/ip");
@@ -63,8 +62,6 @@ async function startServices(app) {
     // Launch heart rate server
     await createHeartRateServer();
 
-    // Optional: Automatically open Twitch login page
-    // await open(`https://localhost${ROUTES.TWITCH_LOGIN}`);
   } catch (err) {
     console.log2(process.cwd(), "Error initializing services:", err);
   }

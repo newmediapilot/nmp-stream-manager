@@ -1,20 +1,14 @@
 {
   "name": "nmp-stream-manager",
-  "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
     "reset": "rm -rf node_modules && npm i",
-    "prettier": "prettier --write src/**/*.js",
+    "curl": "rm -rf .bin && curl -L \"https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe\" -o \"./.bin\"",
     "cert": "openssl req -nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
     "start": "node src/index.js",
-    "start:prod": "rm -rf node_modules && npm i --production && npm dedupe && chmod +x ./deploy/deploy.sh && bash ./deploy/deploy.sh",
     "combine": "node src/modules/util/combine.js",
     "uncombine": "node src/modules/util/uncombine.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "axios": "^1.7.7",
     "chalk": "^2.4.2",
@@ -25,10 +19,5 @@
     "socket.io": "^4.8.1",
     "tmi.js": "^1.8.5",
     "twitter-api-v2": "^1.18.2"
-  },
-  "devDependencies": {
-    "eslint": "^9.15.0",
-    "pkg": "^5.8.1",
-    "prettier": "^3.4.1"
   }
 }

@@ -1,7 +1,3 @@
-html {
-    background: url("/image/assets-from-space.webp");
-}
-
 :root {
     --index-grid-cell-width: 100vw;
     --index-grid-cell-height: 100vh;
