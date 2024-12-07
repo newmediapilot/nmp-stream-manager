@@ -50,38 +50,40 @@
         document.querySelector("#dashboard--toggle"),
     ));
     document.addEventListener("DOMContentLoaded", () => {
-        const withEls = (selectorAll, caller) => {
-            Array.from(document.querySelectorAll(selectorAll)).forEach((e) => caller(e));
-        };
-        // Rotate hues
-        withEls('.dashboard button', (targets=[]) => {
-            anime({
-                targets,
-                delay: anime.stagger(777),
-                duration: 7777,
-                loop: 999,
-                filter: 'hue-rotate(360deg)',
-                easing: 'easeInElastic(1, .6)',
-            });
-            // Bounce borders
-            anime({
-                targets,
-                delay: anime.stagger(333),
-                duration: 3333,
-                loop: 999,
-                borderWidth: ['0px', '150%'],
-                easing: 'easeInElastic(1, .6)',
-            });
+        anime({
+            targets: '.dashboard button',
+            duration: 3000,
+            delay: anime.stagger(50),
+            easing: 'easeInElastic(1, .6)',
+            filter: 'hue-rotate(360deg)',
+            loopBegin: function(anim) {
+                setTimeout(anim.play, 5000);
+            }
         });
-        // All button down behaviours
+        anime({
+            targets: '.dashboard button',
+            duration: 1500,
+            delay: anime.stagger(60),
+            easing: 'easeInOutCubic',
+            direction: 'alternate',
+            borderLeftWidth: ['20px', '40px'],
+            borderTopWidth: ['20px', '40px'],
+            borderRightWidth: ['20px', '40px'],
+            borderBottomWidth: ['20px', '40px'],
+            borderRadius: ['15px', '30px'],
+            loopBegin: (anim) =>{
+                setTimeout(anim.play, 9000);
+            }
+        });
+        // TODO: All button down behaviours
         const downButton = () => {
 
         };
-        // All button up behaviours
+        // TODO: All button up behaviours
         const upButton = () => {
 
         };
-        document.querySelectorAll('button').forEach(buttonEl => {
+        document.querySelectorAll('.dashboard button').forEach(buttonEl => {
             buttonEl.addEventListener('mousedown', downButton);
             buttonEl.addEventListener('touchstart', downButton);
             buttonEl.addEventListener('mouseup', upButton);
