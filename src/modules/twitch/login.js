@@ -63,7 +63,7 @@ async function twitchLoginSuccess(req, res) {
                     client_secret: process.env.TWITCH_CLIENT_SECRET,
                     code: code,
                     grant_type: "authorization_code",
-                    redirect_uri: process.env.ROUTES.TWITCH_REDIRECT_URL,
+                    redirect_uri: ROUTES.TWITCH_REDIRECT_URL,
                 },
             },
         );
