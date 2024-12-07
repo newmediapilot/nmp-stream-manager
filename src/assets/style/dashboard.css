@@ -78,7 +78,6 @@ html.edit-active .dashboard:after {
     width: 100%;
     height: 100%;
     font-size: clamp(40px, 10vw, 80px);
-    padding-left: clamp40px, 10vw, 80px);
     color: var(--text-color-light);
     border-top: 20px solid rgba(255, 255, 255, 0.6);
     border-right: 20px solid rgba(255, 255, 255, 0.2);
@@ -88,15 +87,26 @@ html.edit-active .dashboard:after {
     overflow: hidden;
     position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
 }
 
-.dashboard .button button label {
+.dashboard .button button {
     white-space: nowrap;
     word-wrap: normal;
     word-break: keep-all;
-    width: 100%;
+}
+
+.dashboard .button button label {
+    margin: 10px;
+}
+
+.dashboard .button button label:nth-of-type(1) {
+    /** something **/
+}
+
+.dashboard .button button label:nth-of-type(2) {
+    margin-left: 0px;
+    overflow: hidden
 }
 
 .dashboard .button button label::-webkit-scrollbar {
