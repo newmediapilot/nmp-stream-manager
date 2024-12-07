@@ -58,22 +58,22 @@
             easing: 'easeInElastic(1, .6)',
             filter: 'hue-rotate(360deg)',
             loopBegin: function(anim) {
-                setTimeout(anim.play, 5000);
+                setTimeout(anim.play, 7000);
             }
         });
         anime({
             targets: '.dashboard button',
             duration: 1500,
-            delay: anime.stagger(60),
+            delay: anime.stagger(210),
             easing: 'easeInOutCubic',
             direction: 'alternate',
-            borderLeftWidth: ['20px', '40px'],
-            borderTopWidth: ['20px', '40px'],
-            borderRightWidth: ['20px', '40px'],
-            borderBottomWidth: ['20px', '40px'],
+            borderTopWidth: ['20px', '200px'],
+            borderBottomWidth: ['20px', '200px'],
+            borderLeftWidth: ['20px', '200px'],
+            borderRightWidth: ['20px', '200px'],
             borderRadius: ['15px', '30px'],
             loopBegin: (anim) =>{
-                setTimeout(anim.play, 9000);
+                setTimeout(anim.play, 11000);
             }
         });
         // TODO: All button down behaviours
