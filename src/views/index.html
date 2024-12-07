@@ -10,8 +10,8 @@
     }
 
     :root {
-        --index-grid-cell-width: 33vw;
-        --index-grid-cell-height: 33vh;
+        --index-grid-cell-width: 100vw;
+        --index-grid-cell-height: 100vh;
     }
 
     .pages {
@@ -85,6 +85,9 @@
         type="text/javascript"></script>
 <script defer src="/script/socket_connect.js?={{cache_buster}}" type="text/javascript"></script>
 <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+    });
     document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('message', function (e) {
             const path = e.data.message
