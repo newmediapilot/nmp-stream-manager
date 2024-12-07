@@ -77,7 +77,8 @@ html.edit-active .dashboard:after {
 .dashboard .button button {
     width: 100%;
     height: 100%;
-    font-size: clamp(40px, 10vw, 80px);
+    font-size: clamp(25px, 3vw, 45px);
+    padding: 0 clamp(25px, 3vw, 45px);
     color: var(--text-color-light);
     border-top: 20px solid rgba(255, 255, 255, 0.6);
     border-right: 20px solid rgba(255, 255, 255, 0.2);
@@ -85,9 +86,8 @@ html.edit-active .dashboard:after {
     border-left: 20px solid rgba(255, 255, 255, 0.4);
     border-radius: var(--border-radius);
     overflow: hidden;
+    text-overflow: ellipsis;
     position: relative;
-    display: flex;
-    flex-direction: row;
 }
 
 .dashboard .button button {
@@ -97,7 +97,9 @@ html.edit-active .dashboard:after {
 }
 
 .dashboard .button button label {
-    margin: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: clamp(40px, 8vw, 60px);
 }
 
 .dashboard .button button label:nth-of-type(1) {
@@ -105,8 +107,7 @@ html.edit-active .dashboard:after {
 }
 
 .dashboard .button button label:nth-of-type(2) {
-    margin-left: 0px;
-    overflow: hidden
+    /** something **/
 }
 
 .dashboard .button button label::-webkit-scrollbar {
