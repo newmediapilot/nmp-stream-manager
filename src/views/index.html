@@ -9,11 +9,12 @@
         background: url("/image/assets-from-space.webp");
     }
 
+    :root {
+        --index-grid-cell-width: 33vw;
+        --index-grid-cell-height: 33vh;
+    }
+
     .pages {
-        /** use this to zoom out **/
-        --grid-cell-width: 33vw;
-        --grid-cell-height: 33vh;
-        /** use this to zoom out **/
         overflow-x: hidden;
         overflow-y: hidden;
         position: relative;
@@ -21,13 +22,13 @@
         padding: 0;
         background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
         display: grid;
-        grid-template-columns: repeat(3, var(--grid-cell-width));
-        grid-template-rows: repeat(3, var(--grid-cell-height));
+        grid-template-columns: repeat(3, var(--index-grid-cell-width));
+        grid-template-rows: repeat(3, var(--index-grid-cell-height));
         grid-gap: 0;
-        width: calc(var(--grid-cell-width) * 3);
-        height: calc(var(--grid-cell-height) * 3);
-        margin-left: calc(0vw - var(--grid-cell-width));
-        margin-top: calc(0vh - var(--grid-cell-height));
+        width: calc(var(--index-grid-cell-width) * 3);
+        height: calc(var(--index-grid-cell-height) * 3);
+        margin-left: calc(0vw - var(--index-grid-cell-width));
+        margin-top: calc(0vh - var(--index-grid-cell-height));
     }
 
     html,
@@ -40,8 +41,8 @@
 
     .pages iframe {
         border: none;
-        width: var(--grid-cell-width);
-        height: var(--grid-cell-height);
+        width: var(--index-grid-cell-width);
+        height: var(--index-grid-cell-height);
         display: flex;
     }
 
@@ -70,9 +71,9 @@
 {% endblock %}
 {% block body %}
 <div class="pages">
-    <iframe src="{{public_routes.PUBLIC_SETTINGS}}"></iframe>
-    <iframe src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
     <iframe src="{{public_routes.PUBLIC_MODULES}}"></iframe>
+    <iframe src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
+    <iframe src="{{public_routes.PUBLIC_SETTINGS}}"></iframe>
 </div>
 {% endblock %}
 {% block fscripts %}
@@ -92,7 +93,23 @@
                 const iframeEl = iframeEls.find(el => {
                     return el.getAttribute('src') === path.trim();
                 });
+                const rootStyles = getComputedStyle(document.documentElement);
+                const vw = parseFloat(rootStyles.getPropertyValue('--index-grid-cell-width'));
+                const vh = parseFloat(rootStyles.getPropertyValue('--index-grid-cell-height'));
                 const indexOf = iframeEls.indexOf(iframeEl);
+                const translateValues = [
+                    {translateX: `${1 * vw}vw`, translateY: `${0 * vh}vh`},// iframe[0]
+                    {translateX: `${0 * vw}vw`, translateY: `${0 * vh}vh`},// iframe[1]
+                    {translateX: `${-1 * vw}vw`, translateY: `${0 * vh}vh`},// iframe[2]
+                ];
+                const {translateX, translateY} = translateValues[indexOf];
+                anime({
+                    targets: '.pages',
+                    translateX: translateX,
+                    translateY: translateY,
+                    duration: 333,
+                    easing: 'linear',
+                });
             }
         });
     });
