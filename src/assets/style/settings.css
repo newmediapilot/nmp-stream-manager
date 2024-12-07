@@ -57,8 +57,14 @@ ul + #emoji-widget {
     min-height: 8vh;
 }
 
-.settings-editor * {
+.settings-editor > button {
+    font-size: 40px;
+}
+
+.settings-editor > [type="text"] {
     font-size: 25px;
+    grid-column: span 3;
+    padding: 0 15px;
 }
 
 .settings-editor > [type="text"] {
