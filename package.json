@@ -6,7 +6,7 @@
     "deploy": "chmod +x ./deploy/*.sh && bash ./deploy/start.sh",
     "reset": "rm -rf .secrets && rm -rf node_modules && rm -rf bin && npm i",
     "prettier": "prettier --write src/**/*.js",
-    "curl": "mkdir bin 2>nul & curl -L -o ./bin/hds_desktop_windows.exe https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe",
+    "curl": "mkdir ./bin 2>nul & curl -L -o ./.bin/hds_desktop_windows.exe https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe",
     "cert": "openssl req -nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
     "start": "node src/index.js",
     "combine": "node src/modules/util/combine.js",
