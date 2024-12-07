@@ -5,6 +5,12 @@
 {% block cdn %}<!-- noscript -->{% endblock %}
 {% block local %}<!-- style -->{% endblock %}
 {% block hscripts %}
+<script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer
+        type="text/javascript"></script>
+<script defer crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" defer
+        type="text/javascript"></script>
+<script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" defer
+        type="text/javascript"></script>
 <link rel="stylesheet" href="/style/index.css?cb={{cache_buster}}">
 {% endblock %}
 {% block body %}
@@ -15,16 +21,17 @@
 </div>
 {% endblock %}
 {% block fscripts %}
-<script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer
-        type="text/javascript"></script>
-<script defer crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" defer
-        type="text/javascript"></script>
-<script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" defer
-        type="text/javascript"></script>
 <script defer src="/script/socket_connect.js?={{cache_buster}}" type="text/javascript"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-
+        detectPressHold(
+            ()=>{
+                console.log('press:hold');
+            },
+            ()=>{
+                console.log('press:release');
+            }
+        );
     });
     document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('message', function (e) {
@@ -34,9 +41,8 @@
                 const iframeEl = iframeEls.find(el => {
                     return el.getAttribute('src') === path.trim();
                 });
-                const rootStyles = getComputedStyle(document.documentElement);
-                const vw = parseFloat(rootStyles.getPropertyValue('--index-grid-cell-width'));
-                const vh = parseFloat(rootStyles.getPropertyValue('--index-grid-cell-height'));
+                const vw = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-width'));
+                const vh = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-height'));
                 const indexOf = iframeEls.indexOf(iframeEl);
                 const translateValues = [
                     {translateX: `${1 * vw}vw`, translateY: `${0 * vh}vh`},// iframe[0]
