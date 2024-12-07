@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
-    "deploy": "chmod +x ./deploy/deploy.sh && bash ./deploy/deploy.sh",
     "reset": "rm -rf node_modules && npm i",
     "prettier": "prettier --write src/**/*.js",
     "cert": "openssl req -nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
     "start": "node src/index.js",
+    "start:prod": "chmod +x ./deploy/deploy.sh && bash ./deploy/deploy.sh",
     "combine": "node src/modules/util/combine.js",
     "uncombine": "node src/modules/util/uncombine.js"
   },

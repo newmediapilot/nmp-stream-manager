@@ -6,7 +6,7 @@ const { setParam, getParam } = require("../store/manager");
 const { spawn } = require("child_process");
 
 async function createHeartRateServer(
-  exePath = "./.bin/hds_desktop_windows.exe",
+  exePath = "./bin/hds_desktop_windows.exe",
 ) {
   let MAX_REPORT = 5; // Don't keep logging
   const child = spawn(exePath, [], { detached: false });

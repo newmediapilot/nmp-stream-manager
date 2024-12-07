@@ -1,31 +1,28 @@
 #!/bin/bash
 
-# Set absolute path to .deploy directory
-DEPLOY_DIR="$PWD/.deploy"
+echo "Resetting bins..."
+rm -rf "./.deploy/bin"
+mkdir -p "./.deploy/bin"
 
-# Step 1: Download Portable Node.js into .deploy/bin
-echo "Downloading Portable Node.js..."
-NODE_URL="https://github.com/zeit/next.js/releases/download/v10.0.1/node-v14.18.0-x64.msi"  # Update with correct portable node link if needed
-mkdir -p "$DEPLOY_DIR/bin"
-curl -L $NODE_URL -o "$DEPLOY_DIR/bin/node.exe"
+echo "Downloading Portable Node.js (exe version)..."
+curl -L "https://nodejs.org/dist/v22.12.0/node-v22.12.0-win-x64.zip" -o "./.deploy/bin/node.zip"
+unzip -o "./.deploy/bin/node.zip" -d "./.deploy/bin/node/"
+rm "./.deploy/bin/node.zip"
 
-# Step 2: Download hds_desktop_windows.exe into .deploy/bin
+echo "Finding the node.exe..."
+NODE_EXE=$(find "./.deploy/bin/node/" -name "node.exe" -print -quit)
+echo "Finding the node.exe...$NODE_EXE"
+
 echo "Downloading hds_desktop_windows.exe..."
-HDS_URL="https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe"
-curl -L $HDS_URL -o "$DEPLOY_DIR/bin/hds_desktop_windows.exe"
+curl -L "https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe" -o "./.deploy/bin/hds_desktop_windows.exe"
 
-# Step 3: Copy the src directory into .deploy/src
 echo "Copying src to .deploy/src..."
-cp -r ./src "$DEPLOY_DIR/src"
+cp -r "./src" "./.deploy/src"
 
-# Step 4: Copy the node_modules directory into .deploy/node_modules
 echo "Copying node_modules to .deploy/node_modules..."
-cp -r ./node_modules "$DEPLOY_DIR/node_modules"
+cp -r "./node_modules" "./.deploy/node_modules"
 
-# Step 5: Run node.exe against .deploy/src/index.js, setting NODE_PATH to the node_modules directory
-echo "Running Node.js against .deploy/src/index.js..."
-
-# For Git Bash, use Windows-style paths (C:/ instead of /c/)
-"$DEPLOY_DIR/bin/node.exe" "$DEPLOY_DIR/src/index.js"
+echo "Running node.exe on .deploy/src/index.js..."
+"$NODE_EXE" "./.deploy/src/index.js"
 
 echo "Script completed."
