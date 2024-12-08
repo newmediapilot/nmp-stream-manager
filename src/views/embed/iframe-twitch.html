@@ -35,6 +35,7 @@
     html.iframe #module-container {
         box-shadow: inset 0 0 10px 10px white;
         box-sizing: border-box;
+        opacity: .5;
     }
 </style>
 {{ public_module_styles() }}
@@ -56,7 +57,21 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => {
+        // Read query param of featuredName
+        // Load featuredName into the embed
+        const urlParams = new URLSearchParams(window.location.search);
+        const streamerQueryParam = urlParams.get('featuredName');
+        if (!streamerQueryParam) {
+            console.log('No streamer found');
+        } else {
+            const URL = `https://player.twitch.tv/?channel=${streamerQueryParam}&parent=localhost&muted=false`;
+            const twitchEmbed = document.querySelector('#twitch-embed');
+            twitchEmbed.src = URL;
+        }
+    });
     document.addEventListener("DOMContentLoaded", () => socketWatchFeatureSet((payload) => {
+        // If signal re-sends the same name, hide everything
         const urlParams = new URLSearchParams(window.location.search);
         const streamerQueryParam = urlParams.get('featuredName');
         const featuredName = payload.split(':').pop();
@@ -71,19 +86,5 @@
             getURL(`${window.location.origin}${window.location.pathname}?featuredName=${featuredName}`);
         }
     }));
-    document.addEventListener("DOMContentLoaded", () => {
-        // Read query param of featuredName
-        // Load featuredName into the embed
-        // If signal re-sends the same name, hide everything
-        const urlParams = new URLSearchParams(window.location.search);
-        const streamerQueryParam = urlParams.get('featuredName');
-        if (!streamerQueryParam) {
-            console.log('No streamer found');
-        } else {
-            const URL = `https://player.twitch.tv/?channel=${streamerQueryParam}&parent=localhost&muted=false`;
-            const twitchEmbed = document.querySelector('#twitch-embed');
-            twitchEmbed.src = URL;
-        }
-    });
 </script>
 {% endblock %}
