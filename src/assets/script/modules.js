@@ -1,6 +1,5 @@
-// Pushes the contents of all variables across all modules to write out
-const pushStyleUpdates = () => {
-    // Assign attributes into a --variable format
+// Realtime write of collected data into <style>
+const renderStyleUpdates = () => {
     const payload = Array.from(document.querySelectorAll('input[type="range"]')).map(
         (el) => {
             return [
@@ -10,8 +9,14 @@ const pushStyleUpdates = () => {
             ].join("")
         }
     ).join("");
-    document.querySelector('#public_module_styles').innerHTML = payload;
-    console.log('pushStyleUpdates::payload', payload);
+    document.querySelector('#public_module_styles').innerHTML = `:root{${payload}}`;
+    return payload;
+};
+
+// Pushes the contents of all variables across all modules to write out
+const pushStyleUpdates = () => {
+    // Renders and also gets last collected values
+    const payload = renderStyleUpdates();
     payload && axios.get("/public/style/update", {
         params: {
             type: "style",
@@ -21,7 +26,6 @@ const pushStyleUpdates = () => {
         socketEmitReload();
         console.log('pushStyleUpdates::socketEmitReload');
     });
-    applyStyleUpdates();
 };
 
 // Reads checkboxes and sets checked based on whether css contains their value
