@@ -7,7 +7,7 @@
         font-size: 50px;
         font-family: sans-serif;
         color: red;
-        height: 100vh;
+        height: 10vh
         display: flex;
         justify-content: center;
         align-items: center;
@@ -15,17 +15,34 @@
 </style>
 <style>
     #module-container {
-        height: 100vh;
+        height: 10vh
     }
     /** overwritten by "public_module_styles()" macro */
     :root {
-        --iframe-heart-translate-x:0vw;
-        /** ... **/
+        --module-heart-scaleX: 1;
+        --module-heart-scaleY: 1;
+        --module-heart-scaleZ: 1;
+        --module-heart-translateX: 0;
+        --module-heart-translateY: 0;
+        --module-heart-translateZ: 0;
+        --module-heart-rotateX: 0;
+        --module-heart-rotateY: 0;
+        --module-heart-rotateZ: 0;
     }
     #module-container {
-        transform: translateX(0vw) translateY(0vh) translateZ(0vh) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        transform:
+                scaleX(var(--module-heart-scaleX))
+                scaleY(var(--module-heart-scaleY))
+                scaleZ(var(--module-heart-scaleZ))
+                translateX(var(--module-heart-translateX))
+                translateY(var(--module-heart-translateY))
+                translateZ(var(--module-heart-translateZ))
+                rotateX(var(--module-heart-rotateX))
+                rotateY(var(--module-heart-rotateY))
+                rotateZ(var(--module-heart-rotateZ));
         transform-origin: center center;
     }
+
 </style>
 {{ public_module_styles() }}
 {% endblock %}
