@@ -34,7 +34,14 @@
         transform: scaleX(var(--module-heart-scaleX)) scaleY(var(--module-heart-scaleX));
     }
 
-    html.iframe #module-container {
+    html.iframe #module-container:after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        position:absolute;
+        left:0;
+        top:0;
         box-shadow: inset 0 0 10px 10px white;
         box-sizing: border-box;
     }

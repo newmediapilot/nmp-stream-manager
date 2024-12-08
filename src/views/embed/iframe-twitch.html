@@ -28,14 +28,21 @@
     }
 
     #module-container {
+        position: relative;
         transform-origin: center center;
         transform: scaleX(var(--module-feature-scaleX)) scaleY(var(--module-feature-scaleX));
     }
 
-    html.iframe #module-container {
+    html.iframe #module-container:after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        position:absolute;
+        left:0;
+        top:0;
         box-shadow: inset 0 0 10px 10px white;
         box-sizing: border-box;
-        opacity: .5;
     }
 </style>
 {{ public_module_styles() }}
