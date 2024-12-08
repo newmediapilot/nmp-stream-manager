@@ -6,7 +6,7 @@ const renderStyleUpdates = () => {
         }
     ).join(";");
     document.querySelector('#public_module_styles').innerHTML = `:root{${payload}}`;
-    console.log("renderStyleUpdates", payload);
+    socketEmitStyle(`:root{${payload}}`);
     return payload;
 };
 
