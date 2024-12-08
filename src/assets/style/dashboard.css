@@ -6,8 +6,10 @@
     overflow-y: scroll;
     align-content: stretch;
     justify-items: stretch;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(auto-fit);
+    --grid-template-columns:3;
+    --grid-template-rows:4;
+    grid-template-columns: repeat(var(--grid-template-columns), calc(100%/var(--grid-template-columns)));
+    grid-template-rows: repeat(5, calc(100vh/var(--grid-template-rows)));
     position: relative;
     background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
     transition: padding-right 333ms linear;
@@ -44,14 +46,11 @@ html.edit-active .dashboard:after {
 }
 
 .dashboard .button {
-    --button-height: 20vh;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    border-radius: var(--border-radius);
     box-shadow: 8px 8px 15px 0px rgba(0, 0, 0, 0.75);
-    min-height: var(--button-height);
 }
 
 @media (min-aspect-ratio: 1/1) {
