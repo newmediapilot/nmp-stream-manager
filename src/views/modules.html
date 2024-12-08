@@ -23,8 +23,8 @@
     .module input[type="range"]::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
-        width: 60px;
-        height: 60px;
+        width: 30px;
+        height: 30px;
         background: repeating-radial-gradient(circle, #4f4f4f 0px, #020202 8px);
         box-shadow: 0px 0px 8px 8px rgba(44, 44, 44, 0.5);
     }
@@ -32,13 +32,21 @@
     .module .controls {
         max-width: 100%;
         display: grid;
-        grid-template-columns: repeat(2, 50%);
-        grid-auto-rows: auto;
+        grid-template-columns: repeat(2, 120px);
         gap: 12px;
         margin: 12px;
-        min-height: 110px;
+        min-height: 120px;
         padding-right: 12px;
     }
+
+    .module label {
+        position: relative;
+    }
+
+    .module label input[type="range"] {
+
+    }
+
 </style>
 {% set public_routes = 'public_routes' | getParam %}
 <div class="modules">
@@ -48,26 +56,29 @@
             <button onclick="javascript:showPanelQR('#feature_embed_qrcode_dialog', 'FEATURE')">🔗</button>
         </div>
         <div class="preview">
-            <iframe width="1920" height="1080" src="https://localhost/public/feature/embed?featuredName=aaknot"></iframe>
+            <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_FEATURE_EMBED}}?featuredName=aaknot#featuredNameLock"></iframe>
         </div>
         <div class="controls">
             <input oninput="renderStyleUpdates()" onchange="pushStyleUpdates()"
                    type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="--module-feature-scaleX">
+            <label>
+
+            </label>
         </div>
     </div>
-    <div class="module bloodorange">
-        <div class="title">
-            <p>BPM</p>
-            <button onclick="javascript:showPanelQR('#heart_embed_qrcode_dialog', 'BPM')">🔗</button>
-        </div>
-        <div class="preview">
-            <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_HEART_EMBED}}"></iframe>
-        </div>
-        <div class="controls">
-            <input oninput="renderStyleUpdates()" onchange="pushStyleUpdates()"
-                   type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="--module-heart-scaleX">
-        </div>
-    </div>
+<!--    <div class="module bloodorange">-->
+<!--        <div class="title">-->
+<!--            <p>BPM</p>-->
+<!--            <button onclick="javascript:showPanelQR('#heart_embed_qrcode_dialog', 'BPM')">🔗</button>-->
+<!--        </div>-->
+<!--        <div class="preview">-->
+<!--            <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_HEART_EMBED}}"></iframe>-->
+<!--        </div>-->
+<!--        <div class="controls">-->
+<!--            <input oninput="renderStyleUpdates()" onchange="pushStyleUpdates()"-->
+<!--                   type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="&#45;&#45;module-heart-scaleX">-->
+<!--        </div>-->
+<!--    </div>-->
 </div>
 {% endblock %}
 {% block fscripts %}
