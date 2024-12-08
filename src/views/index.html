@@ -3,7 +3,7 @@
 {% set cache_buster = "" | currentTime %}
 {% set public_routes = 'public_routes' | getParam %}
 {% block cdn %}<!-- noscript -->{% endblock %}
-{% block local %}<!-- style -->{% endblock %}
+{% block local %}<!-- nostyle -->{% endblock %}
 {% block hscripts %}
 <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer
         type="text/javascript"></script>
@@ -21,7 +21,7 @@
 </div>
 {% endblock %}
 {% block fscripts %}
-<script defer src="/script/socket_connect.js?={{cache_buster}}" type="text/javascript"></script>
+<script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
 <script defer src="/script/press_hold.js?={{cache_buster}}" type="text/javascript"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {

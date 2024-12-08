@@ -2,14 +2,11 @@
 const renderStyleUpdates = () => {
     const payload = Array.from(document.querySelectorAll('input[type="range"]')).map(
         (el) => {
-            return [
-                el.getAttribute('id'),
-                el.value,
-                el.getAttribute('name')
-            ].join("")
+            return `${el.getAttribute('id')}:${el.value}${el.getAttribute('name')}`
         }
-    ).join("");
+    ).join(";");
     document.querySelector('#public_module_styles').innerHTML = `:root{${payload}}`;
+    console.log("renderStyleUpdates", payload);
     return payload;
 };
 
@@ -24,7 +21,7 @@ const pushStyleUpdates = () => {
         },
     }).finally(() => {
         socketEmitReload();
-        console.log('pushStyleUpdates::socketEmitReload');
+        console.log('pushStyleUpdates::socketEmitReload', payload);
     });
 };
 
