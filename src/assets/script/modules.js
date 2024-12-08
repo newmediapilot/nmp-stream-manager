@@ -5,8 +5,9 @@ const renderStyleUpdates = () => {
             return `${el.getAttribute('id')}:${el.value}${el.getAttribute('name')}`
         }
     ).join(";");
-    document.querySelector('#public_module_styles').innerHTML = `:root{${payload}}`;
-    socketEmitStyle(`:root{${payload}}`);
+    document.querySelectorAll('iframe').forEach(iframe=>{
+        iframe.contentWindow.document.querySelector('#public_module_styles').innerHTML = `:root { ${payload}; }`;
+    });
     return payload;
 };
 
@@ -14,6 +15,7 @@ const renderStyleUpdates = () => {
 const pushStyleUpdates = () => {
     // Renders and also gets last collected values
     const payload = renderStyleUpdates();
+    console.log('pushStyleUpdates', payload);
     payload && axios.get("/public/style/update", {
         params: {
             type: "style",
@@ -27,12 +29,7 @@ const pushStyleUpdates = () => {
 
 // Reads checkboxes and sets checked based on whether css contains their value
 const applyStyleUpdates = () => {
-    const styleString = document.querySelector('#public_module_styles');
-    console.log('styleString', styleString);
-    Array.from(document.querySelectorAll('input[type="range"]')).forEach(el => {
-        el.checked = styleString.innerText.includes(el.value);
-    });
-    renderStyleUpdates();
+
 };
 
 // Shows QR code for a given panel

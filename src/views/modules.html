@@ -39,20 +39,6 @@
         min-height: 110px;
         padding-right: 12px;
     }
-
-    .preview:after {
-        content: "";
-        width: 100%;
-        height: 100%;
-        box-shadow: inset 0 0 10px 10px white;
-        box-sizing: border-box;
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        transform: scaleX(var(--module-heart-scaleX)) scaleY(var(--module-heart-scaleY)) scaleZ(var(--module-heart-scaleZ)) translateX(var(--module-heart-translateX)) translateY(var(--module-heart-translateY)) translateZ(var(--module-heart-translateZ)) rotateX(var(--module-heart-rotateX)) rotateY(var(--module-heart-rotateY)) rotateZ(var(--module-heart-rotateZ));
-    }
-
 </style>
 {% set public_routes = 'public_routes' | getParam %}
 {{ public_module_styles() }}
@@ -66,22 +52,12 @@
             <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_HEART_EMBED}}"></iframe>
         </div>
         <div class="controls">
-            <input type="range" id="--module-heart-scaleX" value="1" min="0.5" max="1" step="0.01" name=""
-                   oninput="renderStyleUpdates()" onchange="pushStyleUpdates()">
-            <input type="range" id="--module-heart-scaleY" value="1" min="0.5" max="1" step="0.01" name=""
-                   oninput="renderStyleUpdates()" onchange="pushStyleUpdates()">
-            <input type="range" id="--module-heart-translateX" value="1" min="0" max="50" step="1" name="%"
-                   oninput="renderStyleUpdates()" onchange="pushStyleUpdates()">
-            <input type="range" id="--module-heart-translateY" value="1" min="0" max="50" step="1" name="%"
-                   oninput="renderStyleUpdates()" onchange="pushStyleUpdates()">
-<!--            <input type="range" id="&#45;&#45;module-heart-translateZ" value="1" min="0" max="100" step="1" name="%"-->
-<!--                   oninput="renderStyleUpdates()" onchange="pushStyleUpdates()">-->
-            <!--            <input type="range" id="&#45;&#45;module-heart-translateX" name="%" min="0" max="360" value="0" step="36">-->
-            <!--            <input type="range" id="&#45;&#45;module-heart-translateY" name="%" min="0" max="360" value="0" step="36">-->
-            <!--            <input type="range" id="&#45;&#45;module-heart-translateZ" name="%" min="0" max="360" value="0" step="36">-->
-            <!--            <input type="range" id="&#45;&#45;module-heart-rotateX" name="%" min="0" max="360" value="0" step="36">-->
-            <!--            <input type="range" id="&#45;&#45;module-heart-rotateY" name="%" min="0" max="360" value="0" step="36">-->
-            <!--            <input type="range" id="&#45;&#45;module-heart-rotateZ" name="%" min="0" max="360" value="0" step="36">-->
+            <input oninput="renderStyleUpdates()" onchange="pushStyleUpdates()"
+                   type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="--module-heart-scaleX">
+<!--            <input oninput="renderStyleUpdates()" onchange="pushStyleUpdates()"-->
+<!--                   type="range" value="0" min="0" max="100" step="20" name="%" id="&#45;&#45;module-heart-translateY" >-->
+<!--            <input oninput="renderStyleUpdates()" onchange="pushStyleUpdates()"-->
+<!--                   type="range" value="0" min="0" max="100" step="20" name="%" id="&#45;&#45;module-heart-translateY" >-->
         </div>
     </div>
 </div>
@@ -99,5 +75,18 @@
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => scrollSnap('.modules'));
+    document.addEventListener("DOMContentLoaded", () => {
+        anime({
+            targets: '.module .preview',
+            duration: 9000,
+            easing: 'linear',
+            loop: true,
+            update: function (anim) {
+                const percentage = anim.progress;
+                const hueRotation = (percentage * 360) / 100;
+                document.querySelector('.module .preview').style.filter = `hue-rotate(${hueRotation}deg)`;
+            }
+        });
+    });
 </script>
 {% endblock %}

@@ -33,7 +33,7 @@ async function startServices(app) {
     await initializePublicConfigs("signals");
 
     // Initialize module styling
-    await initializePublicStyles("styles");
+    await initializePublicStyles("style");
 
     // Configure Nunjucks
     configureNunjucks(app);
