@@ -13,6 +13,8 @@
     position: relative;
     background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
     transition: padding-right 333ms linear;
+    transform: scale(.95);
+    border-radius: 15px;
 }
 
 .dashboard:after {

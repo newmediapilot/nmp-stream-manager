@@ -21,7 +21,7 @@ const pushStyleUpdates = () => {
         },
     }).finally(() => {
         socketEmitReload();
-        console.log('pushStyleUpdates::socketEmitReload', payload);
+        console.log('pushStyleUpdates', payload);
     });
 };
 
