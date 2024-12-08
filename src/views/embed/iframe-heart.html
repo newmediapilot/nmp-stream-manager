@@ -13,40 +13,22 @@
         color: red;
         padding: 20px;
     }
-
     #heart-rate div:nth-of-type(2) {
         font-size: 120%;
     }
 </style>
 <style>
-
     #module-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(3, 1fr);
         height: 100vh;
     }
-
     /** default values when the page loads */
     /** overwritten by "public_module_styles()" macro */
     :root {
-        --heart-grid-column-start: 1;
-        --heart-grid-column-end: 2;
-        --heart-grid-row-start: 1;
-        --heart-grid-row-end: 2;
-        --heart-align-self: flex-start;
-        --heart-justify-self: flex-start;
+        --heart-transform: matrix(1, 0, 0, 1, -50%, 50%) rotateX(45deg) rotateY(45deg);
     }
-
     #module-container > div {
-        grid-column-start: var(--heart-grid-column-start);
-        grid-column-end: var(--heart-grid-column-end);
-        grid-row-start: var(--heart-grid-row-start);
-        grid-row-end: var(--heart-grid-row-end);
-        align-self: var(--heart-align-self);
-        justify-self: var(--heart-justify-self);
+        transform: var(--heart-transform);
     }
-
 </style>
 {{ public_module_styles() }}
 {% endblock %}
@@ -68,11 +50,9 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-
         const heartRateElement = document.querySelector('#heart-rate');
         const labelEl = heartRateElement.querySelector('div:nth-of-type(1)');
         const emojiEl = heartRateElement.querySelector('div:nth-of-type(2)');
-
         const heartPing = async () => {
             try {
                 const response = await axios.get("/public/heart/ping");
@@ -85,13 +65,9 @@
                 heartRateElement.textContent = "BPM";
                 console.error("Failed to fetch heart rate:", error);
             }
-        }
-
-        // Poll function
+        };
         setInterval(() => heartPing(), 1000);
-
         socketWatchReload();
-
     });
 </script>
 {% endblock %}
