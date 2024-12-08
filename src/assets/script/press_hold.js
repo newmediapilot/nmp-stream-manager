@@ -20,10 +20,10 @@ const detectPressHold = (onHoldDetected, onHoldReleased) => {
         clearTimeout(timeoutId);
     };
 
-    document.documentElement.addEventListener('mousedown', onDown);
-    document.documentElement.addEventListener('touchstart', onDown);
-    document.documentElement.addEventListener('mouseup', onUp);
-    document.documentElement.addEventListener('touchend', onUp);
+    document.addEventListener('mousedown', onDown);
+    document.addEventListener('touchstart', onDown);
+    document.addEventListener('mouseup', onUp);
+    document.addEventListener('touchend', onUp);
 
     console.log('detectPressHold', onHoldDetected, onHoldReleased);
 };

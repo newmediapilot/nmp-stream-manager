@@ -1,28 +1,24 @@
 const scrollSnap = (elQueryString) => {
-    let to = null;
-    let anim = null;
-    let duration = 1000;
+
     let containerEl = document.querySelector(elQueryString);
-    const scrollFunct = () => {
-        if(to) {
-            clearTimeout(to);
-        }
-        to = setTimeout(() => {
-            const closestToTopEls = Array.from(containerEl.children).map(el=>el.getBoundingClientRect().top);
-            // console.log('closestToTopEls',JSON.stringify(closestToTopEls));
-            // TODO: figure out perfection scrollsnap
-            anim && anime.remove();
-            anim = anime({
-                // scrollTop,
-                duration: duration,
-                targets: elQueryString,
-                easing: 'easeInOutQuad'
-            });
-        }, duration);
-    };
-    document.documentElement.addEventListener('touchstart', () => clearTimeout(to));
-    document.documentElement.addEventListener('mousedown', () => clearTimeout(to));
-    document.documentElement.addEventListener('touchend', () => scrollFunct());
-    document.documentElement.addEventListener('mouseup', () => scrollFunct());
-    document.documentElement.addEventListener('wheel', () => scrollFunct());
+
+    // TODO: let's make things scroll-snap at some point!
+    // document.addEventListener('touchstart', () => clearTimeout(to));
+    // document.addEventListener('mousedown', () => clearTimeout(to));
+    // document.addEventListener('touchend', () => scrollFunct());
+    // document.addEventListener('mouseup', () => scrollFunct());
+    // document.addEventListener('wheel', () => scrollFunct());
+
+    // Anchor remembers with debounce
+    if (
+        window.location.hash &&
+        window.location.hash.startsWith('#scrollSnap-')
+    ) {
+        console.log('scrollSnap restore to ', window.location.hash);
+        containerEl.scrollTo(0, Number(window.location.hash.split('#scrollSnap-')[1]));
+    }
+
+    containerEl.addEventListener('scroll', debounceFunction(() => {
+        window.location.hash = `scrollSnap-${containerEl.scrollTop}`;
+    }, 300));
 };
