@@ -45,6 +45,19 @@
 <div class="modules">
     <div class="module bloodorange">
         <div class="title">
+            <p>FEATURE</p>
+            <button onclick="javascript:showPanelQR('#heart_embed_qrcode_dialog', 'BPM')">🔗</button>
+        </div>
+        <div class="preview">
+            <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_FEATURE_EMBED}}"></iframe>
+        </div>
+        <div class="controls">
+            <input oninput="renderStyleUpdates()" onchange="pushStyleUpdates()"
+                   type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="--module-heart-scaleX">
+        </div>
+    </div>
+    <div class="module bloodorange">
+        <div class="title">
             <p>BPM</p>
             <button onclick="javascript:showPanelQR('#heart_embed_qrcode_dialog', 'BPM')">🔗</button>
         </div>
@@ -54,10 +67,6 @@
         <div class="controls">
             <input oninput="renderStyleUpdates()" onchange="pushStyleUpdates()"
                    type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="--module-heart-scaleX">
-<!--            <input oninput="renderStyleUpdates()" onchange="pushStyleUpdates()"-->
-<!--                   type="range" value="0" min="0" max="100" step="20" name="%" id="&#45;&#45;module-heart-translateY" >-->
-<!--            <input oninput="renderStyleUpdates()" onchange="pushStyleUpdates()"-->
-<!--                   type="range" value="0" min="0" max="100" step="20" name="%" id="&#45;&#45;module-heart-translateY" >-->
         </div>
     </div>
 </div>
@@ -76,17 +85,18 @@
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => scrollSnap('.modules'));
     document.addEventListener("DOMContentLoaded", () => {
-        anime({
-            targets: '.module .preview',
-            duration: 9000,
-            easing: 'linear',
-            loop: true,
-            update: function (anim) {
-                const percentage = anim.progress;
-                const hueRotation = (percentage * 360) / 100;
-                document.querySelector('.module .preview').style.filter = `hue-rotate(${hueRotation}deg)`;
-            }
-        });
+        // @eyecandy
+        // anime({
+        //     targets: '.module .preview',
+        //     duration: 9000,
+        //     easing: 'linear',
+        //     loop: true,
+        //     update: function (anim) {
+        //         const percentage = anim.progress;
+        //         const hueRotation = (percentage * 360) / 100;
+        //         document.querySelector('.module .preview').style.filter = `hue-rotate(${hueRotation}deg)`;
+        //     }
+        // });
     });
 </script>
 {% endblock %}

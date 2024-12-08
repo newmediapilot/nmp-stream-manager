@@ -13,14 +13,21 @@ const socketConnect = () => {
 const socketWatchStyle = () => {
     socketConnect();
     console.log("socketWatchStyle");
-    $socketIO.on("browser:style", (payload) => {
-        // Here, you are listening for the specific event name ("browser:style")
-        console.log('style event received', payload);
+    $socketIO.on("payload", (payload) => {
+        payload.startsWith('style:set:') && callback(payload);
+    });
+};
+
+const socketWatchFeatureSet = (callback) => {
+    socketConnect();
+    console.log("socketWatchFeatureSet");
+    $socketIO.on("payload", (payload) => {
+        payload.startsWith('feature:set:') && callback(payload);
     });
 };
 
 const socketEmitStyle = (payload) => {
-   
+// TODO: figure this out
 };
 
 const socketEmitReload = () => {

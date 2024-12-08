@@ -1,5 +1,8 @@
 <!-- src/views/embed.html -->
 {% extends "layouts/main.njk" %}
+{% from "macros/public_module_styles.njk" import public_module_styles %}
+{% block cdn %}<!-- noscript -->{% endblock %}
+{% block local %}<!-- nostyle -->{% endblock %}
 {% block hscripts %}
 <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer
         type="text/javascript"></script>
@@ -7,6 +10,7 @@
         type="text/javascript"></script>
 <script defer src="/script/iframe.js?={{cache_buster}}" type="text/javascript"></script>
 <script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
+<script defer src="/script/router.js?={{cache_buster}}" type="text/javascript"></script>
 <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
 <style>
     #twitch-embed {
@@ -52,6 +56,21 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => socketWatchFeatureSet((payload) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const streamerQueryParam = urlParams.get('featuredName');
+        const featuredName = payload.split(':').pop();
+        const isOpen = (streamerQueryParam === featuredName);
+        if (isOpen) {
+            try {
+                document.documentElement.remove();
+            } catch (e) {
+                window.location.reload();
+            }
+        } else {
+            getURL(`${window.location.origin}${window.location.pathname}?featuredName=${featuredName}`);
+        }
+    }));
     document.addEventListener("DOMContentLoaded", () => {
         // Read query param of featuredName
         // Load featuredName into the embed
@@ -65,21 +84,6 @@
             const twitchEmbed = document.querySelector('#twitch-embed');
             twitchEmbed.src = URL;
         }
-        socketConnect((payload) => {
-            if (payload.startsWith('feature:set:')) {
-                const featuredName = payload.split(':').pop();
-                const isOpen = (streamerQueryParam === featuredName);
-                if (isOpen) {
-                    try {
-                        document.documentElement.remove();
-                    } catch (e) {
-                        window.location.reload();
-                    }
-                } else {
-                    getURL(`${window.location.origin}${window.location.pathname}?featuredName=${featuredName}`);
-                }
-            }
-        });
     });
 </script>
 {% endblock %}
