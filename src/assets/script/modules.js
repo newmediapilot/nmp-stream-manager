@@ -28,9 +28,11 @@ const pushStyleUpdates = () => {
 // Reads checkboxes and sets checked based on whether css contains their value
 const applyStyleUpdates = () => {
     const styleString = document.querySelector('#public_module_styles');
+    console.log('styleString', styleString);
     Array.from(document.querySelectorAll('input[type="range"]')).forEach(el => {
         el.checked = styleString.innerText.includes(el.value);
     });
+    renderStyleUpdates();
 };
 
 // Shows QR code for a given panel
