@@ -1,24 +1,39 @@
 <!-- src/views/embed.html -->
 {% extends "layouts/main.njk" %}
 {% block hscripts %}
+<script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer
+        type="text/javascript"></script>
+<script defer crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" defer
+        type="text/javascript"></script>
+<script defer src="/script/iframe.js?={{cache_buster}}" type="text/javascript"></script>
+<script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
+<link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
 <style>
-    html,
-    body,
-    iframe {
+    #twitch-embed {
         height: 100vh;
-        padding: 0;
-        margin: 0;
-        background-color: transparent;
-        overflow: hidden;
-    }
-    :root {
-        --streamer-qr-size: 500px;
-    }
-    #module-container{
-        width:100%;
-        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 </style>
+<style>
+    #module-container {
+        width: 100vw;
+        height: 100%;
+        display: block;
+    }
+
+    #module-container {
+        transform-origin: center center;
+        transform: scaleX(var(--module-feature-scaleX)) scaleY(var(--module-feature-scaleX));
+    }
+
+    html.iframe #module-container {
+        box-shadow: inset 0 0 10px 10px white;
+        box-sizing: border-box;
+    }
+</style>
+{{ public_module_styles() }}
 {% endblock %}
 {% block body %}
 <div id="module-container">
@@ -35,7 +50,8 @@
 {% endblock %}
 {% block fscripts %}
 <script>
-    document.addEventListener("DOMContentLoaded", () => socketWatchReload);
+    document.addEventListener("DOMContentLoaded", () => iframeDetect());
+    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => {
         // Read query param of featuredName
         // Load featuredName into the embed
