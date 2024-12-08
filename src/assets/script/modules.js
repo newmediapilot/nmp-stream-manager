@@ -1,7 +1,40 @@
 // Simulates a joystick
-const renderMatrixStyle = (horizontalEl) => {
-    horizontalEl.focus();
+const renderMatrixStyle = () => {
+    // Touch device handling + default data handling
 
+
+    if (detectIfTouchDevice()) return; // the rest of the code is for desktop device
+    //////////////////////////////////////////////////////////////////////////////
+    const setFocus = (label) => {
+        const dragger = label.querySelector('input');
+        const labelRect = label.getBoundingClientRect();
+        const draggerRect = dragger.getBoundingClientRect();
+        const top = (document.$clientY - labelRect.top - (draggerRect.height / 2));
+        const left = (document.$clientX - labelRect.left - (draggerRect.width / 2));
+        console.log('top', top);
+        console.log('left', left);
+        label.scrollTo(left, top);
+    };
+    Array.from(document.querySelectorAll('.controls label')).forEach(label => {
+        let isDragging = false;
+        label.addEventListener('touchstart', (e) => {
+            isDragging = true;
+        });
+        label.addEventListener('mousedown', (e) => {
+            isDragging = true;
+        });
+        document.addEventListener('touchend', (e) => {
+            isDragging = false;
+        });
+        document.addEventListener('mouseup', (e) => {
+            isDragging = false;
+        });
+        const runAtFramerate = () => {
+            isDragging && setFocus(label);
+            requestAnimationFrame(runAtFramerate);
+        };
+        requestAnimationFrame(runAtFramerate);
+    });
 };
 
 // Realtime write of collected data into <style>

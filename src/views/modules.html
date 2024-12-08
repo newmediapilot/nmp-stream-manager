@@ -31,7 +31,7 @@
     .module .controls {
         max-width: 100%;
         display: grid;
-        grid-template-columns: repeat(2, 100px);
+        grid-template-columns: repeat(4, 100px);
         gap: 10px;
         margin: 10px;
         height: 100px;
@@ -43,10 +43,12 @@
         position: relative;
         max-height: 100px;
         overflow: scroll;
+        transform: scale(-1);
     }
 
     .module label input[type="range"] {
         background: repeating-linear-gradient(-45deg, #fff, #ccc 10px);
+        pointer-events: none;
         width: 50px;
         height: 50px;
         margin: 50px;
@@ -55,7 +57,7 @@
 </style>
 {% set public_routes = 'public_routes' | getParam %}
 <div class="modules">
-    <div class="module bloodorange">
+    <div class="module aqua">
         <div class="title">
             <p>FEATURE</p>
             <button onclick="javascript:showPanelQR('#feature_embed_qrcode_dialog', 'FEATURE')">🔗</button>
@@ -65,26 +67,35 @@
                     src="{{public_routes.PUBLIC_FEATURE_EMBED}}?featuredName=aaknot#featuredNameLock"></iframe>
         </div>
         <div class="controls">
-            <input oninput="renderStyleUpdates(this)" onchange="javascript:pushStyleUpdates()"
+            <input oninput="javascript:renderStyleUpdates()" onchange="javascript:pushStyleUpdates()"
                    type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="--module-feature-scaleX">
-            <label onload="javascript:renderMatrixStyle(this)">
-                <input oninput="renderStyleUpdates(this)" type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="--module-feature-translateX">
+            <input oninput="javascript:renderStyleUpdates()" onchange="javascript:pushStyleUpdates()"
+                   type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="--module-feature-scaleX">
+            <label>
+                <input oninput="javascript:renderStyleUpdates()" type="range" value="0.25" min="0.5" max="1"
+                       step="0.05" name="" id="--module-feature-translateX">
             </label>
         </div>
     </div>
-    <!--    <div class="module bloodorange">-->
-    <!--        <div class="title">-->
-    <!--            <p>BPM</p>-->
-    <!--            <button onclick="javascript:showPanelQR('#heart_embed_qrcode_dialog', 'BPM')">🔗</button>-->
-    <!--        </div>-->
-    <!--        <div class="preview">-->
-    <!--            <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_HEART_EMBED}}"></iframe>-->
-    <!--        </div>-->
-    <!--        <div class="controls">-->
-    <!--            <input oninput="javascript:renderStyleUpdates()" onchange="javascript:pushStyleUpdates()"-->
-    <!--                   type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="&#45;&#45;module-heart-scaleX">-->
-    <!--        </div>-->
-    <!--    </div>-->
+    <div class="module bloodorange">
+        <div class="title">
+            <p>BPM</p>
+            <button onclick="javascript:showPanelQR('#heart_embed_qrcode_dialog', 'BPM')">🔗</button>
+        </div>
+        <div class="preview">
+            <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_HEART_EMBED}}"></iframe>
+        </div>
+        <div class="controls">
+            <input oninput="javascript:renderStyleUpdates()" onchange="javascript:pushStyleUpdates()"
+                   type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="--module-heart-scaleX">
+            <input oninput="javascript:renderStyleUpdates()" onchange="javascript:pushStyleUpdates()"
+                   type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="--module-heart-scaleX">
+            <label>
+                <input oninput="javascript:renderStyleUpdates()" type="range" value="0.25" min="0.5" max="1"
+                       step="0.05" name="" id="--module-heart-translateX">
+            </label>
+        </div>
+    </div>
 </div>
 {% endblock %}
 {% block fscripts %}
@@ -100,6 +111,7 @@
     document.addEventListener("DOMContentLoaded", () => applyStyleUpdates());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
+    document.addEventListener("DOMContentLoaded", () => renderMatrixStyle());
     document.addEventListener("DOMContentLoaded", () => scrollSnap('.modules'));
     document.addEventListener("DOMContentLoaded", () => {
         // @eyecandy

@@ -21,4 +21,6 @@ ul {
 
 * {
     transform: translate3d(0, 0, 0);
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: auto;
 }

@@ -4,7 +4,7 @@ const scrollSnap = (elQueryString) => {
     let to = null;
 
     const scrollFunct = () => {
-        console.log('containerEl', containerEl);
+        // console.log('containerEl', containerEl);
     };
 
     // TODO: let's make things scroll-snap at some point!

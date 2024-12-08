@@ -1,10 +1,15 @@
 const detectMouseCoordinates = () => {
+    console.log('detectMouseCoordinates')
     const updateXY = (e) => {
         const {clientX, clientY} = e;
         document.$clientX = clientX;
         document.$clientY = clientY;
     };
-    document.addEventListener('mousemove', (e) => updateXY(e));
-    document.addEventListener('touch', (e) => updateXY(e));
-    document.addEventListener('click', (e) => updateXY(e));
+    document.addEventListener('mousemove', updateXY);
+    document.addEventListener('mousedown', updateXY);
+    document.addEventListener('mouseup', updateXY);
+    document.addEventListener('touchstart', updateXY);
+    document.addEventListener('touchend', updateXY);
+    document.addEventListener('touch', updateXY);
+    document.addEventListener('click', updateXY);
 };
