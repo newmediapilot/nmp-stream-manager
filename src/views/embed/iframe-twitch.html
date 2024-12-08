@@ -30,7 +30,7 @@
     #module-container {
         position: relative;
         transform-origin: center center;
-        transform: scaleX(var(--module-feature-scaleX)) scaleY(var(--module-feature-scaleX));
+        transform: scaleX(var(--module-feature-scaleX)) scaleY(var(--module-feature-scaleY));
     }
 
     html.iframe #module-container:after {
@@ -83,11 +83,15 @@
         const streamerQueryParam = urlParams.get('featuredName');
         const featuredName = payload.split(':').pop();
         const isOpen = (streamerQueryParam === featuredName);
+
+        console.log('window.location.hash', window.location.hash);
+
+        return;
         if (isOpen) {
             try {
-                (!'#featuredNameLock' === window.location.hash) && document.documentElement.remove();
+                (!'#featuredNameLock' == window.location.hash) && document.documentElement.remove();
             } catch (e) {
-                window.location.reload();
+                //window.location.reload();
             }
         } else {
             getURL(`${window.location.origin}${window.location.pathname}?featuredName=${featuredName}`);

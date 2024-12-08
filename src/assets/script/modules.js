@@ -1,40 +1,52 @@
 // Simulates a joystick
 const renderMatrixStyle = () => {
-    // Touch device handling + default data handling
 
-
-    if (detectIfTouchDevice()) return; // the rest of the code is for desktop device
-    //////////////////////////////////////////////////////////////////////////////
     const setFocus = (label) => {
         const dragger = label.querySelector('input');
         const labelRect = label.getBoundingClientRect();
         const draggerRect = dragger.getBoundingClientRect();
         const top = (document.$clientY - labelRect.top - (draggerRect.height / 2));
         const left = (document.$clientX - labelRect.left - (draggerRect.width / 2));
-        console.log('top', top);
-        console.log('left', left);
+        const lx = label.scrollLeft;
+        const ly = label.scrollTop;
+        const {width, height} = label.getBoundingClientRect();
+        const percentageX = lx / (width / 2);
+        const percentageY = ly / (height / 2);
+        const inputX = label.children[0];
+        const inputY = label.children[1];
+        inputX.value = inputX.max * percentageX;
+        inputY.value = inputY.max * percentageY;
         label.scrollTo(left, top);
     };
-    Array.from(document.querySelectorAll('.controls label')).forEach(label => {
-        let isDragging = false;
-        label.addEventListener('touchstart', (e) => {
-            isDragging = true;
-        });
-        label.addEventListener('mousedown', (e) => {
-            isDragging = true;
-        });
-        document.addEventListener('touchend', (e) => {
-            isDragging = false;
-        });
-        document.addEventListener('mouseup', (e) => {
-            isDragging = false;
-        });
-        const runAtFramerate = () => {
-            isDragging && setFocus(label);
+    // Touch devices don't requite the code below
+    if (!detectIfTouchDevice()) {
+        Array.from(document.querySelectorAll('.controls label')).forEach(label => {
+            let isDragging = false;
+            label.addEventListener('mousemove', (e) => {
+                isDragging && renderStyleUpdates();
+            });
+            label.addEventListener('touchstart', (e) => {
+                isDragging = true;
+            });
+            label.addEventListener('mousedown', (e) => {
+                isDragging = true;
+            });
+            document.addEventListener('touchend', (e) => {
+                isDragging = false;
+                pushStyleUpdates();
+            });
+            document.addEventListener('mouseup', (e) => {
+                isDragging = false;
+                pushStyleUpdates();
+            });
+            const runAtFramerate = () => {
+                isDragging && setFocus(label);
+                requestAnimationFrame(runAtFramerate);
+            };
             requestAnimationFrame(runAtFramerate);
-        };
-        requestAnimationFrame(runAtFramerate);
-    });
+        });
+    }
+
 };
 
 // Realtime write of collected data into <style>
@@ -61,7 +73,7 @@ const pushStyleUpdates = () => {
             payload
         },
     }).finally(() => {
-        socketEmitReload();
+        // socketEmitReload();
         console.log('pushStyleUpdates', payload);
     });
 };
