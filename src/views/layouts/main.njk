@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/manifest.json?={{cache_buster}}">
     <!-- CDN -->
     {% block cdn %}
     <link crossorigin="anonymous" href="https://fonts.gstatic.com/s/jaro/v6/ea8DadQwV_r_Rv3-7zZMCGhQgVr1SmCkPvzlpQ.woff2" rel="preload" as="font">
@@ -52,6 +52,7 @@
     <script defer src="/script/modules.js?={{cache_buster}}" type="text/javascript"></script>
     <script defer src="/script/press_hold.js?={{cache_buster}}" type="text/javascript"></script>
     <script defer src="/script/debounce.js?={{cache_buster}}" type="text/javascript"></script>
+    <script defer src="/script/mouse_coords.js?={{cache_buster}}" type="text/javascript"></script>
     <link rel="stylesheet" href="/style/font.css?cb={{cache_buster}}">
     <link rel="stylesheet" href="/style/reset.css?cb={{cache_buster}}">
     <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
