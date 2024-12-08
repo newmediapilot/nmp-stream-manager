@@ -40,17 +40,16 @@
     }
 
     .module label {
+        background: repeating-linear-gradient(-45deg, #fff, #ccc 15px);
         position: relative;
+        max-height: 120px;
+        overflow-y: scroll;
     }
 
     .module label input[type="range"] {
-        position: absolute;
-        left: 0;
-        top: 0;
-    }
-
-    .module label input[type="range"]:nth-of-type(2) {
-        display: none;
+        background: repeating-linear-gradient(-45deg, #fff, #ccc 15px);
+        width: 60px;
+        height: 60px;
     }
 
 </style>
@@ -66,12 +65,10 @@
                     src="{{public_routes.PUBLIC_FEATURE_EMBED}}?featuredName=aaknot#featuredNameLock"></iframe>
         </div>
         <div class="controls">
-            <input oninput="renderStyleUpdates()" onchange="javascript:pushStyleUpdates()"
+            <input oninput="renderStyleUpdates(this)" onchange="javascript:pushStyleUpdates()"
                    type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="--module-feature-scaleX">
-            <label>
-                <input type="range" oninput="javascript:renderMatrixStyle(this)" value="0.25" min="0.5" max="1" step="0.05" name=""
-                       id="--module-feature-translateX">
-                <input type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="--module-feature-translateY">
+            <label onload="javascript:renderMatrixStyle(this)">
+                <input oninput="renderStyleUpdates(this)" type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="--module-feature-translateX">
             </label>
         </div>
     </div>

@@ -1,16 +1,9 @@
-/** Make the default scrollbar less ugly for desktop users **/
-
 ::-webkit-scrollbar {
-    width: 50px;
+    display: none;
 }
-
 ::-webkit-scrollbar-thumb {
-    background: repeating-linear-gradient(0deg, #007185, #020202 10px);
-    border-radius: 25px;
-    box-shadow: inset 0 0 15px rgb(0, 113, 133);
+    display: none;
 }
-
 ::-webkit-scrollbar-track {
-    background: repeating-linear-gradient(-45deg, #fff, #ccc 15px);
-    box-shadow: inset 0 0 25px rgba(0, 0, 255, 0.5);
+    display: none;
 }

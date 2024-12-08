@@ -1,15 +1,30 @@
 // Simulates a joystick
 const renderMatrixStyle = (horizontalEl) => {
-    const slider = horizontalEl;
-
-    const {height} = slider.getBoundingClientRect();
-    const {top,left} = slider.parentElement.getBoundingClientRect();
-
-    // slider.style.left = `${document.$clientX}px`;
-    // slider.style.top = `${document.$clientY}px`;
-
-    console.log('onInputEvent', document.$clientX, document.$clientY);
-    console.log('onInputEvent', top, left);
+    // const slider = horizontalEl;
+    // const {height} = slider.getBoundingClientRect();
+    // const {top} = slider.parentElement.getBoundingClientRect();
+    // let mouseActive = false;
+    // slider.parentElement.addEventListener('mousedown', () => {
+    //     mouseActive = true;
+    //     console.log('down');
+    // });
+    // slider.parentElement.addEventListener('touchstart', () => {
+    //     mouseActive = true;
+    //     console.log('down');
+    // });
+    // slider.parentElement.addEventListener('mouseup', () => {
+    //     mouseActive = false;
+    //     console.log('up');
+    // });
+    // slider.parentElement.addEventListener('touchend', () => {
+    //     mouseActive = false;
+    //     console.log('up');
+    // });
+    // const tick = () => {
+    //     slider.style.top = `${document.$clientY - top}px`;
+    //     mouseActive && requestAnimationFrame(tick);
+    // };
+    // requestAnimationFrame(tick);
 };
 
 // Realtime write of collected data into <style>
@@ -43,7 +58,7 @@ const pushStyleUpdates = () => {
 
 // Reads checkboxes and sets checked based on whether css contains their value
 const applyStyleUpdates = () => {
-
+    
 };
 
 // Shows QR code for a given panel
