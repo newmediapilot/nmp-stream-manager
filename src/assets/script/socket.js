@@ -20,8 +20,7 @@ const socketWatchStyle = () => {
 };
 
 const socketEmitStyle = (payload) => {
-    console.log("socketEmitStyle");
-    $socketIO.emit("browser:style", payload);
+   
 };
 
 const socketEmitReload = () => {
