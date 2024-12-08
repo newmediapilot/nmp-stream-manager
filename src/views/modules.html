@@ -92,13 +92,12 @@
 {{ qrcode_dialog("feature_embed_qrcode_dialog", public_routes.PUBLIC_FEATURE_EMBED ) }}
 <!-- dialogs end -->
 <script>
-    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    document.addEventListener("DOMContentLoaded", () => iframeDetect());
-    document.addEventListener("DOMContentLoaded", () => scrollSnap('.modules'));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.preview', 'width', '--js-module-preview-width'));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.title', 'height', '--js-module-title-height', 'px'));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.module', 'height', '--js-module-content-height', 'px'));
-    document.addEventListener("DOMContentLoaded", () => renderStyleUpdates());
     document.addEventListener("DOMContentLoaded", () => applyStyleUpdates());
+    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => iframeDetect());
+    document.addEventListener("DOMContentLoaded", () => scrollSnap('.modules'));
 </script>
 {% endblock %}
