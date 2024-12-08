@@ -6,28 +6,25 @@
     #heart-rate {
         font-size: 50px;
         font-family: sans-serif;
-        line-height: 1;
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-end;
         color: red;
-        padding: 20px;
-    }
-    #heart-rate div:nth-of-type(2) {
-        font-size: 120%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 </style>
 <style>
     #module-container {
         height: 100vh;
     }
-    /** default values when the page loads */
     /** overwritten by "public_module_styles()" macro */
     :root {
-        --heart-transform: matrix(1, 0, 0, 1, -50%, 50%) rotateX(45deg) rotateY(45deg);
+        --iframe-heart-translate-x:0vw;
+        /** ... **/
     }
-    #module-container > div {
-        transform: var(--heart-transform);
+    #module-container {
+        transform: translateX(0vw) translateY(0vh) translateZ(0vh) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        transform-origin: center center;
     }
 </style>
 {{ public_module_styles() }}
