@@ -1,3 +1,17 @@
+// Simulates a joystick
+const renderMatrixStyle = (horizontalEl) => {
+    const slider = horizontalEl;
+
+    const {height} = slider.getBoundingClientRect();
+    const {top,left} = slider.parentElement.getBoundingClientRect();
+
+    // slider.style.left = `${document.$clientX}px`;
+    // slider.style.top = `${document.$clientY}px`;
+
+    console.log('onInputEvent', document.$clientX, document.$clientY);
+    console.log('onInputEvent', top, left);
+};
+
 // Realtime write of collected data into <style>
 const renderStyleUpdates = () => {
     const payload = Array.from(document.querySelectorAll('input[type="range"]')).map(
@@ -5,7 +19,7 @@ const renderStyleUpdates = () => {
             return `${el.getAttribute('id')}:${el.value}${el.getAttribute('name')}`
         }
     ).join(";");
-    document.querySelectorAll('iframe').forEach(iframe=>{
+    document.querySelectorAll('iframe').forEach(iframe => {
         iframe.contentWindow.document.querySelector('#public_module_styles').innerHTML = `:root { ${payload}; }`;
     });
     return payload;
