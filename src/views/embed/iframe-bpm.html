@@ -32,20 +32,20 @@
     }
     /** modules-css-only-start **/
     :root {
-        --_bpm-translateX: 0;
-        --_bpm-translateY: 0;
-        --_bpm-scaleX: 1;
-        --_bpm-scaleY: 1;
-        --_bpm-rotateX: 0deg;
-        --_bpm-rotateY: 0deg;
+        --_bpm-translateX: 0.0%;
+        --_bpm-translateY: 0.0%;
+        --_bpm-scaleX: 1.0;
+        --_bpm-scaleY: 1.0;
+        --_bpm-rotateX: 0.0deg;
+        --_bpm-rotateY: 0.0deg;
     }
     #module-container {
-        transform: translateX(var(--_bpm-translateX))
-        translateY(var(--_bpm-translateY))
-        scaleX(var(--_bpm-scaleX))
-        scaleY(var(--_bpm-scaleY))
-        rotateX(var(--_bpm-rotateX))
-        rotateY(var(--_bpm-rotateY));
+        transform: translateX(calc(var(--_bpm-translateX ) * 1%))
+        translateY(calc(var(--_bpm-translateY ) * 1%))
+        scaleX(calc(var(--_bpm-scaleX ) * 0.01))
+        scaleY(calc(var(--_bpm-scaleY ) * 0.01))
+        rotateX(calc(var(--_bpm-rotateX ) * 3.6deg))
+        rotateY(calc(var(--_bpm-rotateY ) * 3.6deg))
     }
     /** modules-css-only-end **/
 
