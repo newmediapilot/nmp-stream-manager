@@ -13,29 +13,48 @@
 <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
 <style>
     #heart-rate {
+        width: 100vw;
+        height: 100vh;
         font-size: 50px;
         font-family: sans-serif;
         color: red;
-        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
     }
-
-    `
-
 </style>
 <style>
     #module-container {
         width: 100vw;
-        height: 100%;
+        height: 100vh;
         display: block;
     }
 
+
+
+    /** search for -key- to select all keys **/
+    :root {
+        --module-heart-translateX: 0;
+        --module-heart-translateY: 0;
+        --module-heart-scaleX: 1;
+        --module-heart-scaleY: 1;
+        --module-heart-rotateX: 0deg;
+        --module-heart-rotateY: 0deg;
+    }
+
+    /** pre-mapped to above **/
     #module-container {
         position: relative;
         transform-origin: center center;
-        transform: scaleX(var(--module-heart-scaleX)) scaleY(var(--module-heart-scaleY));
+        transform:
+                translateX(var(--module-heart-translateX)),
+                translateY(var(--module-heart-translateY)),
+                translateZ(var(--module-heart-translateZ)),
+                scaleX(var(--module-heart-scaleX)),
+                scaleY(var(--module-heart-scaleY)),
+                rotateX(var(--module-heart-rotateX)),
+                rotateY(var(--module-heart-rotateY)),
+                rotateZ(var(--module-heart-rotateZ));
     }
 
     html.iframe #module-container:after {

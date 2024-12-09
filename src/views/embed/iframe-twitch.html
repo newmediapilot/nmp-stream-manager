@@ -1,7 +1,9 @@
 <!-- src/views/embed.html -->
 {% extends "layouts/main.njk" %}
 {% from "macros/public_module_styles.njk" import public_module_styles %}
-{% block cdn %}<!-- noscript -->{% endblock %}
+{% block cdn %}<!--
+ {{ public_module_styles() }}
+ -->{% endblock %}
 {% block local %}<!-- nostyle -->{% endblock %}
 {% block hscripts %}
 <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer
@@ -14,6 +16,7 @@
 <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
 <style>
     #twitch-embed {
+        width: 100vw;
         height: 100vh;
         display: flex;
         justify-content: center;
@@ -24,7 +27,7 @@
 
     #module-container {
         width: 100vw;
-        height: 100%;
+        height: 100vh;
         display: block;
     }
 
@@ -32,26 +35,41 @@
     :root {
         --module-feature-translateX: 0;
         --module-feature-translateY: 0;
-        --module-feature-translateZ: 0;
         --module-feature-scaleX: 1;
         --module-feature-scaleY: 1;
-        --module-feature-scaleZ: 1;
         --module-feature-rotateX: 0;
         --module-feature-rotateY: 0;
-        --module-feature-rotateZ: 0;
+    }
+
+    #module-container {
+        background-size: 7vw 7vh;
+        background-repeat: repeat;
+        background-image: linear-gradient(120deg, rgba(2, 2, 2, 0.2) 0%, rgba(2, 2, 2, 0.2) 33%, rgba(2, 2, 2, 0.2) 33%, rgba(75, 75, 75, 0.2) 100%);
+        animation: wave 15s linear infinite;
+    }
+
+    @keyframes wave {
+        0% {
+            background-position: 0 0;
+        }
+        100% {
+            background-position: -100vw -100vh;
+        }
     }
 
     /** pre-mapped to above **/
     #module-container {
         position: relative;
         transform-origin: center center;
-        transform: translate(var(--module-feature-translateX), var(--module-feature-translateY), var(--module-feature-translateZ)),
-        scaleX(var(--module-feature-scaleX)),
-        scaleY(var(--module-feature-scaleY)),
-        scaleZ(var(--module-feature-scaleZ)),
-        rotateX(var(--module-feature-rotateX)),
-        rotateY(var(--module-feature-rotateY)),
-        rotateZ(var(--module-feature-rotateZ));
+        transform: translateX(var(--module-feature-translateX)),
+                translateY(var(--module-feature-translateY));
+    /*,*/
+    /*            translateZ(var(--module-feature-translateZ)),*/
+    /*            scaleX(var(--module-feature-scaleX)),*/
+    /*            scaleY(var(--module-feature-scaleY)),*/
+    /*            rotateX(var(--module-feature-rotateX)),*/
+    /*            rotateY(var(--module-feature-rotateY)),*/
+    /*            rotateZ(var(--module-feature-rotateZ));*/
     }
 
     html.iframe #module-container:after {
