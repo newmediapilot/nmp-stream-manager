@@ -39,16 +39,19 @@ const storeInputValues = () => {
         inputX.value = inputX.max * valueX;
         inputY.value = inputY.max * valueY;
     });
-    const payload = Array.from(document.querySelectorAll('input[type="range"]')).map(
-        (el) => {
-            return `${el.name}:${el.value}`;
-        }
-    ).join(";");
+    const payload = Array.from(document.querySelectorAll('input[type="range"]')).map((el) => {
+        return `${el.name}:${el.value}`;
+    }).join(";");
     document.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
     document.querySelectorAll('iframe').forEach(iframe => {
-        iframe.contentWindow.document.querySelectorAll('#public_module_styles').forEach(el => {
-            el.innerHTML = `:root{${payload};}`
-        })
+        try {
+            iframe && iframe.contentWindow && iframe.contentWindow.document.querySelectorAll('#public_module_styles').forEach(el => {
+                el.innerHTML = `:root{${payload};}`
+            });
+        } catch (e) {
+            // Sometimes if the frame is busy and we try
+            // to style it, we will get a browser reload crash
+        }
     });
     console.log('storeInputValues', payload);
 };
@@ -80,7 +83,6 @@ const sendInputValues = () => {
         .innerHTML
         .replace(":root{", "")
         .replace(";}", "");
-    Send it
     payload && axios.get("/public/style/update", {
         params: {
             type: "style",
@@ -89,7 +91,6 @@ const sendInputValues = () => {
     }).finally(() => {
         socketEmitReload();
     });
-    storeInputValues();
 };
 // Shows QR code for a given panel
 const showPanelQR = (dialogQuerySelector, type) => {
