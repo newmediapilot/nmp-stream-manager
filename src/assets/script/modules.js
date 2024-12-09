@@ -13,10 +13,11 @@ const renderMatrixStyle = () => {
             inputY.value = inputY.max * percentageY;
         });
     };
+    // Gentle background refresh this state
     setInterval(() => {
         renderStyleUpdates();
         setFocus();
-    }, 1000 / 60);
+    }, 1000/ 60);
     document.addEventListener('touchend', (e) => {
         setFocus();
         pushStyleUpdates();
@@ -63,6 +64,7 @@ const pushStyleUpdates = () => {
 const applyStyleUpdates = () => {
     Array.from(document.querySelectorAll('.controls label input')).forEach((input) => {
         const id = input.id;
+        const styleText =
         console.log('id', id);
     });
 };

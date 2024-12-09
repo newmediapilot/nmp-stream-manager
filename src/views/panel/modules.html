@@ -125,17 +125,17 @@
     document.addEventListener("DOMContentLoaded", () => scrollSnap('.modules'));
     document.addEventListener("DOMContentLoaded", () => {
         // @eyecandy
-        // anime({
-        //     targets: '.module .preview',
-        //     duration: 9000,
-        //     easing: 'linear',
-        //     loop: true,
-        //     update: function (anim) {
-        //         const percentage = anim.progress;
-        //         const hueRotation = (percentage * 360) / 100;
-        //         document.querySelector('.module .preview').style.filter = `hue-rotate(${hueRotation}deg)`;
-        //     }
-        // });
+        anime({
+            targets: '.module .preview',
+            duration: 5000,
+            easing: 'linear',
+            // loop: true,
+            update: function (anim) {
+                const percentage = anim.progress;
+                const hueRotation = (percentage * 360) / 100;
+                document.querySelector('.module .preview').style.filter = `hue-rotate(${hueRotation}deg)`;
+            }
+        });
     });
 </script>
 {% endblock %}

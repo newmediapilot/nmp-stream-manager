@@ -1,5 +1,5 @@
+// When active we write mouseX mouse Y to global scope
 const detectMouseCoordinates = () => {
-    console.log('detectMouseCoordinates')
     const updateXY = (e) => {
         const {clientX, clientY} = e;
         document.$clientX = clientX;
