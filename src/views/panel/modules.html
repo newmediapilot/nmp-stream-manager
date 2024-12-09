@@ -47,7 +47,7 @@
         transform: scale(-1);
     }
 
-    .module label:after{
+    .module label:after {
 
     }
 
@@ -74,21 +74,21 @@
         <div class="controls">
             <label aria-label="Zoom">
                 <input oninput="javascript:renderStyleUpdates()" onchange="javascript:pushStyleUpdates()"
-                       type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="--module-feature-scaleX">
+                       type="range" value="100" min="0" max="100" step="1" id="--module-feature-scaleX">
                 <input oninput="javascript:renderStyleUpdates()" hidden onchange="javascript:pushStyleUpdates()"
-                       type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="--module-feature-scaleY">
+                       type="range" value="100" min="0" max="100" step="1" id="--module-feature-scaleY">
             </label>
             <label aria-label="Move">
                 <input oninput="javascript:renderStyleUpdates()" onchange="javascript:pushStyleUpdates()"
-                       type="range" value="50" min="50" max="100" step="5" name="%" id="--module-feature-translateX">
+                       type="range" value="0" min="0" max="100" step="1" id="--module-feature-translateX">
                 <input oninput="javascript:renderStyleUpdates()" hidden onchange="javascript:pushStyleUpdates()"
-                       type="range" value="50" min="50" max="100" step="5" name="%" id="--module-feature-translateY">
+                       type="range" value="0" min="0" max="100" step="1" id="--module-feature-translateY">
             </label>
             <label aria-label="Spin">
                 <input oninput="javascript:renderStyleUpdates()" onchange="javascript:pushStyleUpdates()"
-                       type="range" value="0" min="-90" max="90" step="30" name="deg" id="--module-feature-rotateX">
+                       type="range" value="0" min="-20" max="45" step="1" id="--module-feature-rotateX">
                 <input oninput="javascript:renderStyleUpdates()" hidden onchange="javascript:pushStyleUpdates()"
-                       type="range" value="0" min="-90" max="90" step="30" name="deg" id="--module-feature-rotateY">
+                       type="range" value="0" min="-20" max="45" step="1" id="--module-feature-rotateY">
             </label>
         </div>
     </div>
