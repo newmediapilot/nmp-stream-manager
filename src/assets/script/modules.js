@@ -53,7 +53,7 @@ const renderMatrixStyle = () => {
 const renderStyleUpdates = () => {
     const payload = Array.from(document.querySelectorAll('input[type="range"]')).map(
         (el) => {
-            return `${el.getAttribute('id')}:${el.value}${el.getAttribute('name')}`
+            return `${el.getAttribute('id')}:${el.value}`;
         }
     ).join(";");
     document.querySelector('#public_module_styles').innerHTML = `:root { ${payload}; }`;
