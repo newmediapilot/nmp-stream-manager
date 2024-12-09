@@ -27,20 +27,7 @@
         width: 100vw;
         height: 100vh;
         display: block;
-        position:relative;
-    }
-
-    /** search for -key- to select all keys **/
-    :root {
-        --module-feature-translateX: 0.0%;
-        --module-feature-translateY: 0.0%;
-        --module-feature-scaleX: 1.0;
-        --module-feature-scaleY: 1.0;
-        --module-feature-rotateX: 0.0deg;
-        --module-feature-rotateY: 0.0deg;
-    }
-
-    #module-container {
+        position: relative;
         background-size: 7vw 7vh;
         background-repeat: repeat;
         background-image: linear-gradient(120deg, rgba(2, 2, 2, 0.2) 0%, rgba(2, 2, 2, 0.2) 33%, rgba(2, 2, 2, 0.2) 33%, rgba(75, 75, 75, 0.2) 100%);
@@ -56,9 +43,16 @@
         }
     }
 
-    /** pre-mapped to above **/
+    /** modules-css-only-start **/
+    :root {
+        --module-feature-translateX: 0.0%;
+        --module-feature-translateY: 0.0%;
+        --module-feature-scaleX: 1.0;
+        --module-feature-scaleY: 1.0;
+        --module-feature-rotateX: 0.0deg;
+        --module-feature-rotateY: 0.0deg;
+    }
     #module-container {
-        position: relative;
         transform: translateX(calc(var(--module-feature-translateX ) * 1%))
                 translateY(calc(var(--module-feature-translateY ) * 1%))
                 scaleX(calc(var(--module-feature-scaleX ) * 0.01))
@@ -66,6 +60,7 @@
                 rotateX(calc(var(--module-feature-rotateX ) * 3.6deg))
                 rotateY(calc(var(--module-feature-rotateY ) * 3.6deg))
     }
+    /** modules-css-only-end **/
 
     html.iframe #module-container:after {
         content: "";
