@@ -59,13 +59,12 @@
     /** pre-mapped to above **/
     #module-container {
         position: relative;
-        transform-origin: center center;
-        transform: translateX(calc(var(--module-feature-translateX ) + 0))
-                translateY(calc(var(--module-feature-translateY ) + 0))
-                scaleX(calc(var(--module-feature-scaleX ) + 0))
-                scaleY(calc(var(--module-feature-scaleY ) + 0))
-                rotateX(calc(var(--module-feature-rotateX) + 0))
-                rotateY(calc(var(--module-feature-rotateY ) + 0));
+        transform: translateX(calc(var(--module-feature-translateX ) * 1%))
+                translateY(calc(var(--module-feature-translateY ) * 1%))
+                scaleX(calc(var(--module-feature-scaleX ) * 0.01))
+                scaleY(calc(var(--module-feature-scaleY ) * 0.01))
+                rotateX(calc(var(--module-feature-rotateX ) * 3.6deg))
+                rotateY(calc(var(--module-feature-rotateY ) * 3.6deg))
     }
 
     html.iframe #module-container:after {
