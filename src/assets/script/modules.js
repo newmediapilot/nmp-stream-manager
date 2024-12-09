@@ -15,8 +15,7 @@ const renderMatrixStyle = () => {
     };
     // Gentle background refresh this state
     setInterval(() => {
-        renderStyleUpdates();
-        setFocus();
+        renderDynamicStyles();
     }, 1000 / 60);
     document.addEventListener('touchend', (e) => {
         setFocus();
@@ -29,26 +28,25 @@ const renderMatrixStyle = () => {
 };
 
 // Realtime write of collected data into <style>
-const renderStyleUpdates = () => {
+const renderDynamicStyles = () => {
     const payload = Array.from(document.querySelectorAll('input[type="range"]')).map(
         (el) => {
             return `${el.name}:${el.value}`;
         }
     ).join(";");
-    document.querySelector('#public_module_styles').innerHTML = `:root { ${payload}; }`;
+    document.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
     document.querySelectorAll('iframe').forEach(iframe => {
         iframe.contentWindow.document.querySelectorAll('#public_module_styles').forEach(el => {
-            el.innerHTML = `:root { ${payload}; }`
+            el.innerHTML = `:root{${payload};}`
         })
     });
+    // console.log('renderDynamicStyles');
     return payload;
 };
 
 // Pushes the contents of all variables across all modules to write out
 const pushStyleUpdates = () => {
-    // Renders and also gets last collected values
-    const payload = renderStyleUpdates();
-    console.log('pushStyleUpdates', payload);
+    const payload = renderDynamicStyles();
     payload && axios.get("/public/style/update", {
         params: {
             type: "style",
@@ -56,8 +54,8 @@ const pushStyleUpdates = () => {
         },
     }).finally(() => {
         socketEmitReload();
-        applyStyleUpdates();
     });
+    console.log('pushStyleUpdates', payload);
 };
 
 // Reads styles back and re-applies to interface
@@ -69,36 +67,25 @@ const applyStyleUpdates = () => {
         const formY = label.children[1];
         const nameX = formX.name;
         const nameY = formY.name;
-        const percentX = payload
+        const percentageX = payload
             .split(nameX)[1]
             .split(':')[1]
             .split(';')[0];
-        const percentY = payload
+        const percentageY = payload
             .split(nameY)[1]
             .split(':')[1]
             .split(';')[0];
-        console.log('percentX', percentX);
-        console.log('percentY', percentY);
+        const {width, height} = label.getBoundingClientRect();
+        const top = ((percentageX / 100)) * (width);
+        const left = ((percentageY / 100)) * (height);
+        console.log(nameX, percentageX, width, 'top', top);
+        console.log(nameY, percentageX, height, 'left', left);
+        label.scrollTo({
+            top,
+            left,
+            behavior: 'smooth'
+        });
     });
-
-    // Array.from(document.querySelectorAll('.controls label input')).forEach((input) => {
-    //     const label = input.parentElement;
-    //     const name = input.name;
-    //     const value = payload
-    //         .split(name)[1]
-    //         .split(':')[1]
-    //         .split(';')[0];
-    //     const {width, height} = label.getBoundingClientRect();
-    //     const scrollX = width * (value / 100);
-    //     const scrollY = width * (value / 100);
-    //     const percent = Number(value) * inputX.max;
-    //     console.log('percent', percent);
-    //     console.log('scrollX', scrollX);
-    //     console.log('scrollY', scrollY);
-    // });
-    //
-    //
-
 };
 
 // Shows QR code for a given panel

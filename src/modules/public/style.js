@@ -8,7 +8,7 @@ const initializePublicStyles = async (type) => {
     try {
         if (!fs.existsSync(fileName)) {
             console.log2(process.cwd(), "initializePublicStyles :: new file");
-            putStyle(type, ':root {}');
+            putStyle(type, ':root {--_no-style:1;}');
         } else {
             setParam("public_module_styles", getStyle(type));
             console.log2(process.cwd(), "initializePublicStyles :: load file");
@@ -46,7 +46,7 @@ const publicStyleUpdate = (req, res) => {
     console.log2(process.cwd(), "publicStyleUpdate", type, payload);
     if ("style" === type) {
         console.log2(process.cwd(), "publicStyleUpdate :: style");
-        const style =`:root{${payload}}`;
+        const style =`:root{${payload};}`;
         setParam("public_module_styles", style);
         putStyle(type, style);
     }
