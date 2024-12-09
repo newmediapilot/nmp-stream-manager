@@ -1,6 +1,6 @@
 // Simulates a joystick
 const renderMatrixStyle = () => {
-    const setFocus = () => {
+    const updateInputValues = () => {
         Array.from(document.querySelectorAll('.controls label')).forEach((label) => {
             const {width, height} = label.getBoundingClientRect();
             const lx = label.scrollLeft;
@@ -13,17 +13,21 @@ const renderMatrixStyle = () => {
             inputY.value = inputY.max * percentageY;
         });
     };
-    // Gentle background refresh this state
-    setInterval(() => {
-        renderDynamicStyles();
-    }, 1000 / 60);
+    document.addEventListener('touchmove', (e) => {
+        updateInputValues();
+    });
+    document.addEventListener('mousemove', (e) => {
+        updateInputValues();
+    });
     document.addEventListener('touchend', (e) => {
-        setFocus();
+        updateInputValues();
         pushStyleUpdates();
+        renderDynamicStyles();
     });
     document.addEventListener('mouseup', (e) => {
-        setFocus();
+        updateInputValues();
         pushStyleUpdates();
+        renderDynamicStyles();
     });
 };
 
@@ -54,6 +58,8 @@ const pushStyleUpdates = () => {
         },
     }).finally(() => {
         socketEmitReload();
+        renderDynamicStyles();
+        applyStyleUpdates();
     });
     console.log('pushStyleUpdates', payload);
 };
@@ -61,7 +67,6 @@ const pushStyleUpdates = () => {
 // Reads styles back and re-applies to interface
 const applyStyleUpdates = () => {
     const payload = document.querySelector('#public_module_styles').innerHTML;
-
     Array.from(document.querySelectorAll('.controls label'), (label) => {
         const formX = label.children[0];
         const formY = label.children[1];
@@ -75,16 +80,20 @@ const applyStyleUpdates = () => {
             .split(nameY)[1]
             .split(':')[1]
             .split(';')[0];
+
+        const actualX = formX.min - formX.max;
+        console.log('actualX', actualX);
+
         const {width, height} = label.getBoundingClientRect();
-        const top = ((percentageX / 100)) * (width);
-        const left = ((percentageY / 100)) * (height);
+        const top = (percentageX / 100) * (width);
+        const left = (percentageY / 100) * (height);
         console.log(nameX, percentageX, width, 'top', top);
         console.log(nameY, percentageX, height, 'left', left);
-        label.scrollTo({
-            top,
-            left,
-            behavior: 'smooth'
-        });
+        // label.scrollTo({
+        //     top,
+        //     left,
+        //     behavior: 'smooth'
+        // });
     });
 };
 

@@ -12,38 +12,6 @@
 {% include "partials/controls.njk" %}
 <style>
 
-    .module input[type="range"] {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 100%;
-        height: 100%;
-        background: repeating-linear-gradient(-45deg, #fff, #ccc 10px);
-        overflow: hidden;
-    }
-
-    .module input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 50px;
-        height: 50px;
-        background: repeating-radial-gradient(circle, #4f4f4f 0px, #020202 10px);
-    }
-
-    .module label {
-        background: repeating-linear-gradient(-45deg, #fff, #ccc 10px);
-        position: relative;
-        overflow: scroll;
-        transform: scale(-1);
-    }
-
-    .module label input[type="range"] {
-        background: repeating-linear-gradient(-45deg, #fff, #ccc 10px);
-        pointer-events: none;
-        width: 50px;
-        height: 50px;
-        margin: 50px;
-    }
-
 </style>
 {% set public_routes = 'public_routes' | getParam %}
 <div class="modules">
@@ -57,23 +25,17 @@
                     src="{{public_routes.PUBLIC_FEATURE_EMBED}}?featuredName=0#featuredNameLock"></iframe>
         </div>
         <div class="controls">
-            <label aria-label="Zoom">
-                <input oninput="javascript:renderDynamicStyles()" onchange="javascript:pushStyleUpdates()"
-                       type="range" value="100" min="50" max="100" step="1" name="--_feat-scaleX">
-                <input oninput="javascript:renderDynamicStyles()" hidden onchange="javascript:pushStyleUpdates()"
-                       type="range" value="100" min="50" max="100" step="1" name="--_feat-scaleY">
+            <label aria-label="Scale">
+                <input type="range" min="75" max="100" step="1" value="100" name="--_feat-scaleX">
+                <input type="range" min="75" max="100" step="1" value="100" name="--_feat-scaleY" hidden>
             </label>
-            <label aria-label="Move">
-                <input oninput="javascript:renderDynamicStyles()" onchange="javascript:pushStyleUpdates()"
-                       type="range" value="100" min="50" max="100" step="1" name="--_feat-translateX">
-                <input oninput="javascript:renderDynamicStyles()" hidden onchange="javascript:pushStyleUpdates()"
-                       type="range" value="100" min="50" max="100" step="1" name="--_feat-translateY">
+            <label aria-label="Translate">
+                <input type="range" min="100" max="100" step="1" value="0" name="--_feat-translateX">
+                <input type="range" min="0" max="100" step="1" value="0" name="--_feat-translateY" hidden>
             </label>
-            <label aria-label="Spin">
-                <input oninput="javascript:renderDynamicStyles()" onchange="javascript:pushStyleUpdates()"
-                       type="range" value="100" min="50" max="100" step="1" name="--_feat-rotateX">
-                <input oninput="javascript:renderDynamicStyles()" hidden onchange="javascript:pushStyleUpdates()"
-                       type="range" value="100" min="50" max="100" step="1" name="--_feat-rotateY">
+            <label aria-label="Rotate">
+                <input type="range" min="0" max="100" step="12.5" value="0" name="--_feat-rotateX">
+                <input type="range" min="0" max="100" step="12.5" value="0" name="--_feat-rotateY" hidden>
             </label>
         </div>
     </div>

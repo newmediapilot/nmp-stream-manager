@@ -1,7 +1,3 @@
-body {
-
-}
-
 .modules {
     width: 100vw;
     height: 100vh;
@@ -124,25 +120,47 @@ body {
     z-index: -1;
 }
 
+
+
+.module input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(-45deg, #fff, #ccc 10px);
+    overflow: hidden;
+}
+
+.module input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    background: repeating-radial-gradient(circle, #4f4f4f 0px, #020202 10px);
+}
+
+.module label {
+    background: repeating-linear-gradient(-45deg, #fff, #ccc 10px);
+    position: relative;
+    overflow: scroll;
+    transform: scale(-1);
+}
+
+.module label input[type="range"] {
+    background: repeating-linear-gradient(-45deg, #fff, #ccc 10px);
+    pointer-events: none;
+    width: 50px;
+    height: 50px;
+    margin: 50px;
+}
+
 /** themes start **/
 .module.aqua,
 .module.aqua .title {
     background: var(--button-aqua);
 }
-
-.module.orange,
-.module.orange .title {
-    background: var(--button-orange);
-}
-
 .module.bloodorange,
 .module.bloodorange .title {
     background: var(--button-bloodorange);
 }
-
-.module.purple,
-.module.purple .title {
-    background: var(--button-purple);
-}
-
 /** themes end **/
