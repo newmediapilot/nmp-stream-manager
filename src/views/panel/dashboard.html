@@ -55,7 +55,7 @@
             delay: anime.stagger(50),
             easing: 'easeInElastic(1, .6)',
             filter: 'hue-rotate(360deg)',
-            loopBegin: function(anim) {
+            loopBegin: function (anim) {
                 setTimeout(anim.play, 7000);
             }
         });
@@ -65,13 +65,13 @@
             delay: anime.stagger(50),
             easing: 'easeInElastic(1, .6)',
             filter: 'hue-rotate(360deg)',
-            loopBegin: function(anim) {
+            loopBegin: function (anim) {
                 setTimeout(anim.play, 7000);
             }
         });
         // @eyecandy
         anime({
-            targets: '.dashboard button',
+            targets: 'html.iframe .dashboard button',
             duration: 1500,
             delay: anime.stagger(210),
             easing: 'easeInOutCubic',
@@ -81,7 +81,7 @@
             borderLeftWidth: ['20px', '200px'],
             borderRightWidth: ['20px', '200px'],
             borderRadius: ['15px', '30px'],
-            loopBegin: (anim) =>{
+            loopBegin: (anim) => {
                 // setTimeout(anim.play, 11000);
             }
         });
