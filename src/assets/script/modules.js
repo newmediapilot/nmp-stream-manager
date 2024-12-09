@@ -56,6 +56,7 @@ const renderStyleUpdates = () => {
             return `${el.getAttribute('id')}:${el.value}${el.getAttribute('name')}`
         }
     ).join(";");
+    document.querySelector('#public_module_styles').innerHTML = `:root { ${payload}; }`;
     document.querySelectorAll('iframe').forEach(iframe => {
         iframe.contentWindow.document.querySelector('#public_module_styles').innerHTML = `:root { ${payload}; }`;
     });
@@ -73,8 +74,7 @@ const pushStyleUpdates = () => {
             payload
         },
     }).finally(() => {
-        // socketEmitReload();
-        console.log('pushStyleUpdates', payload);
+        socketEmitReload();
     });
 };
 

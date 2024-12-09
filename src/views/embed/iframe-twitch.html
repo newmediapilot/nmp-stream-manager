@@ -21,6 +21,7 @@
     }
 </style>
 <style>
+
     #module-container {
         width: 100vw;
         height: 100%;
@@ -44,16 +45,14 @@
     #module-container {
         position: relative;
         transform-origin: center center;
-        transform: transform: matrix3d(
-        var(--module-feature-scaleX) *cos(var(--module-feature-rotateY)),
-        var(--module-feature-scaleX) *sin(var(--module-feature-rotateZ)),
-        0, 0,
-        var(--module-feature-scaleY) *-sin(var(--module-feature-rotateX)),
-        var(--module-feature-scaleY) *cos(var(--module-feature-rotateY)),
-        0, 0,
-        var(--module-feature-scaleZ), var(--module-feature-scaleZ), var(--module-feature-scaleZ), 1,
-        var(--module-feature-translateX), var(--module-feature-translateY), var(--module-feature-translateZ), 1
-        );
+        transform:
+                translate(var(--module-feature-translateX), var(--module-feature-translateY))
+                scaleX(var(--module-feature-scaleX))
+                scaleY(var(--module-feature-scaleY))
+                scaleZ(var(--module-feature-scaleZ))
+                rotateX(var(--module-feature-rotateX))
+                rotateY(var(--module-feature-rotateY))
+                rotateZ(var(--module-feature-rotateZ));
     }
 
     html.iframe #module-container:after {

@@ -6,6 +6,7 @@
 {% set public_routes = 'public_routes' | getParam %}
 {% block hscripts %}
 <link rel="stylesheet" href="/style/modules.css?cb={{cache_buster}}">
+{{ public_module_styles() }}
 {% endblock %}
 {% block body %}
 {% include "partials/controls.njk" %}
@@ -64,7 +65,7 @@
         </div>
         <div class="preview">
             <iframe width="1920" height="1080"
-                    src="{{public_routes.PUBLIC_FEATURE_EMBED}}?featuredName=aaknot#featuredNameLock"></iframe>
+                    src="{{public_routes.PUBLIC_FEATURE_EMBED}}?featuredName=0#featuredNameLock"></iframe>
         </div>
         <div class="controls">
             <label>

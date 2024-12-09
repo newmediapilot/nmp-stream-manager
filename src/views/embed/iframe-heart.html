@@ -24,32 +24,33 @@
 
     /** search for -key- to select all keys **/
     :root {
-        --module-hearttranslateX: 0;
-        --module-hearttranslateY: 0;
-        --module-hearttranslateZ: 0;
-        --module-heartrotateX: 0;
-        --module-heartrotateY: 0;
-        --module-heartrotateZ: 0;
-        --module-heartscaleX: 1;
-        --module-heartscaleY: 1;
-        --module-heartscaleZ: 1;
+        --module-heart-translateX: 0;
+        --module-heart-translateY: 0;
+        --module-heart-translateZ: 0;
+        --module-heart-rotateX: 0;
+        --module-heart-rotateY: 0;
+        --module-heart-rotateZ: 0;
+        --module-heart-scaleX: 1;
+        --module-heart-scaleY: 1;
+        --module-heart-scaleZ: 1;
     }
 
     /** pre-mapped to above **/
     #heart-rate {
         position: relative;
         transform-origin: center center;
-        transform: transform: matrix3d(
-        var(--module-heartscaleX) *cos(var(--module-heartrotateY)),
-        var(--module-heartscaleX) *sin(var(--module-heartrotateZ)),
+        transform: matrix3d(
+        var(--module-heart-scaleX) * cos(var(--module-heart-rotateY)),
+        var(--module-heart-scaleX) * sin(var(--module-heart-rotateZ)),
         0, 0,
-        var(--module-heartscaleY) *-sin(var(--module-heartrotateX)),
-        var(--module-heartscaleY) *cos(var(--module-heartrotateY)),
+        var(--module-heart-scaleY) * -sin(var(--module-heart-rotateX)),
+        var(--module-heart-scaleY) * cos(var(--module-heart-rotateY)),
         0, 0,
-        var(--module-heartscaleZ), var(--module-heartscaleZ), var(--module-heartscaleZ), 1,
-        var(--module-hearttranslateX), var(--module-hearttranslateY), var(--module-hearttranslateZ), 1
+        var(--module-heart-scaleZ), var(--module-heart-scaleZ), var(--module-heart-scaleZ), 1,
+        var(--module-heart-translateX), var(--module-heart-translateY), var(--module-heart-translateZ), 1
         );
     }
+
 </style>
 <style>
     #module-container {
