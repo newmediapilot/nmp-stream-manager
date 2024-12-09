@@ -58,7 +58,9 @@ const renderStyleUpdates = () => {
     ).join(";");
     document.querySelector('#public_module_styles').innerHTML = `:root { ${payload}; }`;
     document.querySelectorAll('iframe').forEach(iframe => {
-        iframe.contentWindow.document.querySelector('#public_module_styles').innerHTML = `:root { ${payload}; }`;
+        iframe.contentWindow.document.querySelectorAll('#public_module_styles').forEach(el => {
+            el.innerHTML = `:root { ${payload}; }`
+        })
     });
     return payload;
 };
