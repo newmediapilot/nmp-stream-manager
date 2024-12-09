@@ -28,6 +28,16 @@ html:not(.edit-active) .dashboard:after {
     display: block;
 }
 
+html:not(.iframe) {
+    background: repeating-linear-gradient(
+            -45deg,
+            rgba(0, 0, 0, 1) 0px,
+            rgba(0, 0, 0, 1) 20px,
+            rgba(255, 177, 1, 1) 20px,
+            rgba(255, 177, 1, 1) 40px
+    );
+}
+
 html.edit-active .dashboard {
     padding-right: 50px;
 }
