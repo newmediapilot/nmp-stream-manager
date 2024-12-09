@@ -80,15 +80,15 @@ const sendInputValues = () => {
         .innerHTML
         .replace(":root{", "")
         .replace(";}", "");
-    // Send it
-    // payload && axios.get("/public/style/update", {
-    //     params: {
-    //         type: "style",
-    //         payload
-    //     },
-    // }).finally(() => {
-    //     socketEmitReload();
-    // });
+    Send it
+    payload && axios.get("/public/style/update", {
+        params: {
+            type: "style",
+            payload
+        },
+    }).finally(() => {
+        socketEmitReload();
+    });
     storeInputValues();
 };
 // Shows QR code for a given panel
