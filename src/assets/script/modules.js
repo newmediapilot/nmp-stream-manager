@@ -2,8 +2,7 @@
 const applyStyleUpdates = () => {
     Array.from(document.querySelectorAll('.controls label'), (label) => {
         const payload = document.querySelector('#public_module_styles').innerHTML;
-        const formX = label.children[0];
-        const formY = label.children[1];
+        const [formX, formY] = label.children;
         const nameX = formX.name;
         const nameY = formY.name;
         if (1 === payload.split(nameX).length) return;// must contain 'name' to be read
@@ -20,11 +19,9 @@ const applyStyleUpdates = () => {
         const {width, height} = label.getBoundingClientRect();
         const top = (scrollTopPercent) * (height);
         const left = (scrollLeftPercent) * (width);
-        label.scrollTo({
-            top,
-            left,
-        });
+        label.scrollTo({top, left});
     });
+    setInterval(storeInputValues, 1000/120);
 };
 // Gathers scrollbar coordinates into forms and also iframe
 const storeInputValues = () => {

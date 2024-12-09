@@ -19,7 +19,7 @@
 
 .module {
     overflow: hidden;
-    transition: height 333ms linear;
+    min-height: 100vh;
 }
 
 .module .title p {
