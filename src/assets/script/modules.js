@@ -1,52 +1,30 @@
 // Simulates a joystick
 const renderMatrixStyle = () => {
-
-    const setFocus = (label) => {
-        const dragger = label.querySelector('input');
-        const labelRect = label.getBoundingClientRect();
-        const draggerRect = dragger.getBoundingClientRect();
-        const top = (document.$clientY - labelRect.top - (draggerRect.height / 2));
-        const left = (document.$clientX - labelRect.left - (draggerRect.width / 2));
-        const lx = label.scrollLeft;
-        const ly = label.scrollTop;
-        const {width, height} = label.getBoundingClientRect();
-        const percentageX = lx / (width / 2);
-        const percentageY = ly / (height / 2);
-        const inputX = label.children[0];
-        const inputY = label.children[1];
-        inputX.value = inputX.max * percentageX;
-        inputY.value = inputY.max * percentageY;
-        label.scrollTo(left, top);
-    };
-    // Touch devices don't requite the code below
-    if (!detectIfTouchDevice()) {
-        Array.from(document.querySelectorAll('.controls label')).forEach(label => {
-            let isDragging = false;
-            label.addEventListener('mousemove', (e) => {
-                isDragging && renderStyleUpdates();
-            });
-            label.addEventListener('touchstart', (e) => {
-                isDragging = true;
-            });
-            label.addEventListener('mousedown', (e) => {
-                isDragging = true;
-            });
-            document.addEventListener('touchend', (e) => {
-                isDragging = false;
-                pushStyleUpdates();
-            });
-            document.addEventListener('mouseup', (e) => {
-                isDragging = false;
-                pushStyleUpdates();
-            });
-            const runAtFramerate = () => {
-                isDragging && setFocus(label);
-                requestAnimationFrame(runAtFramerate);
-            };
-            requestAnimationFrame(runAtFramerate);
+    const setFocus = () => {
+        Array.from(document.querySelectorAll('.controls label')).forEach((label) => {
+            const {width, height} = label.getBoundingClientRect();
+            const lx = label.scrollLeft;
+            const ly = label.scrollTop;
+            const percentageX = lx / (width / 2);
+            const percentageY = ly / (height / 2);
+            const inputX = label.children[0];
+            const inputY = label.children[1];
+            inputX.value = inputX.max * percentageX;
+            inputY.value = inputY.max * percentageY;
         });
-    }
-
+    };
+    setInterval(() => {
+        renderStyleUpdates();
+        setFocus();
+    }, 1000/60);
+    document.addEventListener('touchend', (e) => {
+        setFocus();
+        pushStyleUpdates();
+    });
+    document.addEventListener('mouseup', (e) => {
+        setFocus();
+        pushStyleUpdates();
+    });
 };
 
 // Realtime write of collected data into <style>
@@ -76,13 +54,16 @@ const pushStyleUpdates = () => {
             payload
         },
     }).finally(() => {
-        socketEmitReload();
+        // socketEmitReload();
     });
 };
 
-// Reads checkboxes and sets checked based on whether css contains their value
+// Reads styles back and re-applies to interface
 const applyStyleUpdates = () => {
-
+    Array.from(document.querySelectorAll('.controls label')).forEach((label) => {
+        // const value__ = label.scrollLeft;
+        // const label__ = label.scrollTop;
+    });
 };
 
 // Shows QR code for a given panel
