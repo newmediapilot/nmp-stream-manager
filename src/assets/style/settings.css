@@ -17,8 +17,8 @@ ul + #emoji-widget {
 .settings-container:after {
     content: "";
     height: 130px;
-    background: transparent;
-    width: 100%;
+    background:transparent;
+    width:100%;
     display: block;
 }
 
@@ -53,29 +53,14 @@ ul + #emoji-widget {
     min-height: 8vh;
 }
 
-.settings-editor > * {
-    box-sizing: border-box;
-    font-size: 25px;
-    grid-column: span 3;
-    background-image: linear-gradient(90deg, silver 50%, transparent 50%), linear-gradient(90deg, silver 50%, transparent 50%), linear-gradient(0deg, silver 50%, transparent 50%), linear-gradient(0deg, silver 50%, transparent 50%);
-    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
-    background-size: 15px 2px, 15px 2px, 2px 15px, 2px 15px;
-    background-position: left top, right bottom, left bottom, right top;
-    animation: selector-loop 1s infinite linear;
-}
-
-@keyframes selector-loop {
-    0% {
-        background-position: left top, right bottom, left bottom, right top;
-    }
-
-    100% {
-        background-position: left 15px top, right 15px bottom, left bottom 15px, right top 15px;
-    }
-}
-
 .settings-editor > button {
     font-size: 40px;
+}
+
+.settings-editor > [type="text"] {
+    font-size: 25px;
+    grid-column: span 3;
+    padding: 0 15px;
 }
 
 .settings-editor > [type="text"] {
@@ -109,7 +94,7 @@ ul + #emoji-widget {
 }
 
 .emoji-widget-instance,
-.emoji-widget-instance-trigger {
+.emoji-widget-instance-trigger{
     background: green !important;
 }
 
@@ -149,5 +134,4 @@ ul + #emoji-widget {
 .settings-editor.purple + #emoji-widget {
     background: var(--button-purple);
 }
-
 /** themes end **/
