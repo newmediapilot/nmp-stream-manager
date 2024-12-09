@@ -27,30 +27,32 @@
         display: block;
     }
 
+    /** search for -key- to select all keys **/
     :root {
-        --module-feature--translateX: 0;
-        --module-feature--translateY: 0;
-        --module-feature--translateZ: 0;
-        --module-feature--rotateX: 0;
-        --module-feature--rotateY: 0;
-        --module-feature--rotateZ: 0;
-        --module-feature--scaleX: 1; /* Scale should start from 1 (no scale) */
-        --module-feature--scaleY: 1; /* Add scaleY */
-        --module-feature--scaleZ: 1; /* Add scaleZ */
+        --module-feature-translateX: 0;
+        --module-feature-translateY: 0;
+        --module-feature-translateZ: 0;
+        --module-feature-rotateX: 0;
+        --module-feature-rotateY: 0;
+        --module-feature-rotateZ: 0;
+        --module-feature-scaleX: 1;
+        --module-feature-scaleY: 1;
+        --module-feature-scaleZ: 1;
     }
 
+    /** pre-mapped to above **/
     #module-container {
         position: relative;
         transform-origin: center center;
         transform: transform: matrix3d(
-        var(--module-feature--scaleX) *cos(var(--module-feature--rotateY)),
-        var(--module-feature--scaleX) *sin(var(--module-feature--rotateZ)),
+        var(--module-feature-scaleX) *cos(var(--module-feature-rotateY)),
+        var(--module-feature-scaleX) *sin(var(--module-feature-rotateZ)),
         0, 0,
-        var(--module-feature--scaleY) *-sin(var(--module-feature--rotateX)),
-        var(--module-feature--scaleY) *cos(var(--module-feature--rotateY)),
+        var(--module-feature-scaleY) *-sin(var(--module-feature-rotateX)),
+        var(--module-feature-scaleY) *cos(var(--module-feature-rotateY)),
         0, 0,
-        var(--module-feature--scaleZ), var(--module-feature--scaleZ), var(--module-feature--scaleZ), 1,
-        var(--module-feature--translateX), var(--module-feature--translateY), var(--module-feature--translateZ), 1
+        var(--module-feature-scaleZ), var(--module-feature-scaleZ), var(--module-feature-scaleZ), 1,
+        var(--module-feature-translateX), var(--module-feature-translateY), var(--module-feature-translateZ), 1
         );
     }
 
@@ -104,15 +106,11 @@
         const streamerQueryParam = urlParams.get('featuredName');
         const featuredName = payload.split(':').pop();
         const isOpen = (streamerQueryParam === featuredName);
-
-        console.log('window.location.hash', window.location.hash);
-
-        return;
         if (isOpen) {
             try {
                 (!'#featuredNameLock' == window.location.hash) && document.documentElement.remove();
             } catch (e) {
-                //window.location.reload();
+                window.location.reload();
             }
         } else {
             getURL(`${window.location.origin}${window.location.pathname}?featuredName=${featuredName}`);

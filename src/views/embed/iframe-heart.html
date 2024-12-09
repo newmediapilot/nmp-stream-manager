@@ -21,6 +21,35 @@
         justify-content: center;
         align-items: center;
     }
+
+    /** search for -key- to select all keys **/
+    :root {
+        --module-hearttranslateX: 0;
+        --module-hearttranslateY: 0;
+        --module-hearttranslateZ: 0;
+        --module-heartrotateX: 0;
+        --module-heartrotateY: 0;
+        --module-heartrotateZ: 0;
+        --module-heartscaleX: 1;
+        --module-heartscaleY: 1;
+        --module-heartscaleZ: 1;
+    }
+
+    /** pre-mapped to above **/
+    #heart-rate {
+        position: relative;
+        transform-origin: center center;
+        transform: transform: matrix3d(
+        var(--module-heartscaleX) *cos(var(--module-heartrotateY)),
+        var(--module-heartscaleX) *sin(var(--module-heartrotateZ)),
+        0, 0,
+        var(--module-heartscaleY) *-sin(var(--module-heartrotateX)),
+        var(--module-heartscaleY) *cos(var(--module-heartrotateY)),
+        0, 0,
+        var(--module-heartscaleZ), var(--module-heartscaleZ), var(--module-heartscaleZ), 1,
+        var(--module-hearttranslateX), var(--module-hearttranslateY), var(--module-hearttranslateZ), 1
+        );
+    }
 </style>
 <style>
     #module-container {
@@ -40,9 +69,9 @@
         display: block;
         width: 100%;
         height: 100%;
-        position:absolute;
-        left:0;
-        top:0;
+        position: absolute;
+        left: 0;
+        top: 0;
         box-shadow: inset 0 0 10px 10px white;
         box-sizing: border-box;
     }
