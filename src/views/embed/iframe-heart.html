@@ -1,4 +1,4 @@
-<!-- src/views/heart.html -->
+<!-- src/views/bpm.html -->
 {% extends "layouts/main.njk" %}
 {% from "macros/public_module_styles.njk" import public_module_styles %}
 {% block cdn %}<!-- noscript -->{% endblock %}
@@ -12,7 +12,7 @@
 <script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
 <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
 <style>
-    #heart-rate {
+    #bpm-rate {
         width: 100vw;
         height: 100vh;
         font-size: 50px;
@@ -34,24 +34,24 @@
 
     /** search for -key- to select all keys **/
     :root {
-        --module-heart-translateX: 0;
-        --module-heart-translateY: 0;
-        --module-heart-scaleX: 1;
-        --module-heart-scaleY: 1;
-        --module-heart-rotateX: 0deg;
-        --module-heart-rotateY: 0deg;
+        --module-bpm-translateX: 0;
+        --module-bpm-translateY: 0;
+        --module-bpm-scaleX: 1;
+        --module-bpm-scaleY: 1;
+        --module-bpm-rotateX: 0deg;
+        --module-bpm-rotateY: 0deg;
     }
 
     /** pre-mapped to above **/
     #module-container {
         position: relative;
         transform-origin: center center;
-        transform: translateX(var(--module-heart-translateX))
-        translateY(var(--module-heart-translateY))
-        scaleX(var(--module-heart-scaleX))
-        scaleY(var(--module-heart-scaleY))
-        rotateX(var(--module-heart-rotateX)) 
-        rotateY(var(--module-heart-rotateY));
+        transform: translateX(var(--module-bpm-translateX))
+        translateY(var(--module-bpm-translateY))
+        scaleX(var(--module-bpm-scaleX))
+        scaleY(var(--module-bpm-scaleY))
+        rotateX(var(--module-bpm-rotateX))
+        rotateY(var(--module-bpm-rotateY));
     }
 
     html.iframe #module-container:after {
@@ -70,9 +70,9 @@
 {% endblock %}
 {% block body %}
 {% for signal in "dashboard_signals_config" | getParam %}
-{% if signal.type == "heart" %}
+{% if signal.type == "bpm" %}
 <div id="module-container">
-    <div id="heart-rate"
+    <div id="bpm-rate"
          data-label-content="{{ signal.label }}"
          data-emoji-content="{{ signal.emoji }}">
         <div></div>
@@ -87,23 +87,23 @@
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => {
-        const heartRateElement = document.querySelector('#heart-rate');
-        const labelEl = heartRateElement.querySelector('div:nth-of-type(1)');
-        const emojiEl = heartRateElement.querySelector('div:nth-of-type(2)');
-        const heartPing = async () => {
+        const bpmRateElement = document.querySelector('#bpm-rate');
+        const labelEl = bpmRateElement.querySelector('div:nth-of-type(1)');
+        const emojiEl = bpmRateElement.querySelector('div:nth-of-type(2)');
+        const bpmPing = async () => {
             try {
-                const response = await axios.get("/public/heart/ping");
-                const heartRate = response.data;
-                const label = heartRateElement.getAttribute('data-label-content');
-                const emoji = heartRateElement.getAttribute('data-emoji-content');
-                labelEl.textContent = heartRate ? heartRate : label;
+                const response = await axios.get("/public/bpm/ping");
+                const bpmRate = response.data;
+                const label = bpmRateElement.getAttribute('data-label-content');
+                const emoji = bpmRateElement.getAttribute('data-emoji-content');
+                labelEl.textContent = bpmRate ? bpmRate : label;
                 emojiEl.textContent = emoji ? emoji : "♥";
             } catch (error) {
-                heartRateElement.textContent = "BPM";
-                console.error("Failed to fetch heart rate:", error);
+                bpmRateElement.textContent = "BPM";
+                console.error("Failed to fetch bpm rate:", error);
             }
         };
-        setInterval(() => heartPing(), 1000);
+        setInterval(() => bpmPing(), 1000);
     });
 </script>
 {% endblock %}

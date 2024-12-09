@@ -3,7 +3,7 @@
  * Description: Logic and operations for src\modules\twitch\commands.js.
  */
 const { getSecret } = require("../store/manager");
-const { getHeartRateMessage } = require("../sensor/listen");
+const { getbpmRateMessage } = require("../sensor/listen");
 const { twitchAdCreate } = require("./ads");
 const { twitchClipCreate } = require("./clip");
 const { twitchTwipCreate } = require("../twip/create");
@@ -32,7 +32,7 @@ async function parseCommand(channel, tags, message) {
     mark: "mark/",
     shout: "shout/",
     title: "title/",
-    heart: "heart/",
+    bpm: "bpm/",
   };
 
   let currentCommand;
@@ -77,8 +77,8 @@ async function parseCommand(channel, tags, message) {
     return true;
   }
 
-  if (currentCommand === COMMANDS.heart) {
-    await twitchMessageCreate(getHeartRateMessage());
+  if (currentCommand === COMMANDS.bpm) {
+    await twitchMessageCreate(getbpmRateMessage());
     return true;
   }
 

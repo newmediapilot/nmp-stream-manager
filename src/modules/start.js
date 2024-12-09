@@ -8,7 +8,7 @@ const https = require("https");
 const { getIp } = require("./helper/ip");
 const { setParam } = require("./store/manager");
 const { configureNunjucks } = require("./nunjucks/config");
-const { createHeartRateServer } = require("./sensor/listen");
+const { createbpmRateServer } = require("./sensor/listen");
 const { initializePublicConfigs } = require("./public/config");
 const { initializePublicStyles } = require("./public/style");
 const { configureSocket } = require("./helper/socket"); // Use configureSocket for socket setup
@@ -51,7 +51,7 @@ async function startServices(app) {
     // Configure Socket.IO for the HTTPS server
     configureSocket(httpsServer);
 
-    // Heart Rate Server
+    // bpm Rate Server
     app.listen(3476, () => {
       console.log2(
         process.cwd(),
@@ -59,8 +59,8 @@ async function startServices(app) {
       );
     });
 
-    // Launch heart rate server
-    await createHeartRateServer();
+    // Launch bpm rate server
+    await createbpmRateServer();
 
   } catch (err) {
     console.log2(process.cwd(), "Error initializing services:", err);

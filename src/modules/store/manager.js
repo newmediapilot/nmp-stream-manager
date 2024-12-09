@@ -25,7 +25,7 @@ let secrets = null;
 const allowedParams = [
   "dashboard_signals_config",
   "device_ip",
-  "sensor_heart_rate",
+  "sensor_BPM_rate",
   "twitch_login_referrer",
   "twitch_broadcaster_id_set",
   "twitch_access_token_set",

@@ -70,7 +70,7 @@
     <!---->
     {% set feature_title_set = false %}
     {% for signal in "dashboard_signals_config" | getParam %}
-    {% if signal.type == "heart" %}
+    {% if signal.type == "bpm" %}
     {% if not feature_title_set %}{% set feature_title_set = true %}
     <li class="settings-container--header {{ signal.theme }}">
         <p>BPM Display</p>

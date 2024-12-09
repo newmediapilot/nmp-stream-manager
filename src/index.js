@@ -11,7 +11,7 @@ const {startServices} = require("./modules/start");
 const {publicSignalCreate} = require("./modules/public/signal");
 const {publicConfigUpdate} = require("./modules/public/config");
 const {publicStyleUpdate} = require("./modules/public/style");
-const {publicHeartPing} = require("./modules/sensor/ping");
+const {publicbpmPing} = require("./modules/sensor/ping");
 const {twitchLogin, twitchLoginSuccess} = require("./modules/twitch/login");
 const app = express();
 // Just log
@@ -26,12 +26,12 @@ app.all(ROUTES.PUBLIC_SETTINGS, (req, res) => res.render("panel/settings"));
 app.all(ROUTES.PUBLIC_MODULES, (req, res) => res.render("panel/modules"));
 // Embeds
 app.all(ROUTES.PUBLIC_FEATURE_EMBED, (req, res) => res.render("embed/iframe-twitch"));
-app.all(ROUTES.PUBLIC_HEART_EMBED, (req, res) => res.render("embed/iframe-heart"));
+app.all(ROUTES.PUBLIC_BPM_EMBED, (req, res) => res.render("embed/iframe-bpm"));
 // Api
 app.all(ROUTES.PUBLIC_SIGNAL_CREATE, publicSignalCreate);
 app.all(ROUTES.PUBLIC_CONFIG_UPDATE, publicConfigUpdate);
 app.all(ROUTES.PUBLIC_STYLE_UPDATE, publicStyleUpdate);
 // Pings
-app.all(ROUTES.PUBLIC_HEART_PING, publicHeartPing);
+app.all(ROUTES.PUBLIC_BPM_PING, publicbpmPing);
 // Init
 startServices(app);

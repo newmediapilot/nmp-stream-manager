@@ -95,19 +95,19 @@
     <!--    <div class="module bloodorange">-->
     <!--        <div class="title">-->
     <!--            <p>BPM</p>-->
-    <!--            <button onclick="javascript:showPanelQR('#heart_embed_qrcode_dialog', 'BPM')">🔗</button>-->
+    <!--            <button onclick="javascript:showPanelQR('#bpm_embed_qrcode_dialog', 'BPM')">🔗</button>-->
     <!--        </div>-->
     <!--        <div class="preview">-->
-    <!--            <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_HEART_EMBED}}"></iframe>-->
+    <!--            <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_BPM_EMBED}}"></iframe>-->
     <!--        </div>-->
     <!--        <div class="controls">-->
     <!--            <input oninput="javascript:renderStyleUpdates()" onchange="javascript:pushStyleUpdates()"-->
-    <!--                   type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="&#45;&#45;module-heart-scaleX">-->
+    <!--                   type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="&#45;&#45;module-bpm-scaleX">-->
     <!--            <input oninput="javascript:renderStyleUpdates()" onchange="javascript:pushStyleUpdates()"-->
-    <!--                   type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="&#45;&#45;module-heart-scaleX">-->
+    <!--                   type="range" value="0.25" min="0.5" max="1" step="0.05" name="" id="&#45;&#45;module-bpm-scaleX">-->
     <!--            <label>-->
     <!--                <input oninput="javascript:renderStyleUpdates()" type="range" value="0.25" min="0.5" max="1"-->
-    <!--                       step="0.05" name="" id="&#45;&#45;module-heart-translateX">-->
+    <!--                       step="0.05" name="" id="&#45;&#45;module-bpm-translateX">-->
     <!--            </label>-->
     <!--        </div>-->
     <!--    </div>-->
@@ -115,7 +115,7 @@
 {% endblock %}
 {% block fscripts %}
 <!-- dialogs start -->
-{{ qrcode_dialog("heart_embed_qrcode_dialog", public_routes.PUBLIC_HEART_EMBED ) }}
+{{ qrcode_dialog("bpm_embed_qrcode_dialog", public_routes.PUBLIC_BPM_EMBED ) }}
 {{ qrcode_dialog("feature_embed_qrcode_dialog", public_routes.PUBLIC_FEATURE_EMBED ) }}
 <!-- dialogs end -->
 <script>

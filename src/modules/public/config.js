@@ -19,8 +19,8 @@ const PUBLIC_CONFIGS = {
     },
     {
       theme: "bloodorange",
-      type: "heart",
-      description: "heart",
+      type: "bpm",
+      description: "bpm",
       wait: "700",
       emoji: "❤",
       label: "BPM",

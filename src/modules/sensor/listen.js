@@ -5,21 +5,21 @@
 const { setParam, getParam } = require("../store/manager");
 const { spawn } = require("child_process");
 
-async function createHeartRateServer(
+async function createbpmRateServer(
   exePath = ".bin/hds_desktop_windows.exe",
 ) {
   let MAX_REPORT = 5; // Don't keep logging
   const child = spawn(exePath, [], { detached: false });
 
-  // Capture log and save sensor_heart_rate
+  // Capture log and save sensor_BPM_rate
   child.stdout.on("data", (data) => {
     const log = data.toString();
-    const pref = "Received data: heartRate:";
-    const heartRate = parseInt(log.match(/\d+/)?.[0], 10);
+    const pref = "Received data: bpmRate:";
+    const bpmRate = parseInt(log.match(/\d+/)?.[0], 10);
 
     log.startsWith(pref) &&
-      !isNaN(heartRate) &&
-      setParam("sensor_heart_rate", heartRate, --MAX_REPORT > 0);
+      !isNaN(bpmRate) &&
+      setParam("sensor_BPM_rate", bpmRate, --MAX_REPORT > 0);
   });
 
   // Clean up
@@ -45,12 +45,12 @@ async function createHeartRateServer(
 }
 
 /**
- * Generates heart rate message based on sensor_heart_rate
+ * Generates bpm rate message based on sensor_BPM_rate
  * @returns {string}
  */
-const getHeartRateMessage = () => {
-  const heartRate = getParam("sensor_heart_rate");
-  return heartRate ? `🤖 💜 ${heartRate}` : `🤖 💜 Dunno.`;
+const getbpmRateMessage = () => {
+  const bpmRate = getParam("sensor_BPM_rate");
+  return bpmRate ? `🤖 💜 ${bpmRate}` : `🤖 💜 Dunno.`;
 };
 
-module.exports = { createHeartRateServer, getHeartRateMessage };
+module.exports = { createbpmRateServer, getbpmRateMessage };

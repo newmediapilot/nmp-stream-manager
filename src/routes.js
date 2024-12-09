@@ -15,9 +15,9 @@ const ROUTES = {
     PUBLIC_MODULES: "/public/modules",
     // Embed Panels
     PUBLIC_FEATURE_EMBED: "/public/feature/embed",
-    PUBLIC_HEART_EMBED: "/public/heart/embed",
+    PUBLIC_BPM_EMBED: "/public/bpm/embed",
     // Api Calls
-    PUBLIC_HEART_PING: "/public/heart/ping",
+    PUBLIC_BPM_PING: "/public/bpm/ping",
     PUBLIC_SIGNAL_CREATE: "/public/signal/create",
     PUBLIC_CONFIG_UPDATE: "/public/config/update",
     PUBLIC_STYLE_UPDATE: "/public/style/update",

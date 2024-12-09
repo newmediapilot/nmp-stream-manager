@@ -1,17 +1,17 @@
 const { getParam } = require("../store/manager");
 
 /**
- * API Endpoint to return the current heart rate.
+ * API Endpoint to return the current bpm rate.
  * @param {Object} req - The Express request object.
  * @param {Object} res - The Express response object.
  */
-function publicHeartPing(req, res) {
-  const heartRate = getParam("sensor_heart_rate");
-  if (heartRate !== undefined && heartRate !== null) {
-    res.send(String(heartRate));
+function publicbpmPing(req, res) {
+  const bpmRate = getParam("sensor_BPM_rate");
+  if (bpmRate !== undefined && bpmRate !== null) {
+    res.send(String(bpmRate));
   } else {
     res.send("null");
   }
 }
 
-module.exports = { publicHeartPing };
+module.exports = { publicbpmPing };

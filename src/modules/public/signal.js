@@ -12,13 +12,14 @@ const { twitchMarkerCreate } = require("../twitch/marker");
 const { twitchMessageCreate } = require("../twitch/message");
 const { twitchAdCreate } = require("../twitch/ads");
 const { sendPayload } = require("../helper/socket");
-const { getHeartRateMessage } = require("../sensor/listen");
+const { getbpmRateMessage } = require("../sensor/listen");
 
 let isCreating = false;
 
 async function publicSignalCreate(req, res) {
+
   if (isCreating) {
-    return res.status(503).send("Busy");
+    return res.status(400).send("Please stop spamming buttons.");
   }
 
   isCreating = true;
@@ -26,18 +27,20 @@ async function publicSignalCreate(req, res) {
   const description = req.query.description;
 
   try {
+
     if (!description || !type) {
       throw Error("query missing");
     }
 
     let result = false;
 
+    // Buttons will emit these
     if ("mark" === type) {
       result = await twitchMarkerCreate(description);
     }
 
-    if ("heart" === type) {
-      result = await twitchMessageCreate(getHeartRateMessage());
+    if ("bpm" === type) {
+      result = await twitchMessageCreate(getbpmRateMessage());
     }
 
     if ("ad" === type) {
@@ -48,6 +51,7 @@ async function publicSignalCreate(req, res) {
       result = await sendPayload(description);
     }
 
+    // Utility function to re-render all views
     if ("browser" === type) {
       if ("reload" === description)
         result = await sendPayload([type, description].join(":"));
@@ -58,7 +62,7 @@ async function publicSignalCreate(req, res) {
       isCreating = false;
       if ("mark" === type) return res.status(400).send("Could not create marker. Are you online?");
       if ("ad" === type) return res.status(400).send("Could not create ad. Are you online? Did you just run an ad?");
-      if ("heart" === type) return res.status(400).send("There was a problem BPM. Are you online? Is the app configured?");
+      if ("bpm" === type) return res.status(400).send("There was a problem BPM. Are you online? Is the app configured?");
       if ("feature" === type) return res.status(400).send("There was a problem requesting a streamer. Is the name correct?");
       return res.status(400).send("Error: " + type);
     }
