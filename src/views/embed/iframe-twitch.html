@@ -60,12 +60,12 @@
     #module-container {
         position: relative;
         transform-origin: center center;
-        transform: translateX(var(--module-feature-translateX))
-                translateY(var(--module-feature-translateY))
-                scaleX(var(--module-feature-scaleX))
-                scaleY(var(--module-feature-scaleY))
-                rotateX(var(--module-feature-rotateX))
-                rotateY(var(--module-feature-rotateY));
+        transform: translateX(calc(var(--module-feature-translateX ) + 0))
+                translateY(calc(var(--module-feature-translateY ) + 0))
+                scaleX(calc(var(--module-feature-scaleX ) + 0))
+                scaleY(calc(var(--module-feature-scaleY ) + 0))
+                rotateX(calc(var(--module-feature-rotateX) + 0))
+                rotateY(calc(var(--module-feature-rotateY ) + 0));
     }
 
     html.iframe #module-container:after {
