@@ -17,7 +17,7 @@ const renderMatrixStyle = () => {
     setInterval(() => {
         renderStyleUpdates();
         setFocus();
-    }, 1000/ 60);
+    }, 1000 / 60);
     document.addEventListener('touchend', (e) => {
         setFocus();
         pushStyleUpdates();
@@ -62,17 +62,43 @@ const pushStyleUpdates = () => {
 
 // Reads styles back and re-applies to interface
 const applyStyleUpdates = () => {
-    Array.from(document.querySelectorAll('.controls label input')).forEach((input) => {
-        const name = input.name;
-        const payload = document.querySelector('#public_module_styles').innerHTML;
-        const value = payload
-            .split(name)[1]
+    const payload = document.querySelector('#public_module_styles').innerHTML;
+
+    Array.from(document.querySelectorAll('.controls label'), (label) => {
+        const formX = label.children[0];
+        const formY = label.children[1];
+        const nameX = formX.name;
+        const nameY = formY.name;
+        const percentX = payload
+            .split(nameX)[1]
             .split(':')[1]
             .split(';')[0];
-        console.log('value', Number(value));
-        console.log('name', name);
-        // console.log('payload', payload);
+        const percentY = payload
+            .split(nameY)[1]
+            .split(':')[1]
+            .split(';')[0];
+        console.log('percentX', percentX);
+        console.log('percentY', percentY);
     });
+
+    // Array.from(document.querySelectorAll('.controls label input')).forEach((input) => {
+    //     const label = input.parentElement;
+    //     const name = input.name;
+    //     const value = payload
+    //         .split(name)[1]
+    //         .split(':')[1]
+    //         .split(';')[0];
+    //     const {width, height} = label.getBoundingClientRect();
+    //     const scrollX = width * (value / 100);
+    //     const scrollY = width * (value / 100);
+    //     const percent = Number(value) * inputX.max;
+    //     console.log('percent', percent);
+    //     console.log('scrollX', scrollX);
+    //     console.log('scrollY', scrollY);
+    // });
+    //
+    //
+
 };
 
 // Shows QR code for a given panel
