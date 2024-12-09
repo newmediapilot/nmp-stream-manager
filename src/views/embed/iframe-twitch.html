@@ -26,11 +26,6 @@
         height: 100%;
         display: block;
     }
-    #module-container {
-        position: relative;
-        transform-origin: center center;
-        transform: scaleX(var(--module-feature-scaleX)) scaleY(var(--module-feature-scaleY));
-    }
 
     :root {
         --module-feature--translateX: 0;
@@ -43,9 +38,10 @@
         --module-feature--scaleY: 1;  /* Add scaleY */
         --module-feature--scaleZ: 1;  /* Add scaleZ */
     }
-
-    .element {
-        transform: matrix3d(
+    #module-container {
+        position: relative;
+        transform-origin: center center;
+        transform: transform: matrix3d(
         var(--module-feature--scaleX) * cos(var(--module-feature--rotateY)),
         var(--module-feature--scaleX) * sin(var(--module-feature--rotateZ)),
         0, 0,
