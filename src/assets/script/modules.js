@@ -16,7 +16,7 @@ const renderMatrixStyle = () => {
     setInterval(() => {
         renderStyleUpdates();
         setFocus();
-    }, 1000/60);
+    }, 1000 / 60);
     document.addEventListener('touchend', (e) => {
         setFocus();
         pushStyleUpdates();
@@ -54,15 +54,16 @@ const pushStyleUpdates = () => {
             payload
         },
     }).finally(() => {
-        // socketEmitReload();
+        socketEmitReload();
+        applyStyleUpdates();
     });
 };
 
 // Reads styles back and re-applies to interface
 const applyStyleUpdates = () => {
-    Array.from(document.querySelectorAll('.controls label')).forEach((label) => {
-        // const value__ = label.scrollLeft;
-        // const label__ = label.scrollTop;
+    Array.from(document.querySelectorAll('.controls label input')).forEach((input) => {
+        const id = input.id;
+        console.log('id', id);
     });
 };
 
