@@ -32,7 +32,7 @@ const renderMatrixStyle = () => {
 const renderStyleUpdates = () => {
     const payload = Array.from(document.querySelectorAll('input[type="range"]')).map(
         (el) => {
-            return `${el.getAttribute('id')}:${el.value}`;
+            return `${el.name}:${el.value}`;
         }
     ).join(";");
     document.querySelector('#public_module_styles').innerHTML = `:root { ${payload}; }`;
@@ -63,9 +63,15 @@ const pushStyleUpdates = () => {
 // Reads styles back and re-applies to interface
 const applyStyleUpdates = () => {
     Array.from(document.querySelectorAll('.controls label input')).forEach((input) => {
-        const id = input.id;
-        const styleText =
-        console.log('id', id);
+        const name = input.name;
+        const payload = document.querySelector('#public_module_styles').innerHTML;
+        const value = payload
+            .split(name)[1]
+            .split(':')[1]
+            .split(';')[0];
+        console.log('value', Number(value));
+        console.log('name', name);
+        // console.log('payload', payload);
     });
 };
 
