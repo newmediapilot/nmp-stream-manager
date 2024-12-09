@@ -28,8 +28,9 @@
         width: 100vw;
         height: 100vh;
         display: block;
+        position: relative;
     }
-    /** search for -key- to select all keys **/
+    /** modules-css-only-start **/
     :root {
         --module-bpm-translateX: 0;
         --module-bpm-translateY: 0;
@@ -38,9 +39,7 @@
         --module-bpm-rotateX: 0deg;
         --module-bpm-rotateY: 0deg;
     }
-    /** pre-mapped to above **/
     #module-container {
-        position: relative;
         transform: translateX(var(--module-bpm-translateX))
         translateY(var(--module-bpm-translateY))
         scaleX(var(--module-bpm-scaleX))
@@ -48,6 +47,8 @@
         rotateX(var(--module-bpm-rotateX))
         rotateY(var(--module-bpm-rotateY));
     }
+    /** modules-css-only-end **/
+
     html.iframe #module-container:after {
         content: "";
         display: block;
