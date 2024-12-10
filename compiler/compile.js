@@ -16,17 +16,12 @@ Object.keys(data)
         return path;
     })
     .map(path => {
-        // Routes
-        data[path] = data[path].replace("TWITCH_LOGIN", "screw_you_guys_im_going_home");
-        data[path] = data[path].replace("public_routes.", "i_am_not_a_criminal____.");
-        // data[path] = data[path].replace("respect_my_authoritah", "respect_my_authoritah_____");
-        // data[path] = data[path].replace("oh_my_god_they_killed_kenny", "oh_my_god_they_killed_kenny");
-        // data[path] = data[path].replace("you_bastards_killed_kenny", "you_bastards_killed_kenny___");
-        // data[path] = data[path].replace("dont_think_ill_forget", "dont_think_ill_forget_____");
-        // data[path] = data[path].replace("how_do_you_do_it", "how_do_you_do_it_________");
-        // data[path] = data[path].replace("dont_touch_me_im_irish", "dont_touch_me_im_irish____");
-        // data[path] = data[path].replace("im_not_going_to_school", "im_not_going_to_school____");
-        // data[path] = data[path].replace("this_isnt_even_my_final_form", "this_isnt_even_my_final_form");
+        data[path] = data[path].replace(/TWITCH_LOGIN/g, "ℵ");
+        data[path] = data[path].replace(/<link href=".*>/g, (m) => {
+            const href = m.match(/href="([^"]+)"/)[1];
+            console.log('href', href);
+            return `<script defer><!-- hei there --></script>`
+        });
         return path;
     })
     .map(path => {
