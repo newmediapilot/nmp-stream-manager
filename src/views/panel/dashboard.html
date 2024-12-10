@@ -12,16 +12,18 @@
     {% for config in 'dashboard_signals_config' | getParam %}
 
     {% if config.type == "feature" %}
-    {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=feature&type=" ~ config.type ~ "&description=" ~
+        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=feature&type=" ~ config.type ~ "&description=" ~
     config.description ~ ":" ~ config.label %}
-    {% elif config.type == "mark" %}
-    {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~
-    config.label %}
-    {% else %}
-    {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~
-    config.description %}
-    {% endif %}
 
+    {% elif config.type == "mark" %}
+        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~
+    config.label %}
+
+    {% else %}
+        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~
+    config.description %}
+
+    {% endif %}
     <div class="button button-{{ config.theme }}" href="{{data_href}}">
         <button
                 data-href="{{ data_href }}"
@@ -43,11 +45,7 @@
     document.addEventListener("DOMContentLoaded", () => scrollSnap('.dashboard'));
     document.addEventListener("DOMContentLoaded", () => generateCopyLink('#qr-code-copy-link'));
     document.addEventListener("DOMContentLoaded", () => generateQrCode(document.querySelector("#qrcode_dialog canvas").getAttribute('data-url'), "#qr-code-dialog-canvas"));
-    document.addEventListener("DOMContentLoaded", () => dashboardButtons(
-        "signals:order",
-        document.querySelector(".dashboard"),
-        document.querySelector("#dashboard--toggle"),
-    ));
+    document.addEventListener("DOMContentLoaded", () => dashboardButtons());
     document.addEventListener("DOMContentLoaded", () => {
         anime({
             targets: '.dashboard button',
@@ -101,5 +99,8 @@
         });
     });
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => {
+
+    });
 </script>
 {% endblock %}
