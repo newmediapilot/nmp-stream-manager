@@ -102,5 +102,5 @@ setTimeout(() => {
     fs.copyFileSync("./localhost.key", "./.dist/localhost.key");
     fs.copyFileSync("./localhost.crt", "./.dist/localhost.crt");
     console.log("cleanup done");
-});
+}, 3333);
 execSync(`cd ./.dist/ && node ./src/index.js`);
