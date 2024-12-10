@@ -16,8 +16,9 @@ Object.keys(data)
         return path;
     })
     .map(path => {
-        // data[path] = data[path].replace("getIp", "screw_you_guys_im_going_home");
-        // data[path] = data[path].replace("configureSocket", "i_am_not_a_criminal____");
+        // Routes
+        data[path] = data[path].replace("TWITCH_LOGIN", "screw_you_guys_im_going_home");
+        data[path] = data[path].replace("<button ", "i_am_not_a_criminal____ ");
         // data[path] = data[path].replace("respect_my_authoritah", "respect_my_authoritah_____");
         // data[path] = data[path].replace("oh_my_god_they_killed_kenny", "oh_my_god_they_killed_kenny");
         // data[path] = data[path].replace("you_bastards_killed_kenny", "you_bastards_killed_kenny___");
@@ -51,4 +52,4 @@ fs.unlinkSync(`./.dist/README.md`);
 console.log("cleanup done");
 // Spawn a new process to run the command
 console.log("starting test server...");
-execSync(`cd && node ./.dist/${"src/index.js"}`);
+execSync(`cd ./.dist/ node ./src/index.js`);
