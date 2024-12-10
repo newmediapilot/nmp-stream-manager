@@ -1,4 +1,4 @@
-.settings-container {
+.settings {
     width: 100vw;
     height: 100vh;
     overflow-x: hidden;
@@ -10,7 +10,7 @@
     background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
 }
 
-.settings-container:after {
+.settings:after {
     content: "";
     height: 130px;
     background:transparent;
@@ -18,14 +18,7 @@
     display: block;
 }
 
-.settings-nav {
-    position: fixed;
-    right: 0;
-    top: 0;
-    height: 100vh;
-}
-
-.settings-container--header {
+.settings .settings-header {
     border-top: 20px solid rgba(255, 255, 255, 0.6);
     border-right: 20px solid rgba(255, 255, 255, 0.2);
     border-bottom: 20px solid rgba(255, 255, 255, 0.1);
@@ -36,7 +29,7 @@
     z-index: 1;
 }
 
-.settings-container--header p {
+.settings-header p {
     flex-grow: 1;
     font-size: 30px;
     margin-left: 10px;
@@ -112,25 +105,25 @@ ul + #emoji-widget {
 
 /** themes start **/
 .settings-editor.aqua,
-.settings-container--header.aqua,
+.settings-header.aqua,
 .settings-editor.aqua + #emoji-widget {
     background: var(--button-aqua);
 }
 
 .settings-editor.orange,
-.settings-container--header.orange,
+.settings-header.orange,
 .settings-editor.orange + #emoji-widget {
     background: var(--button-orange);
 }
 
 .settings-editor.bloodorange,
-.settings-container--header.bloodorange,
+.settings-header.bloodorange,
 .settings-editor.bloodorange + #emoji-widget {
     background: var(--button-bloodorange);
 }
 
 .settings-editor.purple,
-.settings-container--header.purple,
+.settings-header.purple,
 .settings-editor.purple + #emoji-widget {
     background: var(--button-purple);
 }
