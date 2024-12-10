@@ -67,7 +67,7 @@
 {{ qrcode_dialog("bpm_embed_qrcode_dialog", public_routes.PUBLIC_BPM_EMBED ) }}
 {{ qrcode_dialog("feature_embed_qrcode_dialog", public_routes.PUBLIC_FEATURE_EMBED ) }}
 <!-- dialogs end -->
-<script>
+<script defer>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.preview', 'width', '--js-module-preview-width'));

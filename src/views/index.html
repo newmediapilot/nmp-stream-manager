@@ -23,7 +23,7 @@
 {% block fscripts %}
 <script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
 <script defer src="/script/press_hold.js?={{cache_buster}}" type="text/javascript"></script>
-<script>
+<script defer>
     document.addEventListener("DOMContentLoaded", () => {
         anime({
             targets: 'body',

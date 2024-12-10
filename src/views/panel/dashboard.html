@@ -39,7 +39,7 @@
 <!-- dialogs start -->
 {{ qrcode_dialog("qrcode_dialog", public_routes.PUBLIC_INDEX) }}
 <!-- dialogs end -->
-<script>
+<script defer>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => scrollSnap('.dashboard'));
