@@ -95,13 +95,17 @@
 }
 
 .module .controls {
+    border-top: 20px solid rgba(255, 255, 255, 0.6);
+    border-right: 20px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 20px solid rgba(255, 255, 255, 0.1);
+    border-left: 20px solid rgba(255, 255, 255, 0.4);
     max-width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 100px);
     grid-template-rows: repeat(2, 100px);
     justify-content: end;
-    gap: 10px;
-    margin: 10px;
+    gap:10px;
+    padding: 10px;
     height: 210px;
     position: relative;
 }
