@@ -24,6 +24,4 @@ const detectPressHold = (onHoldDetected, onHoldReleased) => {
     document.addEventListener('touchstart', onDown);
     document.addEventListener('mouseup', onUp);
     document.addEventListener('touchend', onUp);
-
-    console.log('detectPressHold', onHoldDetected, onHoldReleased);
 };
