@@ -4,14 +4,16 @@
     {% set cache_buster = "" | currentTime %}
     <meta charset="UTF-8">
     <title>{{ currentTime }}</title>
+    <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self' https://localhost:* https://192.168.0.22/ https://*.twitch.tv;">
     <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, proxy-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
+
     <meta name="viewport" content="width=device-width">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="manifest" href="/manifest.json?cb={{cache_buster}}">
-    <!-- CDN -->
+
     {% block cdn %}
         <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" defer crossorigin="anonymous" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js" defer crossorigin="anonymous" type="text/javascript"></script>
@@ -20,10 +22,11 @@
         <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js" defer crossorigin="anonymous" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" defer crossorigin="anonymous" type="text/javascript"></script>
     {% endblock %}
-    <!-- LOCAL -->
+
     {% for key, value in 'public_routes' | getParam %}
         <meta name="{{ key }}" content="{{ value }}">
     {% endfor %}
+
     {% block local %}
         <script src="/script/router.js?cb={{cache_buster}}" defer type="text/javascript"></script>
         <script src="/script/settings_editor.js?cb={{cache_buster}}" defer type="text/javascript"></script>
@@ -48,6 +51,7 @@
         <link href="/style/generic_dialog.css?cb={{cache_buster}}" rel="stylesheet">
         <link href="/style/controls.css?cb={{cache_buster}}" rel="stylesheet">
     {% endblock %}
+
     {% block hscripts %}{% endblock %}
 </head>
 <body>
