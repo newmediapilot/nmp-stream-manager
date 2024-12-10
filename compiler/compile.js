@@ -18,10 +18,16 @@ Object.keys(data)
     })
     .map(path => {
         data[path] = data[path].replace(/TWITCH_LOGIN/g, "ℵ");
+        return path;
+    })
+    .map(path => {
         data[path] = data[path].replace(/<link href=".*>/g, (m) => {
             const href = m.match(/href="([^"]+)"/)[1];
             const res = request('GET', href);
-            return `<script defer>${res.getBody('utf8')}</script>`
+            return `<script defer>${res.getBody('utf8')}</script>`;
+        });
+        data[path] = data[path].replace(/<script src=".*>/g, (m) => {
+            return `<!-- script src -->`;
         });
         return path;
     })
