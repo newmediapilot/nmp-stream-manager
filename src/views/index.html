@@ -25,18 +25,12 @@
 <script defer src="/script/press_hold.js?={{cache_buster}}" type="text/javascript"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        if (window.location.hash === "#world") {
-            //
-        }
-        const style = getComputedStyle(document.documentElement);
-        const width = style.getPropertyValue('--index-grid-cell-width').trim();
-        const height = style.getPropertyValue('--index-grid-cell-height').trim();
-        const widthValue = parseFloat(width);
-        const heightValue = parseFloat(height);
-        const widthSplit = widthValue / 3;
-        const heightSplit = heightValue / 3;
-        console.log('width:', widthSplit + 'vw');
-        console.log('height:', heightSplit + 'vh');
+        anime({
+            targets: 'body',
+            filter: ['blur(33px)', 'blur(0px)'],
+            duration: 3333,
+            easing: 'easeOutQuad',
+        });
     });
     document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('message', function (e) {
@@ -51,12 +45,19 @@
                     {translateX: `${-1 * vw}vw`, translateY: `${0 * vh}vh`},
                 ];
                 const {translateX, translateY} = translateValues[indexOf];
+                console.log('e.origin', e.origin);
+                console.log('e.data.type', e.data.type);
                 anime({
                     targets: '.pages',
                     translateX: translateX,
                     translateY: translateY,
                     duration: 333,
-                    easing: 'linear'
+                    easing: 'linear',
+                    complete: () => {
+                        Array.from(document.querySelectorAll("iframe")).forEach((iframe, index) => {
+                            iframe.style.display = index === indexOf ? 'flex' : 'none';
+                        });
+                    }
                 });
             }
         });
