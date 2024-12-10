@@ -2,12 +2,13 @@ const fs = require("fs");
 const path = require("path");
 const {execSync} = require('child_process');
 const request = require('sync-request');
-const combinedJsonPath = path.join(process.cwd(), ".combined.json");
-const data = JSON.parse(fs.readFileSync(combinedJsonPath, "utf-8"));
-// Snapashot
 execSync("node ./compiler/combine.js");
-// Cleanup first
+let jsonDataString = fs.readFileSync("./.combined.json", "utf-8");
+jsonDataString = jsonDataString.replace(/TWITCH_LOGIN/g, "WITCH_TUGGING");
+jsonDataString = jsonDataString.replace(/PUBLIC_INDEX/g, "PUBIC_SERVICE");
+// Clean
 fs.rmSync("./.dist", {recursive: true, force: true});
+const data = JSON.parse(jsonDataString);
 Object.keys(data)
 // Copy files and create directories
     .map(path => {
@@ -22,7 +23,6 @@ Object.keys(data)
     // Remove "cb={{cache_buster}}"
     .map(path => {
         data[path] = data[path].replace(/\?cb={{cache_buster}}/g, "");
-        data[path] = data[path].replace(/TWITCH_LOGIN/g, "TWITCH_LOGIN2");
         return path;
     })
     // Inline cdn
@@ -37,23 +37,24 @@ Object.keys(data)
     // Inline script
     .map(path => {
         data[path] = data[path].replace(/<script src="\/script.*>/g, (m) => {
-            Object.keys(data).forEach(key => {
-
+            const dPath = Object.keys(data).find(key => {
+                const hrefKeys = m.match(/src="([^"]+)"/)[1].split('/').join('');
+                const pathKeys = key.split('\\').join('');
+                return pathKeys.endsWith(hrefKeys);
             });
-            return `<script data-script-compiled>/* hello js */</script>`
+            return `<script data-script-compiled script>${data[dPath]}</script>`
         });
         return path;
     })
     // Inline style
     .map(path => {
-        data[path] = data[path].replace(/<link href="\/style.*>/g, (m) => {
+        data[path] = data[path].replace(/<link src="\/style.*>/g, (m) => {
             const dPath = Object.keys(data).find(key => {
                 const hrefKeys = m.match(/href="([^"]+)"/)[1].split('/').join('');
                 const pathKeys = key.split('\\').join('');
                 return pathKeys.endsWith(hrefKeys);
             });
-            console.log('dPath', dPath);
-            return `<style data-style-compiled>/* hello css */</style>`
+            return `<style data-style-compiled>${data[dPath]}</style>`
         });
         return path;
     })
