@@ -53,8 +53,9 @@ async function publicSignalCreate(req, res) {
 
     // Utility function to re-render all views
     if ("browser" === type) {
-      if ("reload" === description)
-        result = await sendPayload([type, description].join(":"));
+      if ("reload" === description){
+        result = await sendPayload("browser:reload");
+      }
     }
 
     // User friendly errors here
@@ -64,6 +65,7 @@ async function publicSignalCreate(req, res) {
       if ("ad" === type) return res.status(400).send("Could not create ad. Are you online? Did you just run an ad?");
       if ("bpm" === type) return res.status(400).send("There was a problem BPM. Are you online? Is the app configured?");
       if ("feature" === type) return res.status(400).send("There was a problem requesting a streamer. Is the name correct?");
+      if ("reload" === type) return res.status(400).send("There was a problem requesting a reload.");
       return res.status(400).send("Error: " + type);
     }
 
