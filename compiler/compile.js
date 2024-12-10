@@ -5,17 +5,27 @@ const request = require('sync-request');
 execSync("node ./compiler/combine.js");
 let jsonDataString = fs.readFileSync("./.combined.json", "utf-8");
 // First pass before bundling
-jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/g, "");
-jsonDataString = jsonDataString.replace(/TWITCH_LOGIN/g, "WITCH_TUGGING");
-jsonDataString = jsonDataString.replace(/PUBLIC_DASHBOARD/g, "CONTROL_PANEL_O_MATIC");
-jsonDataString = jsonDataString.replace(/PUBLIC_SETTINGS/g, "SETTING_SPREE");
-jsonDataString = jsonDataString.replace(/PUBLIC_MODULES/g, "MYSTERY_MODULES");
-jsonDataString = jsonDataString.replace(/PUBLIC_FEATURE_EMBED/g, "MAGIC_EMBEDDING");
-jsonDataString = jsonDataString.replace(/PUBLIC_BPM_EMBED/g, "BEAT_BOX_EMBED");
-jsonDataString = jsonDataString.replace(/PUBLIC_SIGNAL_CREATE/g, "SIGNAL_FIREWORKS");
-jsonDataString = jsonDataString.replace(/PUBLIC_CONFIG_UPDATE/g, "CONFIG_TWEAKS");
-jsonDataString = jsonDataString.replace(/PUBLIC_STYLE_UPDATE/g, "STYLE_SHUFFLE");
-jsonDataString = jsonDataString.replace(/PUBLIC_BPM_PING/g, "BEAT_THROB");
+// jsonDataString = jsonDataString.replace(/<!--[\s\S]*?-->/gm, '');
+// jsonDataString = jsonDataString.replace(/\/\*[\s\S]*?\*\//gm, '');
+// jsonDataString = jsonDataString.replace(/  /gm, '');
+// jsonDataString = jsonDataString.replace(/  /gm, '');
+// jsonDataString = jsonDataString.replace(/  /gm, '');
+// jsonDataString = jsonDataString.replace(/  /gm, '');
+// jsonDataString = jsonDataString.replace(/\r\n/gm, '');
+// jsonDataString = jsonDataString.replace(/\r\n/gm, '');
+// jsonDataString = jsonDataString.replace(/\r\n/gm, '');
+// jsonDataString = jsonDataString.replace(/\r\n/gm, '');
+jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/gm, "");
+jsonDataString = jsonDataString.replace(/TWITCH_LOGIN/gm, "WITCH_TUGGING");
+jsonDataString = jsonDataString.replace(/PUBLIC_DASHBOARD/gm, "CONTROL_PANEL_O_MATIC");
+jsonDataString = jsonDataString.replace(/PUBLIC_SETTINGS/gm, "SETTING_SPREE");
+jsonDataString = jsonDataString.replace(/PUBLIC_MODULES/gm, "MYSTERY_MODULES");
+jsonDataString = jsonDataString.replace(/PUBLIC_FEATURE_EMBED/gm, "MAGIC_EMBEDDING");
+jsonDataString = jsonDataString.replace(/PUBLIC_BPM_EMBED/gm, "BEAT_BOX_EMBED");
+jsonDataString = jsonDataString.replace(/PUBLIC_SIGNAL_CREATE/gm, "SIGNAL_FIREWORKS");
+jsonDataString = jsonDataString.replace(/PUBLIC_CONFIG_UPDATE/gm, "CONFIG_TWEAKS");
+jsonDataString = jsonDataString.replace(/PUBLIC_STYLE_UPDATE/gm, "STYLE_SHUFFLE");
+jsonDataString = jsonDataString.replace(/PUBLIC_BPM_PING/gm, "BEAT_THROB");
 // Clean
 fs.rmSync("./.dist", {recursive: true, force: true});
 const data = JSON.parse(jsonDataString);
@@ -30,19 +40,9 @@ Object.keys(data)
         }
         return path;
     })
-    // Remove user written items
-    .map(path => {
-        // data[path] = data[path].replace(/\/\*.*\*\//g, '');
-        // data[path] = data[path].replace(/\/\*.*\*\//g, '');
-        // data[path] = data[path].replace(/\/\*.*\*\//g, '');
-        // data[path] = data[path].replace(/<!--.*-->/g, '');
-        // data[path] = data[path].replace(/<!--.*-->/g, '');
-        // data[path] = data[path].replace(/<!--.*-->/g, '');
-        return path;
-    })
     // Inline cdn
     .map(path => {
-        data[path] = data[path].replace(/<script src="https:\/\/cdn.*>/g, (m) => {
+        data[path] = data[path].replace(/<script src="https:\/\/cdn.*>/gm, (m) => {
             const src = m.match(/src="([^"]+)"/)[1];
             const res = request('GET', src);
             return `<script data-path="${src}" defer>${res.getBody('utf8')}</script>`;
@@ -51,7 +51,7 @@ Object.keys(data)
     })
     // Inline script
     .map(path => {
-        data[path] = data[path].replace(/<script src="\/script.*>/g, (m) => {
+        data[path] = data[path].replace(/<script src="\/script.*>/gm, (m) => {
             const src = m.match(/src="([^"]+)"/)[1].split('/').join('');
             const dPath = Object.keys(data).find(key => {
                 const pathKeys = key.split('\\').join('');
@@ -63,7 +63,7 @@ Object.keys(data)
     })
     // Inline style
     .map(path => {
-        data[path] = data[path].replace(/<link href="\/style.*>/g, (m) => {
+        data[path] = data[path].replace(/<link href="\/style.*>/gm, (m) => {
             const hrefKeys = m.match(/href="([^"]+)"/)[1].split('/').join('');
             const dPath = Object.keys(data).find(key => {
                 const pathKeys = key.split('\\').join('');
@@ -82,23 +82,25 @@ Object.keys(data)
         return path;
     });
 fs.copyFileSync(".env", "./.dist/.env");
-// console.log(".dist/.env copied");
 fs.copyFileSync("./localhost.key", "./.dist/localhost.key");
 fs.copyFileSync("./localhost.crt", "./.dist/localhost.crt");
 fs.copyFileSync("./src/assets/icon512_maskable.png", "./.dist/src/assets/icon512_maskable.png");
 fs.copyFileSync("./src/assets/icon512_rounded.png", "./.dist/src/assets/icon512_rounded.png");
 fs.copyFileSync("./src/assets/manifest.json", "./.dist/src/assets/manifest.json");
-// console.log("./localhost.key copied");
-// console.log("./localhost.crt copied");
-// console.log("installing packages");
-// execSync(`cd ./.dist/ && npm i --no-save`);
-// console.log("packages installed");
-fs.unlinkSync(`./.dist/.env-example`);
-fs.unlinkSync(`./.dist/.gitignore`);
-fs.unlinkSync(`./.dist/package.json`);
-fs.unlinkSync(`./.dist/README.md`);
-// fs.rmSync(`./src`, { recursive: true, force: true }); // Test only
-console.log("cleanup done");
+console.log("temp files copied");
+console.log("installing packages");
+execSync(`cd ./.dist/ && npm i --no-save`);
+console.log("installing packages...done");
 // Spawn a new process to run the command
 console.log("starting test server...");
+setTimeout(() => {
+    fs.unlinkSync(`./.dist/.env`);
+    fs.unlinkSync(`./.dist/.env-example`);
+    fs.unlinkSync(`./.dist/.gitignore`);
+    fs.unlinkSync(`./.dist/package.json`);
+    fs.unlinkSync(`./.dist/README.md`);
+    fs.copyFileSync("./localhost.key", "./.dist/localhost.key");
+    fs.copyFileSync("./localhost.crt", "./.dist/localhost.crt");
+    console.log("cleanup done");
+});
 execSync(`cd ./.dist/ && node ./src/index.js`);
