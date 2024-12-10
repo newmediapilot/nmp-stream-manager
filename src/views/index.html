@@ -25,23 +25,30 @@
 <script defer src="/script/press_hold.js?={{cache_buster}}" type="text/javascript"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+        if (window.location.hash === "#world") {
+            //
+        }
+        const style = getComputedStyle(document.documentElement);
+        const width = style.getPropertyValue('--index-grid-cell-width').trim();
+        const height = style.getPropertyValue('--index-grid-cell-height').trim();
+        const widthValue = parseFloat(width);
+        const heightValue = parseFloat(height);
+        const widthSplit = widthValue / 3;
+        const heightSplit = heightValue / 3;
+        console.log('width:', widthSplit + 'vw');
+        console.log('height:', heightSplit + 'vh');
     });
     document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('message', function (e) {
-            const path = e.data.message
             if (e.origin === window.location.origin && e.data.type === "path") {
-                const iframeEls = Array.from(document.querySelectorAll("iframe"));
-                const iframeEl = iframeEls.find(el => {
-                    return el.getAttribute('src') === path.trim();
-                });
+                const iframeEl = Array.from(document.querySelectorAll(`iframe[src="${e.data.message}"]`))[0];
+                const indexOf = Array.from(document.querySelectorAll("iframe")).indexOf(iframeEl);
                 const vw = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-width'));
                 const vh = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-height'));
-                const indexOf = iframeEls.indexOf(iframeEl);
-                indexOf.style.visibility = 'visible';
                 const translateValues = [
-                    {translateX: `${1 * vw}vw`, translateY: `${0 * vh}vh`},// iframe[0]
-                    {translateX: `${0 * vw}vw`, translateY: `${0 * vh}vh`},// iframe[1]
-                    {translateX: `${-1 * vw}vw`, translateY: `${0 * vh}vh`},// iframe[2]
+                    {translateX: `${1 * vw}vw`, translateY: `${0 * vh}vh`},
+                    {translateX: `${0 * vw}vw`, translateY: `${0 * vh}vh`},
+                    {translateX: `${-1 * vw}vw`, translateY: `${0 * vh}vh`},
                 ];
                 const {translateX, translateY} = translateValues[indexOf];
                 anime({
