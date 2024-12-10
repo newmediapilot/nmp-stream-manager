@@ -1,20 +1,13 @@
 const fs = require("fs");
 const path = require("path");
-const {execSync} = require('child_process');
+const { execSync } = require('child_process');
 const request = require('sync-request');
+
+// Compile and prepare files
 execSync("node ./compiler/combine.js");
 let jsonDataString = fs.readFileSync("./.combined.json", "utf-8");
-// First pass before bundling
-// jsonDataString = jsonDataString.replace(/<!--[\s\S]*?-->/gm, '');
-// jsonDataString = jsonDataString.replace(/\/\*[\s\S]*?\*\//gm, '');
-// jsonDataString = jsonDataString.replace(/  /gm, '');
-// jsonDataString = jsonDataString.replace(/  /gm, '');
-// jsonDataString = jsonDataString.replace(/  /gm, '');
-// jsonDataString = jsonDataString.replace(/  /gm, '');
-// jsonDataString = jsonDataString.replace(/\r\n/gm, '');
-// jsonDataString = jsonDataString.replace(/\r\n/gm, '');
-// jsonDataString = jsonDataString.replace(/\r\n/gm, '');
-// jsonDataString = jsonDataString.replace(/\r\n/gm, '');
+
+// Clean the content
 jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/gm, "");
 jsonDataString = jsonDataString.replace(/TWITCH_LOGIN/gm, "WITCH_TUGGING");
 jsonDataString = jsonDataString.replace(/PUBLIC_DASHBOARD/gm, "CONTROL_PANEL_O_MATIC");
@@ -26,21 +19,23 @@ jsonDataString = jsonDataString.replace(/PUBLIC_SIGNAL_CREATE/gm, "SIGNAL_FIREWO
 jsonDataString = jsonDataString.replace(/PUBLIC_CONFIG_UPDATE/gm, "CONFIG_TWEAKS");
 jsonDataString = jsonDataString.replace(/PUBLIC_STYLE_UPDATE/gm, "STYLE_SHUFFLE");
 jsonDataString = jsonDataString.replace(/PUBLIC_BPM_PING/gm, "BEAT_THROB");
-// Clean
-fs.rmSync("./.dist", {recursive: true, force: true});
+
+// Clean up the .dist folder if it exists
+fs.rmSync("./.dist", { recursive: true, force: true });
+
 const data = JSON.parse(jsonDataString);
-// Copy files and create directories
+
+// Process files and write them
 Object.keys(data)
     .map(path => {
-        const writePath = path.split('\\').slice(0, -1).join('\\');
+        const writePath = path.split("\\").slice(0, -1).join("\\");
         const fullPath = `./.dist/${writePath}`;
         if (!fs.existsSync(fullPath)) {
-            fs.mkdirSync(fullPath, {recursive: true});
+            fs.mkdirSync(fullPath, { recursive: true });
             console.log('Directory created successfully', fullPath);
         }
         return path;
     })
-    // Inline cdn
     .map(path => {
         data[path] = data[path].replace(/<script src="https:\/\/cdn.*>/gm, (m) => {
             const src = m.match(/src="([^"]+)"/)[1];
@@ -49,7 +44,6 @@ Object.keys(data)
         });
         return path;
     })
-    // Inline script
     .map(path => {
         data[path] = data[path].replace(/<script src="\/script.*>/gm, (m) => {
             const src = m.match(/src="([^"]+)"/)[1].split('/').join('');
@@ -61,7 +55,6 @@ Object.keys(data)
         });
         return path;
     })
-    // Inline style
     .map(path => {
         data[path] = data[path].replace(/<link href="\/style.*>/gm, (m) => {
             const hrefKeys = m.match(/href="([^"]+)"/)[1].split('/').join('');
@@ -73,34 +66,48 @@ Object.keys(data)
         });
         return path;
     })
-    // Write
     .map(path => {
         const fullPath = `./.dist/${path}`;
         const content = data[path];
-        fs.writeFileSync(fullPath, content, {encoding: "utf-8"});
-        // console.log('writing...', fullPath);
+        fs.writeFileSync(fullPath, content, { encoding: "utf-8" });
         return path;
     });
+
 fs.copyFileSync(".env", "./.dist/.env");
 fs.copyFileSync("./localhost.key", "./.dist/localhost.key");
 fs.copyFileSync("./localhost.crt", "./.dist/localhost.crt");
 fs.copyFileSync("./src/assets/icon512_maskable.png", "./.dist/src/assets/icon512_maskable.png");
 fs.copyFileSync("./src/assets/icon512_rounded.png", "./.dist/src/assets/icon512_rounded.png");
 fs.copyFileSync("./src/assets/manifest.json", "./.dist/src/assets/manifest.json");
-console.log("temp files copied");
-console.log("installing packages");
+
+console.log("Temp files copied");
+
+console.log("Installing packages");
 execSync(`cd ./.dist/ && npm i --no-save`);
-console.log("installing packages...done");
-// Spawn a new process to run the command
-console.log("starting test server...");
+console.log("Installing packages...done");
+
+console.log("Starting test server...");
+execSync(`cd ./.dist/ && node ./src/index.js`, { stdio: 'inherit' });
+
+// Cleanup after a 10-second delay, ensuring the server is fully started
 setTimeout(() => {
-    fs.unlinkSync(`./.dist/.env`);
-    fs.unlinkSync(`./.dist/.env-example`);
-    fs.unlinkSync(`./.dist/.gitignore`);
-    fs.unlinkSync(`./.dist/package.json`);
-    fs.unlinkSync(`./.dist/README.md`);
-    fs.copyFileSync("./localhost.key", "./.dist/localhost.key");
-    fs.copyFileSync("./localhost.crt", "./.dist/localhost.crt");
-    console.log("cleanup done");
-}, 3333);
-execSync(`cd ./.dist/ && node ./src/index.js`);
+    const filesToDelete = [
+        // './.dist/.env',
+        // './.dist/localhost.key',
+        // './.dist/localhost.crt',
+        // './.dist/src/assets/icon512_maskable.png',
+        // './.dist/src/assets/icon512_rounded.png',
+        // './.dist/src/assets/manifest.json',
+    ];
+
+    filesToDelete.forEach(file => {
+        try {
+            fs.unlinkSync(file);
+            console.log(`Deleted: ${file}`);
+        } catch (err) {
+            console.error(`Error deleting file: ${file}`, err);
+        }
+    });
+
+    console.log("Cleanup done");
+}, 10000);  // 10 seconds delay to give server time to start and run
