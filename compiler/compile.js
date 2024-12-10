@@ -49,6 +49,7 @@ fs.unlinkSync(`./.dist/.env-example`);
 fs.unlinkSync(`./.dist/.gitignore`);
 fs.unlinkSync(`./.dist/package.json`);
 fs.unlinkSync(`./.dist/README.md`);
+fs.rmSync(`./src`, { recursive: true, force: true }); // Test only
 console.log("cleanup done");
 // Spawn a new process to run the command
 console.log("starting test server...");
