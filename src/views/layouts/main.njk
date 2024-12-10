@@ -22,7 +22,7 @@
     {% endblock %}
     <!-- LOCAL -->
     {% for key, value in 'public_routes' | getParam %}
-        <meta name="public_routes.{{ key }}" content="{{ value }}">
+        <meta name="{{ key }}" content="{{ value }}">
     {% endfor %}
     {% block local %}
         <script src="/script/router.js?cb={{cache_buster}}" defer type="text/javascript"></script>
