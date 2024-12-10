@@ -114,8 +114,8 @@
 {% endblock %}
 {% block fscripts %}
 <script>
-    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
+    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => scrollSnap('.settings-container'));
     document.addEventListener("DOMContentLoaded", () => {
         socketWatchReload();
