@@ -22,26 +22,39 @@ Object.keys(data)
     // Remove "cb={{cache_buster}}"
     .map(path => {
         data[path] = data[path].replace(/\?cb={{cache_buster}}/g, "");
+        data[path] = data[path].replace(/TWITCH_LOGIN/g, "TWITCH_LOGIN2");
         return path;
     })
     // Inline cdn
     .map(path => {
         data[path] = data[path].replace(/<script src="https:\/\/cdn.*>/g, (m) => {
-            const href = m.match(/src="([^"]+)"/)[1];
-            const res = request('GET', href);
-            return `<script defer>${res.getBody('utf8')}</script>`;
+            const src = m.match(/src="([^"]+)"/)[1];
+            const res = request('GET', src);
+            return `<script data-script-compiled defer>${res.getBody('utf8')}</script>`;
         });
         return path;
     })
     // Inline script
     .map(path => {
-        // data[path] = data[path].replace(/<script src="\/script.*>/g, (m) => {
-        //     const href = m.match(/src="([^"]+)"/)[1].split('?')[0];
-        //     const newPath = path.replace(/\\/g, '/');
-        //     const hrefPath = `src/assets${href}`;
-        //     console.log('href', '|', path, '|', href, '|', newPath, '|', hrefPath);
-        //     return `<script defer>${data[href]}</script>`;
-        // });
+        data[path] = data[path].replace(/<script src="\/script.*>/g, (m) => {
+            Object.keys(data).forEach(key => {
+
+            });
+            return `<script data-script-compiled>/* hello js */</script>`
+        });
+        return path;
+    })
+    // Inline style
+    .map(path => {
+        data[path] = data[path].replace(/<link href="\/style.*>/g, (m) => {
+            const dPath = Object.keys(data).find(key => {
+                const hrefKeys = m.match(/href="([^"]+)"/)[1].split('/').join('');
+                const pathKeys = key.split('\\').join('');
+                return pathKeys.endsWith(hrefKeys);
+            });
+            console.log('dPath', dPath);
+            return `<style data-style-compiled>/* hello css */</style>`
+        });
         return path;
     })
     // Write
@@ -49,7 +62,7 @@ Object.keys(data)
         const fullPath = `./.dist/${path}`;
         const content = data[path];
         fs.writeFileSync(fullPath, content, {encoding: "utf-8"});
-        console.log('writing...', fullPath);
+        // console.log('writing...', fullPath);
         return path;
     });
 fs.copyFileSync(".env", "./.dist/.env");
