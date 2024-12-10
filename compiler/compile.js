@@ -4,9 +4,12 @@ const {execSync} = require('child_process');
 const request = require('sync-request');
 const combinedJsonPath = path.join(process.cwd(), ".combined.json");
 const data = JSON.parse(fs.readFileSync(combinedJsonPath, "utf-8"));
+// Snapashot
 execSync("node ./compiler/combine.js");
+// Cleanup first
 fs.rmSync("./.dist", {recursive: true, force: true});
 Object.keys(data)
+// Copy files and create directories
     .map(path => {
         const writePath = path.split('\\').slice(0, -1).join('\\');
         const fullPath = `./.dist/${writePath}`;
@@ -16,25 +19,37 @@ Object.keys(data)
         }
         return path;
     })
+    // Remove "cb={{cache_buster}}"
     .map(path => {
         data[path] = data[path].replace(/\?cb={{cache_buster}}/g, "");
         return path;
     })
+    // Inline cdn
     .map(path => {
-        data[path] = data[path].replace(/<link href=".*>/g, (m) => {
-            const href = m.match(/href="([^"]+)"/)[1];
+        data[path] = data[path].replace(/<script src="https:\/\/cdn.*>/g, (m) => {
+            const href = m.match(/src="([^"]+)"/)[1];
             const res = request('GET', href);
             return `<script defer>${res.getBody('utf8')}</script>`;
         });
-        data[path] = data[path].replace(/<script src=".*>/g, (m) => {
-            return `<!-- script src -->`;
-        });
         return path;
     })
+    // Inline script
+    .map(path => {
+        // data[path] = data[path].replace(/<script src="\/script.*>/g, (m) => {
+        //     const href = m.match(/src="([^"]+)"/)[1].split('?')[0];
+        //     const newPath = path.replace(/\\/g, '/');
+        //     const hrefPath = `src/assets${href}`;
+        //     console.log('href', '|', path, '|', href, '|', newPath, '|', hrefPath);
+        //     return `<script defer>${data[href]}</script>`;
+        // });
+        return path;
+    })
+    // Write
     .map(path => {
         const fullPath = `./.dist/${path}`;
         const content = data[path];
         fs.writeFileSync(fullPath, content, {encoding: "utf-8"});
+        console.log('writing...', fullPath);
         return path;
     });
 fs.copyFileSync(".env", "./.dist/.env");
