@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const {exec, execSync} = require('child_process');
+const {spawn, execSync} = require('child_process');
 const combinedJsonPath = path.join(process.cwd(), ".combined.json");
 const data = JSON.parse(fs.readFileSync(combinedJsonPath, "utf-8"));
 execSync("node ./compiler/combine.js");
@@ -28,12 +28,21 @@ Object.keys(data)
         fs.writeFileSync(fullPath, content, {encoding: "utf-8"});
         return path;
     });
-return;
+
 fs.copyFileSync(".env", "./.dist/.env");
 console.log(".dist/.env copied");
-// Start server
-console.log("starting services...");
-setTimeout(() => {
-    console.log('services started');
-}, 1000);
-execSync(`node ./.dist/${"src/index.js"}`);
+console.log("installing packages");
+execSync(`cd ./.dist/ && npm i`);
+console.log("packages installed");
+
+fs.unlinkSync(`./.dist/.env-example`);
+fs.unlinkSync(`./.dist/.gitignore`);
+fs.unlinkSync(`./.dist/package.json`);
+fs.unlinkSync(`./.dist/package-lock.json`);
+fs.unlinkSync(`./.dist/README.md`);
+console.log("cleanup done");
+
+// Spawn a new process to run the command
+spawn(`node`, [`./.dist/${"src/index.js"}`], {
+    stdio: 'inherit'
+});
