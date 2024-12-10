@@ -50,7 +50,7 @@ const storeInputValues = () => {
             // to style it, we will get a browser reload crash
         }
     });
-    console.log('storeInputValues', payload);
+    // console.log('storeInputValues', payload);
 };
 // Simulates a joystick
 const initializeInputForms = () => {
