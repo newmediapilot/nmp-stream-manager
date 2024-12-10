@@ -49,12 +49,7 @@
                     translateX: translateX,
                     translateY: translateY,
                     duration: 333,
-                    easing: 'linear',
-                    complete: function () {
-                        document.querySelectorAll("iframe", (iframeVisibilityEl, index) => {
-                            iframeVisibilityEl.style.visibility = indexOf === index ? 'visible' : 'hidden';
-                        })
-                    }
+                    easing: 'linear'
                 });
             }
         });
