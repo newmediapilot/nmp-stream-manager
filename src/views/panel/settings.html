@@ -5,7 +5,7 @@
 {% endblock %}
 {% block body %}
 {% include "partials/controls.njk" %}
-<ul class="settings-container">
+<ul class="settings">
     <!---->
     <!---->
     <!---->
@@ -13,7 +13,7 @@
     {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "feature" %}
     {% if not feature_title_set %}{% set feature_title_set = true %}
-    <li class="settings-container--header {{ signal.theme }}">
+    <li class="settings-header {{ signal.theme }}">
         <p>Featured</p>
     </li>
     {% endif %}
@@ -33,7 +33,7 @@
     {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "mark" %}
     {% if not feature_title_set %}{% set feature_title_set = true %}
-    <li class="settings-container--header {{ signal.theme }}">
+    <li class="settings-header {{ signal.theme }}">
         <p>Markers</p>
     </li>
     {% endif %}
@@ -53,15 +53,15 @@
     {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "ad" %}
     {% if not feature_title_set %}{% set feature_title_set = true %}
-    <li class="settings-container--header {{ signal.theme }}">
+    <li class="settings-header {{ signal.theme }}">
         <p>Ads</p>
     </li>
     {% endif %}
-        <div class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
-            <button/>
-            {{ signal.emoji }}</button>
-            <input type="text" disabled value="{{ signal.label }}"/>
-        </div>
+    <div class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
+        <button/>
+        {{ signal.emoji }}</button>
+        <input type="text" disabled value="{{ signal.label }}"/>
+    </div>
     </li>
     {% endif %}
     {% endfor %}
@@ -72,7 +72,7 @@
     {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "bpm" %}
     {% if not feature_title_set %}{% set feature_title_set = true %}
-    <li class="settings-container--header {{ signal.theme }}">
+    <li class="settings-header {{ signal.theme }}">
         <p>BPM Display</p>
     </li>
     {% endif %}
@@ -116,11 +116,7 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    document.addEventListener("DOMContentLoaded", () => scrollSnap('.settings-container'));
-    document.addEventListener("DOMContentLoaded", () => {
-        socketWatchReload();
-        document.querySelectorAll(".settings-editor").forEach(initSettingsEditor);
-        scrollSnap('.settings-container');
-    });
+    document.addEventListener("DOMContentLoaded", () => scrollSnap('.settings'));
+    document.addEventListener("DOMContentLoaded", () => document.querySelectorAll(".settings-editor").forEach(initSettingsEditor));
 </script>
 {% endblock %}
