@@ -41,6 +41,7 @@ const getStyle = (type) => {
     return fs.readFileSync(fileName, "utf-8");
 };
 
+// TODO: add validation to prevent non-variables from entering
 const publicStyleUpdate = (req, res) => {
     const {type, payload} = req.query;
     console.log2(process.cwd(), "publicStyleUpdate", type, payload);
