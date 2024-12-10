@@ -18,7 +18,7 @@ Object.keys(data)
     .map(path => {
         // Routes
         data[path] = data[path].replace("TWITCH_LOGIN", "screw_you_guys_im_going_home");
-        data[path] = data[path].replace("<button ", "i_am_not_a_criminal____ ");
+        data[path] = data[path].replace("public_routes.", "i_am_not_a_criminal____.");
         // data[path] = data[path].replace("respect_my_authoritah", "respect_my_authoritah_____");
         // data[path] = data[path].replace("oh_my_god_they_killed_kenny", "oh_my_god_they_killed_kenny");
         // data[path] = data[path].replace("you_bastards_killed_kenny", "you_bastards_killed_kenny___");
@@ -35,11 +35,13 @@ Object.keys(data)
         fs.writeFileSync(fullPath, content, {encoding: "utf-8"});
         return path;
     });
-
 fs.copyFileSync(".env", "./.dist/.env");
 // console.log(".dist/.env copied");
 fs.copyFileSync("./localhost.key", "./.dist/localhost.key");
 fs.copyFileSync("./localhost.crt", "./.dist/localhost.crt");
+fs.copyFileSync("./src/assets/icon512_maskable.png", "./.dist/src/assets/icon512_maskable.png");
+fs.copyFileSync("./src/assets/icon512_rounded.png", "./.dist/src/assets/icon512_rounded.png");
+fs.copyFileSync("./src/assets/manifest.json", "./.dist/src/assets/manifest.json");
 // console.log("./localhost.key copied");
 // console.log("./localhost.crt copied");
 // console.log("installing packages");
@@ -49,8 +51,8 @@ fs.unlinkSync(`./.dist/.env-example`);
 fs.unlinkSync(`./.dist/.gitignore`);
 fs.unlinkSync(`./.dist/package.json`);
 fs.unlinkSync(`./.dist/README.md`);
-fs.rmSync(`./src`, { recursive: true, force: true }); // Test only
+// fs.rmSync(`./src`, { recursive: true, force: true }); // Test only
 console.log("cleanup done");
 // Spawn a new process to run the command
 console.log("starting test server...");
-execSync(`cd ./.dist/ node ./src/index.js`);
+execSync(`cd ./.dist/ && node ./src/index.js`);
