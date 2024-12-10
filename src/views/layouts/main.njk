@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="manifest" href="/manifest.json?={{ cache_buster }}">
+    <link rel="manifest" href="/manifest.json?cb={{cache_buster}}">
     <!-- CDN -->
     {% block cdn %}
         <link href="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" crossorigin="anonymous" rel="preload" as="script">
@@ -31,28 +31,28 @@
         <meta name="public_routes.{{ key }}" content="{{ value }}">
     {% endfor %}
     {% block local %}
-        <script defer src="/script/router.js?={{ cache_buster }}" type="text/javascript"></script>
-        <script defer src="/script/settings_editor.js?={{ cache_buster }}" type="text/javascript"></script>
-        <script defer src="/script/generate_qr_code.js?={{ cache_buster }}" type="text/javascript"></script>
-        <script defer src="/script/generate_copy_link.js?={{ cache_buster }}" type="text/javascript"></script>
-        <script defer src="/script/generic_dialog.js?={{ cache_buster }}" type="text/javascript"></script>
-        <script defer src="/script/send_signal.js?={{ cache_buster }}" type="text/javascript"></script>
-        <script defer src="/script/dashboard_buttons.js?={{ cache_buster }}" type="text/javascript"></script>
-        <script defer src="/script/socket.js?={{ cache_buster }}" type="text/javascript"></script>
-        <script defer src="/script/scroll_snap.js?={{ cache_buster }}" type="text/javascript"></script>
-        <script defer src="/script/css_variables.js?={{ cache_buster }}" type="text/javascript"></script>
-        <script defer src="/script/iframe.js?={{ cache_buster }}" type="text/javascript"></script>
-        <script defer src="/script/modules.js?={{ cache_buster }}" type="text/javascript"></script>
-        <script defer src="/script/press_hold.js?={{ cache_buster }}" type="text/javascript"></script>
-        <script defer src="/script/debounce.js?={{ cache_buster }}" type="text/javascript"></script>
-        <script defer src="/script/device_type.js?={{ cache_buster }}" type="text/javascript"></script>
-        <link rel="stylesheet" href="/style/font.css?cb={{ cache_buster }}">
-        <link rel="stylesheet" href="/style/reset.css?cb={{ cache_buster }}">
-        <link rel="stylesheet" href="/style/base.css?cb={{ cache_buster }}">
-        <link rel="stylesheet" href="/style/variables.css?cb={{ cache_buster }}">
-        <link rel="stylesheet" href="/style/scrollbar.css?cb={{ cache_buster }}">
-        <link rel="stylesheet" href="/style/generic_dialog.css?cb={{ cache_buster }}">
-        <link rel="stylesheet" href="/style/controls.css?cb={{ cache_buster }}">
+        <script defer src="/script/router.js?cb={{cache_buster}}" type="text/javascript"></script>
+        <script defer src="/script/settings_editor.js?cb={{cache_buster}}" type="text/javascript"></script>
+        <script defer src="/script/generate_qr_code.js?cb={{cache_buster}}" type="text/javascript"></script>
+        <script defer src="/script/generate_copy_link.js?cb={{cache_buster}}" type="text/javascript"></script>
+        <script defer src="/script/generic_dialog.js?cb={{cache_buster}}" type="text/javascript"></script>
+        <script defer src="/script/send_signal.js?cb={{cache_buster}}" type="text/javascript"></script>
+        <script defer src="/script/dashboard_buttons.js?cb={{cache_buster}}" type="text/javascript"></script>
+        <script defer src="/script/socket.js?cb={{cache_buster}}" type="text/javascript"></script>
+        <script defer src="/script/scroll_snap.js?cb={{cache_buster}}" type="text/javascript"></script>
+        <script defer src="/script/css_variables.js?cb={{cache_buster}}" type="text/javascript"></script>
+        <script defer src="/script/iframe.js?cb={{cache_buster}}" type="text/javascript"></script>
+        <script defer src="/script/modules.js?cb={{cache_buster}}" type="text/javascript"></script>
+        <script defer src="/script/press_hold.js?cb={{cache_buster}}" type="text/javascript"></script>
+        <script defer src="/script/debounce.js?cb={{cache_buster}}" type="text/javascript"></script>
+        <script defer src="/script/device_type.js?cb={{cache_buster}}" type="text/javascript"></script>
+        <link rel="stylesheet" href="/style/font.css?cb={{cache_buster}}">
+        <link rel="stylesheet" href="/style/reset.css?cb={{cache_buster}}">
+        <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
+        <link rel="stylesheet" href="/style/variables.css?cb={{cache_buster}}">
+        <link rel="stylesheet" href="/style/scrollbar.css?cb={{cache_buster}}">
+        <link rel="stylesheet" href="/style/generic_dialog.css?cb={{cache_buster}}">
+        <link rel="stylesheet" href="/style/controls.css?cb={{cache_buster}}">
     {% endblock %}
     {% block hscripts %}{% endblock %}
 </head>

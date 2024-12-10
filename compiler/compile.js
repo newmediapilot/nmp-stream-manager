@@ -17,7 +17,7 @@ Object.keys(data)
         return path;
     })
     .map(path => {
-        data[path] = data[path].replace(/TWITCH_LOGIN/g, "ℵ");
+        data[path] = data[path].replace(/\?cb={{cache_buster}}/g, "");
         return path;
     })
     .map(path => {
