@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const {spawn, execSync} = require('child_process');
+const {execSync} = require('child_process');
+const request = require('sync-request');
 const combinedJsonPath = path.join(process.cwd(), ".combined.json");
 const data = JSON.parse(fs.readFileSync(combinedJsonPath, "utf-8"));
 execSync("node ./compiler/combine.js");
@@ -19,8 +20,8 @@ Object.keys(data)
         data[path] = data[path].replace(/TWITCH_LOGIN/g, "ℵ");
         data[path] = data[path].replace(/<link href=".*>/g, (m) => {
             const href = m.match(/href="([^"]+)"/)[1];
-            console.log('href', href);
-            return `<script defer><!-- hei there --></script>`
+            const res = request('GET', href);
+            return `<script defer>${res.getBody('utf8')}</script>`
         });
         return path;
     })
