@@ -40,14 +40,18 @@ const socketWatchReload = () => {
 
     console.log("socketWatchReload");
 
-    const timeout = 3000;
+    const timeout = 333;
     let to = null;
 
     const setFocusToken = () => {
         if (to) clearTimeout(to);
         document.documentElement.classList.add('focus');
-        to = setTimeout(() => document.documentElement.classList.remove('focus'), timeout);
+        to = setTimeout(() => {
+            document.documentElement.classList.remove('focus');
+        }, timeout);
     };
+
+    setFocusToken();
 
     document.documentElement.querySelectorAll('*').forEach((e) => e.addEventListener('touchstart', setFocusToken));
     document.documentElement.querySelectorAll('*').forEach((e) => e.addEventListener('touchend', setFocusToken));
