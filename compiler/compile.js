@@ -3,7 +3,7 @@ const path = require("path");
 const combinedJsonPath = path.join(process.cwd(), ".combined.json");
 const data = JSON.parse(fs.readFileSync(combinedJsonPath, "utf-8"));
 
-fs.rmSync("./.dist", { recursive: true, force: true });
+fs.rmSync("./.dist", {recursive: true, force: true});
 
 Object.keys(data)
     .sort((a, b) => a.split('\\').length - b.split('\\').length)
@@ -13,7 +13,7 @@ Object.keys(data)
         const fullPath = `./.dist/${writePath}`;
         // Ensure the parent directories exist, creating them if necessary
         if (!fs.existsSync(fullPath)) {
-            fs.mkdirSync(fullPath, { recursive: true });  // Create parent directories if they don't exist
+            fs.mkdirSync(fullPath, {recursive: true});  // Create parent directories if they don't exist
             console.log('Directory created successfully', fullPath);
         }
         return path;
@@ -24,4 +24,5 @@ Object.keys(data)
         return path;
     });
 
-// fs.copyFileSync(".env", ".dist/.env");
+fs.copyFileSync(".env", ".dist/.env");
+console.log(".dist/.env copied");
