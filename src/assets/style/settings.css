@@ -1,7 +1,3 @@
-ul + #emoji-widget {
-    display: none;
-}
-
 .settings-container {
     width: 100vw;
     height: 100vh;
@@ -84,6 +80,10 @@ ul + #emoji-widget {
     align-items: center;
     line-height: 0;
     position: relative;
+}
+
+ul + #emoji-widget {
+    display: none;
 }
 
 #emoji-widget {
