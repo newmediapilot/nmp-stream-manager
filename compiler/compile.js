@@ -16,10 +16,16 @@ Object.keys(data)
         return path;
     })
     .map(path => {
-        const content = data[path];
-        const fileName = path.split('\\').pop();
-        const isModule = path.includes('\\modules\\');
-        console.log('isModule', isModule, fileName);
+        // data[path] = data[path].replace("getIp", "screw_you_guys_im_going_home");
+        // data[path] = data[path].replace("configureSocket", "i_am_not_a_criminal____");
+        // data[path] = data[path].replace("respect_my_authoritah", "respect_my_authoritah_____");
+        // data[path] = data[path].replace("oh_my_god_they_killed_kenny", "oh_my_god_they_killed_kenny");
+        // data[path] = data[path].replace("you_bastards_killed_kenny", "you_bastards_killed_kenny___");
+        // data[path] = data[path].replace("dont_think_ill_forget", "dont_think_ill_forget_____");
+        // data[path] = data[path].replace("how_do_you_do_it", "how_do_you_do_it_________");
+        // data[path] = data[path].replace("dont_touch_me_im_irish", "dont_touch_me_im_irish____");
+        // data[path] = data[path].replace("im_not_going_to_school", "im_not_going_to_school____");
+        // data[path] = data[path].replace("this_isnt_even_my_final_form", "this_isnt_even_my_final_form");
         return path;
     })
     .map(path => {
@@ -30,19 +36,19 @@ Object.keys(data)
     });
 
 fs.copyFileSync(".env", "./.dist/.env");
-console.log(".dist/.env copied");
-console.log("installing packages");
-execSync(`cd ./.dist/ && npm i`);
-console.log("packages installed");
-
+// console.log(".dist/.env copied");
+fs.copyFileSync("./localhost.key", "./.dist/localhost.key");
+fs.copyFileSync("./localhost.crt", "./.dist/localhost.crt");
+// console.log("./localhost.key copied");
+// console.log("./localhost.crt copied");
+// console.log("installing packages");
+// execSync(`cd ./.dist/ && npm i --no-save`);
+// console.log("packages installed");
 fs.unlinkSync(`./.dist/.env-example`);
 fs.unlinkSync(`./.dist/.gitignore`);
 fs.unlinkSync(`./.dist/package.json`);
-fs.unlinkSync(`./.dist/package-lock.json`);
 fs.unlinkSync(`./.dist/README.md`);
 console.log("cleanup done");
-
 // Spawn a new process to run the command
-spawn(`node`, [`./.dist/${"src/index.js"}`], {
-    stdio: 'inherit'
-});
+console.log("starting test server...");
+execSync(`cd && node ./.dist/${"src/index.js"}`);
