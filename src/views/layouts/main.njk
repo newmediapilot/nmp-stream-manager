@@ -1,65 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     {% set cache_buster = "" | currentTime %}
-
     <title>{{ currentTime }}</title>
-
-    {% set cache_buster = "" | currentTime %}
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="manifest" href="/manifest.json?={{cache_buster}}">
+    <link rel="manifest" href="/manifest.json?={{ cache_buster }}">
     <!-- CDN -->
     {% block cdn %}
-    <link crossorigin="anonymous" href="https://fonts.gstatic.com/s/jaro/v6/ea8DadQwV_r_Rv3-7zZMCGhQgVr1SmCkPvzlpQ.woff2" rel="preload" as="font">
-    <link crossorigin="anonymous" href="https://fonts.gstatic.com/s/jaro/v6/ea8DadQwV_r_Rv3-7zZMCGhQgVr1SmCrPvw.woff2" rel="preload" as="font">
-    <link crossorigin="anonymous" href="https://fonts.googleapis.com/css2?family=Jaro:wght@400;500;600;700&display=swap" rel="preload" as="style">
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" rel="preload" as="script">
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" rel="preload" as="script">
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js" rel="preload" as="script">
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js" rel="preload" as="script">
-    <link crossorigin="anonymous" href="https://cdn.socket.io/4.0.0/socket.io.min.js" rel="preload" as="script">
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" rel="preload" as="script">
-    <link crossorigin="anonymous" href="https://fonts.googleapis.com/css2?family=Jaro:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" defer type="text/javascript"></script>
-    <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js" defer type="text/javascript"></script>
-    <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer type="text/javascript"></script>
-    <script defer crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" defer type="text/javascript"></script>
-    <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js" defer type="text/javascript"></script>
-    <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" defer type="text/javascript"></script>
+        <link crossorigin="anonymous"
+              href="https://fonts.gstatic.com/s/jaro/v6/ea8DadQwV_r_Rv3-7zZMCGhQgVr1SmCkPvzlpQ.woff2" rel="preload"
+              as="font">
+        <link crossorigin="anonymous"
+              href="https://fonts.gstatic.com/s/jaro/v6/ea8DadQwV_r_Rv3-7zZMCGhQgVr1SmCrPvw.woff2" rel="preload"
+              as="font">
+        <link crossorigin="anonymous"
+              href="https://fonts.googleapis.com/css2?family=Jaro:wght@400;500;600;700&display=swap" rel="preload"
+              as="style">
+        <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"
+              rel="preload" as="script">
+        <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" rel="preload"
+              as="script">
+        <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"
+              rel="preload" as="script">
+        <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js" rel="preload"
+              as="script">
+        <link crossorigin="anonymous" href="https://cdn.socket.io/4.0.0/socket.io.min.js" rel="preload" as="script">
+        <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" rel="preload"
+              as="script">
+        <link crossorigin="anonymous"
+              href="https://fonts.googleapis.com/css2?family=Jaro:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"
+                defer type="text/javascript"></script>
+        <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js" defer
+                type="text/javascript"></script>
+        <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer
+                type="text/javascript"></script>
+        <script defer crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" defer
+                type="text/javascript"></script>
+        <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js" defer
+                type="text/javascript"></script>
+        <script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" defer
+                type="text/javascript"></script>
     {% endblock %}
     <!-- LOCAL -->
-{#  {% set assetLinks = "" | generateAssetLinks %}#}
-{#  {% for link in assetLinks %}<link rel="preload" as="{{ link.type }}" href="{{ link.href | safe }}">#}
-{#  {% endfor %}#}
+    {% for key, value in 'public_routes' | getParam %}
+        <meta name="public_routes.{{ key }}" content="{{ value }}">
+    {% endfor %}
     {% block local %}
-    <script defer src="/script/router.js?={{cache_buster}}" type="text/javascript"></script>
-    <script defer src="/script/settings_editor.js?={{cache_buster}}" type="text/javascript"></script>
-    <script defer src="/script/generate_qr_code.js?={{cache_buster}}" type="text/javascript"></script>
-    <script defer src="/script/generate_copy_link.js?={{cache_buster}}" type="text/javascript"></script>
-    <script defer src="/script/generic_dialog.js?={{cache_buster}}" type="text/javascript"></script>
-    <script defer src="/script/send_signal.js?={{cache_buster}}" type="text/javascript"></script>
-    <script defer src="/script/dashboard_buttons.js?={{cache_buster}}" type="text/javascript"></script>
-    <script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
-    <script defer src="/script/scroll_snap.js?={{cache_buster}}" type="text/javascript"></script>
-    <script defer src="/script/css_variables.js?={{cache_buster}}" type="text/javascript"></script>
-    <script defer src="/script/iframe.js?={{cache_buster}}" type="text/javascript"></script>
-    <script defer src="/script/modules.js?={{cache_buster}}" type="text/javascript"></script>
-    <script defer src="/script/press_hold.js?={{cache_buster}}" type="text/javascript"></script>
-    <script defer src="/script/debounce.js?={{cache_buster}}" type="text/javascript"></script>
-    <script defer src="/script/device_type.js?={{cache_buster}}" type="text/javascript"></script>
-    <link rel="stylesheet" href="/style/font.css?cb={{cache_buster}}">
-    <link rel="stylesheet" href="/style/reset.css?cb={{cache_buster}}">
-    <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
-    <link rel="stylesheet" href="/style/variables.css?cb={{cache_buster}}">
-    <link rel="stylesheet" href="/style/scrollbar.css?cb={{cache_buster}}">
-    <link rel="stylesheet" href="/style/generic_dialog.css?cb={{cache_buster}}">
-    <link rel="stylesheet" href="/style/controls.css?cb={{cache_buster}}">
+        <script defer src="/script/router.js?={{ cache_buster }}" type="text/javascript"></script>
+        <script defer src="/script/settings_editor.js?={{ cache_buster }}" type="text/javascript"></script>
+        <script defer src="/script/generate_qr_code.js?={{ cache_buster }}" type="text/javascript"></script>
+        <script defer src="/script/generate_copy_link.js?={{ cache_buster }}" type="text/javascript"></script>
+        <script defer src="/script/generic_dialog.js?={{ cache_buster }}" type="text/javascript"></script>
+        <script defer src="/script/send_signal.js?={{ cache_buster }}" type="text/javascript"></script>
+        <script defer src="/script/dashboard_buttons.js?={{ cache_buster }}" type="text/javascript"></script>
+        <script defer src="/script/socket.js?={{ cache_buster }}" type="text/javascript"></script>
+        <script defer src="/script/scroll_snap.js?={{ cache_buster }}" type="text/javascript"></script>
+        <script defer src="/script/css_variables.js?={{ cache_buster }}" type="text/javascript"></script>
+        <script defer src="/script/iframe.js?={{ cache_buster }}" type="text/javascript"></script>
+        <script defer src="/script/modules.js?={{ cache_buster }}" type="text/javascript"></script>
+        <script defer src="/script/press_hold.js?={{ cache_buster }}" type="text/javascript"></script>
+        <script defer src="/script/debounce.js?={{ cache_buster }}" type="text/javascript"></script>
+        <script defer src="/script/device_type.js?={{ cache_buster }}" type="text/javascript"></script>
+        <link rel="stylesheet" href="/style/font.css?cb={{ cache_buster }}">
+        <link rel="stylesheet" href="/style/reset.css?cb={{ cache_buster }}">
+        <link rel="stylesheet" href="/style/base.css?cb={{ cache_buster }}">
+        <link rel="stylesheet" href="/style/variables.css?cb={{ cache_buster }}">
+        <link rel="stylesheet" href="/style/scrollbar.css?cb={{ cache_buster }}">
+        <link rel="stylesheet" href="/style/generic_dialog.css?cb={{ cache_buster }}">
+        <link rel="stylesheet" href="/style/controls.css?cb={{ cache_buster }}">
     {% endblock %}
     {% block hscripts %}{% endblock %}
 </head>
