@@ -27,8 +27,8 @@
     document.addEventListener("DOMContentLoaded", () => {
         anime({
             targets: 'body',
-            filter: ['blur(33px)', 'blur(0px)'],
-            duration: 3333,
+            filter: ['sepia(100%)', 'sepia(0%)'], // Animate from full sepia to no sepia
+            duration: 10000,
             easing: 'easeOutQuad',
         });
     });
