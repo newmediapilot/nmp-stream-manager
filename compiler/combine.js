@@ -57,7 +57,7 @@ files.forEach((file) => {
 
   console.log(process.cwd(), `Processing file: ${relativePath}`);
 
-  const fileContent = fs.readFileSync(file, "utf-8");
+  const fileContent = fs.readFileSync(file, {encoding: "utf-8"});
   combined[relativePath] = fileContent;
 });
 
