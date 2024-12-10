@@ -1,3 +1,4 @@
 #!/bin/bash
 
-npm run combine
+node compiler/combine.js
+node compiler/compile.js

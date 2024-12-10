@@ -3,7 +3,7 @@
   "main": "src/index.js",
   "scripts": {
     "reset": "rm -rf node_modules && npm i",
-    "deploy": "./deploy.sh",
+    "deploy": "bash ./deploy.sh",
     "curl": "rm -rf .bin && curl -L \"https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe\" -o \"./.bin\"",
     "cert": "openssl req -nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
     "start": "node src/index.js",
