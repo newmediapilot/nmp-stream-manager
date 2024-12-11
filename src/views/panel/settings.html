@@ -131,7 +131,7 @@
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    document.addEventListener("DOMContentLoaded", () => scrollSnap('.settings'));
+    document.addEventListener("DOMContentLoaded", () => scrollSnap(document.querySelector('.settings')));
     document.addEventListener("DOMContentLoaded", () => document.querySelectorAll(".settings-editor").forEach(initSettingsEditor));
 </script>
 {% endblock %}

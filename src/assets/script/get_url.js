@@ -1,6 +1,5 @@
 const getURL = (path) => {
-    // TODO: implement the real thing
-    document.querySelectorAll('#menu-toggle').forEach(el => el.checked = false)
+    document.querySelectorAll('#toggle-nav-show').forEach(el => el.checked = false);// TODO: implement the real thing
     if (window.self !== window.top) {
         window.parent.postMessage(
             {type: 'path', message: path},

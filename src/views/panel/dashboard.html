@@ -1,20 +1,20 @@
 {% extends "layouts/main.njk" %}
 {% set cache_buster = "" | currentTime %}
-{% set public_routes = 'public_routes' | getParam %}
+{% set public_routes = "public_routes" | getParam %}
 {% block hscripts %}
 <link rel="stylesheet" href="/style/dashboard.css?cb={{cache_buster}}">
 {% endblock %}
 {% block body %}
 <div class="dashboard">
-    {% for config in 'dashboard_signals_config' | getParam %}
+    {% for config in "dashboard_signals_config" | getParam %}
     {% if config.type == "feature" %}
-        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=feature&type=" ~ config.type ~ "&description=" ~
+    {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=feature&type=" ~ config.type ~ "&description=" ~
     config.description ~ ":" ~ config.label %}
     {% elif config.type == "mark" %}
-        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~
+    {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~
     config.label %}
     {% else %}
-        {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~
+    {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~
     config.description %}
     {% endif %}
     <div class="button button-{{ config.theme }}" href="{{data_href}}">
@@ -31,15 +31,14 @@
 {% endblock %}
 {% block extras %}
 <!-- dialogs start -->
-<!--<dialog class="dialog-container" id="{{ id }}">-->
-<!--    <div class="dialog&#45;&#45;title">...</div>-->
-<!--    <div class="dialog&#45;&#45;body">...</div>-->
-<!--    <canvas id="qr-code-dialog-canvas" data-url="https://{{ device_ip  }}{{ public_route }}"></canvas>-->
-<!--    <button style="background: deepskyblue" id="qr-code-copy-link"-->
-<!--            data-clipboard-text="https://{{ device_ip  }}{{ public_route }}">Click to Copy Link!-->
-<!--    </button>-->
-<!--    <button style="background: green" onclick="javascript:closeDialog('{{ id }}')">✅Done</button>-->
-<!--</dialog>-->
+<dialog id="qr-dialog"
+        data-url="https://{{ device_ip  }}{{ public_route }}">
+    <h2 class="dialog--title">QR Code Dialog</h2>
+    <h3 class="dialog--body">This link will open this page on any device on your network</h3>
+    <canvas/>
+    <button>Click to Copy Link!</button>
+    <button style="background: green" onclick="javascript:closeDialog('qr-dialog')">✅Done</button>
+</dialog>
 <!-- dialogs end -->
 {% endblock %}
 {% block fscripts %}
@@ -47,31 +46,34 @@
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    document.addEventListener("DOMContentLoaded", () => scrollSnap('.dashboard'));
-    // document.addEventListener("DOMContentLoaded", () => generateCopyLink('#qr-code-copy-link'));
-    document.addEventListener("DOMContentLoaded", () => generateQrCode(document.querySelector("#qr-code-dialog-canvas").getAttribute('data-url'), "#qr-code-dialog-canvas"));
+    document.addEventListener("DOMContentLoaded", () => scrollSnap(document.querySelector(".dashboard")));
+    document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.querySelector(".dashboard")));
+    document.addEventListener("DOMContentLoaded", () => generateQrCode(
+        document.querySelector("#qr-dialog").getAttribute("data-url"),
+        document.querySelector("#qr-dialog canvas")
+    ));
     document.addEventListener("DOMContentLoaded", () => dashboard());
     document.addEventListener("DOMContentLoaded", () => {
         anime({
-            targets: 'html.iframe .dashboard button',
+            targets: "html.iframe .dashboard button",
             duration: 1500,
             delay: anime.stagger(210),
-            easing: 'easeInOutCubic',
-            direction: 'alternate',
-            borderTopWidth: ['20px', '200px'],
-            borderBottomWidth: ['20px', '200px'],
-            borderLeftWidth: ['20px', '200px'],
-            borderRightWidth: ['20px', '200px'],
-            borderRadius: ['15px', '30px']
+            easing: "easeInOutCubic",
+            direction: "alternate",
+            borderTopWidth: ["20px", "200px"],
+            borderBottomWidth: ["20px", "200px"],
+            borderLeftWidth: ["20px", "200px"],
+            borderRightWidth: ["20px", "200px"],
+            borderRadius: ["15px", "30px"]
         });
     });
     document.addEventListener("DOMContentLoaded", () => {
         anime({
-            targets: '.dashboard button',
+            targets: ".dashboard button",
             duration: 3000,
             delay: anime.stagger(50),
-            easing: 'easeInElastic(1, .6)',
-            filter: 'hue-rotate(360deg)',
+            easing: "easeInElastic(1, .6)",
+            filter: "hue-rotate(360deg)",
             loopBegin: function (anim) {
                 setTimeout(anim.play, 7000);
             }

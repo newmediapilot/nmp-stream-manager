@@ -76,25 +76,13 @@
 {% block fscripts %}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
-    document.addEventListener("DOMContentLoaded", () => socketConnect());
+    // document.addEventListener("DOMContentLoaded", () => socketConnect());
     // document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.preview', 'width', '--js-module-preview-width'));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.title', 'height', '--js-module-title-height', 'px'));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.module', 'height', '--js-module-content-height', 'px'));
-    document.addEventListener("DOMContentLoaded", () => applyStyleUpdates());
-    document.addEventListener("DOMContentLoaded", () => initializeInputForms());
-    document.addEventListener("DOMContentLoaded", () => scrollSnap('.modules'));
-    document.addEventListener("DOMContentLoaded", () => {
-        anime({
-            targets: '.module .preview',
-            duration: 5000,
-            easing: 'linear',
-            update: function (anim) {
-                const percentage = anim.progress;
-                const hueRotation = (percentage * 360) / 100;
-                document.querySelector('.module .preview').style.filter = `hue-rotate(${hueRotation}deg)`;
-            }
-        });
-    });
+    // document.addEventListener("DOMContentLoaded", () => applyStyleUpdates());
+    // document.addEventListener("DOMContentLoaded", () => initializeInputForms());
+    document.addEventListener("DOMContentLoaded", () => scrollSnap(document.querySelector(".modules")));
 </script>
 {% endblock %}

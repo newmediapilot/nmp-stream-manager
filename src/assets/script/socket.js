@@ -34,9 +34,9 @@ const socketWatchReload = () => {
     let to = null;
     const setFocusToken = () => {
         if (to) clearTimeout(to);
-        document.documentElement.classList.add('focus');
+        document.documentElement.classList.add('socket-watch-reload-focus');
         to = setTimeout(() => {
-            document.documentElement.classList.remove('focus');
+            document.documentElement.classList.remove('socket-watch-reload-focus');
         }, timeout);
     };
     setFocusToken();
@@ -46,9 +46,7 @@ const socketWatchReload = () => {
     document.documentElement.querySelectorAll('*').forEach((e) => e.addEventListener('mouseup', setFocusToken));
     $socketIO.on("payload", (payload) => {
         if ("browser:reload" === payload) {
-            // reload inactive only
-            const isFocusedActiveWindow = document.documentElement.classList.contains('focus');
-            !isFocusedActiveWindow && window.location.reload();
+            !document.documentElement.classList.contains('socket-watch-reload-focus') && window.location.reload();
         }
     });
 };

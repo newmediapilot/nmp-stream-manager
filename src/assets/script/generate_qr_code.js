@@ -3,8 +3,7 @@
  * @param {string} text - The text to encode in the QR code.
  * @param {string} canvasSelectorQuery - The ID of the canvas element to render the QR code.
  */
-const generateQrCode = (text, canvasSelectorQuery) => {
-  const qrCanvas = document.querySelector(canvasSelectorQuery);
+const generateQrCode = (text, qrCanvas) => {
   if (!qrCanvas) {
     console.error(`Canvas element with ID '${canvasSelectorQuery}' not found.`);
     return;
