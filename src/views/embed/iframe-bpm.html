@@ -1,7 +1,7 @@
-{% extends "layouts/main.njk" %}
-{% block cdn %}<!-- nocdn -->{% endblock %}
-{% block local %}<!-- nostyle -->{% endblock %}
-{% block hscripts %}
+{%extends "layouts/main.njk"%}
+{%block cdn%}<!-- nocdn -->{%endblock%}
+{%block local%}<!-- nostyle -->{%endblock%}
+{%block hscripts%}
 <script defer crossorigin="anonymous"
         src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
         type="text/javascript" defer></script>
@@ -12,7 +12,7 @@
 <script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
 <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
 <link rel="stylesheet" href="/style/iframe.css?cb={{cache_buster}}">
-{% from "macros/public_module_styles.njk" import public_module_styles %}
+{%from "macros/public_module_styles.njk" import public_module_styles%}
 <style>
     #bpm-rate {
         display: flex;
@@ -45,10 +45,10 @@
     }
 </style>
 {{ public_module_styles() }}
-{% endblock %}
-{% block body %}
-{% for signal in "dashboard_signals_config" | getParam %}
-{% if signal.type == "bpm" %}
+{%endblock%}
+{%block body%}
+{%for signal in "dashboard_signals_config" | getParam%}
+{%if signal.type == "bpm"%}
 <div id="module-container">
     <div id="bpm-rate"
          data-label-content="{{ signal.label }}"
@@ -57,10 +57,10 @@
         <div></div>
     </div>
 </div>
-{% endif %}
-{% endfor %}
-{% endblock %}
-{% block fscripts %}
+{%endif%}
+{%endfor%}
+{%endblock%}
+{%block fscripts%}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
@@ -85,4 +85,4 @@
         setInterval(() => bpmPing(), 1000);
     });
 </script>
-{% endblock %}
+{%endblock%}

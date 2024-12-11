@@ -1,20 +1,21 @@
-{% extends "layouts/main.njk" %}
-{% set cache_buster = "" | currentTime %}
-{% set public_routes = 'public_routes' | getParam %}
-{% block hscripts %}
+{%extends "layouts/main.njk"%}
+{%set cache_buster = "" | currentTime%}
+{%set public_routes = 'public_routes' | getParam%}
+{%block hscripts%}
 <link rel="stylesheet" href="/style/modules.css?cb={{cache_buster}}">
-{% from "macros/public_module_styles.njk" import public_module_styles %}
+{%from "macros/public_module_styles.njk" import public_module_styles%}
 {{ public_module_styles() }}
-{% endblock %}
-{% block body %}
-{% set public_routes = 'public_routes' | getParam %}
+{%endblock%}
+{%block body%}
+{%set public_routes = 'public_routes' | getParam%}
 <section class="modules">
-    <div class="module aqua" aria-label="FEATURE">
-        <div class="title">
+    <div class="module aqua">
+        <div class="title" aria-label="FEATURE">
             <button onclick="javascript:document.body.querySelector('#qr-dialog').showModal()" aria-label="🔗"></button>
         </div>
         <div class="preview">
-            <iframe width="1920" height="1080"
+            <iframe width="1920"
+                    height="1080"
                     src="{{public_routes.PUBLIC_FEATURE_EMBED}}?featuredName=0#featuredNameLock"></iframe>
         </div>
         <div class="controls">
@@ -55,10 +56,10 @@
         </div>
     </div>
 </section>
-{% include "partials/controls.njk" %}
-{% endblock %}
-{% block dialogs %}
-{% set device_ip = "device_ip" | getParam %}
+{%include "partials/controls.njk"%}
+{%endblock%}
+{%block dialogs%}
+{%set device_ip = "device_ip" | getParam%}
 <dialog id="qr-dialog" data-url="https://{{device_ip }}{{public_routes.PUBLIC_DASHBOARD}}">
     <h2 aria-label="QR Code Dialogk"></h2>
     <h3 aria-label="This link will open this page on any device on your network"></h3>
@@ -66,8 +67,8 @@
     <button aria-label="Click to Copy Link!"></button>
     <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qrcode_dialog').close();"></button>
 </dialog>
-{% endblock %}
-{% block fscripts %}
+{%endblock%}
+{%block fscripts%}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
@@ -84,4 +85,4 @@
     document.addEventListener("DOMContentLoaded", () => applyStyleUpdates());
     document.addEventListener("DOMContentLoaded", () => initializeInputForms());
 </script>
-{% endblock %}
+{%endblock%}

@@ -1,73 +1,77 @@
-{% extends "layouts/main.njk" %}
-{% set cache_buster = "" | currentTime %}
-{% block hscripts %}
+{%extends "layouts/main.njk"%}
+{%set cache_buster = "" | currentTime%}
+{%block hscripts%}
 <link rel="stylesheet" href="/style/settings.css?cb={{cache_buster}}">
-{% endblock %}
-{% block body %}
+{%endblock%}
+{%block body%}
 <section class="settings">
     <ul>
-        {% set feature_title_set = false %}
-        {% for signal in "dashboard_signals_config" | getParam %}
-        {% if signal.type == "feature" %}
-        {% if not feature_title_set %}{% set feature_title_set = true %}
+        {%set feature_title_set = false%}
+        {%for signal in "dashboard_signals_config" | getParam%}
+        {%if signal.type == "feature"%}
+        {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="settings-header {{ signal.theme }}" aria-label="Featured"></li>
-        {% endif %}
+        {%endif%}
         <li>
             <form class="{{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
-                <button aria-label="{{ signal.emoji }}"/></button>
+                <button aria-label="{{ signal.emoji }}"/>
+                </button>
                 <input type="text" value="{{ signal.label }}"/>
             </form>
         </li>
-        {% endif %}
-        {% endfor %}
-        {% set feature_title_set = false %}
-        {% for signal in "dashboard_signals_config" | getParam %}
-        {% if signal.type == "mark" %}
-        {% if not feature_title_set %}{% set feature_title_set = true %}
+        {%endif%}
+        {%endfor%}
+        {%set feature_title_set = false%}
+        {%for signal in "dashboard_signals_config" | getParam%}
+        {%if signal.type == "mark"%}
+        {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="settings-header {{ signal.theme }}" aria-label="Markers"></li>
-        {% endif %}
+        {%endif%}
         <li>
             <form class="{{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
-                <button aria-label="{{ signal.emoji }}"/></button>
+                <button aria-label="{{ signal.emoji }}"/>
+                </button>
                 <input type="text" value="{{ signal.label }}"/>
             </form>
         </li>
-        {% endif %}
-        {% endfor %}
-        {% set feature_title_set = false %}
-        {% for signal in "dashboard_signals_config" | getParam %}
-        {% if signal.type == "ad" %}
-        {% if not feature_title_set %}{% set feature_title_set = true %}
+        {%endif%}
+        {%endfor%}
+        {%set feature_title_set = false%}
+        {%for signal in "dashboard_signals_config" | getParam%}
+        {%if signal.type == "ad"%}
+        {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="settings-header {{ signal.theme }}" aria-label="Ads"></li>
-        {% endif %}
+        {%endif%}
         <form class="{{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
-            <button aria-label="{{ signal.emoji }}"/></button>
+            <button aria-label="{{ signal.emoji }}"/>
+            </button>
             <input type="text" disabled value="{{ signal.label }}"/>
         </form>
         </li>
-        {% endif %}
-        {% endfor %}
-        {% set feature_title_set = false %}
-        {% for signal in "dashboard_signals_config" | getParam %}
-        {% if signal.type == "bpm" %}
-        {% if not feature_title_set %}{% set feature_title_set = true %}
+        {%endif%}
+        {%endfor%}
+        {%set feature_title_set = false%}
+        {%for signal in "dashboard_signals_config" | getParam%}
+        {%if signal.type == "bpm"%}
+        {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="settings-header {{ signal.theme }}" aria-label="BPM"></li>
         </li>
-        {% endif %}
+        {%endif%}
         <li>
             <form class="{{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
-                <button aria-label="{{ signal.emoji }}"/></button>
+                <button aria-label="{{ signal.emoji }}"/>
+                </button>
                 <input type="text" value="{{ signal.label }}"/>
             </form>
         </li>
-        {% endif %}
-        {% endfor %}
+        {%endif%}
+        {%endfor%}
     </ul>
 </section>
-{% include "partials/controls.njk" %}
-{% endblock %}
-{% block dialogs %}
-{% set device_ip = "device_ip" | getParam %}
+{%include "partials/controls.njk"%}
+{%endblock%}
+{%block dialogs%}
+{%set device_ip = "device_ip" | getParam%}
 <dialog id="qr-dialog" data-url="https://{{device_ip }}{{public_routes.PUBLIC_DASHBOARD}}">
     <h2 aria-label="QR Code Dialogk"></h2>
     <h3 aria-label="This link will open this page on any device on your network"></h3>
@@ -95,10 +99,9 @@
     <li aria-label="🚀"></li>
     <li aria-label="🌈"></li>
     <li aria-label="👑"></li>
-
 </ul>
-{% endblock %}
-{% block fscripts %}
+{%endblock%}
+{%block fscripts%}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
@@ -109,6 +112,6 @@
         document.body.querySelector("#qr-dialog canvas"),
         document.body.querySelector("#qr-dialog").getAttribute("data-url"),
     ));
-    document.addEventListener("DOMContentLoaded", () =>  settings());
+    document.addEventListener("DOMContentLoaded", () => settings());
 </script>
-{% endblock %}
+{%endblock%}

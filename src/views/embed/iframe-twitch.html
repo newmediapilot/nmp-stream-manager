@@ -1,7 +1,7 @@
-{% extends "layouts/main.njk" %}
-{% block cdn %}<!-- nocdn -->{% endblock %}
-{% block local %}<!-- nostyle -->{% endblock %}
-{% block hscripts %}
+{%extends "layouts/main.njk"%}
+{%block cdn%}<!-- nocdn -->{%endblock%}
+{%block local%}<!-- nostyle -->{%endblock%}
+{%block hscripts%}
 <script defer crossorigin="anonymous"
         src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
         type="text/javascript" defer></script>
@@ -12,7 +12,7 @@
 <script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
 <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
 <link rel="stylesheet" href="/style/iframe.css?cb={{cache_buster}}">
-{% from "macros/public_module_styles.njk" import public_module_styles %}
+{%from "macros/public_module_styles.njk" import public_module_styles%}
 <style>
     #twitch-embed {
         justify-content: center;
@@ -74,8 +74,8 @@
         rotateY(calc(var(--_feat-rotateY) * 3.6deg))
     }
 </style>
-{% endblock %}
-{% block body %}
+{%endblock%}
+{%block body%}
 <div id="module-container">
     <iframe
             id="twitch-embed"
@@ -87,8 +87,8 @@
     >
     </iframe>
 </div>
-{% endblock %}
-{% block fscripts %}
+{%endblock%}
+{%block fscripts%}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
@@ -123,4 +123,4 @@
         }
     }));
 </script>
-{% endblock %}
+{%endblock%}

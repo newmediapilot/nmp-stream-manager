@@ -1,9 +1,9 @@
-{% extends "layouts/main.njk" %}
-{% set cache_buster = "" | currentTime %}
-{% set public_routes = 'public_routes' | getParam %}
-{% block cdn %}<!-- noscript -->{% endblock %}
-{% block local %}<!-- nostyle -->{% endblock %}
-{% block hscripts %}
+{%extends "layouts/main.njk"%}
+{%set cache_buster = "" | currentTime%}
+{%set public_routes = 'public_routes' | getParam%}
+{%block cdn%}<!-- noscript -->{%endblock%}
+{%block local%}<!-- nostyle -->{%endblock%}
+{%block hscripts%}
 <script defer crossorigin="anonymous"
         src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
         type="text/javascript" defer></script>
@@ -14,15 +14,15 @@
         src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"
         type="text/javascript" defer></script>
 <link rel="stylesheet" href="/style/index.css?cb={{cache_buster}}">
-{% endblock %}
-{% block body %}
+{%endblock%}
+{%block body%}
 <div class="pages">
     <iframe src="{{public_routes.PUBLIC_MODULES}}"></iframe>
     <iframe src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
     <iframe src="{{public_routes.PUBLIC_SETTINGS}}"></iframe>
 </div>
-{% endblock %}
-{% block fscripts %}
+{%endblock%}
+{%block fscripts%}
 <script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
 <script defer src="/script/detect_press_hold.js?={{cache_buster}}" type="text/javascript"></script>
 <script defer src="/script/debounce_function.js?={{cache_buster}}" type="text/javascript"></script>
@@ -64,4 +64,4 @@
         });
     });
 </script>
-{% endblock %}
+{%endblock%}

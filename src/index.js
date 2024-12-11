@@ -1,8 +1,3 @@
-/**
- * File: src\index.js
- * Description: Logic and operations for src\index.js.
- */
-
 require("dotenv").config();
 const ROUTES = require("./routes");
 const express = require("express");

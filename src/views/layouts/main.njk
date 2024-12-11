@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% set cache_buster = "" | currentTime %}
+    {%set cache_buster = "" | currentTime%}
     <meta charset="UTF-8">
     <title>{{ currentTime }}</title>
     <meta name="viewport" content="width=device-width">
@@ -9,18 +9,18 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="manifest" href="/manifest.json?cb={{cache_buster}}">
     <link rel="icon" href="/icon512_rounded.png" type="image/png">
-    {% block cdn %}
+    {%block cdn%}
         <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" defer crossorigin="anonymous" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js" defer crossorigin="anonymous" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios@0.27.2/dist/axios.min.js" defer crossorigin="anonymous" type="text/javascript"></script>
         <script src="https://cdn.socket.io/4.0.0/socket.io.min.js" defer crossorigin="anonymous" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js" defer crossorigin="anonymous" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" defer crossorigin="anonymous" type="text/javascript"></script>
-    {% endblock %}
-    {% for key, value in 'public_routes' | getParam %}
+    {%endblock%}
+    {%for key, value in 'public_routes' | getParam%}
         <meta name="{{ key }}" content="{{ value }}">
-    {% endfor %}
-    {% block local %}
+    {%endfor%}
+    {%block local%}
         <script src="/script/get_url.js?cb={{cache_buster}}" defer type="text/javascript"></script>
         <script src="/script/settings.js?cb={{cache_buster}}" defer type="text/javascript"></script>
         <script src="/script/generate_qr_code.js?cb={{cache_buster}}" defer type="text/javascript"></script>
@@ -39,12 +39,12 @@
         <link href="/style/variables.css?cb={{cache_buster}}" rel="stylesheet">
         <link href="/style/scrollbar.css?cb={{cache_buster}}" rel="stylesheet">
         <link href="/style/controls.css?cb={{cache_buster}}" rel="stylesheet">
-    {% endblock %}
-    {% block hscripts %}{% endblock %}
+    {%endblock%}
+    {%block hscripts%}{%endblock%}
 </head>
 <body>
-{% block body %}{% endblock %}
-{% block dialogs %}{% endblock %}
-{% block fscripts %}{% endblock %}
+{%block body%}{%endblock%}
+{%block dialogs%}{%endblock%}
+{%block fscripts%}{%endblock%}
 </body>
 </html>

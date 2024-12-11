@@ -33,7 +33,6 @@
     border-left: 20px solid rgba(255, 255, 255, 0.4);
     min-height: calc(5vh - (4 * 20px));
 }
-
 .settings-header p {
     flex-grow: 1;
     font-size: 30px;

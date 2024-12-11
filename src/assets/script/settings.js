@@ -1,23 +1,22 @@
 const settingsCreateEditor = (editorEl) => {
     const id = editorEl.getAttribute("data-editor-id");
-    const textEditorEl = editorEl.querySelector('[type="text"]');
+    const textInputEl = editorEl.querySelector('[type="text"]');
     const emojiWidgetTriggerEl = editorEl.querySelector("button");
     const emojiWidgetEl = document.body.querySelector("#emoji-widget");
     let emojiWidgetInstanceEl;
     let textEditorValue = null;
-    const textEditorElFocus = () => {
-        textEditorValue = textEditorEl.value;
-        textEditorEl.select();
-        textEditorEl.scrollIntoView({
-            behavior: 'smooth',
-            block: 'top',
+    const textInputElFocus = () => {
+        textEditorValue = textInputEl.value;
+        textInputEl.select();
+        textInputEl.scrollIntoView({
+            behavior: 'smooth'
         });
     };
-    const textEditorElBlur = () => {
+    const textInputElBlur = () => {
         if (
-            textEditorEl.value !== textEditorValue &&
-            textEditorEl.value.trim().length > 2 &&
-            textEditorEl.value.trim().length <= 25 // Twitch max
+            textInputEl.value !== textEditorValue &&
+            textInputEl.value.trim().length > 2 &&
+            textInputEl.value.trim().length <= 25 // Twitch max
         ) {
             axios
                 .get("/public/config/update", {
@@ -26,22 +25,22 @@ const settingsCreateEditor = (editorEl) => {
                         payload: JSON.stringify({
                             id,
                             field: "label",
-                            value: textEditorEl.value,
+                            value: textInputEl.value,
                         }),
                     },
                 })
                 .finally(() => socketEmitReload());
         }
-        textEditorEl.disabled = true;
+        textInputEl.disabled = true;
         setTimeout(() => {
-            textEditorEl.disabled = false;
+            textInputEl.disabled = false;
         }, 1000);
     };
-    textEditorEl.addEventListener("focus", textEditorElFocus);
-    textEditorEl.addEventListener("blur", textEditorElBlur);
-    textEditorEl.addEventListener(
+    textInputEl.addEventListener("focus", textInputElFocus);
+    textInputEl.addEventListener("blur", textInputElBlur);
+    textInputEl.addEventListener(
         "keydown",
-        () => event.keyCode === 13 && textEditorElBlur(),
+        () => event.keyCode === 13 && textInputElBlur(),
     );
     emojiWidgetTriggerEl.addEventListener("click", () => {
         // cleanup anything existing first
