@@ -1,7 +1,6 @@
 <!-- src/views/dashboard.html -->
 {% extends "layouts/main.njk" %}
 {% from "macros/public_module_styles.njk" import public_module_styles %}
-{% from "macros/qrcode_dialog.njk" import qrcode_dialog %}
 {% set cache_buster = "" | currentTime %}
 {% set public_routes = 'public_routes' | getParam %}
 {% block hscripts %}
@@ -63,10 +62,6 @@
 </div>
 {% endblock %}
 {% block fscripts %}
-<!-- dialogs start -->
-{{ qrcode_dialog("bpm_embed_qrcode_dialog", public_routes.PUBLIC_BPM_EMBED ) }}
-{{ qrcode_dialog("feature_embed_qrcode_dialog", public_routes.PUBLIC_FEATURE_EMBED ) }}
-<!-- dialogs end -->
 <script defer>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
@@ -77,12 +72,10 @@
     document.addEventListener("DOMContentLoaded", () => initializeInputForms());
     document.addEventListener("DOMContentLoaded", () => scrollSnap('.modules'));
     document.addEventListener("DOMContentLoaded", () => {
-        // @eyecandy
         anime({
             targets: '.module .preview',
             duration: 5000,
             easing: 'linear',
-            // loop: true,
             update: function (anim) {
                 const percentage = anim.progress;
                 const hueRotation = (percentage * 360) / 100;
