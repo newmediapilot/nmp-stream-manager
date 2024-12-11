@@ -8,6 +8,6 @@ console.err2 = function (dir, ...args) {
 console.info2 = function (dir, ...args) {
     console.log(chalk.bgBlack.white(dir.slice(-12)), chalk.blue(...args));
 };
-ole.warn2 = function (dir, ...args) {
+console.warn2 = function (dir, ...args) {
     console.log(chalk.bgBlack.white(dir.slice(-12)), chalk.yellow(...args));
 };
