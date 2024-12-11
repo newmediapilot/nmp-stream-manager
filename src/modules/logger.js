@@ -7,7 +7,7 @@
  * Middleware to log request details with colorful output
  * @param {Object} app - The Express application instance
  */
-const ROUTES = require("./routes");
+const ROUTES = require("../routes");
 requestLogger = (req, res, next) => {
   // Ignore
   if ([

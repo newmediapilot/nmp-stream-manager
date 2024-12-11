@@ -3,7 +3,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "deploy": "node compiler/compile.js",
+    "deploy": "rm -rf node_modules && npm i --production && node compiler/compile.js",
     "reset": "rm -rf node_modules && npm i",
     "key": "openssl req -nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
     "curl": "rm -rf .bin && curl -L \"https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe\" -o \"./.bin\"",
@@ -16,6 +16,7 @@
     "dotenv": "16.4.5",
     "express": "4.21.1",
     "glob": "11.0.0",
+    "minify": "^12.0.0",
     "nunjucks": "3.2.4",
     "socket.io": "4.8.1",
     "sync-request": "6.1.0",
