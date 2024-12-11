@@ -13,7 +13,7 @@
     position: relative;
     background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
     transition: padding-right 333ms linear;
-    transform: scaleX(.95) scaleX(.95);
+    transform: scaleX(.95) scaleY(.95);
     border-radius: 15px;
 }
 
