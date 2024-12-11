@@ -29,6 +29,15 @@ async function startServices(app) {
     // Set Twitch data
     setParam("twitch_username", process.env.TWITCH_USERNAME);
 
+    // Set emojis
+    setParam('emoji_collection', [
+      "✨", "📢", "❤", "⏰", "🥊", "🧐", "🎬", "👾", "🌟", "🍕",
+      "🎮", "🔥", "🎧", "💎", "🕹️", "🖥️", "🚀", "🌈", "👑", "💥",
+      "🌍", "🎤", "🎨", "🎸", "🎹", "🚗", "🦄", "🐉", "💡", "🍎",
+      "🔗", "🥷", "🧑", "🔒", "🎬️", "⚡", "🌀", "✅", "🔄",
+      "✏️", "🌐"
+    ]);
+
     // Initialize dashboard data
     await initializePublicConfigs("signals");
 
