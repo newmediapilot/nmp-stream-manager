@@ -21,7 +21,7 @@ const applyStyleUpdates = () => {
         const left = (scrollLeftPercent) * (width);
         label.scrollTo({top, left});
     });
-    setInterval(storeInputValues, 1000/120);
+    // setInterval(storeInputValues, 1000/120); // TODO: activate interval only on mouseown and remove onmouseup but run for like 1s after
 };
 // Gathers scrollbar coordinates into forms and also iframe
 const storeInputValues = () => {
@@ -46,8 +46,7 @@ const storeInputValues = () => {
                 el.innerHTML = `:root{${payload};}`
             });
         } catch (e) {
-            // Sometimes if the frame is busy and we try
-            // to style it, we will get a browser reload crash
+            // Sometimes if the frame is busy it nulls out
         }
     });
     // console.log('storeInputValues', payload);
@@ -73,8 +72,7 @@ const initializeInputForms = () => {
         sendInputValues();
     });
 };
-
-// Pushes the contents of all variables across all modules to write out
+// Pushes http
 const sendInputValues = () => {
     let payload = document.querySelector('#public_module_styles')
         .innerHTML
@@ -89,7 +87,7 @@ const sendInputValues = () => {
         socketEmitReload();
     });
 };
-// Shows QR code for a given panel
+// Shows QR
 const showPanelQR = (dialogQuerySelector, type) => {
     const dialogQuerySelectorCanvas = `${dialogQuerySelector} #qr-code-dialog-canvas`;
     const URL = document.querySelector(dialogQuerySelectorCanvas).getAttribute('data-url');
