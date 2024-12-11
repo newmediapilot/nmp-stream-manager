@@ -28,14 +28,8 @@ jsonDataString = jsonDataString.replace(/PUBLIC_SIGNAL_CREATE/gm, "SIGNAL_FIREWO
 jsonDataString = jsonDataString.replace(/PUBLIC_CONFIG_UPDATE/gm, "CONFIG_TWEAKS");
 jsonDataString = jsonDataString.replace(/PUBLIC_STYLE_UPDATE/gm, "STYLE_SHUFFLE");
 jsonDataString = jsonDataString.replace(/PUBLIC_BPM_PING/gm, "BEAT_THROB");
-// jsonDataString = jsonDataString.replace(/document\.addEventListener/gm, (m) => {
-//     DECOYS.push(['addEventListener', document.$${KEYS}]);
-//     return `document.$${KEYS}`;
-// });
-// jsonDataString = jsonDataString.replace(/document\.addEventListener/gm, (m) => {
-//     DECOYS.push(['addEventListener', document.$${KEYS}]);
-//     return `document.$${KEYS}`;
-// });
+// jsonDataString = jsonDataString.replace(/--_bpm-translateX/gm, '--_zjvlu');
+// jsonDataString = jsonDataString.replace(/--_bpm-translateY/gm, '--_gipzw');
 // Clean up the .dist folder if it exists
 fs.rmSync("./.dist", {recursive: true, force: true});
 const data = JSON.parse(jsonDataString);
