@@ -1,19 +1,21 @@
 .dashboard {
     display: grid;
-    max-width: 100vw;
-    height: 100vh;
+    --padding: 10px;
+    max-width: calc(100vw - calc(var(--padding) * 2));
+    height: calc(100vh - calc(var(--padding) * 2));
+    margin-left: var(--padding);
+    margin-top: var(--padding);
     overflow-x: hidden;
     overflow-y: scroll;
     align-content: stretch;
     justify-items: stretch;
-    --grid-template-columns:2;
-    --grid-template-rows:4;
-    grid-template-columns: repeat(var(--grid-template-columns), calc(100%/var(--grid-template-columns)));
-    grid-template-rows: repeat(5, calc(100vh/var(--grid-template-rows)));
+    --grid-template-columns: 2;
+    --grid-template-rows: 4;
+    grid-template-columns: repeat(var(--grid-template-columns), calc(100% / var(--grid-template-columns)));
+    grid-template-rows: repeat(5, calc(100vh / var(--grid-template-rows)));
     position: relative;
     background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
     transition: padding-right 333ms linear;
-    transform: scaleX(.95) scaleY(.95);
     border-radius: 15px;
 }
 
@@ -78,7 +80,7 @@ html.edit-active .dashboard:after {
 }
 
 .dashboard .button button {
-    --clampy:clamp(24px, 4vw, 48px);
+    --clampy: clamp(24px, 4vw, 48px);
     width: 100%;
     height: 100%;
     font-size: var(--clampy);
