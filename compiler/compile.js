@@ -1,6 +1,5 @@
 const fs = require("fs");
 const {execSync} = require('child_process');
-const request = require('sync-request');
 // Compile and prepare files
 execSync("node ./compiler/combine.js");
 let jsonDataString = fs.readFileSync("./.combined.json", "utf-8");
