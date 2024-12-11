@@ -5,10 +5,11 @@ const dashboard = () => {
     const toggleEl = document.querySelector("#toggle-edit-dashboard");
     const notifyEl = document.documentElement;
     const states = [
-        `<span><em>✏</em>Edit</span>`,
-        `<span><em>✅</em>Done</span>`,
+        `<span>Edit</span>`,
+        `<span>Done</span>`,
     ];
     toggleEl.innerHTML = states[0];
+    toggleEl.style.display = 'block';
     const sortable = new Sortable(containerEl, {
         // swap: true, TODO: rewrite interpreter to use this!
         animation: 333,
