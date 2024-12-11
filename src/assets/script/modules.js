@@ -1,4 +1,3 @@
-// Reads styles back and re-applies to interface
 const applyStyleUpdates = () => {
     Array.from(document.querySelectorAll('.controls label'), (label) => {
         const payload = document.querySelector('#public_module_styles').innerHTML;
@@ -21,9 +20,7 @@ const applyStyleUpdates = () => {
         const left = (scrollLeftPercent) * (width);
         label.scrollTo({top, left});
     });
-    // setInterval(storeInputValues, 1000/120); // TODO: activate interval only on mouseown and remove onmouseup but run for like 1s after
 };
-// Gathers scrollbar coordinates into forms and also iframe
 const storeInputValues = () => {
     Array.from(document.querySelectorAll('.controls label')).forEach((label) => {
         const {width, height} = label.getBoundingClientRect();
@@ -49,30 +46,23 @@ const storeInputValues = () => {
             // Sometimes if the frame is busy it nulls out
         }
     });
-    // console.log('storeInputValues', payload);
 };
-// Simulates a joystick
 const initializeInputForms = () => {
-    const updateValues = () => {
-        storeInputValues();
-    };
     document.addEventListener('mousedown', (e) => {
-        document.addEventListener('mousemove', updateValues);
+        document.addEventListener('mousemove', storeInputValues);
+        storeInputValues();
     });
     document.addEventListener('mouseup', (e) => {
-        document.removeEventListener('mousemove', updateValues);
+        document.removeEventListener('mousemove', storeInputValues);
         storeInputValues();
-        sendInputValues();
     });
     document.addEventListener('touchmove', (e) => {
         storeInputValues();
     });
     document.addEventListener('touchend', (e) => {
         storeInputValues();
-        sendInputValues();
     });
 };
-// Pushes http
 const sendInputValues = () => {
     let payload = document.querySelector('#public_module_styles')
         .innerHTML

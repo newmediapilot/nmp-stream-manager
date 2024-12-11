@@ -11,6 +11,7 @@
 <script defer src="/script/iframe_detect.js?={{cache_buster}}" type="text/javascript"></script>
 <script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
 <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
+<link rel="stylesheet" href="/style/iframe.css?cb={{cache_buster}}">
 {% from "macros/public_module_styles.njk" import public_module_styles %}
 {{ public_module_styles() }}
 <style>
@@ -23,25 +24,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-</style>
-<style>
-    #module-container {
-        width: 100vw;
-        height: 100vh;
-        display: block;
-        position: relative;
-    }
-    .iframe #module-container:after {
-        content: "";
-        display: block;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        box-shadow: inset 0 0 10px 10px white;
-        box-sizing: border-box;
     }
 </style>
 <style>
