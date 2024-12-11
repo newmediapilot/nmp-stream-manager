@@ -14,13 +14,7 @@ const {publicStyleUpdate} = require("./modules/public/style");
 const {publicBpmPing} = require("./modules/sensor/ping");
 const {twitchLogin, twitchLoginSuccess} = require("./modules/twitch/login");
 const app = express();
-// Just log
 app.use(requestLogger);
-// Security headers
-app.use((req, res, next) => {
-    // res.setHeader('Content-Security-Policy', "frame-ancestors 'self' https://localhost https://192.168.0.* https://*.twitch.tv;");
-    next();
-});
 // Twitch API Start
 app.all(ROUTES.TWITCH_LOGIN, twitchLogin);
 app.all(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess);
