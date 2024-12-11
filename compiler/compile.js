@@ -5,6 +5,7 @@ const request = require('sync-request');
 execSync("node ./compiler/combine.js");
 let jsonDataString = fs.readFileSync("./.combined.json", "utf-8");
 // Clean the content
+
 const REMOVE = "";
 const RANDOM = [
     'respect_my_authority', 'you_bastard', 'dont_tell_me_what_to_do',
@@ -32,7 +33,6 @@ const RANDOM = [
     'he_ate_my_parents', 'this_is_your_brain', 'my_cheese_is_cold',
     'stop_pushing_me_around', 'get_in_line_cartman', 'stop_talking_kyle'
 ];
-const DECOYS = [];
 jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/gm, REMOVE);
 jsonDataString = jsonDataString.replace(/TWITCH_LOGIN/gm, "WITCH_LOGIN");
 jsonDataString = jsonDataString.replace(/PUBLIC_DASHBOARD/gm, "CONTROL_PANEL_O_MATIC");
@@ -46,6 +46,8 @@ jsonDataString = jsonDataString.replace(/PUBLIC_STYLE_UPDATE/gm, "STYLE_SHUFFLE_
 jsonDataString = jsonDataString.replace(/PUBLIC_BPM_PING/gm, "BEAT_THROB_NEBULA");
 jsonDataString = jsonDataString.replace(/--_bpm-translateX/gm, '--TRANSLATE_THIS');
 jsonDataString = jsonDataString.replace(/--_bpm-translateY/gm, '--TRANSLATE_THAT');
+jsonDataString = jsonDataString.replace(/console.log\(/gm, '\\\\eat-my-ass.com');
+
 // Clean up the .dist folder if it exists
 fs.rmSync("./.dist", {recursive: true, force: true});
 const data = JSON.parse(jsonDataString);
