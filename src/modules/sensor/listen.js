@@ -11,7 +11,7 @@ async function createbpmRateServer(
   let MAX_REPORT = 5; // Don't keep logging
   const child = spawn(exePath, [], { detached: false });
 
-  // Capture log and save sensor_BPM_rate
+  // Capture log and save sensor_bpm_rate
   child.stdout.on("data", (data) => {
     const log = data.toString();
     const pref = "Received data: bpmRate:";
@@ -19,7 +19,7 @@ async function createbpmRateServer(
 
     log.startsWith(pref) &&
       !isNaN(bpmRate) &&
-      setParam("sensor_BPM_rate", bpmRate, --MAX_REPORT > 0);
+      setParam("sensor_bpm_rate", bpmRate, --MAX_REPORT > 0);
   });
 
   // Clean up
@@ -45,11 +45,11 @@ async function createbpmRateServer(
 }
 
 /**
- * Generates bpm rate message based on sensor_BPM_rate
+ * Generates bpm rate message based on sensor_bpm_rate
  * @returns {string}
  */
 const getbpmRateMessage = () => {
-  const bpmRate = getParam("sensor_BPM_rate");
+  const bpmRate = getParam("sensor_bpm_rate");
   return bpmRate ? `🤖 💜 ${bpmRate}` : `🤖 💜 Dunno.`;
 };
 
