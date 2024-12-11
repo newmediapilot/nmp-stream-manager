@@ -4,6 +4,7 @@ const request = require('sync-request');
 // Compile and prepare files
 execSync("node ./compiler/combine.js");
 let jsonDataString = fs.readFileSync("./.combined.json", "utf-8");
+// Clean the content
 const REMOVE = "";
 const RANDOM = [
     'zjvlu', 'xyqmp', 'wtrks', 'bnvwo', 'apdqi', 'mfhgz', 'cjrst', 'yldwp', 'sktzv', 'bluwy',
@@ -14,23 +15,11 @@ const RANDOM = [
     'rjhcs', 'fzoet', 'axntw', 'oivqz', 'cpbwm', 'smyuq', 'vperh', 'kxfld', 'gipzw', 'lbtmq'
 ];
 const DECOYS = [];
-// Clean the content
-jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
-jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
-jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
-jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
-jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
-jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
-jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
-jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
-jsonDataString = jsonDataString.replace(/\r\n/gm, REMOVE);
-jsonDataString = jsonDataString.replace(/\r\n/gm, REMOVE);
-jsonDataString = jsonDataString.replace(/\r\n/gm, REMOVE);
-jsonDataString = jsonDataString.replace(/\r\n/gm, REMOVE);
-jsonDataString = jsonDataString.replace(/\r\n/gm, REMOVE);
-jsonDataString = jsonDataString.replace(/\r\n/gm, REMOVE);
-jsonDataString = jsonDataString.replace(/\r\n/gm, REMOVE);
-jsonDataString = jsonDataString.replace(/\r\n/gm, REMOVE);
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].forEach(i => {
+    jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
+    jsonDataString = jsonDataString.replace(/\r/gm, REMOVE);
+    jsonDataString = jsonDataString.replace(/\r\n/gm, REMOVE);
+});
 jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/gm, REMOVE);
 jsonDataString = jsonDataString.replace(/TWITCH_LOGIN/gm, "WITCH_TUGGING");
 jsonDataString = jsonDataString.replace(/PUBLIC_DASHBOARD/gm, "CONTROL_PANEL_O_MATIC");
