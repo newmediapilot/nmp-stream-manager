@@ -8,10 +8,11 @@
  * @param {Object} app - The Express application instance
  */
 const ROUTES = require("./routes");
-const ignoredPaths = [ROUTES.PUBLIC_BPM_PING];
 requestLogger = (req, res, next) => {
-  // Some paths which constantly log can be ignored
-  if (ignoredPaths.includes(req.path)) {
+  // Ignore
+  if ([
+      ROUTES.PUBLIC_BPM_PING
+  ].includes(req.path)) {
     next();
     return;
   }

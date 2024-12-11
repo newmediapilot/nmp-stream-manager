@@ -15,6 +15,14 @@ const RANDOM = [
 ];
 const DECOYS = [];
 // Clean the content
+jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
+jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
+jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
+jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
+jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
+jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
+jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
+jsonDataString = jsonDataString.replace(/  /gm, REMOVE);
 jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/gm, REMOVE);
 jsonDataString = jsonDataString.replace(/TWITCH_LOGIN/gm, "WITCH_TUGGING");
 jsonDataString = jsonDataString.replace(/PUBLIC_DASHBOARD/gm, "CONTROL_PANEL_O_MATIC");
@@ -89,24 +97,8 @@ console.log("Installing packages");
 execSync(`cd ./.dist/ && npm i --no-save`);
 console.log("Installing packages...done");
 console.log("Starting test server...");
+fs.unlinkSync( './.dist/package.json');
+fs.unlinkSync( './.dist/.env-example');
+fs.unlinkSync( './.dist/.gitignore');
+fs.unlinkSync( './.dist/README.md');
 execSync(`cd ./.dist/ && node ./src/index.js`, {stdio: 'inherit'});
-// Cleanup after a 10-second delay, ensuring the server is fully started
-setTimeout(() => {
-    const filesToDelete = [
-        // './.dist/.env',
-        // './.dist/localhost.key',
-        // './.dist/localhost.crt',
-        // './.dist/src/assets/icon512_maskable.png',
-        // './.dist/src/assets/icon512_rounded.png',
-        // './.dist/src/assets/manifest.json',
-    ];
-    filesToDelete.forEach(file => {
-        try {
-            fs.unlinkSync(file);
-            console.log(`Deleted: ${file}`);
-        } catch (err) {
-            console.error(`Error deleting file: ${file}`, err);
-        }
-    });
-    console.log("Cleanup done");
-}, 10000);  // 10 seconds delay to give server time to start and run
