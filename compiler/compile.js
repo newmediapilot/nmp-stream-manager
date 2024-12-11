@@ -32,15 +32,15 @@ let RANDOM = [
     'stop_pushing_me_around', 'get_in_line_cartman', 'stop_talking_kyle'
 ];
 RANDOM = [...RANDOM, ...RANDOM.map((key) => key.split("_").reverse().join("_"))];
-RANDOM.forEach(e => RANDOM.pop());
-if (RANDOM.length === 0) process.exit("We ran out of keys");
-return;
-jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/g, "");
-jsonDataString = jsonDataString.replace(/console.log\(/g, `/**${RANDOM.pop()}**/`);
-// Clean up the .dist folder if it exists
+console.log('RANDOM', RANDOM.length);
+jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/gm, "");
+// jsonDataString = jsonDataString.replace(/console\.[^,;]+(?:[,;])/gm, `/**${RANDOM.pop()}**/`);
+// jsonDataString = jsonDataString.replace(/chalk\.[^,;]+(?:[,;])/gm, `/**${RANDOM.pop()}**/`);
+// jsonDataString = jsonDataString.replace(/\.\.\.args\)/gm, `/**${RANDOM.pop()}**/`);
+if (RANDOM.length === 0) console.error("We ran out of keys") && process.exit(1);
+console.log('RANDOM used', RANDOM.length);
 fs.rmSync("./.dist", {recursive: true, force: true});
 const data = JSON.parse(jsonDataString);
-// Process files and write them
 Object.keys(data)
     .map(path => {
         const writePath = path.split("\\").slice(0, -1).join("\\");
@@ -94,7 +94,7 @@ fs.copyFileSync("./src/assets/icon512_maskable.png", "./.dist/src/assets/icon512
 fs.copyFileSync("./src/assets/icon512_rounded.png", "./.dist/src/assets/icon512_rounded.png");
 fs.copyFileSync("./src/assets/manifest.json", "./.dist/src/assets/manifest.json");
 console.log("Temp files copied");
-// execSync('curl -L https://nodejs.org/dist/v22.11.0/node-v22.11.0-x64.msi -o "./dist/node/node-v22.11.0-x64.msi"', { stdio: 'inherit' });
+// execSync('curl -L https://nodejs.org/dist/v22.11.0/node-v22.11.0-x64.exe -o "./dist/node/node-v22.11.0-x64.msi"', { stdio: 'inherit' });
 console.log("Installing packages");
 execSync(`cd ./.dist/ && npm i --no-save`);
 console.log("Installing packages...done");
