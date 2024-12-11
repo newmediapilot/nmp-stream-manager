@@ -1,6 +1,5 @@
 <!-- src/views/dashboard.html -->
 {% extends "layouts/main.njk" %}
-{% from "macros/qrcode_dialog.njk" import qrcode_dialog %}
 {% set cache_buster = "" | currentTime %}
 {% set public_routes = 'public_routes' | getParam %}
 {% block hscripts %}
@@ -35,9 +34,7 @@
     {% endfor %}
 </div>
 {% endblock %}
-{% extras %}
-<!-- dialogs start -->
-{% extras %}
+{% block extras %}
 <!-- dialogs start -->
 <dialog class="dialog-container" id="{{ id }}">
     <div class="dialog--title">...</div>
@@ -48,8 +45,6 @@
     </button>
     <button style="background: green" onclick="javascript:closeDialog('{{ id }}')">✅Done</button>
 </dialog>
-<!-- dialogs end -->
-{% endblock %}
 <!-- dialogs end -->
 {% endblock %}
 {% block fscripts %}

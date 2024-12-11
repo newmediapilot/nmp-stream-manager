@@ -1,6 +1,5 @@
 <!-- src/views/embed.html -->
 {% extends "layouts/main.njk" %}
-{% from "macros/public_module_styles.njk" import public_module_styles %}
 {% block cdn %}<!-- -->{% endblock %}
 {% block local %}<!-- nostyle -->{% endblock %}
 {% block hscripts %}
@@ -21,6 +20,8 @@
         align-items: center;
     }
 </style>
+{% from "macros/public_module_styles.njk" import public_module_styles %}
+{{ public_module_styles() }}
 <style>
 
     #module-container {
@@ -74,7 +75,6 @@
         box-sizing: border-box;
     }
 </style>
-{{ public_module_styles() }}
 {% endblock %}
 {% block body %}
 <div id="module-container">

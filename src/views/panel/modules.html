@@ -1,10 +1,10 @@
 <!-- src/views/dashboard.html -->
 {% extends "layouts/main.njk" %}
-{% from "macros/public_module_styles.njk" import public_module_styles %}
 {% set cache_buster = "" | currentTime %}
 {% set public_routes = 'public_routes' | getParam %}
 {% block hscripts %}
 <link rel="stylesheet" href="/style/modules.css?cb={{cache_buster}}">
+{% from "macros/public_module_styles.njk" import public_module_styles %}
 {{ public_module_styles() }}
 {% endblock %}
 {% block body %}

@@ -1,6 +1,5 @@
 <!-- src/views/bpm.html -->
 {% extends "layouts/main.njk" %}
-{% from "macros/public_module_styles.njk" import public_module_styles %}
 {% block cdn %}<!-- noscript -->{% endblock %}
 {% block local %}<!-- nostyle -->{% endblock %}
 {% block hscripts %}
@@ -23,6 +22,8 @@
         align-items: center;
     }
 </style>
+{% from "macros/public_module_styles.njk" import public_module_styles %}
+{{ public_module_styles() }}
 <style>
     #module-container {
         width: 100vw;
@@ -60,7 +61,6 @@
         box-sizing: border-box;
     }
 </style>
-{{ public_module_styles() }}
 {% endblock %}
 {% block body %}
 {% for signal in "dashboard_signals_config" | getParam %}
