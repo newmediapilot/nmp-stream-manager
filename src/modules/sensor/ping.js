@@ -6,7 +6,7 @@ const { getParam } = require("../store/manager");
  * @param {Object} res - The Express response object.
  */
 function publicBpmPing(req, res) {
-  const bpmRate = getParam("sensor_BPM_rate");
+  const bpmRate = getParam("sensor_bpm_rate");
   if (bpmRate !== undefined && bpmRate !== null) {
     res.send(String(bpmRate));
   } else {
