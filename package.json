@@ -1,5 +1,4 @@
 {
-  "name": "nmp-stream-manager",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
