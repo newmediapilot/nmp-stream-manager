@@ -1,7 +1,4 @@
 const scrollSnap = (containerEl) => {
-    document.addEventListener('touchstart', () => clearTimeout(to));
-    document.addEventListener('mousedown', () => clearTimeout(to));
-    // Anchor remembers with debounce
     if (
         window.location.hash &&
         window.location.hash.startsWith('#scrollSnap-')
@@ -11,5 +8,5 @@ const scrollSnap = (containerEl) => {
     }
     containerEl.addEventListener('scroll', debounceFunction(() => {
         window.location.hash = `scrollSnap-${containerEl.scrollTop}`;
-    }, 300));
+    }, 333));
 };
