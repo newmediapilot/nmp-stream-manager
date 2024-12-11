@@ -8,11 +8,11 @@ const requestCompressed = (req, res, next) => {
             emoji_collection.forEach((e,i) =>{
                 body = body.replace(RegExp(e, 'gm'), i);
             });
+            body = body.replace(/[\u200B-\u200D\uFEFF]/g, '');
             const indexOf = body.indexOf('<aside class=items">');
-            console.log(body.substr(indexOf-50, 50));
+            console.log(body.substr(indexOf-150, 50));
             minify(body, {
-                collapseWhitespace: true,
-                removeComments: true,
+                collapseWhitespace: true
             }).then((result) => {
                 //console.log('result.minified', result);
             }).catch((e) => {

@@ -6,88 +6,61 @@
 {% block body %}
 <section class="settings">
     <ul>
-    <!---->
-    <!---->
-    <!---->
     {% set feature_title_set = false %}
     {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "feature" %}
     {% if not feature_title_set %}{% set feature_title_set = true %}
-    <li class="settings-header {{ signal.theme }}">
-        <p>Featured</p>
-    </li>
+    <li class="settings-header {{ signal.theme }}" aria-label="Featured"></li>
     {% endif %}
-    <li class="not-settings-header">
+    <li>
         <form class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
-            <button/>
-            {{ signal.emoji }}</button>
+            <button aria-label="{{ signal.emoji }}"/></button>
             <input type="text" value="{{ signal.label }}"/>
         </form>
     </li>
     {% endif %}
     {% endfor %}
-    <!---->
-    <!---->
-    <!---->
     {% set feature_title_set = false %}
     {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "mark" %}
     {% if not feature_title_set %}{% set feature_title_set = true %}
-    <li class="settings-header {{ signal.theme }}">
-        <p>Markers</p>
-    </li>
+    <li class="settings-header {{ signal.theme }}" aria-label="Markers"></li>
     {% endif %}
     <li>
         <form class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
-            <button/>
-            {{ signal.emoji }}</button>
+            <button aria-label="{{ signal.emoji }}"/></button>
             <input type="text" value="{{ signal.label }}"/>
         </form>
     </li>
     {% endif %}
     {% endfor %}
-    <!---->
-    <!---->
-    <!---->
     {% set feature_title_set = false %}
     {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "ad" %}
     {% if not feature_title_set %}{% set feature_title_set = true %}
-    <li class="settings-header {{ signal.theme }}">
-        <p>Ads</p>
-    </li>
+    <li class="settings-header {{ signal.theme }}" aria-label="Ads"></li>
     {% endif %}
     <form class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
-        <button/>
-        {{ signal.emoji }}</button>
+        <button aria-label="{{ signal.emoji }}"/></button>
         <input type="text" disabled value="{{ signal.label }}"/>
     </form>
     </li>
     {% endif %}
     {% endfor %}
-    <!---->
-    <!---->
-    <!---->
     {% set feature_title_set = false %}
     {% for signal in "dashboard_signals_config" | getParam %}
     {% if signal.type == "bpm" %}
     {% if not feature_title_set %}{% set feature_title_set = true %}
-    <li class="settings-header {{ signal.theme }}">
-        <p>BPM</p>
-    </li>
+    <li class="settings-header {{ signal.theme }}" aria-label="BPM"></li></li>
     {% endif %}
     <li>
         <form class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
-            <button/>
-            {{ signal.emoji }}</button>
+            <button aria-label="{{ signal.emoji }}"/></button>
             <input type="text" value="{{ signal.label }}"/>
         </form>
     </li>
     {% endif %}
     {% endfor %}
-    <!---->
-    <!---->
-    <!---->
     </ul>
 </section>
 {% include "partials/controls.njk" %}
@@ -95,11 +68,11 @@
 {% block dialogs %}
 {% set device_ip = "device_ip" | getParam %}
 <dialog id="qr-dialog" data-url="https://{{device_ip }}{{public_routes.PUBLIC_DASHBOARD}}">
-    <h2 class="dialog--title">QR Code Dialog</h2>
-    <h3 class="dialog--body">This link will open this page on any device on your network</h3>
+    <h2 aria-label="QR Code Dialog"></h2>
+    <h3 aria-label="This link will open this page on any device on your network"></h3>
     <canvas></canvas>
-    <button>Click to Copy Link!</button>
-    <button onclick="javascript:document.querySelector('#qrcode_dialog').close();">✅Done</button>
+    <button aria-label="Click to Copy Link!"></button>
+    <button aria-label="✅Done" onclick="javascript:document.querySelector('#qrcode_dialog').close();"></button>
 </dialog>
 <ul id="emoji-widget">
     <li>✨</li>
@@ -121,7 +94,6 @@
     <li>🚀</li>
     <li>🌈</li>
     <li>👑</li>
-    <li>💥</li>
 </ul>
 {% endblock %}
 {% block fscripts %}

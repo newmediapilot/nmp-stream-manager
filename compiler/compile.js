@@ -5,9 +5,7 @@ const request = require('sync-request');
 execSync("node ./compiler/combine.js");
 let jsonDataString = fs.readFileSync("./.combined.json", "utf-8");
 // Clean the content
-
-const REMOVE = "";
-const RANDOM = [
+let RANDOM = [
     'respect_my_authority', 'you_bastard', 'dont_tell_me_what_to_do',
     'im_not_your_dad', 'screw_you_guys', 'carmen_is_a_genius',
     'i_love_cheesy_puffs', 'cartman_is_a_jerk', 'shut_up_kyle',
@@ -33,21 +31,12 @@ const RANDOM = [
     'he_ate_my_parents', 'this_is_your_brain', 'my_cheese_is_cold',
     'stop_pushing_me_around', 'get_in_line_cartman', 'stop_talking_kyle'
 ];
-jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/gm, REMOVE);
-jsonDataString = jsonDataString.replace(/TWITCH_LOGIN/gm, "WITCH_LOGIN");
-jsonDataString = jsonDataString.replace(/PUBLIC_DASHBOARD/gm, "CONTROL_PANEL_O_MATIC");
-jsonDataString = jsonDataString.replace(/PUBLIC_SETTINGS/gm, "SETTING_SPREE");
-jsonDataString = jsonDataString.replace(/PUBLIC_MODULES/gm, "GAY_MYSTERY_MODULES");
-jsonDataString = jsonDataString.replace(/PUBLIC_FEATURE_EMBED/gm, "MAGIC_EMBEDDING");
-jsonDataString = jsonDataString.replace(/PUBLIC_BPM_EMBED/gm, "BEAT_BOX_EMBED");
-jsonDataString = jsonDataString.replace(/PUBLIC_SIGNAL_CREATE/gm, "SIGNAL_FIREWORKS");
-jsonDataString = jsonDataString.replace(/PUBLIC_CONFIG_UPDATE/gm, "CONFIG_TWEAKS");
-jsonDataString = jsonDataString.replace(/PUBLIC_STYLE_UPDATE/gm, "STYLE_SHUFFLE_REMIX");
-jsonDataString = jsonDataString.replace(/PUBLIC_BPM_PING/gm, "BEAT_THROB_NEBULA");
-jsonDataString = jsonDataString.replace(/--_bpm-translateX/gm, '--TRANSLATE_THIS');
-jsonDataString = jsonDataString.replace(/--_bpm-translateY/gm, '--TRANSLATE_THAT');
-jsonDataString = jsonDataString.replace(/console.log\(/gm, '\\\\eat-my-ass.com');
-
+RANDOM = [...RANDOM, ...RANDOM.map((key) => key.split("_").reverse().join("_"))];
+RANDOM.forEach(e => RANDOM.pop());
+if (RANDOM.length === 0) process.exit("We ran out of keys");
+return;
+jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/g, "");
+jsonDataString = jsonDataString.replace(/console.log\(/g, `/**${RANDOM.pop()}**/`);
 // Clean up the .dist folder if it exists
 fs.rmSync("./.dist", {recursive: true, force: true});
 const data = JSON.parse(jsonDataString);
@@ -63,7 +52,7 @@ Object.keys(data)
         return path;
     })
     .map(path => {
-        data[path] = data[path].replace(/<script src="https:\/\/cdn.*>/gm, (m) => {
+        data[path] = data[path].replace(/<script src="https:\/\/cdn.*>/g, (m) => {
             const src = m.match(/src="([^"]+)"/)[1];
             const res = request('GET', src);
             return `<script data-path="${src}" defer>${res.getBody('utf8')}</script>`;
@@ -71,7 +60,7 @@ Object.keys(data)
         return path;
     })
     .map(path => {
-        data[path] = data[path].replace(/<script src="\/script.*>/gm, (m) => {
+        data[path] = data[path].replace(/<script src="\/script.*>/g, (m) => {
             const src = m.match(/src="([^"]+)"/)[1].split('/').join('');
             const dPath = Object.keys(data).find(key => {
                 const pathKeys = key.split('\\').join('');
@@ -82,7 +71,7 @@ Object.keys(data)
         return path;
     })
     .map(path => {
-        data[path] = data[path].replace(/<link href="\/style.*>/gm, (m) => {
+        data[path] = data[path].replace(/<link href="\/style.*>/g, (m) => {
             const hrefKeys = m.match(/href="([^"]+)"/)[1].split('/').join('');
             const dPath = Object.keys(data).find(key => {
                 const pathKeys = key.split('\\').join('');

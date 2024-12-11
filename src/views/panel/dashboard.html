@@ -30,8 +30,8 @@
 {% block dialogs %}
 {% set device_ip = "device_ip" | getParam %}
 <dialog id="qr-dialog" data-url="https://{{device_ip }}{{public_routes.PUBLIC_DASHBOARD}}">
-    <h2 class="dialog--title">QR Code Dialog</h2>
-    <h3 class="dialog--body">This link will open this page on any device on your network</h3>
+    <h2>QR Code Dialog</h2>
+    <h3>This link will open this page on any device on your network</h3>
     <canvas></canvas>
     <button>Click to Copy Link!</button>
     <button onclick="javascript:document.querySelector('#qrcode_dialog').close();">✅Done</button>
@@ -75,5 +75,21 @@
             }
         });
     });
+</script>
+<script>
+    // Define a simple class inside the script tag
+    class Quack {
+        constructor() {
+            this.sound = "Quack!";
+        }
+
+        makeSound() {
+            console.log(this.sound);
+        }
+    }
+
+    // Create an instance of the class
+    const quackInstance = new Quack();
+    quackInstance.makeSound();  // This will log "Quack!"
 </script>
 {% endblock %}
