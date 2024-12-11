@@ -1,8 +1,8 @@
-const dashboardButtons = () => {
+const dashboard = () => {
     let payload = [];
     const type = "signals:order";
     const containerEl = document.querySelector(".dashboard");
-    const toggleEl = document.querySelector("#dashboard--toggle");
+    const toggleEl = document.querySelector("#toggle-edit-dashboard");
     const notifyEl = document.documentElement;
     const states = [
         `<span><em>✏</em>Edit</span>`,

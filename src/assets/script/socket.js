@@ -30,7 +30,7 @@ const socketEmitReload = () => {
 // Socket will only emit reload for pages which are inactive
 const socketWatchReload = () => {
     console.log("socketWatchReload");
-    const timeout = 333;
+    const timeout = 3000;
     let to = null;
     const setFocusToken = () => {
         if (to) clearTimeout(to);

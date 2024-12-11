@@ -1,4 +1,4 @@
-/** prevents override form studio  **/
+/** prevents override form studio (any browser hosting the projections) **/
 body {
     overflow: hidden !important;
     background: none !important;
@@ -7,6 +7,7 @@ body {
     width: 100vw !important;
 }
 
+/** base overrides for this app  **/
 html {
     background-size: cover;
     background-repeat: no-repeat;

@@ -1,15 +1,18 @@
-<!-- src/views/bpm.html -->
 {% extends "layouts/main.njk" %}
-{% block cdn %}<!-- noscript -->{% endblock %}
+{% block cdn %}<!-- nocdn -->{% endblock %}
 {% block local %}<!-- nostyle -->{% endblock %}
 {% block hscripts %}
-<script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer
-        type="text/javascript"></script>
-<script defer crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" defer
-        type="text/javascript"></script>
-<script defer src="/script/iframe.js?={{cache_buster}}" type="text/javascript"></script>
+<script defer crossorigin="anonymous"
+        src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+        type="text/javascript" defer></script>
+<script defer crossorigin="anonymous"
+        src="https://cdn.socket.io/4.0.0/socket.io.min.js"
+        type="text/javascript" defer></script>
+<script defer src="/script/iframe_detect.js?={{cache_buster}}" type="text/javascript"></script>
 <script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
 <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
+{% from "macros/public_module_styles.njk" import public_module_styles %}
+{{ public_module_styles() }}
 <style>
     #bpm-rate {
         width: 100vw;
@@ -22,8 +25,6 @@
         align-items: center;
     }
 </style>
-{% from "macros/public_module_styles.njk" import public_module_styles %}
-{{ public_module_styles() }}
 <style>
     #module-container {
         width: 100vw;
@@ -31,25 +32,7 @@
         display: block;
         position: relative;
     }
-    /** modules-css-only-start **/
-    :root {
-        --_bpm-translateX: 0.0;
-        --_bpm-translateY: 0.0;
-        --_bpm-scaleX: 0.0;
-        --_bpm-scaleY: 0.0;
-        --_bpm-rotateX: 0.0;
-        --_bpm-rotateY: 0.0;
-    }
-    #module-container {
-        transform: translateX(calc(var(--_bpm-translateX ) * 1%))
-        translateY(calc(var(--_bpm-translateY ) * 1%))
-        scaleX(calc(var(--_bpm-scaleX ) * 0.01))
-        scaleY(calc(var(--_bpm-scaleY ) * 0.01))
-        rotateX(calc(var(--_bpm-rotateX ) * 3.6deg))
-        rotateY(calc(var(--_bpm-rotateY ) * 3.6deg))
-    }
-    /** modules-css-only-end **/
-    html.iframe #module-container:after {
+    .iframe #module-container:after {
         content: "";
         display: block;
         width: 100%;
@@ -59,6 +42,19 @@
         top: 0;
         box-shadow: inset 0 0 10px 10px white;
         box-sizing: border-box;
+    }
+</style>
+<style>
+    :root {
+        --_bpm-translateX: 0.0;
+        --_bpm-translateY: 0.0;
+        --_bpm-scaleX: 0.0;
+        --_bpm-scaleY: 0.0;
+        --_bpm-rotateX: 0.0;
+        --_bpm-rotateY: 0.0;
+    }
+    #module-container {
+        transform: translateX(calc(var(--_bpm-translateX) * 1%)) translateY(calc(var(--_bpm-translateY) * 1%)) scaleX(calc(var(--_bpm-scaleX) * 0.01)) scaleY(calc(var(--_bpm-scaleY) * 0.01)) rotateX(calc(var(--_bpm-rotateX) * 3.6deg)) rotateY(calc(var(--_bpm-rotateY) * 3.6deg))
     }
 </style>
 {% endblock %}

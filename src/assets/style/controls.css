@@ -1,5 +1,5 @@
-/* General header styles */
-.header {
+/* general navbar styles */
+nav {
     position: fixed;
     bottom: 20px;
     left: 50%;
@@ -10,13 +10,11 @@
     align-items: center;
 }
 
-/* Hidden checkbox for toggling */
-.header--checkbox {
+input[type="checkbox"] {
     display: none;
 }
 
-/* Toggle Button Styles (Gearbox) */
-.header--toggle {
+input[type=checkbox] {
     position: relative;
     background: #fff;
     width: 30px;
@@ -31,8 +29,7 @@
     cursor: pointer;
 }
 
-/* Menu Items (Initially Hidden) */
-.header--items {
+aside {
     display: none;
     flex-direction: column;
     background: #fff;
@@ -47,20 +44,18 @@
     bottom: calc(100% + 10px);
 }
 
-.header--items em {
+aside em {
     font-style: normal;
     display: inline-block;
     min-width: 1.5em;
     text-align: center;
 }
 
-/* Show menu when checkbox is checked */
-.header--checkbox:checked ~ .header--items {
+input[type="checkbox"]:checked ~ aside {
     display: flex;
 }
 
-/* Individual Menu Buttons */
-.header--items button {
+aside button {
     color: var(--button-black);
     border: none;
     text-align: left;
@@ -70,21 +65,20 @@
     padding: 6px 11px 8px 6px;
 }
 
-.header--items button:hover,
-.header--items button:active {
+aside button:hover,
+aside button:active {
     background: repeating-linear-gradient(45deg, rgba(0, 0, 0, .15) 0px, rgba(0, 0, 0, .15) 2px, rgba(255, 255, 255, .15) 2px, rgba(255, 255, 255, .15) 4px);
 }
 
-/* Hide dropdown when `edit-active` */
-html.edit-active .header--items {
+html.edit-active aside {
     min-width: auto;
 }
 
-html.edit-active .header--toggle,
-html.edit-active .header--items button:not(#dashboard--toggle) {
+html.edit-active input[type=checkbox],
+html.edit-active aside button:not(#toggle-edit-dashboard) {
     display: none;
 }
 
-html.edit-active #dashboard--toggle {
+html.edit-active #toggle-edit-dashboard {
     width: max-content;
 }

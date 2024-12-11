@@ -1,5 +1,5 @@
 /**
- * File: src/modules/test/signal.js
+ * File: src/modules/test/send_signal.js
  * Description: Handles the creation of test signals for Twitch chat. Accepts a description parameter to identify the command
  * and sends a predefined message to Twitch chat via the Twitch API.
  * @returns {void} - Sends a message to Twitch chat and returns a success or failure response.

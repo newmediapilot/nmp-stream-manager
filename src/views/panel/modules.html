@@ -1,4 +1,3 @@
-<!-- src/views/dashboard.html -->
 {% extends "layouts/main.njk" %}
 {% set cache_buster = "" | currentTime %}
 {% set public_routes = 'public_routes' | getParam %}
@@ -8,7 +7,6 @@
 {{ public_module_styles() }}
 {% endblock %}
 {% block body %}
-{% include "partials/controls.njk" %}
 {% set public_routes = 'public_routes' | getParam %}
 <div class="modules">
     <div class="module aqua">
@@ -60,9 +58,8 @@
         </div>
     </div>
 </div>
+{% include "partials/controls.njk" %}
 {% endblock %}
-{% set device_ip = 'device_ip' | getParam %}
-{% set public_routes = 'public_routes' | getParam %}
 {% block extras %}
 <!-- dialogs start -->
 <!--<dialog class="dialog-container" id="{{ id }}">-->

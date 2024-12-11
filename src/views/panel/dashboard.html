@@ -1,4 +1,3 @@
-<!-- src/views/dashboard.html -->
 {% extends "layouts/main.njk" %}
 {% set cache_buster = "" | currentTime %}
 {% set public_routes = 'public_routes' | getParam %}
@@ -6,22 +5,17 @@
 <link rel="stylesheet" href="/style/dashboard.css?cb={{cache_buster}}">
 {% endblock %}
 {% block body %}
-{% include "partials/controls.njk" %}
 <div class="dashboard">
     {% for config in 'dashboard_signals_config' | getParam %}
-
     {% if config.type == "feature" %}
         {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=feature&type=" ~ config.type ~ "&description=" ~
     config.description ~ ":" ~ config.label %}
-
     {% elif config.type == "mark" %}
         {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~
     config.label %}
-
     {% else %}
         {% set data_href = public_routes.PUBLIC_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~
     config.description %}
-
     {% endif %}
     <div class="button button-{{ config.theme }}" href="{{data_href}}">
         <button
@@ -33,6 +27,7 @@
     </div>
     {% endfor %}
 </div>
+{% include "partials/controls.njk" %}
 {% endblock %}
 {% block extras %}
 <!-- dialogs start -->
@@ -54,30 +49,9 @@
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => scrollSnap('.dashboard'));
     // document.addEventListener("DOMContentLoaded", () => generateCopyLink('#qr-code-copy-link'));
-    document.addEventListener("DOMContentLoaded", () => generateQrCode(document.querySelector("#qrcode_dialog canvas").getAttribute('data-url'), "#qr-code-dialog-canvas"));
-    document.addEventListener("DOMContentLoaded", () => dashboardButtons());
+    document.addEventListener("DOMContentLoaded", () => generateQrCode(document.querySelector("#qr-code-dialog-canvas").getAttribute('data-url'), "#qr-code-dialog-canvas"));
+    document.addEventListener("DOMContentLoaded", () => dashboard());
     document.addEventListener("DOMContentLoaded", () => {
-        anime({
-            targets: '.dashboard button',
-            duration: 3000,
-            delay: anime.stagger(50),
-            easing: 'easeInElastic(1, .6)',
-            filter: 'hue-rotate(360deg)',
-            loopBegin: function (anim) {
-                setTimeout(anim.play, 7000);
-            }
-        });
-        anime({
-            targets: '.dashboard button',
-            duration: 3000,
-            delay: anime.stagger(50),
-            easing: 'easeInElastic(1, .6)',
-            filter: 'hue-rotate(360deg)',
-            loopBegin: function (anim) {
-                setTimeout(anim.play, 7000);
-            }
-        });
-        // @eyecandy
         anime({
             targets: 'html.iframe .dashboard button',
             duration: 1500,
@@ -88,30 +62,22 @@
             borderBottomWidth: ['20px', '200px'],
             borderLeftWidth: ['20px', '200px'],
             borderRightWidth: ['20px', '200px'],
-            borderRadius: ['15px', '30px'],
-            loopBegin: (anim) => {
-                // setTimeout(anim.play, 11000);
-            }
+            borderRadius: ['15px', '30px']
         });
-        // TODO: All button down behaviours
-        const downButton = () => {
-
-        };
-        // TODO: All button up behaviours
-        const upButton = () => {
-
-        };
-        document.querySelectorAll('.dashboard button').forEach(buttonEl => {
-            buttonEl.addEventListener('mousedown', downButton);
-            buttonEl.addEventListener('touchstart', downButton);
-            buttonEl.addEventListener('mouseup', upButton);
-            buttonEl.addEventListener('touchend', upButton);
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+        anime({
+            targets: '.dashboard button',
+            duration: 3000,
+            delay: anime.stagger(50),
+            easing: 'easeInElastic(1, .6)',
+            filter: 'hue-rotate(360deg)',
+            loopBegin: function (anim) {
+                setTimeout(anim.play, 7000);
+            }
         });
     });
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    document.addEventListener("DOMContentLoaded", () => {
-
-    });
 </script>
 {% endblock %}

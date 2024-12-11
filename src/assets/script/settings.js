@@ -4,15 +4,12 @@ const initSettingsEditor = (editorEl) => {
     const emojiWidgetTriggerEl = editorEl.querySelector("button");
     const emojiWidgetEl = document.querySelector("#emoji-widget");
     let emojiWidgetInstanceEl;
-
     let textEditorValue = null;
-
     const textEditorElFocus = () => {
         textEditorValue = textEditorEl.value;
         textEditorEl.select();
         textEditorEl.scrollTo();
     };
-
     const textEditorElBlur = () => {
         if (
             textEditorEl.value !== textEditorValue &&
@@ -38,14 +35,12 @@ const initSettingsEditor = (editorEl) => {
             textEditorEl.disabled = false;
         }, 1000);
     };
-
     textEditorEl.addEventListener("focus", textEditorElFocus);
     textEditorEl.addEventListener("blur", textEditorElBlur);
     textEditorEl.addEventListener(
         "keydown",
         () => event.keyCode === 13 && textEditorElBlur(),
     );
-
     emojiWidgetTriggerEl.addEventListener("click", () => {
 
         // cleanup anything existing first
@@ -53,9 +48,7 @@ const initSettingsEditor = (editorEl) => {
             .forEach(el => el.remove());
         document.querySelectorAll('.emoji-widget-instance-trigger')
             .forEach(el => el.classList.remove('emoji-widget-instance-trigger'));
-
         emojiWidgetTriggerEl.classList.remove("add");
-
         if (emojiWidgetInstanceEl) {
             emojiWidgetInstanceEl = null;
         } else {
@@ -63,23 +56,19 @@ const initSettingsEditor = (editorEl) => {
             emojiWidgetInstanceEl.classList.add('emoji-widget-instance');
             emojiWidgetTriggerEl.classList.add("emoji-widget-instance-trigger");
             editorEl.insertAdjacentElement("afterend", emojiWidgetInstanceEl);
-
             const emojiEls = emojiWidgetInstanceEl.querySelectorAll("li");
-
             const emojiElsClick = (evt) => {
                 emojiEls.forEach(
-                    (el) =>{
+                    (el) => {
                         (emojiWidgetTriggerEl.innerText === el.innerText) ?
                             el.classList.add("active") :
                             el.classList.remove("active");
                     }
                 );
             };
-
             emojiElsClick();
-
             emojiEls.forEach((el) => {
-                el.addEventListener("click", ()=>{
+                el.addEventListener("click", () => {
                     emojiElsClick();
                 });
                 el.addEventListener("click", (evt) => {
@@ -90,16 +79,14 @@ const initSettingsEditor = (editorEl) => {
                         field: "emoji",
                         value: el.innerText,
                     };
-                    axios
-                        .get("/public/config/update", {
-                            params: {
-                                type: "signals:field",
-                                payload: JSON.stringify(payload),
-                            },
-                        })
-                        .finally(() => {
-                            socketEmitReload();
-                        });
+                    axios.get("/public/config/update", {
+                        params: {
+                            type: "signals:field",
+                            payload: JSON.stringify(payload),
+                        },
+                    }).finally(() => {
+                        // socketEmitReload();
+                    });
                 });
             });
         }

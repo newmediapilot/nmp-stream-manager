@@ -1,9 +1,9 @@
 {% set public_routes = 'public_routes' | getParam %}
-<div class="header">
-    <input type="checkbox" id="menu-toggle" class="header--checkbox">
-    <label for="menu-toggle" class="header--toggle">🌐</label>
-    <div class="header--items">
-        <button id="dashboard--qrcode"
+<nav>
+    <input type="checkbox" id="toggle-nav-show">
+    <label for="toggle-nav-show">🌐</label>
+    <aside class=items">
+        <button id="global-qrcode"
                 onclick="showDialog('#qrcode_dialog', '🔗 Dashboard Link', 'This link will open the dashboard<br>on any device on your network.')">
             <em>🔗</em>Show QR
         </button>
@@ -13,9 +13,9 @@
         <button onclick="javascript:getURL('{{ public_routes.TWITCH_LOGIN }}')"><em>🔒</em>Login</button>
         <button onclick="javascript:getURL('{{ public_routes.PUBLIC_MODULES }}')"><em>🎬️</em>Displays</button>
         <button onclick="javascript:getURL('{{ public_routes.PUBLIC_SETTINGS }}')"><em>⚡</em>Settings</button>
-        <button class="dashboard--spare1" onclick="javascript:getURL('{{ public_routes.PUBLIC_DASHBOARD }}')">
+        <button onclick="javascript:getURL('{{ public_routes.PUBLIC_DASHBOARD }}')">
             <em>🌀</em>Dashboard
         </button>
-        <button id="dashboard--toggle">Toggle Feature</button>
-    </div>
-</div>
+        <button id="toggle-edit-dashboard">Toggle Edit</button>
+    </aside>
+</nav>
