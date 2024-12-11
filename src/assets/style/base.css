@@ -1,4 +1,4 @@
-/** prevents override form studio (any browser hosting the projections) **/
+/** override hosts **/
 body {
     overflow: hidden !important;
     background: none !important;
@@ -20,12 +20,10 @@ ul {
     list-style: none;
 }
 
-li::marker {
-    content: none;
-}
-
 * {
     transform: translate3d(0, 0, 0);
     overscroll-behavior: none;
     -webkit-overflow-scrolling: auto;
+    margin: 0;
+    padding: 0;
 }
