@@ -20,12 +20,12 @@
         <meta name="{{ key }}" content="{{ value }}">
     {% endfor %}
     {% block local %}
-        <script src="/script/router.js?cb={{cache_buster}}" defer type="text/javascript"></script>
-        <script src="/script/settings_editor.js?cb={{cache_buster}}" defer type="text/javascript"></script>
+        <script src="/script/get_url.js?cb={{cache_buster}}" defer type="text/javascript"></script>
+        <script src="/script/settings.js?cb={{cache_buster}}" defer type="text/javascript"></script>
         <script src="/script/generate_qr_code.js?cb={{cache_buster}}" defer type="text/javascript"></script>
         <script src="/script/copy_link.js.js?cb={{cache_buster}}" defer type="text/javascript"></script>
         <script src="/script/generic_dialog.js?cb={{cache_buster}}" defer type="text/javascript"></script>
-        <script src="/script/send_signal.js?cb={{cache_buster}}" defer type="text/javascript"></script>
+        <script src="/script/signal.js?cb={{cache_buster}}" defer type="text/javascript"></script>
         <script src="/script/dashboard.js?cb={{cache_buster}}" defer type="text/javascript"></script>
         <script src="/script/socket.js?cb={{cache_buster}}" defer type="text/javascript"></script>
         <script src="/script/scroll_snap.js?cb={{cache_buster}}" defer type="text/javascript"></script>
@@ -47,6 +47,7 @@
 </head>
 <body>
 {% block body %}{% endblock %}
+{% block extras %}{% endblock %}
 {% block fscripts %}{% endblock %}
 </body>
 </html>

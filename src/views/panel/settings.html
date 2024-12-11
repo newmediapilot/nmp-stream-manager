@@ -111,15 +111,19 @@
     <li>👑</li>
     <li>💥</li>
 </ul>
-{% set device_ip = 'device_ip' | getParam %}
-{% set public_routes = 'public_routes' | getParam %}
-<dialog class="dialog-container" id="{{ id }}">
+{% endblock %}
+{% block extras %}
+<!-- dialogs start -->
+<dialog class="dialog-container" id="qrcode_dialog">
     <div class="dialog--title">...</div>
     <div class="dialog--body">...</div>
     <canvas id="qr-code-dialog-canvas" data-url="https://{{ device_ip  }}{{ public_route }}"></canvas>
-    <button style="background: deepskyblue" id="qr-code-copy-link" data-clipboard-text="https://{{ device_ip  }}{{ public_route }}">Click to Copy Link!</button>
+    <button style="background: deepskyblue" id="qr-code-copy-link"
+            data-clipboard-text="https://{{ device_ip  }}{{ public_route }}">Click to Copy Link!
+    </button>
     <button style="background: green" onclick="javascript:closeDialog('{{ id }}')">✅Done</button>
 </dialog>
+<!-- dialogs end -->
 {% endblock %}
 {% block fscripts %}
 <script defer>

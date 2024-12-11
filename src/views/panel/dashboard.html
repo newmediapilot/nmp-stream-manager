@@ -35,10 +35,24 @@
     {% endfor %}
 </div>
 {% endblock %}
-{% block fscripts %}
+{% extras %}
 <!-- dialogs start -->
-{{ qrcode_dialog("qrcode_dialog", public_routes.PUBLIC_INDEX) }}
+{% extras %}
+<!-- dialogs start -->
+<dialog class="dialog-container" id="{{ id }}">
+    <div class="dialog--title">...</div>
+    <div class="dialog--body">...</div>
+    <canvas id="qr-code-dialog-canvas" data-url="https://{{ device_ip  }}{{ public_route }}"></canvas>
+    <button style="background: deepskyblue" id="qr-code-copy-link"
+            data-clipboard-text="https://{{ device_ip  }}{{ public_route }}">Click to Copy Link!
+    </button>
+    <button style="background: green" onclick="javascript:closeDialog('{{ id }}')">✅Done</button>
+</dialog>
 <!-- dialogs end -->
+{% endblock %}
+<!-- dialogs end -->
+{% endblock %}
+{% block fscripts %}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
