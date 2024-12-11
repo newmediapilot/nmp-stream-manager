@@ -68,8 +68,8 @@ const settingsCreateEditor = (editorEl) => {
             };
             emojiEls.forEach((el) => {
                 el.addEventListener("click", (evt) => {
-                    emojiElsClick();
                     emojiWidgetTriggerEl.innerText = el.innerText;
+                    emojiElsClick();
                     axios.get("/public/config/update", {
                         params: {
                             type: "signals:field",
@@ -80,7 +80,7 @@ const settingsCreateEditor = (editorEl) => {
                             }),
                         },
                     }).finally(() => {
-                        // socketEmitReload();
+                        socketEmitReload();
                     });
                 });
             });
