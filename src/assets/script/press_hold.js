@@ -1,9 +1,7 @@
 const detectPressHold = (onHoldDetected, onHoldReleased) => {
-
     let isHeldDown = false;
     let timeoutId = null;
     const debounceTime = 500;
-
     const onDown = () => {
         if (!isHeldDown) {
             isHeldDown = true;
@@ -13,13 +11,11 @@ const detectPressHold = (onHoldDetected, onHoldReleased) => {
             onHoldDetected();
         }, debounceTime);
     };
-
     const onUp = () => {
         isHeldDown = false;
         onHoldReleased();
         clearTimeout(timeoutId);
     };
-
     document.addEventListener('mousedown', onDown);
     document.addEventListener('touchstart', onDown);
     document.addEventListener('mouseup', onUp);
