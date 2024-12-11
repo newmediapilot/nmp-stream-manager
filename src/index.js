@@ -8,6 +8,7 @@ const ROUTES = require("./routes");
 const express = require("express");
 const {requestLogger} = require("./modules/logger");
 const {requestCompressed} = require("./minify");
+const {requestCache} = require("./cache");
 const {startServices} = require("./modules/start");
 const {publicSignalCreate} = require("./modules/public/signal");
 const {publicConfigUpdate} = require("./modules/public/config");
@@ -16,6 +17,7 @@ const {publicBpmPing} = require("./modules/sensor/ping");
 const {twitchLogin, twitchLoginSuccess} = require("./modules/twitch/login");
 const app = express();
 // app.use(requestLogger);
+app.use(requestCache);
 app.use(requestCompressed);
 // Twitch API Start
 app.all(ROUTES.TWITCH_LOGIN, twitchLogin);
