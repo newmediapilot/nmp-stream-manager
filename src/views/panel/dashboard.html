@@ -18,9 +18,7 @@
     config.description %}
     {% endif %}
     <div class="button button-{{ config.theme }}" href="{{data_href}}">
-        <button
-                data-href="{{ data_href }}"
-                onclick="javascript:sendSignal(this)">
+        <button data-href="{{ data_href }}" onclick="javascript:sendSignal(this)">
             <label>{{ config.emoji }}</label>
             <label>{{ config.label }}</label>
         </button>
@@ -31,13 +29,13 @@
 {% endblock %}
 {% block extras %}
 <!-- dialogs start -->
-<dialog id="qr-dialog"
-        data-url="https://{{ device_ip  }}{{ public_route }}">
+{% set device_ip = "device_ip" | getParam %}
+<dialog id="qr-dialog" data-url="https://{{device_ip }}{{public_routes.PUBLIC_DASHBOARD}}">
     <h2 class="dialog--title">QR Code Dialog</h2>
     <h3 class="dialog--body">This link will open this page on any device on your network</h3>
-    <canvas/>
+    </canvas>
     <button>Click to Copy Link!</button>
-    <button style="background: green" onclick="javascript:hideDialog('qr-dialog')">✅Done</button>
+    <button onclick="javascript:document.querySelector('#qrcode_dialog').close();">✅Done</button>
 </dialog>
 <!-- dialogs end -->
 {% endblock %}
@@ -79,7 +77,5 @@
             }
         });
     });
-    document.addEventListener("DOMContentLoaded", () => socketConnect());
-    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
 </script>
 {% endblock %}

@@ -1,4 +1,5 @@
-const initSettingsEditor = (editorEl) => {
+const settings = () => {
+    const editorEl = document.querySelectorAll(".settings-editor");
     const id = editorEl.getAttribute("data-editor-id");
     const textEditorEl = editorEl.querySelector('[type="text"]');
     const emojiWidgetTriggerEl = editorEl.querySelector("button");

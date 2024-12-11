@@ -115,14 +115,13 @@
 {% endblock %}
 {% block extras %}
 <!-- dialogs start -->
-<dialog class="dialog-container" id="qrcode_dialog">
-    <div class="dialog--title">...</div>
-    <div class="dialog--body">...</div>
-    <canvas id="qr-code-dialog-canvas" data-url="https://{{ device_ip  }}{{ public_route }}"></canvas>
-    <button style="background: deepskyblue" id="qr-code-copy-link"
-            data-clipboard-text="https://{{ device_ip  }}{{ public_route }}">Click to Copy Link!
-    </button>
-    <button style="background: green" onclick="javascript:hideDialog('{{ id }}')">✅Done</button>
+{% set device_ip = "device_ip" | getParam %}
+<dialog id="qr-dialog" data-url="https://{{device_ip }}{{public_routes.PUBLIC_DASHBOARD}}">
+    <h2 class="dialog--title">QR Code Dialog</h2>
+    <h3 class="dialog--body">This link will open this page on any device on your network</h3>
+    </canvas>
+    <button>Click to Copy Link!</button>
+    <button onclick="javascript:document.querySelector('#qrcode_dialog').close();">✅Done</button>
 </dialog>
 <!-- dialogs end -->
 {% endblock %}
@@ -131,7 +130,12 @@
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    document.addEventListener("DOMContentLoaded", () => scrollSnap(document.querySelector('.settings')));
-    document.addEventListener("DOMContentLoaded", () => document.querySelectorAll(".settings-editor").forEach(initSettingsEditor));
+    document.addEventListener("DOMContentLoaded", () => scrollSnap(document.querySelector(".dashboard")));
+    document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.querySelector(".dashboard")));
+    document.addEventListener("DOMContentLoaded", () => generateQrCode(
+        document.querySelector("#qr-dialog").getAttribute("data-url"),
+        document.querySelector("#qr-dialog canvas")
+    ));
+    document.addEventListener("DOMContentLoaded", () => settings());
 </script>
 {% endblock %}

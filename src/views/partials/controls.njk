@@ -4,15 +4,13 @@
     <label for="toggle-nav-show">🌐</label>
     <aside class=items">
         <button onclick="javascript:socketEmitReload()"><em>🔄</em>Reload</button>
-        <button onclick="javascript:querySelector('#qr-dialog').open()"><em>🔗</em>Show QR</button>
+        <button onclick="javascript:document.querySelector('#qr-dialog').showModal()"><em>🔗</em>Show QR</button>
         <button onclick="javascript:window.parent.location.href='{{ public_routes.PUBLIC_DASHBOARD }}'"><em>🥷</em>Dev</button>
         <button onclick="javascript:window.parent.location.href='{{ public_routes.PUBLIC_INDEX }}'"><em>🧑</em>User</button>
         <button onclick="javascript:getURL('{{ public_routes.TWITCH_LOGIN }}')"><em>🔒</em>Login</button>
         <button onclick="javascript:getURL('{{ public_routes.PUBLIC_MODULES }}')"><em>🎬️</em>Displays</button>
         <button onclick="javascript:getURL('{{ public_routes.PUBLIC_SETTINGS }}')"><em>⚡</em>Settings</button>
-        <button onclick="javascript:getURL('{{ public_routes.PUBLIC_DASHBOARD }}')">
-            <em>🌀</em>Dashboard
-        </button>
+        <button onclick="javascript:getURL('{{ public_routes.PUBLIC_DASHBOARD }}')"><em>🌀</em>Dashboard</button>
         <button id="toggle-edit-dashboard">Toggle Edit</button>
     </aside>
 </nav>
