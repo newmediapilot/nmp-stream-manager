@@ -38,13 +38,9 @@ const storeInputValues = () => {
     }).join(";");
     document.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
     document.querySelectorAll('iframe').forEach(iframe => {
-        try {
-            iframe && iframe.contentWindow && iframe.contentWindow.document.querySelectorAll('#public_module_styles').forEach(el => {
-                el.innerHTML = `:root{${payload};}`
-            });
-        } catch (e) {
-            // Sometimes if the frame is busy it nulls out
-        }
+        iframe && iframe.contentWindow && iframe.contentWindow.document.querySelectorAll('#public_module_styles').forEach(el => {
+            el.innerHTML = `:root{${payload};}`
+        });
     });
 };
 const initializeInputForms = () => {
@@ -57,9 +53,11 @@ const initializeInputForms = () => {
         storeInputValues();
     });
     document.addEventListener('touchmove', (e) => {
+        document.addEventListener('mousemove', storeInputValues);
         storeInputValues();
     });
     document.addEventListener('touchend', (e) => {
+        document.removeEventListener('mousemove', storeInputValues);
         storeInputValues();
     });
 };

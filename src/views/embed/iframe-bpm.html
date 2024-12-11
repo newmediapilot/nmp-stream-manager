@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
 <link rel="stylesheet" href="/style/iframe.css?cb={{cache_buster}}">
 {% from "macros/public_module_styles.njk" import public_module_styles %}
-{{ public_module_styles() }}
 <style>
     #bpm-rate {
         display: flex;
@@ -26,14 +25,6 @@
     }
 </style>
 <style>
-    :root {
-        --_bpm-translateX: 0.0;
-        --_bpm-translateY: 0.0;
-        --_bpm-scaleX: 100.0;
-        --_bpm-scaleY: 100.0;
-        --_bpm-rotateX: 0.0;
-        --_bpm-rotateY: 0.0;
-    }
     #module-container {
         transform: translateX(calc(var(--_bpm-translateX) * 1%))
         translateY(calc(var(--_bpm-translateY) * 1%))
@@ -43,6 +34,17 @@
         rotateY(calc(var(--_bpm-rotateY) * 3.6deg))
     }
 </style>
+<style>
+    :root {
+        --_bpm-translateX: 0.0;
+        --_bpm-translateY: 0.0;
+        --_bpm-scaleX: 100.0;
+        --_bpm-scaleY: 100.0;
+        --_bpm-rotateX: 0.0;
+        --_bpm-rotateY: 0.0;
+    }
+</style>
+{{ public_module_styles() }}
 {% endblock %}
 {% block body %}
 {% for signal in "dashboard_signals_config" | getParam %}
