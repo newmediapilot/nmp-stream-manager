@@ -15,6 +15,7 @@ const configureSocket = (server) => {
 
   // Handle connection events
   io.on("connection", (socket) => {
+    console.log('socket', socket.handshake.address);
     console.log2(process.cwd(),"Client connected");
 
     // Listen for custom events from clients
