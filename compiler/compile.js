@@ -1,14 +1,23 @@
 const fs = require("fs");
 const path = require("path");
-const { execSync } = require('child_process');
+const {execSync} = require('child_process');
 const request = require('sync-request');
 
 // Compile and prepare files
 execSync("node ./compiler/combine.js");
 let jsonDataString = fs.readFileSync("./.combined.json", "utf-8");
-
+const REMOVE = "";
+const RANDOM = [
+    'zjvlu', 'xyqmp', 'wtrks', 'bnvwo', 'apdqi', 'mfhgz', 'cjrst', 'yldwp', 'sktzv', 'bluwy',
+    'qwmjv', 'xgatz', 'lfpqe', 'vjsoc', 'nrdbu', 'uyqkw', 'pchrd', 'oajkn', 'kzvfg', 'lwmev',
+    'nquzb', 'tchws', 'oarjx', 'fclzd', 'vjbrk', 'qnkps', 'umxly', 'gviqo', 'djhyz', 'pefwa',
+    'rwktz', 'gxqvh', 'sotbe', 'lcwpk', 'azjdi', 'rbmfu', 'hxnwl', 'ycpvo', 'tjzlg', 'suywb',
+    'htzwq', 'npjck', 'owdvs', 'klyom', 'mjgqv', 'btuqi', 'czvpf', 'yxsol', 'qdxrh', 'pkvjb',
+    'rjhcs', 'fzoet', 'axntw', 'oivqz', 'cpbwm', 'smyuq', 'vperh', 'kxfld', 'gipzw', 'lbtmq'
+];
+const DECOYS = [];
 // Clean the content
-jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/gm, "");
+jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/gm, REMOVE);
 jsonDataString = jsonDataString.replace(/TWITCH_LOGIN/gm, "WITCH_TUGGING");
 jsonDataString = jsonDataString.replace(/PUBLIC_DASHBOARD/gm, "CONTROL_PANEL_O_MATIC");
 jsonDataString = jsonDataString.replace(/PUBLIC_SETTINGS/gm, "SETTING_SPREE");
@@ -19,19 +28,24 @@ jsonDataString = jsonDataString.replace(/PUBLIC_SIGNAL_CREATE/gm, "SIGNAL_FIREWO
 jsonDataString = jsonDataString.replace(/PUBLIC_CONFIG_UPDATE/gm, "CONFIG_TWEAKS");
 jsonDataString = jsonDataString.replace(/PUBLIC_STYLE_UPDATE/gm, "STYLE_SHUFFLE");
 jsonDataString = jsonDataString.replace(/PUBLIC_BPM_PING/gm, "BEAT_THROB");
-
+// jsonDataString = jsonDataString.replace(/document\.addEventListener/gm, (m) => {
+//     DECOYS.push(['addEventListener', document.$${KEYS}]);
+//     return `document.$${KEYS}`;
+// });
+// jsonDataString = jsonDataString.replace(/document\.addEventListener/gm, (m) => {
+//     DECOYS.push(['addEventListener', document.$${KEYS}]);
+//     return `document.$${KEYS}`;
+// });
 // Clean up the .dist folder if it exists
-fs.rmSync("./.dist", { recursive: true, force: true });
-
+fs.rmSync("./.dist", {recursive: true, force: true});
 const data = JSON.parse(jsonDataString);
-
 // Process files and write them
 Object.keys(data)
     .map(path => {
         const writePath = path.split("\\").slice(0, -1).join("\\");
         const fullPath = `./.dist/${writePath}`;
         if (!fs.existsSync(fullPath)) {
-            fs.mkdirSync(fullPath, { recursive: true });
+            fs.mkdirSync(fullPath, {recursive: true});
             console.log('Directory created successfully', fullPath);
         }
         return path;
@@ -69,26 +83,21 @@ Object.keys(data)
     .map(path => {
         const fullPath = `./.dist/${path}`;
         const content = data[path];
-        fs.writeFileSync(fullPath, content, { encoding: "utf-8" });
+        fs.writeFileSync(fullPath, content, {encoding: "utf-8"});
         return path;
     });
-
 fs.copyFileSync(".env", "./.dist/.env");
 fs.copyFileSync("./localhost.key", "./.dist/localhost.key");
 fs.copyFileSync("./localhost.crt", "./.dist/localhost.crt");
 fs.copyFileSync("./src/assets/icon512_maskable.png", "./.dist/src/assets/icon512_maskable.png");
 fs.copyFileSync("./src/assets/icon512_rounded.png", "./.dist/src/assets/icon512_rounded.png");
 fs.copyFileSync("./src/assets/manifest.json", "./.dist/src/assets/manifest.json");
-
 console.log("Temp files copied");
-
 console.log("Installing packages");
 execSync(`cd ./.dist/ && npm i --no-save`);
 console.log("Installing packages...done");
-
 console.log("Starting test server...");
-execSync(`cd ./.dist/ && node ./src/index.js`, { stdio: 'inherit' });
-
+execSync(`cd ./.dist/ && node ./src/index.js`, {stdio: 'inherit'});
 // Cleanup after a 10-second delay, ensuring the server is fully started
 setTimeout(() => {
     const filesToDelete = [
@@ -99,7 +108,6 @@ setTimeout(() => {
         // './.dist/src/assets/icon512_rounded.png',
         // './.dist/src/assets/manifest.json',
     ];
-
     filesToDelete.forEach(file => {
         try {
             fs.unlinkSync(file);
@@ -108,6 +116,5 @@ setTimeout(() => {
             console.error(`Error deleting file: ${file}`, err);
         }
     });
-
     console.log("Cleanup done");
 }, 10000);  // 10 seconds delay to give server time to start and run
