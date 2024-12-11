@@ -20,6 +20,11 @@ ul {
     list-style: none;
 }
 
+::selection {
+    background-color: #000;
+    color: white;
+}
+
 * {
     transform: translate3d(0, 0, 0);
     overscroll-behavior: none;
