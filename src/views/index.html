@@ -25,11 +25,12 @@
 {% block fscripts %}
 <script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
 <script defer src="/script/detect_press_hold.js?={{cache_buster}}" type="text/javascript"></script>
+<script defer src="/script/debounce_function.js?={{cache_buster}}" type="text/javascript"></script>
 <script defer>
     document.addEventListener("DOMContentLoaded", () => {
         anime({
             targets: 'body',
-            filter: ['sepia(100%)', 'sepia(0%)'], // Animate from full sepia to no sepia
+            filter: ['sepia(100%)', 'sepia(10%)'], // Animate from full sepia to no sepia
             duration: 10000,
             easing: 'easeOutQuad',
         });
