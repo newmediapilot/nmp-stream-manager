@@ -79,6 +79,7 @@
 {% block fscripts %}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
+    document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => {
         const bpmRateElement = document.querySelector('#bpm-rate');

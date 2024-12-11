@@ -92,6 +92,7 @@
 {% block fscripts %}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
+    document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => {
         // Read query param of featuredName
