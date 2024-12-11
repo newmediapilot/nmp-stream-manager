@@ -76,7 +76,11 @@
     position: relative;
 }
 
-ul + #emoji-widget {
+body > #emoji-widget {
+    display: none;
+}
+
+#emoji-widget {
     display: none;
 }
 

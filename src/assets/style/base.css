@@ -20,6 +20,10 @@ ul {
     list-style: none;
 }
 
+section {
+    display: block;
+}
+
 ::selection {
     background-color: #000;
     color: white;
