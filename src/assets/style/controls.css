@@ -1,4 +1,9 @@
-/* general navbar styles */
+/* toggle */
+html.edit-active nav input[type=checkbox],
+html.edit-active nav aside button:not(#toggle-edit-dashboard) {
+    display: none;
+}
+
 nav {
     position: fixed;
     bottom: 20px;
@@ -10,11 +15,11 @@ nav {
     align-items: center;
 }
 
-input[type="checkbox"] {
+nav input[type="checkbox"] {
     display: none;
 }
 
-input[type=checkbox] {
+nav label {
     position: relative;
     background: #fff;
     width: 30px;
@@ -29,7 +34,7 @@ input[type=checkbox] {
     cursor: pointer;
 }
 
-aside {
+nav aside {
     display: none;
     flex-direction: column;
     background: #fff;
@@ -44,18 +49,18 @@ aside {
     bottom: calc(100% + 10px);
 }
 
-aside em {
+nav aside em {
     font-style: normal;
     display: inline-block;
     min-width: 1.5em;
     text-align: center;
 }
 
-input[type="checkbox"]:checked ~ aside {
+nav input[type="checkbox"]:checked ~ aside {
     display: flex;
 }
 
-aside button {
+nav aside button {
     color: var(--button-black);
     border: none;
     text-align: left;
@@ -65,20 +70,7 @@ aside button {
     padding: 6px 11px 8px 6px;
 }
 
-aside button:hover,
-aside button:active {
+nav aside button:hover,
+nav aside button:active {
     background: repeating-linear-gradient(45deg, rgba(0, 0, 0, .15) 0px, rgba(0, 0, 0, .15) 2px, rgba(255, 255, 255, .15) 2px, rgba(255, 255, 255, .15) 4px);
-}
-
-html.edit-active aside {
-    min-width: auto;
-}
-
-html.edit-active input[type=checkbox],
-html.edit-active aside button:not(#toggle-edit-dashboard) {
-    display: none;
-}
-
-html.edit-active #toggle-edit-dashboard {
-    width: max-content;
 }
