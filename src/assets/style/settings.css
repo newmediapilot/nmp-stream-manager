@@ -13,8 +13,8 @@
 .settings:after {
     content: "";
     height: 130px;
-    background:transparent;
-    width:100%;
+    background: transparent;
+    width: 100%;
     display: block;
 }
 
@@ -45,11 +45,7 @@
     display: grid;
     grid-template-columns: repeat(5, calc(100% / 5));
     box-sizing: border-box;
-    border-top: 20px solid rgba(255, 255, 255, 0.0);
-    border-right: 20px solid rgba(255, 255, 255, 0.0);
-    border-bottom: 20px solid rgba(255, 255, 255, 0.0);
-    border-left: 20px solid rgba(255, 255, 255, 0.0);
-    min-height: calc(5vh - (4 * 20px));
+    min-height: 8vh;
 }
 
 .settings-editor > button {
@@ -92,7 +88,7 @@ ul + #emoji-widget {
 }
 
 .emoji-widget-instance,
-.emoji-widget-instance-trigger{
+.emoji-widget-instance-trigger {
     background: green !important;
 }
 
@@ -132,4 +128,5 @@ ul + #emoji-widget {
 .settings-editor.purple + #emoji-widget {
     background: var(--button-purple);
 }
+
 /** themes end **/

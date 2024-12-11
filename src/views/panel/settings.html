@@ -133,6 +133,8 @@
         document.querySelector("#qr-dialog canvas"),
         document.querySelector("#qr-dialog").getAttribute("data-url"),
     ));
-    document.addEventListener("DOMContentLoaded", () => settings());
+    document.addEventListener("DOMContentLoaded", () => {
+        settings();
+    });
 </script>
 {% endblock %}
