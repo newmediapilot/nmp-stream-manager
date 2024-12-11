@@ -20,6 +20,10 @@ ul {
     list-style: none;
 }
 
+li::marker {
+    content: none;
+}
+
 * {
     transform: translate3d(0, 0, 0);
     overscroll-behavior: none;

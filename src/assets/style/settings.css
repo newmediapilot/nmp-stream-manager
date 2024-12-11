@@ -18,12 +18,17 @@
     display: block;
 }
 
+.settings li {
+    min-height: 5vh;
+}
+
 .settings .settings-header {
-    border-top: 20px solid rgba(255, 255, 255, 0.6);
-    border-right: 20px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 20px solid rgba(255, 255, 255, 0.1);
-    border-left: 20px solid rgba(255, 255, 255, 0.4);
-    height: 5vh;
+    box-sizing: border-box;
+    /*border-top: 20px solid rgba(255, 255, 255, 0.6);*/
+    /*border-right: 20px solid rgba(255, 255, 255, 0.2);*/
+    /*border-bottom: 20px solid rgba(255, 255, 255, 0.1);*/
+    /*border-left: 20px solid rgba(255, 255, 255, 0.4);*/
+    min-height: 5vh;
     display: flex;
     align-items: center;
     z-index: 1;
@@ -32,14 +37,14 @@
 .settings-header p {
     flex-grow: 1;
     font-size: 30px;
-    margin-left: 10px;
+    margin: 0;
     background: repeating-linear-gradient(45deg, rgba(0, 0, 0, .05) 0px, rgba(0, 0, 0, .05) 2px, rgba(255, 255, 255, .05) 2px, rgba(255, 255, 255, .05) 4px);
 }
 
 .settings-editor {
     display: grid;
     grid-template-columns: repeat(5, calc(100% / 5));
-    min-height: 8vh;
+    min-height: 5vh;
 }
 
 .settings-editor > button {
@@ -49,7 +54,6 @@
 .settings-editor > [type="text"] {
     font-size: 25px;
     grid-column: span 3;
-    padding: 0 15px;
 }
 
 .settings-editor > [type="text"] {

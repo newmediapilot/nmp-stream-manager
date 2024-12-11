@@ -24,7 +24,6 @@
         <script src="/script/settings.js?cb={{cache_buster}}" defer type="text/javascript"></script>
         <script src="/script/generate_qr_code.js?cb={{cache_buster}}" defer type="text/javascript"></script>
         <script src="/script/generate_copy_link.js?cb={{cache_buster}}" defer type="text/javascript"></script>
-        <script src="/script/dialog.js?cb={{cache_buster}}" defer type="text/javascript"></script>
         <script src="/script/send_signal.js?cb={{cache_buster}}" defer type="text/javascript"></script>
         <script src="/script/dashboard.js?cb={{cache_buster}}" defer type="text/javascript"></script>
         <script src="/script/socket.js?cb={{cache_buster}}" defer type="text/javascript"></script>
@@ -39,14 +38,13 @@
         <link href="/style/base.css?cb={{cache_buster}}" rel="stylesheet">
         <link href="/style/variables.css?cb={{cache_buster}}" rel="stylesheet">
         <link href="/style/scrollbar.css?cb={{cache_buster}}" rel="stylesheet">
-        <link href="/style/dialog.css?cb={{cache_buster}}" rel="stylesheet">
         <link href="/style/controls.css?cb={{cache_buster}}" rel="stylesheet">
     {% endblock %}
     {% block hscripts %}{% endblock %}
 </head>
 <body>
 {% block body %}{% endblock %}
-{% block extras %}{% endblock %}
+{% block dialogs %}{% endblock %}
 {% block fscripts %}{% endblock %}
 </body>
 </html>

@@ -8,7 +8,7 @@
 {% endblock %}
 {% block body %}
 {% set public_routes = 'public_routes' | getParam %}
-<div class="modules">
+<secion class="modules">
     <div class="module aqua">
         <div class="title">
             <p>FEATURE</p>
@@ -57,19 +57,30 @@
             </label>
         </div>
     </div>
-</div>
+</secion>
 {% include "partials/controls.njk" %}
 {% endblock %}
-{% block extras %}
-<!-- dialogs start -->
-<!-- dialogs end -->
+{% block dialogs %}
+{% set device_ip = "device_ip" | getParam %}
+<dialog id="qr-dialog" data-url="https://{{device_ip }}{{public_routes.PUBLIC_DASHBOARD}}">
+    <h2 class="dialog--title">QR Code Dialog</h2>
+    <h3 class="dialog--body">This link will open this page on any device on your network</h3>
+    <canvas></canvas>
+    <button>Click to Copy Link!</button>
+    <button onclick="javascript:document.querySelector('#qrcode_dialog').close();">✅Done</button>
+</dialog>
 {% endblock %}
 {% block fscripts %}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    document.addEventListener("DOMContentLoaded", () => scrollSnap(document.querySelector(".modules")));
+    document.addEventListener("DOMContentLoaded", () => scrollSnap(document.querySelector("body > section")));
+    document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.querySelector("#qr-dialog")));
+    document.addEventListener("DOMContentLoaded", () => generateQrCode(
+        document.querySelector("#qr-dialog canvas"),
+        document.querySelector("#qr-dialog").getAttribute("data-url"),
+    ));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.preview', 'width', '--js-module-preview-width'));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.title', 'height', '--js-module-title-height', 'px'));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.module', 'height', '--js-module-content-height', 'px'));
