@@ -36,7 +36,7 @@ const dashboard = () => {
                 })
                 .finally(() => {
                     socketEmitReload();
-                    document.querySelector("#menu-toggle").checked = false;
+                    document.querySelector("#toggle-edit-dashboard").checked = false;
                 });
             payload = [];
         }
