@@ -18,11 +18,11 @@
     </li>
     {% endif %}
     <li class="not-settings-header">
-        <p class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
+        <form class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
             <button/>
             {{ signal.emoji }}</button>
             <input type="text" value="{{ signal.label }}"/>
-        </p>
+        </form>
     </li>
     {% endif %}
     {% endfor %}
@@ -38,11 +38,11 @@
     </li>
     {% endif %}
     <li>
-        <div class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
+        <form class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
             <button/>
             {{ signal.emoji }}</button>
             <input type="text" value="{{ signal.label }}"/>
-        </div>
+        </form>
     </li>
     {% endif %}
     {% endfor %}
@@ -57,11 +57,11 @@
         <p>Ads</p>
     </li>
     {% endif %}
-    <div class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
+    <form class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
         <button/>
         {{ signal.emoji }}</button>
         <input type="text" disabled value="{{ signal.label }}"/>
-    </div>
+    </form>
     </li>
     {% endif %}
     {% endfor %}
@@ -77,11 +77,11 @@
     </li>
     {% endif %}
     <li>
-        <div class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
+        <form class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
             <button/>
             {{ signal.emoji }}</button>
             <input type="text" value="{{ signal.label }}"/>
-        </div>
+        </form>
     </li>
     {% endif %}
     {% endfor %}
