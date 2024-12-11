@@ -5,6 +5,7 @@
 {% endblock %}
 {% block body %}
 <section class="settings">
+    <ul>
     <!---->
     <!---->
     <!---->
@@ -16,12 +17,12 @@
         <p>Featured</p>
     </li>
     {% endif %}
-    <li>
-        <div class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
+    <li class="not-settings-header">
+        <p class="settings-editor {{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
             <button/>
             {{ signal.emoji }}</button>
             <input type="text" value="{{ signal.label }}"/>
-        </div>
+        </p>
     </li>
     {% endif %}
     {% endfor %}
@@ -87,6 +88,7 @@
     <!---->
     <!---->
     <!---->
+    </ul>
 </section>
 {% include "partials/controls.njk" %}
 {% endblock %}
