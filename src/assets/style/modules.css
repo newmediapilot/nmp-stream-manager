@@ -148,13 +148,17 @@
     border-radius: 25px;
 }
 
+.module label::before {
+    content: "";
+}
+
 .module label::after {
     content: attr(aria-label);
     position: fixed;
     top: 63px;
     left: 25px;
-    color:white;
-    display:block;
+    color: white;
+    display: block;
     text-align: center;
     width: 100px;
 }

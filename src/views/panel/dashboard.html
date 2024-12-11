@@ -19,8 +19,8 @@
     {% endif %}
     <div class="button button-{{ config.theme }}" href="{{data_href}}">
         <button data-href="{{ data_href }}" onclick="javascript:sendSignal(this)">
-            <label>{{ config.emoji }}</label>
-            <label>{{ config.label }}</label>
+            <label aria-label="{{ config.emoji }}"></label>
+            <label aria-label="{{ config.label }}"></label>
         </button>
     </div>
     {% endfor %}
@@ -30,11 +30,11 @@
 {% block dialogs %}
 {% set device_ip = "device_ip" | getParam %}
 <dialog id="qr-dialog" data-url="https://{{device_ip }}{{public_routes.PUBLIC_DASHBOARD}}">
-    <h2>QR Code Dialog</h2>
-    <h3>This link will open this page on any device on your network</h3>
+    <h2 aria-label="QR Code Dialogk"></h2>
+    <h3 aria-label="This link will open this page on any device on your network"></h3>
     <canvas></canvas>
-    <button>Click to Copy Link!</button>
-    <button onclick="javascript:document.querySelector('#qrcode_dialog').close();">✅Done</button>
+    <button aria-label="Click to Copy Link!"></button>
+    <button aria-label="✅Done" onclick="javascript:document.querySelector('#qrcode_dialog').close();"></button>
 </dialog>
 {% endblock %}
 {% block fscripts %}

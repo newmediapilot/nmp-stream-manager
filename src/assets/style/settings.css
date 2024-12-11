@@ -41,33 +41,33 @@
     background: repeating-linear-gradient(45deg, rgba(0, 0, 0, .05) 0px, rgba(0, 0, 0, .05) 2px, rgba(255, 255, 255, .05) 2px, rgba(255, 255, 255, .05) 4px);
 }
 
-.settings-editor {
+form {
     display: grid;
     grid-template-columns: repeat(5, calc(100% / 5));
     box-sizing: border-box;
     min-height: 8vh;
 }
 
-.settings-editor > button {
+form > button {
     font-size: 40px;
 }
 
-.settings-editor > [type="text"] {
+form > [type="text"] {
     font-size: 25px;
     grid-column: span 3;
     padding: 0 15px;
 }
 
-.settings-editor > [type="text"]:disabled {
+form > [type="text"]:disabled {
     opacity: .5;
 }
 
-.settings-editor > [type="text"]:focus {
+form > [type="text"]:focus {
     background: var(--button-deepyellow);
     border-radius: 10px;
 }
 
-.settings-editor > :not([type="text"]) {
+form > :not([type="text"]) {
     grid-column: span 1;
     display: flex;
     justify-content: center;
@@ -109,27 +109,27 @@ body > #emoji-widget {
 }
 
 /** themes start **/
-.settings-editor.aqua,
+form.aqua,
 .settings-header.aqua,
-.settings-editor.aqua + #emoji-widget {
+form.aqua + #emoji-widget {
     background: var(--button-aqua);
 }
 
-.settings-editor.orange,
+form.orange,
 .settings-header.orange,
-.settings-editor.orange + #emoji-widget {
+form.orange + #emoji-widget {
     background: var(--button-orange);
 }
 
-.settings-editor.bloodorange,
+form.bloodorange,
 .settings-header.bloodorange,
-.settings-editor.bloodorange + #emoji-widget {
+form.bloodorange + #emoji-widget {
     background: var(--button-bloodorange);
 }
 
-.settings-editor.purple,
+form.purple,
 .settings-header.purple,
-.settings-editor.purple + #emoji-widget {
+form.purple + #emoji-widget {
     background: var(--button-purple);
 }
 

@@ -60,7 +60,7 @@ const settingsCreateEditor = (editorEl) => {
             const emojiElsClick = (evt) => {
                 emojiEls.forEach(
                     (el) => {
-                        (emojiWidgetTriggerEl.innerText === el.innerText) ?
+                        (emojiWidgetTriggerEl.getAttribute("aria-label") === el.getAttribute("aria-label")) ?
                             el.classList.add("active") :
                             el.classList.remove("active");
                     }
@@ -68,7 +68,7 @@ const settingsCreateEditor = (editorEl) => {
             };
             emojiEls.forEach((el) => {
                 el.addEventListener("click", (evt) => {
-                    emojiWidgetTriggerEl.innerText = el.innerText;
+                    emojiWidgetTriggerEl.getAttribute("aria-label") = el.getAttribute("aria-label");
                     emojiElsClick();
                     axios.get("/public/config/update", {
                         params: {
@@ -76,7 +76,7 @@ const settingsCreateEditor = (editorEl) => {
                             payload: JSON.stringify({
                                 id,
                                 field: "emoji",
-                                value: el.innerText,
+                                value: el.getAttribute("aria-label"),
                             }),
                         },
                     }).finally(() => {

@@ -5,8 +5,8 @@ const dashboard = () => {
     const toggleEl = document.querySelector("#toggle-edit-dashboard");
     const notifyEl = document.documentElement;
     const states = [
-        `<span>Edit</span>`,
-        `<span>Done</span>`,
+        `<span aria-label="Edit"></span>`,
+        `<span aria-label="Done"></span>`,
     ];
     toggleEl.innerHTML = states[0];
     toggleEl.style.display = 'block';
