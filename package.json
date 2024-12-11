@@ -1,8 +1,8 @@
 {
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "deploy": "rm -rf node_modules && npm i --omit=dev && node compiler/compile.js",
+    "dev": "node src/index.js",
+    "preview": "rm .secrets.json && rm .style.css rm -rf node_modules && npm i --omit=dev && node compiler/compile.js",
     "reset": "rm -rf node_modules && npm i",
     "key": "openssl req -nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
     "curl": "rm -rf .bin && curl -L \"https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe\" -o \"./.bin\"",

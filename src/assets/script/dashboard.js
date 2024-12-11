@@ -1,12 +1,12 @@
 const dashboard = () => {
     let payload = [];
     const type = "signals:order";
-    const containerEl = document.querySelector(".dashboard");
-    const toggleEl = document.querySelector("#toggle-edit-dashboard");
+    const containerEl = document.body.querySelector(".dashboard");
+    const toggleEl = document.body.querySelector("#toggle-edit-dashboard");
     const notifyEl = document.documentElement;
     const states = [
-        `<span aria-label="Edit"></span>`,
-        `<span aria-label="Done"></span>`,
+        `<span aria-label="Edit"><em aria-label="✏"></em></span>`,
+        `<span aria-label="Done"><em aria-label="☑"></em></span>`,
     ];
     toggleEl.innerHTML = states[0];
     toggleEl.style.display = 'block';
@@ -36,7 +36,7 @@ const dashboard = () => {
                 })
                 .finally(() => {
                     socketEmitReload();
-                    document.querySelector("#toggle-edit-dashboard").checked = false;
+                    document.body.querySelector("#toggle-edit-dashboard").checked = false;
                 });
             payload = [];
         }

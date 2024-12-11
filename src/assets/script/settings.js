@@ -2,10 +2,9 @@ const settingsCreateEditor = (editorEl) => {
     const id = editorEl.getAttribute("data-editor-id");
     const textEditorEl = editorEl.querySelector('[type="text"]');
     const emojiWidgetTriggerEl = editorEl.querySelector("button");
-    const emojiWidgetEl = document.querySelector("#emoji-widget");
+    const emojiWidgetEl = document.body.querySelector("#emoji-widget");
     let emojiWidgetInstanceEl;
     let textEditorValue = null;
-    editorEl.addEventListener('submit', (e) => e.preventDefault());
     const textEditorElFocus = () => {
         textEditorValue = textEditorEl.value;
         textEditorEl.select();
@@ -46,8 +45,8 @@ const settingsCreateEditor = (editorEl) => {
     );
     emojiWidgetTriggerEl.addEventListener("click", () => {
         // cleanup anything existing first
-        document.querySelectorAll('.emoji-widget-instance').forEach(el => el.remove());
-        document.querySelectorAll('.emoji-widget-instance-trigger').forEach(el => el.classList.remove('emoji-widget-instance-trigger'));
+        document.body.querySelectorAll('.emoji-widget-instance').forEach(el => el.remove());
+        document.body.querySelectorAll('.emoji-widget-instance-trigger').forEach(el => el.classList.remove('emoji-widget-instance-trigger'));
         emojiWidgetTriggerEl.classList.remove("add");
         if (emojiWidgetInstanceEl) {
             emojiWidgetInstanceEl = null;
@@ -68,7 +67,7 @@ const settingsCreateEditor = (editorEl) => {
             };
             emojiEls.forEach((el) => {
                 el.addEventListener("click", (evt) => {
-                    emojiWidgetTriggerEl.getAttribute("aria-label") = el.getAttribute("aria-label");
+                    emojiWidgetTriggerEl.setAttribute("aria-label", el.getAttribute("aria-label"));
                     emojiElsClick();
                     axios.get("/public/config/update", {
                         params: {
@@ -89,5 +88,11 @@ const settingsCreateEditor = (editorEl) => {
 }
 
 const settings = () => {
-    document.querySelectorAll(".settings-editor").forEach(settingsCreateEditor);
+    document.body.querySelectorAll('form').forEach((form) => {
+        form.addEventListener('submit', (e) => {
+            console.log('form');
+            e.preventDefault()
+        });
+    });
+    document.body.querySelectorAll("form").forEach(settingsCreateEditor);
 };

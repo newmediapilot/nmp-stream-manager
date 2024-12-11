@@ -11,7 +11,7 @@
 <section class="modules">
     <div class="module aqua" aria-label="FEATURE">
         <div class="title">
-            <button onclick="javascript:document.querySelector('#qr-dialog').showModal()" aria-label="🔗"></button>
+            <button onclick="javascript:document.body.querySelector('#qr-dialog').showModal()" aria-label="🔗"></button>
         </div>
         <div class="preview">
             <iframe width="1920" height="1080"
@@ -34,7 +34,7 @@
     </div>
     <div class="module bloodorange">
         <div class="title" aria-label="BPM">
-            <button onclick="javascript:document.querySelector('#qr-dialog').showModal()" aria-label="🔗"></button>
+            <button onclick="javascript:document.body.querySelector('#qr-dialog').showModal()" aria-label="🔗"></button>
         </div>
         <div class="preview">
             <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_BPM_EMBED}}"></iframe>
@@ -64,7 +64,7 @@
     <h3 aria-label="This link will open this page on any device on your network"></h3>
     <canvas></canvas>
     <button aria-label="Click to Copy Link!"></button>
-    <button aria-label="✅Done" onclick="javascript:document.querySelector('#qrcode_dialog').close();"></button>
+    <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qrcode_dialog').close();"></button>
 </dialog>
 {% endblock %}
 {% block fscripts %}
@@ -72,11 +72,11 @@
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    document.addEventListener("DOMContentLoaded", () => scrollSnap(document.querySelector("body > section")));
-    document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.querySelector("#qr-dialog")));
+    document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
+    document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.body.querySelector("#qr-dialog")));
     document.addEventListener("DOMContentLoaded", () => generateQrCode(
-        document.querySelector("#qr-dialog canvas"),
-        document.querySelector("#qr-dialog").getAttribute("data-url"),
+        document.body.querySelector("#qr-dialog canvas"),
+        document.body.querySelector("#qr-dialog").getAttribute("data-url"),
     ));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.preview', 'width', '--js-module-preview-width'));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.title', 'height', '--js-module-title-height', 'px'));

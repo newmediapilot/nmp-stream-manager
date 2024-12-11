@@ -102,7 +102,7 @@
             console.log('No streamer found');
         } else {
             const URL = `https://player.twitch.tv/?channel=${streamerQueryParam}&parent=localhost&muted=false`;
-            const twitchEmbed = document.querySelector('#twitch-embed');
+            const twitchEmbed = document.body.querySelector('#twitch-embed');
             twitchEmbed.src = URL;
         }
     });

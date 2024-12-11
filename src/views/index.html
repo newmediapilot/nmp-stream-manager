@@ -38,8 +38,8 @@
     document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('message', function (e) {
             if (e.origin === window.location.origin && e.data.type === "path") {
-                const iframeEl = Array.from(document.querySelectorAll(`iframe[src="${e.data.message}"]`))[0];
-                const indexOf = Array.from(document.querySelectorAll("iframe")).indexOf(iframeEl);
+                const iframeEl = Array.from(document.body.querySelectorAll(`iframe[src="${e.data.message}"]`))[0];
+                const indexOf = Array.from(document.body.querySelectorAll("iframe")).indexOf(iframeEl);
                 const vw = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-width'));
                 const vh = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-height'));
                 const translateValues = [
@@ -55,7 +55,7 @@
                     duration: 333,
                     easing: 'linear',
                     complete: () => {
-                        Array.from(document.querySelectorAll("iframe")).forEach((iframe, index) => {
+                        Array.from(document.body.querySelectorAll("iframe")).forEach((iframe, index) => {
                             iframe.style.display = index === indexOf ? 'flex' : 'none';
                         });
                     }

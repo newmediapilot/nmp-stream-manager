@@ -18,7 +18,7 @@ const {twitchLogin, twitchLoginSuccess} = require("./modules/twitch/login");
 const app = express();
 // app.use(requestLogger);
 app.use(requestCache);
-app.use(requestCompressed);
+// app.use(requestCompressed);
 // Twitch API Start
 app.all(ROUTES.TWITCH_LOGIN, twitchLogin);
 app.all(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess);

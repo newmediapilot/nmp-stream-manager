@@ -34,7 +34,7 @@
     <h3 aria-label="This link will open this page on any device on your network"></h3>
     <canvas></canvas>
     <button aria-label="Click to Copy Link!"></button>
-    <button aria-label="✅Done" onclick="javascript:document.querySelector('#qrcode_dialog').close();"></button>
+    <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qrcode_dialog').close();"></button>
 </dialog>
 {% endblock %}
 {% block fscripts %}
@@ -42,11 +42,11 @@
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    document.addEventListener("DOMContentLoaded", () => scrollSnap(document.querySelector("body > section")));
-    document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.querySelector("#qr-dialog")));
+    document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
+    document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.body.querySelector("#qr-dialog")));
     document.addEventListener("DOMContentLoaded", () => generateQrCode(
-        document.querySelector("#qr-dialog canvas"),
-        document.querySelector("#qr-dialog").getAttribute("data-url"),
+        document.body.querySelector("#qr-dialog canvas"),
+        document.body.querySelector("#qr-dialog").getAttribute("data-url"),
     ));
     document.addEventListener("DOMContentLoaded", () => dashboard());
     document.addEventListener("DOMContentLoaded", () => {

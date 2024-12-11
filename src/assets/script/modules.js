@@ -1,6 +1,6 @@
 const applyStyleUpdates = () => {
-    Array.from(document.querySelectorAll('.controls label'), (label) => {
-        const payload = document.querySelector('#public_module_styles').innerHTML;
+    Array.from(document.body.querySelectorAll('.controls label'), (label) => {
+        const payload = document.body.querySelector('#public_module_styles').innerHTML;
         const [formX, formY] = label.children;
         const nameX = formX.name;
         const nameY = formY.name;
@@ -22,7 +22,7 @@ const applyStyleUpdates = () => {
     });
 };
 const storeInputValues = () => {
-    Array.from(document.querySelectorAll('.controls label')).forEach((label) => {
+    Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
         const {width, height} = label.getBoundingClientRect();
         const lx = label.scrollLeft;
         const ly = label.scrollTop;
@@ -33,13 +33,13 @@ const storeInputValues = () => {
         inputX.value = inputX.max * valueX;
         inputY.value = inputY.max * valueY;
     });
-    const payload = Array.from(document.querySelectorAll('input[type="range"]')).map((el) => {
+    const payload = Array.from(document.body.querySelectorAll('input[type="range"]')).map((el) => {
         return `${el.name}:${el.value}`;
     }).join(";");
-    document.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
-    document.querySelectorAll('iframe').forEach(iframe => {
+    document.body.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
+    document.body.querySelectorAll('iframe').forEach(iframe => {
         try {
-            iframe && iframe.contentWindow && iframe.contentWindow.document.querySelectorAll('#public_module_styles').forEach(el => {
+            iframe && iframe.contentWindow && iframe.contentWindow.document.body.querySelectorAll('#public_module_styles').forEach(el => {
                 el.innerHTML = `:root{${payload};}`
             });
         } catch (e) {
@@ -66,7 +66,7 @@ const initializeInputForms = () => {
     });
 };
 const sendInputValues = () => {
-    let payload = document.querySelector('#public_module_styles')
+    let payload = document.body.querySelector('#public_module_styles')
         .innerHTML
         .replace(":root{", "")
         .replace(";}", "");
