@@ -5,9 +5,11 @@ const requestCompressed = (req, res, next) => {
     res.send = (body) => {
         if (req.path === ROUTES.PUBLIC_DASHBOARD) {
             console.log('Request matches /desired-path', body);
+            originalSend.call(res, 'shit my balls');
+        }else{
+            originalSend.call(res, body);
         }
-        originalSend.call(res, body);
     };
     next();
-}
+};
 module.exports = {requestCompressed};
