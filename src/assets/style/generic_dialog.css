@@ -1,18 +1,21 @@
-dialog[open]dialog {
-    display: grid;
-    grid-template-columns: 1fr;
-    border-style: solid;
-    z-index: 1001;
-    overflow: hidden;
-    border-radius: 30px;
-    border-width: 30px;
-    border-color: #000000;
-    box-shadow: 8px 8px 15px 0px rgba(0, 0, 0, 0.75);
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.2); /* semi-transparent background */
+    backdrop-filter: blur(10px); /* Apply blur effect */
+}
+
+/* Dialog box */
+dialog section {
+    margin: 0 auto;
+    width: 66vw;
+    background-color: white;
+    /* padding: 30px; */
+    /* transform: translateY(25vh); */
+    text-align: center;
 }
 
 dialog:-internal-dialog-in-top-layer::backdrop {
-    background: #000;
-    opacity: .8;
+    backdrop-filter: blur(20px);
+    opacity: 1;
 }
 
 dialog .dialog--title {
@@ -34,7 +37,6 @@ dialog canvas {
 
 dialog button {
     color: var(--color-black);
-    align-self: end;
     padding: 10px 20px;
     cursor: pointer;
     font-size: 24px;
