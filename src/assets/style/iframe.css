@@ -21,7 +21,7 @@ html:not(.iframe) {
 html.iframe #module-container {
     background-image: linear-gradient(120deg, rgba(2, 2, 2, 0.2) 0%, rgba(75, 75, 75, 0.66) 33%, rgba(2, 2, 2, 0.66) 33%, rgba(75, 75, 75, 0.99) 100%);
     background-size: cover;
-    box-shadow: 0 0 99px 99px rgb(255, 255, 255,.5);
+    box-shadow: inset 0 0 5px 5px rgb(255, 255, 255,.5);
 }
 
 html.iframe iframe {
