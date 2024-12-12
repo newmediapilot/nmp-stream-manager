@@ -3,7 +3,7 @@
 {%set public_routes = 'public_routes' | getParam%}
 {%block hscripts%}
 <link rel="stylesheet" href="/style/modules.css?cb={{cache_buster}}">
-{%from "macros/public_module_styles.njk" import public_module_styles%}
+{%from "macros/public_module_styles.njk" import public_module_styles %}
 {{ public_module_styles() }}
 {%endblock%}
 {%block body%}
@@ -65,7 +65,7 @@
     <h3 aria-label="This link will open this page on any device on your network"></h3>
     <canvas></canvas>
     <button aria-label="Click to Copy Link!"></button>
-    <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qrcode_dialog').close();"></button>
+    <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-dialog').close();"></button>
 </dialog>
 {%endblock%}
 {%block fscripts%}
@@ -82,7 +82,7 @@
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.preview', 'width', '--js-module-preview-width'));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.title', 'height', '--js-module-title-height', 'px'));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.module', 'height', '--js-module-content-height', 'px'));
-    document.addEventListener("DOMContentLoaded", () => applyStyleUpdates());
-    document.addEventListener("DOMContentLoaded", () => initializeInputForms());
+    document.addEventListener("DOMContentLoaded", () => applyModuleStyles());
+    document.addEventListener("DOMContentLoaded", () => initializeModuleClickTouch());
 </script>
 {%endblock%}

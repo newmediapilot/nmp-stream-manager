@@ -33,7 +33,7 @@ dialog canvas {
 }
 
 dialog button {
-    color: var(--button-black);
+    color: var(--color-black);
     align-self: end;
     padding: 10px 20px;
     cursor: pointer;

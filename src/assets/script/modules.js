@@ -1,6 +1,6 @@
-const applyStyleUpdates = () => {
+const applyModuleStyles = () => {
     Array.from(document.body.querySelectorAll('.controls label'), (label) => {
-        const payload = document.body.querySelector('#public_module_styles').innerHTML;
+        const payload = document.head.querySelector('#public_module_styles').innerHTML;
         const [formX, formY] = label.children;
         const nameX = formX.name;
         const nameY = formY.name;
@@ -21,7 +21,7 @@ const applyStyleUpdates = () => {
         label.scrollTo({top, left});
     });
 };
-const storeInputValues = () => {
+const castModuleInputValues = () => {
     Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
         const {width, height} = label.getBoundingClientRect();
         const lx = label.scrollLeft;
@@ -36,37 +36,35 @@ const storeInputValues = () => {
     const payload = Array.from(document.body.querySelectorAll('input[type="range"]')).map((el) => {
         return `${el.name}:${el.value}`;
     }).join(";");
-    document.body.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
+    document.head.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
     document.body.querySelectorAll('iframe').forEach(iframe => {
         try {
-            iframe && iframe.contentWindow && iframe.contentWindow.document.body.querySelectorAll('#public_module_styles').forEach(el => {
+            iframe && iframe.contentWindow && iframe.contentWindow.document.head.querySelectorAll('#public_module_styles').forEach(el => {
                 el.innerHTML = `:root{${payload};}`
             });
-        } catch (e) {
-            // Sometimes if the frame is busy
-        }
+        } catch (e) {}
     });
 };
-const initializeInputForms = () => {
+const initializeModuleClickTouch = () => {
     document.addEventListener('mousedown', (e) => {
-        document.addEventListener('mousemove', storeInputValues);
-        storeInputValues();
+        document.addEventListener('mousemove', castModuleInputValues);
+        castModuleInputValues();
     });
     document.addEventListener('mouseup', (e) => {
-        document.removeEventListener('mousemove', storeInputValues);
-        storeInputValues();
+        document.removeEventListener('mousemove', castModuleInputValues);
+        castModuleInputValues();
     });
     document.addEventListener('touchmove', (e) => {
-        document.addEventListener('mousemove', storeInputValues);
-        storeInputValues();
+        document.addEventListener('mousemove', castModuleInputValues);
+        castModuleInputValues();
     });
     document.addEventListener('touchend', (e) => {
-        document.removeEventListener('mousemove', storeInputValues);
-        storeInputValues();
+        document.removeEventListener('mousemove', castModuleInputValues);
+        castModuleInputValues();
     });
 };
 const sendInputValues = () => {
-    let payload = document.body.querySelector('#public_module_styles')
+    let payload = document.head.querySelector('#public_module_styles')
         .innerHTML
         .replace(":root{", "")
         .replace(";}", "");

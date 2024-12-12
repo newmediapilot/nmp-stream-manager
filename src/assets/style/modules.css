@@ -49,23 +49,23 @@
             -45deg,
             transparent 0,
             transparent 25%,
-            var(--button-bloodorange) 0,
-            var(--button-bloodorange) 50%
+            var(--color-bloodorange) 0,
+            var(--color-bloodorange) 50%
     ),
     repeating-linear-gradient(
             45deg,
             transparent 0,
             transparent 25%,
-            var(--button-orange) 0,
-            var(--button-orange) 50%
+            var(--color-orange) 0,
+            var(--color-orange) 50%
     ),
     repeating-linear-gradient(
             transparent 0,
             transparent 25%,
-            var(--button-deepyellow) 0,
-            var(--button-deepyellow) 50%
+            var(--color-deepyellow) 0,
+            var(--color-deepyellow) 50%
     ),
-    var(--button-black);
+    var(--color-black);
     background-blend-mode: multiply;
     background-size: 100px 100px;
     background-position: 0 0, 33px 33px, -33px -33px;
@@ -175,12 +175,12 @@
 /** themes start **/
 .module.aqua,
 .module.aqua .title {
-    background: var(--button-aqua);
+    background: var(--color-aqua);
 }
 
 .module.bloodorange,
 .module.bloodorange .title {
-    background: var(--button-bloodorange);
+    background: var(--color-bloodorange);
 }
 
 /** themes end **/

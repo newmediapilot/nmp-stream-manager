@@ -36,7 +36,7 @@
         });
     });
     document.addEventListener("DOMContentLoaded", () => {
-        window.addEventListener('message', function (e) {
+        window.addEventListener('message', function(e) {
             if (e.origin === window.location.origin && e.data.type === "path") {
                 const iframeEl = Array.from(document.body.querySelectorAll(`iframe[src="${e.data.message}"]`))[0];
                 const indexOf = Array.from(document.body.querySelectorAll("iframe")).indexOf(iframeEl);

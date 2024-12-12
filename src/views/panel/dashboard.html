@@ -34,7 +34,7 @@
     <h3 aria-label="This link will open this page on any device on your network"></h3>
     <canvas></canvas>
     <button aria-label="Click to Copy Link!"></button>
-    <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qrcode_dialog').close();"></button>
+    <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-dialog').close();"></button>
 </dialog>
 {%endblock%}
 {%block fscripts%}
@@ -70,26 +70,23 @@
             delay: anime.stagger(50),
             easing: "easeInElastic(1, .6)",
             filter: "hue-rotate(360deg)",
-            loopBegin: function (anim) {
+            loopBegin: function(anim) {
                 setTimeout(anim.play, 7000);
             }
         });
     });
 </script>
 <script>
-    // Define a simple class inside the script tag
-    class Quack {
-        constructor() {
-            this.sound = "Quack!";
-        }
-
-        makeSound() {
-            console.log(this.sound);
-        }
-    }
-
-    // Create an instance of the class
-    const quackInstance = new Quack();
-    quackInstance.makeSound();  // This will log "Quack!"
+    // TODO: turn this into a crypto for document elements
+    // class Quack {
+    //     constructor() {
+    //         this.sound = "Quack!";
+    //     }
+    //     makeSound() {
+    //         console.log(this.sound);
+    //     }
+    // }
+    // const quackInstance = new Quack({extends:'div'});
+    // quackInstance.makeSound();
 </script>
 {%endblock%}

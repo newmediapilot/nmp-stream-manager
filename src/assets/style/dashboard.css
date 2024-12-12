@@ -84,7 +84,7 @@ html.edit-active .dashboard:after {
     width: 100%;
     height: 100%;
     font-size: var(--clampy);
-    color: var(--text-color-light);
+    color: var(--color-light);
     border-top: 20px solid rgba(255, 255, 255, 0.6);
     border-right: 20px solid rgba(255, 255, 255, 0.2);
     border-bottom: 20px solid rgba(255, 255, 255, 0.1);
@@ -138,68 +138,53 @@ html.edit-active .dashboard .button button {
 }
 
 .dashboard .button-red button {
-    background-color: var(--button-red);
-    color: var(--text-color-light);
+    background-color: var(--color-red);
+    color: var(--color-light);
 }
 
 .dashboard .button-pink button {
-    background-color: var(--button-pink);
-    color: var(--text-color-light);
+    background-color: var(--color-pink);
+    color: var(--color-light);
 }
 
 .dashboard .button-blue button {
-    background-color: var(--button-blue);
-    color: var(--text-color-light);
+    background-color: var(--color-blue);
+    color: var(--color-light);
 }
 
 .dashboard .button-aqua button {
-    background-color: var(--button-aqua);
-    color: var(--text-color-dark);
+    background-color: var(--color-aqua);
+    color: var(--color-dark);
 }
 
 .dashboard .button-black button {
-    background-color: var(--button-black);
-    color: var(--text-color-light);
+    background-color: var(--color-black);
+    color: var(--color-light);
 }
 
 .dashboard .button-orange button {
-    background-color: var(--button-orange);
-    color: var(--text-color-dark);
+    background-color: var(--color-orange);
+    color: var(--color-dark);
 }
 
 .dashboard .button-purple button {
-    background-color: var(--button-purple);
-    color: var(--text-color-light);
+    background-color: var(--color-purple);
+    color: var(--color-light);
 }
 
 .dashboard .button-bloodorange button {
-    background-color: var(--button-bloodorange);
-    color: var(--text-color-light);
+    background-color: var(--color-bloodorange);
+    color: var(--color-light);
 }
 
 .dashboard .button-deepyellow button {
-    background-color: var(--button-deepyellow);
-    color: var(--text-color-dark);
+    background-color: var(--color-deepyellow);
+    color: var(--color-dark);
 }
 
 .dashboard .button-green button {
-    background-color: var(--button-green);
-    color: var(--text-color-light);
-}
-
-.dashboard .button button[data-state="loading"] {
-    background-color: var(--color-loading);
-    color: var(--text-color-dark);
-}
-
-.dashboard .button button[data-state="success"] {
-    background-color: var(--color-success);
-    color: var(--text-color-light);
-}
-
-.dashboard .button button[data-state="error"] {
-    background-color: var(--color-error);
-    color: var(--text-color-light);
+    background-color: var(--color-green);
+    color: var(--color-light);
 }
 
 .pointer-events-none {

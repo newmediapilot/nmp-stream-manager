@@ -11,7 +11,7 @@ const dashboard = () => {
     toggleEl.innerHTML = states[0];
     toggleEl.style.display = 'block';
     const sortable = new Sortable(containerEl, {
-        // swap: true, TODO: rewrite interpreter to use this!
+        // swap: true, TODO: rewrite interpreter to use this
         animation: 333,
         forceFallback: true,
         removeCloneOnHide: true,
