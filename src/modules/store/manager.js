@@ -1,27 +1,6 @@
-/**
- * File: src\modules\store\manager.js
- * Description: Logic and operations for src\modules\store\manager.js.
- */
-
-/**
- * File: src\modules\store\manager.js
- * Description: This file contains logic for managing src\modules\store\manager operations.
- * Usage: Import relevant methods/functions as required.
- */
-/**
- * Manages state in a primitive singleton
- * setParam and getParam save globally accessible data to memory (synchronously) but invoked often by async functions (beware)
- * setSecret and getSecret create a .secrets(json) file and save values there for retrieval of temp tokens etc
- * setSecret works by writing directly and reading directly from file at point of access to ensure sync behaviour
- */
-
 const fs = require("fs");
-
 let paramsState = {};
 let secrets = null;
-
-// Register setParam to capture any unexpected behaviour
-// Light debugging effort
 const allowedParams = [
   "dashboard_signals_config",
   "device_ip",
@@ -33,7 +12,6 @@ const allowedParams = [
   "twitch_refresh_token_set",
   "twitch_channel_id_set",
 ];
-
 function loadSecrets() {
   if (fs.existsSync(".secrets.json")) {
     try {
@@ -46,7 +24,6 @@ function loadSecrets() {
     secrets = {};
   }
 }
-
 function setParam(key, value, log = true) {
   if (!allowedParams.includes(key)) {
     console.warn2(
@@ -64,7 +41,6 @@ function setParam(key, value, log = true) {
 function getAllParams() {
   return paramsState;
 }
-
 function getParam(key) {
   const value = paramsState[key];
   if (value === undefined) {
@@ -80,24 +56,17 @@ function getParam(key) {
   }
   return value;
 }
-
 function resetSecrets() {
   fs.rmSync(".secrets.json", { force: true });
   console.warn2(process.cwd(), "Removing secrets");
 }
-
 function setSecret(name, key) {
   try {
     loadSecrets();
-
     secrets[name] = key;
     setParam(`${name}_set`, true);
-
     const secretsJSON = JSON.stringify(secrets, null, 2);
-
-    // Reset secrets so it reloads next time
     secrets = null;
-
     fs.writeFileSync(".secrets.json", secretsJSON, "utf8");
     console.log2(
       process.cwd(),
@@ -107,11 +76,9 @@ function setSecret(name, key) {
     console.err2(process.cwd(), "Error setting secret:", error.message);
   }
 }
-
 function getSecret(name) {
   try {
     loadSecrets();
-
     if (secrets[name]) {
       return secrets[name];
     } else {
@@ -123,7 +90,6 @@ function getSecret(name) {
     return null;
   }
 }
-
 module.exports = {
   setParam,
   getParam,
