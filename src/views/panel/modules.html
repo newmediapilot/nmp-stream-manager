@@ -4,7 +4,7 @@
 {%block hscripts%}
 <link rel="stylesheet" href="/style/modules.css?cb={{cache_buster}}">
 {%from "macros/public_module_styles.njk" import public_module_styles %}
-{{ public_module_styles() }}
+{{public_module_styles()}}
 {%endblock%}
 {%block body%}
 {%set public_routes = 'public_routes' | getParam%}
@@ -25,8 +25,8 @@
                 <input type="range" min="33" max="99" step="33" value="33" name="--_feat-scaleY" hidden>
             </label>
             <label aria-label="move">
-                <input type="range" min="-99" max="66" step="33" value="-99" name="--_feat-translateX">
-                <input type="range" min="-99" max="66" step="33" value="-99" name="--_feat-translateY" hidden>
+                <input type="range" min="0" max="66" step="33" value="66" name="--_feat-translateX">
+                <input type="range" min="0" max="66" step="33" value="66" name="--_feat-translateY" hidden>
             </label>
 <!--            <label aria-label="spin">-->
 <!--                <input type="range" min="33" max="99" step="33" value="33" name="&#45;&#45;_feat-rotateX">-->

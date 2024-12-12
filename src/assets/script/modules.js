@@ -1,25 +1,36 @@
 const applyModuleStyles = () => {
-    Array.from(document.body.querySelectorAll('.controls label'), (label) => {
-        const payload = document.head.querySelector('#public_module_styles').innerHTML;
-        const [formX, formY] = label.children;
-        const nameX = formX.name;
-        const nameY = formY.name;
-        if (1 === payload.split(nameX).length) return;// must contain 'name' to be read
-        const valueX = payload
-            .split(nameX)[1]
-            .split(':')[1]
-            .split(';')[0];
-        const valueY = payload
-            .split(nameY)[1]
-            .split(':')[1]
-            .split(';')[0];
-        const scrollTopPercent = (valueX - formX.min) / (formX.max - formX.min);
-        const scrollLeftPercent = (valueY - formY.min) / (formY.max - formY.min);
-        const {width, height} = label.getBoundingClientRect();
-        const top = (scrollTopPercent) * (height);
-        const left = (scrollLeftPercent) * (width);
-        label.scrollTo({top, left});
-    });
+
+    // const payload = document.head.querySelector('#public_module_styles').innerHTML;
+    // const [formX, formY] = label.children;
+    // const nameX = formX.name;
+    // const nameY = formY.name;
+    // if (1 === payload.split(nameX).length) return;// must contain 'name' to be read
+    // const valueX = payload
+    //     .split(nameX)[1]
+    //     .split(':')[1]
+    //     .split(';')[0];
+    // const valueY = payload
+    //     .split(nameY)[1]
+    //     .split(':')[1]
+    //     .split(';')[0];
+
+    const payload = document.head.querySelector('#public_module_styles').innerHTML
+        .split(':root{')[1];
+    console.log('payload', payload);
+
+
+
+
+
+    // const scrollTopPercent = (valueX - formX.min) / (formX.max - formX.min);
+    // const scrollLeftPercent = (valueY - formY.min) / (formY.max - formY.min);
+    // const {width, height} = label.getBoundingClientRect();
+    // const top = (scrollTopPercent) * (height);
+    // const left = (scrollLeftPercent) * (width);
+    // label.scrollTo({top, left});
+
+
+
 };
 const castModuleInputValues = () => {
     Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {

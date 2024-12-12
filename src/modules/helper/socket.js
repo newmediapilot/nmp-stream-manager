@@ -27,7 +27,7 @@ const sendPayload = (payload) => {
         return false;
     }
     try {
-        io.emit("payload", payload); // Emit the payload to all connected clients
+        io.emit("payload", payload);
         return true;
     } catch (err) {
         console.error("Error sending payload:", err);
