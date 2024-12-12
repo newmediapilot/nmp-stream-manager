@@ -24,25 +24,12 @@
     }
 </style>
 <style>
-    html.iframe #module-container:after {
-        content: "";
-        display: block;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        box-shadow: inset 0 0 10px 10px white;
-        box-sizing: border-box;
-    }
-</style>
-<style>
     :root {
         --_feat-translateX: 0.0;
         --_feat-translateY: 0.0;
         --_feat-scaleX: 100.0;
+        /*--_feat-scaleY: 100.0;*/
         --_feat-scaleY: var(--_feat-scaleX);
-    / / 100.0;
         --_feat-rotateX: 0.0;
         --_feat-rotateY: 0.0;
         --_feat-rotateZ: 0.0;
@@ -52,10 +39,16 @@
 <style>
     body {
         perspective: 1920px;
+        transform: scale(1.01);
     }
-
     #module-container {
-        transform: translateX(calc(calc(var(--_feat-translateX) * -1%) + 33%)) translateY(calc(calc(var(--_feat-translateY) * -1%) + 33%)) scaleX(calc(var(--_feat-scaleX) * 0.01)) scaleY(calc(var(--_feat-scaleY) * 0.01)) rotateX(calc(var(--_feat-rotateX) * 3.6deg)) rotateY(calc(var(--_feat-rotateY) * 3.6deg)) rotateZ(calc(var(--_feat-rotateZ) * 3.6deg))
+        transform: translateX(calc(calc(var(--_feat-translateX) * -1%) + 33%))
+        translateY(calc(calc(var(--_feat-translateY) * -1%) + 33%))
+        scaleX(calc(var(--_feat-scaleX) * 0.01))
+        scaleY(calc(var(--_feat-scaleY) * 0.01))
+        rotateX(calc(var(--_feat-rotateX) * 3.6deg))
+        rotateY(calc(var(--_feat-rotateY) * 3.6deg))
+        rotateZ(calc(var(--_feat-rotateZ) * 3.6deg))
     }
 </style>
 {%endblock%}
