@@ -1,28 +1,18 @@
-/* Disable text selection globally */
 * {
     user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     border: none
 }
-
-/* Remove focus outlines and highlights */
 *:focus {
     outline: none;
-    box-shadow: none; /* Disable default focus outlines */
 }
-
-/* Disable pointer events on focusable elements */
 *:focus-visible {
     outline: none;
 }
-
-/* Disable tap highlight on mobile browsers */
 body {
     -webkit-tap-highlight-color: transparent;
 }
-
-/* Remove default browser styling for inputs and buttons */
 input, button, select, textarea {
     border: none;
     outline: none;
@@ -34,13 +24,10 @@ input, button, select, textarea {
     margin: 0;
     box-shadow: none;
 }
-
-/* Prevent default drag-and-drop behavior */
 img, a {
     -webkit-user-drag: none;
     user-drag: none;
 }
-
 button {
     cursor: pointer;
 }
