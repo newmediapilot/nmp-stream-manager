@@ -22,7 +22,8 @@
     100% {
         background-position: -100vw -100vh;
     }
-}`
+}
+
 #module-container {
     width: 100vw;
     height: 100vh;

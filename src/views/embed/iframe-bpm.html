@@ -25,14 +25,29 @@
     }
 </style>
 <style>
+    :root {
+        --_bpm-translateX: 0.0;
+        --_bpm-translateY: 0.0;
+        --_bpm-scaleX: 100.0;
+        --_bpm-scaleY: var(--_bpm-scaleX);//100.0;
+        --_bpm-rotateX: 0.0;
+        --_bpm-rotateY: 0.0;
+        --_bpm-rotateZ: 0.0;
+    }
+</style>
+{{public_module_styles()}}
+<style>
+    body {
+        perspective: 1920px;
+    }
     #module-container {
-        transform: translateX(calc(var(--_bpm-translateX) * 1%))
-        translateY(calc(var(--_bpm-translateY) * 1%))
+        transform: translateX(calc(calc(var(--_bpm-translateX) * -1%) + 33%))
+        translateY(calc(calc(var(--_bpm-translateY) * -1%) + 33%))
         scaleX(calc(var(--_bpm-scaleX) * 0.01))
         scaleY(calc(var(--_bpm-scaleY) * 0.01))
         rotateX(calc(var(--_bpm-rotateX) * 3.6deg))
         rotateY(calc(var(--_bpm-rotateY) * 3.6deg))
-        rotateZ(calc(var(--_bmp-rotateZ) * 3.6deg))
+        rotateZ(calc(var(--_bpm-rotateZ) * 3.6deg))
     }
 </style>
 <style>
@@ -67,6 +82,10 @@
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
+        let style = payload.split('style:set:')[1];
+        document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
+    }));
     document.addEventListener("DOMContentLoaded", () => {
         const bpmRateElement = document.body.querySelector('#bpm-rate');
         const labelEl = bpmRateElement.querySelector('div:nth-of-type(1)');

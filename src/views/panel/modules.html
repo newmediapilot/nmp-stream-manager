@@ -10,7 +10,7 @@
 {%set public_routes = 'public_routes' | getParam%}
 <section class="modules">
     <div class="module aqua">
-        <div class="title" aria-label="FEATURE">
+        <div class="title" aria-label="Featured">
             <button onclick="javascript:document.body.querySelector('#qr-dialog').showModal()" aria-label="🔗"></button>
         </div>
         <div class="preview">
@@ -38,28 +38,35 @@
             </label>
         </div>
     </div>
-    <!--    <div class="module bloodorange">-->
-    <!--        <div class="title" aria-label="BPM">-->
-    <!--            <button onclick="javascript:document.body.querySelector('#qr-dialog').showModal()" aria-label="🔗"></button>-->
-    <!--        </div>-->
-    <!--        <div class="preview">-->
-    <!--            <iframe width="1920" height="1080" src="{{public_routes.PUBLIC_BPM_EMBED}}"></iframe>-->
-    <!--        </div>-->
-    <!--        <div class="controls">-->
-    <!--            <label aria-label="size">-->
-    <!--                <input type="range" min="80" max="100" step="1" value="100" name="&#45;&#45;_bpm-scaleX">-->
-    <!--                <input type="range" min="80" max="100" step="1" value="100" name="&#45;&#45;_bpm-scaleY" hidden>-->
-    <!--            </label>-->
-    <!--            <label aria-label="move">-->
-    <!--                <input type="range" min="0" max="10" step="1" value="0" name="&#45;&#45;_bpm-translateX">-->
-    <!--                <input type="range" min="0" max="10" step="1" value="0" name="&#45;&#45;_bpm-translateY" hidden>-->
-    <!--            </label>-->
-    <!--            <label aria-label="spin">-->
-    <!--                <input type="range" min="33" max="99" step="33" value="33" name="&#45;&#45;_bpm-rotateX">-->
-    <!--                <input type="range" min="33" max="99" step="33" value="33" name="&#45;&#45;_bpm-rotateY" hidden>-->
-    <!--            </label>-->
-    <!--        </div>-->
-    <!--    </div>-->
+    <div class="module bloodorange">
+        <div class="title" aria-label="BPM">
+            <button onclick="javascript:document.body.querySelector('#qr-dialog').showModal()" aria-label="🔗"></button>
+        </div>
+        <div class="preview">
+            <iframe width="1920"
+                    height="1080"
+                    src="{{public_routes.PUBLIC_BPM_EMBED}}?featuredName=0#featuredNameLock">
+            </iframe>
+        </div>
+        <div class="controls">
+            <label aria-label="size">
+                <input type="range" min="33" max="99" step="3" value="33" name="--_bpm-scaleX">
+                <input type="range" min="33" max="99" step="3" value="33" name="--_bpm-scaleX" hidden>
+            </label>
+            <label aria-label="move">
+                <input type="range" min="0" max="66" step="3" value="66" name="--_bpm-translateX">
+                <input type="range" min="0" max="66" step="3" value="66" name="--_bpm-translateY" hidden>
+            </label>
+            <label aria-label="tilt">
+                <input type="range" min="-3" max="3" step="3" value="0" name="--_bpm-rotateX">
+                <input type="range" min="-3" max="3" step="3" value="0" name="--_bpm-rotateY" hidden>
+            </label>
+            <label aria-label="spin">
+                <input type="range" min="-6" max="6" step="3" value="0" name="--_bpm-rotateZ">
+                <input type="range" min="-6" max="6" step="3" value="0" name="--_bpm-rotateZ" hidden>
+            </label>
+        </div>
+    </div>
 </section>
 {%include "partials/controls.njk"%}
 {%endblock%}
