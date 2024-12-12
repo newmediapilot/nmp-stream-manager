@@ -40,7 +40,6 @@ nav aside {
     background: #fff;
     border-radius: 8px;
     position: absolute;
-    bottom: 80px;
     left: 50%;
     transform: translateX(-50%);
     min-width: 250px;
