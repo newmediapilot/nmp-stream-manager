@@ -36,9 +36,11 @@
         });
     });
     document.addEventListener("DOMContentLoaded", () => {
+        let previousPath = null;
         window.addEventListener('message', function(e) {
             if (e.origin === window.location.origin && e.data.type === "path") {
-                const iframeEl = Array.from(document.body.querySelectorAll(`iframe[src="${e.data.message}"]`))[0];
+                const currentPath = e.data.message;
+                const iframeEl = Array.from(document.body.querySelectorAll(`iframe[src="${currentPath}"]`))[0];
                 const indexOf = Array.from(document.body.querySelectorAll("iframe")).indexOf(iframeEl);
                 const vw = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-width'));
                 const vh = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-height'));
@@ -47,6 +49,15 @@
                     {translateX: `${0 * vw}vw`, translateY: `${0 * vh}vh`},
                     {translateX: `${-1 * vw}vw`, translateY: `${0 * vh}vh`},
                 ];
+                // if(previousPath) {
+                //     Array.from(document.body.querySelectorAll("iframe")).forEach((iframe, index) => {
+                //         iframe.style.display = index === (
+                //             iframe.src === currentPath ||
+                //             iframe.src === previousPath
+                //         ) ? 'flex' : 'none';
+                //     });
+                // }
+                previousPath = currentPath;
                 const {translateX, translateY} = translateValues[indexOf];
                 anime({
                     targets: '.pages',
@@ -55,9 +66,9 @@
                     duration: 333,
                     easing: 'linear',
                     complete: () => {
-                        Array.from(document.body.querySelectorAll("iframe")).forEach((iframe, index) => {
-                            iframe.style.display = index === indexOf ? 'flex' : 'none';
-                        });
+                        // Array.from(document.body.querySelectorAll("iframe")).forEach((iframe, index) => {
+                        //     iframe.style.display = index === indexOf ? 'flex' : 'none';
+                        // });
                     }
                 });
             }
