@@ -58,7 +58,8 @@
     background: radial-gradient(circle, transparent 20%, #ffffff 20%, #ffffff 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #ffffff 20%, #ffffff 80%, transparent 80%, transparent) 10px 10px, linear-gradient(#000000 0.8px, transparent 0.8px) 0 -0.4px, linear-gradient(90deg, #000000 0.8px, #ffffff 0.8px) -0.4px 0;
     background-size: 20px 20px, 20px 20px, 10px 10px, 10px 10px;
     background-position: -1px 0px;
-    animation: backgroundSizeAnimation 1000ms linear;
+    animation: backgroundSizeAnimation 333ms linear;
+    box-shadow: inset 0px 0px 33px 33px rgba(0, 0, 0, 0.15);
 }
 
 .module .preview iframe {
