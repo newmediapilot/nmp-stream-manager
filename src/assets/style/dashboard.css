@@ -1,10 +1,7 @@
 .dashboard {
     display: grid;
-    --padding: 10px;
-    max-width: calc(100vw - calc(var(--padding) * 2));
-    height: calc(100vh - calc(var(--padding) * 2));
-    margin-left: var(--padding);
-    margin-top: var(--padding);
+    max-width: 100vw;
+    height: 100vh;
     overflow-x: hidden;
     overflow-y: scroll;
     align-content: stretch;
@@ -80,15 +77,10 @@ html.edit-active .dashboard:after {
 }
 
 .dashboard .button button {
-    --clampy: clamp(24px, 4vw, 48px);
+    font-size: clamp(24px, 4vw, 48px);
+    color: var(--color-light);
     width: 100%;
     height: 100%;
-    font-size: var(--clampy);
-    color: var(--color-light);
-    border-top: 20px solid rgba(255, 255, 255, 0.6);
-    border-right: 20px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 20px solid rgba(255, 255, 255, 0.1);
-    border-left: 20px solid rgba(255, 255, 255, 0.4);
     border-radius: var(--border-radius);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -122,8 +114,16 @@ html.edit-active .dashboard .button button {
     border-style: dashed;
 }
 
+.dashboard .button button {
+    border-top: 15px solid rgba(255, 255, 255, 0.6);
+    border-right: 15px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 15px solid rgba(255, 255, 255, 0.1);
+    border-left: 15px solid rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+}
+
 .dashboard .button button:active {
-    border: 4px solid rgba(255, 255, 255, 1);
+    border: 20px solid rgba(255, 255, 255, 1);
 }
 
 .dashboard .button button:after {
