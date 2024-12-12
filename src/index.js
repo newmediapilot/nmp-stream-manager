@@ -11,8 +11,8 @@ const {publicStyleUpdate} = require("./modules/public/style");
 const {publicBpmPing} = require("./modules/sensor/ping");
 const {twitchLogin, twitchLoginSuccess} = require("./modules/twitch/login");
 const app = express();
-// app.use(requestLogger);
-app.use(requestCache);
+app.use(requestLogger);
+// app.use(requestCache);
 // app.use(requestCompressed);
 // Twitch API Start
 app.all(ROUTES.TWITCH_LOGIN, twitchLogin);
