@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/style/iframe.css?cb={{cache_buster}}">
 {%from "macros/public_module_styles.njk" import public_module_styles%}
 <style>
-    #bpm-rate {
+    #bpm-embed {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -41,13 +41,14 @@
         perspective: 1920px;
     }
     #module-container {
-        transform: translateX(calc(calc(var(--_bpm-translateX) * -1%) + 33%))
+        transform:
+        translateX(calc(calc(var(--_bpm-translateX) * -1%) + 33%))
         translateY(calc(calc(var(--_bpm-translateY) * -1%) + 33%))
         scaleX(calc(var(--_bpm-scaleX) * 0.01))
         scaleY(calc(var(--_bpm-scaleY) * 0.01))
         rotateX(calc(var(--_bpm-rotateX) * 3.6deg))
         rotateY(calc(var(--_bpm-rotateY) * 3.6deg))
-        rotateZ(calc(var(--_bpm-rotateZ) * 3.6deg))
+        rotateZ(calc(var(--_bpm-rotateZ) * 3.6deg));
     }
 </style>
 <style>
@@ -67,7 +68,7 @@
 {%for signal in "dashboard_signals_config" | getParam%}
 {%if signal.type == "bpm"%}
 <div id="module-container">
-    <div id="bpm-rate"
+    <div id="bpm-embed"
          data-label-content="{{ signal.label }}"
          data-emoji-content="{{ signal.emoji }}">
         <div></div>
@@ -87,7 +88,7 @@
         document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
     }));
     document.addEventListener("DOMContentLoaded", () => {
-        const bpmRateElement = document.body.querySelector('#bpm-rate');
+        const bpmRateElement = document.body.querySelector('#bpm-embed');
         const labelEl = bpmRateElement.querySelector('div:nth-of-type(1)');
         const emojiEl = bpmRateElement.querySelector('div:nth-of-type(2)');
         const bpmPing = async () => {
