@@ -10,10 +10,10 @@
         {%for signal in "dashboard_signals_config" | getParam%}
         {%if signal.type == "feature"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
-        <li class="settings-header {{ signal.theme }}" aria-label="Featured"></li>
+        <li class="settings-header {{signal.theme}}" aria-label="Featured"></li>
         {%endif%}
         <li>
-            <form class="{{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
+            <form class="{{signal.theme}}" data-editor-id="{{ loop.index0  }}">
                 <button aria-label="{{ signal.emoji }}"/>
                 </button>
                 <input type="text" value="{{ signal.label }}"/>
@@ -25,10 +25,10 @@
         {%for signal in "dashboard_signals_config" | getParam%}
         {%if signal.type == "mark"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
-        <li class="settings-header {{ signal.theme }}" aria-label="Markers"></li>
+        <li class="settings-header {{signal.theme}}" aria-label="Markers"></li>
         {%endif%}
         <li>
-            <form class="{{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
+            <form class="{{signal.theme}}" data-editor-id="{{ loop.index0  }}">
                 <button aria-label="{{ signal.emoji }}"/>
                 </button>
                 <input type="text" value="{{ signal.label }}"/>
@@ -40,9 +40,9 @@
         {%for signal in "dashboard_signals_config" | getParam%}
         {%if signal.type == "ad"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
-        <li class="settings-header {{ signal.theme }}" aria-label="Ads"></li>
+        <li class="settings-header {{signal.theme}}" aria-label="Ads"></li>
         {%endif%}
-        <form class="{{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
+        <form class="{{signal.theme}}" data-editor-id="{{ loop.index0  }}">
             <button aria-label="{{ signal.emoji }}"/>
             </button>
             <input type="text" disabled value="{{ signal.label }}"/>
@@ -54,11 +54,11 @@
         {%for signal in "dashboard_signals_config" | getParam%}
         {%if signal.type == "bpm"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
-        <li class="settings-header {{ signal.theme }}" aria-label="BPM"></li>
+        <li class="settings-header {{signal.theme}}" aria-label="BPM"></li>
         </li>
         {%endif%}
         <li>
-            <form class="{{ signal.theme }}" data-editor-id="{{ loop.index0  }}">
+            <form class="{{signal.theme}}" data-editor-id="{{ loop.index0  }}">
                 <button aria-label="{{ signal.emoji }}"/>
                 </button>
                 <input type="text" value="{{ signal.label }}"/>
