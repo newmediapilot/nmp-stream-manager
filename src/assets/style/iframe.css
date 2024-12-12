@@ -1,20 +1,3 @@
-#module-container {
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    position: relative;
-}
-.iframe #module-container:after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    box-shadow: inset 0 0 10px 10px white;
-    box-sizing: border-box;
-}
 @keyframes wave {
     0% {
         background-position: 0 0;
@@ -29,8 +12,23 @@
     height: 100vh;
     display: block;
     position: relative;
+}
+
+html:not(.iframe) {
+    /*transform: scale(1.01);*/
+}
+
+html.iframe #module-container {
+    background-image: linear-gradient(120deg, rgba(2, 2, 2, 0.2) 0%, rgba(75, 75, 75, 0.66) 33%, rgba(2, 2, 2, 0.66) 33%, rgba(75, 75, 75, 0.99) 100%);
+}
+
+#module-container {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    position: relative;
     background-size: 7vw 7vh;
     background-repeat: repeat;
-    background-image: linear-gradient(120deg, rgba(2, 2, 2, 0.2) 0%, rgba(2, 2, 2, 0.2) 33%, rgba(2, 2, 2, 0.2) 33%, rgba(75, 75, 75, 0.2) 100%);
     animation: wave 15s linear infinite;
+    box-shadow: 0 0 99px 99px white;
 }
