@@ -64,12 +64,22 @@
         --_feat-scaleY: 100.0;
         --_feat-rotateX: 0.0;
         --_feat-rotateY: 0.0;
+        --_feat-rotateZ: 0.0;
     }
 </style>
 {{public_module_styles()}}
 <style>
     #module-container {
-        transform: translateX(calc(calc(var(--_feat-translateX) * -1%) + 33%)) translateY(calc(calc(var(--_feat-translateY) * -1%) + 33%)) scaleX(calc(var(--_feat-scaleX) * 0.01)) scaleY(calc(var(--_feat-scaleY) * 0.01)) rotateX(calc(var(--_feat-rotateX) * 3.6deg)) rotateY(calc(var(--_feat-rotateY) * 3.6deg))
+        /* TODO: figure out perspective issue */
+        perspective-origin: 50% 50%;
+        perspective: 800px;
+        transform: translateX(calc(calc(var(--_feat-translateX) * -1%) + 33%))
+        translateY(calc(calc(var(--_feat-translateY) * -1%) + 33%))
+        scaleX(calc(var(--_feat-scaleX) * 0.01))
+        scaleY(calc(var(--_feat-scaleY) * 0.01))
+        rotateX(calc(var(--_feat-rotateX) * 3.6deg))
+        rotateY(calc(var(--_feat-rotateY) * 3.6deg))
+        rotateZ(calc(var(--_feat-rotateZ) * 3.6deg))
     }
 </style>
 {%endblock%}
