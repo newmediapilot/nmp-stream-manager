@@ -8,8 +8,7 @@ const socketConnect = () => {
     $socketIO.on("connect", () => console.log("Connected to the socket server"));
     console.log("Socket connection start");
 };
-const socketWatchStyle = () => {
-
+const socketWatchStyle = (callback) => {
     console.log("socketWatchStyle");
     $socketIO.on("payload", (payload) => {
         payload.startsWith('style:set:') && callback(payload);

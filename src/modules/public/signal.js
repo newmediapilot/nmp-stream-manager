@@ -1,64 +1,41 @@
-/**
- * File: src/modules/test/send_signal.js
- * Description: Handles the creation of test signals for Twitch chat. Accepts a description parameter to identify the command
- * and sends a predefined message to Twitch chat via the Twitch API.
- * @returns {void} - Sends a message to Twitch chat and returns a success or failure response.
- * @method publicSignalCreate(req, res) - Processes the signal creation based on the description parameter.
- *   @param {object} req - The HTTP request object containing the query parameter `description`.
- *   @param {object} res - The HTTP response object used to send the response.
- */
-
 const { twitchMarkerCreate } = require("../twitch/marker");
 const { twitchMessageCreate } = require("../twitch/message");
 const { twitchAdCreate } = require("../twitch/ads");
 const { sendPayload } = require("../helper/socket");
 const { getbpmRateMessage } = require("../sensor/listen");
-
 let isCreating = false;
-
 async function publicSignalCreate(req, res) {
-
   if (isCreating) {
     return res.status(400).send("Please stop spamming buttons.");
   }
-
   isCreating = true;
   const type = req.query.type;
   const description = req.query.description;
-
   try {
-
     if (!description || !type) {
       throw Error("query missing");
     }
-
     let result = false;
-
-    // Buttons will emit these
     if ("mark" === type) {
       result = await twitchMarkerCreate(description);
     }
-
     if ("bpm" === type) {
       result = await twitchMessageCreate(getbpmRateMessage());
     }
-
     if ("ad" === type) {
       result = await twitchAdCreate(description);
     }
-
     if ("feature" === type) {
       result = await sendPayload(description);
     }
-
-    // Utility function to re-render all views
+    if ("style:set" === type) {
+      result = await sendPayload(`style:set:${description}`);
+    }
     if ("browser" === type) {
       if ("reload" === description){
         result = await sendPayload("browser:reload");
       }
     }
-
-    // User friendly errors here
     if (!result) {
       isCreating = false;
       if ("mark" === type) return res.status(400).send("Could not create marker. Are you online?");
@@ -68,7 +45,6 @@ async function publicSignalCreate(req, res) {
       if ("reload" === type) return res.status(400).send("There was a problem requesting a reload.");
       return res.status(400).send("Error: " + type);
     }
-
     isCreating = false;
     return res.send("Success");
   } catch (error) {
@@ -76,5 +52,4 @@ async function publicSignalCreate(req, res) {
     return res.status(400).send("Error: " + error);
   }
 }
-
 module.exports = { publicSignalCreate };

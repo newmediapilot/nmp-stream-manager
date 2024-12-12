@@ -28,6 +28,7 @@ const sendPayload = (payload) => {
     }
     try {
         io.emit("payload", payload);
+        console.error("Sending payload:", payload);
         return true;
     } catch (err) {
         console.error("Error sending payload:", err);

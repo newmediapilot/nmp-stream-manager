@@ -28,9 +28,13 @@
                 <input type="range" min="0" max="66" step="33" value="66" name="--_feat-translateX">
                 <input type="range" min="0" max="66" step="33" value="66" name="--_feat-translateY" hidden>
             </label>
+            <label aria-label="tilt">
+                <input type="range" min="-3" max="3" step="3" value="0" name="--_feat-rotateX">
+                <input type="range" min="-3" max="3" step="3" value="0" name="--_feat-rotateY" hidden>
+            </label>
             <label aria-label="spin">
-                <input type="range" min="-11" max="11" step="11" value="0" name="--_feat-rotateX">
-                <input type="range" min="-11" max="11" step="11" value="0" name="--_feat-rotateY" hidden>
+                <input type="range" min="-6" max="6" step="3" value="0" name="--_feat-rotateZ">
+                <input type="range" min="-6" max="6" step="3" value="0" name="--_feat-rotateZ" hidden>
             </label>
         </div>
     </div>
@@ -61,7 +65,7 @@
 {%endblock%}
 {%block dialogs%}
 {%set device_ip = "device_ip" | getParam%}
-<dialog id="qr-dialog" data-url="https://{{device_ip }}{{public_routes.PUBLIC_DASHBOARD}}">
+<dialog id="qr-dialog" data-url="https://{{device_ip }}">
     <h2 aria-label="QR Code Dialogk"></h2>
     <h3 aria-label="This link will open this page on any device on your network"></h3>
     <canvas></canvas>

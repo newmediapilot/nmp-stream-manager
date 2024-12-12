@@ -69,17 +69,12 @@
 </style>
 {{public_module_styles()}}
 <style>
+    body {
+        perspective: 1920px;
+    }
+
     #module-container {
-        /* TODO: figure out perspective issue */
-        perspective-origin: 50% 50%;
-        perspective: 800px;
-        transform: translateX(calc(calc(var(--_feat-translateX) * -1%) + 33%))
-        translateY(calc(calc(var(--_feat-translateY) * -1%) + 33%))
-        scaleX(calc(var(--_feat-scaleX) * 0.01))
-        scaleY(calc(var(--_feat-scaleY) * 0.01))
-        rotateX(calc(var(--_feat-rotateX) * 3.6deg))
-        rotateY(calc(var(--_feat-rotateY) * 3.6deg))
-        rotateZ(calc(var(--_feat-rotateZ) * 3.6deg))
+        transform: translateX(calc(calc(var(--_feat-translateX) * -1%) + 33%)) translateY(calc(calc(var(--_feat-translateY) * -1%) + 33%)) scaleX(calc(var(--_feat-scaleX) * 0.01)) scaleY(calc(var(--_feat-scaleY) * 0.01)) rotateX(calc(var(--_feat-rotateX) * 3.6deg)) rotateY(calc(var(--_feat-rotateY) * 3.6deg)) rotateZ(calc(var(--_feat-rotateZ) * 3.6deg))
     }
 </style>
 {%endblock%}
@@ -99,6 +94,12 @@
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => ()=>{
+        socketWatchStyle((payload) => {
+            let style = payload.split('style:set:')[1];
+            document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
+        });
+    });
     document.addEventListener("DOMContentLoaded", () => {
         const urlParams = new URLSearchParams(window.location.search);
         const streamerQueryParam = urlParams.get('featuredName');
