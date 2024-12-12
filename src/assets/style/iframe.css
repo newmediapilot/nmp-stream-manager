@@ -15,11 +15,16 @@
 }
 
 html:not(.iframe) {
-    /*transform: scale(1.01);*/
+    transform: scale(1.01);
 }
 
 html.iframe #module-container {
     background-image: linear-gradient(120deg, rgba(2, 2, 2, 0.2) 0%, rgba(75, 75, 75, 0.66) 33%, rgba(2, 2, 2, 0.66) 33%, rgba(75, 75, 75, 0.99) 100%);
+    box-shadow: 0 0 99px 99px white;
+}
+
+html.iframe iframe {
+    display: none;
 }
 
 #module-container {
@@ -30,5 +35,4 @@ html.iframe #module-container {
     background-size: 7vw 7vh;
     background-repeat: repeat;
     animation: wave 15s linear infinite;
-    box-shadow: 0 0 99px 99px white;
 }
