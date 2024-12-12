@@ -66,8 +66,8 @@
 {{ public_module_styles() }}
 <style>
     #module-container {
-        transform: translateX(calc(var(--_feat-translateX) * 1%))
-        translateY(calc(var(--_feat-translateY) * 1%))
+        transform: translateX(calc(calc(var(--_feat-translateX) * -1%)  + 33% ))
+        translateY(calc(calc(var(--_feat-translateY) * -1%)  + 33% ))
         scaleX(calc(var(--_feat-scaleX) * 0.01))
         scaleY(calc(var(--_feat-scaleY) * 0.01))
         rotateX(calc(var(--_feat-rotateX) * 3.6deg))
