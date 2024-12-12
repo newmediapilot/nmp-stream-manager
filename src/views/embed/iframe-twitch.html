@@ -24,17 +24,6 @@
     }
 </style>
 <style>
-    #module-container {
-        width: 100vw;
-        height: 100vh;
-        display: block;
-        position: relative;
-        background-size: 7vw 7vh;
-        background-repeat: repeat;
-        background-image: linear-gradient(120deg, rgba(2, 2, 2, 0.2) 0%, rgba(2, 2, 2, 0.2) 33%, rgba(2, 2, 2, 0.2) 33%, rgba(75, 75, 75, 0.2) 100%);
-        animation: wave 15s linear infinite;
-    }
-
     html.iframe #module-container:after {
         content: "";
         display: block;
@@ -46,7 +35,6 @@
         box-shadow: inset 0 0 10px 10px white;
         box-sizing: border-box;
     }
-
     @keyframes wave {
         0% {
             background-position: 0 0;
