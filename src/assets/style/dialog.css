@@ -1,43 +1,14 @@
-dialog::backdrop {
-    background: rgba(0, 0, 0, 0.2); /* semi-transparent background */
-    backdrop-filter: blur(10px); /* Apply blur effect */
-}
-
-/* Dialog box */
-dialog section {
-    margin: 0 auto;
-    width: 66vw;
+dialog {
+    display: grid;
+    grid-template-rows: 1fr min-content 1fr min-content min-content 1fr;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    width: 400px;
+    max-width: 90%;
     background-color: white;
-    /* padding: 30px; */
-    /* transform: translateY(25vh); */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
-}
-
-dialog:-internal-dialog-in-top-layer::backdrop {
-    backdrop-filter: blur(20px);
-    opacity: 1;
-}
-
-dialog .dialog--title {
-    font-size: 36px;
-    margin-bottom: 12px;
-}
-
-dialog .dialog--body {
-    text-align: center;
-    font-size: 20px;
-    margin: 5px 0;
-}
-
-dialog canvas {
-    margin: 0 auto;
-    width: 280px;
-    height: 280px;
-}
-
-dialog button {
-    color: var(--color-black);
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 24px;
-}
+}X
