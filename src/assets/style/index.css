@@ -1,23 +1,21 @@
-:root{
+:root {
     --index-grid-cell-width: 100vw;
     --index-grid-cell-height: 100vh;
 }
 
 main {
-    overflow-x: hidden;
-    overflow-y: hidden;
-    position: relative;
     margin: 0;
     padding: 0;
-    background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
+    overflow: visible;
+    position: fixed;
     display: grid;
+    grid-gap: 0;
     grid-template-columns: repeat(3, var(--index-grid-cell-width));
     grid-template-rows: repeat(3, var(--index-grid-cell-height));
-    grid-gap: 0;
     width: calc(var(--index-grid-cell-width) * 3);
     height: calc(var(--index-grid-cell-height) * 3);
-    margin-left: calc(0vw - var(--index-grid-cell-width));
-    margin-top: calc(0vh - var(--index-grid-cell-height));
+    left: calc(0vw - var(--index-grid-cell-width));
+    top: calc(0vh - var(--index-grid-cell-height));
 }
 
 html,
@@ -55,4 +53,11 @@ main iframe:nth-of-type(3) {
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 3;
+}
+
+main iframe:nth-of-type(4) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
 }
