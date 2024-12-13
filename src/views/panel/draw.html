@@ -15,17 +15,29 @@
         height: 100vh;
     }
 
+    nav {
+        transform: none;
+        left: 0;
+        bottom: 0;
+    }
+
     canvas {
         width: 100vw;
         height: 100vw;
-        box-shadow: inset 0 0 3px 3px #f77f00;
+        opacity: 1;
+        background-image:  
+                linear-gradient(rgba(0,0,0,.1) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(0,0,0,.1) 2px, transparent 2px),
+                linear-gradient(rgba(0,0,0,.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,.1) 1px, rgba(255,255,255,.1) 1px);
+        background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+        background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
     }
 </style>
 {%endblock%}
 {%block body%}
 <section>
     <canvas id="canvas"></canvas>
-    <div>menu with stuff</div>
 </section>
 <nav>
     <label onclick="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></label>
@@ -37,6 +49,7 @@
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => {
+        const drawing = [];
         const pixelSize = 20;
         const canvas = document.querySelector("canvas");
         canvas.width = canvas.getBoundingClientRect().width;
@@ -47,6 +60,8 @@
             ctx.beginPath();
             ctx.arc(x, y, pixelSize / 2, 0, Math.PI * 2, false);
             ctx.fill();
+            drawing.push(x);
+            drawing.push(y);
         };
         window.addEventListener("touchmove", (e) => {
             drawPixel(
