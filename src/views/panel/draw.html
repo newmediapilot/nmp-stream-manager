@@ -26,18 +26,18 @@
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => {
-        // const canvas = document.querySelector("canvas");
-        // const pixelSize = 6;
-        // const drawPixel = (x, y) => {
-        //     canvas.getContext("2d").fillStyle = "#000";
-        //     canvas.getContext("2d").fillRect(x - pixelSize / 2, y - pixelSize / 2, pixelSize, pixelSize);
-        // };
-        // document.addEventListener("mousemove", (e) => {
-        //     drawPixel(
-        //         e.pageX,
-        //         e.pageY,
-        //     );
-        // });
+        const canvas = document.querySelector("canvas");
+        const pixelSize = 6;
+        const drawPixel = (x, y) => {
+            canvas.getContext("2d").fillStyle = "#000";
+            canvas.getContext("2d").fillRect(x - pixelSize / 2, y - pixelSize / 2, pixelSize, pixelSize);
+        };
+        document.addEventListener("mousemove", (e) => {
+            drawPixel(
+                e.pageX,
+                e.pageY,
+            );
+        });
     });
 </script>
 {%endblock%}
