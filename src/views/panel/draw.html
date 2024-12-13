@@ -37,8 +37,9 @@
 {%block body%}
 <section>
     <canvas id="canvas"></canvas>
-    <input>
-    <button onclick="javascript: document.clearCanvas()">CLEAR</button>
+    <input type="range" min="0">
+    <button onclick="javascript: document.clearCanvas()">WIPE</button>
+    <button onclick="javascript: document.sendPayload()">SEND</button>
 </section>
 <nav>
     <label onclick="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></label>
@@ -59,23 +60,18 @@
         document.clearCanvas = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height)
         };
+        document.sendPayload = () => {
+            
+        };
         document.drawPixel = (x, y) => {
-            if (drawing.length >= 1) {
-                const px = drawing[drawing.length - 2];
-                const py = drawing[drawing.length - 1];
-                const nx = (x + px) / 2;
-                const ny = (y + py) / 2;
-                ctx.fillStyle = "#fff16e";
-                ctx.beginPath();
-                ctx.arc(nx, ny, pixelSize / 2, 0, Math.PI * 2, false);
-                ctx.fill();
-            }
             ctx.fillStyle = "#ff7b00";
             ctx.beginPath();
             ctx.arc(x, y, pixelSize / 2, 0, Math.PI * 2, false);
             ctx.fill();
             drawing.push(x);
             drawing.push(y);
+            document.querySelector('[type=range]').max = drawing.length;
+            document.querySelector('[type=range]').value = drawing.length;
         };
         window.addEventListener("touchend", (e) => {
             const replay = () => {
@@ -84,8 +80,9 @@
                 const y = drawing.shift();
                 ctx.fillStyle = "#2fffa5";
                 ctx.beginPath();
-                ctx.arc(x, y, (pixelSize*1.25) / 2, 0, Math.PI * 2, false);
+                ctx.arc(x, y, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
                 ctx.fill();
+                document.querySelector('[type=range]').value = drawing.length;
                 setTimeout(() => requestAnimationFrame(replay), 4);
             };
             requestAnimationFrame(replay);
