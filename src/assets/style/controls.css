@@ -1,4 +1,3 @@
-/* toggle */
 html.edit-active nav input[type=checkbox],
 html.edit-active nav aside button:not(#toggle-edit-dashboard) {
     display: none;
@@ -6,13 +5,19 @@ html.edit-active nav aside button:not(#toggle-edit-dashboard) {
 
 nav {
     position: fixed;
-    bottom: 20px;
+    bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+@media (display-mode: standalone) {
+    body nav {
+        bottom: 20px;
+    }
 }
 
 nav input[type="checkbox"] {
