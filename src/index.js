@@ -20,6 +20,7 @@ app.all(ROUTES.PUBLIC_INDEX, (req, res) => res.render("index"));
 app.all(ROUTES.PUBLIC_DASHBOARD, (req, res) => res.render("panel/dashboard"));
 app.all(ROUTES.PUBLIC_SETTINGS, (req, res) => res.render("panel/settings"));
 app.all(ROUTES.PUBLIC_MODULES, (req, res) => res.render("panel/modules"));
+app.all(ROUTES.PUBLIC_DRAW, (req, res) => res.render("panel/draw"));
 app.all(ROUTES.PUBLIC_FEATURE_EMBED, (req, res) => res.render("embed/iframe-twitch"));
 app.all(ROUTES.PUBLIC_BPM_EMBED, (req, res) => res.render("embed/iframe-bpm"));
 app.all(ROUTES.PUBLIC_SIGNAL_CREATE, publicSignalCreate);
