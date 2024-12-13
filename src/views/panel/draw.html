@@ -64,7 +64,7 @@
         };
         document.sendPayload = () => {
             document.replayStart();
-            payload && payload && axios.get("/api/signal/create", {
+            payload.length && axios.get("/api/signal/create", {
                 params: {
                     type: "draw",
                     description: payload.join(','),
@@ -95,7 +95,9 @@
                 ctx.arc(x, y, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
                 ctx.fill();
                 document.querySelector('[type=range]').value = capture.length;
-                document.querySelector('[type=range]').disabled = !!capture.length;
+                document.querySelectorAll('button').forEach(button => () => {
+                    button.disabled = !!capture.length;
+                });
                 requestAnimationFrame(document.replayStart);
             } else {
                 document.replayDone();
