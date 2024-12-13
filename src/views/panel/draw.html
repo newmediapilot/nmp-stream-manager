@@ -37,13 +37,16 @@
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => {
+        const pixelSize = 20;
         const canvas = document.querySelector("canvas");
         canvas.width = canvas.getBoundingClientRect().width;
         canvas.height = canvas.getBoundingClientRect().height;
-        const pixelSize = 6;
         const drawPixel = (x, y) => {
-            canvas.getContext("2d").fillStyle = "#6a82ff";
-            canvas.getContext("2d").fillRect(x - pixelSize / 2, y - pixelSize / 2, pixelSize, pixelSize);
+            const ctx = canvas.getContext("2d");
+            ctx.fillStyle = "#6a82ff";
+            ctx.beginPath();
+            ctx.arc(x, y, pixelSize / 2, 0, Math.PI * 2, false);
+            ctx.fill();
         };
         window.addEventListener("touchmove", (e) => {
             drawPixel(
