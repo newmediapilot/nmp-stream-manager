@@ -9,16 +9,33 @@ const initServiceWorker = () => {
     }
 
     // Check if the user is online or offline
+    const noInternetMessage = document.createElement('p');
+    noInternetMessage.id = 'no-internet-message';
+    noInternetMessage.style.position = 'fixed';
+    noInternetMessage.style.top = '0';
+    noInternetMessage.style.left = '0';
+    noInternetMessage.style.right = '0';
+    noInternetMessage.style.backgroundColor = 'red';
+    noInternetMessage.style.color = 'white';
+    noInternetMessage.style.textAlign = 'center';
+    noInternetMessage.style.padding = '10px';
+    noInternetMessage.style.fontSize = '18px';
+
     if (!navigator.onLine) {
-        alert('No internet connection detected');
+        noInternetMessage.textContent = 'No internet connection';
+        document.body.appendChild(noInternetMessage);
     }
 
     // Listen for online and offline events
     window.addEventListener('offline', () => {
-        alert('You are offline');
+        noInternetMessage.textContent = 'No internet connection';
+        document.body.appendChild(noInternetMessage);
     });
 
     window.addEventListener('online', () => {
-        alert('You are back online');
+        const message = document.getElementById('no-internet-message');
+        if (message) {
+            message.remove();
+        }
     });
 };
