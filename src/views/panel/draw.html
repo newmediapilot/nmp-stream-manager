@@ -38,8 +38,8 @@
 <section>
     <canvas id="canvas"></canvas>
     <input disabled type="range" min="0" max="1000" value="max" step="1">
-    <button onclick="javascript: document.clearCanvas()">WIPE</button>
-    <button onclick="javascript: document.sendPayload()">SEND</button>
+    <button onclick="javascript: document.clearCanvas()" aria-label="🧹"></button>
+    <button onclick="javascript: document.sendPayload()" aria-label="📨"></button>
 </section>
 <nav>
     <label onclick="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></label>
@@ -51,8 +51,8 @@
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => {
-        let recording = [];
         let capture = [];
+        let payload = [];
         const pixelSize = 20;
         const canvas = document.querySelector("canvas");
         canvas.width = canvas.getBoundingClientRect().width;
@@ -60,38 +60,48 @@
         const ctx = document.querySelector("canvas").getContext("2d");
         document.clearCanvas = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            recording = [];
+            document.querySelector('input[type=range]').value = document.querySelector('input[type=range]').max;
             capture = [];
+            payload = [];
         };
         document.sendPayload = () => {
             window.replayStart();
-            console.log('recording', recording);
+            payload && payload && axios.get("/api/signal/create", {
+                params: {
+                    type: "draw",
+                    description: payload,
+                },
+            });
         };
         window.replayDone = () => {
-            // document.clearCanvas();
-            setTimeout(() => requestAnimationFrame(window.replayStart), 4);
+            console.log('replayDone');
         };
         document.drawPixel = (x, y) => {
             ctx.fillStyle = "#ff7b00";
             ctx.beginPath();
             ctx.arc(x, y, pixelSize / 2, 0, Math.PI * 2, false);
             ctx.fill();
-            capture.push(x);
-            recording.push(x);
-            capture.push(y);
-            recording.push(y);
+            capture.push(Math.round(x));
+            payload.push(Math.round(x));
+            capture.push(Math.round(y));
+            payload.push(Math.round(y));
             document.querySelector('[type=range]').value = capture.length;
         };
         window.replayStart = () => {
-            if (!capture.length) return window.replayDone();
-            const x = capture.shift();
-            const y = capture.shift();
-            ctx.fillStyle = "#2fffa5";
-            ctx.beginPath();
-            ctx.arc(x, y, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
-            ctx.fill();
-            document.querySelector('[type=range]').value = capture.length;
-            setTimeout(() => requestAnimationFrame(window.replayStart), 4);
+            console.log("document.querySelector('[type=range]').value", document.querySelector('[type=range]').value);
+            if (Number(document.querySelector('[type=range]').value) > 0) {
+                const x = capture.shift();
+                const y = capture.shift();
+                ctx.fillStyle = "#2fffa5";
+                ctx.beginPath();
+                ctx.arc(x, y, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
+                ctx.fill();
+                document.querySelector('[type=range]').value = capture.length;
+                document.querySelector('[type=range]').disabled = !!capture.length;
+                requestAnimationFrame(window.replayStart);
+            } else {
+                window.replayDone();
+            }
         };
         window.addEventListener("touchmove", (e) => document.drawPixel(
             e.touches[0].pageX,
