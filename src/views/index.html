@@ -45,28 +45,16 @@
                     {translateX: `${-1 * vw}vw`, translateY: `${0 * vh}vh`},
                     {translateX: `${0 * vw}vw`, translateY: `${-1 * vh}vh`},
                 ];
-                // if(previousPath) {
-                //     Array.from(document.body.querySelectorAll("iframe")).forEach((iframe, index) => {
-                //         iframe.style.display = index === (
-                //             iframe.src === currentPath ||
-                //             iframe.src === previousPath
-                //         ) ? 'flex' : 'none';
-                //     });
-                // }
                 previousPath = currentPath;
                 const {translateX, translateY} = translateValues[indexOf];
-
-                console.log('translateValues[indexOf]', translateValues[indexOf]);
                 anime({
-                    targets: '.pages',
+                    targets: 'main',
                     translateX: translateX,
                     translateY: translateY,
-                    duration: 333,
+                    duration: 22,
                     easing: 'linear',
                     complete: () => {
-                        // Array.from(document.body.querySelectorAll("iframe")).forEach((iframe, index) => {
-                        //     iframe.style.display = index === indexOf ? 'flex' : 'none';
-                        // });
+                        // console.log('done');
                     }
                 });
             }
