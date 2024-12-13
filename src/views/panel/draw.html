@@ -18,18 +18,17 @@
     nav {
         transform: none;
         left: 0;
-        bottom: 0;
+        bottom: 150px;
     }
 
     canvas {
         width: 100vw;
         height: 100vw;
         opacity: 1;
-        background-image:  
-                linear-gradient(rgba(0,0,0,.1) 2px, transparent 2px),
-                linear-gradient(90deg, rgba(0,0,0,.1) 2px, transparent 2px),
-                linear-gradient(rgba(0,0,0,.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,0,0,.1) 1px, rgba(255,255,255,.1) 1px);
+        background-image: linear-gradient(rgba(0, 0, 0, .1) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(0, 0, 0, .1) 2px, transparent 2px),
+        linear-gradient(rgba(0, 0, 0, .1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, .1) 1px, rgba(255, 255, 255, .1) 1px);
         background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
         background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
     }
@@ -54,23 +53,44 @@
         const canvas = document.querySelector("canvas");
         canvas.width = canvas.getBoundingClientRect().width;
         canvas.height = canvas.getBoundingClientRect().height;
+        const ctx = canvas.getContext("2d");
         const drawPixel = (x, y) => {
-            const ctx = canvas.getContext("2d");
+            if (drawing.length >= 1) {
+                const px = drawing[drawing.length - 2];
+                const py = drawing[drawing.length - 1];
+                const nx = (x + px) / 2;
+                const ny = (y + py) / 2;
+                ctx.fillStyle = "#fff16e";
+                ctx.beginPath();
+                ctx.arc(nx, ny, pixelSize / 2, 0, Math.PI * 2, false);
+                ctx.fill();
+            }
             ctx.fillStyle = "#6a82ff";
             ctx.beginPath();
             ctx.arc(x, y, pixelSize / 2, 0, Math.PI * 2, false);
             ctx.fill();
+
+            // Add current coordinates to the drawing array
             drawing.push(x);
             drawing.push(y);
         };
-        window.addEventListener("touchmove", (e) => {
-            drawPixel(
-                e.touches[0].pageX,
-                e.touches[0].pageY,
-            );
-            console.log('e.pageX', e.touches[0].pageX);
-            console.log('e.pageY', e.touches[0].pageY);
+        window.addEventListener("touchend", (e) => {
+            const replay = () => {
+                if (!drawing.length) return;
+                const x = drawing.shift();
+                const y = drawing.shift();
+                ctx.fillStyle = "#ffffff";
+                ctx.beginPath();
+                ctx.arc(x, y, pixelSize / 2, 0, Math.PI * 2, false);
+                ctx.fill();
+                setTimeout(() => requestAnimationFrame(replay), 4);
+            };
+            requestAnimationFrame(replay);
         });
+        window.addEventListener("touchmove", (e) => drawPixel(
+            e.touches[0].pageX,
+            e.touches[0].pageY,
+        ));
     });
 </script>
 {%endblock%}
