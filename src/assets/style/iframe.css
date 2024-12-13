@@ -14,10 +14,6 @@
     position: relative;
 }
 
-html:not(.iframe) {
-    transform: scale(1.01);
-}
-
 html.iframe #module-container {
     background-image: linear-gradient(120deg, rgb(2, 2, 2) 0%, rgb(75, 75, 75) 33%, rgb(2, 2, 2) 33%, rgb(75, 75, 75) 100%);
     background-size: cover;
