@@ -34,8 +34,7 @@
         --_feat-rotateZ: 0.0;
     }
 </style>
-{%set public_module_styles = 'dashboard_signals_config'|getParam%}
-<style id="public_module_styles">/*{{public_module_styles}}*/</style>
+<style id="public_module_styles">:root{{'{' ~ 'dashboard_signals_config'|getParam ~ '}'}}</style>
 <style>
     body {
         perspective: 1920px;
