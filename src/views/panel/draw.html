@@ -37,7 +37,7 @@
 {%block body%}
 <section>
     <canvas id="canvas"></canvas>
-    <input type="range" min="0">
+    <input disabled type="range" min="0" max="1000" value="max" step="1">
     <button onclick="javascript: document.clearCanvas()">WIPE</button>
     <button onclick="javascript: document.sendPayload()">SEND</button>
 </section>
@@ -51,42 +51,50 @@
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => {
-        const drawing = [];
+        let recording = [];
+        let capture = [];
         const pixelSize = 20;
         const canvas = document.querySelector("canvas");
         canvas.width = canvas.getBoundingClientRect().width;
         canvas.height = canvas.getBoundingClientRect().height;
         const ctx = document.querySelector("canvas").getContext("2d");
         document.clearCanvas = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            recording = [];
+            capture = [];
         };
         document.sendPayload = () => {
-            
+            window.replayStart();
+            console.log('recording', recording);
+        };
+        window.replayDone = () => {
+            // document.clearCanvas();
+            setTimeout(() => requestAnimationFrame(window.replayStart), 4);
         };
         document.drawPixel = (x, y) => {
             ctx.fillStyle = "#ff7b00";
             ctx.beginPath();
             ctx.arc(x, y, pixelSize / 2, 0, Math.PI * 2, false);
             ctx.fill();
-            drawing.push(x);
-            drawing.push(y);
-            document.querySelector('[type=range]').max = drawing.length;
-            document.querySelector('[type=range]').value = drawing.length;
+            capture.push(x);
+            recording.push(x);
+            capture.push(y);
+            recording.push(y);
+            document.querySelector('[type=range]').value = capture.length;
         };
-        window.addEventListener("touchend", (e) => {
-            const replay = () => {
-                if (!drawing.length) return;
-                const x = drawing.shift();
-                const y = drawing.shift();
-                ctx.fillStyle = "#2fffa5";
-                ctx.beginPath();
-                ctx.arc(x, y, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
-                ctx.fill();
-                document.querySelector('[type=range]').value = drawing.length;
-                setTimeout(() => requestAnimationFrame(replay), 4);
-            };
-            requestAnimationFrame(replay);
-        });
+        window.replayStart = () => {
+            if (!capture.length) {
+                window.replayDone();
+            }
+            const x = capture.shift();
+            const y = capture.shift();
+            ctx.fillStyle = "#2fffa5";
+            ctx.beginPath();
+            ctx.arc(x, y, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
+            ctx.fill();
+            document.querySelector('[type=range]').value = capture.length;
+            setTimeout(() => requestAnimationFrame(window.replayStart), 4);
+        };
         window.addEventListener("touchmove", (e) => document.drawPixel(
             e.touches[0].pageX,
             e.touches[0].pageY,
