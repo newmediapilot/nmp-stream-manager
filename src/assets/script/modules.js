@@ -68,7 +68,7 @@ const initializeModuleClickTouch = () => {
         castModuleInputValues();
     });
     document.addEventListener('touchend', (e) => {
-        document.removeEventListener('mousemove', castModuleInputValues);
+        document.removeEventListener('touchmove', castModuleInputValues);
         castModuleInputValues();
         sendInputValues();
     });
