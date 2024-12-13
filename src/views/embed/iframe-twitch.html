@@ -78,7 +78,7 @@ getParam
         document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
     }));
     document.addEventListener("DOMContentLoaded", () => socketWatchFeatureSet((payload) => {
-        if ('#off' === window.location.hash) return;
+        if ('#edit' === window.location.hash) return;
         const urlParams = new URLSearchParams(window.location.search);
         const streamerQueryParam = urlParams.get('featuredName');
         const featuredName = payload.split(':').pop();
@@ -94,7 +94,7 @@ getParam
         }
     }));
     document.addEventListener("DOMContentLoaded", () => {
-        if ('#off' === window.location.hash) return;
+        if ('#edit' === window.location.hash) return;
         const urlParams = new URLSearchParams(window.location.search);
         const streamerQueryParam = urlParams.get('featuredName');
         if (!streamerQueryParam) {
