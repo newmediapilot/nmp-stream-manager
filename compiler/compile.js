@@ -34,9 +34,8 @@ let RANDOM = [
 RANDOM = [...RANDOM, ...RANDOM.map((key) => key.split("_").reverse().join("_"))];
 console.log('RANDOM', RANDOM.length);
 jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/gm, "");
-// jsonDataString = jsonDataString.replace(/console\.[^,;]+(?:[,;])/gm, `/**${RANDOM.pop()}**/`);
-// jsonDataString = jsonDataString.replace(/chalk\.[^,;]+(?:[,;])/gm, `/**${RANDOM.pop()}**/`);
-// jsonDataString = jsonDataString.replace(/\.\.\.args\)/gm, `/**${RANDOM.pop()}**/`);
+// TODO: Encode here and send as string to compiled
+// atob(`${btoa("addEventListener")}`);
 if (RANDOM.length === 0) console.error("We ran out of keys") && process.exit(1);
 console.log('RANDOM used', RANDOM.length);
 fs.rmSync("./.dist", {recursive: true, force: true});
