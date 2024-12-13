@@ -20,9 +20,6 @@ const socketWatchFeatureSet = (callback) => {
         payload.startsWith('feature:set:') && callback(payload);
     });
 };
-const socketEmitStyle = (payload) => {
-// TODO: figure this out
-};
 const socketEmitReload = () => {
     axios.get("/api/signal/create?type=browser&description=reload");
 };
