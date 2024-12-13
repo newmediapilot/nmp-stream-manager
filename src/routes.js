@@ -13,6 +13,7 @@ const ROUTES = {
     PUBLIC_DASHBOARD: "/public/dashboard",
     PUBLIC_SETTINGS: "/public/settings",
     PUBLIC_MODULES: "/public/modules",
+    PUBLIC_DRAW: "/public/draw",
     // Embed Panels
     PUBLIC_FEATURE_EMBED: "/public/feature/embed",
     PUBLIC_BPM_EMBED: "/public/bpm/embed",
