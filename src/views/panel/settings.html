@@ -14,10 +14,10 @@
         <li class="settings-header {{signal.theme}}" aria-label="Featured"></li>
         {%endif%}
         <li>
-            <form class="{{signal.theme}}" data-editor-id="{{ loop.index0 }}">
-                <button aria-label="{{ signal.emoji}}"/>
+            <form class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
+                <button aria-label="{{signal.emoji}}"/>
                 </button>
-                <input type="text" value="{{ signal.label}}"/>
+                <input type="text" value="{{signal.label}}"/>
             </form>
         </li>
         {%endif%}
@@ -29,10 +29,10 @@
         <li class="settings-header {{signal.theme}}" aria-label="Markers"></li>
         {%endif%}
         <li>
-            <form class="{{signal.theme}}" data-editor-id="{{ loop.index0 }}">
-                <button aria-label="{{ signal.emoji}}"/>
+            <form class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
+                <button aria-label="{{signal.emoji}}"/>
                 </button>
-                <input type="text" value="{{ signal.label}}"/>
+                <input type="text" value="{{signal.label}}"/>
             </form>
         </li>
         {%endif%}
@@ -43,10 +43,10 @@
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="settings-header {{signal.theme}}" aria-label="Ads"></li>
         {%endif%}
-        <form class="{{signal.theme}}" data-editor-id="{{ loop.index0 }}">
-            <button aria-label="{{ signal.emoji}}"/>
+        <form class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
+            <button aria-label="{{signal.emoji}}"/>
             </button>
-            <input type="text" disabled value="{{ signal.label}}"/>
+            <input type="text" disabled value="{{signal.label}}"/>
         </form>
         </li>
         {%endif%}
@@ -59,10 +59,10 @@
         </li>
         {%endif%}
         <li>
-            <form class="{{signal.theme}}" data-editor-id="{{ loop.index0 }}">
-                <button aria-label="{{ signal.emoji}}"/>
+            <form class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
+                <button aria-label="{{signal.emoji}}"/>
                 </button>
-                <input type="text" value="{{ signal.label}}"/>
+                <input type="text" value="{{signal.label}}"/>
             </form>
         </li>
         {%endif%}

@@ -5,11 +5,11 @@
     <aside class=items">
         <button onclick="javascript:socketEmitReload()" aria-label="Reload"><em aria-label="🔄"></em></button>
         <button onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').showModal()" aria-label="Show QR"><em aria-label="🔗"></em></button>
-        <button onclick="javascript:window.parent.location.href='{{ public_routes.PUBLIC_DASHBOARD}}'" aria-label="Dev"><em aria-label="⚙"></em></button>
-        <button onclick="javascript:window.parent.location.href='{{ public_routes.PUBLIC_INDEX}}'" aria-label="User"><em aria-label="🧑"></em></button>
-        <button onclick="javascript:getURL('{{ public_routes.TWITCH_LOGIN}}')" aria-label="Login"><em aria-label="🔒"></em></button>
-        <button onclick="javascript:getURL('{{ public_routes.PUBLIC_MODULES}}')" aria-label="Modules"><em aria-label="🎬"></em></button>
-        <button onclick="javascript:getURL('{{ public_routes.PUBLIC_SETTINGS}}')" aria-label="Settings"><em aria-label="⚡"></em></button>
+        <button onclick="javascript:window.parent.location.href='{{public_routes.PUBLIC_DASHBOARD}}'" aria-label="Dev"><em aria-label="⚙"></em></button>
+        <button onclick="javascript:window.parent.location.href='{{public_routes.PUBLIC_INDEX}}'" aria-label="User"><em aria-label="🧑"></em></button>
+        <button onclick="javascript:getURL('{{public_routes.TWITCH_LOGIN}}')" aria-label="Login"><em aria-label="🔒"></em></button>
+        <button onclick="javascript:getURL('{{public_routes.PUBLIC_MODULES}}')" aria-label="Modules"><em aria-label="🎬"></em></button>
+        <button onclick="javascript:getURL('{{public_routes.PUBLIC_SETTINGS}}')" aria-label="Settings"><em aria-label="⚡"></em></button>
         <button style="display:none;" id="toggle-edit-dashboard"></button>
     </aside>
 </nav>
