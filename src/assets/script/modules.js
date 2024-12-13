@@ -47,7 +47,7 @@ const castModuleInputValues = () => {
     if (payload) document.head.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
     payload && payload && axios.get("/api/signal/create", {
         params: {
-            type: "style:set",
+            type: "style",
             description: payload,
         },
     });
