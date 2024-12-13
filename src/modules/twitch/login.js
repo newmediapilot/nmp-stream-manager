@@ -31,10 +31,10 @@ function twitchLogin(req, res) {
 
     console.log2(process.cwd(), "twitchLogin start...");
     console.log2(process.cwd(), "TWITCH_SCOPES:", TWITCH_SCOPES);
-    console.log2(process.cwd(), "ROUTES.TWITCH_REDIRECT_URL:", ROUTES.TWITCH_REDIRECT_URL);
+    console.log2(process.cwd(), "ROUTES.TWITCH_REDIRECT:", ROUTES.TWITCH_REDIRECT);
 
     setParam("twitch_login_referrer", ROUTES.PANEL_DASHBOARD);
-    const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(ROUTES.TWITCH_REDIRECT_URL)}&response_type=code&scope=${TWITCH_SCOPES}`;
+    const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(ROUTES.TWITCH_REDIRECT)}&response_type=code&scope=${TWITCH_SCOPES}`;
 
     console.log2(process.cwd(), "OAuth URL generated:", oauthUrl);
 
@@ -63,7 +63,7 @@ async function twitchLoginSuccess(req, res) {
                     client_secret: process.env.TWITCH_CLIENT_SECRET,
                     code: code,
                     grant_type: "authorization_code",
-                    redirect_uri: ROUTES.TWITCH_REDIRECT_URL,
+                    redirect_uri: ROUTES.TWITCH_REDIRECT,
                 },
             },
         );
