@@ -5,15 +5,25 @@
 <script defer type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
 <style>
+    html {
+        width: 100vw;
+        height: 100vh;
+    }
+    body {
+        width: 100vw;
+        height: 100vh;
+    }
     canvas {
-        min-width: 100vw;
-        min-height: 100vh;
+        width: 100vw;
+        height: 100vw;
+        box-shadow: inset 0 0 3px 3px #f77f00;
     }
 </style>
 {%endblock%}
 {%block body%}
-<section class="draw">
-    <canvas id="canvas" width="400" height="400"></canvas>
+<section>
+    <canvas id="canvas"></canvas>
+    <div>menu with stuff</div>
 </section>
 <nav>
     <label onclick="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></label>
@@ -28,14 +38,16 @@
         const canvas = document.querySelector("canvas");
         const pixelSize = 6;
         const drawPixel = (x, y) => {
-            canvas.getContext("2d").fillStyle = "#000";
+            canvas.getContext("2d").fillStyle = "#6a82ff";
             canvas.getContext("2d").fillRect(x - pixelSize / 2, y - pixelSize / 2, pixelSize, pixelSize);
         };
-        document.addEventListener("mousemove", (e) => {
+        window.addEventListener("touchmove", (e) => {
             drawPixel(
-                e.pageX,
-                e.pageY,
+                e.touches[0].pageX,
+                e.touches[0].pageY,
             );
+            console.log('e.pageX', e.touches[0].pageX);
+            console.log('e.pageY', e.touches[0].pageY);
         });
     });
 </script>
