@@ -31,66 +31,24 @@ let RANDOM = [
     'he_ate_my_parents', 'this_is_your_brain', 'my_cheese_is_cold',
     'stop_pushing_me_around', 'get_in_line_cartman', 'stop_talking_kyle'
 ];
-RANDOM = [...RANDOM, ...RANDOM.map((key) => key.split("_").reverse().join("_"))];
 console.log('RANDOM', RANDOM.length);
 jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/gm, "");
+jsonDataString = jsonDataString.replace(/API_SIGNAL_CREATE/gm, RANDOM.pop());
 // TODO: Encode here and send as string to compiled
 // atob(`${btoa("addEventListener")}`);
 if (RANDOM.length === 0) console.error("We ran out of keys") && process.exit(1);
+const {ROUTES} = require('../src/routes');
+Object.keys(ROUTES).forEach(route=>{
+    console.log('route',
+        route);
+});
 console.log('RANDOM used', RANDOM.length);
 fs.rmSync("./.dist", {recursive: true, force: true});
-const data = JSON.parse(jsonDataString);
-Object.keys(data)
-    .map(path => {
-        const writePath = path.split("\\").slice(0, -1).join("\\");
-        const fullPath = `./.dist/${writePath}`;
-        if (!fs.existsSync(fullPath)) {
-            fs.mkdirSync(fullPath, {recursive: true});
-            console.log('Directory created successfully', fullPath);
-        }
-        return path;
-    })
-    .map(path => {
-        data[path] = data[path].replace(/<script src="https:\/\/cdn.*>/g, (m) => {
-            const src = m.match(/src="([^"]+)"/)[1];
-            const res = request('GET', src);
-            return `<script data-path="${src}" defer>${res.getBody('utf8')}</script>`;
-        });
-        return path;
-    })
-    .map(path => {
-        data[path] = data[path].replace(/<script src="\/script.*>/g, (m) => {
-            const src = m.match(/src="([^"]+)"/)[1].split('/').join('');
-            const dPath = Object.keys(data).find(key => {
-                const pathKeys = key.split('\\').join('');
-                return pathKeys.endsWith(src);
-            });
-            return `<script data-path="${src}" defer>${data[dPath]}</script>`
-        });
-        return path;
-    })
-    .map(path => {
-        data[path] = data[path].replace(/<link href="\/style.*>/g, (m) => {
-            const hrefKeys = m.match(/href="([^"]+)"/)[1].split('/').join('');
-            const dPath = Object.keys(data).find(key => {
-                const pathKeys = key.split('\\').join('');
-                return pathKeys.endsWith(hrefKeys);
-            });
-            return `<style data-path="${hrefKeys}">${data[dPath]}</style>`
-        });
-        return path;
-    })
-    .map(path => {
-        const fullPath = `./.dist/${path}`;
-        const content = data[path];
-        fs.writeFileSync(fullPath, content, {encoding: "utf-8"});
-        return path;
-    });
 fs.copyFileSync(".env", "./.dist/.env");
 fs.copyFileSync("./localhost.key", "./.dist/localhost.key");
 fs.copyFileSync("./localhost.crt", "./.dist/localhost.crt");
-fs.copyFileSync("./src/assets/icon512_maskable.png", "./.dist/src/assets/icon512_maskable.png");
-fs.copyFileSync("./src/assets/icon512_rounded.png", "./.dist/src/assets/icon512_rounded.png");
+// fs.copyFileSync("./src/assets/icon512_maskable.png", "./.dist/src/assets/icon512_maskable.png");
+// fs.copyFileSync("./src/assets/icon512_rounded.png", "./.dist/src/assets/icon512_rounded.png");
 fs.copyFileSync("./src/assets/manifest.json", "./.dist/src/assets/manifest.json");
 console.log("Temp files copied");
 // execSync('curl -L https://nodejs.org/dist/v22.11.0/node-v22.11.0-x64.exe -o "./dist/node/node-v22.11.0-x64.msi"', { stdio: 'inherit' });
