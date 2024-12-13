@@ -83,9 +83,7 @@
             document.querySelector('[type=range]').value = capture.length;
         };
         window.replayStart = () => {
-            if (!capture.length) {
-                window.replayDone();
-            }
+            if (!capture.length) return window.replayDone();
             const x = capture.shift();
             const y = capture.shift();
             ctx.fillStyle = "#2fffa5";
