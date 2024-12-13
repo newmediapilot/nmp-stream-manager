@@ -16,7 +16,7 @@
         <div class="preview">
             <iframe width="1920"
                     height="1080"
-                    src="{{public_routes.PUBLIC_FEATURE_EMBED}}?featuredName=0#featuredNameLock">
+                    src="{{public_routes.PUBLIC_FEATURE_EMBED}}#off">
             </iframe>
         </div>
         <div class="controls">
@@ -46,17 +46,17 @@
         <div class="preview">
             <iframe width="1920"
                     height="1080"
-                    src="{{public_routes.PUBLIC_BPM_EMBED}}?featuredName=0#featuredNameLock">
+                    src="{{public_routes.PUBLIC_BPM_EMBED}}#off">
             </iframe>
         </div>
         <div class="controls">
+            <label aria-label="move">
+                <input type="range" min="0" max="66" step="3" value="66" name="--_bpm-translateX">
+                <input type="range" min="0" max="66" step="3" value="66" name="--_bpm-translateX" hidden>
+            </label>
             <label aria-label="size">
                 <input type="range" min="33" max="99" step="9" value="33" name="--_bpm-scaleX">
                 <input type="range" min="33" max="99" step="9" value="33" name="--_bpm-scaleX" hidden>
-            </label>
-            <label aria-label="move">
-                <input type="range" min="0" max="66" step="3" value="66" name="--_bpm-translateX">
-                <input type="range" min="0" max="66" step="3" value="66" name="--_bpm-translateY" hidden>
             </label>
             <label aria-label="tilt">
                 <input type="range" min="-3" max="3" step="3" value="0" name="--_bpm-rotateX">
