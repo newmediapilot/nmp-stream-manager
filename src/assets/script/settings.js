@@ -19,7 +19,7 @@ const settingsCreateEditor = (editorEl) => {
             textInputEl.value.trim().length <= 25 // Twitch max
         ) {
             axios
-                .get("/public/config/update", {
+                .get("/api/config/update", {
                     params: {
                         type: "signals:field",
                         payload: JSON.stringify({
@@ -68,7 +68,7 @@ const settingsCreateEditor = (editorEl) => {
                 el.addEventListener("click", (evt) => {
                     emojiWidgetTriggerEl.setAttribute("aria-label", el.getAttribute("aria-label"));
                     emojiElsClick();
-                    axios.get("/public/config/update", {
+                    axios.get("/api/config/update", {
                         params: {
                             type: "signals:field",
                             payload: JSON.stringify({

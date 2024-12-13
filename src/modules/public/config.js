@@ -1,5 +1,5 @@
 // Define public configurations
-const PUBLIC_CONFIGS = {
+const PANEL_CONFIGS = {
     signals: [
         {
             theme: "aqua",
@@ -167,8 +167,8 @@ const initializePublicConfigs = async (type) => {
     const fileName = path.resolve(`.${type}.json`);
     try {
         if (!fs.existsSync(fileName)) {
-            setParam("dashboard_signals_config", PUBLIC_CONFIGS.signals);
-            putConfig("signals", PUBLIC_CONFIGS.signals);
+            setParam("dashboard_signals_config", PANEL_CONFIGS.signals);
+            putConfig("signals", PANEL_CONFIGS.signals);
             console.log2(process.cwd(), "initializePublicConfigs :: new file");
         } else {
             setParam("dashboard_signals_config", getConfig("signals"));
@@ -244,7 +244,7 @@ const publicConfigUpdate = (req, res) => {
     }
 };
 module.exports = {
-    PUBLIC_CONFIGS,
+    PANEL_CONFIGS,
     initializePublicConfigs,
     publicConfigUpdate,
 };

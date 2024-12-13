@@ -2,7 +2,7 @@ const ROUTES = require("../routes");
 requestLogger = (req, res, next) => {
   // Ignore
   if ([
-      ROUTES.PUBLIC_BPM_PING
+      ROUTES.API_BPM_PING
   ].includes(req.path)) {
     next();
     return;

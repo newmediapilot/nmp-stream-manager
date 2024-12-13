@@ -45,13 +45,13 @@ const castModuleInputValues = () => {
         return `${el.name}:${el.value}`;
     }).join(";");
     if (payload) document.head.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
-    payload && payload && axios.get("/public/signal/create", {
+    payload && payload && axios.get("/api/signal/create", {
         params: {
             type: "style:set",
             description: payload,
         },
     });
-    console.log('/public/signal/create/payload', payload)
+    console.log('/api/signal/create/payload', payload)
 };
 const initializeModuleClickTouch = () => {
     document.addEventListener('mousedown', (e) => {
@@ -79,7 +79,7 @@ const sendInputValues = () => {
         .replace(":root{", "")
         .replace(";}", "");
     // TODO: Just use signal
-    payload && axios.get("/public/style/update", {
+    payload && axios.get("/api/style/update", {
         params: {
             type: "style",
             payload

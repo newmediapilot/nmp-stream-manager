@@ -1,27 +1,17 @@
-/**
- * File: src\routes.js
- * Description: Logic and operations for src\routes.js.
- */
-
 const ROUTES = {
-    // Twitch API
+    API_SIGNAL_CREATE: "/api/signal/create",
+    API_CONFIG_UPDATE: "/api/config/update",
+    API_STYLE_UPDATE: "/api/style/update",
+    INDEX: "/",
+    PANEL_DASHBOARD: "/public/dashboard",
+    PANEL_SETTINGS: "/public/settings",
+    PANEL_MODULES: "/public/modules",
+    PANEL_DRAW: "/public/draw",
+    PANEL_FEATURE_EMBED: "/public/feature/embed",
+    PANEL_BPM_EMBED: "/public/bpm/embed",
+    API_BPM_PING: "/public/bpm/ping",
     TWITCH_LOGIN: "/twitch/login",
     TWITCH_REDIRECT_URL: process.env.TWITCH_REDIRECT_URL,
     TWITCH_LOGIN_SUCCESS: process.env.TWITCH_REDIRECT_URL.split('https://localhost')[1],
-    // Public HTML
-    PUBLIC_INDEX: "/",
-    PUBLIC_DASHBOARD: "/public/dashboard",
-    PUBLIC_SETTINGS: "/public/settings",
-    PUBLIC_MODULES: "/public/modules",
-    PUBLIC_DRAW: "/public/draw",
-    // Embed Panels
-    PUBLIC_FEATURE_EMBED: "/public/feature/embed",
-    PUBLIC_BPM_EMBED: "/public/bpm/embed",
-    // Api Calls
-    PUBLIC_BPM_PING: "/public/bpm/ping",
-    PUBLIC_SIGNAL_CREATE: "/public/signal/create",
-    PUBLIC_CONFIG_UPDATE: "/public/config/update",
-    PUBLIC_STYLE_UPDATE: "/public/style/update",
 };
-
 module.exports = ROUTES;

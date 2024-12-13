@@ -28,7 +28,7 @@ const dashboard = () => {
         toggleEl.innerHTML = sortable.option("disabled") ? states[0] : states[1];
         if (sortable.option("disabled")) {
             axios
-                .get("/public/config/update", {
+                .get("/api/config/update", {
                     params: {
                         type,
                         payload: JSON.stringify(payload),

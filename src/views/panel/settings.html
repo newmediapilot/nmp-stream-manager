@@ -70,7 +70,7 @@
     </ul>
 </section>
 <nav>
-    <label onclick="javascript:getURL('{{public_routes.PUBLIC_DASHBOARD}}')" aria-label="🌀"></label>
+    <label onclick="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></label>
 </nav>
 {%endblock%}
 {%block dialogs%}
@@ -84,28 +84,7 @@
     <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').close();">
     </button>
 </dialog>
-<!-- TODO: Make emoji generative -->
-<ul id="emoji-widget">
-    <li aria-label="✨"></li>
-    <li aria-label="📢"></li>
-    <li aria-label="❤"></li>
-    <li aria-label="⏰"></li>
-    <li aria-label="🥊"></li>
-    <li aria-label="🧐"></li>
-    <li aria-label="🎬"></li>
-    <li aria-label="👾"></li>
-    <li aria-label="🌟"></li>
-    <li aria-label="🍕"></li>
-    <li aria-label="🎮"></li>
-    <li aria-label="🔥"></li>
-    <li aria-label="🎧"></li>
-    <li aria-label="💎"></li>
-    <li aria-label="🕹️"></li>
-    <li aria-label="🖥️"></li>
-    <li aria-label="🚀"></li>
-    <li aria-label="🌈"></li>
-    <li aria-label="👑"></li>
-</ul>
+<ul id="emoji-widget">{%for emoji in "emoji_collection"|getParam%}<li aria-label="{{emoji}}"></li>{%endfor%}</ul>
 {%endblock%}
 {%block fscripts%}
 <script defer>

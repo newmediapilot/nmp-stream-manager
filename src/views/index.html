@@ -17,11 +17,12 @@
 <script src="/script/service_worker.js?cb={{cache_buster}}" defer type="text/javascript"></script>
 {%endblock%}
 {%block body%}
-<div class="pages">
-    <iframe src="{{public_routes.PUBLIC_MODULES}}"></iframe>
-    <iframe src="{{public_routes.PUBLIC_DASHBOARD}}"></iframe>
-    <iframe src="{{public_routes.PUBLIC_SETTINGS}}"></iframe>
-</div>
+<main>
+    <iframe src="{{public_routes.PANEL_MODULES}}"></iframe>
+    <iframe src="{{public_routes.PANEL_DASHBOARD}}"></iframe>
+    <iframe src="{{public_routes.PANEL_SETTINGS}}"></iframe>
+    <iframe src="{{public_routes.PANEL_DRAW}}"></iframe>
+</main>
 {%endblock%}
 {%block fscripts%}
 <script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
@@ -31,7 +32,7 @@
     document.addEventListener("DOMContentLoaded", () => initServiceWorker());
     document.addEventListener("DOMContentLoaded", () => {
         let previousPath = null;
-        window.addEventListener('message', function(e) {
+        window.addEventListener('message', function (e) {
             if (e.origin === window.location.origin && e.data.type === "path") {
                 const currentPath = e.data.message;
                 const iframeEl = Array.from(document.body.querySelectorAll(`iframe[src="${currentPath}"]`))[0];
@@ -42,6 +43,7 @@
                     {translateX: `${1 * vw}vw`, translateY: `${0 * vh}vh`},
                     {translateX: `${0 * vw}vw`, translateY: `${0 * vh}vh`},
                     {translateX: `${-1 * vw}vw`, translateY: `${0 * vh}vh`},
+                    {translateX: `${0 * vw}vw`, translateY: `${-1 * vh}vh`},
                 ];
                 // if(previousPath) {
                 //     Array.from(document.body.querySelectorAll("iframe")).forEach((iframe, index) => {
@@ -53,6 +55,8 @@
                 // }
                 previousPath = currentPath;
                 const {translateX, translateY} = translateValues[indexOf];
+
+                console.log('translateValues[indexOf]', translateValues[indexOf]);
                 anime({
                     targets: '.pages',
                     translateX: translateX,

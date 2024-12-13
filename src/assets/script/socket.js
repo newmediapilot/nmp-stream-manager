@@ -24,7 +24,7 @@ const socketEmitStyle = (payload) => {
 // TODO: figure this out
 };
 const socketEmitReload = () => {
-    axios.get("/public/signal/create?type=browser&description=reload");
+    axios.get("/api/signal/create?type=browser&description=reload");
 };
 // Socket will only emit reload for pages which are inactive
 const socketWatchReload = () => {
