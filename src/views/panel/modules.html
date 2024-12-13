@@ -3,7 +3,7 @@
 {%set public_routes = 'public_routes'|getParam%}
 {%block head%}
 <link rel="stylesheet" href="/style/modules.css?cb={{cache_buster}}">
-<style id="public_module_styles">:root{{'{' ~ 'dashboard_signals_config'|getParam ~ '}'}}</style>
+<style id="public_module_styles">:root{{'{' ~ 'public_module_styles'|getParam ~ '}'}}</style>
 {%endblock%}
 {%block body%}
 {%set public_routes = 'public_routes'|getParam%}
