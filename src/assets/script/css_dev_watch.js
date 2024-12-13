@@ -1,7 +1,19 @@
 const cssDevWatch = () => {
-    var observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutationRecord) {
-            console.log('style changed!');
-        });
-    });
+    // const targetNode = document.documentElement;
+    // const config = {
+    //     childList: true,
+    //     attributes: true,
+    //     subtree: true
+    // };
+    // const callback = (mutationsList) => {
+    //     for (const mutation of mutationsList) {
+    //         console.log(`Style changed on element: ${mutation.target.tagName}`);
+    //     }
+    // };
+    // const observer = new MutationObserver(callback);
+    // observer.observe(targetNode, config);
+    // Array.from(document.styleSheets)
+    //     .map(({href, cssRules}) => {
+    //         console.log('styleSheet', href, cssRules);
+    //     });
 };
