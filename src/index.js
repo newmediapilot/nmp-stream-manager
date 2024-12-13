@@ -23,6 +23,7 @@ app.all(ROUTES.PANEL_MODULES, (req, res) => res.render("panel/modules"));
 app.all(ROUTES.PANEL_DRAW, (req, res) => res.render("panel/draw"));
 app.all(ROUTES.PANEL_FEATURE_EMBED, (req, res) => res.render("embed/iframe-twitch"));
 app.all(ROUTES.PANEL_BPM_EMBED, (req, res) => res.render("embed/iframe-bpm"));
+app.all(ROUTES.PANEL_DRAW_EMBED, (req, res) => res.render("embed/iframe-draw"));
 app.all(ROUTES.API_SIGNAL_CREATE, publicSignalCreate);
 app.all(ROUTES.API_CONFIG_UPDATE, publicConfigUpdate);
 app.all(ROUTES.API_STYLE_UPDATE, publicStyleUpdate);
