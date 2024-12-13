@@ -44,6 +44,7 @@ const castModuleInputValues = () => {
     const payload = Array.from(document.body.querySelectorAll('input[type="range"]')).map((el) => {
         return `${el.name}:${el.value}`;
     }).join(";");
+    if (payload) document.head.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
     payload && payload && axios.get("/public/signal/create", {
         params: {
             type: "style:set",

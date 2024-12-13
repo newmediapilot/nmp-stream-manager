@@ -34,8 +34,8 @@
         --_bmp-rotateZ: 0.0;
     }
 </style>
-{%set public_module_styles = ''%}
-<style id="public_module_styles">{{public_module_styles}}</style>
+{%set public_module_styles = 'public_module_styles'|getParam%}
+<style id="public_module_styles">:root{{public_module_styles}}</style>
 <style>
     body {
         perspective: 1920px;

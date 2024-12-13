@@ -6,8 +6,8 @@ const initializePublicStyles = async (type) => {
     try {
         if (!fs.existsSync(path.resolve(`.${type}.css`))) {
             console.log2(process.cwd(), "initializePublicStyles :: new file");
-            setParam("public_module_styles", ':root{--_no-style:1;}');
-            fs.writeFileSync(path.resolve(`.${type}.css`), ':root{--_no-style:1;}', {encoding: "utf-8"});
+            setParam("public_module_styles", '/*--_no-style:1;*/');
+            fs.writeFileSync(path.resolve(`.${type}.css`), '/*--_no-style:1;*/', {encoding: "utf-8"});
         } else {
             setParam("public_module_styles",
                 fs.readFileSync(path.resolve(`.${type}.css`), "utf-8")
@@ -29,9 +29,9 @@ const publicStyleUpdate = (req, res) => {
         const {type, payload} = req.query;
         console.log2(process.cwd(), "publicStyleUpdate", type, payload);
         if ("style" === type) {
-            fs.writeFileSync(path.resolve(`.${type}.css`), `:root{${payload};}`, {encoding: "utf-8"});
-            setParam("public_module_styles", `:root{${payload};}`);
-            console.log2(process.cwd(), "publicStyleUpdate :: style", `:root{${payload};}`);
+            fs.writeFileSync(path.resolve(`.${type}.css`), payload, {encoding: "utf-8"});
+            setParam("public_module_styles", payload);
+            console.log2(process.cwd(), "publicStyleUpdate :: style", payload);
         }
         res.status(200).json({
             message: "Style for " + type + " updated successfully.",
