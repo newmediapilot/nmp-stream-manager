@@ -90,8 +90,8 @@
     border-left: 20px solid rgba(255, 255, 255, 0.4);
     max-width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 100px);
-    grid-template-rows: repeat(2, 100px);
+    grid-template-columns:  [a] 100px [b] 100px [c] 100px [d];
+    grid-template-rows:     [a] 100px [b] 100px [c];
     justify-content: end;
     gap: 10px;
     padding: 10px;
