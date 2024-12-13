@@ -52,16 +52,6 @@ const castModuleInputValues = () => {
         },
     });
     console.log('/public/signal/create/payload', payload)
-    // document.head.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
-    // document.body.querySelectorAll('iframe').forEach(iframe => {
-    //     try {
-    //         iframe && iframe.contentWindow && iframe.contentWindow.document.head.querySelectorAll('#public_module_styles').forEach(el => {
-    //             el.innerHTML = `:root{${payload};}`
-    //         });
-    //     } catch (e) {
-    //     }
-    //     //
-    // });
 };
 const initializeModuleClickTouch = () => {
     document.addEventListener('mousedown', (e) => {
