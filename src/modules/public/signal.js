@@ -35,6 +35,9 @@ async function publicSignalCreate(req, res) {
       if ("reload" === description){
         result = await sendPayload("browser:reload");
       }
+      if ("style" === description){
+        console.log("browser:style");
+      }
     }
     if (!result) {
       isCreating = false;
