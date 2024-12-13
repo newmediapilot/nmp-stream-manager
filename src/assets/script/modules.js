@@ -45,12 +45,12 @@ const castModuleInputValues = () => {
         return `${el.name}:${el.value}`;
     }).join(";");
     if (payload) document.head.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
-    payload && payload && axios.get("/api/signal/create", {
-        params: {
-            type: "style:set",
-            description: payload,
-        },
-    });
+    // payload && payload && axios.get("/api/signal/create", {
+    //     params: {
+    //         type: "style:set",
+    //         description: payload,
+    //     },
+    // });
     console.log('/api/signal/create/payload', payload)
 };
 const initializeModuleClickTouch = () => {
