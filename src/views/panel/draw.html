@@ -15,10 +15,9 @@
 <section class="draw">
     <canvas id="canvas" width="400" height="400"></canvas>
 </section>
-{%include "partials/controls.njk"%}
-{%endblock%}
-{%block dialogs%}
-{%set device_ip = "device_ip"|getParam%}
+<nav>
+    <label onclick="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></label>
+</nav>
 {%endblock%}
 {%block fscripts%}
 <script defer>
