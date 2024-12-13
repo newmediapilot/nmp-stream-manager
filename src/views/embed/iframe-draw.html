@@ -1,0 +1,32 @@
+{%extends "layouts/main.njk"%}
+{%block cdn%}<!-- nocdn -->{%endblock%}
+{%block local%}<!-- nostyle -->{%endblock%}
+{%block head%}
+<script defer crossorigin="anonymous"
+        src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+        type="text/javascript" defer></script>
+<script defer crossorigin="anonymous"
+        src="https://cdn.socket.io/4.0.0/socket.io.min.js"
+        type="text/javascript" defer></script>
+<script defer src="/script/iframe_detect.js?={{cache_buster}}" type="text/javascript"></script>
+<script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
+<link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
+{%endblock%}
+{%block body%}
+<div id="module-container">
+    <div id="draw-embed">
+    </div>
+</div>
+{%endif%}
+{%endfor%}
+{%endblock%}
+{%block fscripts%}
+<script defer>
+    document.addEventListener("DOMContentLoaded", () => iframeDetect());
+    document.addEventListener("DOMContentLoaded", () => socketConnect());
+    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => socketWatchDrawSet((payload) => {
+        console.log("DOMContentLoaded.payload", payload);
+    }));
+</script>
+{%endblock%}
