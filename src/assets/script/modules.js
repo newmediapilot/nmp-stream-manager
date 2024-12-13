@@ -2,9 +2,9 @@ const applyModuleStyles = () => {
     Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
         const {width} = label.getBoundingClientRect();
         console.log('width', width);
-        if (50 === width) label.scrollTo({top: 25, left: 50});
-        if (100 === width) label.scrollTo({top: 25, left: 25});
-        console.log('applyModuleStyles');
+        if (50 === width) label.scrollTo({top: 0, left: 0});
+        if (100 === width) label.scrollTo({top: 0, left: 0});
+        console.log('applyModuleStyles', label);
     });
     // const payload = document.head.querySelector('#public_module_styles').innerHTML;
     // const [formX, formY] = label.children;
@@ -79,12 +79,12 @@ const sendInputValues = () => {
         .replace(":root{", "")
         .replace(";}", "");
     // TODO: Just use signal
-    payload && axios.get("/api/style/update", {
-        params: {
-            type: "style",
-            payload
-        },
-    }).finally(() => {
-        // socketEmitReload();
-    });
+    // payload && axios.get("/api/style/update", {
+    //     params: {
+    //         type: "style",
+    //         payload
+    //     },
+    // }).finally(() => {
+    //     // socketEmitReload();
+    // });
 };
