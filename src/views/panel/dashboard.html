@@ -50,31 +50,31 @@
         document.body.querySelector("#qr-dashboard-dialog").getAttribute("data-url"),
     ));
     document.addEventListener("DOMContentLoaded", () => dashboard());
-    // document.addEventListener("DOMContentLoaded", () => {
-    //     anime({
-    //         targets: "html.iframe .dashboard button",
-    //         duration: 666,
-    //         delay: anime.stagger(11),
-    //         easing: "easeInOutCubic",
-    //         direction: "alternate",
-    //         borderTopWidth: ["20px", "200px"],
-    //         borderBottomWidth: ["20px", "200px"],
-    //         borderLeftWidth: ["20px", "200px"],
-    //         borderRightWidth: ["20px", "200px"],
-    //         borderRadius: ["15px", "30px"]
-    //     });
-    // });
-    // document.addEventListener("DOMContentLoaded", () => {
-    //     anime({
-    //         targets: ".dashboard button",
-    //         duration: 3333,
-    //         delay: anime.stagger(50),
-    //         easing: "easeInElastic(1, .6)",
-    //         filter: "hue-rotate(360deg)",
-    //         loopBegin: function(anim) {
-    //             setTimeout(anim.play, 6666);
-    //         }
-    //     });
-    // });
+    document.addEventListener("DOMContentLoaded", () => {
+        anime({
+            targets: "html.iframe .dashboard button",
+            duration: 666,
+            delay: anime.stagger(11),
+            easing: "easeInOutCubic",
+            direction: "alternate",
+            borderTopWidth: ["20px", "200px"],
+            borderBottomWidth: ["20px", "200px"],
+            borderLeftWidth: ["20px", "200px"],
+            borderRightWidth: ["20px", "200px"],
+            borderRadius: ["15px", "30px"]
+        });
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+        anime({
+            targets: ".dashboard button",
+            duration: 3333,
+            delay: anime.stagger(50),
+            easing: "easeInElastic(1, .6)",
+            filter: "hue-rotate(360deg)",
+            loopBegin: function(anim) {
+                setTimeout(anim.play, 6666);
+            }
+        });
+    });
 </script>
 {%endblock%}
