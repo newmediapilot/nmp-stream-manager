@@ -36,7 +36,7 @@
 {%endblock%}
 {%block body%}
 <section>
-    <canvas id="canvas"></canvas>
+    <canvas></canvas>
     <input disabled type="range" min="0" max="1000" value="max" step="1">
     <button onclick="javascript: document.clearCanvas()" aria-label="🧹"></button>
     <button onclick="javascript: document.sendPayload()" aria-label="📨"></button>
@@ -61,20 +61,19 @@
         document.clearCanvas = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             document.querySelector('input[type=range]').value = document.querySelector('input[type=range]').max;
-            capture = [];
-            payload = [];
         };
         document.sendPayload = () => {
-            window.replayStart();
+            document.replayStart();
             payload && payload && axios.get("/api/signal/create", {
                 params: {
                     type: "draw",
-                    description: payload,
+                    description: payload.join(','),
                 },
             });
         };
-        window.replayDone = () => {
-            console.log('replayDone');
+        document.replayDone = () => {
+            capture = [];
+            payload = [];
         };
         document.drawPixel = (x, y) => {
             ctx.fillStyle = "#ff7b00";
@@ -87,8 +86,7 @@
             payload.push(Math.round(y));
             document.querySelector('[type=range]').value = capture.length;
         };
-        window.replayStart = () => {
-            console.log("document.querySelector('[type=range]').value", document.querySelector('[type=range]').value);
+        document.replayStart = () => {
             if (Number(document.querySelector('[type=range]').value) > 0) {
                 const x = capture.shift();
                 const y = capture.shift();
@@ -98,9 +96,9 @@
                 ctx.fill();
                 document.querySelector('[type=range]').value = capture.length;
                 document.querySelector('[type=range]').disabled = !!capture.length;
-                requestAnimationFrame(window.replayStart);
+                requestAnimationFrame(document.replayStart);
             } else {
-                window.replayDone();
+                document.replayDone();
             }
         };
         window.addEventListener("touchmove", (e) => document.drawPixel(
