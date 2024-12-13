@@ -12,7 +12,6 @@
 <script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
 <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
 <link rel="stylesheet" href="/style/iframe.css?cb={{cache_buster}}">
-{%from "macros/public_module_styles.njk" import public_module_styles%}
 <style>
     #bpm-embed {
         display: flex;
@@ -29,13 +28,14 @@
         --_bpm-translateX: 0.0;
         --_bpm-translateY: 0.0;
         --_bpm-scaleX: 100.0;
-      --_bpm-scaleY: var(--_bpm-scaleX);//100.0;
+        --_bpm-scaleY: var(--_bpm-scaleX);//100.0;
         --_bpm-rotateX: 0.0;
         --_bpm-rotateY: 0.0;
         --_bmp-rotateZ: 0.0;
     }
 </style>
-{{public_module_styles()}}
+{%set public_module_styles = ''%}
+<style id="public_module_styles">{{public_module_styles}}</style>
 <style>
     body {
         perspective: 1920px;

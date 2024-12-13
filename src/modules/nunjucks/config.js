@@ -18,17 +18,13 @@ const configureNunjucks = (app) => {
     express: app,
     noCache: true, // refresh on reload!
   });
-
   nunjucksEnv.addFilter("getParam", getParam);
   nunjucksEnv.addFilter("getAllParams", getAllParams);
   nunjucksEnv.addFilter("urlencode", encodeURIComponent);
   nunjucksEnv.addFilter("generateAssetLinks", generateAssetLinks);
   nunjucksEnv.addFilter("currentTime", () => new Date().getTime().toString());
-
   app.set("view engine", "html");
-
   app.use(express.static("src/assets"));
-
   appRef = app;
 };
 

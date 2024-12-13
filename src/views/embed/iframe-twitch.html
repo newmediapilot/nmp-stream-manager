@@ -13,7 +13,6 @@
 <script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
 <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
 <link rel="stylesheet" href="/style/iframe.css?cb={{cache_buster}}">
-{%from "macros/public_module_styles.njk" import public_module_styles%}
 <style>
     #twitch-embed {
         justify-content: center;
@@ -35,7 +34,8 @@
         --_feat-rotateZ: 0.0;
     }
 </style>
-{{public_module_styles()}}
+{%set public_module_styles = ''%}
+<style id="public_module_styles">{{public_module_styles}}</style>
 <style>
     body {
         perspective: 1920px;

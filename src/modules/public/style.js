@@ -9,6 +9,7 @@ const initializePublicStyles = async (type) => {
         if (!fs.existsSync(fileName)) {
             console.log2(process.cwd(), "initializePublicStyles :: new file");
             putStyle(type, ':root {--_no-style:1;}');
+            setParam("public_module_styles", ':root {--_no-style:1;}');
         } else {
             setParam("public_module_styles", getStyle(type));
             console.log2(process.cwd(), "initializePublicStyles :: load file");
