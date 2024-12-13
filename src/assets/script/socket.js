@@ -20,6 +20,12 @@ const socketWatchFeatureSet = (callback) => {
         payload.startsWith('feature:set:') && callback(payload);
     });
 };
+const socketWatchDrawSet = (callback) => {
+    console.log("socketWatchDrawRecording");
+    $socketIO.on("payload", (payload) => {
+        payload.startsWith('draw:') && callback(payload);
+    });
+};
 const socketEmitReload = () => {
     axios.get("/api/signal/create?type=browser&description=reload");
 };
