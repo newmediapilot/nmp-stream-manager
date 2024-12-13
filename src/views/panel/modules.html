@@ -69,11 +69,13 @@
         </div>
     </div>
 </section>
-{%include "partials/home.njk"%}
+<nav>
+    <label onclick="javascript:getURL('{{ public_routes.PUBLIC_DASHBOARD}}')" aria-label="🌐"></label>
+</nav>
 {%endblock%}
 {%block dialogs%}
 {%set device_ip = "device_ip"|getParam%}
-<dialog id="qr-dashboard-dialog" data-url="https://{{device_ip }}">
+<dialog id="qr-dashboard-dialog" data-url="https://{{device_ip}}">
     <section>
         <h2 aria-label="QR Code Link"></h2>
         <h3 aria-label="This link will open this page on any device on your network"></h3>
