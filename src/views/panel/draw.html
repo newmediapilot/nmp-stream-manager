@@ -37,6 +37,8 @@
 {%block body%}
 <section>
     <canvas id="canvas"></canvas>
+    <input>
+    <button onclick="javascript: document.clearCanvas()">CLEAR</button>
 </section>
 <nav>
     <label onclick="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></label>
@@ -53,8 +55,11 @@
         const canvas = document.querySelector("canvas");
         canvas.width = canvas.getBoundingClientRect().width;
         canvas.height = canvas.getBoundingClientRect().height;
-        const ctx = canvas.getContext("2d");
-        const drawPixel = (x, y) => {
+        const ctx = document.querySelector("canvas").getContext("2d");
+        document.clearCanvas = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+        };
+        document.drawPixel = (x, y) => {
             if (drawing.length >= 1) {
                 const px = drawing[drawing.length - 2];
                 const py = drawing[drawing.length - 1];
@@ -65,12 +70,10 @@
                 ctx.arc(nx, ny, pixelSize / 2, 0, Math.PI * 2, false);
                 ctx.fill();
             }
-            ctx.fillStyle = "#6a82ff";
+            ctx.fillStyle = "#ff7b00";
             ctx.beginPath();
             ctx.arc(x, y, pixelSize / 2, 0, Math.PI * 2, false);
             ctx.fill();
-
-            // Add current coordinates to the drawing array
             drawing.push(x);
             drawing.push(y);
         };
@@ -79,15 +82,15 @@
                 if (!drawing.length) return;
                 const x = drawing.shift();
                 const y = drawing.shift();
-                ctx.fillStyle = "#ffffff";
+                ctx.fillStyle = "#2fffa5";
                 ctx.beginPath();
-                ctx.arc(x, y, pixelSize / 2, 0, Math.PI * 2, false);
+                ctx.arc(x, y, (pixelSize*1.25) / 2, 0, Math.PI * 2, false);
                 ctx.fill();
                 setTimeout(() => requestAnimationFrame(replay), 4);
             };
             requestAnimationFrame(replay);
         });
-        window.addEventListener("touchmove", (e) => drawPixel(
+        window.addEventListener("touchmove", (e) => document.drawPixel(
             e.touches[0].pageX,
             e.touches[0].pageY,
         ));
