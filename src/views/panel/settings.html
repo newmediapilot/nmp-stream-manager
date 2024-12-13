@@ -1,13 +1,13 @@
 {%extends "layouts/main.njk"%}
 {%set cache_buster = "" | currentTime%}
-{%block hscripts%}
+{%block head%}
 <link rel="stylesheet" href="/style/settings.css?cb={{cache_buster}}">
 {%endblock%}
 {%block body%}
 <section class="settings">
     <ul>
         {%set feature_title_set = false%}
-        {%for signal in "dashboard_signals_config" | getParam%}
+        {%for signal in "dashboard_signals_config"|getParam%}
         {%if signal.type == "feature"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="settings-header {{signal.theme}}" aria-label="Featured"></li>
@@ -22,7 +22,7 @@
         {%endif%}
         {%endfor%}
         {%set feature_title_set = false%}
-        {%for signal in "dashboard_signals_config" | getParam%}
+        {%for signal in "dashboard_signals_config"|getParam%}
         {%if signal.type == "mark"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="settings-header {{signal.theme}}" aria-label="Markers"></li>
@@ -37,7 +37,7 @@
         {%endif%}
         {%endfor%}
         {%set feature_title_set = false%}
-        {%for signal in "dashboard_signals_config" | getParam%}
+        {%for signal in "dashboard_signals_config"|getParam%}
         {%if signal.type == "ad"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="settings-header {{signal.theme}}" aria-label="Ads"></li>
@@ -51,7 +51,7 @@
         {%endif%}
         {%endfor%}
         {%set feature_title_set = false%}
-        {%for signal in "dashboard_signals_config" | getParam%}
+        {%for signal in "dashboard_signals_config"|getParam%}
         {%if signal.type == "bpm"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="settings-header {{signal.theme}}" aria-label="BPM"></li>
@@ -71,7 +71,7 @@
 {%include "partials/controls.njk"%}
 {%endblock%}
 {%block dialogs%}
-{%set device_ip = "device_ip" | getParam%}
+{%set device_ip = "device_ip"|getParam%}
 <dialog id="qr-dashboard-dialog" data-url="https://{{device_ip }}">
     <h2 aria-label="QR Code Link"></h2>
     <h3 aria-label="This link will open this page on any device on your network"></h3>

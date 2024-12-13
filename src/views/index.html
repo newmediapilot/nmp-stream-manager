@@ -1,9 +1,9 @@
 {%extends "layouts/main.njk"%}
 {%set cache_buster = "" | currentTime%}
-{%set public_routes = 'public_routes' | getParam%}
+{%set public_routes = 'public_routes'|getParam%}
 {%block cdn%}<!-- noscript -->{%endblock%}
 {%block local%}<!-- nostyle -->{%endblock%}
-{%block hscripts%}
+{%block head%}
 <script defer crossorigin="anonymous"
         src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
         type="text/javascript" defer></script>

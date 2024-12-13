@@ -17,7 +17,7 @@
         <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js" defer crossorigin="anonymous" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" defer crossorigin="anonymous" type="text/javascript"></script>
     {%endblock%}
-    {%for key, value in 'public_routes' | getParam%}
+    {%for key, value in 'public_routes'|getParam%}
         <meta name="{{ key }}" content="{{ value }}">
     {%endfor%}
     {%block local%}
@@ -41,7 +41,7 @@
         <link href="/style/controls.css?cb={{cache_buster}}" rel="stylesheet">
         <link href="/style/dialog.css?cb={{cache_buster}}" rel="stylesheet">
     {%endblock%}
-    {%block hscripts%}{%endblock%}
+    {%block head%}{%endblock%}
 </head>
 <body>
 {%block body%}{%endblock%}
