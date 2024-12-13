@@ -9,10 +9,12 @@
         width: 100vw;
         height: 100vh;
     }
+
     body {
         width: 100vw;
         height: 100vh;
     }
+
     canvas {
         width: 100vw;
         height: 100vw;
@@ -36,6 +38,8 @@
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => {
         const canvas = document.querySelector("canvas");
+        canvas.width = canvas.getBoundingClientRect().width;
+        canvas.height = canvas.getBoundingClientRect().height;
         const pixelSize = 6;
         const drawPixel = (x, y) => {
             canvas.getContext("2d").fillStyle = "#6a82ff";
