@@ -1,5 +1,6 @@
 {%extends "layouts/main.njk"%}
 {%set cache_buster = "" | currentTime%}
+{%set public_routes = 'public_routes'|getParam%}
 {%block head%}
 <link rel="stylesheet" href="/style/settings.css?cb={{cache_buster}}">
 {%endblock%}
@@ -13,10 +14,10 @@
         <li class="settings-header {{signal.theme}}" aria-label="Featured"></li>
         {%endif%}
         <li>
-            <form class="{{signal.theme}}" data-editor-id="{{ loop.index0  }}">
-                <button aria-label="{{ signal.emoji }}"/>
+            <form class="{{signal.theme}}" data-editor-id="{{ loop.index0 }}">
+                <button aria-label="{{ signal.emoji}}"/>
                 </button>
-                <input type="text" value="{{ signal.label }}"/>
+                <input type="text" value="{{ signal.label}}"/>
             </form>
         </li>
         {%endif%}
@@ -28,10 +29,10 @@
         <li class="settings-header {{signal.theme}}" aria-label="Markers"></li>
         {%endif%}
         <li>
-            <form class="{{signal.theme}}" data-editor-id="{{ loop.index0  }}">
-                <button aria-label="{{ signal.emoji }}"/>
+            <form class="{{signal.theme}}" data-editor-id="{{ loop.index0 }}">
+                <button aria-label="{{ signal.emoji}}"/>
                 </button>
-                <input type="text" value="{{ signal.label }}"/>
+                <input type="text" value="{{ signal.label}}"/>
             </form>
         </li>
         {%endif%}
@@ -42,10 +43,10 @@
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="settings-header {{signal.theme}}" aria-label="Ads"></li>
         {%endif%}
-        <form class="{{signal.theme}}" data-editor-id="{{ loop.index0  }}">
-            <button aria-label="{{ signal.emoji }}"/>
+        <form class="{{signal.theme}}" data-editor-id="{{ loop.index0 }}">
+            <button aria-label="{{ signal.emoji}}"/>
             </button>
-            <input type="text" disabled value="{{ signal.label }}"/>
+            <input type="text" disabled value="{{ signal.label}}"/>
         </form>
         </li>
         {%endif%}
@@ -58,21 +59,23 @@
         </li>
         {%endif%}
         <li>
-            <form class="{{signal.theme}}" data-editor-id="{{ loop.index0  }}">
-                <button aria-label="{{ signal.emoji }}"/>
+            <form class="{{signal.theme}}" data-editor-id="{{ loop.index0 }}">
+                <button aria-label="{{ signal.emoji}}"/>
                 </button>
-                <input type="text" value="{{ signal.label }}"/>
+                <input type="text" value="{{ signal.label}}"/>
             </form>
         </li>
         {%endif%}
         {%endfor%}
     </ul>
 </section>
-{%include "partials/home.njk"%}
+<nav>
+    <label onclick="javascript:getURL('{{public_routes.PUBLIC_DASHBOARD}}')" aria-label="🌐"></label>
+</nav>
 {%endblock%}
 {%block dialogs%}
 {%set device_ip = "device_ip"|getParam%}
-<dialog id="qr-dashboard-dialog" data-url="https://{{device_ip }}">
+<dialog id="qr-dashboard-dialog" data-url="https://{{device_ip}}">
     <h2 aria-label="QR Code Link"></h2>
     <h3 aria-label="This link will open this page on any device on your network"></h3>
     <canvas></canvas>
