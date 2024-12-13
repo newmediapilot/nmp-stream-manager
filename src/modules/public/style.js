@@ -1,17 +1,17 @@
 const fs = require("fs");
 const path = require("path");
-const {setParam, getParam} = require("../store/manager");
-
+const {setParam} = require("../store/manager");
 const initializePublicStyles = async (type) => {
     console.log2(process.cwd(), "initializePublicStyles :: start");
-    const fileName = path.resolve(`.${type}.css`);
     try {
-        if (!fs.existsSync(fileName)) {
+        if (!fs.existsSync(path.resolve(`.${type}.css`))) {
             console.log2(process.cwd(), "initializePublicStyles :: new file");
-            putStyle(type, ':root {--_no-style:1;}');
-            setParam("public_module_styles", ':root {--_no-style:1;}');
+            setParam("public_module_styles", ':root{--_no-style:1;}');
+            fs.writeFileSync(path.resolve(`.${type}.css`), ':root{--_no-style:1;}', {encoding: "utf-8"});
         } else {
-            setParam("public_module_styles", getStyle(type));
+            setParam("public_module_styles",
+                fs.readFileSync(path.resolve(`.${type}.css`), "utf-8")
+            );
             console.log2(process.cwd(), "initializePublicStyles :: load file");
         }
         console.log2(process.cwd(), "initializePublicStyles :: success");
@@ -23,39 +23,19 @@ const initializePublicStyles = async (type) => {
         console.log2(process.cwd(), "initializePublicStyles :: done");
     }
 };
-
-const putStyle = (filePath, styleStringCSS) => {
-    const fileName = path.resolve(`.${filePath}.css`);
-    console.log2(process.cwd(),
-        "putStyle :: file:",
-        fileName.substr(-10),
-        ":: contents :",
-        styleStringCSS,
-    );
-    fs.writeFileSync(fileName, styleStringCSS, {encoding: "utf-8"});
-};
-
-// Load style from a file (synchronous)
-const getStyle = (type) => {
-    const fileName = path.resolve(`.${type}.css`);
-    console.log2(process.cwd(), "getStyle :: file:", fileName);
-    return fs.readFileSync(fileName, "utf-8");
-};
-
 // TODO: add validation to prevent non-variables from entering
 const publicStyleUpdate = (req, res) => {
-    const {type, payload} = req.query;
-    console.log2(process.cwd(), "publicStyleUpdate", type, payload);
-    if ("style" === type) {
-        console.log2(process.cwd(), "publicStyleUpdate :: style");
-        const style =`:root{${payload};}`;
-        setParam("public_module_styles", style);
-        putStyle(type, style);
-    }
-    res.status(200).json({
-        message: "Style for " + type + " updated successfully.",
-    });
     try {
+        const {type, payload} = req.query;
+        console.log2(process.cwd(), "publicStyleUpdate", type, payload);
+        if ("style" === type) {
+            fs.writeFileSync(path.resolve(`.${type}.css`), `:root{${payload};}`, {encoding: "utf-8"});
+            setParam("public_module_styles", `:root{${payload};}`);
+            console.log2(process.cwd(), "publicStyleUpdate :: style", `:root{${payload};}`);
+        }
+        res.status(200).json({
+            message: "Style for " + type + " updated successfully.",
+        });
     } catch (error) {
         console.err2(
             process.cwd(),
@@ -63,10 +43,10 @@ const publicStyleUpdate = (req, res) => {
             error.message,
         );
         res.status(500).json({error: error.message});
+    } finally {
+        console.log2(process.cwd(), "Done processing style");
     }
 };
-
-// Exported methods and styles
 module.exports = {
     initializePublicStyles,
     publicStyleUpdate,
