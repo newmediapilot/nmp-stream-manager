@@ -9,22 +9,11 @@
     --grid-template-columns: 2;
     --grid-template-rows: 4;
     grid-template-columns: repeat(var(--grid-template-columns), calc(100% / var(--grid-template-columns)));
-    grid-template-rows: repeat(5, calc(100vh / var(--grid-template-rows)));
+    grid-template-rows: repeat(10, calc(100vh / var(--grid-template-rows)));
     position: relative;
     background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
     transition: padding-right 333ms linear;
     border-radius: 15px;
-}
-
-.dashboard:after {
-    content: "";
-}
-
-html:not(.edit-active) .dashboard:after {
-    width: 100%;
-    height: 130px;
-    background: transparent;
-    display: block;
 }
 
 html:not(.iframe) {
@@ -39,21 +28,6 @@ html:not(.iframe) {
 
 html.edit-active .dashboard {
     padding-right: 50px;
-}
-
-html.edit-active .dashboard:after {
-    width: 50px;
-    height: 200%;
-    margin-top: -50%;
-    background: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(75, 75, 75, 0.8) 8px),
-    repeating-linear-gradient(45deg, rgba(75, 75, 75, 0.8), rgba(0, 0, 0, 0.5) 8px),
-    repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.5), rgba(75, 75, 75, 0.8) 8px),
-    repeating-linear-gradient(-45deg, rgba(75, 75, 75, 0.8), rgba(0, 0, 0, 0.5) 8px);
-    mix-blend-mode: multiply;
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: -1;
 }
 
 .dashboard .button {
