@@ -1,4 +1,4 @@
-{% macro public_module_styles() %}
-    {%set public_module_styles = 'public_module_styles' | getParam %}
-    <style id="public_module_styles">{{ public_module_styles }}</style>
-{% endmacro %}
+{%macro public_module_styles()%}
+    {%set public_module_styles = 'public_module_styles' | getParam%}
+    <style id="public_module_styles">/**{{public_module_styles}}**/</style>
+{%endmacro %}
