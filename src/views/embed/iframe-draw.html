@@ -29,7 +29,10 @@
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => socketWatchDrawSet((payload) => {
-        if (document.$drawing) return;
+        if (document.$drawing) {
+            console.log('busy...');
+            return;
+        }
         document.$drawing = true;
         const pixelSize = 20;
         const playback = payload.split(":")[1].split(",");
@@ -52,6 +55,9 @@
             }
         };
         document.replayStart();
+        document.$drawing = setTimeout(()=>{
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
     }));
 </script>
 {%endblock%}
