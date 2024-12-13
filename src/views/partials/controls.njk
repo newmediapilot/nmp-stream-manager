@@ -1,7 +1,7 @@
 {%set public_routes = 'public_routes'|getParam%}
 <nav>
     <input type="checkbox" id="toggle-nav-show">
-    <label for="toggle-nav-show" aria-label="🌐"></label>
+    <label for="toggle-nav-show" aria-label="🌀"></label>
     <aside class=items">
         <button onclick="javascript:socketEmitReload()" aria-label="Reload"><em aria-label="🔄"></em></button>
         <button onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').showModal()" aria-label="Show QR"><em aria-label="🔗"></em></button>
@@ -10,7 +10,6 @@
         <button onclick="javascript:getURL('{{ public_routes.TWITCH_LOGIN}}')" aria-label="Login"><em aria-label="🔒"></em></button>
         <button onclick="javascript:getURL('{{ public_routes.PUBLIC_MODULES}}')" aria-label="Modules"><em aria-label="🎬"></em></button>
         <button onclick="javascript:getURL('{{ public_routes.PUBLIC_SETTINGS}}')" aria-label="Settings"><em aria-label="⚡"></em></button>
-        <button onclick="javascript:getURL('{{ public_routes.PUBLIC_DASHBOARD}}')" aria-label="Dashboard"><em aria-label="🌀"></em></button>
         <button style="display:none;" id="toggle-edit-dashboard"></button>
     </aside>
 </nav>
