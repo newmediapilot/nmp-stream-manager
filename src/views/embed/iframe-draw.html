@@ -11,10 +11,48 @@
 <script defer src="/script/iframe_detect.js?={{cache_buster}}" type="text/javascript"></script>
 <script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
 <link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
+<link rel="stylesheet" href="/style/iframe.css?cb={{cache_buster}}">
 <style>
     canvas {
+        border: 100px solid red;
         width: 100vw;
-        height: 100vw;
+        height: 100vh;
+        box-sizing: border-box;
+        object-fit: contain;
+    }
+</style>
+<style>
+    :root{
+        --_draw-translateX: 0.0;
+        --_draw-translateY: 0.0;
+        --_draw-scaleX: 100.0;
+        --_draw-scaleY: var(--_draw-scaleX);
+        --_draw-rotateX: 0.0;
+        --_draw-rotateY: 0.0;
+        --_draw-rotateZ: 0.0;
+    }
+</style>
+<style id="public_module_styles">:root{{'{' ~ 'public_module_styles'|getParam ~ '}'}}</style>
+<style>
+    #module-container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    body {
+        perspective: 1920px;
+    }
+    #module-container {
+        /*transform:*/
+                /*translateX(calc(calc(var(--_draw-translateX) * -1%) + 33%))*/
+                /*translateY(calc(calc(var(--_draw-translateY) * -1%) + 33%))*/
+                /*scaleX(calc(var(--_draw-scaleX) * 0.01))*/
+                /*scaleY(calc(var(--_draw-scaleY) * 0.01))*/
+                /*rotateX(calc(var(--_draw-rotateX) * 3.6deg))*/
+                /*rotateY(calc(var(--_draw-rotateY) * 3.6deg))*/
+                /*rotateZ(calc(var(--_draw-rotateZ) * 3.6deg));*/
     }
 </style>
 {%endblock%}
@@ -28,9 +66,13 @@
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
+        let style = payload.split('style:set:')[1];
+        document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
+    }));
     document.addEventListener("DOMContentLoaded", () => socketWatchDrawSet((payload) => {
         if (document.$drawing) {
-            console.log('busy...');
+            console.log('Busy...');
             return;
         }
         document.$drawing = true;
@@ -40,6 +82,20 @@
         canvas.width = canvas.getBoundingClientRect().width;
         canvas.height = canvas.getBoundingClientRect().height;
         const ctx = document.querySelector("canvas").getContext("2d");
+        if (canvas.width > canvas.height) {
+            canvas.width = canvas.height;
+        }
+        if (canvas.height > canvas.width) {
+            canvas.height = canvas.width;
+        }
+        canvas.style.width = `${canvas.width}px`;
+        canvas.style.height = `${canvas.height}px`;
+        document.replayDone = () => {
+            document.$drawing = setTimeout(() => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                document.$drawing = false;
+            }, 5000);
+        };
         document.replayStart = () => {
             if (playback.length) {
                 const x = playback.shift();
@@ -50,14 +106,10 @@
                 ctx.fill();
                 requestAnimationFrame(document.replayStart);
             } else {
-                document.$drawing = false;
-                clearTimeout(document.$drawing);
+                document.replayDone();
             }
         };
         document.replayStart();
-        document.$drawing = setTimeout(()=>{
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        });
     }));
 </script>
 {%endblock%}
