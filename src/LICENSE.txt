@@ -1,0 +1,33 @@
+The external dependencies used in this project, including those loaded via CDN and listed in the package.json file, are licensed under the MIT License. This includes libraries for UI, real-time communication, and various utilities.
+
+Below is a summary of the external dependencies used:
+
+External Dependencies:
+Axios (for HTTP requests)
+
+CDN Link: Axios
+License: MIT
+Socket.io (for real-time communication)
+
+CDN Link: Socket.io
+License: MIT
+Anime.js (for animations)
+
+CDN Link: Anime.js
+License: MIT
+Clipboard.js (for clipboard operations)
+
+CDN Link: Clipboard.js
+License: MIT
+Sortable.js (for sortable lists)
+
+CDN Link: Sortable.js
+License: MIT
+Qrcode.js (for QR code generation)
+
+CDN Link: Qrcode.js
+License: MIT
+License Explanation:
+The MIT License allows you to freely use, modify, and distribute the code, including in proprietary software, as long as the original copyright notice and license text are included. The MIT license is very permissive, with the only requirement being that the license must be included in copies of the software or substantial portions of it.
+
+By using the external dependencies listed above, this project complies with the MIT License, ensuring that users and contributors are free to use the software for any purpose, with no warranty provided.
