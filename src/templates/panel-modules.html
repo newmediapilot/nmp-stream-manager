@@ -7,7 +7,7 @@
 {%block body%}
 {%set public_routes = 'public_routes'|getParam%}
 <section class="modules">
-    <div class="module aqua">
+    <article class="module aqua">
         <div class="title" aria-label="Featured">
             <button onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').showModal()"
                     aria-label="🔗"></button>
@@ -36,8 +36,8 @@
                 <input type="range" min="-6" max="6" step="3" value="0" name="--_feat-rotateZ" hidden>
             </label>
         </div>
-    </div>
-    <div class="module bloodorange">
+    </article>
+    <article class="module bloodorange">
         <div class="title" aria-label="BPM">
             <button onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').showModal()"
                     aria-label="🔗"></button>
@@ -66,7 +66,7 @@
                 <input type="range" min="-6" max="6" step="3" value="0" name="--_bpm-rotateZ" hidden>
             </label>
         </div>
-    </div>
+    </article>
 </section>
 {%include "_home.njk"%}
 {%endblock%}
