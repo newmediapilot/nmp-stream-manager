@@ -93,9 +93,9 @@ Object.keys(data)
 fs.copyFileSync(".env", "./.dist/.env");
 fs.copyFileSync("./localhost.key", "./.dist/localhost.key");
 fs.copyFileSync("./localhost.crt", "./.dist/localhost.crt");
-// fs.copyFileSync("./src/assets/icon512_maskable.png", "./.dist/src/assets/icon512_maskable.png");
-// fs.copyFileSync("./src/assets/icon512_rounded.png", "./.dist/src/assets/icon512_rounded.png");
-fs.copyFileSync("./src/assets/manifest.json", "./.dist/src/assets/manifest.json");
+// fs.copyFileSync("./src/client/icon512_maskable.png", "./.dist/src/client/icon512_maskable.png");
+// fs.copyFileSync("./src/client/icon512_rounded.png", "./.dist/src/client/icon512_rounded.png");
+fs.copyFileSync("./src/client/manifest.json", "./.dist/src/client/manifest.json");
 console.log("Temp files copied");
 // execSync('curl -L https://nodejs.org/dist/v22.11.0/node-v22.11.0-x64.exe -o "./dist/node/node-v22.11.0-x64.msi"', { stdio: 'inherit' });
 console.log("Installing packages");
