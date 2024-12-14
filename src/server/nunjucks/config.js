@@ -9,7 +9,6 @@ const configureNunjucks = (app) => {
     });
     nunjucksEnv.addFilter("getParam", getParam);
     nunjucksEnv.addFilter("getAllParams", getAllParams);
-    nunjucksEnv.addFilter("urlencode", encodeURIComponent);
     nunjucksEnv.addFilter("cacheBuster", () => `?a=${new Date().getTime()}`);
     app.set("view engine", "html");
     app.use(express.static("src/client"));
