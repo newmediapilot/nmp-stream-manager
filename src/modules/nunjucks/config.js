@@ -13,7 +13,7 @@ const { generateAssetLinks } = require("../nunjucks/preload.filter");
  * @param {object} app - The Express app instance.
  */
 const configureNunjucks = (app) => {
-  const nunjucksEnv = nunjucks.configure("src/views", {
+  const nunjucksEnv = nunjucks.configure("src/templates", {
     autoescape: true,
     express: app,
     noCache: true, // refresh on reload!
