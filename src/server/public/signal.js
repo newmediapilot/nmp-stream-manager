@@ -2,7 +2,7 @@ const {twitchMarkerCreate} = require("../twitch/marker");
 const {twitchMessageCreate} = require("../twitch/message");
 const {twitchAdCreate} = require("../twitch/ads");
 const {sendPayload} = require("../helper/socket");
-const {getbpmRateMessage} = require("../sensor/listen");
+const {getbpmRateMessage} = require("../bpm/listen");
 let isCreating = false;
 async function publicSignalCreate(req, res) {
     if (isCreating) {

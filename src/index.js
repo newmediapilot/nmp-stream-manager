@@ -7,7 +7,7 @@ const {startServices} = require("./server/start");
 const {publicSignalCreate} = require("./server/public/signal");
 const {publicConfigUpdate} = require("./server/public/config");
 const {publicStyleUpdate} = require("./server/public/style");
-const {publicBpmPing} = require("./server/sensor/ping");
+const {publicBpmPing} = require("./server/bpm/ping");
 const {twitchLogin, twitchLoginSuccess} = require("./server/twitch/login");
 const app = express();
 app.use(logger);

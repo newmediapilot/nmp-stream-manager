@@ -1,5 +1,5 @@
 const { getSecret } = require("../store/manager");
-const { getbpmRateMessage } = require("../sensor/listen");
+const { getbpmRateMessage } = require("../bpm/listen");
 const { twitchAdCreate } = require("./ads");
 const { twitchClipCreate } = require("./clip");
 const { twitchTwipCreate } = require("../combo/twip");
