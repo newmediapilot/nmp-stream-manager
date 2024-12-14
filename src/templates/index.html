@@ -1,7 +1,7 @@
 {%extends "main.njk"%}
 {%set cache_buster = "" | currentTime%}
 {%set public_routes = 'public_routes'|getParam%}
-{%block cdn%}<!-- noscript -->{%endblock%}
+{%block cdn%}{%endblock%}
 {%block local%}{%endblock%}}
 {%block head%}
 <script defer crossorigin="anonymous"
