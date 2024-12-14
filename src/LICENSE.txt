@@ -1,33 +1,26 @@
-The external dependencies used in this project, including those loaded via CDN and listed in the package.json file, are licensed under the MIT License. This includes libraries for UI, real-time communication, and various utilities.
+Demo Version License Agreement
+Copyright (c) [year] [company]
 
-Below is a summary of the external dependencies used:
+By downloading and using this demo version of the software (the "Software"), you agree to the following terms:
 
-External Dependencies:
-Axios (for HTTP requests)
+1. License Grant
+You are granted a non-exclusive, non-transferable license to use the Software as-is, for personal or professional purposes. You are free to share the Software with others, but you may not sell the Software or any part of it. You may modify, decompile, redistribute, or use the Software however you choose, with no restrictions.
 
-CDN Link: Axios
-License: MIT
-Socket.io (for real-time communication)
+2. No Warranty or Guarantee
+The Software is provided as-is, without any warranty or guarantee of any kind, express or implied. This includes, but is not limited to, warranties of merchantability, fitness for a particular purpose, and non-infringement. We make no guarantees that the Software will work as expected on your system, nor do we provide any support or maintenance.
 
-CDN Link: Socket.io
-License: MIT
-Anime.js (for animations)
+3. Expiration and Updates
+The demo version of the Software will expire within 24 hours of downloading. While the application will continue to work after the expiration, future versions of the Software may differ from the current version. The Software does not auto-update, and updates are not guaranteed or promised.
 
-CDN Link: Anime.js
-License: MIT
-Clipboard.js (for clipboard operations)
+4. System Requirements
+The Software requires Node.js 20+ and a reliable internet connection to operate. If your computer cannot run Node.js 20+ or is unable to connect sufficiently to the web, the Software will not function properly.
 
-CDN Link: Clipboard.js
-License: MIT
-Sortable.js (for sortable lists)
+5. No Hidden Mechanisms or Tracking
+This Software does not use any technology beyond what is provided by Node.js, the WebKit browser, and your network connection. There are no hidden mechanisms to analyze, track, or collect any user data. The Software simply acts as an interface, sending signals to pages, which interact with each other. Nothing is tracked or analyzed, and this will never change.
 
-CDN Link: Sortable.js
-License: MIT
-Qrcode.js (for QR code generation)
+6. Ownership
+The Software remains the intellectual property of [Your Name or Company]. By using this Software, you acknowledge that you do not own the Software but are granted a license to use it under the terms specified in this agreement.
 
-CDN Link: Qrcode.js
-License: MIT
-License Explanation:
-The MIT License allows you to freely use, modify, and distribute the code, including in proprietary software, as long as the original copyright notice and license text are included. The MIT license is very permissive, with the only requirement being that the license must be included in copies of the software or substantial portions of it.
+7. No Support or Maintenance
+The Software is a labour of love and is intended for entertainment purposes only. We do not provide technical support, updates, or maintenance for the demo version.
 
-By using the external dependencies listed above, this project complies with the MIT License, ensuring that users and contributors are free to use the software for any purpose, with no warranty provided.
