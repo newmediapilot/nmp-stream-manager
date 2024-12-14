@@ -2,7 +2,7 @@
 {%set cache_buster = "" | currentTime%}
 {%set public_routes = "public_routes"|getParam%}
 {%block head%}
-<link rel="stylesheet" href="/style/dashboard.css?cb={{cache_buster}}">
+<link rel="stylesheet" href="../../client/style/dashboard.css?cb={{cache_buster}}">
 {%endblock%}
 {%block body%}
 <!-- index.njk -->
@@ -72,7 +72,7 @@
             delay: anime.stagger(50),
             easing: "easeInElastic(1, .6)",
             filter: "hue-rotate(360deg)",
-            loopBegin: function(anim) {
+            loopBegin: function (anim) {
                 setTimeout(anim.play, 6666);
             }
         });
