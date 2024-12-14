@@ -1,9 +1,8 @@
-{%extends "layouts/main.njk"%}
+{%extends "main.njk"%}
 {%set cache_buster = "" | currentTime%}
 {%set public_routes = "public_routes"|getParam%}
 {%block head%}
-<script defer type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+<script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js?cb={{cache_buster}}"></script>
 <style>
     html {
         width: 100vw;

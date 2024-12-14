@@ -1,8 +1,8 @@
-{%extends "layouts/main.njk"%}
+{%extends "main.njk"%}
 {%set cache_buster = "" | currentTime%}
 {%set public_routes = 'public_routes'|getParam%}
 {%block head%}
-<link rel="stylesheet" href="/style/settings.css?cb={{cache_buster}}">
+<link rel="stylesheet" href="../../client/style/settings.css?cb={{cache_buster}}">
 {%endblock%}
 {%block body%}
 <section class="settings">
@@ -15,8 +15,7 @@
         {%endif%}
         <li>
             <form class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
-                <button aria-label="{{signal.emoji}}"/>
-                </button>
+                <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
             </form>
         </li>
@@ -30,8 +29,7 @@
         {%endif%}
         <li>
             <form class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
-                <button aria-label="{{signal.emoji}}"/>
-                </button>
+                <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
             </form>
         </li>
@@ -44,8 +42,7 @@
         <li class="settings-header {{signal.theme}}" aria-label="Ads"></li>
         {%endif%}
         <form class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
-            <button aria-label="{{signal.emoji}}"/>
-            </button>
+            <button aria-label="{{signal.emoji}}"></button>
             <input type="text" disabled value="{{signal.label}}"/>
         </form>
         </li>
@@ -60,8 +57,7 @@
         {%endif%}
         <li>
             <form class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
-                <button aria-label="{{signal.emoji}}"/>
-                </button>
+                <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
             </form>
         </li>
@@ -84,7 +80,7 @@
     <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').close();">
     </button>
 </dialog>
-<ul id="emoji-widget">{%for emoji in "emoji_collection"|getParam%}<li aria-label="{{emoji}}"></li>{%endfor%}</ul>
+{%include "partials/emoji_widget.njk"%}
 {%endblock%}
 {%block fscripts%}
 <script defer>

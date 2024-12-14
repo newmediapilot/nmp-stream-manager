@@ -1,0 +1,5 @@
+<ul id="emoji-widget">
+    {% for emoji in "emoji_collection"|getParam %}
+        <li aria-label="{{ emoji }}"></li>
+    {% endfor %}
+</ul>
