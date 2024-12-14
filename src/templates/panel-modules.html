@@ -1,9 +1,8 @@
 {%extends "main.njk"%}
-{%set cache_buster = "" | currentTime%}
 {%set public_routes = 'public_routes'|getParam%}
 {%block head%}
-<link rel="stylesheet" href="/style/modules.css?cb={{cache_buster}}">
-<style id="public_module_styles">:root{{'{' ~ 'public_module_styles'|getParam ~ '}'}}</style>
+<link rel="stylesheet" href="../client/style/modules.css#{{cacheBuster}}">
+{%include "_style.njk"%}
 {%endblock%}
 {%block body%}
 {%set public_routes = 'public_routes'|getParam%}
@@ -69,9 +68,7 @@
         </div>
     </div>
 </section>
-<nav>
-    <label onclick="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></label>
-</nav>
+{%include "_home.njk"%}
 {%endblock%}
 {%block dialogs%}
 {%set device_ip = "device_ip"|getParam%}

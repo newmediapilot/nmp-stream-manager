@@ -1,8 +1,9 @@
 {%extends "main.njk"%}
-{%set cache_buster = "" | currentTime%}
+{%set device_ip = "device_ip"|getParam%}
 {%set public_routes = "public_routes"|getParam%}
 {%block head%}
-<link rel="stylesheet" href="../../client/style/dashboard.css?cb={{cache_buster}}">
+<link rel="stylesheet" href="../client/style/dashboard.css#{{cacheBuster}}">
+{%include "_style.njk"%}
 {%endblock%}
 {%block body%}
 <section class="dashboard">
@@ -25,10 +26,9 @@
     </div>
     {%endfor%}
 </section>
-{%include "partials/controls.njk"%}
+{%include "_controls.njk"%}
 {%endblock%}
 {%block dialogs%}
-{%set device_ip = "device_ip"|getParam%}
 <dialog id="qr-dashboard-dialog" data-url="https://{{device_ip}}">
     <h2 aria-label="QR Code Link"></h2>
     <h3 aria-label="This link will open this page on any device on your network"></h3>

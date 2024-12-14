@@ -1,20 +1,13 @@
 {%extends "main.njk"%}
-{%set cache_buster = "" | currentTime%}
 {%set public_routes = 'public_routes'|getParam%}
 {%block cdn%}{%endblock%}
 {%block local%}{%endblock%}}
 {%block head%}
-<script crossorigin="anonymous"
-        src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
-        type="text/javascript" defer></script>
-<script crossorigin="anonymous"
-        src="https://cdn.socket.io/4.0.0/socket.io.min.js"
-        type="text/javascript" defer></script>
-<script crossorigin="anonymous"
-        src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"
-        type="text/javascript" defer></script>
-<link rel="stylesheet" href="/style/index.css?cb={{cache_buster}}">
-<script src="/script/service_worker.js?cb={{cache_buster}}" defer type="text/javascript"></script>
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js#{{cacheBuster}}" type="text/javascript" defer></script>
+<script crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js#{{cacheBuster}}" type="text/javascript" defer></script>
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js#{{cacheBuster}}" type="text/javascript" defer></script>
+<link href="../client/style/index.css#{{cacheBuster}}" rel="stylesheet">
+<script src="../client/script/service_worker.js#{{cacheBuster}}" defer type="text/javascript"></script>
 {%endblock%}
 {%block body%}
 <main>
@@ -25,9 +18,9 @@
 </main>
 {%endblock%}
 {%block fscripts%}
-<script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
-<script defer src="/script/detect_press_hold.js?={{cache_buster}}" type="text/javascript"></script>
-<script defer src="/script/debounce_function.js?={{cache_buster}}" type="text/javascript"></script>
+<script defer src="../client/script/socket.js#{{cacheBuster}}" type="text/javascript"></script>
+<script defer src="../client/script/detect_press_hold.js#{{cacheBuster}}" type="text/javascript"></script>
+<script defer src="../client/script/debounce_function.js#{{cacheBuster}}" type="text/javascript"></script>
 <script defer>
     document.addEventListener("DOMContentLoaded", () => initServiceWorker());
     document.addEventListener("DOMContentLoaded", () => {
@@ -53,9 +46,7 @@
                     translateY: translateY,
                     duration: 333,
                     easing: 'linear',
-                    complete: () => {
-                        // console.log('done');
-                    }
+                    // complete
                 });
             }
         });

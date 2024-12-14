@@ -1,8 +1,7 @@
 {%extends "main.njk"%}
-{%set cache_buster = "" | currentTime%}
 {%set public_routes = 'public_routes'|getParam%}
 {%block head%}
-<link rel="stylesheet" href="../../client/style/settings.css?cb={{cache_buster}}">
+<link rel="stylesheet" href="../client/style/settings.css#{{cacheBuster}}">
 {%endblock%}
 {%block body%}
 <section class="settings">
@@ -65,9 +64,7 @@
         {%endfor%}
     </ul>
 </section>
-<nav>
-    <label onclick="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></label>
-</nav>
+{%include "_home.njk"%}
 {%endblock%}
 {%block dialogs%}
 {%set device_ip = "device_ip"|getParam%}
@@ -80,7 +77,7 @@
     <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').close();">
     </button>
 </dialog>
-{%include "partials/emoji_widget.njk"%}
+{%include "_emoji.njk"%}
 {%endblock%}
 {%block fscripts%}
 <script defer>

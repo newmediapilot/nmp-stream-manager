@@ -1,8 +1,7 @@
 {%extends "main.njk"%}
-{%set cache_buster = "" | currentTime%}
 {%set public_routes = "public_routes"|getParam%}
 {%block head%}
-<script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js?cb={{cache_buster}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js#{{cacheBuster}}" type="text/javascript" defer></script>
 <style>
     html {
         width: 100vw;
@@ -40,9 +39,7 @@
     <button onclick="javascript: document.clearCanvas()" aria-label="🧹"></button>
     <button onclick="javascript: document.sendPayload()" aria-label="📨"></button>
 </section>
-<nav>
-    <label onclick="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></label>
-</nav>
+{%include "_home.njk"%}
 {%endblock%}
 {%block fscripts%}
 <script defer>

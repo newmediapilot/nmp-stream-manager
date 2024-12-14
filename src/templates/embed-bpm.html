@@ -2,16 +2,12 @@
 {%block cdn%}{%endblock%}
 {%block local%}{%endblock%}}
 {%block head%}
-<script crossorigin="anonymous"
-        src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
-        type="text/javascript" defer></script>
-<script crossorigin="anonymous"
-        src="https://cdn.socket.io/4.0.0/socket.io.min.js"
-        type="text/javascript" defer></script>
-<script defer src="../../client/script/iframe_detect.js?={{getTime}}" type="text/javascript"></script>
-<script defer src="../../client/script/socket.js?={{getTime}}" type="text/javascript"></script>
-<link rel="stylesheet" href="../../client/style/base.css?cb={{getTime}}">
-<link rel="stylesheet" href="../../client/style/iframe.css?cb={{getTime}}">
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="text/javascript" defer></script>
+<script crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" type="text/javascript" defer></script>
+<script defer src="../client/script/iframe_detect.js#{{cacheBuster}}" type="text/javascript"></script>
+<script defer src="../client/script/socket.js#{{cacheBuster}}" type="text/javascript"></script>
+<link rel="stylesheet" href="../client/style/base.css#{{cacheBuster}}">
+<link rel="stylesheet" href="../client/style/iframe.css#{{cacheBuster}}">
 <style>
     #bpm-embed {
         display: flex;
@@ -24,7 +20,7 @@
     }
 </style>
 <style>
-    :root{
+    :root {
         --_bpm-translateX: 0.0;
         --_bpm-translateY: 0.0;
         --_bpm-scaleX: 100.0;
@@ -34,20 +30,14 @@
         --_bpm-rotateZ: 0.0;
     }
 </style>
-{%include "partials/public_module_styles.njk"%}
+{%include "_style.njk"%}
 <style>
     body {
         perspective: 1920px;
     }
+
     #module-container {
-        transform:
-                translateX(calc(calc(var(--_bpm-translateX) * -1%) + 33%))
-                translateY(calc(calc(var(--_bpm-translateY) * -1%) + 33%))
-                scaleX(calc(var(--_bpm-scaleX) * 0.01))
-                scaleY(calc(var(--_bpm-scaleY) * 0.01))
-                rotateX(calc(var(--_bpm-rotateX) * 3.6deg))
-                rotateY(calc(var(--_bpm-rotateY) * 3.6deg))
-                rotateZ(calc(var(--_bpm-rotateZ) * 3.6deg));
+        transform: translateX(calc(calc(var(--_bpm-translateX) * -1%) + 33%)) translateY(calc(calc(var(--_bpm-translateY) * -1%) + 33%)) scaleX(calc(var(--_bpm-scaleX) * 0.01)) scaleY(calc(var(--_bpm-scaleY) * 0.01)) rotateX(calc(var(--_bpm-rotateX) * 3.6deg)) rotateY(calc(var(--_bpm-rotateY) * 3.6deg)) rotateZ(calc(var(--_bpm-rotateZ) * 3.6deg));
     }
 </style>
 {%endblock%}
