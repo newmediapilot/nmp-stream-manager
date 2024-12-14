@@ -3,7 +3,7 @@ const scrollSnap = (containerEl) => {
         window.location.hash &&
         window.location.hash.startsWith('#scrollSnap-')
     ) {
-        console.log('scrollSnap restore to ', window.location.hash);
+        console.log('scrollSnap :: restore to', window.location.hash);
         containerEl.scrollTo(0, Number(window.location.hash.split('#scrollSnap-')[1]));
     }
     containerEl.addEventListener('scroll', debounceFunction(() => {

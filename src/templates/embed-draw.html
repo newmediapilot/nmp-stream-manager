@@ -62,7 +62,7 @@
     }));
     document.addEventListener("DOMContentLoaded", () => socketWatchDrawSet((payload) => {
         if (document.$drawing) {
-            console.log('Busy...');
+            console.log('socketWatchDrawSet busy...');
             return;
         }
         document.$drawing = true;

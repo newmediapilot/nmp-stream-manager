@@ -89,7 +89,6 @@ const settingsCreateEditor = (editorEl) => {
 const settings = () => {
     document.body.querySelectorAll('form').forEach((form) => {
         form.addEventListener('submit', (e) => {
-            console.log('form');
             e.preventDefault()
         });
     });

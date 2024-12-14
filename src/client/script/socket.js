@@ -3,25 +3,25 @@ const socketConnect = () => {
     if ($socketIO) return;
     $socketIO = io();
     $socketIO.on("connect_error", (err) =>
-        console.error("Socket connection error:", err),
+        console.error("socketConnect :: connection error:", err),
     );
-    $socketIO.on("connect", () => console.log("Connected to the socket server"));
-    console.log("Socket connection start");
+    $socketIO.on("connect", () => console.log("socketConnect :: connected to the socket server"));
+    console.log("socketConnect :: socket connection start");
 };
 const socketWatchStyle = (callback) => {
-    console.log("socketWatchStyle");
+    console.log("socketConnect :: socketWatchStyle");
     $socketIO.on("payload", (payload) => {
         payload.startsWith('style:set:') && callback(payload);
     });
 };
 const socketWatchFeatureSet = (callback) => {
-    console.log("socketWatchFeatureSet");
+    console.log("socketConnect :: socketWatchFeatureSet");
     $socketIO.on("payload", (payload) => {
         payload.startsWith('feature:set:') && callback(payload);
     });
 };
 const socketWatchDrawSet = (callback) => {
-    console.log("socketWatchDrawRecording");
+    console.log("socketConnect :: socketWatchDrawRecording");
     $socketIO.on("payload", (payload) => {
         payload.startsWith('draw:') && callback(payload);
     });
@@ -31,7 +31,7 @@ const socketEmitReload = () => {
 };
 // Socket will only emit reload for pages which are inactive
 const socketWatchReload = () => {
-    console.log("socketWatchReload");
+    console.log("socketConnect :: socketWatchReload");
     const timeout = 3000;
     let to = null;
     const setFocusToken = () => {

@@ -27,6 +27,13 @@ const DASHBOARD_BUTTON_CONFIG = {
             theme: "purple",
             type: "mark",
             description: "match:checkpoint",
+        },
+        {
+            emoji: "👉",
+            label: "Announcement",
+            theme: "green",
+            type: "message",
+            description: "message:announce",
         }
     ],
 };

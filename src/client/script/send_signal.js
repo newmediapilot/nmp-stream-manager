@@ -3,12 +3,12 @@ const sendSignal = (el) => {
     const dataHref = el.getAttribute("data-href");
     const getRes = axios.get(dataHref);
     getRes.then((getRes) => {
-        console.log("Success:", getRes);
+        console.log("sendSignal ::", getRes);
     });
     getRes.catch((error) => {
-        console.log("Error:", error.response.data);
+        console.log("sendSignal :: error:", error.response.data);
     });
     getRes.finally(() => {
-        console.info("Complete.");
+        console.info("sendSignal :: complete");
     });
 };
