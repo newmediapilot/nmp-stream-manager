@@ -2,16 +2,16 @@
 {%block cdn%}{%endblock%}
 {%block local%}{%endblock%}}
 {%block head%}
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js#{{cacheBuster}}" type="text/javascript" crossorigin="anonymous" defer></script>
-<script src="https://cdn.socket.io/4.0.0/socket.io.min.js#{{cacheBuster}}" type="text/javascript" crossorigin="anonymous" defer></script>
-<script src="../client/script/iframe_detect.js#{{cacheBuster}}" type="text/javascript" defer></script>
-<script src="../client/script/socket.js#{{cacheBuster}}" type="text/javascript" defer></script>
-<link rel="stylesheet" href="../client/style/base.css#{{cacheBuster}}">
-<link rel="stylesheet" href="../client/style/iframe.css#{{cacheBuster}}">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?{{cacheBuster}}" type="text/javascript" crossorigin="anonymous" defer></script>
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js?{{cacheBuster}}" type="text/javascript" crossorigin="anonymous" defer></script>
+<script src="../client/script/iframe_detect.js?{{cacheBuster}}" type="text/javascript" defer></script>
+<script src="../client/script/socket.js?{{cacheBuster}}" type="text/javascript" defer></script>
+<link rel="stylesheet" href="../client/style/base.css?{{cacheBuster}}">
+<link rel="stylesheet" href="../client/style/iframe.css?{{cacheBuster}}">
 <style>
     canvas {
-        width: 100vw;
-        height: 100vh;
+        width: 50vw;
+        height: 50vw;
         box-sizing: border-box;
         object-fit: contain;
     }
