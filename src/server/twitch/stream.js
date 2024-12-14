@@ -1,16 +1,6 @@
-/**
- * File: src\server\twitch\stream.js
- * Description: Logic and operations for src\server\twitch\stream.js.
- */
-
 const tmi = require("tmi.js");
 const { getSecret } = require("../store/manager");
 const { parseCommand } = require("./commands");
-
-/**
- * Initializes and starts listening for Twitch chat messages.
- * @returns {Promise<void>}
- */
 async function watchMessages() {
   const token = getSecret("twitch_access_token");
   const channel = getSecret("twitch_channel_id");
@@ -24,7 +14,6 @@ async function watchMessages() {
     },
     channels: [channel],
   });
-
   client
     .connect()
     .then(() =>
@@ -37,11 +26,9 @@ async function watchMessages() {
     .catch((err) =>
       console.log2(process.cwd(), "Error connecting to Twitch chat:", err),
     );
-
   client.on("message", parseCommand);
   client.on("disconnected", (reason) =>
     console.log2(process.cwd(), "Disconnected from Twitch chat:", reason),
   );
 }
-
 module.exports = { watchMessages };

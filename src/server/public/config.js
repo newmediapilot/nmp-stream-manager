@@ -1,4 +1,3 @@
-// Define public configurations
 const PANEL_CONFIGS = {
     signals: [
         {

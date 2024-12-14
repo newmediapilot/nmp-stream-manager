@@ -1,4 +1,3 @@
-
 const { getSecret } = require("../store/manager");
 const axios = require("axios");
 const { twitchMessageCreate } = require("./message");

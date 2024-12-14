@@ -1,10 +1,4 @@
 const { getParam } = require("../store/manager");
-
-/**
- * API Endpoint to return the current bpm rate.
- * @param {Object} req - The Express request object.
- * @param {Object} res - The Express response object.
- */
 function publicBpmPing(req, res) {
   const bpmRate = getParam("sensor_bpm_rate");
   if (bpmRate !== undefined && bpmRate !== null) {
@@ -13,5 +7,4 @@ function publicBpmPing(req, res) {
     res.send("null");
   }
 }
-
 module.exports = { publicBpmPing };

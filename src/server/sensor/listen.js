@@ -1,10 +1,5 @@
-/**
- * File: src\server\sensor\data.js
- * Description: Logic and operations for src\server\sensor\data.js.
- */
 const { setParam, getParam } = require("../store/manager");
 const { spawn } = require("child_process");
-
 async function createbpmRateServer(
   exePath = ".bin/hds_desktop_windows.exe",
 ) {
@@ -21,14 +16,10 @@ async function createbpmRateServer(
       !isNaN(bpmRate) &&
       setParam("sensor_bpm_rate", bpmRate, --MAX_REPORT > 0);
   });
-
-  // Clean up
   const shutdown = () => {
     child.kill("SIGTERM");
     process.exit();
   };
-
-  // Shutdown listeners
   process.on("exit", shutdown); // exit
   process.on("SIGINT", shutdown); // Ctrl+C
   process.on("SIGTERM", shutdown); // signals
@@ -36,21 +27,13 @@ async function createbpmRateServer(
     "uncaughtException",
     (err) => console.error("Uncaught exception:", err) && shutdown(),
   );
-
-  // Errors
   child.on("error", (err) =>
     console.error(`Failed to start process: ${err.message}`),
   );
   child.on("close", (code) => console.log2(`Process exited with code ${code}`));
 }
-
-/**
- * Generates bpm rate message based on sensor_bpm_rate
- * @returns {string}
- */
 const getbpmRateMessage = () => {
   const bpmRate = getParam("sensor_bpm_rate");
   return bpmRate ? `🤖 💜 ${bpmRate}` : `🤖 💜 Dunno.`;
 };
-
 module.exports = { createbpmRateServer, getbpmRateMessage };

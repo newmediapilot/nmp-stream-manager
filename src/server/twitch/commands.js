@@ -1,7 +1,3 @@
-/**
- * File: src\server\twitch\commands.js
- * Description: Logic and operations for src\server\twitch\commands.js.
- */
 const { getSecret } = require("../store/manager");
 const { getbpmRateMessage } = require("../sensor/listen");
 const { twitchAdCreate } = require("./ads");
@@ -11,18 +7,9 @@ const { twitterTweet } = require("../twitter/tweet");
 const { twitchMessageCreate } = require("./message");
 const { twitchMarkerCreate } = require("./marker");
 const { setBroadcastTitle } = require("./broadcast");
-
-/**
- * Feeds the command to the appropriate handler.
- * @param channel
- * @param tags
- * @param message
- */
 async function parseCommand(channel, tags, message) {
   console.log2(process.cwd(), "Message: ", message);
-
   const isBroadcaster = tags["user-id"] === getSecret("twitch_broadcaster_id");
-
   const COMMANDS = {
     test: "test/",
     ad: "ad/",
@@ -34,10 +21,8 @@ async function parseCommand(channel, tags, message) {
     title: "title/",
     bpm: "bpm/",
   };
-
   let currentCommand;
   let currentMessage;
-
   // Catch command messages
   for (const [key, value] of Object.entries(COMMANDS)) {
     if (message.startsWith(value)) {
@@ -46,7 +31,6 @@ async function parseCommand(channel, tags, message) {
       break;
     }
   }
-
   // Exit early if no commands
   if (!currentCommand) {
     console.warn2(
@@ -65,9 +49,7 @@ async function parseCommand(channel, tags, message) {
       currentMessage,
     );
   }
-
   // Public commands
-
   if (currentCommand === COMMANDS.shout) {
     const username = currentMessage;
     const twitchURL = `https://twitch.tv/${username}`;
@@ -81,7 +63,6 @@ async function parseCommand(channel, tags, message) {
     await twitchMessageCreate(getbpmRateMessage());
     return true;
   }
-
   // Broadcaster commands
   if (isBroadcaster) {
     console.log2(
@@ -91,7 +72,6 @@ async function parseCommand(channel, tags, message) {
       "with message",
       currentMessage,
     );
-
     if (currentCommand === COMMANDS.test) {
       await twitchMessageCreate("🤖 Testing beep boop!");
     }
@@ -113,7 +93,6 @@ async function parseCommand(channel, tags, message) {
     if (currentCommand === COMMANDS.title) {
       await setBroadcastTitle(currentMessage);
     }
-
     return true;
   }
 }

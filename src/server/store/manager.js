@@ -37,7 +37,6 @@ function setParam(key, value, log = true) {
   paramsState[key] = value;
   log && console.log2(process.cwd(), "Set", key, "::", value);
 }
-
 function getAllParams() {
   return paramsState;
 }

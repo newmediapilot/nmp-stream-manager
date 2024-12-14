@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="../../client/style/dashboard.css?cb={{cache_buster}}">
 {%endblock%}
 {%block body%}
-<!-- index.njk -->
 <section class="dashboard">
     {%for config in "dashboard_signals_config"|getParam%}
     {%if config.type == "feature"%}

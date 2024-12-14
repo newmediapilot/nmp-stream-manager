@@ -4,7 +4,6 @@ const {twitchAdCreate} = require("../twitch/ads");
 const {sendPayload} = require("../helper/socket");
 const {getbpmRateMessage} = require("../sensor/listen");
 let isCreating = false;
-
 async function publicSignalCreate(req, res) {
     if (isCreating) {
         return res.status(400).send("Please stop spamming buttons.");
