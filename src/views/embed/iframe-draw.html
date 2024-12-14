@@ -21,7 +21,7 @@
     }
 </style>
 <style>
-    :root{
+    :root {
         --_draw-translateX: 0.0;
         --_draw-translateY: 0.0;
         --_draw-scaleX: 100.0;
@@ -31,7 +31,7 @@
         --_draw-rotateZ: 0.0;
     }
 </style>
-<style id="public_module_styles">:root{{'{' ~ 'public_module_styles'|getParam ~ '}'}}</style>
+{%include "partials/public_module_styles.njk"%}
 <style>
     #module-container {
         width: 100vw;
@@ -40,18 +40,13 @@
         justify-content: center;
         align-items: center;
     }
+
     body {
         perspective: 1920px;
     }
+
     #module-container {
-        /*transform:*/
-                /*translateX(calc(calc(var(--_draw-translateX) * -1%) + 33%))*/
-                /*translateY(calc(calc(var(--_draw-translateY) * -1%) + 33%))*/
-                /*scaleX(calc(var(--_draw-scaleX) * 0.01))*/
-                /*scaleY(calc(var(--_draw-scaleY) * 0.01))*/
-                /*rotateX(calc(var(--_draw-rotateX) * 3.6deg))*/
-                /*rotateY(calc(var(--_draw-rotateY) * 3.6deg))*/
-                /*rotateZ(calc(var(--_draw-rotateZ) * 3.6deg));*/
+        transform: translateX(calc(calc(var(--_draw-translateX) * -1%) + 33%)) translateY(calc(calc(var(--_draw-translateY) * -1%) + 33%)) scaleX(calc(var(--_draw-scaleX) * 0.01)) scaleY(calc(var(--_draw-scaleY) * 0.01)) rotateX(calc(var(--_draw-rotateX) * 3.6deg)) rotateY(calc(var(--_draw-rotateY) * 3.6deg)) rotateZ(calc(var(--_draw-rotateZ) * 3.6deg));
     }
 </style>
 {%endblock%}
