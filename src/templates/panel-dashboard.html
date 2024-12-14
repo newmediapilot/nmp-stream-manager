@@ -18,12 +18,12 @@
     {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~
     config.description%}
     {%endif%}
-    <div class="button button-{{config.theme}}">
+    <article class="button button-{{config.theme}}">
         <button data-href="{{data_href}}" onclick="javascript:sendSignal(this)">
             <label aria-label="{{config.emoji}}"></label>
             <label aria-label="{{config.label}}"></label>
         </button>
-    </div>
+    </article>
     {%endfor%}
 </section>
 {%include "_controls.njk"%}
