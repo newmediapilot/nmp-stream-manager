@@ -1,12 +1,16 @@
 const paths = (req, res, next) => {
     const originalSend = res.send;
     res.send = (body) => {
-        if (req.path.startsWith("/public/") && typeof body === 'string') {
-            body = body.replace(/\.\.\/client/g, (m)=>{
-
-                console.log('m', m);
-
-                return "";
+        if (
+            (
+                req.path === '/' ||
+                req.path.startsWith('/public/')
+            ) &&
+            typeof body === 'string'
+        ) {
+            const matched = body.match(new RegExp("../client", "gm"));
+            matched && matched.forEach(match => {
+                body = body.replace(match, "");
             });
         }
         originalSend.call(res, body);
