@@ -32,6 +32,10 @@ let RANDOM = [
     'stop_pushing_me_around', 'get_in_line_cartman', 'stop_talking_kyle'
 ];
 console.log('RANDOM', RANDOM.length);
+
+
+
+
 jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/gm, "");
 // const {ROUTES} = require('../src/routes');
 // Object.keys(ROUTES)
@@ -40,56 +44,18 @@ jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/gm, "");
 // });
 // TODO: Encode here and send as string to compiled
 // atob(`${btoa("addEventListener")}`);
+
+
+
+
 if (RANDOM.length === 0) console.error("We ran out of keys") && process.exit(1);
 console.log('RANDOM used', RANDOM.length);
 fs.rmSync("./.dist", {recursive: true, force: true});
 const data = JSON.parse(jsonDataString);
 Object.keys(data)
-    .map(path => {
-        const writePath = path.split("\\").slice(0, -1).join("\\");
-        const fullPath = `./.dist/${writePath}`;
-        if (!fs.existsSync(fullPath)) {
-            fs.mkdirSync(fullPath, {recursive: true});
-            console.log('Directory created successfully', fullPath);
-        }
-        return path;
-    })
-    .map(path => {
-        data[path] = data[path].replace(/<script src="https:\/\/cdn.*>/g, (m) => {
-            const src = m.match(/src="([^"]+)"/)[1];
-            const res = request('GET', src);
-            return `<script data-path="${src}" defer>${res.getBody('utf8')}</script>`;
-        });
-        return path;
-    })
-    .map(path => {
-        data[path] = data[path].replace(/<script src="\/script.*>/g, (m) => {
-            const src = m.match(/src="([^"]+)"/)[1].split('/').join('');
-            const dPath = Object.keys(data).find(key => {
-                const pathKeys = key.split('\\').join('');
-                return pathKeys.endsWith(src);
-            });
-            return `<script data-path="${src}" defer>${data[dPath]}</script>`
-        });
-        return path;
-    })
-    .map(path => {
-        data[path] = data[path].replace(/<link href="\/style.*>/g, (m) => {
-            const hrefKeys = m.match(/href="([^"]+)"/)[1].split('/').join('');
-            const dPath = Object.keys(data).find(key => {
-                const pathKeys = key.split('\\').join('');
-                return pathKeys.endsWith(hrefKeys);
-            });
-            return `<style data-path="${hrefKeys}">${data[dPath]}</style>`
-        });
-        return path;
-    })
-    .map(path => {
-        const fullPath = `./.dist/${path}`;
-        const content = data[path];
-        fs.writeFileSync(fullPath, content, {encoding: "utf-8"});
-        return path;
-    });
+    .map(path => path)
+    .map(path => { console.log(path, data[path]);return path; })
+    .map(path => fs.writeFileSync(`./.dist/${path}`, JSON.stringify(data[path]), {encoding: "utf-8"}));
 fs.copyFileSync(".env", "./.dist/.env");
 fs.copyFileSync("./localhost.key", "./.dist/localhost.key");
 fs.copyFileSync("./localhost.crt", "./.dist/localhost.crt");
