@@ -1,18 +1,14 @@
 {%extends "layouts/main.njk"%}
-{%block cdn%}<!-- nocdn -->{%endblock%}
-{%block local%}<!-- nostyle -->{%endblock%}
+{%block cdn%}{%endblock%}
+{%block local%}{%endblock%}}
 {%block head%}
-<script defer crossorigin="anonymous"
-        src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
-        type="text/javascript" defer></script>
-<script defer crossorigin="anonymous"
-        src="https://cdn.socket.io/4.0.0/socket.io.min.js"
-        type="text/javascript" defer></script>
-<script defer src="/script/get_url.js?={{cache_buster}}" type="text/javascript"></script>
-<script defer src="/script/iframe_detect.js?={{cache_buster}}" type="text/javascript"></script>
-<script defer src="/script/socket.js?={{cache_buster}}" type="text/javascript"></script>
-<link rel="stylesheet" href="/style/base.css?cb={{cache_buster}}">
-<link rel="stylesheet" href="/style/iframe.css?cb={{cache_buster}}">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="text/javascript" crossorigin="anonymous" defer></script>
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js" type="text/javascript" crossorigin="anonymous" defer></script>
+<script src="../../assets/script/get_url.js?={{cache_buster}}" type="text/javascript" defer></script>
+<script src="../../assets/script/iframe_detect.js?={{cache_buster}}" type="text/javascript" defer></script>
+<script src="../../assets/script/socket.js?={{cache_buster}}" type="text/javascript" defer></script>
+<link rel="stylesheet" href="../../assets/style/base.css?cb={{cache_buster}}">
+<link rel="stylesheet" href="../../assets/style/iframe.css?cb={{cache_buster}}">
 <style>
     #twitch-embed {
         justify-content: center;
