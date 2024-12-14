@@ -1,4 +1,4 @@
-{%extends "layouts/main.njk"%}
+{%extends "main.njk"%}
 {%set cache_buster = "" | currentTime%}
 {%set public_routes = "public_routes"|getParam%}
 {%block head%}
@@ -6,7 +6,6 @@
 {%endblock%}
 {%block body%}
 <!-- index.njk -->
-{% include "_partial.njk" with { title: "Hello", message: "This is a message from the main template." } %}
 <section class="dashboard">
     {%for config in "dashboard_signals_config"|getParam%}
     {%if config.type == "feature"%}
