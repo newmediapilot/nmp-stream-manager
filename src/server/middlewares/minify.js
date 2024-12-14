@@ -1,5 +1,5 @@
 // const {minify} = require('html-minifier-terser');
-// const {getParam} = require("./modules/store/manager");
+// const {getParam} = require("./server/store/manager");
 const minify = (req, res, next) => {
     // const originalSend = res.send;
     // res.send = (body) => {

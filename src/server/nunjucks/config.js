@@ -1,6 +1,6 @@
 /**
- * File: src\modules\nunjucks\config.js
- * Description: Logic and operations for src\modules\nunjucks\config.js.
+ * File: src\server\nunjucks\config.js
+ * Description: Logic and operations for src\server\nunjucks\config.js.
  */
 
 const nunjucks = require("nunjucks");

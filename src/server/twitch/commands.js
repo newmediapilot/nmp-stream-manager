@@ -1,6 +1,6 @@
 /**
- * File: src\modules\twitch\commands.js
- * Description: Logic and operations for src\modules\twitch\commands.js.
+ * File: src\server\twitch\commands.js
+ * Description: Logic and operations for src\server\twitch\commands.js.
  */
 const { getSecret } = require("../store/manager");
 const { getbpmRateMessage } = require("../sensor/listen");

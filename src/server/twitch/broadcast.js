@@ -1,6 +1,6 @@
 /**
- * File: src\modules\twitch\broadcast.js
- * Description: Logic and operations for src\modules\twitch\broadcast.js.
+ * File: src\server\twitch\broadcast.js
+ * Description: Logic and operations for src\server\twitch\broadcast.js.
  */
 
 const axios = require("axios");

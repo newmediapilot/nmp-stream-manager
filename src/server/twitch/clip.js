@@ -1,6 +1,6 @@
 /**
- * File: src\modules\twitch\clip.js
- * Description: Logic and operations for src\modules\twitch\clip.js.
+ * File: src\server\twitch\clip.js
+ * Description: Logic and operations for src\server\twitch\clip.js.
  */
 
 const axios = require("axios");

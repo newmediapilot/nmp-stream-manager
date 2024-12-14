@@ -1,11 +1,11 @@
 /**
- * File: src\modules\twitch\login.js
- * Description: Logic and operations for src\modules\twitch\login.js.
+ * File: src\server\twitch\login.js
+ * Description: Logic and operations for src\server\twitch\login.js.
  */
 
 /**
- * File: src\modules\twitch\login.js
- * Description: This file contains logic for managing src\modules\twitch\login operations.
+ * File: src\server\twitch\login.js
+ * Description: This file contains logic for managing src\server\twitch\login operations.
  * Usage: Import relevant methods/functions as required.
  */
 

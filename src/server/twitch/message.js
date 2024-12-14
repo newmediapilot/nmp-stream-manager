@@ -1,6 +1,6 @@
 /**
- * File: src\modules\twitch\message.js
- * Description: Logic and operations for src\modules\twitch\message.js.
+ * File: src\server\twitch\message.js
+ * Description: Logic and operations for src\server\twitch\message.js.
  */
 
 const axios = require("axios");

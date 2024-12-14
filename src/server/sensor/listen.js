@@ -1,6 +1,6 @@
 /**
- * File: src\modules\sensor\data.js
- * Description: Logic and operations for src\modules\sensor\data.js.
+ * File: src\server\sensor\data.js
+ * Description: Logic and operations for src\server\sensor\data.js.
  */
 const { setParam, getParam } = require("../store/manager");
 const { spawn } = require("child_process");

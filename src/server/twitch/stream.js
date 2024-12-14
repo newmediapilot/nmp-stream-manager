@@ -1,6 +1,6 @@
 /**
- * File: src\modules\twitch\stream.js
- * Description: Logic and operations for src\modules\twitch\stream.js.
+ * File: src\server\twitch\stream.js
+ * Description: Logic and operations for src\server\twitch\stream.js.
  */
 
 const tmi = require("tmi.js");

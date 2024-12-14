@@ -1,6 +1,6 @@
 /**
- * File: src\modules\twitch\marker.js
- * Description: Logic and operations for src\modules\twitch\marker.js.
+ * File: src\server\twitch\marker.js
+ * Description: Logic and operations for src\server\twitch\marker.js.
  */
 
 const axios = require("axios");
