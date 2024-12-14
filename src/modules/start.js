@@ -1,4 +1,4 @@
-require("../console"); // Set up console, keep!
+require("../console");
 const fs = require("fs");
 const https = require("https");
 const { getIp } = require("./helper/ip");
@@ -7,7 +7,7 @@ const { configureNunjucks } = require("./nunjucks/config");
 const { createbpmRateServer } = require("./sensor/listen");
 const { initializePublicConfigs } = require("./public/config");
 const { initializePublicStyles } = require("./public/style");
-const { configureSocket } = require("./helper/socket"); // Use configureSocket for socket setup
+const { configureSocket } = require("./helper/socket");
 const ROUTES = require("./routes");
 async function startServices(app) {
   try {
