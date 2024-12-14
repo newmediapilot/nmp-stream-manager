@@ -62,6 +62,7 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             document.querySelector('input[type=range]').value = document.querySelector('input[type=range]').max;
             document.querySelector('[type=range]').value = 0;
+            document.clearMemory();
         };
         document.sendPayload = () => {
             document.replayStart();
@@ -72,7 +73,7 @@
                 },
             });
         };
-        document.replayDone = () => {
+        document.clearMemory = () => {
             capture = [];
             payload = [];
         };
@@ -101,7 +102,7 @@
                 });
                 requestAnimationFrame(document.replayStart);
             } else {
-                document.replayDone();
+                document.clearMemory();
             }
         };
         window.addEventListener("touchmove", (e) => document.drawPixel(
