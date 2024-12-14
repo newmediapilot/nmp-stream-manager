@@ -1,11 +1,11 @@
 const fs = require('fs');
-const {execSync} = require('child_process');
 const request = require('sync-request');
-// Compile and prepare files
+const {execSync} = require('child_process');
+execSync("rm -rf ./node_modules");
+execSync("npm install");
 execSync("node ./compiler/combine.js");
-let jsonDataString = fs.readFileSync("./.combined.json", "utf-8");
-// Clean the content
-let RANDOM = [
+let data = JSON.parse(fs.readFileSync("./.combined.json", "utf-8"));
+let tokens = [
     'respect_my_authority', 'you_bastard', 'dont_tell_me_what_to_do',
     'im_not_your_dad', 'screw_you_guys', 'carmen_is_a_genius',
     'i_love_cheesy_puffs', 'cartman_is_a_jerk', 'shut_up_kyle',
@@ -31,36 +31,24 @@ let RANDOM = [
     'he_ate_my_parents', 'this_is_your_brain', 'my_cheese_is_cold',
     'stop_pushing_me_around', 'get_in_line_cartman', 'stop_talking_kyle'
 ];
-console.log('RANDOM', RANDOM.length);
-
-
-
-
-jsonDataString = jsonDataString.replace(/\?cb={{cache_buster}}/gm, "");
-// const {ROUTES} = require('../src/routes');
-// Object.keys(ROUTES)
-//     .forEach(route => {
-//     jsonDataString = jsonDataString.replace(new RegExp(route, 'gm'), RANDOM.pop());
-// });
-// TODO: Encode here and send as string to compiled
-// atob(`${btoa("addEventListener")}`);
-
-
-
-
-if (RANDOM.length === 0) console.error("We ran out of keys") && process.exit(1);
-console.log('RANDOM used', RANDOM.length);
 fs.rmSync("./.dist", {recursive: true, force: true});
-const data = JSON.parse(jsonDataString);
-Object.keys(data)
-    .map(path => path)
-    .map(path => { console.log(path, data[path]);return path; })
-    .map(path => fs.writeFileSync(`./.dist/${path}`, JSON.stringify(data[path]), {encoding: "utf-8"}));
+Object.keys(data).reduce((a, b) => {
+    // console.log('previousValue', b.split("\\").slice(0, -1).join("\\"));
+    // `./dist${b.split("\\").slice(0, -1).join("\\")}`
+});
+process.exit(0);
+Object.keys(data).map(path => {
+    // fs.writeFileSync(
+    //     `./.dist/${path.split('\\').slice(0, -1).join('\\')}`, JSON.stringify(data[path]),
+    //     {encoding: "utf-8"}
+    // );
+    return path;
+});
 fs.copyFileSync(".env", "./.dist/.env");
 fs.copyFileSync("./localhost.key", "./.dist/localhost.key");
 fs.copyFileSync("./localhost.crt", "./.dist/localhost.crt");
-// fs.copyFileSync("./src/client/icon512_maskable.png", "./.dist/src/client/icon512_maskable.png");
-// fs.copyFileSync("./src/client/icon512_rounded.png", "./.dist/src/client/icon512_rounded.png");
+fs.copyFileSync("./src/client/icon512_maskable.png", "./.dist/src/client/icon512_maskable.png");
+fs.copyFileSync("./src/client/icon512_rounded.png", "./.dist/src/client/icon512_rounded.png");
 fs.copyFileSync("./src/client/manifest.json", "./.dist/src/client/manifest.json");
 console.log("Temp files copied");
 // execSync('curl -L https://nodejs.org/dist/v22.11.0/node-v22.11.0-x64.exe -o "./dist/node/node-v22.11.0-x64.msi"', { stdio: 'inherit' });
