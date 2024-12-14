@@ -1,3 +1,12 @@
+body {
+    overflow: hidden !important;
+    background: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    perspective: 1920px;
+}
+
 @keyframes wave {
     0% {
         background-position: 0 0;
