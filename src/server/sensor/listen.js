@@ -3,10 +3,8 @@ const { spawn } = require("child_process");
 async function createbpmRateServer(
   exePath = ".bin/hds_desktop_windows.exe",
 ) {
-  let MAX_REPORT = 5; // Don't keep logging
+  let MAX_REPORT = 5;
   const child = spawn(exePath, [], { detached: false });
-
-  // Capture log and save sensor_bpm_rate
   child.stdout.on("data", (data) => {
     const log = data.toString();
     const pref = "Received data: bpmRate:";
