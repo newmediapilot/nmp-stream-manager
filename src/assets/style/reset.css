@@ -2,17 +2,21 @@
     user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    border: none
+    border: none;
 }
+
 *:focus {
     outline: none;
 }
+
 *:focus-visible {
     outline: none;
 }
+
 body {
     -webkit-tap-highlight-color: transparent;
 }
+
 input, button, select, textarea {
     border: none;
     outline: none;
@@ -24,10 +28,12 @@ input, button, select, textarea {
     margin: 0;
     box-shadow: none;
 }
+
 img, a {
     -webkit-user-drag: none;
     user-drag: none;
 }
+
 button {
     cursor: pointer;
 }
