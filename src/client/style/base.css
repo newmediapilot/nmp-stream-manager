@@ -48,3 +48,8 @@ section {
 *[aria-label]:before {
     content: attr(aria-label);
 }
+
+html.reduced-motion * {
+    animation: none !important;
+    transition: none !important;
+}
