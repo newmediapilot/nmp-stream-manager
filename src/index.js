@@ -1,9 +1,9 @@
 require("dotenv").config();
 const ROUTES = require("./modules/routes");
 const express = require("express");
-const {requestLogger} = require("./modules/logger");
-const {minify} = require("./modules/minify");
-const {cache} = require("./modules/cache");
+const {requestLogger} = require("./modules/middlewares/logger");
+const {minify} = require("./modules/middlewares/minify");
+const {cache} = require("./modules/middlewares/cache");
 const {startServices} = require("./modules/start");
 const {publicSignalCreate} = require("./modules/public/signal");
 const {publicConfigUpdate} = require("./modules/public/config");

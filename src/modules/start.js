@@ -1,4 +1,4 @@
-require("./console"); // Set up console, keep!
+require("../console"); // Set up console, keep!
 const fs = require("fs");
 const https = require("https");
 const { getIp } = require("./helper/ip");

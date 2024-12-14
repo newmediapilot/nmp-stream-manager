@@ -24,7 +24,7 @@ const configureNunjucks = (app) => {
   nunjucksEnv.addFilter("generateAssetLinks", generateAssetLinks);
   nunjucksEnv.addFilter("currentTime", () => new Date().getTime().toString());
   app.set("view engine", "html");
-  app.use(express.static("src/assets"));
+  app.use(express.static("src/client"));
   appRef = app;
 };
 
