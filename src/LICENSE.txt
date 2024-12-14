@@ -1,5 +1,5 @@
 Demo Version License Agreement
-Copyright (c) [year] [company]
+Copyright (c) 2077 🕹
 
 By downloading and using this demo version of the software (the "Software"), you agree to the following terms:
 
@@ -19,7 +19,7 @@ The Software requires Node.js 20+ and a reliable internet connection to operate.
 This Software does not use any technology beyond what is provided by Node.js, the WebKit browser, and your network connection. There are no hidden mechanisms to analyze, track, or collect any user data. The Software simply acts as an interface, sending signals to pages, which interact with each other. Nothing is tracked or analyzed, and this will never change.
 
 6. Ownership
-The Software remains the intellectual property of [Your Name or Company]. By using this Software, you acknowledge that you do not own the Software but are granted a license to use it under the terms specified in this agreement.
+The Software remains the sole intellectual property of 🕹. By using this Software, you acknowledge that you do not own the Software but are granted a license to use it under the terms specified in this agreement.
 
 7. No Support or Maintenance
 The Software is a labour of love and is intended for entertainment purposes only. We do not provide technical support, updates, or maintenance for the demo version.
