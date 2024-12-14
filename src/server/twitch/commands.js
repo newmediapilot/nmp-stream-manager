@@ -58,7 +58,6 @@ async function parseCommand(channel, tags, message) {
     );
     return true;
   }
-
   if (currentCommand === COMMANDS.bpm) {
     await twitchMessageCreate(getbpmRateMessage());
     return true;

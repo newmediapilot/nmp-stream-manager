@@ -1,38 +1,9 @@
-const PANEL_CONFIGS = {
+const DASHBOARD_BUTTON_CONFIG = {
     signals: [
         {
             theme: "aqua",
             type: "feature",
             description: "feature:set",
-            wait: "700",
-            emoji: "👉",
-            label: "aaknot",
-        }, {
-            theme: "aqua",
-            type: "feature",
-            description: "feature:set",
-            wait: "700",
-            emoji: "👉",
-            label: "aaknot",
-        }, {
-            theme: "aqua",
-            type: "feature",
-            description: "feature:set",
-            wait: "700",
-            emoji: "👉",
-            label: "aaknot",
-        }, {
-            theme: "aqua",
-            type: "feature",
-            description: "feature:set",
-            wait: "700",
-            emoji: "👉",
-            label: "aaknot",
-        }, {
-            theme: "aqua",
-            type: "feature",
-            description: "feature:set",
-            wait: "700",
             emoji: "👉",
             label: "aaknot",
         },
@@ -40,39 +11,6 @@ const PANEL_CONFIGS = {
             theme: "orange",
             type: "ad",
             description: "30",
-            wait: "30000",
-            emoji: "👉",
-            label: "30s",
-        },
-        {
-            theme: "orange",
-            type: "ad",
-            description: "30",
-            wait: "30000",
-            emoji: "👉",
-            label: "30s",
-        },
-        {
-            theme: "orange",
-            type: "ad",
-            description: "30",
-            wait: "30000",
-            emoji: "👉",
-            label: "30s",
-        },
-        {
-            theme: "orange",
-            type: "ad",
-            description: "30",
-            wait: "30000",
-            emoji: "👉",
-            label: "30s",
-        },
-        {
-            theme: "orange",
-            type: "ad",
-            description: "30",
-            wait: "30000",
             emoji: "👉",
             label: "30s",
         },
@@ -80,39 +18,6 @@ const PANEL_CONFIGS = {
             theme: "bloodorange",
             type: "bpm",
             description: "bpm",
-            wait: "700",
-            emoji: "❤",
-            label: "BPM",
-        },
-        {
-            theme: "bloodorange",
-            type: "bpm",
-            description: "bpm",
-            wait: "700",
-            emoji: "❤",
-            label: "BPM",
-        },
-        {
-            theme: "bloodorange",
-            type: "bpm",
-            description: "bpm",
-            wait: "700",
-            emoji: "❤",
-            label: "BPM",
-        },
-        {
-            theme: "bloodorange",
-            type: "bpm",
-            description: "bpm",
-            wait: "700",
-            emoji: "❤",
-            label: "BPM",
-        },
-        {
-            theme: "bloodorange",
-            type: "bpm",
-            description: "bpm",
-            wait: "700",
             emoji: "❤",
             label: "BPM",
         },
@@ -120,39 +25,13 @@ const PANEL_CONFIGS = {
             theme: "purple",
             type: "mark",
             description: "match:checkpoint",
-            wait: "700",
             emoji: "👉",
             label: "Ping",
         },
         {
             theme: "purple",
             type: "mark",
-            description: "match:checkpoint",
-            wait: "700",
-            emoji: "👉",
-            label: "Ping",
-        },
-        {
-            theme: "purple",
-            type: "mark",
-            description: "match:checkpoint",
-            wait: "700",
-            emoji: "👉",
-            label: "Ping",
-        },
-        {
-            theme: "purple",
-            type: "mark",
-            description: "match:checkpoint",
-            wait: "700",
-            emoji: "👉",
-            label: "Ping",
-        },
-        {
-            theme: "purple",
-            type: "mark",
-            description: "match:checkpoint",
-            wait: "700",
+            description: "chat:announcement",
             emoji: "👉",
             label: "Ping",
         },
@@ -166,8 +45,8 @@ const initializePublicConfigs = async (type) => {
     const fileName = path.resolve(`.${type}.json`);
     try {
         if (!fs.existsSync(fileName)) {
-            setParam("dashboard_signals_config", PANEL_CONFIGS.signals);
-            putConfig("signals", PANEL_CONFIGS.signals);
+            setParam("dashboard_signals_config", DASHBOARD_BUTTON_CONFIG.signals);
+            putConfig("signals", DASHBOARD_BUTTON_CONFIG.signals);
             console.log2(process.cwd(), "initializePublicConfigs :: new file");
         } else {
             setParam("dashboard_signals_config", getConfig("signals"));
@@ -243,7 +122,7 @@ const publicConfigUpdate = (req, res) => {
     }
 };
 module.exports = {
-    PANEL_CONFIGS,
+    DASHBOARD_BUTTON_CONFIG,
     initializePublicConfigs,
     publicConfigUpdate,
 };

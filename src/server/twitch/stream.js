@@ -4,7 +4,6 @@ const { parseCommand } = require("./commands");
 async function watchMessages() {
   const token = getSecret("twitch_access_token");
   const channel = getSecret("twitch_channel_id");
-
   const client = new tmi.Client({
     options: { debug: true },
     connection: { reconnect: true, secure: true },
