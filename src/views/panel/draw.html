@@ -61,6 +61,7 @@
         document.clearCanvas = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             document.querySelector('input[type=range]').value = document.querySelector('input[type=range]').max;
+            document.querySelector('[type=range]').value = 0;
         };
         document.sendPayload = () => {
             document.replayStart();
