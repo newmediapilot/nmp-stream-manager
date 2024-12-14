@@ -120,7 +120,7 @@ nmp-stream-manager/
     │   │   ├── login.js
     │   │   └── success.js
     │   ├── nunjucks/
-    │   │   └── config.js
+    │   │   └── configure.js
     │   └── util/
     │       ├── combine.js
     │       └── uncombine.js
