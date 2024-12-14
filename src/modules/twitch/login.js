@@ -10,7 +10,7 @@
  */
 
 const axios = require("axios");
-const ROUTES = require("../../routes");
+const ROUTES = require("../routes");
 const {
     getSecret,
     setSecret,

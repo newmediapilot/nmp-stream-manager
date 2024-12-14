@@ -1,4 +1,4 @@
-const ROUTES = require("../routes");
+const ROUTES = require("./routes");
 requestLogger = (req, res, next) => {
   // Ignore
   if ([

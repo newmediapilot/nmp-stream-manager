@@ -1,5 +1,5 @@
 require("dotenv").config();
-const ROUTES = require("./routes");
+const ROUTES = require("./modules/routes");
 const express = require("express");
 const {requestLogger} = require("./modules/logger");
 const {minify} = require("./modules/minify");

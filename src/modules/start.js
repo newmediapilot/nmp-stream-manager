@@ -8,7 +8,7 @@ const { createbpmRateServer } = require("./sensor/listen");
 const { initializePublicConfigs } = require("./public/config");
 const { initializePublicStyles } = require("./public/style");
 const { configureSocket } = require("./helper/socket"); // Use configureSocket for socket setup
-const ROUTES = require("../routes");
+const ROUTES = require("./routes");
 async function startServices(app) {
   try {
     setParam("device_ip", getIp());
