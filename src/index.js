@@ -1,8 +1,8 @@
 require("dotenv").config();
 const ROUTES = require("./server/routes");
 const express = require("express");
-const {logger} = require("./server/middlewares/logger");
-const {paths} = require("./server/middlewares/paths");
+const {logger} = require("./server/middleware/logger");
+const {paths} = require("./server/middleware/paths");
 const {startServices} = require("./server/start");
 const {publicSignalCreate} = require("./server/public/signal");
 const {publicConfigUpdate} = require("./server/public/config");
