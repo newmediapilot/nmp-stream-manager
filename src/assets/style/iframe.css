@@ -15,9 +15,9 @@
 }
 
 html.iframe #module-container {
-    background-image: linear-gradient(120deg, rgb(2, 2, 2) 0%, rgb(75, 75, 75) 33%, rgb(2, 2, 2) 33%, rgb(75, 75, 75) 100%);
+    background-image: linear-gradient(120deg, rgba(2, 2, 2, 1) 0%, rgba(75, 75, 75, 1) 33%, rgba(2, 2, 2, 1) 33%, rgba(75, 75, 75, 1) 100%);
     background-size: cover;
-    box-shadow: inset 0 0 5px 5px rgb(255, 255, 255,.5);
+    box-shadow: inset 0 0 5px 5px rgba(255, 255, 255, .5);
 }
 
 html.iframe iframe {
