@@ -32,18 +32,11 @@ let tokens = [
     'stop_pushing_me_around', 'get_in_line_cartman', 'stop_talking_kyle'
 ];
 fs.rmSync("./.dist", {recursive: true, force: true});
-Object.keys(data).reduce((a, b) => {
-    // console.log('previousValue', b.split("\\").slice(0, -1).join("\\"));
-    // `./dist${b.split("\\").slice(0, -1).join("\\")}`
+Object.keys(data).map(path => {
+    fs.rmSync(`.dist/${path}`, {recursive: true, force: true});
+    fs.mkdirSync(`.dist/${path.split('\\').slice(0,-1).join('\\')}`, {recursive: true, force: true});
 });
 process.exit(0);
-Object.keys(data).map(path => {
-    // fs.writeFileSync(
-    //     `./.dist/${path.split('\\').slice(0, -1).join('\\')}`, JSON.stringify(data[path]),
-    //     {encoding: "utf-8"}
-    // );
-    return path;
-});
 fs.copyFileSync(".env", "./.dist/.env");
 fs.copyFileSync("./localhost.key", "./.dist/localhost.key");
 fs.copyFileSync("./localhost.crt", "./.dist/localhost.crt");
