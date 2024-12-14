@@ -1,40 +1,33 @@
 const DASHBOARD_BUTTON_CONFIG = {
     signals: [
         {
+            label: "aaknot",
             theme: "aqua",
             type: "feature",
             description: "feature:set",
             emoji: "👉",
-            label: "aaknot",
         },
         {
+            emoji: "👉",
             theme: "orange",
             type: "ad",
             description: "30",
-            emoji: "👉",
             label: "30s",
         },
         {
+            emoji: "❤",
             theme: "bloodorange",
             type: "bpm",
             description: "bpm",
-            emoji: "❤",
             label: "BPM",
         },
         {
+            emoji: "👉",
+            label: "Ping",
             theme: "purple",
             type: "mark",
             description: "match:checkpoint",
-            emoji: "👉",
-            label: "Ping",
-        },
-        {
-            theme: "purple",
-            type: "mark",
-            description: "chat:announcement",
-            emoji: "👉",
-            label: "Ping",
-        },
+        }
     ],
 };
 const fs = require("fs");
