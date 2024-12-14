@@ -1,25 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>{{ cacheBuster }}</title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="manifest" href="../client/manifest.json?{{ cacheBuster }}">
-    <link rel="icon" href="../client/icon512_rounded.png?{{ cacheBuster }}" type="image/png">
-    {% block cdn %}
-        <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
-        <script src="https://cdn.jsdelivr.net/npm/axios@0.27.2/dist/axios.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
-        <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
-        <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
-        <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
-    {% endblock %}
-    {% for key, value in 'public_routes'|getParam %}
-        <meta name="{{ key }}" content="{{ value }}">
-    {% endfor %}
-    {% block local %}
+    {%block client%}
         <script src="../client/script/css_dev_watch.js?{{ cacheBuster }}" defer type="text/javascript"></script>
         <script src="../client/script/service_worker.js?{{ cacheBuster }}" defer type="text/javascript"></script>
         <script src="../client/script/get_url.js?{{ cacheBuster }}" defer type="text/javascript"></script>
@@ -41,12 +23,30 @@
         <link href="../client/style/scrollbar.css?{{ cacheBuster }}" rel="stylesheet">
         <link href="../client/style/controls.css?{{ cacheBuster }}" rel="stylesheet">
         <link href="../client/style/dialog.css?{{ cacheBuster }}" rel="stylesheet">
-    {% endblock %}
-    {% block head %}{% endblock %}
+    {%endblock%}
+    {%block cdn%}
+        <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios@0.27.2/dist/axios.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
+        <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
+    {%endblock%}
+    {%for key, value in 'public_routes'|getParam%}
+        <meta name="{{ key }}" content="{{ value }}">
+    {%endfor%}
+    {%block head%}{%endblock%}
+    <meta charset="UTF-8">
+    <title>{{ cacheBuster }}</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="manifest" href="../client/manifest.json?{{ cacheBuster }}">
+    <link rel="icon" href="../client/icon512_rounded.png?{{ cacheBuster }}" type="image/png">
 </head>
 <body>
-{% block body %}{% endblock %}
-{% block dialogs %}{% endblock %}
-{% block fscripts %}{% endblock %}
+{%block body%}{%endblock%}
+{%block dialogs%}{%endblock%}
+{%block scripts%}{%endblock%}
 </body>
 </html>

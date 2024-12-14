@@ -1,6 +1,6 @@
 {%extends "main.njk"%}
 {%block cdn%}{%endblock%}
-{%block local%}{%endblock%}}
+{%block client%}{%endblock%}}
 {%block head%}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?{{cacheBuster}}" type="text/javascript" crossorigin="anonymous" defer></script>
 <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?{{cacheBuster}}" type="text/javascript" crossorigin="anonymous" defer></script>
@@ -51,7 +51,7 @@
     <canvas></canvas>
 </div>
 {%endblock%}
-{%block fscripts%}
+{%block scripts%}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
