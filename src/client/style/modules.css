@@ -107,6 +107,7 @@
     width: 150px;
     height: 150px;
     border-radius: 25px;
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
 }
 
 .module label::after {
@@ -114,13 +115,13 @@
     display: block;
     width: 250px;
     height: 250px;
-    background: repeating-radial-gradient(circle, rgba(0, 0, 0, 1) 0px, rgba(0, 0, 0, 1) 20px, rgba(0, 0, 0, 1) 20px, rgba(255, 255, 255, 1) 25px);
+    background: repeating-radial-gradient(circle, rgba(0, 0, 0, 1) 0px, rgba(0, 0, 0, 1) 20px, rgba(0, 0, 0, 1) 20px, rgba(255, 255, 255, 1) 23px);
     background-position: center;
 }
 
 .module label:nth-of-type(2)::after,
 .module label:nth-of-type(4)::after {
-    background: linear-gradient(black, white);
+    background: repeating-linear-gradient(rgba(0, 0, 0, 1) 0px, rgba(0, 0, 0, 1) 20px, rgba(0, 0, 0, 1) 20px, rgba(255, 255, 255, 1) 23px);
 }
 
 .module label:nth-of-type(1) {
