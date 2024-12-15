@@ -161,10 +161,6 @@
     border-radius: 25px;
 }
 
-.module label::before {
-    content: "";
-}
-
 .module label::after {
     background: repeating-linear-gradient(-45deg, #fff, #ccc 10px);
     width: 100px;
