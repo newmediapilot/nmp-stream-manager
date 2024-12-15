@@ -29,15 +29,10 @@ const applyModuleStyles = () => {
 };
 const castModuleInputValues = () => {
     Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
-        const {width, height} = label.getBoundingClientRect();
-        const lx = label.scrollLeft;
-        const ly = label.scrollTop;
-        const valueX = lx / (width / 2);
-        const valueY = ly / (height / 2);
-        const inputX = label.children[0];
-        const inputY = label.children[1];
-        inputX.value = inputX.max * valueX;
-        inputY.value = inputY.max * valueY;
+        const [inputX, inputY] = [label.children[0], label.children[1]];
+        const [px, py] = [label.scrollLeft / label.scrollWidth, label.scrollTop / label.scrollHeight];
+        inputX.value = ((Math.abs(inputX.max) + Math.abs(inputX.min)) * px);
+        inputY.value = ((Math.abs(inputY.max) + Math.abs(inputY.min)) * py);
     });
     const payload = Array.from(document.body.querySelectorAll('input[type="range"]')).map((el) => {
         return `${el.name}:${el.value}`;
@@ -74,7 +69,7 @@ const sendInputValues = () => {
         .innerHTML
         .replace(":root{", "")
         .replace(";}", "");
-    console.log('payload', payload);
+    // console.log('payload', payload);
     // payload && axios.get("/api/style/update", {
     //     params: {
     //         type: "style",
