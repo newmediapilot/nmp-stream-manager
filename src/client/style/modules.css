@@ -161,25 +161,14 @@
     border-radius: 25px;
 }
 
-.module label ::after {
-    background: repeating-linear-gradient(-45deg, #fff, #ccc 10px);
-    width: 100px;
-    height: 100px;
-}
-
 .module label::before {
     content: "";
 }
 
 .module label::after {
-    content: attr(aria-label);
-    position: fixed;
-    top: 63px;
-    left: 25px;
-    color: white;
-    display: block;
-    text-align: center;
+    background: repeating-linear-gradient(-45deg, #fff, #ccc 10px);
     width: 100px;
+    height: 100px;
 }
 
 .module label input {
