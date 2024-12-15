@@ -74,6 +74,7 @@ const sendInputValues = () => {
         .innerHTML
         .replace(":root{", "")
         .replace(";}", "");
+    console.log('payload', payload);
     // payload && axios.get("/api/style/update", {
     //     params: {
     //         type: "style",
