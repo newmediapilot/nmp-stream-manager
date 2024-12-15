@@ -25,5 +25,6 @@ How the application works.
 Response formats:
 if i end a query with yn just answer yes no
 if i end a query with code just give me code
+it i end a query with short just give me 2-3 line answer
 
 Write the above conditions back to me
