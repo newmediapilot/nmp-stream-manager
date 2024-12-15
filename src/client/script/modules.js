@@ -31,8 +31,8 @@ const castModuleInputValues = () => {
     Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
         const [inputX, inputY] = [label.children[0], label.children[1]];
         const [px, py] = [label.scrollLeft / label.scrollWidth, label.scrollTop / label.scrollHeight];
-        inputX.value = ((Math.abs(inputX.max) + Math.abs(inputX.min)) * px);
-        inputY.value = ((Math.abs(inputY.max) + Math.abs(inputY.min)) * py);
+        inputX.value = Number(inputX.min) + ((Math.abs(inputX.max) + Math.abs(inputX.min)) * px);
+        inputY.value = Number(inputY.min) + ((Math.abs(inputY.max) + Math.abs(inputY.min)) * py);
     });
     const payload = Array.from(document.body.querySelectorAll('input[type="range"]')).map((el) => {
         return `${el.name}:${el.value}`;
