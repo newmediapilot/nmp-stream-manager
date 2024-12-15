@@ -58,7 +58,6 @@ const initializeModuleClickTouch = () => {
     });
     document.addEventListener('mouseup', (e) => {
         document.removeEventListener('mousemove', castModuleInputValues);
-        castModuleInputValues();
         sendInputValues();
     });
     document.addEventListener('touchmove', (e) => {
@@ -67,7 +66,6 @@ const initializeModuleClickTouch = () => {
     });
     document.addEventListener('touchend', (e) => {
         document.removeEventListener('touchmove', castModuleInputValues);
-        castModuleInputValues();
         sendInputValues();
     });
 };

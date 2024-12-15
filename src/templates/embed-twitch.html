@@ -35,11 +35,16 @@
 <style>
     body {
         perspective: 1920px;
-        transform: scale(1.01);
     }
-
     #module-container {
-        transform: translateX(calc(calc(var(--_feat-translateX) * -1%) + 33%)) translateY(calc(calc(var(--_feat-translateY) * -1%) + 33%)) scaleX(calc(var(--_feat-scaleX) * 0.01)) scaleY(calc(var(--_feat-scaleY) * 0.01)) rotateX(calc(var(--_feat-rotateX) * 3.6deg)) rotateY(calc(var(--_feat-rotateY) * 3.6deg)) rotateZ(calc(var(--_feat-rotateZ) * 3.6deg))
+        transition: transform 33ms ease-in-out;
+        transform: translateX(calc(calc(var(--_feat-translateX) * -1%) + 25%))
+        translateY(calc(calc(var(--_feat-translateY) * -1%) + 25%))
+        scaleX(calc(var(--_feat-scaleX) * 0.01))
+        scaleY(calc(var(--_feat-scaleY) * 0.01))
+        rotateX(calc(var(--_feat-rotateX) * 3.6deg))
+        rotateY(calc(var(--_feat-rotateY) * 3.6deg))
+        rotateZ(calc(var(--_feat-rotateZ) * 3.6deg))
     }
 </style>
 {%endblock%}
@@ -62,6 +67,7 @@
     document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
         let style = payload.split('style:set:')[1];
         document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
+
     }));
     document.addEventListener("DOMContentLoaded", () => socketWatchFeatureSet((payload) => {
         if ('#edit' === window.location.hash) return;
