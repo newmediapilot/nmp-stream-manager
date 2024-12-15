@@ -33,6 +33,7 @@ const castModuleInputValues = () => {
         const [px, py] = [label.scrollLeft / label.scrollWidth, label.scrollTop / label.scrollHeight];
         inputX.value = Number(inputX.min) + ((Math.abs(inputX.max) + Math.abs(inputX.min)) * px);
         inputY.value = Number(inputY.min) + ((Math.abs(inputY.max) + Math.abs(inputY.min)) * py);
+        console.log(inputX.value, inputY.value);
     });
     const payload = Array.from(document.body.querySelectorAll('input[type="range"]')).map((el) => {
         return `${el.name}:${el.value}`;
