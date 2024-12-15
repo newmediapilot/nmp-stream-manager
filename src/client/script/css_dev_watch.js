@@ -15,7 +15,7 @@ const cssDevWatch = () => {
     Array.from(document.styleSheets)
         .forEach(({href, cssRules}) => {
             Array.from(cssRules).forEach(({cssText}) => {
-
+                console.log('href', href, cssText);
             });
         });
 };
