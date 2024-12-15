@@ -99,7 +99,7 @@
     justify-content: end;
     column-gap: 20px;
     grid-template-columns: 50px 50px 50px 50px;
-    grid-template-rows: 50px 50px 50px 50px 50px 50px
+    grid-template-rows: 50px 50px 50px 20px 50px 50px 50px;
 }
 
 .module label {
@@ -114,7 +114,7 @@
     display: block;
     width: 250px;
     height: 250px;
-    background: radial-gradient(circle at center, black, white);
+    background: repeating-radial-gradient(circle, rgba(0, 0, 0, 1) 0px, rgba(0, 0, 0, 1) 20px, rgba(0, 0, 0, 1) 20px, rgba(255, 255, 255, 1) 25px);
     background-position: center;
 }
 
@@ -137,12 +137,12 @@
 
 .module label:nth-of-type(3) {
     grid-column: 4 / 7;
-    grid-row: 4 / 7;
+    grid-row: 5 / 8;
 }
 
 .module label:nth-of-type(4) {
     grid-column: 3 / 4;
-    grid-row: 4 / 7;
+    grid-row: 5 / 8;
     max-width: 50px;
     overflow-x: hidden;
 }
