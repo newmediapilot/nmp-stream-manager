@@ -7,7 +7,7 @@ const logger = (req, res, next) => {
         next();
         return;
     }
-    console.info2(
+    console.info(
         process.cwd(),
         "REQUEST =>",
         req.path,

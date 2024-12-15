@@ -1,4 +1,3 @@
-require("../console");
 const fs = require("fs");
 const https = require("https");
 const { getIp } = require("./helper/ip");
