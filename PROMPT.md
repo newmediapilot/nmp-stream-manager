@@ -22,4 +22,8 @@ What node modules are used.
 How the are used.
 How the application works.
 
-Do you understand?
+Response formats:
+if i end a query with yn just answer yes no
+if i end a query with code just give me code
+
+Write the above conditions back to me
