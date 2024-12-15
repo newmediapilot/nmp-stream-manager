@@ -26,7 +26,7 @@ async function twitchClipCreate(description) {
     const url = `https://clips.twitch.tv/${response.data.data[0].id}`;
     clipResponses.push({ url, data: response.data });
     setParam("broadcast_clips", clipResponses);
-    console.log2(process.cwd(), "Clip created:", url);
+    console.log(process.cwd(), "Clip created:", url);
     await twitchMessageCreate("🤖 Clip ready: " + url);
     return url;
   } catch (error) {

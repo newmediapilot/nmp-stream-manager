@@ -3,7 +3,7 @@ const socketConnect = () => {
     if ($socketIO) return;
     $socketIO = io();
     $socketIO.on("connect_error", (err) =>
-        console.error("socketConnect :: connection error:", err),
+        console.log("socketConnect :: connection error:", err),
     );
     $socketIO.on("connect", () => console.log("socketConnect :: connected to the socket server"));
     console.log("socketConnect :: socket connection start");

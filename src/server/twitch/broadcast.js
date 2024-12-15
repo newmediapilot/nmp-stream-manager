@@ -22,7 +22,7 @@ async function setBroadcastTitle(title) {
     const accessToken = getSecret("twitch_access_token");
     const broadcasterId = getSecret("twitch_broadcaster_id");
 
-    console.log2(process.cwd(), "Setting stream title to:", title);
+    console.log(process.cwd(), "Setting stream title to:", title);
 
     const response = await axios.patch(
       "https://api.twitch.tv/helix/channels",
@@ -38,7 +38,7 @@ async function setBroadcastTitle(title) {
     );
 
     if (response.status === 204) {
-      console.log2(process.cwd(), "Stream title updated successfully.");
+      console.log(process.cwd(), "Stream title updated successfully.");
       await twitchMessageCreate("Stream title updated to: " + title);
 
       return title;

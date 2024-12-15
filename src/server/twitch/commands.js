@@ -8,7 +8,7 @@ const { twitchMessageCreate } = require("./message");
 const { twitchMarkerCreate } = require("./marker");
 const { setBroadcastTitle } = require("./broadcast");
 async function parseCommand(channel, tags, message) {
-  console.log2(process.cwd(), "Message: ", message);
+  console.log(process.cwd(), "Message: ", message);
   const isBroadcaster = tags["user-id"] === getSecret("twitch_broadcaster_id");
   const COMMANDS = {
     test: "test/",
@@ -33,7 +33,7 @@ async function parseCommand(channel, tags, message) {
   }
   // Exit early if no commands
   if (!currentCommand) {
-    console.warn2(
+    console.log(
       process.cwd(),
       "Skipping no command found for:",
       message.substr(0, 20),
@@ -41,7 +41,7 @@ async function parseCommand(channel, tags, message) {
     );
     return false;
   } else {
-    console.log2(
+    console.log(
       process.cwd(),
       "Found command:",
       currentCommand,
@@ -64,7 +64,7 @@ async function parseCommand(channel, tags, message) {
   }
   // Broadcaster commands
   if (isBroadcaster) {
-    console.log2(
+    console.log(
       process.cwd(),
       "BROADCASTER command:",
       currentCommand,

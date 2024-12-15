@@ -29,18 +29,18 @@ async function startServices(app) {
       cert: fs.readFileSync("./localhost.crt"),
     };
     const httpsServer = https.createServer(certs, app).listen(443, () => {
-      console.log2(process.cwd(), "Server running on 443 at https://localhost");
+      console.log(process.cwd(), "Server running on 443 at https://localhost");
     });
     configureSocket(httpsServer);
     app.listen(3476, () => {
-      console.log2(
+      console.log(
         process.cwd(),
         "Server running on 3476 at https://localhost",
       );
     });
     await createbpmRateServer();
   } catch (err) {
-    console.log2(process.cwd(), "Error initializing services:", err);
+    console.log(process.cwd(), "Error initializing services:", err);
   }
 }
 module.exports = { startServices };

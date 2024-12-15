@@ -16,18 +16,18 @@ async function watchMessages() {
   client
     .connect()
     .then(() =>
-      console.log2(
+      console.log(
         process.cwd(),
         "Connected to Twitch chat for channel:",
         channel,
       ),
     )
     .catch((err) =>
-      console.log2(process.cwd(), "Error connecting to Twitch chat:", err),
+      console.log(process.cwd(), "Error connecting to Twitch chat:", err),
     );
   client.on("message", parseCommand);
   client.on("disconnected", (reason) =>
-    console.log2(process.cwd(), "Disconnected from Twitch chat:", reason),
+    console.log(process.cwd(), "Disconnected from Twitch chat:", reason),
   );
 }
 module.exports = { watchMessages };

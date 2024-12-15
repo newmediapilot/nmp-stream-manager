@@ -17,7 +17,7 @@ function loadSecrets() {
     try {
       secrets = JSON.parse(fs.readFileSync(".secrets.json", "utf8"));
     } catch (error) {
-      console.log2(process.cwd(), "Error loading secrets:", error.message);
+      console.log(process.cwd(), "Error loading secrets:", error.message);
       secrets = {};
     }
   } else {
@@ -26,7 +26,7 @@ function loadSecrets() {
 }
 function setParam(key, value, log = true) {
   if (!allowedParams.includes(key)) {
-    console.warn2(
+    console.log(
       process.cwd(),
       "Attempted to set unregistered key",
       key,
@@ -35,7 +35,7 @@ function setParam(key, value, log = true) {
     );
   }
   paramsState[key] = value;
-  log && console.log2(process.cwd(), "Set", key, "::", value);
+  log && console.log(process.cwd(), "Set", key, "::", value);
 }
 function getAllParams() {
   return paramsState;
@@ -43,7 +43,7 @@ function getAllParams() {
 function getParam(key) {
   const value = paramsState[key];
   if (value === undefined) {
-    // console.warn2(
+    // console.log(
     //   process.cwd(),
     //   "Warning: Attempted to get",
     //   key,
@@ -57,7 +57,7 @@ function getParam(key) {
 }
 function resetSecrets() {
   fs.rmSync(".secrets.json", { force: true });
-  console.warn2(process.cwd(), "Removing secrets");
+  console.log(process.cwd(), "Removing secrets");
 }
 function setSecret(name, key) {
   try {
@@ -67,7 +67,7 @@ function setSecret(name, key) {
     const secretsJSON = JSON.stringify(secrets, null, 2);
     secrets = null;
     fs.writeFileSync(".secrets.json", secretsJSON, "utf8");
-    console.log2(
+    console.log(
       process.cwd(),
       `Secret set for ${name} : ${String("X").repeat(String(key).length)}`,
     );
@@ -81,7 +81,7 @@ function getSecret(name) {
     if (secrets[name]) {
       return secrets[name];
     } else {
-      console.log2(process.cwd(), `Secret ${name} not found.`);
+      console.log(process.cwd(), `Secret ${name} not found.`);
       return null;
     }
   } catch (error) {

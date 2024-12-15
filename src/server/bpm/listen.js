@@ -23,12 +23,12 @@ async function createbpmRateServer(
   process.on("SIGTERM", shutdown); // signals
   process.on(
     "uncaughtException",
-    (err) => console.error("Uncaught exception:", err) && shutdown(),
+    (err) => console.log("Uncaught exception:", err) && shutdown(),
   );
   child.on("error", (err) =>
-    console.error(`Failed to start process: ${err.message}`),
+    console.log(`Failed to start process: ${err.message}`),
   );
-  child.on("close", (code) => console.log2(`Process exited with code ${code}`));
+  child.on("close", (code) => console.log(`Process exited with code ${code}`));
 }
 const getbpmRateMessage = () => {
   const bpmRate = getParam("sensor_bpm_rate");

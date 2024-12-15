@@ -41,29 +41,29 @@ const fs = require("fs");
 const path = require("path");
 const {setParam, getParam} = require("../store/manager");
 const initializePublicConfigs = async (type) => {
-    console.log2(process.cwd(), "initializePublicConfigs :: start");
+    console.log(process.cwd(), "initializePublicConfigs :: start");
     const fileName = path.resolve(`.${type}.json`);
     try {
         if (!fs.existsSync(fileName)) {
             setParam("dashboard_signals_config", DASHBOARD_BUTTON_CONFIG.signals);
             putConfig("signals", DASHBOARD_BUTTON_CONFIG.signals);
-            console.log2(process.cwd(), "initializePublicConfigs :: new file");
+            console.log(process.cwd(), "initializePublicConfigs :: new file");
         } else {
             setParam("dashboard_signals_config", getConfig("signals"));
-            console.log2(process.cwd(), "initializePublicConfigs :: load file");
+            console.log(process.cwd(), "initializePublicConfigs :: load file");
         }
-        console.log2(process.cwd(), "initializePublicConfigs :: success");
+        console.log(process.cwd(), "initializePublicConfigs :: success");
         return true;
     } catch (e) {
         console.err2(process.cwd(), "initializePublicConfigs :: error", e);
         return false;
     } finally {
-        console.log2(process.cwd(), "initializePublicConfigs :: done");
+        console.log(process.cwd(), "initializePublicConfigs :: done");
     }
 };
 const putConfig = (filePath, config) => {
     const fileName = path.resolve(`.${filePath}.json`);
-    console.log2(process.cwd(),
+    console.log(process.cwd(),
         "putConfig :: file:",
         fileName.substr(-10),
         ":: contents :",
@@ -73,7 +73,7 @@ const putConfig = (filePath, config) => {
 };
 const getConfig = (type) => {
     const fileName = path.resolve(`.${type}.json`);
-    console.log2(process.cwd(), "getConfig :: file:", fileName);
+    console.log(process.cwd(), "getConfig :: file:", fileName);
     return JSON.parse(fs.readFileSync(fileName, "utf-8"));
 };
 const applySignalsOrder = (payloadJSON) => {
@@ -90,7 +90,7 @@ const applySignalsOrder = (payloadJSON) => {
     return signalsTarget;
 };
 const applySignalsField = (payloadJSON) => {
-    console.log2(process.cwd(), "applySignalsField", payloadJSON);
+    console.log(process.cwd(), "applySignalsField", payloadJSON);
     const signalsTarget = JSON.parse(
         JSON.stringify(getParam("dashboard_signals_config")),
     );
@@ -101,7 +101,7 @@ const applySignalsField = (payloadJSON) => {
 };
 const publicConfigUpdate = (req, res) => {
     const {type, payload} = req.query;
-    console.log2(process.cwd(), "publicConfigUpdate", type, payload);
+    console.log(process.cwd(), "publicConfigUpdate", type, payload);
     try {
         if (type === "signals:order") {
             putConfig("signals", applySignalsOrder(payload));

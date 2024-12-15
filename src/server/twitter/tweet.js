@@ -17,10 +17,10 @@ async function twitterTweet(description) {
     const me = await twitterClient.v2.me();
     const username = me.data.username;
     const text = `${description} ${HASHTAGS}`;
-    console.log2(process.cwd(), "twitterTweet...", description);
+    console.log(process.cwd(), "twitterTweet...", description);
     const tweetResponse = await twitterClient.v2.tweet({ text });
     const tweetURL = `https://twitter.com/${username}/status/${tweetResponse.data.id}`;
-    console.log2(process.cwd(), "Tweet posted successfully:", tweetURL);
+    console.log(process.cwd(), "Tweet posted successfully:", tweetURL);
     await twitchMessageCreate("🤖 Tweet ready: " + tweetURL);
     // TODO: make it post a chat command too
     tweetResponses.push({ text });

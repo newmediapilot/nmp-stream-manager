@@ -5,7 +5,7 @@ async function twitchAdCreate(length) {
   try {
     if (!length) length = 30;
     const roundedLength = Math.ceil(Number(length) / 30) * 30;
-    console.log2(
+    console.log(
       process.cwd(),
       `Starting advertisement for ${roundedLength} seconds`,
     );

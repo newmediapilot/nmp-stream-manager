@@ -9,7 +9,7 @@ async function twitchMarkerCreate(description) {
   try {
     const accessToken = getSecret("twitch_access_token");
     const broadcasterId = getSecret("twitch_broadcaster_id");
-    console.log2(process.cwd(), "Creating marker:", description);
+    console.log(process.cwd(), "Creating marker:", description);
     const response = await axios.post(
       `https://api.twitch.tv/helix/streams/markers`,
       {
@@ -23,7 +23,7 @@ async function twitchMarkerCreate(description) {
         },
       },
     );
-    console.log2(
+    console.log(
       process.cwd(),
       "Marker created successfully:",
       `${response.data.data[0]?.description}`,

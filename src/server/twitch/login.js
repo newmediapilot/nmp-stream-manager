@@ -11,12 +11,12 @@ const {watchMessages} = require("./stream");
 function twitchLogin(req, res) {
     const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
     const TWITCH_SCOPES = process.env.TWITCH_SCOPES;
-    console.log2(process.cwd(), "twitchLogin start...");
-    console.log2(process.cwd(), "TWITCH_SCOPES:", TWITCH_SCOPES);
-    console.log2(process.cwd(), "ROUTES.TWITCH_REDIRECT:", ROUTES.TWITCH_REDIRECT);
+    console.log(process.cwd(), "twitchLogin start...");
+    console.log(process.cwd(), "TWITCH_SCOPES:", TWITCH_SCOPES);
+    console.log(process.cwd(), "ROUTES.TWITCH_REDIRECT:", ROUTES.TWITCH_REDIRECT);
     setParam("twitch_login_referrer", ROUTES.PANEL_DASHBOARD);
     const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(ROUTES.TWITCH_REDIRECT)}&response_type=code&scope=${TWITCH_SCOPES}`;
-    console.log2(process.cwd(), "OAuth URL generated:", oauthUrl);
+    console.log(process.cwd(), "OAuth URL generated:", oauthUrl);
     res.redirect(oauthUrl);
 }
 async function twitchLoginSuccess(req, res) {
@@ -50,7 +50,7 @@ async function twitchLoginSuccess(req, res) {
         }
         return res.send("OAuth tokens retrieved successfully");
     } catch (error) {
-        console.log2(
+        console.log(
             process.cwd(),
             "Error exchanging code for tokens:",
             error.response?.data || error.message,
@@ -62,7 +62,7 @@ async function getBroadcasterId() {
     try {
         const username = getParam("twitch_username");
         const accessToken = getSecret("twitch_access_token");
-        console.log2(
+        console.log(
             process.cwd(),
             "Access Token:",
             String("X").repeat(accessToken.length),
@@ -78,7 +78,7 @@ async function getBroadcasterId() {
         );
         if (response.data.data && response.data.data.length > 0) {
             const broadcasterId = response.data.data[0].id;
-            console.log2(
+            console.log(
                 process.cwd(),
                 "Broadcaster ID fetched:",
                 String("X").repeat(broadcasterId.length),
@@ -109,7 +109,7 @@ async function getChannelId() {
         );
         if (response.data.data && response.data.data.length > 0) {
             const channelId = response.data.data[0].login;
-            console.log2(process.cwd(), "Channel ID fetched:", channelId);
+            console.log(process.cwd(), "Channel ID fetched:", channelId);
             setSecret("twitch_channel_id", channelId);
             return channelId;
         } else {

@@ -78,7 +78,7 @@
                 emojiEl.textContent = emoji ? emoji : "♥";
             } catch (error) {
                 bpmRateElement.textContent = "BPM";
-                console.error("Failed to fetch bpm rate:", error);
+                console.log("Failed to fetch bpm rate:", error);
             }
         };
         setInterval(() => bpmPing(), 1000);
