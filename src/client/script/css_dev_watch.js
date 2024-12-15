@@ -1,21 +1,18 @@
 const cssDevWatch = () => {
-    const targetNode = document.documentElement;
-    const config = {
-        childList: true,
-        attributes: true,
-        subtree: true
-    };
-    const callback = (mutationsList) => {
-        for (const mutation of mutationsList) {
-            console.log(`Style changed on element: ${mutation.target.tagName}`);
-        }
-    };
-    const observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);
+    const memory = [];
+    const changes = [];
     Array.from(document.styleSheets)
-        .forEach(({href, cssRules}) => {
-            Array.from(cssRules).forEach(({cssText}) => {
-                console.log('href', href, cssText);
+        .forEach(sheet => {
+            sheet.href && Array.from(sheet.cssRules).forEach(cssRule => memory.push([sheet.href, cssRule.cssText]));
+        });
+    console.log('cssDevWatch :: inited with ', memory.length);
+    Array.from(document.styleSheets)
+        .filter(sheet => sheet.href)
+        .forEach(sheet => {
+            sheet.href && Array.from(sheet.cssRules).forEach((cssRule, index) => {
+                const [href, cssText] = [memory[index][0], memory[index][1]];
+
             });
         });
+    // console.log('cssDevWatch :: updated with ', JSON.stringify(memory, null, 4));
 };
