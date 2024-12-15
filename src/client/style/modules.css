@@ -9,7 +9,7 @@
     background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
 }
 
-.modules:after {
+.modules::after {
     content: "";
     height: 50vh;
     background: transparent;
