@@ -97,9 +97,8 @@
 .module .controls {
     display: grid;
     justify-content: end;
-    column-gap: 20px;
-    grid-template-columns: 50px 50px 50px 50px;
-    grid-template-rows: 50px 50px 50px 20px 50px 50px 50px;
+    grid-template-columns: repeat(20, 25px);
+    grid-template-rows: repeat(20, 25px);
 }
 
 .module label {
@@ -124,33 +123,31 @@
     background: repeating-linear-gradient(rgba(0, 0, 0, 1) 0px, rgba(0, 0, 0, 1) 20px, rgba(0, 0, 0, 1) 20px, rgba(255, 255, 255, 1) 23px);
 }
 
-.module label:nth-of-type(1) {
-    grid-column: 4 / 7;
-    grid-row: 1 / 4;
-}
-
-.module label:nth-of-type(2) {
-    grid-column: 3 / 4;
-    grid-row: 1 / 4;
-    max-width: 50px;
-    overflow-x: hidden;
-}
-
-.module label:nth-of-type(3) {
-    grid-column: 4 / 7;
-    grid-row: 5 / 8;
-}
-
+/** max-widths **/
+.module label:nth-of-type(2),
 .module label:nth-of-type(4) {
-    grid-column: 3 / 4;
-    grid-row: 5 / 8;
-    max-width: 50px;
+    max-width: 120px;
     overflow-x: hidden;
 }
 
-.module label:nth-of-type(4) input {
-    margin-left: 0;
-    margin-right: 0;
+.module label:nth-of-type(1),
+.module label:nth-of-type(2) {
+    grid-row: 1 / 12;
+}
+
+.module label:nth-of-type(3),
+.module label:nth-of-type(4) {
+    grid-column: 1 / 18;
+}
+
+.module label:nth-of-type(1),
+.module label:nth-of-type(2) {
+    grid-row: 12 / 24;
+}
+
+.module label:nth-of-type(1),
+.module label:nth-of-type(2) {
+    grid-column: 12 / 24;
 }
 
 .module input {
