@@ -41,11 +41,13 @@ const cssDevWatch = () => {
     cssDevWatch.check = () => {
         if (changes.length) {
             console.log('cssDevWatch.check :: rule changes changes ', changes.length, memory.length);
+            let outputCss = '';
+            let outputHref = '';
             changes.forEach((change) => {
-                const css = '\r\n\r\n' + memory.map(a => a.css).join('\r\n\r\n') + '\r\n\r\n' + '/***/';
-                console.log('cssDevWatch.check ::', change.href, css);
+                outputCss = '\r\n\r\n' + memory.map(a => a.css).join('\r\n') + '\r\n\r\n';
+                outputHref = change.href;
             });
-            console.log('cssDevWatch.check :: rule changes changes processed');
+            console.log('cssDevWatch.check :: rule changes changes processed on', outputHref);
             cssDevWatch.createChanges();
             changes = [];
         } else {
