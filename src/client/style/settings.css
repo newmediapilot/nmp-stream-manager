@@ -8,6 +8,7 @@
     background: repeating-linear-gradient(-45deg, rgb(2, 2, 2), rgb(19, 19, 19) 15px);
     font-size: 300%;
 }
+
 .settings::after {
     content: '';
     height: 130px;
@@ -15,6 +16,7 @@
     width: 100%;
     display: block;
 }
+
 .settings .settings-header {
     display: flex;
     align-items: center;
@@ -27,18 +29,20 @@
     position: sticky;
     top: 0px;
 }
+
 .settings-header p {
     flex-grow: 1;
     font-size: 30px;
     margin: 0px;
     background: repeating-linear-gradient(
-        45deg,
-        rgba(0, 0, 0, 0.05) 0px,
-        rgba(0, 0, 0, 0.05) 2px,
-        rgba(255, 255, 255, 0.05) 2px,
-        rgba(255, 255, 255, 0.05) 4px
+            45deg,
+            rgba(0, 0, 0, 0.05) 0px,
+            rgba(0, 0, 0, 0.05) 2px,
+            rgba(255, 255, 255, 0.05) 2px,
+            rgba(255, 255, 255, 0.05) 4px
     );
 }
+
 .settings label {
     display: grid;
     grid-template-columns: repeat(21, 25px);
@@ -46,50 +50,62 @@
     box-sizing: border-box;
     height: 225px;
 }
+
 .settings label > button {
     font-size: 40px;
 }
+
 .settings label > [type='text'] {
     font-size: 25px;
     padding: 0px 15px;
     grid-area: 10 / 4 / 7 / 22;
     box-shadow: yellow 0px 0px 1px 1px inset;
 }
+
 .settings label > textarea {
     font-size: 25px;
     padding: 0px 15px;
     grid-area: 1 / 1 / 7 / 22;
     box-shadow: yellow 0px 0px 1px 1px inset;
 }
+
 .settings label > [type='text']:nth-of-type(2) {
     box-shadow: rgb(255, 40, 58) 0px 0px 1px 1px inset;
     grid-row: 4 / 7;
 }
+
+.settings label > textarea:focus,
 .settings label > [type='text']:focus {
     background: var(--color-deepyellow);
     border-radius: 10px;
 }
+
 .settings label > button {
     line-height: 0;
     grid-area: 7 / 1 / 10 / 4;
     box-shadow: yellow 0px 0px 1px 1px inset;
 }
+
 body > #emoji-widget {
     display: none;
 }
+
 #emoji-widget {
     display: none;
 }
+
 #emoji-widget {
     margin: 0px;
     padding: 0px;
     display: grid;
     grid-template-columns: repeat(5, calc(20%));
 }
+
 .emoji-widget-instance,
 .emoji-widget-instance-trigger {
     background: green !important;
 }
+
 #emoji-widget li {
     display: flex;
     justify-content: center;
@@ -97,29 +113,35 @@ body > #emoji-widget {
     line-height: 0;
     height: 10vh;
 }
+
 #emoji-widget li.active {
     box-shadow: inset 0 0 8px 8px var(--color-deepyellow);
 }
+
 .settings label.aqua,
 .settings-header.aqua,
 .settings label.aqua + #emoji-widget {
     background: var(--color-aqua);
 }
+
 .settings label.orange,
 .settings-header.orange,
 .settings label.orange + #emoji-widget {
     background: var(--color-orange);
 }
+
 .settings label.bloodorange,
 .settings-header.bloodorange,
 .settings label.bloodorange + #emoji-widget {
     background: var(--color-bloodorange);
 }
+
 .settings label.purple,
 .settings-header.purple,
 .settings label.purple + #emoji-widget {
     background: var(--color-purple);
 }
+
 .settings label.green,
 .settings-header.green,
 .settings label.green + #emoji-widget {
