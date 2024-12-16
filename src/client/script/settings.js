@@ -1,5 +1,5 @@
 const settingsCreateEditor = (editorEl) => {
-    const id = editorEl.getAttribute("data-editor-id");
+    const id = editorEl.name;
     const textInputEl = editorEl.querySelector('[type="text"]');
     const emojiWidgetTriggerEl = editorEl.querySelector("button");
     const emojiWidgetEl = document.body.querySelector("#emoji-widget");
@@ -23,7 +23,7 @@ const settingsCreateEditor = (editorEl) => {
                     params: {
                         type: "signals:field",
                         payload: JSON.stringify({
-                            id,
+                            id: editorEl.id,
                             field: "label",
                             value: textInputEl.value,
                         }),
@@ -87,5 +87,5 @@ const settingsCreateEditor = (editorEl) => {
 };
 
 const settings = () => {
-    document.body.querySelectorAll("label").forEach(settingsCreateEditor);
+    document.body.querySelectorAll(".settings label").forEach(settingsCreateEditor);
 };
