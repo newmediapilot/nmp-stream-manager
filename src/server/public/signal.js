@@ -8,9 +8,7 @@ const {getbpmRateMessage} = require("../bpm/listen");
 let isCreating = false;
 
 async function publicSignalCreate(req, res) {
-    if (isCreating) {
-        return res.status(400).send("Please stop spamming buttons.");
-    }
+    if (isCreating) return res.status(400).send("Please stop spamming buttons.");
     isCreating = true;
     const type = req.query.type;
     const description = req.query.description;
@@ -50,7 +48,8 @@ async function publicSignalCreate(req, res) {
             const formatted = css;
             const path = "./src/client/style/" + href.split("/style/")[1].split('?').join('');
             fs.writeFileSync(path, formatted, {encoding: 'utf-8'});
-            fs.execSync(`prettier --write ${path}`);
+            execSync(`prettier --write ${path}`);
+            console.log(`prettier --write ${path}`);
             result = 1;
         }
         if (!result) {
