@@ -33,7 +33,7 @@ const DASHBOARD_BUTTON_CONFIG = {
             label: "Announcement",
             theme: "green",
             type: "announce",
-            description: "announce",
+            description: "A button made this announcement.",
         }
     ],
 };
