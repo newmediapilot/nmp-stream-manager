@@ -51,7 +51,7 @@ const cssDevWatch = () => {
             axios.get("/api/signal/create", {
                 params: {
                     type: "dev:css:write",
-                    description: outputHref
+                    description: JSON.stringify({href: outputHref, css: outputCss})
                 }
             });
             cssDevWatch.createChanges();
