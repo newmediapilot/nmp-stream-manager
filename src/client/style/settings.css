@@ -42,8 +42,9 @@
 .settings label {
     display: grid;
     grid-template-columns: repeat(21, 25px);
-    grid-template-rows: repeat(6, 25px);
+    grid-template-rows: repeat(auto-fill, 25px);
     box-sizing: border-box;
+    height: 225px;
 }
 .settings label > button {
     font-size: 40px;
@@ -51,7 +52,13 @@
 .settings label > [type='text'] {
     font-size: 25px;
     padding: 0px 15px;
-    grid-area: 4 / 4 / 1 / 22;
+    grid-area: 10 / 4 / 7 / 22;
+    box-shadow: yellow 0px 0px 1px 1px inset;
+}
+.settings label > textarea {
+    font-size: 25px;
+    padding: 0px 15px;
+    grid-area: 1 / 1 / 7 / 22;
     box-shadow: yellow 0px 0px 1px 1px inset;
 }
 .settings label > [type='text']:nth-of-type(2) {
@@ -64,7 +71,7 @@
 }
 .settings label > button {
     line-height: 0;
-    grid-area: 1 / 1 / 4 / 4;
+    grid-area: 7 / 1 / 10 / 4;
     box-shadow: yellow 0px 0px 1px 1px inset;
 }
 body > #emoji-widget {
