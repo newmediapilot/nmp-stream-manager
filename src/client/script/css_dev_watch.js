@@ -42,12 +42,8 @@ const cssDevWatch = () => {
         if (changes.length) {
             console.log('cssDevWatch.check :: rule changes changes ', changes.length, memory.length);
             changes.forEach((change) => {
-                const mem = memory.filter(a => a.href === change.href)
-                    .sort((a, b) => a.css.localeCompare(b.css))
-                    .reverse()
-                    .map(a => a.css).join('\r\n');
-                console.log('mem', mem);
-                console.log('cssDevWatch.check ::', mem.length);
+                const css = '\r\n\r\n' + memory.map(a => a.css).join('\r\n\r\n') + '\r\n\r\n' + '/***/';
+                console.log('cssDevWatch.check ::', change.href, css);
             });
             console.log('cssDevWatch.check :: rule changes changes processed');
             cssDevWatch.createChanges();
