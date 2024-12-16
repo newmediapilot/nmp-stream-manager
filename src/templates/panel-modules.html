@@ -31,36 +31,30 @@
             </label>
         </div>
     </article>
-    <!--    <article class="module bloodorange">-->
-    <!--        <div class="title" aria-label="BPM">-->
-    <!--            <button onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').showModal()"-->
-    <!--                    aria-label="🔗"></button>-->
-    <!--        </div>-->
-    <!--        <div class="preview">-->
-    <!--            <iframe width="1920"-->
-    <!--                    height="1080"-->
-    <!--                    src="{{public_routes.PANEL_BPM_EMBED}}#edit">-->
-    <!--            </iframe>-->
-    <!--        </div>-->
-    <!--        <div class="controls">-->
-    <!--            <label data-aria-label="move">-->
-    <!--                <input type="range" min="0" max="100" step="2.5" value="0" name="&#45;&#45;_bpm-translateX">-->
-    <!--                <input type="range" min="0" max="100" step="2.5" value="0" name="&#45;&#45;_bpm-translateY" hidden>-->
-    <!--            </label>-->
-    <!--            <label data-aria-label="size">-->
-    <!--                <input type="range" min="0" max="100" step="2.5" value="2.5" name="&#45;&#45;_bpm-scaleX">-->
-    <!--                <input type="range" min="0" max="100" step="2.5" value="2.5" name="&#45;&#45;_bpm-scaleX" hidden>-->
-    <!--            </label>-->
-    <!--            <label data-aria-label="tilt">-->
-    <!--                <input type="range" min="-25" max="25" step="2.5" value="0" name="&#45;&#45;_bpm-rotateY">-->
-    <!--                <input type="range" min="-25" max="25" step="2.5" value="0" name="&#45;&#45;_bpm-rotateX"hidden>-->
-    <!--            </label>-->
-    <!--            <label data-aria-label="turn">-->
-    <!--                <input type="range" min="0" max="75" step="2.5" value="0" name="&#45;&#45;_bpm-rotateZ">-->
-    <!--                <input type="range" min="0" max="75" step="2.5" value="0" name="&#45;&#45;_bpm-rotateZ" hidden>-->
-    <!--            </label>-->
-    <!--        </div>-->
-    <!--    </article>-->
+    <article class="module bloodorange">
+        <div class="title" aria-label="BPM">
+            <button onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').showModal()"
+                    aria-label="🔗"></button>
+        </div>
+        <div class="preview">
+            <iframe width="1920" height="1080" src="{{public_routes.PANEL_BPM_EMBED}}#edit"></iframe>
+        </div>
+        <div class="controls">
+            <label data-aria-label="moveX">
+                <input type="range" min="0" max="160" step="2.5" value="40" name="--_bpm-translateX" hidden>
+                <input type="range" min="0" max="160" step="2.5" value="40" name="--_bpm-translateY" hidden>
+            </label>
+            <label data-aria-label="sizeXY">
+                <input type="range" min="20" max="160" step="2.5" value="20" name="--_bpm-scaleX" hidden>
+                <input type="range" min="20" max="160" step="2.5" value="20" name="--_bpm-scaleY" hidden>
+            </label>
+            <label data-aria-label="spinXYZ">
+                <input type="range" min="0" max="100" step="2.5" value="0" name="--_bpm-rotateX" hidden>
+                <input type="range" min="0" max="100" step="2.5" value="0" name="--_bpm-rotateY" hidden>
+                <input type="range" min="0" max="100" step="2.5" value="0" name="--_bpm-rotateZ" hidden>
+            </label>
+        </div>
+    </article>
 </section>
 {%include "_home.njk"%}
 {%endblock%}
