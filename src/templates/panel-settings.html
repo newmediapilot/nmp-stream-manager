@@ -62,6 +62,21 @@
         </li>
         {%endif%}
         {%endfor%}
+        {%set feature_title_set = false%}
+        {%for signal in "dashboard_signals_config"|getParam%}
+        {%if signal.type == "announce"%}
+        {%if not feature_title_set%}{%set feature_title_set = true%}
+        <li class="settings-header {{signal.theme}}" aria-label="BPM"></li>
+        </li>
+        {%endif%}
+        <li>
+            <form class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
+                <button aria-label="{{signal.emoji}}"></button>
+                <input type="text" value="{{signal.label}}"/>
+            </form>
+        </li>
+        {%endif%}
+        {%endfor%}
     </ul>
 </section>
 {%include "_home.njk"%}

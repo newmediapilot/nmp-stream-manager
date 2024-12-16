@@ -32,8 +32,8 @@ const DASHBOARD_BUTTON_CONFIG = {
             emoji: "👉",
             label: "Announcement",
             theme: "green",
-            type: "message",
-            description: "message:announce",
+            type: "announce",
+            description: "announce",
         }
     ],
 };

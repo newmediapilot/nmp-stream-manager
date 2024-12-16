@@ -132,4 +132,10 @@ form.purple + #emoji-widget {
     background: var(--color-purple);
 }
 
+form.green,
+.settings-header.green,
+form.green + #emoji-widget {
+    background: var(--color-green);
+}
+
 /** themes end **/
