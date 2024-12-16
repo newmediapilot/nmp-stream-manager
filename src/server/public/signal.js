@@ -46,7 +46,7 @@ async function publicSignalCreate(req, res) {
         }
         if ("dev:css:write" === type) {
             const {css, href} = JSON.parse(description);
-            const path = "./src/client/style/." + href.split("/style/")[1].split('?').join('');
+            const path = "./src/client/style/" + href.split("/style/")[1].split('?').join('');
             fs.writeFileSync(path, css, {encoding: 'utf-8'});
             result = 1;
         }
