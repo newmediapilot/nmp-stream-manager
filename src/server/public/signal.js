@@ -48,8 +48,7 @@ async function publicSignalCreate(req, res) {
             const formatted = css;
             const path = "./src/client/style/" + href.split("/style/")[1].split('?').join('');
             fs.writeFileSync(path, formatted, {encoding: 'utf-8'});
-            execSync(`prettier --write ${path}`);
-            console.log(`prettier --write ${path}`);
+            execSync(`prettier --config ./.prettierrc --write ${path}`);
             result = 1;
         }
         if (!result) {
