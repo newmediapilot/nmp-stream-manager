@@ -13,7 +13,7 @@
         <li class="settings-header {{signal.theme}}" aria-label="Featured"></li>
         {%endif%}
         <li>
-            <label class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
+            <label class="{{signal.theme}}" id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
             </label>
@@ -27,7 +27,7 @@
         <li class="settings-header {{signal.theme}}" aria-label="Markers"></li>
         {%endif%}
         <li>
-            <label class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
+            <label class="{{signal.theme}}" id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
             </label>
@@ -40,7 +40,7 @@
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="settings-header {{signal.theme}}" aria-label="Ads"></li>
         {%endif%}
-        <label class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
+        <label class="{{signal.theme}}" id="{{loop.index0}}">
             <button aria-label="{{signal.emoji}}"></button>
             <input type="text" disabled value="{{signal.label}}"/>
         </label>
@@ -55,7 +55,7 @@
         </li>
         {%endif%}
         <li>
-            <label class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
+            <label class="{{signal.theme}}" id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
             </label>
@@ -70,7 +70,7 @@
         </li>
         {%endif%}
         <li>
-            <label class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
+            <label class="{{signal.theme}}" id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
                 <input type="text" value="{{signal.label}}"/>
@@ -98,6 +98,7 @@
 {%block scripts%}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => reducedMotion());
+    document.addEventListener("DOMContentLoaded", () => cssDevWatch());
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
