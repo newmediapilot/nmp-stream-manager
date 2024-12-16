@@ -44,7 +44,9 @@ const cssDevWatch = () => {
             let outputCss = '';
             let outputHref = '';
             changes.forEach((change) => {
-                outputCss = '\r\n\r\n' + memory.map(a => a.css).join('\r\n') + '\r\n\r\n';
+                outputCss = memory
+                    .filter(mem => mem.href === change.href)
+                    .map(a => a.css).join('\r\n');
                 outputHref = change.href;
             });
             console.log('cssDevWatch.check :: rule changes changes processed on', outputHref);
