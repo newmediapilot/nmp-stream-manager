@@ -33,11 +33,17 @@
 {%include "_style.njk"%}
 <style>
     body {
-        perspective: 1920px;
+        perspective: calc(3 * 1920px);
+        perspective-origin: calc(0.5 * 1920px) calc(0.5 * 1920px);
     }
-
     #module-container {
-        transform: translateX(calc(calc(var(--_bpm-translateX) * -1%) + 33%)) translateY(calc(calc(var(--_bpm-translateY) * -1%) + 33%)) scaleX(calc(var(--_bpm-scaleX) * 0.01)) scaleY(calc(var(--_bpm-scaleY) * 0.01)) rotateX(calc(var(--_bpm-rotateX) * 3.6deg)) rotateY(calc(var(--_bpm-rotateY) * 3.6deg)) rotateZ(calc(var(--_bpm-rotateZ) * 3.6deg));
+        transform: translateX(calc(calc(var(--_bpm-translateX) * -1%) + 40%))
+        translateY(calc(calc(var(--_bpm-translateY) * -1%) + 40%))
+        scaleX(calc(var(--_bpm-scaleX) * 0.01))
+        scaleY(calc(var(--_bpm-scaleY) * 0.01))
+        rotateX(calc(var(--_bpm-rotateX) * 3.6deg))
+        rotateY(calc(var(--_bpm-rotateY) * -3.6deg))
+        rotateZ(calc(var(--_bpm-rotateZ) * -3.6deg))
     }
 </style>
 {%endblock%}
