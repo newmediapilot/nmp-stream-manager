@@ -13,10 +13,10 @@
         <li class="settings-header {{signal.theme}}" aria-label="Featured"></li>
         {%endif%}
         <li>
-            <form class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
+            <label class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
-            </form>
+            </label>
         </li>
         {%endif%}
         {%endfor%}
@@ -27,10 +27,10 @@
         <li class="settings-header {{signal.theme}}" aria-label="Markers"></li>
         {%endif%}
         <li>
-            <form class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
+            <label class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
-            </form>
+            </label>
         </li>
         {%endif%}
         {%endfor%}
@@ -40,10 +40,10 @@
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="settings-header {{signal.theme}}" aria-label="Ads"></li>
         {%endif%}
-        <form class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
+        <label class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
             <button aria-label="{{signal.emoji}}"></button>
             <input type="text" disabled value="{{signal.label}}"/>
-        </form>
+        </label>
         </li>
         {%endif%}
         {%endfor%}
@@ -55,10 +55,10 @@
         </li>
         {%endif%}
         <li>
-            <form class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
+            <label class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
-            </form>
+            </label>
         </li>
         {%endif%}
         {%endfor%}
@@ -70,10 +70,11 @@
         </li>
         {%endif%}
         <li>
-            <form class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
+            <label class="{{signal.theme}}" data-editor-id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
-            </form>
+                <input type="text" value="{{signal.label}}"/>
+            </label>
         </li>
         {%endif%}
         {%endfor%}
@@ -100,6 +101,7 @@
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => autoSizeInput());
     document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
     document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.body.querySelector("#qr-dashboard-dialog")));
     document.addEventListener("DOMContentLoaded", () => generateQrCode(
