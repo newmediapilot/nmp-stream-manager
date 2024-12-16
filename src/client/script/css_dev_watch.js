@@ -10,7 +10,7 @@ const cssDevWatch = () => {
             .sort((a, b) => a.href.localeCompare(b.href))
             .forEach(sheet => Array.from(sheet.cssRules).forEach(
                 (cssRule) => {
-                    memory.push([sheet.href, cssRule.cssText]);
+                    memory.push({href: sheet.href, css: String(cssRule.cssText)});
                 })
             );
     };
@@ -23,11 +23,9 @@ const cssDevWatch = () => {
             .sort((a, b) => a.href.localeCompare(b.href))
             .forEach(sheet => Array.from(sheet.cssRules).forEach(
                 (cssRule) => {
-                    const memCache = memory[index++];
-                    const memCssHref = memCache[0];
-                    const memCssText = memCache[1];
-                    if (String(cssRule.cssText) !== String(memCssText)) {
-                        changes.push([memCssHref, String(cssRule.cssText)]);
+                    const {css} = memory[index++];
+                    if (String(cssRule.cssText) !== String(css)) {
+                        changes[index] = {href: sheet.href, css: String(cssRule.cssText)};
                     }
                 })
             );
@@ -42,14 +40,20 @@ const cssDevWatch = () => {
     };
     cssDevWatch.check = () => {
         if (changes.length) {
-            console.log('cssDevWatch.start ::changes detected', changes.length);
-            changes.forEach(([href, cssText], index) => {
-                changes.splice(changes[index].indexOf(changes[index]), 1);
+            console.log('cssDevWatch.check :: rule changes changes ', changes.length, memory.length);
+            changes.forEach((change) => {
+                const mem = memory.filter(a => a.href === change.href)
+                    .sort((a, b) => a.css.localeCompare(b.css))
+                    .reverse()
+                    .map(a => a.css).join('\r\n');
+                console.log('mem', mem);
+                console.log('cssDevWatch.check ::', mem.length);
             });
-            console.log('cssDevWatch.start ::changes processed');
+            console.log('cssDevWatch.check :: rule changes changes processed');
             cssDevWatch.createChanges();
+            changes = [];
         } else {
-            console.log('cssDevWatch.start ::memory', memory.length);
+            console.log('cssDevWatch.check :: rules in memory', memory.length);
             cssDevWatch.createChanges();
             cssDevWatch.setMemory();
         }
