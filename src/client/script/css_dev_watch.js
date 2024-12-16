@@ -39,29 +39,33 @@ const cssDevWatch = () => {
         console.log('cssDevWatch.start ::', interval);
     };
     cssDevWatch.check = () => {
-        if (changes.length) {
-            console.log('cssDevWatch.check :: rule changes changes ', changes.length, memory.length);
-            let outputCss = '';
-            let outputHref = '';
-            changes.forEach((change) => {
-                outputCss = memory
-                    .filter(mem => mem.href === change.href)
-                    .map(a => a.css).join('\r\n');
-                outputHref = change.href;
-            });
-            console.log('cssDevWatch.check :: rule changes changes processed on', outputHref);
-            axios.get("/api/signal/create", {
-                params: {
-                    type: "dev:css:write",
-                    description: JSON.stringify({href: outputHref, css: outputCss})
-                }
-            });
-            cssDevWatch.createChanges();
-            changes = [];
-        } else {
-            console.log('cssDevWatch.check :: rules in memory', memory.length);
-            cssDevWatch.createChanges();
-            cssDevWatch.setMemory();
+        try {
+            if (changes.length) {
+                console.log('cssDevWatch.check :: rule changes changes ', changes.length, memory.length);
+                let outputCss = '';
+                let outputHref = '';
+                changes.forEach((change) => {
+                    outputCss = memory
+                        .filter(mem => mem.href === change.href)
+                        .map(a => a.css).join('\r\n');
+                    outputHref = change.href;
+                });
+                console.log('cssDevWatch.check :: rule changes changes processed on', outputHref);
+                axios.get("/api/signal/create", {
+                    params: {
+                        type: "dev:css:write",
+                        description: JSON.stringify({href: outputHref, css: outputCss})
+                    }
+                });
+                cssDevWatch.createChanges();
+                changes = [];
+            } else {
+                console.log('cssDevWatch.check :: rules in memory', memory.length);
+                cssDevWatch.createChanges();
+                cssDevWatch.setMemory();
+            }
+        } catch (e) {
+            cssDevWatch.stop();
         }
     };
     cssDevWatch.start();
