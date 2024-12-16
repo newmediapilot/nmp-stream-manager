@@ -15,9 +15,6 @@
     width: 100%;
     display: block;
 }
-.settings li {
-    min-height: 5vh;
-}
 .settings .settings-header {
     display: flex;
     align-items: center;
@@ -27,25 +24,26 @@
     border-style: solid;
     border-color: rgba(255, 255, 255, 0.6) rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.4);
     min-height: calc(-80px + 5vh);
+    position: sticky;
+    top: 0px;
 }
 .settings-header p {
     flex-grow: 1;
     font-size: 30px;
     margin: 0px;
     background: repeating-linear-gradient(
-            45deg,
-            rgba(0, 0, 0, 0.05) 0px,
-            rgba(0, 0, 0, 0.05) 2px,
-            rgba(255, 255, 255, 0.05) 2px,
-            rgba(255, 255, 255, 0.05) 4px
+        45deg,
+        rgba(0, 0, 0, 0.05) 0px,
+        rgba(0, 0, 0, 0.05) 2px,
+        rgba(255, 255, 255, 0.05) 2px,
+        rgba(255, 255, 255, 0.05) 4px
     );
 }
 .settings label {
     display: grid;
     grid-template-columns: repeat(21, 25px);
-    box-sizing: border-box;
-    min-height: 8vh;
     grid-template-rows: repeat(6, 25px);
+    box-sizing: border-box;
 }
 .settings label > button {
     font-size: 40px;
@@ -56,16 +54,17 @@
     grid-area: 4 / 4 / 1 / 22;
     box-shadow: yellow 0px 0px 1px 1px inset;
 }
-.settings label > [type='text']:nth-child(2) {
-
+.settings label > [type='text']:nth-of-type(2) {
+    box-shadow: rgb(255, 40, 58) 0px 0px 1px 1px inset;
+    grid-row: 4 / 7;
 }
 .settings label > [type='text']:focus {
     background: var(--color-deepyellow);
     border-radius: 10px;
 }
-.settings label > :not([type='text']) {
+.settings label > button {
     line-height: 0;
-    grid-area: 1/1/4/4;
+    grid-area: 1 / 1 / 4 / 4;
     box-shadow: yellow 0px 0px 1px 1px inset;
 }
 body > #emoji-widget {
