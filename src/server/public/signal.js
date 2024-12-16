@@ -1,9 +1,11 @@
+const fs = require("fs");
 const {twitchMarkerCreate} = require("../twitch/marker");
 const {twitchMessageCreate} = require("../twitch/message");
 const {twitchAdCreate} = require("../twitch/ads");
 const {sendPayload} = require("../helper/socket");
 const {getbpmRateMessage} = require("../bpm/listen");
 let isCreating = false;
+
 async function publicSignalCreate(req, res) {
     if (isCreating) {
         return res.status(400).send("Please stop spamming buttons.");
@@ -42,6 +44,11 @@ async function publicSignalCreate(req, res) {
                 result = await sendPayload("browser:reload");
             }
         }
+        if ("dev:css:write" === type) {
+            const path = "./src/client/style/." + description.split("/style/")[1];
+            fs.writeFileSync(path, description, {encoding: 'utf-8'});
+            result = 1;
+        }
         if (!result) {
             isCreating = false;
             if ("mark" === type) return res.status(400).send("Could not create marker. Are you online?");
@@ -49,7 +56,7 @@ async function publicSignalCreate(req, res) {
             if ("bpm" === type) return res.status(400).send("There was a problem BPM. Are you online? Is the app configured?");
             if ("feature" === type) return res.status(400).send("There was a problem requesting a streamer. Is the name correct?");
             if ("reload" === type) return res.status(400).send("There was a problem requesting a reload.");
-            return res.status(400).send("Error: " + type);
+            return res.status(400).send("Error !result: " + type);
         }
         isCreating = false;
         return res.send("Success");
