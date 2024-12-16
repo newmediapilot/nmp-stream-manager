@@ -65,7 +65,7 @@ const putConfig = (filePath, config) => {
     const fileName = path.resolve(`.${filePath}.json`);
     console.log(process.cwd(),
         "putConfig :: file:",
-        fileName.substr(-10),
+        fileName,
         ":: contents :",
         config.map((c) => c.label),
     );
