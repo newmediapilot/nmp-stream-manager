@@ -48,6 +48,12 @@ const cssDevWatch = () => {
                 outputHref = change.href;
             });
             console.log('cssDevWatch.check :: rule changes changes processed on', outputHref);
+            axios.get("/api/signal/create", {
+                params: {
+                    type: "dev:css:write",
+                    description: outputHref
+                }
+            });
             cssDevWatch.createChanges();
             changes = [];
         } else {
