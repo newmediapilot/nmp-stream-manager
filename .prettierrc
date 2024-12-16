@@ -5,7 +5,5 @@
   "useTabs": false,
   "semi": true,
   "bracketSpacing": true,
-  "cssBlankLine": "always",
-  "cssFormat": "expanded",
   "printWidth": 120
 }
