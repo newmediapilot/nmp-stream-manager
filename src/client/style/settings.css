@@ -1,16 +1,19 @@
 .settings {
     width: 100vw;
     height: 100vh;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    overflow: hidden scroll;
     position: relative;
-    margin: 0;
-    padding: 0;
-    background: repeating-linear-gradient(-45deg, #020202, #131313 15px);
+    margin: 0px;
+    padding: 0px;
+    background: repeating-linear-gradient(
+            -45deg,
+            rgb(2, 2, 2),
+            rgb(19, 19, 19) 15px
+    );
     font-size: 300%;
 }
 
-.settings:after {
+.settings::after {
     content: "";
     height: 130px;
     background: transparent;
@@ -27,22 +30,28 @@
     align-items: center;
     z-index: 1;
     box-sizing: border-box;
-    border-top: 20px solid rgba(255, 255, 255, 0.6);
-    border-right: 20px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 20px solid rgba(255, 255, 255, 0.1);
-    border-left: 20px solid rgba(255, 255, 255, 0.4);
-    min-height: calc(5vh - (4 * 20px));
+    border-width: 20px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.6) rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.4);
+    min-height: calc(-80px + 5vh);
 }
+
 .settings-header p {
     flex-grow: 1;
     font-size: 30px;
-    margin: 0;
-    background: repeating-linear-gradient(45deg, rgba(0, 0, 0, .05) 0px, rgba(0, 0, 0, .05) 2px, rgba(255, 255, 255, .05) 2px, rgba(255, 255, 255, .05) 4px);
+    margin: 0px;
+    background: repeating-linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.05) 0px,
+            rgba(0, 0, 0, 0.05) 2px,
+            rgba(255, 255, 255, 0.05) 2px,
+            rgba(255, 255, 255, 0.05) 4px
+    );
 }
 
 .settings label {
     display: grid;
-    grid-template-columns: repeat(5, calc(100% / 5));
+    grid-template-columns: repeat(21, 25px);
     box-sizing: border-box;
     min-height: 8vh;
 }
@@ -54,11 +63,11 @@
 .settings label > [type="text"] {
     font-size: 25px;
     grid-column: span 3;
-    padding: 0 15px;
+    padding: 0px 15px;
 }
 
 .settings label > [type="text"]:disabled {
-    opacity: .5;
+    opacity: 0.5;
 }
 
 .settings label > [type="text"]:focus {
@@ -84,10 +93,10 @@ body > #emoji-widget {
 }
 
 #emoji-widget {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     display: grid;
-    grid-template-columns: repeat(5, calc(100% / 5));
+    grid-template-columns: repeat(5, calc(20%));
 }
 
 .emoji-widget-instance,
