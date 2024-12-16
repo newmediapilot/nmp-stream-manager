@@ -46,10 +46,7 @@ async function publicSignalCreate(req, res) {
         }
         if ("dev:css:write" === type) {
             const {css, href} = JSON.parse(description);
-            const formatted = css
-                .replace(new RegExp("{", "gm"), "{\r\n")
-                .replace(new RegExp("}", "gm"), "}\r\n")
-                .replace(new RegExp(";", "gm"), ";\r\n");
+            const formatted = css;
             const path = "./src/client/style/" + href.split("/style/")[1].split('?').join('');
             fs.writeFileSync(path, formatted, {encoding: 'utf-8'});
             result = 1;
