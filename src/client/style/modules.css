@@ -98,8 +98,8 @@
 .module .controls {
     display: grid;
     justify-content: end;
-    grid-template-columns: repeat(20, 20px);
-    grid-template-rows: repeat(11, 20px);
+    grid-template-columns: repeat(20, 15px);
+    grid-template-rows: repeat(11, 15px);
 }
 
 .module label {
