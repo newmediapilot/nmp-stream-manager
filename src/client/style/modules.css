@@ -59,11 +59,13 @@
     background-color: rgb(229, 229, 247);
     opacity: 0.8;
     background-size: 100% 100%;
-    background-image: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 2.5%, rgba(0, 0, 0, 0.1) 2.50001%, rgba(0, 0, 0, 0.05) 5%), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 2.5%, rgba(0, 0, 0, 0.1) 2.50001%, rgba(0, 0, 0, 0.05) 5%);
+    background-image: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 33%, rgba(0, 0, 0, 0.1) 33.0001%, rgba(0, 0, 0, 0.05) 50%),
+                      repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 33%, rgba(0, 0, 0, 0.1) 33.0001%, rgba(0, 0, 0, 0.05) 50%);
 }
 
 .module .preview iframe {
     transform: scale(calc(var(--js-module-preview-width) / 1920));
+    --js-module-preview-width;
     pointer-events: none;
     border: none;
     background: none;
