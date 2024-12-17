@@ -40,7 +40,7 @@ const DASHBOARD_BUTTON_CONFIG = {
             label: "Sound",
             theme: "red",
             type: "sound",
-            description: "a",
+            description: "a.mp3",
         }
     ],
 };
