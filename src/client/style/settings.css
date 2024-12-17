@@ -70,6 +70,7 @@ section label > button {
     line-height: 0;
     grid-area: 1 / 1 / 10 / 4;
     width: 75px;
+    max-width: 75px;
 }
 body > #emoji-widget {
     display: none;
