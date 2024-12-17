@@ -114,7 +114,7 @@ const settingsCreateUploader = (editorEl) => {
                         axios.post("/api/media/update",
                             {
                                 data: reader.result.split(',')[1],
-                                filename: uploader.files[0].name,
+                                id: uploadButton.id,
                             }).then(response => {
                             console.log('settingsCreateUploader :: success:', response.data);
                         }).catch(error => {
