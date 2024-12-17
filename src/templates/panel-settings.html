@@ -1,4 +1,5 @@
 {%extends "main.njk"%}
+{%set public_routes = 'public_routes'|getParam%}
 {%block head%}
 <link rel="stylesheet" href="../client/style/settings.css?{{cacheBuster}}">
 {%endblock%}
