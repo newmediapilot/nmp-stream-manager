@@ -1,6 +1,6 @@
 const settingsCreateEditor = (editorEl) => {
     const {id} = editorEl;
-    const textInputEls = editorEl.querySelectorAll('[type="text"]');
+    const textInputEls = editorEl.querySelectorAll('[type="text"], textarea');
     const emojiWidgetEl = document.body.querySelector("#emoji-widget");
     const textInputElFocus = (textInputEl) => {
         textInputEl.$value = textInputEl.value;
@@ -15,6 +15,9 @@ const settingsCreateEditor = (editorEl) => {
             textInputEl.value.trim().length > 2 &&
             textInputEl.value.trim().length <= 25
         ) {
+            const field = (textInputEl.tagName === 'input') ?
+                'label' :
+                'description';
             axios
                 .get("/api/config/update", {
                     params: {
@@ -40,7 +43,6 @@ const settingsCreateEditor = (editorEl) => {
     });
     let emojiWidgetInstanceEl;
     const emojiWidgetTriggerEl = editorEl.querySelector("button");
-    console.log('emojiWidgetTriggerEl', emojiWidgetTriggerEl);
     emojiWidgetTriggerEl.addEventListener("click", () => {
         document.body.querySelectorAll('.emoji-widget-instance').forEach(el => el.remove());
         document.body.querySelectorAll('.emoji-widget-instance-trigger').forEach(el => el.classList.remove('emoji-widget-instance-trigger'));
