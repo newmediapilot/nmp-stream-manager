@@ -95,12 +95,20 @@ const settingsCreateEditor = (editorEl) => {
 
 const settingsCreateUploader = (editorEl) => {
     const {id} = editorEl;
-    const textInputEls = editorEl.querySelectorAll('[type="text"], textarea');
-
+    const uploadButton = editorEl.querySelector('button:nth-of-type(2)');
+    const replayButton = editorEl.querySelector('button:nth-of-type(3)');
+    if (!!uploadButton && !!replayButton) {
+        uploadButton.addEventListener('click', () => {
+            console.log('upload', id);
+        });
+        replayButton.addEventListener('click', () => {
+            console.log('replay', id);
+        });
+    }
 };
 
 const settings = () => {
-    document.body.querySelectorAll("section label").forEach(settingsCreateEditor);
-    document.body.querySelectorAll("section label").forEach(settingsCreateEmojiWidget);
-    document.body.querySelectorAll("section label").forEach(settingsCreateUploader);
+    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsCreateEditor);
+    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsCreateEmojiWidget);
+    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsCreateUploader);
 };
