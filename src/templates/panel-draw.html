@@ -18,7 +18,7 @@
 {%block body%}
 <section>
     <canvas></canvas>
-    <input type="range" min="0" max="1000" disabled>
+    <input type="range" min="0" max="1000" value="0" disabled>
     <button onclick="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></button>
     <button onclick="javascript: document.sendPayload()" aria-label="🚀" disabled></button>
     <button onclick="javascript: document.clearCanvas()" aria-label="🧼" disabled></button>
