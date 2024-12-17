@@ -69,8 +69,6 @@ section label > [type='text']:focus {
 section label > button {
     line-height: 0;
     grid-area: 1 / 1 / 10 / 4;
-    width: 75px;
-    max-width: 75px;
 }
 body > #emoji-widget {
     display: none;
@@ -83,10 +81,11 @@ body > #emoji-widget {
     padding: 0px;
     display: grid;
     grid-template-columns: repeat(5, calc(20%));
+    border-top: 5px dotted rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 .emoji-widget-instance,
 .emoji-widget-instance-trigger {
-    background: green !important;
 }
 #emoji-widget li {
     display: flex;
