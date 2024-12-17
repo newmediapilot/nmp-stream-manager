@@ -18,7 +18,7 @@ ul {
 section {
     display: grid;
     grid-template-columns: repeat(15, 25px);
-    grid-template-rows: repeat(10, 25px);
+    grid-template-rows: repeat(20, 25px);
 }
 textarea {
     resize: none;
