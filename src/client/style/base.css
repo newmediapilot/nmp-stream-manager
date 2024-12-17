@@ -15,12 +15,6 @@ html {
 ul {
     list-style: none;
 }
-section {
-    display: grid;
-    grid-template-columns: repeat(15, 25px);
-    grid-template-rows: repeat(20, 25px);
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 15px 15px;
-}
 textarea {
     resize: none;
 }
