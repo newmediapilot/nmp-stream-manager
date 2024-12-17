@@ -99,7 +99,17 @@ const settingsCreateUploader = (editorEl) => {
     const replayButton = editorEl.querySelector('button:nth-of-type(3)');
     if (!!uploadButton && !!replayButton) {
         uploadButton.addEventListener('click', () => {
-            console.log('upload', id);
+            const uploader = document.createElement('input');
+            uploader.type = 'file';
+            uploader.accept = '.mp3';
+            uploader.click();
+            uploader.addEventListener('change', function () {
+                const selected = uploader.files[0];
+                if (selected) {
+                    console.log('Selected MP3 file:', selected);
+                }
+                uploader.remove();
+            });
         });
         replayButton.addEventListener('click', () => {
             console.log('replay', id);
