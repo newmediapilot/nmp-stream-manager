@@ -26,7 +26,7 @@ nav input[type="checkbox"] {
 
 nav label {
     position: relative;
-    background: #fff;
+    background: var(--color-light);
     width: 30px;
     height: 30px;
     border-radius: 999px;
@@ -42,7 +42,7 @@ nav label {
 nav aside {
     display: none;
     flex-direction: column;
-    background: #fff;
+    background: var(--color-light);
     border-radius: 8px;
     position: absolute;
     left: 50%;
