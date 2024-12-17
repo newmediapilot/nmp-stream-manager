@@ -101,13 +101,12 @@
 .module .controls {
     max-width: 100%;
     position: relative;
-    padding: 10px;
 }
 .module .controls {
     display: grid;
     justify-content: end;
-    grid-template-columns: repeat(30, 15px);
-    grid-template-rows: repeat(11, 15px);
+    grid-template-columns: repeat(23, 15px);
+    grid-template-rows: repeat(7, 15px);
 }
 .module label {
     overflow: scroll;
@@ -134,13 +133,13 @@
     background-blend-mode: hard-light;
 }
 .module label:nth-of-type(1) {
-    grid-area: 1 / 23 / 10 / 31;
+    grid-area: 1 / 17 / 8 / 27;
 }
 .module label:nth-of-type(2) {
-    grid-area: 1 / 14 / 10 / 22;
+    grid-area: 1 / 9 / 8 / 16;
 }
 .module label:nth-of-type(3) {
-    grid-area: 1 / 5 / 10 / 13;
+    grid-area: 1 / 1 / 8 / 8;
 }
 .module label:nth-of-type(4) {
     grid-area: 10 / 11 / 12 / 21;
