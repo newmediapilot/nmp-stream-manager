@@ -117,10 +117,12 @@ const settingsCreateUploader = (editorEl) => {
         };
         togglePlayDisabled();
         const clickReplayButton = () => {
+            console.log('(audio.currentTime', (audio.currentTime))
+            console.log('(audio.duration', (audio.duration))
             if (audio.currentTime > 0) {
                 audio.pause();
                 audio.currentTime = 0;
-            } else {
+            }else{
                 audio.play();
             }
         };
