@@ -44,8 +44,8 @@
             document.querySelector('input[type=range]').value = document.querySelector('input[type=range]').max;
             document.querySelector('[type=range]').value = 0;
             document.clearMemory();
-            document.querySelectorAll('button')[1].disabled = true;
-            document.querySelectorAll('button')[2].disabled = true;
+            document.querySelector('button:nth-of-type(2)').disabled = true;
+            document.querySelector('button:nth-of-type(3)').disabled = true;
             // TODO: animate the canvas fading in from 0 opacity
         };
         document.sendPayload = () => {
@@ -60,9 +60,10 @@
         document.clearMemory = () => {
             capture = [];
             payload = [];
-            document.querySelectorAll('button')[1].disabled = true;
-            document.querySelectorAll('button')[2].disabled = false;
+            document.querySelector('button:nth-of-type(2)').disabled = true;
+            document.querySelector('button:nth-of-type(3)').disabled = false;
         };
+        let drawPixelTo = null;
         document.drawPixel = (x, y) => {
             ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-blue').trim();
             ctx.beginPath();
@@ -73,8 +74,11 @@
             capture.push(Math.round(y));
             payload.push(Math.round(y));
             document.querySelector('[type=range]').value = capture.length;
-            document.querySelectorAll('button')[1].disabled = false;
-            document.querySelectorAll('button')[2].disabled = false;
+            if (drawPixelTo) clearTimeout(drawPixelTo);
+            drawPixelTo = setTimeout(() => {
+                document.querySelector('button:nth-of-type(2)').disabled = false;
+                document.querySelector('button:nth-of-type(3)').disabled = false;
+            }, 300);
         };
         document.replayStart = () => {
             if (Number(document.querySelector('[type=range]').value) > 0) {
@@ -85,8 +89,8 @@
                 ctx.arc(x, y, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
                 ctx.fill();
                 document.querySelector('[type=range]').value = capture.length;
-                document.querySelectorAll('button')[1].disabled = true;
-                document.querySelectorAll('button')[2].disabled = true;
+                document.querySelector('button:nth-of-type(2)').disabled = true;
+                document.querySelector('button:nth-of-type(3)').disabled = true;
                 requestAnimationFrame(document.replayStart);
                 document.querySelectorAll('[aria-label]').forEach(icon => {
                     const {value, max} = document.querySelector('[type="range"]');
