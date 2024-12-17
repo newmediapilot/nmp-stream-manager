@@ -14,6 +14,20 @@ body {
 nav {
     bottom: 150px;
 }
+input[type="range"] {
+    background: var(--color-dark);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+    background: var(--color-light);
+}
+
+input[type="range"]::-moz-range-thumb {
+    background: var(--color-light);
+}
 section {
     display: grid;
     grid-template-columns: repeat(15, 25px);
