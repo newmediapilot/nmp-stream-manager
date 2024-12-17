@@ -9,14 +9,11 @@
 <section class="dashboard">
     {%for config in "dashboard_signals_config"|getParam%}
     {%if config.type == "feature"%}
-    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?api=feature&type=" ~ config.type ~ "&description=" ~
-    config.description ~ ":" ~ config.label%}
+    {####}{%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label%}
     {%elif config.type == "mark"%}
-    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~
-    config.label%}
+    {####}{%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.label%}
     {%else%}
-    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?api=no-feature&type=" ~ config.type ~ "&description=" ~
-    config.description%}
+    {####}{%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description%}
     {%endif%}
     <article class="button button-{{config.theme}}">
         <button data-href="{{data_href}}" onclick="javascript:sendSignal(this)">
