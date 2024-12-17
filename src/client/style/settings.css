@@ -33,15 +33,14 @@ section label {
     grid-template-columns: repeat(21, 25px);
     grid-template-rows: repeat(10, 25px);
     box-sizing: border-box;
-    min-height: 75px;
-}
-section ul li:first-child label {
-    grid-template-rows: repeat(9, 25px);
-    height: 225px;
-}
-section ul li:not(:first-child) label {
-    grid-template-rows: repeat(3, 25px);
     height: 75px;
+}
+section > ul > li:not([aria-label]) label {
+    grid-template-rows: repeat(auto-fit, 25px);
+    height: 75px;
+}
+section > ul > li:not([aria-label]):nth-child(2) label {
+    height: 175px;
 }
 section label > [type='text'] {
     font-size: 25px;
@@ -61,6 +60,7 @@ section label > textarea:disabled,
 section label > [type='text']:disabled {
     color: var(--color-light);
     opacity: 0.5;
+    pointer-events: none;
 }
 section label > textarea:focus,
 section label > [type='text']:focus {
