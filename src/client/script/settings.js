@@ -104,9 +104,20 @@ const settingsCreateUploader = (editorEl) => {
             uploader.accept = '.mp3';
             uploader.click();
             uploader.addEventListener('change', function () {
-                const selected = uploader.files[0];
-                if (selected) {
-                    console.log('Selected MP3 file:', selected);
+                if (uploader.files[0]) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        const data = reader.result.split(',')[1];
+                        axios.post("/api/media/update", {
+                            data: data,
+                            filename: uploader.files[0].name
+                        }).then(response => {
+                            console.log('settingsCreateUploader :: success:', response.data);
+                        }).catch(error => {
+                            console.error('settingsCreateUploader :: error:', error);
+                        });
+                    };
+                    reader.readAsDataURL(uploader.files[0]);
                 }
                 uploader.remove();
             });
