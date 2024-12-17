@@ -1,6 +1,6 @@
 const settingsCreateEditor = (editorEl) => {
     const {id} = editorEl;
-    const textInputEls = editorEl.querySelectorAll('[type="text"],textarea');
+    const textInputEls = editorEl.querySelectorAll('[type="text"]');
     const emojiWidgetEl = document.body.querySelector("#emoji-widget");
     const textInputElFocus = (textInputEl) => {
         textInputEl.$value = textInputEl.value;
@@ -38,8 +38,9 @@ const settingsCreateEditor = (editorEl) => {
         textInputEl.addEventListener("blur", ({currentTarget}) => textInputElBlur(currentTarget));
         textInputEl.addEventListener("keydown", ({currentTarget}) => (event.keyCode === 13) && textInputElBlur(currentTarget));
     });
-    const emojiWidgetTriggerEl = editorEl.querySelector("button");
     let emojiWidgetInstanceEl;
+    const emojiWidgetTriggerEl = editorEl.querySelector("button");
+    console.log('emojiWidgetTriggerEl', emojiWidgetTriggerEl);
     emojiWidgetTriggerEl.addEventListener("click", () => {
         document.body.querySelectorAll('.emoji-widget-instance').forEach(el => el.remove());
         document.body.querySelectorAll('.emoji-widget-instance-trigger').forEach(el => el.classList.remove('emoji-widget-instance-trigger'));
@@ -84,5 +85,5 @@ const settingsCreateEditor = (editorEl) => {
 };
 
 const settings = () => {
-    document.body.querySelectorAll(".settings label").forEach(settingsCreateEditor);
+    document.body.querySelectorAll("section label").forEach(settingsCreateEditor);
 };
