@@ -107,6 +107,9 @@ section label > button:nth-of-type(2),
 section label > button:nth-of-type(3) {
     background: var(--color-deepyellow);
     border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 section label > button:nth-of-type(2) {
     grid-area: 1 / 12 / 4 / 14;
