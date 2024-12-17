@@ -49,11 +49,19 @@ section input {
     grid-area: 21 / 16 / 22 / 1;
     border-radius: 0px 0px 10px 10px;
 }
+section button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    border-width: 15px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.6) rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+}
 section button:nth-of-type(1) {
     background: rgb(255, 121, 198);
     grid-area: 23 / 1 / 31 / 8;
-    font-size: 45px;
-    border-radius: 20px;
 }
 section button:nth-of-type(1):disabled {
     opacity: .5;
@@ -61,11 +69,6 @@ section button:nth-of-type(1):disabled {
 section button:nth-of-type(2) {
     background: rgb(32, 137, 74);
     grid-area: 23 / 9 / 31 / 16;
-    font-size: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
 }
 section button:nth-of-type(2):disabled {
     opacity: .5;
