@@ -23,9 +23,23 @@
         {%endfor%}
         {%set feature_title_set = false%}
         {%for signal in "dashboard_signals_config"|getParam%}
+        {%if signal.type == "sound"%}
+        {%if not feature_title_set%}{%set feature_title_set = true%}
+        <li class="{{signal.theme}}" aria-label="Sound"></li>
+        {%endif%}
+        <li class="{{signal.theme}}">
+            <label id="{{loop.index0}}">
+                <button aria-label="{{signal.emoji}}"></button>
+                <input type="text" value="{{signal.label}}"/>
+            </label>
+        </li>
+        {%endif%}
+        {%endfor%}
+        {%set feature_title_set = false%}
+        {%for signal in "dashboard_signals_config"|getParam%}
         {%if signal.type == "feature"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
-        <li class="{{signal.theme}}" aria-label="Featured"></li>
+        <li class="{{signal.theme}}" aria-label="Feature"></li>
         {%endif%}
         <li class="{{signal.theme}}">
             <label id="{{loop.index0}}">
@@ -39,7 +53,7 @@
         {%for signal in "dashboard_signals_config"|getParam%}
         {%if signal.type == "mark"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
-        <li class="{{signal.theme}}" aria-label="Markers"></li>
+        <li class="{{signal.theme}}" aria-label="Mark"></li>
         {%endif%}
         <li class="{{signal.theme}}">
             <label id="{{loop.index0}}">
@@ -53,7 +67,7 @@
         {%for signal in "dashboard_signals_config"|getParam%}
         {%if signal.type == "ad"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
-        <li class="{{signal.theme}}" aria-label="Ads"></li>
+        <li class="{{signal.theme}}" aria-label="Ad"></li>
         {%endif%}
         <li class="{{signal.theme}}">
             <label id="{{loop.index0}}">
