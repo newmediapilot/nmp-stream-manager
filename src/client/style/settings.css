@@ -115,5 +115,5 @@ section label.purple + #emoji-widget {
 section label.green,
 section li[aria-label].green,
 section label.green + #emoji-widget {
-    background: var(--color-green);
+    background: rgb(0, 115, 46);
 }
