@@ -10,11 +10,8 @@ body {
     justify-content: center;
     align-items: flex-start;
     border-radius: 20px;
-    transform: translateY(5vh);
 }
 nav {
-    transform: none;
-    left: 0px;
     bottom: 150px;
 }
 section {
@@ -29,9 +26,9 @@ section canvas {
     width: 100%;
     height: 100%;
     grid-area: 1 / 16 / 15 / 1;
-    background-color: #ffffff;
+    background-color: rgb(255, 255, 255);
     opacity: 1;
-    background-image: radial-gradient(#000000 0.75px, #ffffff 0.75px);
+    background-image: radial-gradient(rgb(0, 0, 0) 0.75px, rgb(255, 255, 255) 0.75px);
     background-size: 15px 15px;
 }
 section input {
