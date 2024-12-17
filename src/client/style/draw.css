@@ -1,7 +1,7 @@
 html {
     width: 100vw;
     height: 100vh;
-    background: repeating-linear-gradient(-45deg, rgb(2, 2, 2), rgb(19, 19, 19) 15px);
+    background: repeating-linear-gradient(-45deg, rgb(0, 0, 0), rgb(19, 19, 19) 15px);
 }
 body {
     width: 100vw;
@@ -21,9 +21,7 @@ input[type='range']::-webkit-slider-thumb {
     width: 25px;
     height: 25px;
     background: repeating-radial-gradient(circle, rgb(255, 123, 0) 0px, rgb(255, 6, 0) 25px);
-    border-radius: 20px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-radius: 0px 0px 20px 20px;
 }
 section {
     display: grid;
