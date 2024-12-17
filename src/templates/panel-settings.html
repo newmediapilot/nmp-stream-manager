@@ -11,7 +11,6 @@
         {%if signal.type == "announce"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="{{signal.theme}}" aria-label="Announce"></li>
-        </li>
         {%endif%}
         <li>
             <label class="{{signal.theme}}" id="{{loop.index0}}">
@@ -56,10 +55,11 @@
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="{{signal.theme}}" aria-label="Ads"></li>
         {%endif%}
-        <label class="{{signal.theme}}" id="{{loop.index0}}">
-            <button aria-label="{{signal.emoji}}"></button>
-            <input type="text" disabled value="{{signal.label}}"/>
-        </label>
+        <li>
+            <label class="{{signal.theme}}" id="{{loop.index0}}">
+                <button aria-label="{{signal.emoji}}"></button>
+                <input type="text" value="{{signal.label}}"/>
+            </label>
         </li>
         {%endif%}
         {%endfor%}
@@ -68,7 +68,6 @@
         {%if signal.type == "bpm"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="{{signal.theme}}" aria-label="BPM"></li>
-        </li>
         {%endif%}
         <li>
             <label class="{{signal.theme}}" id="{{loop.index0}}">
