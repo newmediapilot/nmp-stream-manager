@@ -37,13 +37,14 @@ const settingsCreateEditor = (editorEl) => {
         }, 1000);
     };
     textInputEls.forEach((textInputEl) => {
-        textInputEl.addEventListener("focus", ({currentTarget}) => textInputElFocus(currentTarget));
-        textInputEl.addEventListener("blur", ({currentTarget}) => textInputElBlur(currentTarget));
-        textInputEl.addEventListener("keydown", ({currentTarget}) => (event.keyCode === 13) && textInputElBlur(currentTarget));
+        textInputEl.addEventListener("focus", ({target}) => textInputElFocus(target));
+        textInputEl.addEventListener("blur", ({target}) => textInputElBlur(target));
+        textInputEl.addEventListener("keydown", ({target}) => (event.keyCode === 13) && textInputElBlur(target));
     });
     let emojiWidgetInstanceEl;
     const emojiWidgetTriggerEl = editorEl.querySelector("button");
-    emojiWidgetTriggerEl.addEventListener("click", () => {
+    console.log(emojiWidgetTriggerEl)
+    emojiWidgetTriggerEl.addEventListener("click", (e) => {
         document.body.querySelectorAll('.emoji-widget-instance').forEach(el => el.remove());
         document.body.querySelectorAll('.emoji-widget-instance-trigger').forEach(el => el.classList.remove('emoji-widget-instance-trigger'));
         emojiWidgetTriggerEl.classList.remove("add");
