@@ -8,4 +8,4 @@ node_modules
 .style.css
 .combined.json
 .styles.css
-src/client/.media
+src/client/.media/
