@@ -34,6 +34,13 @@ const DASHBOARD_BUTTON_CONFIG = {
             theme: "green",
             type: "announce",
             description: "A button made this announcement.",
+        },
+        {
+            emoji: "👉",
+            label: "Sound",
+            theme: "red",
+            type: "sound",
+            description: "a",
         }
     ],
 };
