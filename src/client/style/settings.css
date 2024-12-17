@@ -24,9 +24,11 @@ section > ul > li[aria-label] {
     border-style: solid;
     border-color: rgba(255, 255, 255, 0.6) rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.4);
     min-height: calc(-80px + 5vh);
+    padding-left: 10px;
 }
 section button {
     font-size: 40px;
+    padding: 10px;
 }
 section label {
     display: grid;
@@ -44,13 +46,15 @@ section > ul > li:not([aria-label]):nth-child(2) label {
 }
 section label > [type='text'] {
     font-size: 25px;
-    padding: 0px 15px;
+    padding: 10px;
     grid-area: 1 / 4 / 4 / 22;
 }
 section label > textarea {
     font-size: 25px;
-    padding: 16px;
+    padding: 10px;
     grid-area: 4 / 4 / 10 / 22;
+    width: 420px;
+    height: 120px;
 }
 section label > [type='text']:nth-of-type(2) {
     grid-row: 4 / 7;
