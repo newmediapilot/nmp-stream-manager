@@ -7,13 +7,11 @@
     :root {
         --range-rotation-deg: 0;
     }
-
     section button {
         transition: opacity 100ms ease-out;
     }
-
-    section button::before {
-        transition: rotateZ 1000ms ease-in-out;
+    section button:nth-of-type(2)::before {
+        transition: rotateZ 2000ms ease-in-out;
         transform: rotateZ(var(--range-rotation-deg));
     }
 </style>
