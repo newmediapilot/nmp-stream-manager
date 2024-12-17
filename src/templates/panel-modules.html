@@ -54,6 +54,29 @@
             </label>
         </div>
     </article>
+    <article class="module bloodorange">
+        <div class="title" aria-label="DRAW">
+            <button onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').showModal()" aria-label="🔗"></button>
+        </div>
+        <div class="preview">
+            <iframe width="1920" height="1080" src="{{public_routes.PANEL_DRAW_EMBED}}#edit"></iframe>
+        </div>
+        <div class="controls">
+            <label data-aria-label="moveX">
+                <input type="range" min="0" max="160" step="2.5" value="40" name="--_draw-translateX" hidden>
+                <input type="range" min="0" max="160" step="2.5" value="40" name="--_draw-translateY" hidden>
+            </label>
+            <label data-aria-label="sizeXY">
+                <input type="range" min="20" max="160" step="2.5" value="20" name="--_draw-scaleX" hidden>
+                <input type="range" min="20" max="160" step="2.5" value="20" name="--_bpm-scaleY" hidden>
+            </label>
+            <label data-aria-label="spinXYZ">
+                <input type="range" min="0" max="100" step="2.5" value="0" name="--_draw-rotateX" hidden>
+                <input type="range" min="0" max="100" step="2.5" value="0" name="--_draw-rotateY" hidden>
+                <input type="range" min="0" max="100" step="2.5" value="0" name="--_draw-rotateZ" hidden>
+            </label>
+        </div>
+    </article>
 </section>
 {%include "_home.njk"%}
 {%endblock%}
