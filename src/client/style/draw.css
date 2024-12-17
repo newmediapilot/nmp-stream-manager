@@ -30,9 +30,9 @@ section canvas {
     grid-area: 1 / 16 / 15 / 1;
     background-color: rgb(255, 255, 255);
     opacity: 1;
-    background-image: linear-gradient(rgb(0, 0, 0) 1px, transparent 1px),
-        linear-gradient(to right, rgb(0, 0, 0) 1px, rgb(255, 255, 255) 1px);
-    background-size: 27px 27px;
+    background-image: radial-gradient(rgb(0, 0, 0) 1px, rgb(255, 255, 255) 1px);
+    background-size: 24px 24px;
+    background-position: -5px -5px;
 }
 section input {
     background: red;
