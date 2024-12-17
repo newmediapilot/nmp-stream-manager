@@ -103,13 +103,18 @@ section label > button {
 section label > button:nth-of-type(1) {
     grid-area: 1 / 1 / 4 / 4;
 }
+section label > button:nth-of-type(2),
+section label > button:nth-of-type(3) {
+    background: var(--color-deepyellow);
+    border-radius: 10px;
+}
 section label > button:nth-of-type(2) {
     grid-area: 1 / 12 / 4 / 14;
-    font-size: 20px;
+    font-size: 30px;
 }
 section label > button:nth-of-type(3) {
     grid-area: 1 / 14 / 4 / 16;
-    font-size: 20px;
+    font-size: 30px;
 }
 body > #emoji-widget {
     display: none;
