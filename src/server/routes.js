@@ -2,6 +2,7 @@ const ROUTES = {
     API_SIGNAL_CREATE: "/api/signal/create",
     API_CONFIG_UPDATE: "/api/config/update",
     API_STYLE_UPDATE: "/api/style/update",
+    API_MEDIA_UPDATE: "/api/media/update",
     INDEX: "/",
     PANEL_DASHBOARD: "/public/dashboard",
     PANEL_SETTINGS: "/public/settings",
