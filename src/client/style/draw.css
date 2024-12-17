@@ -1,0 +1,31 @@
+html {
+    width: 100vw;
+    height: 100vh;
+}
+body {
+    width: 100vw;
+    height: 100vh;
+}
+nav {
+    transform: none;
+    left: 0px;
+    bottom: 150px;
+}
+canvas {
+    opacity: 1;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.1) 2px, transparent 2px),
+        linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, rgba(255, 255, 255, 0.1) 1px);
+    background-size:
+        50px 50px,
+        50px 50px,
+        10px 10px,
+        10px 10px;
+    background-position:
+        -2px -2px,
+        -2px -2px,
+        -1px -1px,
+        -1px -1px;
+    grid-area: 1 / 1 / 1 / 1;
+}
