@@ -65,17 +65,20 @@ section button::after {
     box-shadow: var(--color-purple) 0px 0px 50px 25px inset;
     mix-blend-mode: multiply;
 }
-section button:nth-of-type(1) {
-    background: rgb(255, 121, 198);
-    grid-area: 23 / 1 / 31 / 6;
-}
-section button:nth-of-type(1):disabled {
+section button:nth-of-type(1):disabled,
+section button:nth-of-type(2):disabled,
+section button:nth-of-type(3):disabled {
     opacity: 0.5;
+}
+section button:nth-of-type(1) {
+    background: var(--color-red);
+    grid-area: 23 / 11 / 31 / 16;
 }
 section button:nth-of-type(2) {
-    background: var(--color-green);
-    grid-area: 23 / 6 / 31 / 16;
+    background: var(--color-aqua);
+    grid-area: 23 / 6 / 31 / 11;
 }
-section button:nth-of-type(2):disabled {
-    opacity: 0.5;
+section button:nth-of-type(3) {
+    background: var(--color-dark);
+    grid-area: 31 / 1 / 23 / 6;
 }
