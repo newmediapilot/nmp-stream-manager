@@ -100,6 +100,10 @@ const settingsCreateUploader = (editorEl) => {
     if (!!uploadButton && !!replayButton) {
         uploadButton.addEventListener('click', () => {
             const uploader = document.createElement('input');
+            // {
+            //     data: data,
+            //         filename: uploader.files[0].name
+            // }
             uploader.type = 'file';
             uploader.accept = '.mp3';
             uploader.click();
@@ -107,11 +111,11 @@ const settingsCreateUploader = (editorEl) => {
                 if (uploader.files[0]) {
                     const reader = new FileReader();
                     reader.onloadend = () => {
-                        const data = reader.result.split(',')[1];
-                        axios.post("/api/media/update", {
-                            data: data,
-                            filename: uploader.files[0].name
-                        }).then(response => {
+                        axios.post("/api/media/update",
+                            {
+                                data: reader.result.split(',')[1],
+                                filename: uploader.files[0].name,
+                            }).then(response => {
                             console.log('settingsCreateUploader :: success:', response.data);
                         }).catch(error => {
                             console.error('settingsCreateUploader :: error:', error);
