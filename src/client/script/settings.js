@@ -1,30 +1,27 @@
 const settingsCreateEditor = (editorEl) => {
-    const id = editorEl.id;
-    const textInputEl = editorEl.querySelector('[type="text"]');
-    const emojiWidgetTriggerEl = editorEl.querySelector("button");
+    const {id} = editorEl;
+    const textInputEls = editorEl.querySelectorAll('[type="text"],textarea');
     const emojiWidgetEl = document.body.querySelector("#emoji-widget");
-    let emojiWidgetInstanceEl;
-    let textEditorValue = null;
-    const textInputElFocus = () => {
-        textEditorValue = textInputEl.value;
+    const textInputElFocus = (textInputEl) => {
+        textInputEl.$value = textInputEl.value;
         textInputEl.select();
         textInputEl.scrollIntoView({
             behavior: 'smooth'
         });
     };
-    const textInputElBlur = () => {
+    const textInputElBlur = (textInputEl) => {
         if (
-            textInputEl.value !== textEditorValue &&
+            textInputEl.$value !== textInputEl.value &&
             textInputEl.value.trim().length > 2 &&
-            textInputEl.value.trim().length <= 25 // Twitch max
+            textInputEl.value.trim().length <= 25
         ) {
             axios
                 .get("/api/config/update", {
                     params: {
                         type: "signals:field",
                         payload: JSON.stringify({
-                            id: editorEl.id,
-                            field: "label",
+                            id,
+                            field,
                             value: textInputEl.value,
                         }),
                     },
@@ -36,14 +33,14 @@ const settingsCreateEditor = (editorEl) => {
             textInputEl.disabled = false;
         }, 1000);
     };
-    textInputEl.addEventListener("focus", textInputElFocus);
-    textInputEl.addEventListener("blur", textInputElBlur);
-    textInputEl.addEventListener(
-        "keydown",
-        () => event.keyCode === 13 && textInputElBlur(),
-    );
+    textInputEls.forEach((textInputEl) => {
+        textInputEl.addEventListener("focus", ({currentTarget}) => textInputElFocus(currentTarget));
+        textInputEl.addEventListener("blur", ({currentTarget}) => textInputElBlur(currentTarget));
+        textInputEl.addEventListener("keydown", ({currentTarget}) => (event.keyCode === 13) && textInputElBlur(currentTarget));
+    });
+    const emojiWidgetTriggerEl = editorEl.querySelector("button");
+    let emojiWidgetInstanceEl;
     emojiWidgetTriggerEl.addEventListener("click", () => {
-        // cleanup anything existing first
         document.body.querySelectorAll('.emoji-widget-instance').forEach(el => el.remove());
         document.body.querySelectorAll('.emoji-widget-instance-trigger').forEach(el => el.classList.remove('emoji-widget-instance-trigger'));
         emojiWidgetTriggerEl.classList.remove("add");
