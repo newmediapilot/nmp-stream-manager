@@ -40,7 +40,7 @@ section > ul > li:not([aria-label]) label {
     height: 75px;
 }
 section > ul > li:not([aria-label]):nth-child(2) label {
-    height: 175px;
+    height: 225px;
 }
 section label > [type='text'] {
     font-size: 25px;
@@ -50,10 +50,9 @@ section label > [type='text'] {
 section label > textarea {
     font-size: 25px;
     padding: 16px;
-    grid-area: 4 / 4 / 8 / 22;
+    grid-area: 4 / 4 / 10 / 22;
 }
 section label > [type='text']:nth-of-type(2) {
-    box-shadow: rgb(255, 40, 58) 0px 0px 1px 1px inset;
     grid-row: 4 / 7;
 }
 section label > textarea:disabled,
@@ -97,28 +96,28 @@ body > #emoji-widget {
 #emoji-widget li.active {
     box-shadow: inset 0 0 8px 8px var(--color-deepyellow);
 }
+section li.aqua,
 section label.aqua,
-section li[aria-label].aqua,
 section label.aqua + #emoji-widget {
     background: var(--color-aqua);
 }
+section li.orange,
 section label.orange,
-section li[aria-label].orange,
 section label.orange + #emoji-widget {
     background: var(--color-orange);
 }
+section li.bloodorange,
 section label.bloodorange,
-section li[aria-label].bloodorange,
 section label.bloodorange + #emoji-widget {
     background: var(--color-bloodorange);
 }
+section li.purple,
 section label.purple,
-section li[aria-label].purple,
 section label.purple + #emoji-widget {
     background: var(--color-purple);
 }
+section li.green,
 section label.green,
-section li[aria-label].green,
 section label.green + #emoji-widget {
-    background: rgb(0, 115, 46);
+    background: var(--color-green);
 }
