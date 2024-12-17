@@ -8,13 +8,9 @@ const paths = (req, res, next) => {
             ) &&
             typeof body === 'string'
         ) {
-            const src = body.match(new RegExp('src="../client', "gm"));
-            src && src.forEach(match => {
-                body = body.replace(match, "src=\"");
-            });
-            const href = body.match(new RegExp('href="../client', "gm"));
-            href && href.forEach(match => {
-                body = body.replace(match, "href=\"");
+            const matched = body.match(new RegExp("../client", "gm"));
+            matched && matched.forEach(match => {
+                body = body.replace(match, "");
             });
         }
         originalSend.call(res, body);
