@@ -1,0 +1,70 @@
+{%extends "main.njk"%}
+{%block cdn%}{%endblock%}
+{%block client%}{%endblock%}}
+{%block head%}
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="text/javascript" defer></script>
+<script crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" type="text/javascript" defer></script>
+<script defer src="../client/script/iframe_detect.js?{{cacheBuster}}" type="text/javascript"></script>
+<script defer src="../client/script/socket.js?{{cacheBuster}}" type="text/javascript"></script>
+<link rel="stylesheet" href="../client/style/base.css?{{cacheBuster}}">
+<link rel="stylesheet" href="../client/style/iframe.css?{{cacheBuster}}">
+<style>
+    #projector {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 100px;
+        color: red;
+        width: 100vw;
+        height: 100vh;
+    }
+</style>
+<style>
+    :root {
+        --_proj-translateX: 0.0;
+        --_proj-translateY: 0.0;
+        --_proj-scaleX: 100.0;
+        --_proj-scaleY: var(--_proj-scaleX);
+        --_proj-rotateX: 0.0;
+        --_proj-rotateY: 0.0;
+        --_proj-rotateZ: 0.0;
+    }
+</style>
+{%include "_style.njk"%}
+<style>
+    body {
+        perspective: calc(3 * 1920px);
+        perspective-origin: calc(0.5 * 1920px) calc(0.5 * 1920px);
+    }
+
+    #module-container {
+        transform: translateX(calc(calc(var(--_proj-translateX) * -1%) + 40%)) translateY(calc(calc(var(--_proj-translateY) * -1%) + 40%)) scaleX(calc(var(--_proj-scaleX) * 0.01)) scaleY(calc(var(--_proj-scaleY) * 0.01)) rotateX(calc(var(--_proj-rotateX) * 3.6deg)) rotateY(calc(var(--_proj-rotateY) * -3.6deg)) rotateZ(calc(var(--_proj-rotateZ) * -3.6deg))
+    }
+</style>
+{%endblock%}
+{%block body%}
+{%for signal in "dashboard_signals_config"|getParam%}
+{%if signal.type == "bpm"%}
+<main id="module-container">
+    <section id="projector">
+        P R O J E C T O R
+    </section>
+</main>
+{%endif%}
+{%endfor%}
+{%endblock%}
+{%block scripts%}
+<script defer>
+    document.addEventListener("DOMContentLoaded", () => iframeDetect());
+    document.addEventListener("DOMContentLoaded", () => socketConnect());
+    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
+        let style = payload.split('style:set:')[1];
+        document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
+    }));
+    document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
+        let projector = payload.split('projector:set:')[1];
+        console.log('embed-projector', projector);
+    }));
+</script>
+{%endblock%}
