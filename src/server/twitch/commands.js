@@ -1,5 +1,5 @@
 const { getSecret } = require("../store/manager");
-const { getbpmRateMessage } = require("../bpm/listen");
+const { getBpm } = require("../bpm/listen");
 const { twitchAdCreate } = require("./ads");
 const { twitchClipCreate } = require("./clip");
 const { twitchTwipCreate } = require("../twitter/twip");
@@ -59,7 +59,7 @@ async function parseCommand(channel, tags, message) {
     return true;
   }
   if (currentCommand === COMMANDS.bpm) {
-    await twitchMessageCreate(getbpmRateMessage());
+    await twitchMessageCreate(getBpm());
     return true;
   }
   // Broadcaster commands
