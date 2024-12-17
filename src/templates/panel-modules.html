@@ -33,8 +33,7 @@
     </article>
     <article class="module bloodorange">
         <div class="title" aria-label="BPM">
-            <button onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').showModal()"
-                    aria-label="🔗"></button>
+            <button onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').showModal()" aria-label="🔗"></button>
         </div>
         <div class="preview">
             <iframe width="1920" height="1080" src="{{public_routes.PANEL_BPM_EMBED}}#edit"></iframe>
@@ -60,14 +59,22 @@
 {%endblock%}
 {%block dialogs%}
 {%set device_ip = "device_ip"|getParam%}
+<dialog id="feature-dialog" data-url="https://{{device_ip}}">
+    <section>
+        <h2 aria-label="Feature Link"></h2>
+        <h3 aria-label="Use this link as a source in your streaming software."></h3>
+        <canvas></canvas>
+        <button aria-label="Click to Copy Link!"></button>
+        <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#feature-dialog').close();"></button>
+    </section>
+</dialog>
 <dialog id="qr-dashboard-dialog" data-url="https://{{device_ip}}">
     <section>
         <h2 aria-label="QR Code Link"></h2>
         <h3 aria-label="This link will open this page on any device on your network"></h3>
         <canvas></canvas>
         <button aria-label="Click to Copy Link!"></button>
-        <button aria-label="✅Done"
-                onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').close();"></button>
+        <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').close();"></button>
     </section>
 </dialog>
 {%endblock%}
