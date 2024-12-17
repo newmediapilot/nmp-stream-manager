@@ -1,4 +1,4 @@
-.settings {
+section {
     width: 100vw;
     height: 100vh;
     overflow: hidden scroll;
@@ -8,14 +8,14 @@
     background: repeating-linear-gradient(-45deg, rgb(2, 2, 2), rgb(19, 19, 19) 15px);
     font-size: 300%;
 }
-.settings::after {
+section::after {
     content: '';
     height: 130px;
     background: transparent;
     width: 100%;
     display: block;
 }
-.settings li[aria-label] {
+section li[aria-label] {
     display: flex;
     align-items: center;
     z-index: 1;
@@ -25,53 +25,38 @@
     border-color: rgba(255, 255, 255, 0.6) rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.4);
     min-height: calc(-80px + 5vh);
 }
-.settings li[aria-label] p {
-    flex-grow: 1;
-    font-size: 30px;
-    margin: 0px;
-    background: repeating-linear-gradient(
-        45deg,
-        rgba(0, 0, 0, 0.05) 0px,
-        rgba(0, 0, 0, 0.05) 2px,
-        rgba(255, 255, 255, 0.05) 2px,
-        rgba(255, 255, 255, 0.05) 4px
-    );
-}
-.settings label {
+section label {
     display: grid;
     grid-template-columns: repeat(21, 25px);
     grid-template-rows: repeat(auto-fill, 25px);
     box-sizing: border-box;
     height: 225px;
 }
-.settings label > button {
+section label > button {
     font-size: 40px;
 }
-.settings label > [type='text'] {
+section label > [type='text'] {
     font-size: 25px;
     padding: 0px 15px;
     grid-area: 10 / 4 / 7 / 22;
-    box-shadow: yellow 0px 0px 1px 1px inset;
 }
-.settings label > textarea {
+section label > textarea {
     font-size: 25px;
     padding: 16px;
     grid-area: 1 / 1 / 7 / 22;
-    box-shadow: yellow 0px 0px 1px 1px inset;
 }
-.settings label > [type='text']:nth-of-type(2) {
+section label > [type='text']:nth-of-type(2) {
     box-shadow: rgb(255, 40, 58) 0px 0px 1px 1px inset;
     grid-row: 4 / 7;
 }
-.settings label > textarea:focus,
-.settings label > [type='text']:focus {
+section label > textarea:focus,
+section label > [type='text']:focus {
     background: var(--color-deepyellow);
     border-radius: 10px;
 }
-.settings label > button {
+section label > button {
     line-height: 0;
     grid-area: 7 / 1 / 10 / 4;
-    box-shadow: yellow 0px 0px 1px 1px inset;
 }
 body > #emoji-widget {
     display: none;
@@ -99,28 +84,28 @@ body > #emoji-widget {
 #emoji-widget li.active {
     box-shadow: inset 0 0 8px 8px var(--color-deepyellow);
 }
-.settings label.aqua,
-.settings li[aria-label].aqua,
-.settings label.aqua + #emoji-widget {
+section label.aqua,
+section li[aria-label].aqua,
+section label.aqua + #emoji-widget {
     background: var(--color-aqua);
 }
-.settings label.orange,
-.settings li[aria-label].orange,
-.settings label.orange + #emoji-widget {
+section label.orange,
+section li[aria-label].orange,
+section label.orange + #emoji-widget {
     background: var(--color-orange);
 }
-.settings label.bloodorange,
-.settings li[aria-label].bloodorange,
-.settings label.bloodorange + #emoji-widget {
+section label.bloodorange,
+section li[aria-label].bloodorange,
+section label.bloodorange + #emoji-widget {
     background: var(--color-bloodorange);
 }
-.settings label.purple,
-.settings li[aria-label].purple,
-.settings label.purple + #emoji-widget {
+section label.purple,
+section li[aria-label].purple,
+section label.purple + #emoji-widget {
     background: var(--color-purple);
 }
-.settings label.green,
-.settings li[aria-label].green,
-.settings label.green + #emoji-widget {
+section label.green,
+section li[aria-label].green,
+section label.green + #emoji-widget {
     background: var(--color-green);
 }
