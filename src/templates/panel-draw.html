@@ -2,10 +2,11 @@
 {%set public_routes = "public_routes"|getParam%}
 {%block head%}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js?{{cacheBuster}}" type="text/javascript" defer></script>
+<link rel="stylesheet" href="../client/style/draw.css?{{cacheBuster}}">
 {%endblock%}
 {%block body%}
 <section>
-    <canvas>HELLO</canvas>
+    <canvas></canvas>
     <input disabled type="range" min="0" max="1000" value="max" step="1">
     <button onclick="javascript: document.clearCanvas()" aria-label="🧹"></button>
     <button onclick="javascript: document.sendPayload()" aria-label="📨"></button>
