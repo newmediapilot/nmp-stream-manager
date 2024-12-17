@@ -105,8 +105,8 @@
 .module .controls {
     display: grid;
     justify-content: end;
-    grid-template-columns: repeat(23, 15px);
-    grid-template-rows: repeat(7, 15px);
+    grid-template-columns: repeat(23, 12.5px);
+    grid-template-rows: repeat(7, 12.5px);
 }
 .module label {
     overflow: scroll;
