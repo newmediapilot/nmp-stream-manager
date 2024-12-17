@@ -100,20 +100,29 @@ const settingsCreateUploader = (editorEl) => {
     const inputEl = editorEl.querySelector('input[type=text]');
     if (!!inputEl && !!uploadButton && !!replayButton) {
         const togglePlayDisabled = () => {
-            axios.get(`/.media/${uploadButton.id}`)
-                .then(response => {
-                    audio = new Audio(`/.media/${uploadButton.id}`);
-                    audio.volume = 0.75;
-                    replayButton.disabled = false;
-                }).catch(error => {
-                console.error('togglePlayDisabled :: error:', error);
-                replayButton.disabled = true;
-            });
+            const url = `/.media/${uploadButton.id}?${new Date().getTime()}`;
+            console.log('togglePlayDisabled :: checking ::', url);
+            axios.get(url).then(() => {
+                if (audio) {
+                    audio = undefined;
+                }
+                audio = new Audio(url);
+                audio.volume = 0.75;
+                replayButton.disabled = false;
+            }).catch(error => {
+                    console.log('togglePlayDisabled :: no sound ::', url);
+                    replayButton.disabled = true;
+                }
+            );
         };
         togglePlayDisabled();
         const clickReplayButton = () => {
-            audio.currentTime = 0;
-            audio.play();
+            if (audio.currentTime > 0) {
+                audio.pause();
+                audio.currentTime = 0;
+            } else {
+                audio.play();
+            }
         };
         const clickUploadButton = () => {
             const uploader = document.createElement('input');
@@ -123,7 +132,6 @@ const settingsCreateUploader = (editorEl) => {
             uploader.addEventListener('change', function () {
                 if (uploader.files[0]) {
                     const reader = new FileReader();
-                    inputEl.value = uploader.files[0].name.split(".mp3")[0].slice(0, 15);
                     inputEl.focus();
                     reader.onloadend = () => {
                         axios.post("/api/media/update",
@@ -132,9 +140,10 @@ const settingsCreateUploader = (editorEl) => {
                                 id: uploadButton.id,
                             }).then(response => {
                             console.log('settingsCreateUploader :: success:', response.data);
+                            togglePlayDisabled();
                         }).catch(error => {
                             console.error('settingsCreateUploader :: error:', error);
-                        }).finally(togglePlayDisabled)
+                        });
                     };
                     reader.readAsDataURL(uploader.files[0]);
                 }
