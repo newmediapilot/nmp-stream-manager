@@ -1,49 +1,8 @@
-const settingsCreateEditor = (editorEl) => {
+const settingsCreateEmojiWidget = (editorEl) => {
     const {id} = editorEl;
-    const textInputEls = editorEl.querySelectorAll('[type="text"], textarea');
     const emojiWidgetEl = document.body.querySelector("#emoji-widget");
-    const textInputElFocus = (textInputEl) => {
-        textInputEl.$value = textInputEl.value;
-        textInputEl.select();
-        textInputEl.scrollIntoView({
-            behavior: 'smooth'
-        });
-    };
-    const textInputElBlur = (textInputEl) => {
-        if (
-            textInputEl.$value !== textInputEl.value &&
-            textInputEl.value.trim().length > 2 &&
-            textInputEl.value.trim().length <= 25
-        ) {
-            const field = (textInputEl.tagName === 'input') ?
-                'label' :
-                'description';
-            axios
-                .get("/api/config/update", {
-                    params: {
-                        type: "signals:field",
-                        payload: JSON.stringify({
-                            id,
-                            field,
-                            value: textInputEl.value,
-                        }),
-                    },
-                })
-                .finally(() => socketEmitReload());
-        }
-        textInputEl.disabled = true;
-        setTimeout(() => {
-            textInputEl.disabled = false;
-        }, 1000);
-    };
-    textInputEls.forEach((textInputEl) => {
-        textInputEl.addEventListener("focus", ({target}) => textInputElFocus(target));
-        textInputEl.addEventListener("blur", ({target}) => textInputElBlur(target));
-        textInputEl.addEventListener("keydown", ({target}) => (event.keyCode === 13) && textInputElBlur(target));
-    });
+    const emojiWidgetTriggerEl = editorEl.querySelector("button:nth-of-type(1)");
     let emojiWidgetInstanceEl;
-    const emojiWidgetTriggerEl = editorEl.querySelector("button");
-    console.log(emojiWidgetTriggerEl)
     emojiWidgetTriggerEl.addEventListener("click", (e) => {
         document.body.querySelectorAll('.emoji-widget-instance').forEach(el => el.remove());
         document.body.querySelectorAll('.emoji-widget-instance-trigger').forEach(el => el.classList.remove('emoji-widget-instance-trigger'));
@@ -90,6 +49,58 @@ const settingsCreateEditor = (editorEl) => {
     });
 };
 
+const settingsCreateEditor = (editorEl) => {
+    const {id} = editorEl;
+    const textInputEls = editorEl.querySelectorAll('[type="text"], textarea');
+    const textInputElFocus = (textInputEl) => {
+        textInputEl.$value = textInputEl.value;
+        textInputEl.select();
+        textInputEl.scrollIntoView({
+            behavior: 'smooth'
+        });
+    };
+    const textInputElBlur = (textInputEl) => {
+        if (
+            textInputEl.$value !== textInputEl.value &&
+            textInputEl.value.trim().length > 2 &&
+            textInputEl.value.trim().length <= 25
+        ) {
+            const field = (textInputEl.tagName.toLowerCase() === 'input') ?
+                'label' :
+                'description';
+            axios
+                .get("/api/config/update", {
+                    params: {
+                        type: "signals:field",
+                        payload: JSON.stringify({
+                            id,
+                            field,
+                            value: textInputEl.value,
+                        }),
+                    },
+                })
+                .finally(() => socketEmitReload());
+        }
+        textInputEl.disabled = true;
+        setTimeout(() => {
+            textInputEl.disabled = false;
+        }, 1000);
+    };
+    textInputEls.forEach((textInputEl) => {
+        textInputEl.addEventListener("focus", ({target}) => textInputElFocus(target));
+        textInputEl.addEventListener("blur", ({target}) => textInputElBlur(target));
+        textInputEl.addEventListener("keydown", ({target}) => (event.keyCode === 13) && textInputElBlur(target));
+    });
+};
+
+const settingsCreateUploader = (editorEl) => {
+    const {id} = editorEl;
+    const textInputEls = editorEl.querySelectorAll('[type="text"], textarea');
+
+};
+
 const settings = () => {
     document.body.querySelectorAll("section label").forEach(settingsCreateEditor);
+    document.body.querySelectorAll("section label").forEach(settingsCreateEmojiWidget);
+    document.body.querySelectorAll("section label").forEach(settingsCreateUploader);
 };
