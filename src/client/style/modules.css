@@ -121,16 +121,9 @@
     width: 200%;
     height: 200%;
     opacity: 0.8;
-    background-image: radial-gradient(circle, rgb(255, 6, 0), rgb(255, 123, 0)),
-        repeating-radial-gradient(
-            circle,
-            rgb(255, 241, 110),
-            rgb(247, 193, 0),
-            10px,
-            transparent 20px,
-            transparent 10px
-        );
-    background-blend-mode: hard-light;
+    background-image: radial-gradient(circle, rgb(255, 255, 255), rgb(0, 0, 0)),
+        repeating-radial-gradient(circle, rgb(255, 255, 255), rgb(0, 0, 0), 25px, transparent 50px, transparent 25px);
+    background-blend-mode: darken;
 }
 .module label:nth-of-type(1) {
     grid-area: 1 / 17 / 8 / 27;
