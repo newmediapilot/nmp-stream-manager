@@ -5,11 +5,13 @@
 <link rel="stylesheet" href="../client/style/draw.css?{{cacheBuster}}">
 <style>
     :root {
-        --range-rotation-deg: 0deg;
+        --range-rotation-deg: 0;
     }
+
     section button {
         transition: opacity 100ms ease-out;
     }
+
     section button::before {
         transition: rotateZ 1000ms ease-in-out;
         transform: rotateZ(var(--range-rotation-deg));
@@ -97,10 +99,7 @@
                     const {value, max} = document.querySelector('[type="range"]');
                     const percent = Number(value) / Number(max);
                     const deg = Math.round(percent * 1080);
-                    document.documentElement.style.setProperty(
-                        '--range-rotation-percent',
-                        `${deg}deg`
-                    );
+                    document.documentElement.style.setProperty('--range-rotation-deg', `${deg}deg`);
                 });
             } else {
                 document.clearMemory();
