@@ -122,3 +122,8 @@ section label.green,
 section label.green + #emoji-widget {
     background: var(--color-green);
 }
+section li.red,
+section label.red,
+section label.red + #emoji-widget {
+    background: var(--color-red);
+}
