@@ -25,18 +25,23 @@ section > ul > li[aria-label] {
     border-color: rgba(255, 255, 255, 0.6) rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.4);
     min-height: calc(-80px + 5vh);
 }
+section button {
+    font-size: 40px;
+}
 section label {
     display: grid;
     grid-template-columns: repeat(21, 25px);
-    grid-template-rows: repeat(auto-fill, 25px);
+    grid-template-rows: repeat(10, 25px);
     box-sizing: border-box;
+    min-height: 75px;
+}
+section ul li:first-child label {
+    grid-template-rows: repeat(9, 25px);
     height: 225px;
 }
-section > ul > li:not(:nth-of-type(1)) label {
+section ul li:not(:first-child) label {
     grid-template-rows: repeat(3, 25px);
-}
-section label > button {
-    font-size: 40px;
+    height: 75px;
 }
 section label > [type='text'] {
     font-size: 25px;
