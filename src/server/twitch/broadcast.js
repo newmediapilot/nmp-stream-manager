@@ -14,7 +14,7 @@ const { twitchMessageCreate } = require("./message");
  */
 async function setBroadcastTitle(title) {
   if (!title) {
-    console.err2(process.cwd(), "No title provided. Skipping update.");
+    console.log(process.cwd(), "No title provided. Skipping update.");
     return false;
   }
 
@@ -43,7 +43,7 @@ async function setBroadcastTitle(title) {
 
       return title;
     } else {
-      console.err2(
+      console.log(
         process.cwd(),
         "Failed to update stream title:",
         response.status,
@@ -51,7 +51,7 @@ async function setBroadcastTitle(title) {
       return false;
     }
   } catch (error) {
-    console.err2(
+    console.log(
       process.cwd(),
       "Error updating stream title:",
       error.response?.data || error.message,

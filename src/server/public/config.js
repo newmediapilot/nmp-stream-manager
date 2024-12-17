@@ -55,7 +55,7 @@ const initializePublicConfigs = async (type) => {
         console.log(process.cwd(), "initializePublicConfigs :: success");
         return true;
     } catch (e) {
-        console.err2(process.cwd(), "initializePublicConfigs :: error", e);
+        console.log(process.cwd(), "initializePublicConfigs :: error", e);
         return false;
     } finally {
         console.log(process.cwd(), "initializePublicConfigs :: done");
@@ -113,7 +113,7 @@ const publicConfigUpdate = (req, res) => {
             message: "Configuration for " + type + " updated successfully.",
         });
     } catch (error) {
-        console.err2(
+        console.log(
             process.cwd(),
             "Error processing configuration:",
             error.message,

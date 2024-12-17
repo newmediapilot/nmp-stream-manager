@@ -17,7 +17,7 @@ const initializePublicStyles = async (type) => {
         console.log(process.cwd(), "initializePublicStyles :: success");
         return true;
     } catch (e) {
-        console.err2(process.cwd(), "initializePublicStyles :: error", e);
+        console.log(process.cwd(), "initializePublicStyles :: error", e);
         return false;
     } finally {
         console.log(process.cwd(), "initializePublicStyles :: done");
@@ -37,7 +37,7 @@ const publicStyleUpdate = (req, res) => {
             message: "Style for " + type + " updated successfully.",
         });
     } catch (error) {
-        console.err2(
+        console.log(
             process.cwd(),
             "Error processing style:",
             error.message,

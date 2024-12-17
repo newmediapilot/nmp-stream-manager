@@ -72,7 +72,7 @@ function setSecret(name, key) {
       `Secret set for ${name} : ${String("X").repeat(String(key).length)}`,
     );
   } catch (error) {
-    console.err2(process.cwd(), "Error setting secret:", error.message);
+    console.log(process.cwd(), "Error setting secret:", error.message);
   }
 }
 function getSecret(name) {
@@ -85,7 +85,7 @@ function getSecret(name) {
       return null;
     }
   } catch (error) {
-    console.err2(process.cwd(), "Error getting secret:", error.message);
+    console.log(process.cwd(), "Error getting secret:", error.message);
     return null;
   }
 }

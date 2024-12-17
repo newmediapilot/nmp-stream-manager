@@ -3,7 +3,7 @@ const { getSecret } = require("../store/manager");
 const { createMessage } = require("../twitch/message");
 async function twitchMarkerCreate(description) {
   if (!description) {
-    console.err2(process.cwd(), "No marker description provided. Skipping...");
+    console.log(process.cwd(), "No marker description provided. Skipping...");
     return true;
   }
   try {
@@ -30,7 +30,7 @@ async function twitchMarkerCreate(description) {
     );
     return true;
   } catch (error) {
-    console.err2(
+    console.log(
       process.cwd(),
       "Error creating marker:",
       error.status,

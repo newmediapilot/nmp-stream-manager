@@ -30,7 +30,7 @@ async function twitchClipCreate(description) {
     await twitchMessageCreate("🤖 Clip ready: " + url);
     return url;
   } catch (error) {
-    console.err2(process.cwd(), "Failed to create clip:", error.message);
+    console.log(process.cwd(), "Failed to create clip:", error.message);
     return false;
   }
 }

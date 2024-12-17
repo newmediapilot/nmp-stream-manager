@@ -11,7 +11,7 @@ const twitterClient = new TwitterApi({
 async function twitterTweet(description) {
   try {
     if (!description) {
-      console.err2(process.cwd(), "Missing description.");
+      console.log(process.cwd(), "Missing description.");
       return false;
     }
     const me = await twitterClient.v2.me();
@@ -26,7 +26,7 @@ async function twitterTweet(description) {
     tweetResponses.push({ text });
     return tweetResponse.data.text;
   } catch (error) {
-    console.err2(process.cwd(), `Error tweeting`, error);
+    console.log(process.cwd(), `Error tweeting`, error);
     return false;
   }
 }
