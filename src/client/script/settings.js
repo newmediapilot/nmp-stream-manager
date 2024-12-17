@@ -81,6 +81,9 @@ const settingsCreateEditor = (editorEl) => {
                 });
             });
         }
+        emojiWidgetTriggerEl.scrollIntoView({
+            behavior: 'smooth'
+        });
     });
 };
 
