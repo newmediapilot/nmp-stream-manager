@@ -100,10 +100,6 @@ const settingsCreateUploader = (editorEl) => {
     if (!!uploadButton && !!replayButton) {
         uploadButton.addEventListener('click', () => {
             const uploader = document.createElement('input');
-            // {
-            //     data: data,
-            //         filename: uploader.files[0].name
-            // }
             uploader.type = 'file';
             uploader.accept = '.mp3';
             uploader.click();
