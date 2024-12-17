@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="../client/style/base.css?{{cacheBuster}}">
 <link rel="stylesheet" href="../client/style/iframe.css?{{cacheBuster}}">
 <style>
-    #projector {
+    #media {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -46,7 +46,7 @@
 {%for signal in "dashboard_signals_config"|getParam%}
 {%if signal.type == "bpm"%}
 <main id="module-container">
-    <section id="projector">
+    <section id="media">
         P R O J E C T O R
     </section>
 </main>
@@ -63,8 +63,8 @@
         document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
     }));
     document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
-        let projector = payload.split('projector:set:')[1];
-        console.log('embed-projector', projector);
+        let media = payload.split('media:set:')[1];
+        console.log('embed-media', media);
     }));
 </script>
 {%endblock%}
