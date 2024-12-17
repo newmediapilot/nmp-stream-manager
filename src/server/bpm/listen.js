@@ -30,8 +30,8 @@ async function createbpmRateServer(
   );
   child.on("close", (code) => console.log(`Process exited with code ${code}`));
 }
-const getbpmRateMessage = () => {
+const getBpm = () => {
   const bpmRate = getParam("sensor_bpm_rate");
   return bpmRate ? `🤖 💜 ${bpmRate}` : `🤖 💜 Dunno.`;
 };
-module.exports = { createbpmRateServer, getbpmRateMessage };
+module.exports = { createbpmRateServer, getBpm };
