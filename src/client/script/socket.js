@@ -46,6 +46,8 @@ const socketWatchReload = () => {
     document.documentElement.querySelectorAll('*').forEach((e) => e.addEventListener('touchend', setFocusToken));
     document.documentElement.querySelectorAll('*').forEach((e) => e.addEventListener('mousedown', setFocusToken));
     document.documentElement.querySelectorAll('*').forEach((e) => e.addEventListener('mouseup', setFocusToken));
+    document.documentElement.querySelectorAll('*').forEach((e) => e.addEventListener('keydown', setFocusToken));
+    document.documentElement.querySelectorAll('*').forEach((e) => e.addEventListener('keyup', setFocusToken));
     $socketIO.on("payload", (payload) => {
         if ("browser:reload" === payload) {
             !document.documentElement.classList.contains('socket-watch-reload-focus') && window.location.reload();
