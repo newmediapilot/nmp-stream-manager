@@ -32,7 +32,7 @@ section button {
 }
 section label {
     display: grid;
-    grid-template-columns: repeat(21, 25px);
+    grid-template-columns: repeat(15, 25px);
     grid-template-rows: repeat(10, 25px);
     box-sizing: border-box;
     height: 75px;
