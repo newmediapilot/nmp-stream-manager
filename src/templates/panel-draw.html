@@ -3,14 +3,25 @@
 {%block head%}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js?{{cacheBuster}}" type="text/javascript" defer></script>
 <link rel="stylesheet" href="../client/style/draw.css?{{cacheBuster}}">
+<style>
+    :root {
+        --range-rotation-deg: 0deg;
+    }
+
+    section button::before {
+        transition: rotateZ 1s ease-in-out;
+        transform: rotateZ(var(--range-rotation-deg));
+        display: block;
+    }
+</style>
 {%endblock%}
 {%block body%}
 <section>
     <canvas></canvas>
-    <input disabled type="range" min="0" max="1000" value="0" step="1">
-    <button onclick="javascript: document.clearCanvas()" aria-label="🧼"></button>
-    <button onclick="javascript: document.sendPayload()" aria-label="🚀"></button>
+    <input type="range" min="0" max="1000" disabled>
     <button onclick="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></button>
+    <button onclick="javascript: document.sendPayload()" aria-label="🚀" disabled></button>
+    <button onclick="javascript: document.clearCanvas()" aria-label="🧼" disabled></button>
 </section>
 {%endblock%}
 {%block scripts%}
@@ -33,6 +44,8 @@
             document.querySelector('input[type=range]').value = document.querySelector('input[type=range]').max;
             document.querySelector('[type=range]').value = 0;
             document.clearMemory();
+            document.querySelectorAll('button')[1].disabled = true;
+            document.querySelectorAll('button')[2].disabled = true;
             // TODO: animate the canvas fading in from 0 opacity
         };
         document.sendPayload = () => {
@@ -47,6 +60,8 @@
         document.clearMemory = () => {
             capture = [];
             payload = [];
+            document.querySelectorAll('button')[1].disabled = true;
+            document.querySelectorAll('button')[2].disabled = false;
         };
         document.drawPixel = (x, y) => {
             ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-blue').trim();
@@ -58,6 +73,8 @@
             capture.push(Math.round(y));
             payload.push(Math.round(y));
             document.querySelector('[type=range]').value = capture.length;
+            document.querySelectorAll('button')[1].disabled = false;
+            document.querySelectorAll('button')[2].disabled = false;
         };
         document.replayStart = () => {
             if (Number(document.querySelector('[type=range]').value) > 0) {
@@ -68,10 +85,18 @@
                 ctx.arc(x, y, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
                 ctx.fill();
                 document.querySelector('[type=range]').value = capture.length;
-                document.querySelectorAll('button').forEach(button => {
-                    button.disabled = !!capture.length;
-                });
+                document.querySelectorAll('button')[1].disabled = true;
+                document.querySelectorAll('button')[2].disabled = true;
                 requestAnimationFrame(document.replayStart);
+                document.querySelectorAll('[aria-label]').forEach(icon => {
+                    const {value, max} = document.querySelector('[type="range"]');
+                    const percent = Number(value) / Number(max);
+                    const deg = Math.round(percent * 1080);
+                    document.documentElement.style.setProperty(
+                        '--range-rotation-percent',
+                        `${deg}deg`
+                    );
+                });
             } else {
                 document.clearMemory();
             }
