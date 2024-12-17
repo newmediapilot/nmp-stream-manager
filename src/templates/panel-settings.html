@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="../client/style/settings.css?{{cacheBuster}}">
 {%endblock%}
 {%block body%}
-<section >
+<section>
     <ul>
         {%set feature_title_set = false%}
         {%for signal in "dashboard_signals_config"|getParam%}
@@ -12,10 +12,10 @@
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="{{signal.theme}}" aria-label="Announce"></li>
         {%endif%}
-        <li>
-            <label class="{{signal.theme}}" id="{{loop.index0}}">
+        <li class="{{signal.theme}}">
+            <label id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
-                <input type="text" value="{{signal.label}}"/>
+                <input type="text" value="{{signal.label}}" disabled/>
                 <textarea value="{{signal.description}}">{{signal.description}}</textarea>
             </label>
         </li>
@@ -27,8 +27,8 @@
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="{{signal.theme}}" aria-label="Featured"></li>
         {%endif%}
-        <li>
-            <label class="{{signal.theme}}" id="{{loop.index0}}">
+        <li class="{{signal.theme}}">
+            <label id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
             </label>
@@ -41,8 +41,8 @@
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="{{signal.theme}}" aria-label="Markers"></li>
         {%endif%}
-        <li>
-            <label class="{{signal.theme}}" id="{{loop.index0}}">
+        <li class="{{signal.theme}}">
+            <label id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
             </label>
@@ -55,8 +55,8 @@
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="{{signal.theme}}" aria-label="Ads"></li>
         {%endif%}
-        <li>
-            <label class="{{signal.theme}}" id="{{loop.index0}}">
+        <li class="{{signal.theme}}">
+            <label id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}" disabled/>
             </label>
@@ -69,8 +69,8 @@
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="{{signal.theme}}" aria-label="BPM"></li>
         {%endif%}
-        <li>
-            <label class="{{signal.theme}}" id="{{loop.index0}}">
+        <li class="{{signal.theme}}">
+            <label id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
             </label>
