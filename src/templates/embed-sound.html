@@ -16,8 +16,11 @@
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => socketWatchSoundSet((payload) => {
         console.log('socketWatchSoundSet :: ', payload);
+        let audio;
         try {
-            new Audio("/.media/" + payload.split(":")[1] + ".mp3").play();
+            if(audio) audio.pause();
+            audio = new Audio("/.media/" + payload.split(":")[1] + ".mp3");
+            audio.play();
         } catch (e) {
             console.log('socketWatchSoundSet :: error', e);
         }
