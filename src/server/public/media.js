@@ -2,11 +2,11 @@ const fs = require("fs");
 const publicMediaUpdate = (req, res) => {
     try {
         const data = req.body.data;
-        const name = req.body.filename;
-        if (!data || !name) {
-            return res.status(400).json({error: 'Missing file data or filename'});
+        const id = req.body.id;
+        if (!data || !id) {
+            return res.status(400).json({error: 'Missing file data or id'});
         }
-        fs.writeFileSync(`./src/client/.media/1.mp3`, Buffer.from(data, 'base64'));
+        fs.writeFileSync(`./src/client/.media/${id}.mp3`, Buffer.from(data, 'base64'));
         res.status(200).json({
             message: "Media updated successfully.",
         });
