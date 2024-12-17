@@ -7,11 +7,12 @@
     :root {
         --range-rotation-deg: 0deg;
     }
-
+    section button {
+        transition: opacity 100ms ease-out;
+    }
     section button::before {
-        transition: rotateZ 1s ease-in-out;
+        transition: rotateZ 1000ms ease-in-out;
         transform: rotateZ(var(--range-rotation-deg));
-        display: block;
     }
 </style>
 {%endblock%}
@@ -19,7 +20,7 @@
 <section>
     <canvas></canvas>
     <input type="range" min="0" max="1000" value="0" disabled>
-    <button ontouch="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></button>
+    <button onclick="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></button>
     <button onclick="javascript: document.sendPayload()" aria-label="🚀" disabled></button>
     <button onclick="javascript: document.clearCanvas()" aria-label="🧼" disabled></button>
 </section>
@@ -34,6 +35,7 @@
     document.addEventListener("DOMContentLoaded", () => {
         let capture = [];
         let payload = [];
+        let buttonTimeout = null;
         const pixelSize = 20;
         const canvas = document.querySelector("canvas");
         canvas.width = canvas.getBoundingClientRect().width;
@@ -44,9 +46,6 @@
             document.querySelector('input[type=range]').value = document.querySelector('input[type=range]').max;
             document.querySelector('[type=range]').value = 0;
             document.clearMemory();
-            document.querySelector('button:nth-of-type(2)').disabled = true;
-            document.querySelector('button:nth-of-type(3)').disabled = true;
-            // TODO: animate the canvas fading in from 0 opacity
         };
         document.sendPayload = () => {
             document.replayStart();
@@ -60,10 +59,12 @@
         document.clearMemory = () => {
             capture = [];
             payload = [];
-            document.querySelector('button:nth-of-type(2)').disabled = true;
-            document.querySelector('button:nth-of-type(3)').disabled = false;
+            if (buttonTimeout) clearTimeout(buttonTimeout);
+            buttonTimeout = setTimeout(() => {
+                document.querySelector('button:nth-of-type(2)').disabled = true;
+                document.querySelector('button:nth-of-type(3)').disabled = false;
+            }, 300);
         };
-        let drawPixelTo = null;
         document.drawPixel = (x, y) => {
             ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-blue').trim();
             ctx.beginPath();
@@ -74,8 +75,8 @@
             capture.push(Math.round(y));
             payload.push(Math.round(y));
             document.querySelector('[type=range]').value = capture.length;
-            if (drawPixelTo) clearTimeout(drawPixelTo);
-            drawPixelTo = setTimeout(() => {
+            if (buttonTimeout) clearTimeout(buttonTimeout);
+            buttonTimeout = setTimeout(() => {
                 document.querySelector('button:nth-of-type(2)').disabled = false;
                 document.querySelector('button:nth-of-type(3)').disabled = false;
             }, 300);
