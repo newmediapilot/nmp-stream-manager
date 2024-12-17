@@ -3,7 +3,7 @@ const settingsCreateEmojiWidget = (editorEl) => {
     const emojiWidgetEl = document.body.querySelector("#emoji-widget");
     const emojiWidgetTriggerEl = editorEl.querySelector("button:nth-of-type(1)");
     let emojiWidgetInstanceEl;
-    emojiWidgetTriggerEl.addEventListener("click", (e) => {
+    emojiWidgetTriggerEl.addEventListener("click", () => {
         document.body.querySelectorAll('.emoji-widget-instance').forEach(el => el.remove());
         document.body.querySelectorAll('.emoji-widget-instance-trigger').forEach(el => el.classList.remove('emoji-widget-instance-trigger'));
         emojiWidgetTriggerEl.classList.remove("add");
@@ -15,7 +15,7 @@ const settingsCreateEmojiWidget = (editorEl) => {
             emojiWidgetTriggerEl.classList.add("emoji-widget-instance-trigger");
             editorEl.insertAdjacentElement("afterend", emojiWidgetInstanceEl);
             const emojiEls = emojiWidgetInstanceEl.querySelectorAll("li");
-            const emojiElsClick = (evt) => {
+            const emojiElsClick = () => {
                 emojiEls.forEach(
                     (el) => {
                         (emojiWidgetTriggerEl.getAttribute("aria-label") === el.getAttribute("aria-label")) ?
@@ -94,11 +94,28 @@ const settingsCreateEditor = (editorEl) => {
 };
 
 const settingsCreateUploader = (editorEl) => {
-    const {id} = editorEl;
+    let audio = null;
     const uploadButton = editorEl.querySelector('button:nth-of-type(2)');
     const replayButton = editorEl.querySelector('button:nth-of-type(3)');
-    if (!!uploadButton && !!replayButton) {
-        uploadButton.addEventListener('click', () => {
+    const inputEl = editorEl.querySelector('input[type=text]');
+    if (!!inputEl && !!uploadButton && !!replayButton) {
+        const togglePlayDisabled = () => {
+            axios.get(`/.media/${uploadButton.id}`)
+                .then(response => {
+                    audio = new Audio(`/.media/${uploadButton.id}`);
+                    audio.volume = 0.75;
+                    replayButton.disabled = false;
+                }).catch(error => {
+                console.error('togglePlayDisabled :: error:', error);
+                replayButton.disabled = true;
+            });
+        };
+        togglePlayDisabled();
+        const clickReplayButton = () => {
+            audio.currentTime = 0;
+            audio.play();
+        };
+        const clickUploadButton = () => {
             const uploader = document.createElement('input');
             uploader.type = 'file';
             uploader.accept = '.mp3';
@@ -106,6 +123,8 @@ const settingsCreateUploader = (editorEl) => {
             uploader.addEventListener('change', function () {
                 if (uploader.files[0]) {
                     const reader = new FileReader();
+                    inputEl.value = uploader.files[0].name.split(".mp3")[0].slice(0, 15);
+                    inputEl.focus();
                     reader.onloadend = () => {
                         axios.post("/api/media/update",
                             {
@@ -115,16 +134,15 @@ const settingsCreateUploader = (editorEl) => {
                             console.log('settingsCreateUploader :: success:', response.data);
                         }).catch(error => {
                             console.error('settingsCreateUploader :: error:', error);
-                        });
+                        }).finally(togglePlayDisabled)
                     };
                     reader.readAsDataURL(uploader.files[0]);
                 }
                 uploader.remove();
             });
-        });
-        replayButton.addEventListener('click', () => {
-            console.log('replay', id);
-        });
+        };
+        replayButton.addEventListener('click', clickReplayButton);
+        uploadButton.addEventListener('click', clickUploadButton);
     }
 };
 
