@@ -19,7 +19,8 @@
         let audio;
         try {
             if(audio) audio.pause();
-            audio = new Audio("/.media/" + payload.split(":")[1] + ".mp3");
+            audio = new Audio("/.media/" + payload.split(":")[1]);
+            audio.volume = 0.75;
             audio.play();
         } catch (e) {
             console.log('socketWatchSoundSet :: error', e);
