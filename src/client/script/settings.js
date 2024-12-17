@@ -1,5 +1,5 @@
 const settingsCreateEditor = (editorEl) => {
-    const id = editorEl.name;
+    const id = editorEl.id;
     const textInputEl = editorEl.querySelector('[type="text"]');
     const emojiWidgetTriggerEl = editorEl.querySelector("button");
     const emojiWidgetEl = document.body.querySelector("#emoji-widget");
