@@ -20,6 +20,12 @@ const socketWatchFeatureSet = (callback) => {
         payload.startsWith('feature:set:') && callback(payload);
     });
 };
+const socketWatchSoundSet = (callback) => {
+    console.log("socketConnect :: socketWatchFeatureSet");
+    $socketIO.on("payload", (payload) => {
+        payload.startsWith('sound:') && callback(payload);
+    });
+};
 const socketWatchDrawSet = (callback) => {
     console.log("socketConnect :: socketWatchDrawRecording");
     $socketIO.on("payload", (payload) => {
