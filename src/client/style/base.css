@@ -24,6 +24,10 @@ section {
     display: block;
 }
 
+textarea {
+    resize: none;
+}
+
 ::selection {
     background-color: #000;
     color: white;
