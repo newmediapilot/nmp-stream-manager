@@ -4,7 +4,7 @@ const {twitchMarkerCreate} = require("../twitch/marker");
 const {twitchMessageCreate} = require("../twitch/message");
 const {twitchAdCreate} = require("../twitch/ads");
 const {sendPayload} = require("../helper/socket");
-const {getbpmRateMessage} = require("../bpm/listen");
+const {getBpm} = require("../bpm/listen");
 let isCreating = false;
 
 async function publicSignalCreate(req, res) {
@@ -19,12 +19,14 @@ async function publicSignalCreate(req, res) {
         let result = false;
         if ("mark" === type) {
             result = await twitchMarkerCreate(description);
+            await twitchMessageCreate(`🤖 Marker set.`);
         }
         if ("bpm" === type) {
-            result = await twitchMessageCreate(getbpmRateMessage());
+            result = await twitchMessageCreate(getBpm());
         }
         if ("ad" === type) {
             result = await twitchAdCreate(description);
+            await twitchMessageCreate(`🤖 Ad requested.`);
         }
         if ("feature" === type) {
             result = await sendPayload(description);
@@ -36,7 +38,7 @@ async function publicSignalCreate(req, res) {
             result = await sendPayload(`draw:${description}`);
         }
         if ("announce" === type) {
-            result = await sendPayload(`announce:${description}`);
+            result = await twitchMessageCreate(`🤖 ${description}`);
         }
         if ("sound" === type) {
             result = await sendPayload(`sound:${description}`);
