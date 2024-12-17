@@ -52,6 +52,7 @@ section label > [type='text'] {
     grid-area: 1 / 4 / 4 / 12;
     border: 3px solid var(--color-light);
     border-radius: 10px;
+    width: 165px;
 }
 section label > [type='text']:not(:disabled) {
     animation: 2s linear 0s infinite normal none running borderAnimation;
@@ -112,14 +113,14 @@ section label > button:nth-of-type(3) {
     align-items: center;
 }
 section label > button:nth-of-type(2) {
-    grid-area: 1 / 13 / 4 / 14;
+    grid-area: 1 / 12 / 4 / 14;
     font-size: 30px;
-    width: 45px;
+    width: 40px;
 }
 section label > button:nth-of-type(3) {
-    grid-area: 1 / 15 / 4 / 16;
+    grid-area: 1 / 14 / 4 / 16;
     font-size: 30px;
-    width: 46px;
+    width: 40px;
 }
 body > #emoji-widget {
     display: none;
