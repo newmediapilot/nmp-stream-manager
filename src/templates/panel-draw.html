@@ -19,7 +19,7 @@
 <section>
     <canvas></canvas>
     <input type="range" min="0" max="1000" value="0" disabled>
-    <button onclick="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></button>
+    <button ontouch="javascript:getURL('{{public_routes.PANEL_DASHBOARD}}')" aria-label="🌀"></button>
     <button onclick="javascript: document.sendPayload()" aria-label="🚀" disabled></button>
     <button onclick="javascript: document.clearCanvas()" aria-label="🧼" disabled></button>
 </section>
@@ -108,8 +108,8 @@
                 e.touches[0].pageY - top,
             )
         };
-        window.addEventListener("touchstart", (e) => document.touchStartMove(e));
-        window.addEventListener("touchmove", (e) => document.touchStartMove(e));
+        document.querySelector('canvas').addEventListener("touchstart", (e) => document.touchStartMove(e));
+        document.querySelector('canvas').addEventListener("touchmove", (e) => document.touchStartMove(e));
     });
 </script>
 {%endblock%}
