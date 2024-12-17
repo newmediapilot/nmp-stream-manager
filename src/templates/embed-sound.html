@@ -1,0 +1,27 @@
+{%extends "main.njk"%}
+{%block cdn%}{%endblock%}
+{%block client%}{%endblock%}}
+{%block head%}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?{{cacheBuster}}" type="text/javascript" crossorigin="anonymous" defer></script>
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js?{{cacheBuster}}" type="text/javascript" crossorigin="anonymous" defer></script>
+<script src="../client/script/iframe_detect.js?{{cacheBuster}}" type="text/javascript" defer></script>
+<script src="../client/script/socket.js?{{cacheBuster}}" type="text/javascript" defer></script>
+{%include "_style.njk"%}
+{%endblock%}
+{%block scripts%}
+<script defer>
+    document.addEventListener("DOMContentLoaded", () => iframeDetect());
+    document.addEventListener("DOMContentLoaded", () => socketConnect());
+    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => socketWatchSoundSet((payload) => {
+        console.log('socketWatchSoundSet :: ', payload);
+        try {
+            const path = "/client/.media/" + payload + ".mp3";
+            document.documentElement.click();
+            new Audio(path).play();
+        } catch (e) {
+            console.log('socketWatchSoundSet :: error', e);
+        }
+    }));
+</script>
+{%endblock%}

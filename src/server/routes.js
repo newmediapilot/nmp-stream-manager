@@ -11,6 +11,7 @@ const ROUTES = {
     PANEL_FEATURE_EMBED: "/public/feature/embed",
     PANEL_BPM_EMBED: "/public/bpm/embed",
     PANEL_DRAW_EMBED: "/public/draw/embed",
+    PANEL_SOUND_EMBED: "/public/sound/embed",
     API_BPM_PING: "/public/bpm/ping",
     TWITCH_LOGIN: "/twitch/login",
     TWITCH_REDIRECT: process.env.TWITCH_REDIRECT_URL,
