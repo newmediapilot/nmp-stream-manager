@@ -8,8 +8,8 @@
 <section>
     <canvas></canvas>
     <input disabled type="range" min="0" max="1000" value="0" step="1">
-    <button onclick="javascript: document.clearCanvas()" aria-label="🧹"></button>
-    <button onclick="javascript: document.sendPayload()" aria-label="📨"></button>
+    <button onclick="javascript: document.clearCanvas()" aria-label="🧼"></button>
+    <button onclick="javascript: document.sendPayload()" aria-label="🚀"></button>
 </section>
 {%include "_home.njk"%}
 {%endblock%}
@@ -33,6 +33,7 @@
             document.querySelector('input[type=range]').value = document.querySelector('input[type=range]').max;
             document.querySelector('[type=range]').value = 0;
             document.clearMemory();
+            // TODO: animate the canvas fading in from 0 opacity
         };
         document.sendPayload = () => {
             document.replayStart();
@@ -75,13 +76,15 @@
                 document.clearMemory();
             }
         };
-        window.addEventListener("touchmove", (e) => {
+        document.touchStartMove = (e) => {
             const {left, top} = document.querySelector('canvas').getBoundingClientRect();
             document.drawPixel(
                 e.touches[0].pageX - left,
                 e.touches[0].pageY - top,
             )
-        });
+        };
+        window.addEventListener("touchstart", (e) => document.touchStartMove(e));
+        window.addEventListener("touchmove", (e) => document.touchStartMove(e));
     });
 </script>
 {%endblock%}
