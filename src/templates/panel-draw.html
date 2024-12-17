@@ -48,7 +48,7 @@
             payload = [];
         };
         document.drawPixel = (x, y) => {
-            ctx.fillStyle = "#ff7b00";
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-blue').trim();
             ctx.beginPath();
             ctx.arc(x, y, pixelSize / 2, 0, Math.PI * 2, false);
             ctx.fill();
@@ -62,12 +62,12 @@
             if (Number(document.querySelector('[type=range]').value) > 0) {
                 const x = capture.shift();
                 const y = capture.shift();
-                ctx.fillStyle = "#2fffa5";
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-aqua').trim();
                 ctx.beginPath();
                 ctx.arc(x, y, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
                 ctx.fill();
                 document.querySelector('[type=range]').value = capture.length;
-                document.querySelectorAll('button').forEach(button => () => {
+                document.querySelectorAll('button').forEach(button => {
                     button.disabled = !!capture.length;
                 });
                 requestAnimationFrame(document.replayStart);
