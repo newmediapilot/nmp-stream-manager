@@ -1,14 +1,25 @@
 const applyModuleStyles = () => {
     Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
-        const {scrollTop, scrollLeft} = label;
-        const payload = document.head.querySelector('#public_module_styles').innerHTML;
+        const {scrollWidth, scrollHeight} = label;
+        let payload = document.head.querySelector('#public_module_styles')
+            .innerHTML
+            .replace(":root{", "")
+            .replace(";}", "")
+            .split(';')
+            .map(e => {
+                const [name, value] = e.split(':');
+                return {name, value}
+            }).map(p => {
+                return {
+                    ...p,
+                    value: Number(p.value)
+                }
+            }).filter(p => label.querySelector(`[name=${p.name}]`));
+        console.log('applyModuleStyles :: payload', payload);
         label.scrollTo({
-            top: label.scrollHeight / 2,
-            left: label.scrollWidth / 2,
+            top: scrollHeight / 4,
+            left: scrollWidth / 4,
         });
-        console.log("applyModuleStyles :: scrollTop", scrollTop);
-        console.log("applyModuleStyles :: scrollLeft", scrollLeft);
-        console.log("applyModuleStyles :: payload", payload);
     });
 };
 const castModuleInputValues = () => {
@@ -17,7 +28,6 @@ const castModuleInputValues = () => {
         const [px, py] = [label.scrollLeft / label.scrollWidth, label.scrollTop / label.scrollHeight];
         inputX.value = Number(inputX.min) + ((Math.abs(inputX.max) + Math.abs(inputX.min)) * px);
         inputY.value = Number(inputY.min) + ((Math.abs(inputY.max) + Math.abs(inputY.min)) * py);
-        // console.log(inputX.value, inputY.value);
     });
     const payload = Array.from(document.body.querySelectorAll('input[type="range"]')).map((el) => {
         return `${el.name}:${el.value}`;
