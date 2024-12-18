@@ -1,7 +1,7 @@
 {
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "rm -rf .signals.json .style.css",
     "preview": "node compiler/compile.js",
     "reset": "rm -rf node_modules && npm i",
     "key": "openssl req -nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
