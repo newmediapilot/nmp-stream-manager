@@ -75,7 +75,7 @@ section label > [type='text']:not(:disabled) {
 section label > textarea {
     font-size: 25px;
     padding: 10px;
-    grid-area: 4 / 4 / 10 / 16;
+    grid-area: 4 / 3 / 10 / 16;
     border-radius: 10px;
     box-sizing: border-box;
     border-color: var(--color-light);
@@ -110,7 +110,8 @@ section label > button:nth-of-type(1) {
     font-size: 30px;
 }
 section label > button:nth-of-type(2),
-section label > button:nth-of-type(3) {
+section label > button:nth-of-type(3),
+section label > button:nth-of-type(4) {
     background: var(--color-deepyellow);
     border-radius: 25px;
     display: flex;
@@ -125,6 +126,11 @@ section label > button:nth-of-type(2) {
 section label > button:nth-of-type(3) {
     grid-area: 1 / 13 / 4 / 14;
     font-size: 30px;
+    width: 40px;
+}
+section label > button:nth-of-type(4) {
+    grid-area: 1 / 15 / 4 / 16;
+    font-size: 20px;
     width: 40px;
 }
 body > #emoji-widget {
