@@ -94,26 +94,48 @@ const settingsCreateEditor = (editorEl) => {
 };
 
 const settingsCreateUpload = (editorEl) => {
+    let audio = null;
+    const id = editorEl.id;
     const uploadButton = editorEl.querySelector('button:nth-of-type(2):not(:disabled)');
     const replayButton = editorEl.querySelector('button:nth-of-type(3):not(:disabled)');
+    const inputEl = editorEl.querySelector('[type="text"]');
+    const togglePlayDisabled = () => {
+        const cells = uploadButton.id.split(',');
+        const url = `/.media/${cells[0]}.${cells[2]}?${cells[1]}=${new Date().getTime()}`;
+        console.log('togglePlayDisabled :: checking ::', url);
+        axios.get(url).then(() => {
+            if (audio) {
+                audio = undefined;
+            }
+            audio = new Audio(url);
+            audio.volume = 0.75;
+            replayButton.disabled = false;
+        }).catch(() => {
+                console.log('togglePlayDisabled :: no sound ::', url);
+                replayButton.disabled = true;
+            }
+        );
+    };
+    replayButton && togglePlayDisabled();
     if (!!uploadButton) {
         const clickUploadButton = () => {
             const cells = uploadButton.id.split(',')
             const uploader = document.createElement('input');
             uploader.type = 'file';
-            uploader.accept = cells.slice(1).map(f => `${cells[1]}/${f}`).slice(1).join(', ');
+            uploader.accept = cells.slice(1).map(suffix => `${cells[1]}/${suffix}`).slice(1).join(', ');
             uploader.addEventListener('change', () => {
                 if (uploader.files[0]) {
                     const reader = new FileReader();
                     inputEl.focus();
                     reader.onloadend = () => {
                         const type = uploader.files[0].name.split('.').pop();
-                        uploadButton.key = cells;
+                        uploadButton.id = `${cells[0]},${cells[1]},${cells.slice(2)}`;
                         axios.post("/api/media/update",
                             {
                                 data: reader.result.split(',')[1],
                                 key: cells[0],
                                 type,
+                                id,
                             }).then(response => {
                             console.log('settingsCreateUpload :: success:', response.data);
                             togglePlayDisabled();
@@ -130,24 +152,6 @@ const settingsCreateUpload = (editorEl) => {
         uploadButton.addEventListener('click', clickUploadButton);
     }
     if (!!replayButton) {
-        let audio = null;
-        const togglePlayDisabled = () => {
-            const cells = uploadButton.id.split(',');
-            const url = `/.media/${cells[0]}.${cells[2]}?${cells[1]}=${new Date().getTime()}`;
-            console.log('togglePlayDisabled :: checking ::', url);
-            axios.get(url).then(() => {
-                if (audio) {
-                    audio = undefined;
-                }
-                audio = new Audio(url);
-                audio.volume = 0.75;
-                replayButton.disabled = false;
-            }).catch(error => {
-                    console.log('togglePlayDisabled :: no sound ::', url);
-                    replayButton.disabled = true;
-                }
-            );
-        };
         const clickReplayButton = () => {
             console.log('clickReplayButton :: currentTime ::', audio.currentTime);
             if (audio.currentTime > 0) {
@@ -158,7 +162,6 @@ const settingsCreateUpload = (editorEl) => {
             }
         };
         replayButton.addEventListener('click', clickReplayButton);
-        togglePlayDisabled();
     }
 };
 
