@@ -14,17 +14,19 @@
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    document.addEventListener("DOMContentLoaded", () => socketWatchSoundSet((payload) => {
-        console.log('socketWatchSoundSet :: ', payload);
-        let audio;
-        try {
-            if(audio) audio.pause();
-            audio = new Audio("/.media/" + payload.split(":")[1]);
-            audio.volume = 0.75;
-            audio.play();
-        } catch (e) {
-            console.log('socketWatchSoundSet :: error', e);
-        }
-    }));
+    document.addEventListener("DOMContentLoaded", () => {
+        return socketWatchSoundSet((payload) => {
+            console.log('socketWatchSoundSet :: ', payload);
+            let audio;
+            try {
+                if(audio) audio.pause();
+                audio = new Audio("/.media/" + payload.split(":")[1]);
+                audio.volume = 0.75;
+                audio.play();
+            } catch (e) {
+                console.log('socketWatchSoundSet :: error', e);
+            }
+
+        }));
 </script>
 {%endblock%}
