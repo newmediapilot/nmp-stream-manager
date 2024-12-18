@@ -33,17 +33,14 @@ section button {
 section label {
     display: grid;
     grid-template-columns: repeat(15, 25px);
-    grid-template-rows: repeat(10, 25px);
     box-sizing: border-box;
+    padding: 10px 0px;
 }
 section > ul > li:not([aria-label]) label {
     grid-template-rows: repeat(3, 25px);
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
-section > ul > li:not([aria-label]):nth-child(2) label {
-    padding-bottom: 10px;
-    padding-top: 10px;
+section > ul > li:not([aria-label]):nth-of-type(2) label {
+    grid-template-rows: repeat(10, 25px);
 }
 section label > [type='text'] {
     font-size: 25px;
@@ -73,12 +70,13 @@ section label > [type='text']:not(:disabled) {
 }
 section label > textarea {
     font-size: 25px;
-    padding: 10px;
-    grid-area: 4 / 3 / 10 / 16;
+    grid-area: 5 / 3 / 11 / 16;
     border-radius: 10px;
     box-sizing: border-box;
     border-color: var(--color-light);
     animation: 2s linear 0s infinite normal none running borderAnimation;
+    width: 340px;
+    padding: 10px;
 }
 section label > [type='text']:nth-of-type(2) {
     grid-row: 4 / 7;
