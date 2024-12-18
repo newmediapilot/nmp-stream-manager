@@ -117,12 +117,12 @@ const settingsCreateUploader = (editorEl) => {
         };
         togglePlayDisabled();
         const clickReplayButton = () => {
-            console.log('(audio.currentTime', (audio.currentTime))
-            console.log('(audio.duration', (audio.duration))
+            console.log('(audio.currentTime', (audio.currentTime));
+            console.log('(audio.duration', (audio.duration));
             if (audio.currentTime > 0) {
                 audio.pause();
                 audio.currentTime = 0;
-            }else{
+            } else {
                 audio.play();
             }
         };
@@ -157,8 +157,40 @@ const settingsCreateUploader = (editorEl) => {
     }
 };
 
+const settingsToggler = (editorEl) => {
+    const {id} = editorEl;
+    const toggleButton = editorEl.querySelector('button:nth-of-type(4)');
+    if (!!toggleButton) {
+        const sendToggleState = () => {
+            toggleButton.disabled = true;
+            let state = toggleButton.getAttribute('aria-label');
+            if (state === "ON") {
+                state = "OFF";
+            } else if (state === "OFF") {
+                state = "ON";
+            }
+            toggleButton.setAttribute('aria-label', state);
+            axios.get("/api/config/update", {
+                params: {
+                    type: "signals:field",
+                    payload: JSON.stringify({
+                        id,
+                        field: "visibility",
+                        value: state,
+                    }),
+                },
+            }).finally(() => {
+                toggleButton.disabled = false;
+                socketEmitReload();
+            });
+        };
+        toggleButton.addEventListener('click', sendToggleState);
+    }
+};
+
 const settings = () => {
     document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsCreateEditor);
     document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsCreateEmojiWidget);
     document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsCreateUploader);
+    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsToggler);
 };
