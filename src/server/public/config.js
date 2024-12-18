@@ -45,7 +45,7 @@ const DASHBOARD_BUTTON_CONFIG = {
             label: "Sound",
             theme: "red",
             type: "sound",
-            description: "a,audio, mp3, wav, webm",
+            description: "a,audio,mp3,wav,webm",
             visibility: "ON",
         },
         {
@@ -53,7 +53,7 @@ const DASHBOARD_BUTTON_CONFIG = {
             label: "Media",
             theme: "blue",
             type: "media",
-            description: "a,image, jpeg, gif, png, webp, bmp",
+            description: "a,image,jpeg,gif,png,webp,bmp",
             visibility: "ON",
         },
     ],
