@@ -4,7 +4,6 @@ const {getIp} = require("./helper/ip");
 const {setParam} = require("./store/manager");
 const {configureNunjucks} = require("./nunjucks/configure");
 const {createBpmServer} = require("./bpm/listen");
-const {startTwitchServices} = require("./twitch/services");
 const {initializePublicConfigs} = require("./public/config");
 const {initializePublicStyles} = require("./public/style");
 const {configureSocket} = require("./helper/socket");
@@ -33,7 +32,6 @@ async function startServices(app) {
             console.log(process.cwd(), "Server running on 443 at https://localhost");
         });
         configureSocket(httpsServer);
-        startTwitchServices();
         await createBpmServer(app);
     } catch (err) {
         console.log(process.cwd(), "Error initializing services:", err);
