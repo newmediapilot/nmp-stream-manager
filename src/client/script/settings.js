@@ -100,52 +100,59 @@ const settingsCreateUploader = (editorEl) => {
     const inputEl = editorEl.querySelector('input[type=text]');
     if (!!inputEl && !!uploadButton && !!replayButton) {
         const togglePlayDisabled = () => {
-            const url = `/.media/${uploadButton.id}?${new Date().getTime()}`;
-            console.log('togglePlayDisabled :: checking ::', url);
-            axios.get(url).then(() => {
-                if (audio) {
-                    audio = undefined;
-                }
-                audio = new Audio(url);
-                audio.volume = 0.75;
-                replayButton.disabled = false;
-            }).catch(error => {
-                    console.log('togglePlayDisabled :: no sound ::', url);
-                    replayButton.disabled = true;
-                }
-            );
+            // const url = `/.media/${uploadButton.id}?${new Date().getTime()}`;
+            // console.log('togglePlayDisabled :: checking ::', url);
+            // axios.get(url).then(() => {
+            //     if (audio) {
+            //         audio = undefined;
+            //     }
+            //     audio = new Audio(url);
+            //     audio.volume = 0.75;
+            //     replayButton.disabled = false;
+            // }).catch(error => {
+            //         console.log('togglePlayDisabled :: no sound ::', url);
+            //         replayButton.disabled = true;
+            //     }
+            // );
         };
         togglePlayDisabled();
         const clickReplayButton = () => {
-            console.log('(audio.currentTime', (audio.currentTime));
-            console.log('(audio.duration', (audio.duration));
-            if (audio.currentTime > 0) {
-                audio.pause();
-                audio.currentTime = 0;
-            } else {
-                audio.play();
-            }
+            // console.log('(audio.currentTime', (audio.currentTime));
+            // console.log('(audio.duration', (audio.duration));
+            // if (audio.currentTime > 0) {
+            //     audio.pause();
+            //     audio.currentTime = 0;
+            // } else {
+            //     audio.play();
+            // }
         };
         const clickUploadButton = () => {
+            const buttonId = uploadButton.id.split(':')[0];
+            const buttonFileTypes = uploadButton.id.split(',')[1];
             const uploader = document.createElement('input');
             uploader.type = 'file';
-            uploader.accept = '.mp3';
+            uploader.accept = buttonFileTypes;
+            console.log('buttonFileTypes', buttonFileTypes);
+            console.log('buttonId', buttonId);
             uploader.click();
             uploader.addEventListener('change', function () {
                 if (uploader.files[0]) {
                     const reader = new FileReader();
                     inputEl.focus();
                     reader.onloadend = () => {
-                        axios.post("/api/media/update",
-                            {
-                                data: reader.result.split(',')[1],
-                                id: uploadButton.id,
-                            }).then(response => {
-                            console.log('settingsCreateUploader :: success:', response.data);
-                            togglePlayDisabled();
-                        }).catch(error => {
-                            console.error('settingsCreateUploader :: error:', error);
-                        });
+                        const suffix = uploader.files[0].name.split('.').pop();
+                        console.log('suffix', suffix);
+                        // uploadButton.id =
+                        // axios.post("/api/media/update",
+                        //     {
+                        //         data: reader.result.split(',')[1],
+                        //         id: uploadButton.id,
+                        //     }).then(response => {
+                        //     console.log('settingsCreateUploader :: success:', response.data);
+                        //     togglePlayDisabled();
+                        // }).catch(error => {
+                        //     console.error('settingsCreateUploader :: error:', error);
+                        // });
                     };
                     reader.readAsDataURL(uploader.files[0]);
                 }
