@@ -15,16 +15,20 @@
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => {
+        let audio;
         return socketWatchSoundSet((payload) => {
             console.log('socketWatchSoundSet :: ', payload);
-            let audio;
             try {
-                if (audio) audio.pause();
+                if (audio) {
+                    audio.pause();
+                    audio = undefined;
+                }
                 const cells = payload.split(":")[1].split(',');
                 const fileName = cells[0];
                 const fileSuffix = cells[2];
                 audio = new Audio(`/.media/${fileName}.${fileSuffix}`);
                 audio.volume = 0.75;
+                audio.currentTime = 0;
                 audio.play();
             } catch (e) {
                 console.log('socketWatchSoundSet :: error', e);
