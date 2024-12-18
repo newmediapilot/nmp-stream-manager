@@ -97,26 +97,25 @@ const settingsCreateUpload = (editorEl) => {
     let audio = null;
     const id = editorEl.id;
     const uploadButton = editorEl.querySelector('button:nth-of-type(2):not(:disabled)');
-    const replayButton = editorEl.querySelector('button:nth-of-type(3):not(:disabled)');
+    const actionButton = editorEl.querySelector('button:nth-of-type(3):not(:disabled)');
     const inputEl = editorEl.querySelector('[type="text"]');
-    const togglePlayDisabled = () => {
+    const toggleReplayState = () => {
         const cells = uploadButton.id.split(',');
         const url = `/.media/${cells[0]}.${cells[2]}?${cells[1]}=${new Date().getTime()}`;
-        console.log('togglePlayDisabled :: checking ::', url);
+        console.log('toggleReplayState :: checking ::', url);
         axios.get(url).then(() => {
             if (audio) {
                 audio = undefined;
             }
             audio = new Audio(url);
             audio.volume = 0.75;
-            replayButton.disabled = false;
+            actionButton.disabled = false;
         }).catch(() => {
-                console.log('togglePlayDisabled :: no sound ::', url);
-                replayButton.disabled = true;
+                console.log('toggleReplayState :: no sound ::', url);
+                actionButton.disabled = true;
             }
         );
     };
-    replayButton && togglePlayDisabled();
     if (!!uploadButton) {
         const clickUploadButton = () => {
             const cells = uploadButton.id.split(',')
@@ -128,6 +127,8 @@ const settingsCreateUpload = (editorEl) => {
                     const reader = new FileReader();
                     reader.onloadend = () => {
                         const type = uploader.files[0].name.split('.').pop();
+                        const acceptTypes = cells.slice(2);
+                        const newCells = `${cells[0]},${cells[1]},${type},${acceptTypes.filter(t => t !== type).join(',')}`;
                         axios.post("/api/media/update",
                             {
                                 data: reader.result.split(',')[1],
@@ -135,9 +136,8 @@ const settingsCreateUpload = (editorEl) => {
                                 type,
                                 id,
                             }).then(response => {
-                            const sorted = `${cells[0]},${cells[1]},${cells.slice(2).sort(a => a === type).join(',')}`;
-                            uploadButton.setAttribute("id", sorted);
-                            replayButton && togglePlayDisabled();
+                            uploadButton.setAttribute("id", newCells);
+                            actionButton && toggleReplayState();
                             inputEl.focus();
                             console.log('settingsCreateUpload :: success:', response.data);
                         }).catch(error => {
@@ -152,9 +152,13 @@ const settingsCreateUpload = (editorEl) => {
         };
         uploadButton.addEventListener('click', clickUploadButton);
     }
-    if (!!replayButton) {
-        const clickReplayButton = () => {
-            console.log('clickReplayButton :: currentTime ::', audio.currentTime);
+    if (!!actionButton) {
+        toggleReplayState();
+        const cells = uploadButton.id.split(',');
+        const type = cells[1];
+
+        const replayAudio = () => {
+            console.log('replayAudio :: currentTime ::', audio.currentTime);
             if (audio.currentTime > 0) {
                 audio.pause();
                 audio.currentTime = 0;
@@ -162,7 +166,19 @@ const settingsCreateUpload = (editorEl) => {
                 audio.play();
             }
         };
-        replayButton.addEventListener('click', clickReplayButton);
+        const displayMedia = () => {
+            console.log('replayAudio :: currentTime ::', audio.currentTime);
+            if (audio.currentTime > 0) {
+                audio.pause();
+                audio.currentTime = 0;
+            } else {
+                audio.play();
+            }
+        };
+        actionButton.addEventListener('click', () => {
+            "audio" === type && replayAudio();
+            "image" === type && displayMedia();
+        });
     }
 };
 
