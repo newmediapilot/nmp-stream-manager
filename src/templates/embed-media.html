@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="../client/style/base.css?{{cacheBuster}}">
 <link rel="stylesheet" href="../client/style/iframe.css?{{cacheBuster}}">
 <style>
-    #media {
+    #media-embed {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -17,6 +17,8 @@
         color: red;
         width: 100vw;
         height: 100vh;
+        object-fit: contain;
+        background: none;
     }
 </style>
 <style>
@@ -46,9 +48,7 @@
 {%for signal in "dashboard_signals_config"|getParam%}
 {%if signal.type == "bpm"%}
 <main id="module-container">
-    <section id="media">
-        P R O J E C T O R
-    </section>
+    <img id="media-embed"/>
 </main>
 {%endif%}
 {%endfor%}
@@ -64,7 +64,6 @@
     }));
     document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
         let media = payload.split('media:set:')[1];
-        console.log('media', media);
     }));
 </script>
 {%endblock%}
