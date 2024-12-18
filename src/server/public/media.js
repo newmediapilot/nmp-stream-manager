@@ -2,6 +2,7 @@ const fs = require("fs");
 const publicMediaUpdate = (req, res) => {
     try {
         const {data, key, type, id} = req.body;
+        
         if (!data || !key || !type || !id) {
             return res.status(400).json({error: 'Missing file data or id'});
         }
