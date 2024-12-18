@@ -127,21 +127,23 @@ const settingsCreateUploader = (editorEl) => {
             // }
         };
         const clickUploadButton = () => {
-            const buttonId = uploadButton.id.split(',')[0];
-            const buttonFileTypes = uploadButton.id.split(',').slice(1);
+            const fields = uploadButton.id.split(',')
+            const fileId = fields[0];
+            const fileType = fields[1];
+            const fileAcceptList = fields.slice(1).map(f => `${fileType}/${f}`).slice(1).join(', ');
             const uploader = document.createElement('input');
+            console.log('fileId', fileId);
+            console.log('fileType', fileType);
+            console.log('fileAcceptList', fileAcceptList);
             uploader.type = 'file';
-            uploader.accept = buttonFileTypes;
-            console.log('buttonFileTypes', buttonFileTypes);
-            console.log('buttonId', buttonId);
+            uploader.accept = fileAcceptList;
             uploader.click();
             uploader.addEventListener('change', function () {
                 if (uploader.files[0]) {
                     const reader = new FileReader();
                     inputEl.focus();
                     reader.onloadend = () => {
-                        const suffix = uploader.files[0].name.split('.').pop();
-                        console.log('suffix', suffix);
+                        // const suffix = uploader.files[0].name.split('.').pop();
                         // uploadButton.id =
                         // axios.post("/api/media/update",
                         //     {
