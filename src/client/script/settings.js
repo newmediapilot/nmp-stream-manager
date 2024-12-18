@@ -127,8 +127,8 @@ const settingsCreateUploader = (editorEl) => {
             // }
         };
         const clickUploadButton = () => {
-            const buttonId = uploadButton.id.split(':')[0];
-            const buttonFileTypes = uploadButton.id.split(',')[1];
+            const buttonId = uploadButton.id.split(',')[0];
+            const buttonFileTypes = uploadButton.id.split(',').slice(1);
             const uploader = document.createElement('input');
             uploader.type = 'file';
             uploader.accept = buttonFileTypes;
