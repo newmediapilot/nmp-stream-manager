@@ -45,7 +45,6 @@ const castModuleInputValues = () => {
             description: payload,
         },
     });
-    // console.log(`modules :: castModuleInputValues`);
 };
 const initializeModuleClickTouch = () => {
     document.addEventListener('mousedown', (e) => {
@@ -70,13 +69,12 @@ const sendInputValues = () => {
         .innerHTML
         .replace(":root{", "")
         .replace(";}", "");
-    // console.log('payload', payload);
-    // payload && axios.get("/api/style/update", {
-    //     params: {
-    //         type: "style",
-    //         payload
-    //     },
-    // }).finally(() => {
-    //     socketEmitReload();
-    // });
+    payload && axios.get("/api/style/update", {
+        params: {
+            type: "style",
+            payload
+        },
+    }).finally(() => {
+        socketEmitReload();
+    });
 };
