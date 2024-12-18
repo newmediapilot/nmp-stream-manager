@@ -47,7 +47,6 @@ const socketWatchReload = () => {
             document.documentElement.classList.remove('socket-watch-reload-focus');
         }, timeout);
     };
-    setFocusToken();
     window.addEventListener('touchstart', setFocusToken);
     window.addEventListener('touchend', setFocusToken);
     window.addEventListener('mousedown', setFocusToken);
