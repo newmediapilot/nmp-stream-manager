@@ -44,11 +44,12 @@ html.edit-active .dashboard {
     overflow: hidden;
     text-overflow: ellipsis;
     position: relative;
-}
-.dashboard .button button {
     white-space: nowrap;
     overflow-wrap: normal;
     word-break: keep-all;
+}
+.dashboard .button button:disabled {
+    filter: saturate(0);
 }
 .dashboard .button button label {
     width: 100%;
