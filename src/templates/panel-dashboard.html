@@ -16,7 +16,9 @@
     {####}{%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description%}
     {%endif%}
     <article class="button button-{{config.theme}}">
-        <button data-href="{{data_href}}" onclick="javascript:sendSignal(this)" {%if config.visibility == "OFF"%}disabled{%endif%}>
+        <button onclick="javascript:sendSignal(this, '{{data_href}})'"
+                {%if config.visibility == "OFF"%}disabled{%endif%}
+        >
             <label aria-label="{{config.emoji}}"></label>
             <label aria-label="{{config.label}}"></label>
         </button>
@@ -49,7 +51,7 @@
     ));
     document.addEventListener("DOMContentLoaded", () => dashboard());
     document.addEventListener("DOMContentLoaded", () => {
-        anime({
+        !document.documentElement.classList.contains('reduced-motion') && anime({
             targets: "html.iframe .dashboard button",
             duration: 666,
             delay: anime.stagger(11),
@@ -63,7 +65,7 @@
         });
     });
     document.addEventListener("DOMContentLoaded", () => {
-        anime({
+        !document.documentElement.classList.contains('reduced-motion') && anime({
             targets: ".dashboard button:not(:disabled)",
             duration: 3333,
             delay: anime.stagger(50),
