@@ -17,43 +17,43 @@
         </div>
         <div class="controls">
             <label>
-                <input type="range" min="0" max="160" step="2.5" value="40" name="--_feat-translateX" hidden>
-                <input type="range" min="0" max="160" step="2.5" value="40" name="--_feat-translateY" hidden>
+                <input type="range" min="0" max="200" step="5.0" value="50" name="--_feat-translateX" hidden>
+                <input type="range" min="0" max="200" step="5.0" value="20" name="--_feat-translateY" hidden>
             </label>
             <label>
-                <input type="range" min="20" max="160" step="2.5" value="20" name="--_feat-scaleX" hidden>
-                <input type="range" min="20" max="160" step="2.5" value="20" name="--_feat-scaleY" hidden>
+                <input type="range" min="10" max="200" step="5.0" value="50" name="--_feat-scaleX" hidden>
+                <input type="range" min="10" max="200" step="5.0" value="50" name="--_feat-scaleY" hidden>
             </label>
             <label>
-                <input type="range" min="0" max="100" step="2.5" value="0" name="--_feat-rotateX" hidden>
-                <input type="range" min="0" max="100" step="2.5" value="0" name="--_feat-rotateY" hidden>
-                <input type="range" min="0" max="100" step="2.5" value="0" name="--_feat-rotateZ" hidden>
+                <input type="range" min="0" max="100" step="5.0" value="0" name="--_feat-rotateX" hidden>
+                <input type="range" min="0" max="100" step="5.0" value="0" name="--_feat-rotateY" hidden>
+                <input type="range" min="0" max="100" step="5.0" value="0" name="--_feat-rotateZ" hidden>
             </label>
         </div>
     </article>
-    <article class="module bloodorange">
-        <div class="title" aria-label="BPM">
-            <button onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').showModal()" aria-label="🔗"></button>
-        </div>
-        <div class="preview">
-            <iframe width="1920" height="1080" src="{{public_routes.PANEL_BPM_EMBED}}#edit"></iframe>
-        </div>
-        <div class="controls">
-            <label>
-                <input type="range" min="0" max="160" step="2.5" value="40" name="--_bpm-translateX" hidden>
-                <input type="range" min="0" max="160" step="2.5" value="40" name="--_bpm-translateY" hidden>
-            </label>
-            <label>
-                <input type="range" min="20" max="160" step="2.5" value="20" name="--_bpm-scaleX" hidden>
-                <input type="range" min="20" max="160" step="2.5" value="20" name="--_bpm-scaleY" hidden>
-            </label>
-            <label>
-                <input type="range" min="0" max="100" step="2.5" value="0" name="--_bpm-rotateX" hidden>
-                <input type="range" min="0" max="100" step="2.5" value="0" name="--_bpm-rotateY" hidden>
-                <input type="range" min="0" max="100" step="2.5" value="0" name="--_bpm-rotateZ" hidden>
-            </label>
-        </div>
-    </article>
+<!--    <article class="module bloodorange">-->
+<!--        <div class="title" aria-label="BPM">-->
+<!--            <button onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').showModal()" aria-label="🔗"></button>-->
+<!--        </div>-->
+<!--        <div class="preview">-->
+<!--            <iframe width="1920" height="1080" src="{{public_routes.PANEL_BPM_EMBED}}#edit"></iframe>-->
+<!--        </div>-->
+<!--        <div class="controls">-->
+<!--            <label>-->
+<!--                <input type="range" min="0" max="160" step="5.0" value="40" name="&#45;&#45;_bpm-translateX" hidden>-->
+<!--                <input type="range" min="0" max="160" step="5.0" value="40" name="&#45;&#45;_bpm-translateY" hidden>-->
+<!--            </label>-->
+<!--            <label>-->
+<!--                <input type="range" min="20" max="160" step="5.0" value="20" name="&#45;&#45;_bpm-scaleX" hidden>-->
+<!--                <input type="range" min="20" max="160" step="5.0" value="20" name="&#45;&#45;_bpm-scaleY" hidden>-->
+<!--            </label>-->
+<!--            <label>-->
+<!--                <input type="range" min="0" max="100" step="5.0" value="0" name="&#45;&#45;_bpm-rotateX" hidden>-->
+<!--                <input type="range" min="0" max="100" step="5.0" value="0" name="&#45;&#45;_bpm-rotateY" hidden>-->
+<!--                <input type="range" min="0" max="100" step="5.0" value="0" name="&#45;&#45;_bpm-rotateZ" hidden>-->
+<!--            </label>-->
+<!--        </div>-->
+<!--    </article>-->
 </section>
 {%include "_home.njk"%}
 {%endblock%}
