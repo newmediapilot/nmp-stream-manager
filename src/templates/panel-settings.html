@@ -26,6 +26,25 @@
         {%endfor%}
         {%set feature_title_set = false%}
         {%for signal in "dashboard_signals_config"|getParam%}
+        {%if signal.type == "media"%}
+        {%if not feature_title_set%}{%set feature_title_set = true%}
+        <li class="{{signal.theme}}" aria-label="Media"></li>
+        {%endif%}
+        <li class="{{signal.theme}}">
+            <label id="{{loop.index0}}">
+                <button aria-label="{{signal.emoji}}"></button>
+                <input type="text" value="{{signal.label}}"/>
+                <button aria-label="⬆" id="{{signal.description}}"></button>
+                <button aria-label="🎶"></button>
+                <button aria-label="{{signal.visibility}}"></button>
+            </label>
+        </li>
+        {%endif%}
+        {%endfor%}
+        {%endif%}
+        {%endfor%}
+        {%set feature_title_set = false%}
+        {%for signal in "dashboard_signals_config"|getParam%}
         {%if signal.type == "sound"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
         <li class="{{signal.theme}}" aria-label="Sound"></li>
@@ -35,7 +54,7 @@
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
                 <button aria-label="⬆" id="{{signal.description}}"></button>
-                <button aria-label="🎶"></button>
+                <button disabled></button>
                 <button aria-label="{{signal.visibility}}"></button>
             </label>
         </li>
