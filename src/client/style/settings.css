@@ -8,7 +8,6 @@ section {
     background: repeating-linear-gradient(-45deg, rgb(2, 2, 2), rgb(19, 19, 19) 15px);
     font-size: 300%;
 }
-
 section::after {
     content: '';
     height: 130px;
@@ -16,7 +15,6 @@ section::after {
     width: 100%;
     display: block;
 }
-
 section > ul > li[aria-label] {
     display: flex;
     align-items: center;
@@ -28,27 +26,22 @@ section > ul > li[aria-label] {
     min-height: calc(-80px + 5vh);
     padding-left: 10px;
 }
-
 section button {
     font-size: 40px;
     padding: 10px;
 }
-
 section label {
     display: grid;
     grid-template-columns: repeat(15, 25px);
     box-sizing: border-box;
     padding: 10px 0px;
 }
-
 section > ul > li:not([aria-label]) label {
     grid-template-rows: repeat(3, 25px);
 }
-
 section > ul > li:not([aria-label]):nth-of-type(2) label {
     grid-template-rows: repeat(10, 25px);
 }
-
 section label > [type='text'] {
     font-size: 25px;
     padding: 10px;
@@ -57,16 +50,13 @@ section label > [type='text'] {
     border-radius: 10px;
     width: 165px;
 }
-
 section label > [type='text']:not(:disabled) {
     animation: 2s linear 0s infinite normal none running borderAnimation;
 }
-
 :root {
     --border-gradient-start: red;
     --border-gradient-end: yellow;
 }
-
 @keyframes borderAnimation {
     0% {
         border-style: dotted;
@@ -78,7 +68,6 @@ section label > [type='text']:not(:disabled) {
         border-style: dotted;
     }
 }
-
 section label > textarea {
     font-size: 25px;
     grid-area: 5 / 3 / 11 / 16;
@@ -89,11 +78,9 @@ section label > textarea {
     width: 340px;
     padding: 10px;
 }
-
 section label > [type='text']:nth-of-type(2) {
     grid-row: 4 / 7;
 }
-
 section label > textarea:disabled,
 section label > [type='text']:disabled {
     color: var(--color-light);
@@ -101,7 +88,6 @@ section label > [type='text']:disabled {
     pointer-events: none;
     border: none;
 }
-
 section label > textarea:focus,
 section label > [type='text']:focus {
     background: var(--color-deepyellow);
@@ -109,11 +95,9 @@ section label > [type='text']:focus {
     border: none;
     animation: auto ease 0s 1 normal none running none;
 }
-
 section label > button {
     line-height: 0;
 }
-
 section label > button:nth-of-type(1) {
     grid-area: 1 / 1 / 4 / 3;
     display: flex;
@@ -122,7 +106,6 @@ section label > button:nth-of-type(1) {
     justify-content: center;
     font-size: 30px;
 }
-
 section label > button:nth-of-type(2),
 section label > button:nth-of-type(3),
 section label > button:nth-of-type(4) {
@@ -132,87 +115,71 @@ section label > button:nth-of-type(4) {
     justify-content: center;
     align-items: center;
 }
-
 section label > button:disabled,
 section label > button:disabled,
 section label > button:disabled {
-    opacity: .5;
+    opacity: 0.5;
 }
-
 section label > button:nth-of-type(2) {
     grid-area: 1 / 11 / 4 / 12;
     font-size: 30px;
     width: 40px;
 }
-
 section label > button:nth-of-type(3) {
     grid-area: 1 / 13 / 4 / 14;
     font-size: 30px;
     width: 40px;
+    height: 40px;
 }
-
 section label > button:nth-of-type(4) {
     grid-area: 1 / 15 / 4 / 16;
     font-size: 20px;
     width: 40px;
 }
-
-
 #emoji-widget li.active {
     box-shadow: inset 0 0 8px 8px var(--color-deepyellow);
 }
-
 section li.aqua,
 section label.aqua,
 section label.aqua + #emoji-widget {
     background: var(--color-aqua);
 }
-
 section li.orange,
 section label.orange,
 section label.orange + #emoji-widget {
     background: var(--color-orange);
 }
-
 section li.bloodorange,
 section label.bloodorange,
 section label.bloodorange + #emoji-widget {
     background: var(--color-bloodorange);
 }
-
 section li.purple,
 section label.purple,
 section label.purple + #emoji-widget {
     background: var(--color-purple);
 }
-
 section li.green,
 section label.green,
 section label.green + #emoji-widget {
     background: var(--color-green);
 }
-
 section li.red,
 section label.red,
 section label.red + #emoji-widget {
     background: var(--color-red);
 }
-
 section li.blue,
 section label.blue,
 section label.blue + #emoji-widget {
     background: var(--color-blue);
 }
-
-
 body > #emoji-widget {
     display: none;
 }
-
 #emoji-widget {
     display: none;
 }
-
 #emoji-widget {
     margin: 0px;
     padding: 0px;
@@ -221,11 +188,9 @@ body > #emoji-widget {
     border-top: 5px dotted rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
 }
-
 .emoji-widget-instance,
 .emoji-widget-instance-trigger {
 }
-
 #emoji-widget li {
     display: flex;
     justify-content: center;
