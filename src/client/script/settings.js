@@ -67,7 +67,7 @@ const settingsCreateEditor = (editorEl) => {
         ) {
             const field = (textInputEl.tagName.toLowerCase() === 'input') ?
                 'label' :
-                'description';
+                'cells';
             axios
                 .get("/api/config/update", {
                     params: {
@@ -127,39 +127,37 @@ const settingsCreateUploader = (editorEl) => {
             // }
         };
         const clickUploadButton = () => {
-            const fields = uploadButton.id.split(',')
-            const fileId = fields[0];
-            const fileType = fields[1];
-            const fileAcceptList = fields.slice(1).map(f => `${fileType}/${f}`).slice(1).join(', ');
+            const cells = uploadButton.id.split(',')
+            const id = cells[0];
+            let fileType = cells[1];
+            const fileAcceptList = cells.slice(1).map(f => `${fileType}/${f}`).slice(1).join(', ');
             const uploader = document.createElement('input');
-            console.log('fileId', fileId);
-            console.log('fileType', fileType);
-            console.log('fileAcceptList', fileAcceptList);
             uploader.type = 'file';
             uploader.accept = fileAcceptList;
-            uploader.click();
             uploader.addEventListener('change', function () {
                 if (uploader.files[0]) {
                     const reader = new FileReader();
                     inputEl.focus();
                     reader.onloadend = () => {
-                        // const suffix = uploader.files[0].name.split('.').pop();
-                        // uploadButton.id =
-                        // axios.post("/api/media/update",
-                        //     {
-                        //         data: reader.result.split(',')[1],
-                        //         id: uploadButton.id,
-                        //     }).then(response => {
-                        //     console.log('settingsCreateUploader :: success:', response.data);
-                        //     togglePlayDisabled();
-                        // }).catch(error => {
-                        //     console.error('settingsCreateUploader :: error:', error);
-                        // });
+                        const type = uploader.files[0].name.split('.').pop();
+                        uploadButton.id = cells
+                        axios.post("/api/media/update",
+                            {
+                                data: reader.result.split(',')[1],
+                                id,
+                                type,
+                            }).then(response => {
+                            console.log('settingsCreateUploader :: success:', response.data);
+                            togglePlayDisabled();
+                        }).catch(error => {
+                            console.error('settingsCreateUploader :: error:', error);
+                        });
                     };
                     reader.readAsDataURL(uploader.files[0]);
                 }
                 uploader.remove();
             });
+            uploader.click();
         };
         replayButton.addEventListener('click', clickReplayButton);
         uploadButton.addEventListener('click', clickUploadButton);
