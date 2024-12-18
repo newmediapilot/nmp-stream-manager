@@ -187,3 +187,8 @@ section label.red,
 section label.red + #emoji-widget {
     background: var(--color-red);
 }
+section li.deepyellow,
+section label.deepyellow,
+section label.deepyellow + #emoji-widget {
+    background: var(--color-deepyellow);
+}
