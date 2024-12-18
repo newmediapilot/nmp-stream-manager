@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="../client/style/reset.css?{{cacheBuster}}">
 <link rel="stylesheet" href="../client/style/iframe.css?{{cacheBuster}}">
 <style>
-    #twitch-embed {
+    #feature-embed {
         justify-content: center;
         align-items: center;
         font-size: 100px;
@@ -42,15 +42,15 @@
         translateY(calc(calc(var(--_feat-translateY) * -1%) + 40%))
         scaleX(calc(var(--_feat-scaleX) * 0.01))
         scaleY(calc(var(--_feat-scaleY) * 0.01))
-        rotateX(calc(var(--_feat-rotateX) * 3.6deg))
-        rotateY(calc(var(--_feat-rotateY) * -3.6deg))
-        rotateZ(calc(var(--_feat-rotateZ) * -3.6deg))
+        rotateX(calc(calc(var(--_feat-rotateX) * -3.6deg) + 0deg))
+        rotateY(calc(calc(var(--_feat-rotateY) * -3.6deg) + 0deg))
+        rotateZ(calc(calc(var(--_feat-rotateZ) * -3.6deg) + 0deg));
     }
 </style>
 {%endblock%}
 {%block body%}
 <main id="module-container">
-    <iframe id="twitch-embed"
+    <iframe id="feature-embed"
             frameborder="0"
             allowfullscreen="true"
             scrolling="no"
@@ -90,10 +90,10 @@
         const urlParams = new URLSearchParams(window.location.search);
         const streamerQueryParam = urlParams.get('featuredName');
         if (!streamerQueryParam) {
-            console.log('embed-twitch :: no streamer found');
+            console.log('embed-feature :: no streamer found');
         } else {
             const URL = `https://player.twitch.tv/?channel=${streamerQueryParam}&parent=localhost&muted=false`;
-            const twitchEmbed = document.body.querySelector('#twitch-embed');
+            const twitchEmbed = document.body.querySelector('#feature-embed');
             twitchEmbed.src = URL;
         }
     });
