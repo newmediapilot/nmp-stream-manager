@@ -42,7 +42,6 @@ section > ul > li:not([aria-label]) label {
     padding-bottom: 10px;
 }
 section > ul > li:not([aria-label]):nth-child(2) label {
-    height: 245px;
     padding-bottom: 10px;
     padding-top: 10px;
 }
