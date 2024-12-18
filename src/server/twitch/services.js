@@ -1,4 +1,5 @@
 const { getSecret } = require("../store/manager");
+const axios = require("axios");
 const startTwitchServices = () => {
     let cycles = 0;
     const getOnlineStatus = () => {
