@@ -126,10 +126,8 @@ const settingsCreateUpload = (editorEl) => {
             uploader.addEventListener('change', () => {
                 if (uploader.files[0]) {
                     const reader = new FileReader();
-                    inputEl.focus();
                     reader.onloadend = () => {
                         const type = uploader.files[0].name.split('.').pop();
-                        uploadButton.id = `${cells[0]},${cells[1]},${cells.slice(2)}`;
                         axios.post("/api/media/update",
                             {
                                 data: reader.result.split(',')[1],
@@ -137,11 +135,14 @@ const settingsCreateUpload = (editorEl) => {
                                 type,
                                 id,
                             }).then(response => {
+                            const sorted = `${cells[0]},${cells[1]},${cells.slice(2).sort(a => a === type).join(',')}`;
+                            uploadButton.setAttribute("id", sorted);
                             replayButton && togglePlayDisabled();
+                            inputEl.focus();
                             console.log('settingsCreateUpload :: success:', response.data);
                         }).catch(error => {
                             console.error('settingsCreateUpload :: error:', error);
-                        });
+                        })
                     };
                     reader.readAsDataURL(uploader.files[0]);
                 }
