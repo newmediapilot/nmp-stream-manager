@@ -6,6 +6,7 @@ const DASHBOARD_BUTTON_CONFIG = {
             type: "feature",
             description: "feature:set",
             emoji: "👉",
+            visibility: "ON",
         },
         {
             emoji: "👉",
@@ -13,6 +14,7 @@ const DASHBOARD_BUTTON_CONFIG = {
             type: "ad",
             description: "30",
             label: "30s",
+            visibility: "ON",
         },
         {
             emoji: "❤",
@@ -20,13 +22,15 @@ const DASHBOARD_BUTTON_CONFIG = {
             type: "bpm",
             description: "bpm",
             label: "BPM",
+            visibility: "ON",
         },
         {
             emoji: "👉",
-            label: "Ping",
             theme: "purple",
             type: "mark",
             description: "match:checkpoint",
+            label: "Ping",
+            visibility: "ON",
         },
         {
             emoji: "👉",
@@ -34,6 +38,7 @@ const DASHBOARD_BUTTON_CONFIG = {
             theme: "green",
             type: "announce",
             description: "A button made this announcement.",
+            visibility: "ON",
         },
         {
             emoji: "👉",
@@ -41,6 +46,7 @@ const DASHBOARD_BUTTON_CONFIG = {
             theme: "red",
             type: "sound",
             description: "a.mp3",
+            visibility: "ON",
         }
     ],
 };
