@@ -1,11 +1,11 @@
 const DASHBOARD_BUTTON_CONFIG = {
     signals: [
         {
+            emoji: "👉",
             label: "aaknot",
             theme: "aqua",
             type: "feature",
             description: "feature:set",
-            emoji: "👉",
             visibility: "ON",
         },
         {
@@ -47,7 +47,15 @@ const DASHBOARD_BUTTON_CONFIG = {
             type: "sound",
             description: "a.mp3",
             visibility: "ON",
-        }
+        },
+        {
+            emoji: "👉",
+            label: "Media",
+            theme: "deepyellow",
+            type: "sound",
+            description: "a.gif",
+            visibility: "ON",
+        },
     ],
 };
 const fs = require("fs");
