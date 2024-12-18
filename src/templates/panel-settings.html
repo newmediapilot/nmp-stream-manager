@@ -35,12 +35,10 @@
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
                 <button aria-label="⬆" id="{{signal.description}}"></button>
-                <button aria-label="🎶"></button>
+                <button disabled></button>
                 <button aria-label="{{signal.visibility}}"></button>
             </label>
         </li>
-        {%endif%}
-        {%endfor%}
         {%endif%}
         {%endfor%}
         {%set feature_title_set = false%}
@@ -54,7 +52,7 @@
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
                 <button aria-label="⬆" id="{{signal.description}}"></button>
-                <button disabled></button>
+                <button aria-label="🎶"></button>
                 <button aria-label="{{signal.visibility}}"></button>
             </label>
         </li>
