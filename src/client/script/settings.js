@@ -109,6 +109,16 @@ const settingsCreateUpload = (editorEl) => {
             }
             audio = new Audio(url);
             audio.volume = 0.75;
+            audio.addEventListener('timeupdate', () => {
+                if (audio.currentTime > 0) {
+                    const value = (audio.currentTime / audio.duration) * 360;
+                    editorEl.querySelector('button:nth-of-type(3)').style.transform = `rotateZ(${value}deg)`;
+                }
+                if(audio.currentTime === audio.duration) {
+                    audio.currentTime = 0;
+                    audio.pause();
+                }
+            });
             actionButton.disabled = false;
         }).catch(() => {
                 console.log('toggleReplayState :: no sound ::', url);
