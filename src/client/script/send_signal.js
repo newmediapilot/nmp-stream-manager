@@ -1,6 +1,5 @@
 const sendSignal = (el, href) => {
-    const dataHref = href;
-    const getRes = axios.get(dataHref);
+    const getRes = axios.get(href);
     getRes.then((getRes) => {
         console.log("sendSignal ::", getRes);
     });
