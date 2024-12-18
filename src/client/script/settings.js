@@ -156,7 +156,6 @@ const settingsCreateUpload = (editorEl) => {
         toggleReplayState();
         const cells = uploadButton.id.split(',');
         const type = cells[1];
-
         const replayAudio = () => {
             console.log('replayAudio :: currentTime ::', audio.currentTime);
             if (audio.currentTime > 0) {
@@ -167,13 +166,7 @@ const settingsCreateUpload = (editorEl) => {
             }
         };
         const displayMedia = () => {
-            console.log('replayAudio :: currentTime ::', audio.currentTime);
-            if (audio.currentTime > 0) {
-                audio.pause();
-                audio.currentTime = 0;
-            } else {
-                audio.play();
-            }
+            console.log('displayMedia :: displayMedia ::');
         };
         actionButton.addEventListener('click', () => {
             "audio" === type && replayAudio();
