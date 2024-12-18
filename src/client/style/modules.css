@@ -121,16 +121,15 @@
     display: block;
     width: 200%;
     height: 200%;
-    background-color: var(--color-light);
-    background-image: radial-gradient(circle at center center, var(--color-dark), var(--color-light)),
-        repeating-radial-gradient(
-            circle at center center,
-            var(--color-dark),
-            var(--color-dark),
-            10px,
-            transparent 20px,
-            transparent 10px
-        );
+
+
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: radial-gradient(circle at center center, #000000, #ffffff), repeating-radial-gradient(circle at center center, #000000, #000000, 4px, transparent 8px, transparent 4px);
+    background-blend-mode: multiply;
+
+
+
 }
 .module label:nth-of-type(1) {
     grid-area: 1 / 17 / 8 / 27;
