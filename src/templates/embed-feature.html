@@ -38,13 +38,13 @@
         perspective-origin: calc(0.5 * 1920px) calc(0.5 * 1920px);
     }
     #module-container {
-        transform: translateX(calc(calc(var(--_feat-translateX) * -1%) + 40%))
-        translateY(calc(calc(var(--_feat-translateY) * -1%) + 40%))
+        transform: translateX(calc(calc(var(--_feat-translateX) * 1%) - 50%))
+        translateY(calc(calc(var(--_feat-translateY) * 1%) - 50%))
         scaleX(calc(var(--_feat-scaleX) * 0.01))
         scaleY(calc(var(--_feat-scaleY) * 0.01))
-        rotateX(calc(calc(var(--_feat-rotateX) * -3.6deg) + 0deg))
-        rotateY(calc(calc(var(--_feat-rotateY) * -3.6deg) + 0deg))
-        rotateZ(calc(calc(var(--_feat-rotateZ) * -3.6deg) + 0deg));
+        rotateX(calc(calc(var(--_feat-rotateX) * 3.6deg) + 0deg))
+        rotateY(calc(calc(var(--_feat-rotateY) * 3.6deg) + 0deg))
+        rotateZ(calc(calc(var(--_feat-rotateZ) * 3.6deg) + 0deg));
     }
 </style>
 {%endblock%}
