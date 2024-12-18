@@ -30,6 +30,18 @@ section button {
     font-size: 40px;
     padding: 10px;
 }
+section button[aria-label=''] {
+    opacity: 0.25;
+    filter: contrast(900%);
+    background-size: 5px 5px !important;
+    background-image: repeating-linear-gradient(
+        -45deg,
+        var(--color-dark) 0,
+        var(--color-dark) 1px,
+        var(--color-light) 0,
+        var(--color-light) 50%
+    ) !important;
+}
 section label {
     display: grid;
     grid-template-columns: repeat(15, 25px);
