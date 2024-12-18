@@ -51,7 +51,7 @@ const DASHBOARD_BUTTON_CONFIG = {
         {
             emoji: "👉",
             label: "Media",
-            theme: "deepyellow",
+            theme: "blue",
             type: "media",
             description: "a.gif",
             visibility: "ON",
