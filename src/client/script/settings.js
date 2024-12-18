@@ -1,4 +1,4 @@
-const settingsCreateEmojiWidget = (editorEl) => {
+const settingsCreateEmojis = (editorEl) => {
     const {id} = editorEl;
     const emojiWidgetEl = document.body.querySelector("#emoji-widget");
     const emojiWidgetTriggerEl = editorEl.querySelector("button:nth-of-type(1)");
@@ -93,64 +93,32 @@ const settingsCreateEditor = (editorEl) => {
     });
 };
 
-const settingsCreateUploader = (editorEl) => {
-    let audio = null;
-    const uploadButton = editorEl.querySelector('button:nth-of-type(2)');
-    const replayButton = editorEl.querySelector('button:nth-of-type(3)');
-    const inputEl = editorEl.querySelector('input[type=text]');
-    if (!!inputEl && !!uploadButton && !!replayButton) {
-        const togglePlayDisabled = () => {
-            // const url = `/.media/${uploadButton.id}?${new Date().getTime()}`;
-            // console.log('togglePlayDisabled :: checking ::', url);
-            // axios.get(url).then(() => {
-            //     if (audio) {
-            //         audio = undefined;
-            //     }
-            //     audio = new Audio(url);
-            //     audio.volume = 0.75;
-            //     replayButton.disabled = false;
-            // }).catch(error => {
-            //         console.log('togglePlayDisabled :: no sound ::', url);
-            //         replayButton.disabled = true;
-            //     }
-            // );
-        };
-        togglePlayDisabled();
-        const clickReplayButton = () => {
-            // console.log('(audio.currentTime', (audio.currentTime));
-            // console.log('(audio.duration', (audio.duration));
-            // if (audio.currentTime > 0) {
-            //     audio.pause();
-            //     audio.currentTime = 0;
-            // } else {
-            //     audio.play();
-            // }
-        };
+const settingsCreateUpload = (editorEl) => {
+    const uploadButton = editorEl.querySelector('button:nth-of-type(2):not(:disabled)');
+    const replayButton = editorEl.querySelector('button:nth-of-type(3):not(:disabled)');
+    if (!!uploadButton) {
         const clickUploadButton = () => {
             const cells = uploadButton.id.split(',')
-            const id = cells[0];
-            let fileType = cells[1];
-            const fileAcceptList = cells.slice(1).map(f => `${fileType}/${f}`).slice(1).join(', ');
             const uploader = document.createElement('input');
             uploader.type = 'file';
-            uploader.accept = fileAcceptList;
-            uploader.addEventListener('change', function () {
+            uploader.accept = cells.slice(1).map(f => `${cells[1]}/${f}`).slice(1).join(', ');
+            uploader.addEventListener('change', () => {
                 if (uploader.files[0]) {
                     const reader = new FileReader();
                     inputEl.focus();
                     reader.onloadend = () => {
                         const type = uploader.files[0].name.split('.').pop();
-                        uploadButton.id = cells
+                        uploadButton.key = cells;
                         axios.post("/api/media/update",
                             {
                                 data: reader.result.split(',')[1],
-                                id,
+                                key: cells[0],
                                 type,
                             }).then(response => {
-                            console.log('settingsCreateUploader :: success:', response.data);
+                            console.log('settingsCreateUpload :: success:', response.data);
                             togglePlayDisabled();
                         }).catch(error => {
-                            console.error('settingsCreateUploader :: error:', error);
+                            console.error('settingsCreateUpload :: error:', error);
                         });
                     };
                     reader.readAsDataURL(uploader.files[0]);
@@ -159,12 +127,42 @@ const settingsCreateUploader = (editorEl) => {
             });
             uploader.click();
         };
-        replayButton.addEventListener('click', clickReplayButton);
         uploadButton.addEventListener('click', clickUploadButton);
+    }
+    if (!!replayButton) {
+        let audio = null;
+        const togglePlayDisabled = () => {
+            const cells = uploadButton.id.split(',');
+            const url = `/.media/${cells[0]}.${cells[2]}?${cells[1]}=${new Date().getTime()}`;
+            console.log('togglePlayDisabled :: checking ::', url);
+            axios.get(url).then(() => {
+                if (audio) {
+                    audio = undefined;
+                }
+                audio = new Audio(url);
+                audio.volume = 0.75;
+                replayButton.disabled = false;
+            }).catch(error => {
+                    console.log('togglePlayDisabled :: no sound ::', url);
+                    replayButton.disabled = true;
+                }
+            );
+        };
+        const clickReplayButton = () => {
+            console.log('clickReplayButton :: currentTime ::', audio.currentTime);
+            if (audio.currentTime > 0) {
+                audio.pause();
+                audio.currentTime = 0;
+            } else {
+                audio.play();
+            }
+        };
+        replayButton.addEventListener('click', clickReplayButton);
+        togglePlayDisabled();
     }
 };
 
-const settingsToggler = (editorEl) => {
+const settingsToggle = (editorEl) => {
     const {id} = editorEl;
     const toggleButton = editorEl.querySelector('button:nth-of-type(4)');
     if (!!toggleButton) {
@@ -197,7 +195,7 @@ const settingsToggler = (editorEl) => {
 
 const settings = () => {
     document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsCreateEditor);
-    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsCreateEmojiWidget);
-    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsCreateUploader);
-    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsToggler);
+    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsCreateEmojis);
+    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsCreateUpload);
+    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsToggle);
 };
