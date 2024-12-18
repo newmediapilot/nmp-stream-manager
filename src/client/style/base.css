@@ -35,6 +35,7 @@ textarea {
 }
 [aria-label]::before {
     content: attr(aria-label);
+    color: var(--color-dark);
 }
 html.reduced-motion * {
     animation: auto ease 0s 1 normal none running none !important;
