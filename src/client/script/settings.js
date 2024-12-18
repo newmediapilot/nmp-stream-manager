@@ -137,8 +137,8 @@ const settingsCreateUpload = (editorEl) => {
                                 type,
                                 id,
                             }).then(response => {
+                            replayButton && togglePlayDisabled();
                             console.log('settingsCreateUpload :: success:', response.data);
-                            togglePlayDisabled();
                         }).catch(error => {
                             console.error('settingsCreateUpload :: error:', error);
                         });
