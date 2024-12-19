@@ -71,7 +71,6 @@
     background-size: 100% 100%;
 }
 .module .preview iframe {
-    transform: scale(calc(var(--js-module-preview-width) / 1920));
     pointer-events: none;
     border: none;
     background: none;
@@ -79,6 +78,8 @@
     left: 0px;
     top: 0px;
     transform-origin: 0px 0px;
+    width: 100%;
+    height: 100%;
 }
 .module .title {
     border-width: 20px;
