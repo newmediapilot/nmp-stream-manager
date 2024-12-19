@@ -21,24 +21,13 @@ body {
     height: 100vh;
     display: block;
     position: relative;
+    background-size: 7vw 7vh;
+    background-repeat: repeat;
+    animation: wave 15s linear infinite;
 }
 
 html.iframe #module-container {
     background-image: linear-gradient(120deg, rgba(2, 2, 2, 1) 0%, rgba(75, 75, 75, 1) 33%, rgba(2, 2, 2, 1) 33%, rgba(75, 75, 75, 1) 100%);
     background-size: cover;
     box-shadow: inset 0 0 5px 5px rgba(255, 255, 255, .5);
-}
-
-html.iframe iframe {
-    display: none;
-}
-
-#module-container {
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    position: relative;
-    background-size: 7vw 7vh;
-    background-repeat: repeat;
-    animation: wave 15s linear infinite;
 }
