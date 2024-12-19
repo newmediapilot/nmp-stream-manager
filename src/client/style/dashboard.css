@@ -108,7 +108,7 @@ section .aqua button {
     color: var(--color-dark);
 }
 section .black button {
-    background-color: var(--color-black);
+    background-color: var(--color-light);
     color: var(--color-light);
 }
 section .orange button {
