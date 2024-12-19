@@ -8,7 +8,7 @@
     "curl": "rm -rf .bin && curl -L \"https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe\" -o \"./.bin\"",
     "combine": "node compiler/combine.js",
     "uncombine": "node compiler/uncombine.js",
-    "postinstall": "rm -rf package-lock.json"
+    "postinstall": "rm -rf package-lock.json && node ./node/install.js"
   },
   "dependencies": {
     "axios": "1.7.7",
