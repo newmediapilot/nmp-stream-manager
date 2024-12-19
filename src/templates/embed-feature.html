@@ -36,7 +36,7 @@
         perspective: calc(3 * 1920px);
         perspective-origin: calc(0.5 * 1920px) calc(0.5 * 1920px);
     }
-    #module-container {
+    main {
         transform: translateX(calc(calc(var(--_feat-translateX) * -1%) + 50%))
         translateY(calc(calc(var(--_feat-translateY) * -1%) + 50%))
         scaleX(calc(calc(var(--_feat-scaleX) * 0.01) + 0.0))
@@ -47,7 +47,7 @@
 </style>
 {%endblock%}
 {%block body%}
-<main id="module-container">
+<main>
     <iframe id="feature-embed"
             frameborder="0"
             allowfullscreen="true"
