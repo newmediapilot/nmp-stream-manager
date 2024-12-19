@@ -1,18 +1,21 @@
 section {
     width: 100vw;
     height: 100vh;
-    overflow: hidden scroll;
+    overflow: hidden;
     position: relative;
     margin: 0px;
     padding: 0px;
     background: repeating-linear-gradient(-45deg, var(--color-dark), var(--color-gray) 15px);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 article {
     display: grid;
     min-height: 100vh;
     overflow: hidden;
     grid-template-columns: repeat(16, calc(6.25vw));
-    grid-template-rows: repeat(25, calc(6.25vw));
+    grid-template-rows: repeat(30, calc(6.25vw));
 }
 article .preview {
     position: relative;
