@@ -114,7 +114,7 @@ section label > button:nth-of-type(3) {
     font-size: 30px;
     width: 40px;
     height: 60px;
-    transition: transform 100ms linear;
+    transition: transform 500ms linear;
 }
 section label > button:nth-of-type(4) {
     grid-area: 1 / 15 / 4 / 16;
