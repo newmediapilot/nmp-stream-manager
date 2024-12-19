@@ -143,8 +143,18 @@ const publicConfigUpdate = (req, res) => {
         res.status(500).json({error: error.message});
     }
 };
+const configFieldUpdate = (id, field, value) => {
+    console.log(process.cwd(), "configFieldUpdate", payloadJSON);
+    const signalsTarget = JSON.parse(
+        JSON.stringify(getParam("dashboard_signals_config")),
+    );
+    signalsTarget[Number(id)][field] = value;
+    setParam("dashboard_signals_config", signalsTarget);
+    putConfig("signals", signalsTarget);
+};
 module.exports = {
     DASHBOARD_BUTTON_CONFIG,
     initializePublicConfigs,
     publicConfigUpdate,
+    configFieldUpdate,
 };
