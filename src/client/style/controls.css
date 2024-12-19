@@ -5,7 +5,7 @@ html.edit-active nav aside button:not(#toggle-edit-dashboard) {
 nav {
     position: fixed;
     bottom: 1.5%;
-    left: 15%;
+    left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
     display: flex;
