@@ -23,13 +23,12 @@
 </style>
 <style>
     :root {
-        --_feat-translateX: 50.0;
-        --_feat-translateY: 50.0;
-        --_feat-scaleX: 50.0;
-        --_feat-scaleY: 50.0;
-        --_feat-scaleZ: 50.0;
-        --_feat-rotateX: 50.0;
-        --_feat-rotateY: 50.0;
+        --_feat-tX: 50.0;
+        --_feat-tY: 50.0;
+        --_feat-sX: 50.0;
+        --_feat-sY: 50.0;
+        --_feat-rX: 50.0;
+        --_feat-rY: 50.0;
     }
 </style>
 {%include "_style.njk"%}
@@ -39,12 +38,12 @@
         perspective-origin: calc(0.5 * 1920px) calc(0.5 * 1920px);
     }
     main {
-        transform: translateX(calc(calc(var(--_feat-translateX) * -1%) + 50%))
-        translateY(calc(calc(var(--_feat-translateY) * -1%) + 50%))
-        scaleX(calc(calc(var(--_feat-scaleX) * 0.01) + 0.0))
-        scaleY(calc(calc(var(--_feat-scaleY) * 0.01) + 0.0))
-        rotateX(calc(calc(var(--_feat-rotateY) * 3.6deg) - 180deg))
-        rotateY(calc(calc(var(--_feat-rotateX) * 3.6deg) - 180deg));
+        transform: translateX(calc(calc(var(--_feat-tX) * -1%) + 50%))
+        translateY(calc(calc(var(--_feat-tY) * -1%) + 50%))
+        scaleX(calc(calc(var(--_feat-sX) * 0.01) + 0.0))
+        scaleY(calc(calc(var(--_feat-sY) * 0.01) + 0.0))
+        rotateX(calc(calc(var(--_feat-rY) * 3.6deg) - 180deg))
+        rotateY(calc(calc(var(--_feat-rX) * 3.6deg) - 180deg));
     }
 </style>
 {%endblock%}

@@ -24,12 +24,12 @@
 </style>
 <style>
     :root {
-        --_proj-translateX: 0.0;
-        --_proj-translateY: 0.0;
-        --_proj-scaleX: 100.0;
-        --_proj-scaleY: var(--_proj-scaleX);
-        --_proj-rotateX: 0.0;
-        --_proj-rotateY: 0.0;
+        --_proj-tX: 0.0;
+        --_proj-tY: 0.0;
+        --_proj-sX: 100.0;
+        --_proj-sY: var(--_proj-sX);
+        --_proj-rX: 0.0;
+        --_proj-rY: 0.0;
         --_proj-rotateZ: 0.0;
     }
 </style>
@@ -41,7 +41,7 @@
     }
 
     main {
-        transform: translateX(calc(calc(var(--_proj-translateX) * -1%) + 40%)) translateY(calc(calc(var(--_proj-translateY) * -1%) + 40%)) scaleX(calc(var(--_proj-scaleX) * 0.01)) scaleY(calc(var(--_proj-scaleY) * 0.01)) rotateX(calc(var(--_proj-rotateX) * 3.6deg)) rotateY(calc(var(--_proj-rotateY) * -3.6deg)) rotateZ(calc(var(--_proj-rotateZ) * -3.6deg))
+        transform: translateX(calc(calc(var(--_proj-tX) * -1%) + 40%)) translateY(calc(calc(var(--_proj-tY) * -1%) + 40%)) scaleX(calc(var(--_proj-sX) * 0.01)) scaleY(calc(var(--_proj-sY) * 0.01)) rotateX(calc(var(--_proj-rX) * 3.6deg)) rotateY(calc(var(--_proj-rY) * -3.6deg)) rotateZ(calc(var(--_proj-rotateZ) * -3.6deg))
     }
 </style>
 {%endblock%}

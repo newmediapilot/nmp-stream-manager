@@ -25,13 +25,13 @@
 </style>
 <style>
     :root {
-        --_bpm-translateX: 50.0;
-        --_bpm-translateY: 50.0;
-        --_bpm-scaleX: 50.0;
-        --_bpm-scaleY: 50.0;
-        --_bpm-scaleZ: 50.0;
-        --_bpm-rotateX: 50.0;
-        --_bpm-rotateY: 50.0;
+        --_bpm-tX: 50.0;
+        --_bpm-tY: 50.0;
+        --_bpm-sX: 50.0;
+        --_bpm-sY: 50.0;
+        --_bpm-sZ: 50.0;
+        --_bpm-rX: 50.0;
+        --_bpm-rY: 50.0;
     }
 </style>
 {%include "_style.njk"%}
@@ -41,12 +41,12 @@
         perspective-origin: calc(0.5 * 1920px) calc(0.5 * 1920px);
     }
     main {
-        transform: translateX(calc(calc(var(--_bpm-translateX) * -1%) + 50%))
-        translateY(calc(calc(var(--_bpm-translateY) * -1%) + 50%))
-        scaleX(calc(calc(var(--_bpm-scaleX) * 0.01) + 0.0))
-        scaleY(calc(calc(var(--_bpm-scaleY) * 0.01) + 0.0))
-        rotateX(calc(calc(var(--_bpm-rotateY) * 3.6deg) - 180deg))
-        rotateY(calc(calc(var(--_bpm-rotateX) * 3.6deg) - 180deg));
+        transform: translateX(calc(calc(var(--_bpm-tX) * -1%) + 50%))
+        translateY(calc(calc(var(--_bpm-tY) * -1%) + 50%))
+        scaleX(calc(calc(var(--_bpm-sX) * 0.01) + 0.0))
+        scaleY(calc(calc(var(--_bpm-sY) * 0.01) + 0.0))
+        rotateX(calc(calc(var(--_bpm-rY) * 3.6deg) - 180deg))
+        rotateY(calc(calc(var(--_bpm-rX) * 3.6deg) - 180deg));
     }
 </style>
 {%endblock%}

@@ -19,12 +19,12 @@
 </style>
 <style>
     :root {
-        --_draw-translateX: 0.0;
-        --_draw-translateY: 0.0;
-        --_draw-scaleX: 100.0;
-        --_draw-scaleY: var(--_draw-scaleX);
-        --_draw-rotateX: 0.0;
-        --_draw-rotateY: 0.0;
+        --_draw-tX: 0.0;
+        --_draw-tY: 0.0;
+        --_draw-sX: 100.0;
+        --_draw-sY: var(--_draw-sX);
+        --_draw-rX: 0.0;
+        --_draw-rY: 0.0;
         --_draw-rotateZ: 0.0;
     }
 </style>
@@ -43,7 +43,7 @@
     }
 
     main {
-        transform: translateX(calc(calc(var(--_draw-translateX) * -1%) + 33%)) translateY(calc(calc(var(--_draw-translateY) * -1%) + 33%)) scaleX(calc(var(--_draw-scaleX) * 0.01)) scaleY(calc(var(--_draw-scaleY) * 0.01)) rotateX(calc(var(--_draw-rotateX) * 3.6deg)) rotateY(calc(var(--_draw-rotateY) * 3.6deg)) rotateZ(calc(var(--_draw-rotateZ) * 3.6deg));
+        transform: translateX(calc(calc(var(--_draw-tX) * -1%) + 33%)) translateY(calc(calc(var(--_draw-tY) * -1%) + 33%)) scaleX(calc(var(--_draw-sX) * 0.01)) scaleY(calc(var(--_draw-sY) * 0.01)) rotateX(calc(var(--_draw-rX) * 3.6deg)) rotateY(calc(var(--_draw-rY) * 3.6deg)) rotateZ(calc(var(--_draw-rotateZ) * 3.6deg));
     }
 </style>
 {%endblock%}
