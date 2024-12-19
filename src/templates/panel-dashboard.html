@@ -49,7 +49,8 @@
     ));
     document.addEventListener("DOMContentLoaded", () => dashboard());
     document.addEventListener("DOMContentLoaded", () => {
-        !document.documentElement.classList.contains('reduced-motion') && anime({
+        // !document.documentElement.classList.contains('reduced-motion') &&
+        anime({
             targets: "html.iframe .dashboard button",
             duration: 666,
             delay: anime.stagger(11),
@@ -63,7 +64,8 @@
         });
     });
     document.addEventListener("DOMContentLoaded", () => {
-        !document.documentElement.classList.contains('reduced-motion') && anime({
+        // !document.documentElement.classList.contains('reduced-motion') &&
+        anime({
             targets: ".dashboard button:not(:disabled)",
             duration: 3333,
             delay: anime.stagger(50),
