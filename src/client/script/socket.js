@@ -39,7 +39,7 @@ const socketWatchDrawSet = (callback) => {
     });
 };
 const socketEmitReload = () => {
-    axios.get("/api/signal/create?type=browser&description=reload");
+    axios.get(`${getPath("API_SIGNAL_CREATE")}?type=browser&description=reload`);
 };
 // Socket will only emit reload for pages which are inactive
 const socketWatchReload = () => {
