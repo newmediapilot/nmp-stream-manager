@@ -39,7 +39,7 @@
         perspective-origin: calc(0.5 * 1920px) calc(0.5 * 1920px);
     }
 
-    #module-container {
+    main {
         transform: translateX(calc(calc(var(--_proj-translateX) * -1%) + 40%)) translateY(calc(calc(var(--_proj-translateY) * -1%) + 40%)) scaleX(calc(var(--_proj-scaleX) * 0.01)) scaleY(calc(var(--_proj-scaleY) * 0.01)) rotateX(calc(var(--_proj-rotateX) * 3.6deg)) rotateY(calc(var(--_proj-rotateY) * -3.6deg)) rotateZ(calc(var(--_proj-rotateZ) * -3.6deg))
     }
 </style>
@@ -47,7 +47,7 @@
 {%block body%}
 {%for signal in "dashboard_signals_config"|getParam%}
 {%if signal.type == "bpm"%}
-<main id="module-container">
+<main>
     <img id="media-embed"/>
 </main>
 {%endif%}
