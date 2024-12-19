@@ -1,6 +1,5 @@
 const fs = require("fs");
 const {getParam} = require('../store/manager');
-const {publicConfigUpdate} = require('./config');
 const publicMediaUpdate = (req, res) => {
     try {
         const {data, key, type, id} = req.body;
