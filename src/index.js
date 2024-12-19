@@ -18,7 +18,7 @@ app.all(ROUTES.TWITCH_LOGIN, twitchLogin);
 app.all(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess);
 app.all(ROUTES.INDEX, (req, res) => res.render("index"));
 app.all(ROUTES.PANEL_DASHBOARD, (req, res) => res.render("panel-dashboard"));
-app.all(ROUTES.PANEL_SETTINGS, (req, res) => res.render("panel-settings"));
+app.all(ROUTES.PANEL_SETTINGS, (req, res) => res.render("panel-actions"));
 app.all(ROUTES.PANEL_MODULES, (req, res) => res.render("panel-modules"));
 app.all(ROUTES.PANEL_DRAW, (req, res) => res.render("panel-draw"));
 app.all(ROUTES.PANEL_EMBED, (req, res) => res.render("embed"));
