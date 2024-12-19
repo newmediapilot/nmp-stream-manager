@@ -1,7 +1,7 @@
 const dashboard = () => {
     let payload = [];
     const type = "signals:order";
-    const containerEl = document.body.querySelector(".dashboard");
+    const containerEl = document.body.querySelector("section");
     const toggleEl = document.body.querySelector("#toggle-edit-dashboard");
     const notifyEl = document.documentElement;
     const states = [

@@ -6,7 +6,7 @@
 {%include "_style.njk"%}
 {%endblock%}
 {%block body%}
-<section class="dashboard">
+<section>
     {%for config in "dashboard_signals_config"|getParam%}
     {%if config.type == "feature"%}
     {####}{%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label%}
@@ -51,7 +51,7 @@
     document.addEventListener("DOMContentLoaded", () => {
         // !document.documentElement.classList.contains('reduced-motion') &&
         anime({
-            targets: "html.iframe .dashboard button",
+            targets: "html.iframe section button",
             duration: 666,
             delay: anime.stagger(11),
             easing: "easeInOutCubic",
@@ -66,7 +66,7 @@
     document.addEventListener("DOMContentLoaded", () => {
         // !document.documentElement.classList.contains('reduced-motion') &&
         anime({
-            targets: ".dashboard button:not(:disabled)",
+            targets: "section button:not(:disabled)",
             duration: 3333,
             delay: anime.stagger(50),
             easing: "easeInElastic(1, .6)",
