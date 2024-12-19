@@ -54,21 +54,23 @@ const castModuleInputValues = () => {
     });
 };
 const initializeModuleClickTouch = () => {
-    document.addEventListener('mousedown', (e) => {
-        document.addEventListener('mousemove', castModuleInputValues);
-        castModuleInputValues();
-    });
-    document.addEventListener('mouseup', (e) => {
-        document.removeEventListener('mousemove', castModuleInputValues);
-        sendInputValues();
-    });
-    document.addEventListener('touchmove', (e) => {
-        document.addEventListener('touchmove', castModuleInputValues);
-        castModuleInputValues();
-    });
-    document.addEventListener('touchend', (e) => {
-        document.removeEventListener('touchmove', castModuleInputValues);
-        sendInputValues();
+    Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
+        label.addEventListener('mousedown', (e) => {
+            label.addEventListener('mousemove', castModuleInputValues);
+            castModuleInputValues();
+        });
+        label.addEventListener('mouseup', (e) => {
+            label.removeEventListener('mousemove', castModuleInputValues);
+            sendInputValues();
+        });
+        label.addEventListener('touchmove', (e) => {
+            label.addEventListener('touchmove', castModuleInputValues);
+            castModuleInputValues();
+        });
+        label.addEventListener('touchend', (e) => {
+            label.removeEventListener('touchmove', castModuleInputValues);
+            sendInputValues();
+        });
     });
 };
 const sendInputValues = () => {
