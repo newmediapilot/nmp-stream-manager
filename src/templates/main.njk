@@ -35,7 +35,8 @@
         <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
-        <script src="https://cdn.jsdelivr.net/npm/marquee-js@1.5.0/dist/marquee.min.js?{{ cacheBuster }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/marquee-js@1.5.0/dist/marquee.min.js?{{ cacheBuster }}" type="text/javascript" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js?{{cacheBuster}}" type="text/javascript" defer></script>
     {%endblock%}
     {%for key, value in 'public_routes'|getParam%}
         <meta name="{{ key }}" content="{{ value }}">
