@@ -1,3 +1,3 @@
-const generateCopyLink = (copyLinkElement) => {
-  new ClipboardJS(copyLinkElement);
+const generateCopyLink = (copyLinkButtonElement) => {
+
 };
