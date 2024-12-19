@@ -51,18 +51,14 @@
 </style>
 {%endblock%}
 {%block body%}
-{%for signal in "dashboard_signals_config"|getParam%}
-{%if signal.type == "bpm"%}
 <main>
     <section id="bpm-embed"
-         data-label-content="{{signal.label}}"
-         data-emoji-content="{{signal.emoji}}">
+             data-label-content="{{signal.label}}"
+             data-emoji-content="{{signal.emoji}}">
         <div></div>
         <div></div>
     </section>
 </main>
-{%endif%}
-{%endfor%}
 {%endblock%}
 {%block scripts%}
 <script defer>
