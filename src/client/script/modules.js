@@ -48,7 +48,7 @@ const castModuleInputValues = () => {
         return `${el.name}:${el.value}`;
     }).join(";");
     if (payload) document.head.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
-    payload && payload && axios.get("/api/signal/create", {
+    payload && payload && axios.get(getPath("API_SIGNAL_CREATE"), {
         params: {
             type: "style",
             description: payload,
@@ -78,7 +78,7 @@ const sendInputValues = () => {
         .innerHTML
         .replace(":root{", "")
         .replace(";}", "");
-    payload && axios.get("/api/style/update", {
+    payload && axios.get(getPath("API_STYLE_UPDATE"), {
         params: {
             type: "style",
             payload
