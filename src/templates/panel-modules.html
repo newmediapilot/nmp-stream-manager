@@ -24,8 +24,8 @@
                 <input type="range" min="0" max="200" step="5.0" value="50" name="--_feat-tY" hidden>
             </label>
             <label>
-                <input type="range" min="0" max="200" step="5.0" value="50" name="--_feat-sX" hidden>
-                <input type="range" min="0" max="200" step="5.0" value="50" name="--_feat-sY" hidden>
+                <input type="range" min="0" max="200" step="25.0" value="50" name="--_feat-sX" hidden>
+                <input type="range" min="0" max="200" step="25.0" value="50" name="--_feat-sY" hidden>
             </label>
             <label>
                 <input type="range" min="0" max="200" step="5.0" value="0" name="--_feat-rX" hidden>
@@ -38,8 +38,8 @@
                 <input type="range" min="0" max="200" step="5.0" value="50" name="--_bpm-tY" hidden>
             </label>
             <label>
-                <input type="range" min="0" max="200" step="5.0" value="50" name="--_bpm-sX" hidden>
-                <input type="range" min="0" max="200" step="5.0" value="50" name="--_bpm-sY" hidden>
+                <input type="range" min="0" max="200" step="25.0" value="50" name="--_bpm-sX" hidden>
+                <input type="range" min="0" max="200" step="25.0" value="50" name="--_bpm-sY" hidden>
             </label>
             <label>
                 <input type="range" min="0" max="200" step="5.0" value="0" name="--_bpm-rX" hidden>
@@ -56,7 +56,7 @@
     <h2 aria-label="Embed Link"></h2>
     <h3 aria-label="Use this link as a source input"></h3>
     <canvas data-url="https://{{device_ip}}{{public_routes.PANEL_EMBED}}"></canvas>
-    <button data-url="https://{{device_ip}}{{public_routes.PANEL_EMBED}}" aria-label="Click to Copy Link!"></button>
+    <button data-url="https://{{device_ip}}{{public_routes.PANEL_EMBED}}" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
     <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-dialog').close();"></button>
 </dialog>
 {%endblock%}
