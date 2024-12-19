@@ -59,9 +59,9 @@ section label > textarea {
     grid-area: 5 / 3 / 11 / 16;
     border-radius: 10px;
     box-sizing: border-box;
-    border-color: var(--color-light);
     width: 340px;
     padding: 10px;
+    border: 3px solid var(--color-light);
 }
 section label > [type='text']:nth-of-type(2) {
     grid-row: 4 / 7;
