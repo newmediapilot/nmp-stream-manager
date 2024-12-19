@@ -114,7 +114,7 @@ const settingsCreateUpload = (editorEl) => {
                     const value = (audio.currentTime / audio.duration) * 360;
                     editorEl.querySelector('button:nth-of-type(3)').style.transform = `rotateZ(${value}deg)`;
                 }
-                if(audio.currentTime === audio.duration) {
+                if(audio.currentTime >= audio.duration) {
                     audio.currentTime = 0;
                     audio.pause();
                 }
