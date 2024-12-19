@@ -9,11 +9,14 @@
 <section class="modules">
     <article class="module aqua">
         <div class="title" aria-label="Featured">
-            <button onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').showModal()"
+            <button onclick="javascript:document.body.querySelector('#qr-embed-dialog').showModal()"
                     aria-label="🔗"></button>
         </div>
         <div class="preview">
             <iframe width="1920" height="1080" src="{{public_routes.PANEL_EMBED}}#edit"></iframe>
+        </div>
+        <div class="layers">
+
         </div>
         <div class="controls">
             <label>
@@ -49,22 +52,13 @@
 {%endblock%}
 {%block dialogs%}
 {%set device_ip = "device_ip"|getParam%}
-<dialog id="feature-dialog" data-url="https://{{device_ip}}">
-    <section>
-        <h2 aria-label="Feature Link"></h2>
-        <h3 aria-label="Use this link as a source in your streaming software."></h3>
-        <canvas></canvas>
-        <button aria-label="Click to Copy Link!"></button>
-        <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#feature-dialog').close();"></button>
-    </section>
-</dialog>
-<dialog id="qr-dashboard-dialog" data-url="https://{{device_ip}}">
+<dialog id="qr-embed-dialog" data-url="https://{{device_ip}}{{public_routes.PANEL_EMBED}}">
     <section>
         <h2 aria-label="QR Code Link"></h2>
         <h3 aria-label="This link will open this page on any device on your network"></h3>
         <canvas></canvas>
         <button aria-label="Click to Copy Link!"></button>
-        <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').close();"></button>
+        <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-embed-dialog').close();"></button>
     </section>
 </dialog>
 {%endblock%}
@@ -76,10 +70,10 @@
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
-    document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.body.querySelector("#qr-dashboard-dialog")));
+    document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.body.querySelector("#qr-embed-dialog")));
     document.addEventListener("DOMContentLoaded", () => generateQrCode(
-        document.body.querySelector("#qr-dashboard-dialog canvas"),
-        document.body.querySelector("#qr-dashboard-dialog").getAttribute("data-url"),
+        document.body.querySelector("#qr-embed-dialog canvas"),
+        document.body.querySelector("#qr-embed-dialog").getAttribute("data-url"),
     ));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.preview', 'width', '--js-module-preview-width'));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.title', 'height', '--js-module-title-height', 'px'));
