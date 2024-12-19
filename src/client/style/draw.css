@@ -29,6 +29,8 @@ section {
     grid-template-rows: repeat(30, 25px);
     box-shadow: rgba(255, 255, 255, 0.25) 0px 0px 20px 20px;
     overflow: hidden;
+    border-radius: 25px;
+    margin-top: 8px;
 }
 section canvas {
     width: 100%;
