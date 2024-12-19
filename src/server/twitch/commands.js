@@ -23,7 +23,6 @@ async function parseCommand(channel, tags, message) {
   };
   let currentCommand;
   let currentMessage;
-  // Catch command messages
   for (const [key, value] of Object.entries(COMMANDS)) {
     if (message.startsWith(value)) {
       currentCommand = value;
@@ -31,7 +30,6 @@ async function parseCommand(channel, tags, message) {
       break;
     }
   }
-  // Exit early if no commands
   if (!currentCommand) {
     console.log(
       process.cwd(),
@@ -49,7 +47,6 @@ async function parseCommand(channel, tags, message) {
       currentMessage,
     );
   }
-  // Public commands
   if (currentCommand === COMMANDS.shout) {
     const username = currentMessage;
     const twitchURL = `https://twitch.tv/${username}`;
@@ -62,7 +59,6 @@ async function parseCommand(channel, tags, message) {
     await twitchMessageCreate(getBpm());
     return true;
   }
-  // Broadcaster commands
   if (isBroadcaster) {
     console.log(
       process.cwd(),
