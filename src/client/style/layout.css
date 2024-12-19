@@ -1,12 +1,14 @@
-/*@media () {*/
-
-/*}*/
 body {
     background: var(--color-dark) !important;
 }
+:root {
+    --cell-density: 3vw;
+    --section-width: 100vh;
+    --section-height: 100vh;
+}
 section {
-    width: 100vw;
-    height: 100vh;
+    width: var(--section-width);
+    height: var(--section-height);
     overflow: hidden;
     position: relative;
     margin: 0px;
@@ -14,15 +16,29 @@ section {
     background: repeating-linear-gradient(-45deg, var(--color-dark), var(--color-gray) 15px);
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: center;
     border-radius: 25px;
+}
+@media (min-aspect-ratio: 1 / 1) {
+    section {
+        --cell-density: 3vh;
+        --section-width: 100vw;
+        --section-height: 100vh;
+    }
+}
+@media (max-aspect-ratio: 1 / 1) {
+    section {
+        --cell-density: 3vw;
+        --section-width: 100vw;
+        --section-height: 100vh;
+    }
 }
 article {
     display: grid;
     overflow: hidden;
-    grid-template-columns: repeat(32, calc(3.125vw));
-    grid-template-rows: repeat(32, calc(3.125vw));
+    grid-template-columns: repeat(32, calc(var(--cell-density)));
+    grid-template-rows: repeat(32, calc(var(--cell-density)));
 }
 article .preview {
     position: relative;
@@ -33,7 +49,8 @@ article .preview {
     background-color: var(--color-light);
     opacity: 1;
     background-size: 100% 100%;
-    grid-area: 6 / 1 / 10 / 17;
+    grid-area: 1 / 1 / 19 / 33;
+    border-radius: 25px;
 }
 article .preview iframe {
     pointer-events: none;
@@ -47,10 +64,9 @@ article .preview iframe {
     height: 100%;
 }
 article .layers {
-    grid-area: 11 / 1 / 13 / 8;
+    grid-area: 20 / 1 / 32 / 20;
     background: var(--color-orange);
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 25px;
 }
 article .controls {
     width: 100%;
@@ -60,7 +76,7 @@ article .controls {
     border-radius: 25px;
 }
 article .controls {
-    grid-area: 11 / 9 / 18 / 17;
+    grid-area: 20 / 21 / 32 / 33;
 }
 article label {
     overflow: scroll;
