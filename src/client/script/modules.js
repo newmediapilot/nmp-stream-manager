@@ -25,7 +25,6 @@ const applyModuleStyles = () => {
                 }
             })
             .filter(p => label.querySelector(`[name=${p.name}]`));
-        console.log('payload', payload);
         const scrollX = payload[0].value ? payload[0].value / 100 : 0;
         const scrollY = payload[1].value ? payload[1].value / 100 : 0;
         label.scrollTo({
