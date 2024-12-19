@@ -16,7 +16,7 @@
     {####}{%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description%}
     {%endif%}
     <article class="{{config.theme}}">
-        <button onclick="javascript:sendSignal(this, '{{data_href}}');" {%if config.visibility == "OFF"%}disabled{%endif%}>
+        <button onmouseup="javascript:sendSignal(this, '{{data_href}}');" {%if config.visibility == "OFF"%}disabled{%endif%}>
             <label aria-label="{{config.emoji}}"></label>
             <label aria-label="{{config.label}}"></label>
         </button>
