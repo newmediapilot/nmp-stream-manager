@@ -144,10 +144,8 @@ const publicConfigUpdate = (req, res) => {
     }
 };
 const configFieldUpdate = (id, field, value) => {
-    console.log(process.cwd(), "configFieldUpdate", payloadJSON);
-    const signalsTarget = JSON.parse(
-        JSON.stringify(getParam("dashboard_signals_config")),
-    );
+    console.log(process.cwd(), "configFieldUpdate", id, field, value);
+    const signalsTarget = JSON.parse(JSON.stringify(getParam("dashboard_signals_config")));
     signalsTarget[Number(id)][field] = value;
     setParam("dashboard_signals_config", signalsTarget);
     putConfig("signals", signalsTarget);
