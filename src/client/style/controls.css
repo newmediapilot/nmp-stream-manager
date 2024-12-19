@@ -1,29 +1,25 @@
-html.edit-active nav input[type=checkbox],
+html.edit-active nav input[type='checkbox'],
 html.edit-active nav aside button:not(#toggle-edit-dashboard) {
     display: none;
 }
-
 nav {
     position: fixed;
-    bottom: 150px;
-    left: 50%;
+    bottom: 1.5%;
+    left: 15%;
     transform: translateX(-50%);
     z-index: 1000;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 @media (display-mode: standalone) {
     body nav {
         bottom: 50px;
     }
 }
-
-nav input[type="checkbox"] {
+nav input[type='checkbox'] {
     display: none;
 }
-
 nav label {
     position: relative;
     background: var(--color-light);
@@ -38,7 +34,6 @@ nav label {
     line-height: 2.5rem;
     cursor: pointer;
 }
-
 nav aside {
     display: none;
     flex-direction: column;
@@ -52,18 +47,15 @@ nav aside {
     text-align: left;
     bottom: calc(100% + 10px);
 }
-
 nav aside em {
     font-style: normal;
     display: inline-block;
     min-width: 1.5em;
     text-align: center;
 }
-
-nav input[type="checkbox"]:checked ~ aside {
+nav input[type='checkbox']:checked ~ aside {
     display: flex;
 }
-
 nav aside button {
     color: var(--color-light);
     border: none;
@@ -73,8 +65,13 @@ nav aside button {
     cursor: pointer;
     padding: 6px 11px 8px 6px;
 }
-
 nav aside button:hover,
 nav aside button:active {
-    background: repeating-linear-gradient(45deg, rgba(0, 0, 0, .15) 0px, rgba(0, 0, 0, .15) 2px, rgba(255, 255, 255, .15) 2px, rgba(255, 255, 255, .15) 4px);
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.15) 0px,
+        rgba(0, 0, 0, 0.15) 2px,
+        rgba(255, 255, 255, 0.15) 2px,
+        rgba(255, 255, 255, 0.15) 4px
+    );
 }
