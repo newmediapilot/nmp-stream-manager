@@ -5,10 +5,8 @@ section {
     overflow: hidden scroll;
     align-content: stretch;
     justify-items: stretch;
-    --grid-template-columns: 4;
-    --grid-template-rows: 4;
-    grid-template-columns: repeat(var(--grid-template-columns), calc(100% / var(--grid-template-columns)));
-    grid-template-rows: repeat(10, calc(100vh / var(--grid-template-rows)));
+    grid-template-columns: repeat(4, calc(100% / 4));
+    grid-template-rows: repeat(10, calc(100vh / 4));
     position: relative;
     background: repeating-linear-gradient(-45deg, rgb(2, 2, 2), rgb(19, 19, 19) 15px);
     transition: padding-right 333ms linear;
