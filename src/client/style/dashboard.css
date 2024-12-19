@@ -5,20 +5,18 @@ section {
     overflow: scroll;
     align-content: stretch;
     justify-items: stretch;
-    grid-template-columns: repeat(4, 25vw);
-    grid-template-rows: repeat(10, 25vh);
+    grid-template-columns: repeat(16, 25vw);
+    grid-template-rows: repeat(16, 25vh);
     position: relative;
     background: repeating-linear-gradient(-45deg, rgb(2, 2, 2), rgb(19, 19, 19) 15px);
     transition: padding-right 333ms linear;
 }
-
-@media (max-aspect-ratio: 1/1) {
+@media (max-aspect-ratio: 1 / 1) {
     section {
         grid-template-columns: repeat(4, 50vw);
         grid-template-rows: repeat(10, 25vh);
     }
 }
-
 html.edit-active section {
     padding-right: 50px;
 }
