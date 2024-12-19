@@ -1,16 +1,24 @@
 section {
     display: grid;
-    max-width: 100vw;
+    width: 100vw;
     height: 100vh;
-    overflow: hidden scroll;
+    overflow: scroll;
     align-content: stretch;
     justify-items: stretch;
-    grid-template-columns: repeat(4, calc(100% / 4));
-    grid-template-rows: repeat(10, calc(100vh / 4));
+    grid-template-columns: repeat(4, 25vw);
+    grid-template-rows: repeat(10, 25vh);
     position: relative;
     background: repeating-linear-gradient(-45deg, rgb(2, 2, 2), rgb(19, 19, 19) 15px);
     transition: padding-right 333ms linear;
 }
+
+@media (max-aspect-ratio: 1/1) {
+    section {
+        grid-template-columns: repeat(4, 50vw);
+        grid-template-rows: repeat(10, 25vh);
+    }
+}
+
 html.edit-active section {
     padding-right: 50px;
 }
@@ -36,7 +44,7 @@ section article button {
     color: var(--color-light);
     width: 100%;
     height: 100%;
-    border-radius: var(--border-radius);
+    border-radius: 15px;
     overflow: hidden;
     text-overflow: ellipsis;
     position: relative;
