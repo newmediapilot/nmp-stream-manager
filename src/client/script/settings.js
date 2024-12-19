@@ -98,6 +98,7 @@ const settingsCreateUpload = (editorEl) => {
     const id = editorEl.id;
     const uploadButton = editorEl.querySelector('button:nth-of-type(2):not(:disabled)');
     const actionButton = editorEl.querySelector('button:nth-of-type(3):not(:disabled)');
+    const imageElement = editorEl.querySelector('img');
     const inputEl = editorEl.querySelector('[type="text"]');
     const toggleReplayState = () => {
         const cells = uploadButton.id.split(',');
@@ -176,7 +177,13 @@ const settingsCreateUpload = (editorEl) => {
             }
         };
         const displayMedia = () => {
-            console.log('displayMedia :: displayMedia ::');
+            if(!imageElement.src){
+                const cells = uploadButton.id.split(',');
+                const url = `/.media/${cells[0]}.${cells[2]}?${cells[1]}=${new Date().getTime()}`;
+                imageElement.src = url;
+            }else{
+                imageElement.removeAttribute('src');
+            }
         };
         actionButton.addEventListener('click', () => {
             "audio" === type && replayAudio();
