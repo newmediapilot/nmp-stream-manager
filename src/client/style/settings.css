@@ -50,9 +50,16 @@ section label > [type='text'] {
     border-radius: 10px;
     width: 165px;
 }
-:root {
-    --border-gradient-start: red;
-    --border-gradient-end: yellow;
+section label > img {
+    border: 3px solid var(--color-light);
+    border-radius: 10px;
+    display: block;
+    width: 100%;
+    z-index: 1;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    height: 100px;
 }
 section label > textarea {
     font-size: 25px;
