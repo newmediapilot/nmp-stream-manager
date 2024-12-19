@@ -1,4 +1,5 @@
 {%extends "main.njk"%}
+{%set public_routes = 'public_routes'|getParam%}
 {%block cdn%}{%endblock%}
 {%block client%}{%endblock%}}
 {%block head%}
@@ -13,10 +14,15 @@
     iframe {
         width: 100vw;
         height: 100vh;
+        position: absolute;
+        left: 0;
+        top: 0;
     }
+
     main {
         width: 100vw;
         height: 100vh;
+        position: relative;
     }
 </style>
 {%endblock%}
