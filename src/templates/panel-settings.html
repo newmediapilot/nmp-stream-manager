@@ -134,12 +134,10 @@
 {%set device_ip = "device_ip"|getParam%}
 <dialog id="qr-dashboard-dialog" data-url="https://{{device_ip}}">
     <h2 aria-label="QR Code Link"></h2>
-    <h3 aria-label="This link will open this page on any device on your network"></h3>
-    <canvas></canvas>
-    <button aria-label="Click to Copy Link!">
-    </button>
-    <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').close();">
-    </button>
+    <h3 aria-label="This link will open the dashboard on any device on your network."></h3>
+    <canvas data-url="https://{{device_ip}}"></canvas>
+    <button data-url="https://{{device_ip}}" aria-label="Click to Copy Link!"></button>
+    <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').close();"></button>
 </dialog>
 {%include "_emoji.njk"%}
 {%endblock%}
@@ -155,7 +153,7 @@
     document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.body.querySelector("#qr-dashboard-dialog")));
     document.addEventListener("DOMContentLoaded", () => generateQrCode(
         document.body.querySelector("#qr-dashboard-dialog canvas"),
-        document.body.querySelector("#qr-dashboard-dialog").getAttribute("data-url"),
+        document.body.querySelector("#qr-dashboard-dialog canvas").getAttribute("data-url"),
     ));
     document.addEventListener("DOMContentLoaded", () => settings());
 </script>
