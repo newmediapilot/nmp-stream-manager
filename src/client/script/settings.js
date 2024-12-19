@@ -139,7 +139,7 @@ const settingsCreateUpload = (editorEl) => {
                         const type = uploader.files[0].name.split('.').pop();
                         const acceptTypes = cells.slice(2);
                         const newCells = `${cells[0]},${cells[1]},${type},${acceptTypes.filter(t => t !== type).join(',')}`;
-                        axios.post("/api/media/update",
+                        axios.post(getPath("API_MEDIA_UPDATE"),
                             {
                                 data: reader.result.split(',')[1],
                                 key: cells[0],
@@ -209,7 +209,7 @@ const settingsToggle = (editorEl) => {
             state = "ON";
         }
         toggleButton.setAttribute('aria-label', state);
-        axios.get("/api/config/update", {
+        axios.get(getPath("API_CONFIG_UPDATE"), {
             params: {
                 type: "signals:field",
                 payload: JSON.stringify({
