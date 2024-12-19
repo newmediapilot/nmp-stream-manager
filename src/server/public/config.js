@@ -102,6 +102,7 @@ const applySignalsOrder = (payloadJSON) => {
     const signalsTarget = JSON.parse(
         JSON.stringify(getParam("dashboard_signals_config")),
     );
+    //TODO: replace with foreach
     while (payloadAction.length > 0) {
         const [from, to] = payloadAction.splice(0, 2);
         const fromEl = signalsTarget.splice(from, 1)[0];
