@@ -27,11 +27,6 @@ section article {
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.75) 8px 8px 15px 0px;
 }
-@media (min-aspect-ratio: 1 / 1) {
-    section article {
-        min-height: 25vh;
-    }
-}
 section img {
     object-fit: contain;
     width: 100%;
