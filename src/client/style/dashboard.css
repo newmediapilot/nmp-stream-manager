@@ -3,8 +3,6 @@ section {
     width: 100vw;
     height: 100vh;
     overflow: scroll;
-    align-content: stretch;
-    justify-items: stretch;
     position: relative;
     background: repeating-linear-gradient(-45deg, rgb(2, 2, 2), rgb(19, 19, 19) 15px);
     transition: padding-right 333ms linear;
