@@ -6,7 +6,7 @@ const ROUTES = {
     INDEX: "/",
     PANEL_DASHBOARD: "/public/dashboard",
     PANEL_SETTINGS: "/public/settings",
-    PANEL_MODULES: "/public/modules",
+    PANEL_LAYOUT: "/public/layout",
     PANEL_DRAW: "/public/draw",
     PANEL_FEATURE_EMBED: "/public/feature/embed",
     PANEL_EMBED: "/public/embed",
