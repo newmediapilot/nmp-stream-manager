@@ -1,3 +1,6 @@
+:root {
+    --grid-size: 12;
+}
 section {
     display: grid;
     width: 100vw;
@@ -7,16 +10,28 @@ section {
     background: repeating-linear-gradient(-45deg, rgb(2, 2, 2), rgb(19, 19, 19) 15px);
     transition: padding-right 333ms linear;
 }
-@media (min-aspect-ratio: 1 / 1) {
+@media (min-aspect-ratio: 3/4) {
     section {
-        grid-template-columns: repeat(16, 25vw);
-        grid-template-rows: repeat(16, 25vh);
+        grid-template-columns: repeat(var(--grid-size), calc(100vw/4));
+        grid-template-rows: repeat(var(--grid-size), calc(100vh/3));
     }
 }
-@media (max-aspect-ratio: 1 / 1) {
+@media (max-aspect-ratio: 3/4) {
     section {
-        grid-template-columns: repeat(4, 50vw);
-        grid-template-rows: repeat(10, 25vh);
+        grid-template-columns: repeat(var(--grid-size), calc(100vw/3));
+        grid-template-rows: repeat(var(--grid-size), calc(100vh/4));
+    }
+}
+@media (min-aspect-ratio: 16/9) {
+    section {
+        grid-template-columns: repeat(var(--grid-size), 25vw);
+        grid-template-rows: repeat(var(--grid-size), 50vh);
+    }
+}
+@media (max-aspect-ratio: 16/9) {
+    section {
+        grid-template-columns: repeat(var(--grid-size), 50vw);
+        grid-template-rows: repeat(var(--grid-size), 25vh);
     }
 }
 html.edit-active section {
@@ -27,7 +42,7 @@ section article {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    box-shadow: rgba(0, 0, 0, 0.75) 8px 8px 15px 0;
+    box-shadow: rgba(0, 0, 0, 0.75) 8px 8px 15px 0px;
 }
 section img {
     object-fit: contain;
@@ -79,11 +94,11 @@ section article button:active {
 section article button::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0px;
+    left: 0px;
     width: 100%;
     height: 100%;
-    box-shadow: rgba(255, 0, 98, 0.75) 0 0 50px 25px inset;
+    box-shadow: rgba(255, 0, 98, 0.75) 0px 0px 50px 25px inset;
     mix-blend-mode: multiply;
 }
 section .red button {
