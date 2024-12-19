@@ -35,7 +35,7 @@ dialog canvas {
     padding: 20px;
 }
 dialog button {
-    color: var(--color-black);
+    color: var(--color-light);
     padding: 10px 20px;
     cursor: pointer;
     font-size: 24px;
