@@ -5,7 +5,7 @@
     overflow: hidden scroll;
     align-content: stretch;
     justify-items: stretch;
-    --grid-template-columns: 2;
+    --grid-template-columns: 4;
     --grid-template-rows: 4;
     grid-template-columns: repeat(var(--grid-template-columns), calc(100% / var(--grid-template-columns)));
     grid-template-rows: repeat(10, calc(100vh / var(--grid-template-rows)));
