@@ -28,8 +28,6 @@ const applyModuleStyles = () => {
         console.log('payload', payload);
         const scrollX = payload[0].value ? payload[0].value / 100 : 0;
         const scrollY = payload[1].value ? payload[1].value / 100 : 0;
-        console.log(scrollWidth, (scrollX * scrollWidth));
-        console.log(scrollHeight, (scrollY * scrollHeight));
         label.scrollTo({
             left: scrollWidth * (scrollX / 2),
             top: scrollHeight * (scrollY / 2),
