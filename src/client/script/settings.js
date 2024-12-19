@@ -28,7 +28,7 @@ const settingsCreateEmojis = (editorEl) => {
                 el.addEventListener("click", (evt) => {
                     emojiWidgetTriggerEl.setAttribute("aria-label", el.getAttribute("aria-label"));
                     emojiElsClick();
-                    axios.get("/api/config/update", {
+                    axios.get(getPath("API_CONFIG_UPDATE"), {
                         params: {
                             type: "signals:field",
                             payload: JSON.stringify({
