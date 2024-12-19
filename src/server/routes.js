@@ -9,6 +9,7 @@ const ROUTES = {
     PANEL_MODULES: "/public/modules",
     PANEL_DRAW: "/public/draw",
     PANEL_FEATURE_EMBED: "/public/feature/embed",
+    PANEL_EMBED: "/public/embed",
     PANEL_BPM_EMBED: "/public/bpm/embed",
     PANEL_DRAW_EMBED: "/public/draw/embed",
     PANEL_SOUND_EMBED: "/public/sound/embed",
