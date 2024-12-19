@@ -2,8 +2,8 @@ body {
     perspective: 1920px;
     overflow: hidden !important;
     background: none !important;
-    padding: 0px !important;
-    margin: 0px !important;
+    padding: 0 !important;
+    margin: 0 !important;
     width: 100vw !important;
 }
 main {

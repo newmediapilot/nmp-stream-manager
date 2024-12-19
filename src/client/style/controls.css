@@ -69,7 +69,7 @@ nav aside button:hover,
 nav aside button:active {
     background: repeating-linear-gradient(
         45deg,
-        rgba(0, 0, 0, 0.15) 0px,
+        rgba(0, 0, 0, 0.15) 0,
         rgba(0, 0, 0, 0.15) 2px,
         rgba(255, 255, 255, 0.15) 2px,
         rgba(255, 255, 255, 0.15) 4px
