@@ -65,7 +65,7 @@ const initializeModuleClickTouch = () => {
         label.addEventListener('touchmove', (e) => {
             label.addEventListener('touchmove', castModuleInputValues);
             castModuleInputValues();
-        });
+        }, {passive:true});
         label.addEventListener('touchend', (e) => {
             label.removeEventListener('touchmove', castModuleInputValues);
             sendInputValues();
