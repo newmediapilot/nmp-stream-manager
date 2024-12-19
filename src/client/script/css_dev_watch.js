@@ -51,7 +51,7 @@ const cssDevWatch = () => {
                     outputHref = change.href;
                 });
                 console.log('cssDevWatch.check :: rule changes changes processed on', outputHref);
-                axios.get("/api/signal/create", {
+                axios.get(getPath("API_SIGNAL_CREATE"), {
                     params: {
                         type: "dev:css:write",
                         description: JSON.stringify({href: outputHref, css: outputCss})
