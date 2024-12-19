@@ -59,6 +59,10 @@ section label > img {
     grid-area: 1 / 1 / 4 / 13;
     background: var(--color-dark);
     object-fit: contain;
+    display: none;
+}
+section label > img[src] {
+    display: block;
 }
 section label > textarea {
     font-size: 25px;
