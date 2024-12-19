@@ -13,8 +13,6 @@ section {
     background: repeating-linear-gradient(-45deg, rgb(2, 2, 2), rgb(19, 19, 19) 15px);
     transition: padding-right 333ms linear;
 }
-html:not(.iframe) {
-}
 html.edit-active section {
     padding-right: 50px;
 }
