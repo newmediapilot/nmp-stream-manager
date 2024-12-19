@@ -25,7 +25,7 @@ app.all(ROUTES.PANEL_FEATURE_EMBED, (req, res) => res.render("embed-feature"));
 app.all(ROUTES.PANEL_BPM_EMBED, (req, res) => res.render("embed-bpm"));
 app.all(ROUTES.PANEL_DRAW_EMBED, (req, res) => res.render("embed-draw"));
 app.all(ROUTES.PANEL_SOUND_EMBED, (req, res) => res.render("embed-sound"));
-app.all(ROUTES.PANEL_PROJECTOR_EMBED, (req, res) => res.render("embed-media"));
+app.all(ROUTES.PANEL_MEDIA_EMBED, (req, res) => res.render("embed-media"));
 app.all(ROUTES.API_SIGNAL_CREATE, publicSignalCreate);
 app.all(ROUTES.API_CONFIG_UPDATE, publicConfigUpdate);
 app.all(ROUTES.API_STYLE_UPDATE, publicStyleUpdate);
