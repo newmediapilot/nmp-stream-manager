@@ -87,43 +87,43 @@ section .button button::after {
     box-shadow: rgba(255, 0, 98, 0.75) 0px 0px 50px 25px inset;
     mix-blend-mode: multiply;
 }
-section .button-red button {
+section .red button {
     background-color: var(--color-red);
     color: var(--color-light);
 }
-section .button-pink button {
+section .pink button {
     background-color: var(--color-pink);
     color: var(--color-light);
 }
-section .button-blue button {
+section .blue button {
     background-color: var(--color-blue);
     color: var(--color-light);
 }
-section .button-aqua button {
+section .aqua button {
     background-color: var(--color-aqua);
     color: var(--color-dark);
 }
-section .button-black button {
+section .black button {
     background-color: var(--color-black);
     color: var(--color-light);
 }
-section .button-orange button {
+section .orange button {
     background-color: var(--color-orange);
     color: var(--color-dark);
 }
-section .button-purple button {
+section .purple button {
     background-color: var(--color-purple);
     color: var(--color-light);
 }
-section .button-bloodorange button {
+section .bloodorange button {
     background-color: var(--color-bloodorange);
     color: var(--color-light);
 }
-section .button-deepyellow button {
+section .deepyellow button {
     background-color: var(--color-deepyellow);
     color: var(--color-dark);
 }
-section .button-green button {
+section .green button {
     background-color: var(--color-green);
     color: var(--color-light);
 }
