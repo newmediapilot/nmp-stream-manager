@@ -3,10 +3,7 @@
 {%block cdn%}{%endblock%}
 {%block client%}{%endblock%}}
 {%block head%}
-<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="text/javascript" defer></script>
-<script crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" type="text/javascript" defer></script>
 <script defer src="../client/script/iframe_detect.js?{{cacheBuster}}" type="text/javascript"></script>
-<script defer src="../client/script/socket.js?{{cacheBuster}}" type="text/javascript"></script>
 <link rel="stylesheet" href="../client/style/base.css?{{cacheBuster}}">
 <link rel="stylesheet" href="../client/style/reset.css?{{cacheBuster}}">
 <link rel="stylesheet" href="../client/style/iframe.css?{{cacheBuster}}">
@@ -18,7 +15,6 @@
         left: 0;
         top: 0;
     }
-
     main {
         width: 100vw;
         height: 100vh;
@@ -28,14 +24,12 @@
 {%endblock%}
 {%block body%}
 <main>
-    <iframe src="{{public_routes.PANEL_FEATURE_EMBED}}"></iframe>
-    <iframe src="{{public_routes.PANEL_BPM_EMBED}}"></iframe>
+    <iframe src="{{public_routes.PANEL_FEATURE_EMBED}}#edit"></iframe>
+    <iframe src="{{public_routes.PANEL_BPM_EMBED}}#edit"></iframe>
 </main>
 {%endblock%}
 {%block scripts%}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
-    document.addEventListener("DOMContentLoaded", () => socketConnect());
-    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
 </script>
 {%endblock%}
