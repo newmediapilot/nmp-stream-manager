@@ -53,13 +53,11 @@
 {%block dialogs%}
 {%set device_ip = "device_ip"|getParam%}
 <dialog id="qr-dialog">
-    <section>
-        <h2 aria-label="Embed Link"></h2>
-        <h3 aria-label="Use this link as a source input"></h3>
-        <canvas data-url="https://{{device_ip}}{{public_routes.PANEL_EMBED}}"></canvas>
-        <button data-url="https://{{device_ip}}{{public_routes.PANEL_EMBED}}" aria-label="Click to Copy Link!"></button>
-        <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-dialog').close();"></button>
-    </section>
+    <h2 aria-label="Embed Link"></h2>
+    <h3 aria-label="Use this link as a source input"></h3>
+    <canvas data-url="https://{{device_ip}}{{public_routes.PANEL_EMBED}}"></canvas>
+    <button data-url="https://{{device_ip}}{{public_routes.PANEL_EMBED}}" aria-label="Click to Copy Link!"></button>
+    <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-dialog').close();"></button>
 </dialog>
 {%endblock%}
 {%block scripts%}
