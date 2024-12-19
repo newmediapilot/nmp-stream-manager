@@ -52,11 +52,11 @@
 {%endblock%}
 {%block dialogs%}
 {%set device_ip = "device_ip"|getParam%}
-<dialog id="qr-embed-dialog" data-url="https://{{device_ip}}{{public_routes.PANEL_EMBED}}">
+<dialog id="qr-embed-dialog">
     <section>
         <h2 aria-label="Embed Link"></h2>
         <h3 aria-label="Use this link as a source input"></h3>
-        <canvas data-url="https://{{device_ip}}"></canvas>
+        <canvas data-url="https://{{device_ip}}{{public_routes.PANEL_EMBED}}"></canvas>
         <button data-url="https://{{device_ip}}{{public_routes.PANEL_EMBED}}" aria-label="Click to Copy Link!"></button>
         <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-embed-dialog').close();"></button>
     </section>
@@ -70,7 +70,7 @@
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
-    document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.body.querySelector("#qr-embed-dialog")));
+    document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.body.querySelector("#qr-dashboard-dialog")));
     document.addEventListener("DOMContentLoaded", () => generateQrCode(
         document.body.querySelector("#qr-embed-dialog canvas"),
         document.body.querySelector("#qr-embed-dialog canvas").getAttribute("data-url"),
