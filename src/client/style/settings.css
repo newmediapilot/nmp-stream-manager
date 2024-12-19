@@ -37,7 +37,7 @@ section label {
     padding: 10px 0px;
 }
 section > ul > li:not([aria-label]) label {
-    grid-template-rows: repeat(3, 25px);
+    grid-template-rows: repeat(3, 3.5vh);
 }
 section > ul > li:not([aria-label]):nth-of-type(2) label {
     grid-template-rows: repeat(10, 25px);
@@ -53,13 +53,12 @@ section label > [type='text'] {
 section label > img {
     border: 3px solid var(--color-light);
     border-radius: 10px;
-    display: block;
     width: 100%;
-    z-index: 1;
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    height: 100px;
+    height: 100%;
+    box-sizing: border-box;
+    grid-area: 1 / 1 / 4 / 13;
+    background: var(--color-dark);
+    object-fit: contain;
 }
 section label > textarea {
     font-size: 25px;
