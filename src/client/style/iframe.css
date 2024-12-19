@@ -16,7 +16,10 @@ main {
 }
 html.iframe main {
     background: var(--color-bloodorange);
-    border: 30px solid var(--color-dark);
     box-sizing: border-box;
-    opacity: 0.5;
+    background-color: var(--color-light);
+    opacity: 0.6;
+    background: radial-gradient(circle, transparent 20%, var(--color-light) 20%, var(--color-light) 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, var(--color-light) 20%, var(--color-light) 80%, transparent 80%, transparent) 32.5px 32.5px, linear-gradient(#000000 2.6px, transparent 2.6px) 0 -1.3px, linear-gradient(90deg, #000000 2.6px, var(--color-light) 2.6px) -1.3px 0;
+    background-size: 65px 65px, 65px 65px, 32.5px 32.5px, 32.5px 32.5px;
+    border: 32.5px solid var(--color-dark);
 }
