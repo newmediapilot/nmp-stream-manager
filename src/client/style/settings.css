@@ -50,23 +50,9 @@ section label > [type='text'] {
     border-radius: 10px;
     width: 165px;
 }
-section label > [type='text']:not(:disabled) {
-    animation: 2s linear 0s infinite normal none running borderAnimation;
-}
 :root {
     --border-gradient-start: red;
     --border-gradient-end: yellow;
-}
-@keyframes borderAnimation {
-    0% {
-        border-style: dotted;
-    }
-    50% {
-        border-style: dashed;
-    }
-    100% {
-        border-style: dotted;
-    }
 }
 section label > textarea {
     font-size: 25px;
@@ -74,7 +60,6 @@ section label > textarea {
     border-radius: 10px;
     box-sizing: border-box;
     border-color: var(--color-light);
-    animation: 2s linear 0s infinite normal none running borderAnimation;
     width: 340px;
     padding: 10px;
 }
@@ -93,7 +78,6 @@ section label > [type='text']:focus {
     background: var(--color-deepyellow);
     border-radius: 10px;
     border: none;
-    animation: auto ease 0s 1 normal none running none;
 }
 section label > button {
     line-height: 0;
