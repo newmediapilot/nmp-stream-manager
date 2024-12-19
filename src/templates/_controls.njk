@@ -4,7 +4,7 @@
 <label for="toggle-nav-show" aria-label="🌀"></label>
 <aside>
 <button onclick="javascript:socketEmitReload()" aria-label="Reload"><em aria-label="🔄"></em></button>
-<button onclick="javascript:document.body.querySelector('#qr-dashboard-dialog').showModal()" aria-label="Show QR"><em aria-label="🔗"></em></button>
+<button onclick="javascript:document.body.querySelector('#qr-dialog').showModal()" aria-label="Show QR"><em aria-label="🔗"></em></button>
 <button onclick="javascript:window.parent.location.href='{{public_routes.PANEL_DASHBOARD}}'" aria-label="Dev"><em aria-label="⚙"></em></button>
 <button onclick="javascript:window.parent.location.href='{{public_routes.INDEX}}'" aria-label="App"><em aria-label="🕹️"></em></button>
 <button onclick="javascript:getURL('{{public_routes.TWITCH_LOGIN}}')" aria-label="Login"><em aria-label="🔒"></em></button>
