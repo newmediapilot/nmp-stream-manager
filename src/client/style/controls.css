@@ -65,7 +65,7 @@ nav input[type="checkbox"]:checked ~ aside {
 }
 
 nav aside button {
-    color: var(--color-black);
+    color: var(--color-light);
     border: none;
     text-align: left;
     font-size: 2rem;
