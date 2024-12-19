@@ -34,7 +34,7 @@ let tokens = [
 fs.rmSync("./.dist", {recursive: true, force: true});
 Object.keys(data).map(path => {
     fs.rmSync(`.dist/${path}`, {recursive: true, force: true});
-    fs.mkdirSync(`.dist/${path.split('\\').slice(0,-1).join('\\')}`, {recursive: true, force: true});
+    fs.mkdirSync(`.dist/${path.split('\\').slice(0, -1).join('\\')}`, {recursive: true, force: true});
 });
 process.exit(0);
 fs.copyFileSync(".env", "./.dist/.env");
@@ -44,7 +44,8 @@ fs.copyFileSync("./src/client/icon512_maskable.png", "./.dist/src/client/icon512
 fs.copyFileSync("./src/client/icon512_rounded.png", "./.dist/src/client/icon512_rounded.png");
 fs.copyFileSync("./src/client/manifest.json", "./.dist/src/client/manifest.json");
 console.log("Temp files copied");
-// execSync('curl -L https://nodejs.org/dist/v22.11.0/node-v22.11.0-x64.exe -o "./dist/node/node-v22.11.0-x64.msi"', { stdio: 'inherit' });
+console.log("Installing engine");
+execSync('node ./node/install.js', {stdio: 'inherit'});
 console.log("Installing packages");
 execSync(`cd ./.dist/ && npm i --no-save`);
 console.log("Installing packages...done");
