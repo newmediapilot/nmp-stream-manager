@@ -1,7 +1,6 @@
 dialog {
     display: none;
 }
-
 dialog[open] {
     box-sizing: border-box;
     display: flex;
@@ -16,32 +15,26 @@ dialog[open] {
     width: 66vw;
     height: 66vh;
     padding: 50px;
+    border-radius: 50px;
 }
-
 dialog::backdrop {
     opacity: 1;
 }
-
-
 dialog[open]::backdrop {
     opacity: 1;
 }
-
 dialog h2 {
     font-size: 36px;
 }
-
 dialog h3 {
     text-align: center;
     font-size: 20px;
 }
-
 dialog canvas {
-    margin: 0 auto;
+    margin: 0px auto;
     width: 200px;
     height: 200px;
 }
-
 dialog button {
     color: var(--color-black);
     padding: 10px 20px;
