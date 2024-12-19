@@ -114,7 +114,7 @@ const settingsCreateUpload = (editorEl) => {
                     const value = (audio.currentTime / audio.duration) * 360;
                     editorEl.querySelector('button:nth-of-type(3)').style.transform = `rotateZ(${value}deg)`;
                 }
-                if(audio.currentTime >= audio.duration) {
+                if (audio.currentTime >= audio.duration) {
                     audio.currentTime = 0;
                     audio.pause();
                 }
@@ -188,32 +188,46 @@ const settingsCreateUpload = (editorEl) => {
 const settingsToggle = (editorEl) => {
     const {id} = editorEl;
     const toggleButton = editorEl.querySelector('button:nth-of-type(4)');
-    if (!!toggleButton) {
-        const sendToggleState = () => {
-            toggleButton.disabled = true;
-            let state = toggleButton.getAttribute('aria-label');
-            if (state === "ON") {
-                state = "OFF";
-            } else if (state === "OFF") {
-                state = "ON";
+    const updateButtons = () => {
+        let state = toggleButton.getAttribute('aria-label');
+        editorEl.querySelectorAll('button, input, textarea').forEach((el) => {
+            if (el !== toggleButton) {
+                if (state === "ON") {
+                    el.disabled = false;
+                } else if (state === "OFF") {
+                    el.disabled = true;
+                }
             }
+        });
+    };
+    const sendToggleState = () => {
+        toggleButton.disabled = true;
+        let state = toggleButton.getAttribute('aria-label');
+        if (state === "ON") {
+            state = "OFF";
+        } else if (state === "OFF") {
+            state = "ON";
+        }
+        toggleButton.setAttribute('aria-label', state);
+        axios.get("/api/config/update", {
+            params: {
+                type: "signals:field",
+                payload: JSON.stringify({
+                    id,
+                    field: "visibility",
+                    value: state,
+                }),
+            },
+        }).then(() => {
+            updateButtons();
             toggleButton.setAttribute('aria-label', state);
-            axios.get("/api/config/update", {
-                params: {
-                    type: "signals:field",
-                    payload: JSON.stringify({
-                        id,
-                        field: "visibility",
-                        value: state,
-                    }),
-                },
-            }).finally(() => {
-                toggleButton.disabled = false;
-                socketEmitReload();
-            });
-        };
-        toggleButton.addEventListener('click', sendToggleState);
-    }
+        }).finally(() => {
+            toggleButton.disabled = false;
+            socketEmitReload();
+        });
+    };
+    toggleButton.addEventListener('click', sendToggleState);
+    updateButtons();
 };
 
 const settings = () => {
