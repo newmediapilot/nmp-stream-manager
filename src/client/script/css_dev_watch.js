@@ -60,7 +60,7 @@ const cssDevWatch = () => {
                 cssDevWatch.createChanges();
                 changes = [];
             } else {
-                console.log('cssDevWatch.check :: rules in memory', memory.length);
+                // console.log('cssDevWatch.check :: rules in memory', memory.length);
                 cssDevWatch.createChanges();
                 cssDevWatch.setMemory();
             }
