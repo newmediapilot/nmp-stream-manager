@@ -37,7 +37,7 @@ section label {
     padding: 10px 0px;
 }
 section > ul > li:not([aria-label]) label {
-    grid-template-rows: repeat(3, 3.5vh);
+    grid-template-rows: repeat(3, 25px);
 }
 section > ul > li:not([aria-label]):nth-of-type(2) label {
     grid-template-rows: repeat(10, 25px);
