@@ -44,7 +44,7 @@ async function publicSignalCreate(req, res) {
             result = await sendPayload(`sound:${description}`);
         }
         if ("media" === type) {
-            result = await sendPayload(`media:${description}`);
+            result = await sendPayload(`media:set:${description}`);
         }
         if ("browser" === type) {
             if ("reload" === description) {
