@@ -60,26 +60,25 @@ article .preview iframe {
     height: 100%;
 }
 article .layers {
-    grid-area: 19 / 1 / 33 / 19;
+    grid-area: 20 / 2 / 33 / 16;
+    background: var(--color-dark);
+    color: var(--color-deepyellow);
+    border-radius: 25px;
 }
 article .layers ul {
     display: grid;
     grid-template-columns: repeat(1, 100%);
     grid-template-rows: repeat(12, calc(var(--cell-density)));
     box-sizing: border-box;
-    border-width: var(--cell-density);
-    border-style: solid;
-    border-color: rgba(255, 255, 255, 0.6) rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.4);
 }
 article .layers ul li {
 }
 article .modes {
-    grid-area: 19 / 19 / 22 / 33;
+    grid-area: 20 / 17 / 24 / 32;
     display: grid;
     grid-template-rows: repeat(1, 1fr);
     grid-template-columns: repeat(5, 25%);
     width: 100%;
-    z-index: 1;
 }
 article .modes label {
     position: relative;
@@ -89,6 +88,7 @@ article .modes label input {
 }
 article .modes label input:checked {
     background: repeating-linear-gradient(45deg, var(--color-bloodorange), var(--color-deepyellow) 25px);
+    box-shadow: 0px 0px 10px inset;
 }
 article .modes label[aria-label]::before {
     position: absolute;
@@ -110,7 +110,6 @@ article .controls {
     overflow: hidden;
     height: 100%;
     box-sizing: border-box;
-    border-width: var(--cell-density);
     border-radius: 25px;
 }
 article .controls {
