@@ -13,12 +13,11 @@ section {
     position: relative;
     margin: 0px;
     padding: 0px;
-    background: repeating-linear-gradient(-45deg, var(--color-dark), var(--color-gray) 15px);
+    background: repeating-linear-gradient(-45deg, rgb(2, 2, 2), rgb(19, 19, 19) 15px);
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    border-radius: 25px;
 }
 @media (min-aspect-ratio: 1 / 1) {
     section {
@@ -64,6 +63,15 @@ article .preview iframe {
 article .layers {
     grid-area: 20 / 1 / 33 / 19;
     background: var(--color-orange);
+}
+article .layers ul {
+    display: grid;
+    grid-template-columns: repeat(1, 100%);
+    grid-template-rows: repeat(11, calc(var(--cell-density)));
+    box-sizing: border-box;
+    border-width: var(--cell-density);
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.6) rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.4);
 }
 article .controls {
     width: 100%;
