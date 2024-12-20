@@ -4,13 +4,13 @@ const {setParam} = require("../store/manager");
 const initializePublicStyles = async (type) => {
     console.log(process.cwd(), "initializePublicStyles :: start");
     try {
-        if (!fs.existsSync(path.resolve(`.${type}.css`))) {
+        if (!fs.existsSync(path.resolve(`.${type}`))) {
             console.log(process.cwd(), "initializePublicStyles :: new file");
             setParam("public_module_styles", '/*--_no-style:1;*/');
-            fs.writeFileSync(path.resolve(`.${type}.css`), '/*--_no-style:1;*/', {encoding: "utf-8"});
+            fs.writeFileSync(path.resolve(`.${type}`), '/*--_no-style:1;*/', {encoding: "utf-8"});
         } else {
             setParam("public_module_styles",
-                fs.readFileSync(path.resolve(`.${type}.css`), "utf-8")
+                fs.readFileSync(path.resolve(`.${type}`), "utf-8")
             );
             console.log(process.cwd(), "initializePublicStyles :: load file");
         }
@@ -29,7 +29,7 @@ const publicStyleUpdate = (req, res) => {
         const {type, payload} = req.query;
         console.log(process.cwd(), "publicStyleUpdate", type, payload);
         if ("style" === type) {
-            fs.writeFileSync(path.resolve(`.${type}.css`), payload, {encoding: "utf-8"});
+            fs.writeFileSync(path.resolve(`.${type}`), payload, {encoding: "utf-8"});
             setParam("public_module_styles", payload);
             console.log(process.cwd(), "publicStyleUpdate :: style", payload);
         }
