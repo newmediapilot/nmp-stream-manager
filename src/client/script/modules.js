@@ -1,4 +1,4 @@
-const applyModuleStyles = () => {
+const applyLayoutStyles = () => {
     Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
         const {scrollWidth, scrollHeight} = label;
         const payloadHTML = document.head.querySelector('#public_module_styles').innerHTML;
@@ -7,7 +7,7 @@ const applyModuleStyles = () => {
                 top: scrollHeight / 4,
                 left: scrollWidth / 4,
             });
-            console.log('applyModuleStyles :: no payload');
+            console.log('applyLayoutStyles :: no payload');
             return;
         }
         let payload = payloadHTML
@@ -34,7 +34,7 @@ const applyModuleStyles = () => {
         });
     });
 };
-const castModuleInputValues = () => {
+const castLayoutInputValues = () => {
     Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
         const [inputX, inputY] = [label.children[0], label.children[1]];
         const [px, py] = [(label.scrollLeft / label.scrollWidth) || 0, (label.scrollTop / label.scrollHeight) || 0];
@@ -53,27 +53,27 @@ const castModuleInputValues = () => {
         },
     });
 };
-const initializeModuleClickTouch = () => {
+const initializeLayoutClickTouch = () => {
     Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
         label.addEventListener('mousedown', (e) => {
-            label.addEventListener('mousemove', castModuleInputValues);
-            castModuleInputValues();
+            label.addEventListener('mousemove', castLayoutInputValues);
+            castLayoutInputValues();
         });
         label.addEventListener('mouseup', (e) => {
-            label.removeEventListener('mousemove', castModuleInputValues);
-            sendInputValues();
+            label.removeEventListener('mousemove', castLayoutInputValues);
+            sendLayoutInputValues();
         });
         label.addEventListener('touchstart', (e) => {
-            label.addEventListener('touchmove', castModuleInputValues, {passive: true});
-            castModuleInputValues();
+            label.addEventListener('touchmove', castLayoutInputValues, {passive: true});
+            castLayoutInputValues();
         }, {passive: true});
         label.addEventListener('touchend', (e) => {
-            label.removeEventListener('touchmove', castModuleInputValues);
-            sendInputValues();
+            label.removeEventListener('touchmove', castLayoutInputValues);
+            sendLayoutInputValues();
         }, {passive: true});
     });
 };
-const sendInputValues = () => {
+const sendLayoutInputValues = () => {
     let payload = document.head.querySelector('#public_module_styles')
         .innerHTML
         .replace(":root{", "")

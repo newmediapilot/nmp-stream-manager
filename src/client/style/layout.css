@@ -96,7 +96,7 @@ article label::after {
     content: '';
     display: block;
     width: calc(var(--cell-density) * 16);
-    height: calc(var(--cell-density) * 9);
+    height: calc(var(--cell-density) * 16);
     background-color: var(--color-light);
     opacity: 1;
     background-image: radial-gradient(circle, var(--color-orange), var(--color-bloodorange)),

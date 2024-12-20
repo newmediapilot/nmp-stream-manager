@@ -52,7 +52,7 @@
         document.body.querySelector("#qr-dialog canvas").getAttribute("data-url"),
     ));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.preview', 'width', '--js-module-preview-width'));
-    document.addEventListener("DOMContentLoaded", () => applyModuleStyles());
-    document.addEventListener("DOMContentLoaded", () => initializeModuleClickTouch());
+    document.addEventListener("DOMContentLoaded", () => applyLayoutStyles());
+    document.addEventListener("DOMContentLoaded", () => initializeLayoutClickTouch());
 </script>
 {%endblock%}
