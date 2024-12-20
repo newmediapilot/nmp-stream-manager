@@ -13,11 +13,10 @@ section {
     position: relative;
     margin: 0px;
     padding: 0px;
-    background: repeating-linear-gradient(-45deg, rgb(2, 2, 2), rgb(19, 19, 19) 15px);
+    background: var(--color-orange);
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 @media (min-aspect-ratio: 1 / 1) {
     section {
@@ -61,17 +60,19 @@ article .preview iframe {
     height: 100%;
 }
 article .layers {
-    grid-area: 20 / 1 / 33 / 19;
+    grid-area: 19 / 1 / 33 / 19;
     background: var(--color-orange);
 }
 article .layers ul {
     display: grid;
     grid-template-columns: repeat(1, 100%);
-    grid-template-rows: repeat(11, calc(var(--cell-density)));
+    grid-template-rows: repeat(12, calc(var(--cell-density)));
     box-sizing: border-box;
     border-width: var(--cell-density);
     border-style: solid;
     border-color: rgba(255, 255, 255, 0.6) rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.4);
+}
+article .layers ul li {
 }
 article .controls {
     width: 100%;
@@ -80,7 +81,7 @@ article .controls {
     height: 100%;
 }
 article .controls {
-    grid-area: 20 / 20 / 33 / 34;
+    grid-area: 21 / 21 / 33 / 33;
 }
 article label {
     overflow: scroll;
