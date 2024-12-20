@@ -150,6 +150,7 @@ const settingsCreateUpload = (editorEl) => {
                             uploadButton.setAttribute("id", newCells);
                             actionButton && toggleReplayState();
                             inputEl.focus();
+                            socketEmitReload();
                             console.log('settingsCreateUpload :: success:', response.data);
                         }).catch(error => {
                             console.error('settingsCreateUpload :: error:', error);
