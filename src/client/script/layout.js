@@ -84,6 +84,6 @@ const sendLayoutInputValues = () => {
             payload
         },
     }).finally(() => {
-        // socketEmitReload();
+        socketEmitReload();
     });
 };
