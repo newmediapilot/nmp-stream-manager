@@ -74,7 +74,7 @@ article .layers ul {
 article .layers ul li {
 }
 article .modes {
-    grid-area: 18 / 18 / 23 / 33;
+    grid-area: 19 / 19 / 22 / 33;
     display: grid;
     grid-template-rows: repeat(1, 1fr);
     grid-template-columns: repeat(5, 25%);
@@ -98,7 +98,11 @@ article .modes label[aria-label]::before {
     transform: translate(-50%, -50%);
     font-size: 12px;
     font-weight: bolder;
-    text-shadow: 0 0 5px var(--color-light);
+    text-shadow:
+        0px 0px 5px var(--color-light),
+        0px 0px 5px var(--color-light),
+        0px 0px 5px var(--color-light),
+        0px 0px 5px var(--color-light);
 }
 article .controls {
     width: 100%;
