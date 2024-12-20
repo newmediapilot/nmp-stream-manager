@@ -93,12 +93,19 @@ article label {
 article label::after {
     content: '';
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 200%;
+    height: 200%;
     background-color: var(--color-light);
     opacity: 1;
     background-image: radial-gradient(circle, var(--color-orange), var(--color-bloodorange)),
-        repeating-radial-gradient(circle, var(--color-red), var(--color-red), 10px, transparent 25px, transparent 25px);
+        repeating-radial-gradient(
+            circle,
+            var(--color-red),
+            var(--color-red),
+            17.5px,
+            transparent 25px,
+            transparent 25px
+        );
     background-blend-mode: hard-light;
 }
 article input {
