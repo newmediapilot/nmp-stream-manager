@@ -1,5 +1,4 @@
 body {
-    background: var(--color-dark) !important;
 }
 :root {
     --cell-density: 3.125vw;
@@ -61,7 +60,6 @@ article .preview iframe {
 }
 article .layers {
     grid-area: 19 / 1 / 33 / 19;
-    background: var(--color-orange);
 }
 article .layers ul {
     display: grid;
@@ -79,9 +77,10 @@ article .controls {
     position: relative;
     overflow: hidden;
     height: 100%;
+    box-sizing: border-box;
 }
 article .controls {
-    grid-area: 21 / 21 / 33 / 33;
+    grid-area: 19 / 19 / 33 / 33;
 }
 article label {
     overflow: scroll;
