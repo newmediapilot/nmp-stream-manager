@@ -15,7 +15,8 @@ section {
     background: var(--color-orange);
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: flex-end;
+    justify-content: end;
 }
 @media (min-aspect-ratio: 1 / 1) {
     section {
