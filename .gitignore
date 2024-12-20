@@ -3,9 +3,8 @@ node_modules
 .dist
 .idea
 .env
-.secrets.json
-.signals.json
-.style.css
+.secrets
+.signal
+.style
 .combined.json
-.styles.css
 src/client/.media/
