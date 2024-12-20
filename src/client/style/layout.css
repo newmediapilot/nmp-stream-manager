@@ -62,9 +62,10 @@ article .preview iframe {
 article .layers {
     grid-area: 20 / 2 / 33 / 16;
     background: var(--color-dark);
-    color: var(--color-lightgreen);
     border-radius: 25px;
     padding: 25px;
+    display: grid;
+    grid-template-rows: repeat(4, var(--cell-density));
 }
 article .layers ul {
     display: grid;
@@ -72,7 +73,11 @@ article .layers ul {
     grid-template-rows: repeat(12, calc(var(--cell-density)));
     box-sizing: border-box;
 }
-article .layers ul li {
+article .layers label::before {
+    color: var(--color-lightgreen) !important;
+}
+article .layers label[aria-label] {
+    color: var(--color-lightgreen) !important;
 }
 article .modes {
     grid-area: 20 / 17 / 24 / 32;
