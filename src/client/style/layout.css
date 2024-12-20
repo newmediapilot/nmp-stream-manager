@@ -89,12 +89,13 @@ article label {
     overflow: scroll;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 4px 4px inset;
     position: relative;
+    display: block;
 }
 article label::after {
     content: '';
     display: block;
-    width: 200%;
-    height: 200%;
+    width: calc(var(--cell-density) * 16);
+    height: calc(var(--cell-density) * 9);
     background-color: var(--color-light);
     opacity: 1;
     background-image: radial-gradient(circle, var(--color-orange), var(--color-bloodorange)),
