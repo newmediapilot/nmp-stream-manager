@@ -111,11 +111,10 @@ article .controls {
     height: 100%;
     box-sizing: border-box;
     border-width: var(--cell-density);
-    border-style: solid;
-    border-color: rgba(255, 255, 255, 0.6) rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.4);
+    border-radius: 25px;
 }
 article .controls {
-    grid-area: 22 / 19 / 33 / 33;
+    grid-area: 25 / 17 / 33 / 32;
 }
 article .controls label {
     overflow: scroll;
