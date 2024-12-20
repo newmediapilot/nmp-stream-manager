@@ -79,9 +79,16 @@ article .modes {
     grid-template-rows: repeat(1, 1fr);
     grid-template-columns: repeat(5, 25%);
     width: 100%;
+    z-index: 1;
 }
 article .modes label {
     position: relative;
+}
+article .modes label input {
+    background: repeating-linear-gradient(-45deg, var(--color-light), var(--color-deepyellow) 25px);
+}
+article .modes label input:checked {
+    background: repeating-linear-gradient(45deg, var(--color-bloodorange), var(--color-deepyellow) 25px);
 }
 article .modes label[aria-label]::before {
     position: absolute;
@@ -91,6 +98,7 @@ article .modes label[aria-label]::before {
     transform: translate(-50%, -50%);
     font-size: 12px;
     font-weight: bolder;
+    text-shadow: 0 0 5px var(--color-light);
 }
 article .controls {
     width: 100%;
