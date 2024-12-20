@@ -14,8 +14,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 100px;
-        color: red;
         width: 100vw;
         height: 100vh;
         object-fit: contain;
@@ -24,13 +22,13 @@
 </style>
 <style>
     :root {
-        --_proj-tX: 0.0;
-        --_proj-tY: 0.0;
-        --_proj-sX: 100.0;
-        --_proj-sY: var(--_proj-sX);
-        --_proj-rX: 0.0;
-        --_proj-rY: 0.0;
-        --_proj-rotateZ: 0.0;
+        --med-tX: 0.0;
+        --med-tY: 0.0;
+        --med-sX: 100.0;
+        --med-sY: var(--med-sX);
+        --med-rX: 0.0;
+        --med-rY: 0.0;
+        --med-rotateZ: 0.0;
     }
 </style>
 {%include "_style.njk"%}
@@ -41,7 +39,11 @@
     }
 
     main {
-        transform: translateX(calc(calc(var(--_proj-tX) * -1%) + 40%)) translateY(calc(calc(var(--_proj-tY) * -1%) + 40%)) scaleX(calc(var(--_proj-sX) * 0.01)) scaleY(calc(var(--_proj-sY) * 0.01)) rotateX(calc(var(--_proj-rX) * 3.6deg)) rotateY(calc(var(--_proj-rY) * -3.6deg)) rotateZ(calc(var(--_proj-rotateZ) * -3.6deg))
+        transform: translateX(calc(calc(var(--med-tX) * -1%) + 40%)) translateY(calc(calc(var(--med-tY) * -1%) + 40%)) scaleX(calc(var(--med-sX) * 0.01)) scaleY(calc(var(--med-sY) * 0.01)) rotateX(calc(var(--med-rX) * 3.6deg)) rotateY(calc(var(--med-rY) * -3.6deg)) rotateZ(calc(var(--med-rotateZ) * -3.6deg))
+    }
+
+    #media-embed[src=''] {
+        visibility: hidden;
     }
 </style>
 {%endblock%}
@@ -49,7 +51,7 @@
 {%for signal in "dashboard_signals_config"|getParam%}
 {%if signal.type == "bpm"%}
 <main>
-    <img id="media-embed"/>
+    <img id="media-embed" src=""/>
 </main>
 {%endif%}
 {%endfor%}
@@ -64,8 +66,16 @@
         let style = payload.split('style:set:')[1];
         document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
     }));
-    document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
-        let media = payload.split('media:set:')[1];
+    document.addEventListener("DOMContentLoaded", () => socketWatchMediaSet((payload) => {
+        let cells = payload.split('media:set:')[1];
+        const [name, type, suffix] = cells.split(',');
+        const src = `/.media/${name}.${suffix}?type=${type}`;
+        if (document.body.querySelector('#media-embed').getAttribute('src') === src) {
+            document.body.querySelector('#media-embed').setAttribute('src', '');
+        } else {
+            document.body.querySelector('#media-embed').setAttribute('src', src);
+        }
+        console.log('media', name, type, suffix);
     }));
 </script>
 {%endblock%}
