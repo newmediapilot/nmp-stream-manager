@@ -63,7 +63,7 @@ const path = require("path");
 const {setParam, getParam} = require("../store/manager");
 const initializePublicConfigs = async (type) => {
     console.log(process.cwd(), "initializePublicConfigs :: start");
-    const fileName = path.resolve(`.${type}.json`);
+    const fileName = path.resolve(`.${type}`);
     try {
         if (!fs.existsSync(fileName)) {
             setParam("dashboard_signals_config", DASHBOARD_BUTTON_CONFIG.signals);
@@ -83,7 +83,7 @@ const initializePublicConfigs = async (type) => {
     }
 };
 const putConfig = (filePath, config) => {
-    const fileName = path.resolve(`.${filePath}.json`);
+    const fileName = path.resolve(`.${filePath}`);
     console.log(process.cwd(),
         "putConfig :: file:",
         fileName,
@@ -93,7 +93,7 @@ const putConfig = (filePath, config) => {
     fs.writeFileSync(fileName, JSON.stringify(config), {encoding: "utf-8"});
 };
 const getConfig = (type) => {
-    const fileName = path.resolve(`.${type}.json`);
+    const fileName = path.resolve(`.${type}`);
     console.log(process.cwd(), "getConfig :: file:", fileName);
     return JSON.parse(fs.readFileSync(fileName, "utf-8"));
 };
