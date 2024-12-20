@@ -14,9 +14,9 @@ const allowedParams = [
   "twitch_channel_id_set",
 ];
 function loadSecrets() {
-  if (fs.existsSync(".secrets.json")) {
+  if (fs.existsSync(".secrets")) {
     try {
-      secrets = JSON.parse(fs.readFileSync(".secrets.json", "utf8"));
+      secrets = JSON.parse(fs.readFileSync(".secrets", "utf8"));
     } catch (error) {
       console.log(process.cwd(), "Error loading secrets:", error.message);
       secrets = {};
@@ -57,7 +57,7 @@ function getParam(key) {
   return value;
 }
 function resetSecrets() {
-  fs.rmSync(".secrets.json", { force: true });
+  fs.rmSync(".secrets", { force: true });
   console.log(process.cwd(), "Removing secrets");
 }
 function setSecret(name, key) {
@@ -67,7 +67,7 @@ function setSecret(name, key) {
     setParam(`${name}_set`, true);
     const secretsJSON = JSON.stringify(secrets, null, 2);
     secrets = null;
-    fs.writeFileSync(".secrets.json", secretsJSON, "utf8");
+    fs.writeFileSync(".secrets", secretsJSON, "utf8");
     console.log(
       process.cwd(),
       `Secret set for ${name} : ${String("X").repeat(String(key).length)}`,
