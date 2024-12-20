@@ -33,7 +33,7 @@ section {
 }
 article {
     display: grid;
-    overflow: hidden;
+    overflow: visible;
     grid-template-columns: repeat(32, calc(var(--cell-density)));
     grid-template-rows: repeat(32, calc(var(--cell-density)));
 }
@@ -62,8 +62,9 @@ article .preview iframe {
 article .layers {
     grid-area: 20 / 2 / 33 / 16;
     background: var(--color-dark);
-    color: var(--color-deepyellow);
+    color: var(--color-lightgreen);
     border-radius: 25px;
+    padding: 25px;
 }
 article .layers ul {
     display: grid;
@@ -105,12 +106,11 @@ article .modes label[aria-label]::before {
         0px 0px 5px var(--color-light);
 }
 article .controls {
-    width: 100%;
     position: relative;
     overflow: hidden;
-    height: 100%;
     box-sizing: border-box;
     border-radius: 25px;
+    box-shadow: inset 0 0 5px 5px var(--color-dark);
 }
 article .controls {
     grid-area: 25 / 17 / 33 / 32;
@@ -145,7 +145,7 @@ article input {
     height: 100%;
     background: repeating-linear-gradient(-45deg, var(--color-light), rgb(204, 204, 204) 10px);
     overflow: hidden;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 5px 5px;
+    box-shadow: inset 0 0 5px 5px var(--color-deepyellow);
     border-radius: 25px;
 }
 article input::-webkit-slider-thumb {
