@@ -37,9 +37,10 @@ const applyModuleStyles = () => {
 const castModuleInputValues = () => {
     Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
         const [inputX, inputY] = [label.children[0], label.children[1]];
-        const [px, py] = [label.scrollLeft / label.scrollWidth, label.scrollTop / label.scrollHeight];
+        const [px, py] = [(label.scrollLeft / label.scrollWidth) || 0, (label.scrollTop / label.scrollHeight) || 0];
         inputX.value = (Math.abs(inputX.max) * px);
         inputY.value = (Math.abs(inputY.max) * py);
+        label.setAttribute('data-px-py', [px, py].join(' '))
     });
     const payload = Array.from(document.body.querySelectorAll('input[type="range"]')).map((el) => {
         return `${el.name}:${el.value}`;
@@ -63,13 +64,13 @@ const initializeModuleClickTouch = () => {
             sendInputValues();
         });
         label.addEventListener('touchstart', (e) => {
-            label.addEventListener('touchmove', castModuleInputValues, {passive:true});
+            label.addEventListener('touchmove', castModuleInputValues, {passive: true});
             castModuleInputValues();
-        }, {passive:true});
+        }, {passive: true});
         label.addEventListener('touchend', (e) => {
             label.removeEventListener('touchmove', castModuleInputValues);
             sendInputValues();
-        }, {passive:true});
+        }, {passive: true});
     });
 };
 const sendInputValues = () => {
