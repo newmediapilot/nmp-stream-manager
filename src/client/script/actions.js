@@ -240,8 +240,8 @@ const actionsToggle = (editorEl) => {
 };
 
 const actions = () => {
-    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(actionsCreateEditor);
-    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(actionsCreateEmojis);
-    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(actionsCreateUpload);
-    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(actionsToggle);
+    document.body.querySelectorAll("section > div:not([aria-label]) label").forEach(actionsCreateEditor);
+    document.body.querySelectorAll("section > div:not([aria-label]) label").forEach(actionsCreateEmojis);
+    document.body.querySelectorAll("section > div:not([aria-label]) label").forEach(actionsCreateUpload);
+    document.body.querySelectorAll("section > div:not([aria-label]) label").forEach(actionsToggle);
 };
