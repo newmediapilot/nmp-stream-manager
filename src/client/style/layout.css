@@ -96,6 +96,7 @@ article .modes label {
 }
 article .modes label input {
     background: repeating-linear-gradient(-45deg, var(--color-orange), var(--color-deepyellow) 25px);
+    border-radius: 0px;
 }
 article .modes label input:checked {
     background: repeating-linear-gradient(45deg, var(--color-bloodorange), var(--color-deepyellow) 25px);
