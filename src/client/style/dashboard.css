@@ -35,6 +35,8 @@ section article {
     align-items: center;
     overflow: hidden;
     border-radius: 15px;
+    scroll-snap-stop: normal;
+    scroll-snap-align: start;
 }
 section img {
     object-fit: contain;
