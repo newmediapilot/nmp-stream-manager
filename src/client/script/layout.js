@@ -44,8 +44,8 @@ const castLayoutInputValues = () => {
     });
     const payload = [
         ...Array.from(document.body.querySelectorAll('section .controls label input[type="range"]')).map(el => {return `${el.name}:${el.value}`;}),
-        ...Array.from(document.body.querySelectorAll('section .layers label input[type="radio"]')).map((el,index) => {
-            return `${el.id}:${index}`;
+        ...Array.from(document.body.querySelectorAll('section .layers label input[type="radio"]')).map((el,index, arr) => {
+            return `${el.id}:${arr.length - index - 1}`;
         })
     ].join(";");
     if (payload) document.head.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
