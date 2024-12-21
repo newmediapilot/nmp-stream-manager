@@ -1,5 +1,7 @@
 :root {
     --grid-size: 6;
+    --sizeX: 3;
+    --sizeY: 4;
 }
 section {
     display: grid;
@@ -9,27 +11,25 @@ section {
     position: relative;
 }
 section {
-    grid-template-columns: repeat(var(--grid-size), calc(100vw / 3));
-    grid-template-rows: repeat(var(--grid-size), calc(100vh / 4));
-    transition:
-        width 500ms ease-in-out,
-        height 500ms ease-in-out;
     background: var(--color-dark);
+    transition:
+        grid-template-columns 1s,
+        grid-template-rows 1s;
 }
 html.edit-active section {
-    width: 200vw;
-    height: 200vh;
+    --sizeX: 6;
+    --sizeY: 6;
 }
 @media (orientation: landscape) {
     section {
-        grid-template-columns: repeat(var(--grid-size), calc(100vw / 4));
-        grid-template-rows: repeat(var(--grid-size), calc(100vh / 3));
+        grid-template-columns: repeat(var(--grid-size), calc(100vw / var(--sizeX)));
+        grid-template-rows: repeat(var(--grid-size), calc(100vw / var(--sizeY)));
     }
 }
 @media (orientation: portrait) {
     section {
-        grid-template-columns: repeat(var(--grid-size), calc(100vw / 3));
-        grid-template-rows: repeat(var(--grid-size), calc(100vh / 5));
+        grid-template-columns: repeat(var(--grid-size), calc(100vw / var(--sizeY)));
+        grid-template-rows: repeat(var(--grid-size), calc(100vw / var(--sizeX)));
     }
 }
 section article {
@@ -80,7 +80,7 @@ section article button label::-webkit-scrollbar {
     display: none;
 }
 html.edit-active section article button {
-    border-style: dashed;
+    border: none;
 }
 section article button {
     border-width: 15px;
@@ -103,43 +103,47 @@ section article button::before {
     mix-blend-mode: multiply;
     z-index: 0;
 }
-section .red button {
+section article.empty {
+    background-color: var(--color-light);
+    opacity: 0.25;
+}
+section article.red button {
     background-color: var(--color-red);
     color: var(--color-light);
 }
-section .pink button {
+section article.pink button {
     background-color: var(--color-pink);
     color: var(--color-light);
 }
-section .blue button {
+section article.blue button {
     background-color: var(--color-blue);
     color: var(--color-light);
 }
-section .aqua button {
+section article.aqua button {
     background-color: var(--color-aqua);
     color: var(--color-dark);
 }
-section .black button {
+section article.black button {
     background-color: var(--color-light);
     color: var(--color-light);
 }
-section .orange button {
+section article.orange button {
     background-color: var(--color-orange);
     color: var(--color-dark);
 }
-section .purple button {
+section article.purple button {
     background-color: var(--color-purple);
     color: var(--color-light);
 }
-section .bloodorange button {
+section article.bloodorange button {
     background-color: var(--color-bloodorange);
     color: var(--color-light);
 }
-section .deepyellow button {
+section article deepyellow button {
     background-color: var(--color-deepyellow);
     color: var(--color-dark);
 }
-section .green button {
+section article.green button {
     background-color: var(--color-green);
     color: var(--color-light);
 }
