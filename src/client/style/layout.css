@@ -3,6 +3,7 @@
     --section-width: 100vh;
     --section-height: 100vh;
 }
+
 section {
     width: var(--section-width);
     height: var(--section-height);
@@ -16,6 +17,7 @@ section {
     align-items: center;
     justify-content: center;
 }
+
 @media (min-aspect-ratio: 1 / 1) {
     section {
         --cell-density: 3vh;
@@ -23,12 +25,14 @@ section {
         --section-height: 100vh;
     }
 }
+
 @media (max-aspect-ratio: 1 / 1) {
     section {
         --section-width: 100vw;
         --section-height: 100vh;
     }
 }
+
 article {
     display: grid;
     overflow: visible;
@@ -36,6 +40,7 @@ article {
     grid-template-rows: repeat(32, calc(var(--cell-density)));
     background: var(--color-bloodorange);
 }
+
 article .preview {
     position: relative;
     overflow: hidden;
@@ -47,6 +52,7 @@ article .preview {
     background-size: 100% 100%;
     grid-area: 1 / 1 / 19 / 33;
 }
+
 article .preview iframe {
     pointer-events: none;
     border: none;
@@ -58,6 +64,7 @@ article .preview iframe {
     width: 100%;
     height: 100%;
 }
+
 article .layers {
     grid-area: 19 / 1 / 33 / 17;
     background: var(--color-orange);
@@ -68,32 +75,41 @@ article .layers {
     gap: 10px;
     box-shadow: inset 0 0 5px 5px var(--color-deepyellow);
 }
+
 article .layers label {
     grid-template-columns: repeat(3, 1fr);
     display: grid;
     column-gap: 10px;
 }
+
+article .layers label span {
+    font-size: 20px;
+}
+
 article .layers label::before {
     font-size: 20px;
 }
+
 article .layers label::after {
     content: '';
     background-size: 8px 8px;
     background-image: repeating-linear-gradient(
-        -45deg,
-        rgb(0, 0, 0) 0px,
-        rgb(0, 0, 0) 0.8px,
-        rgba(0, 0, 0, 0) 0px,
-        rgba(0, 0, 0, 0) 50%
+            -45deg,
+            rgb(0, 0, 0) 0px,
+            rgb(0, 0, 0) 0.8px,
+            rgba(0, 0, 0, 0) 0px,
+            rgba(0, 0, 0, 0) 50%
     );
     width: 40px;
 }
+
 article .layers label input:checked {
     background: repeating-linear-gradient(45deg, var(--color-bloodorange), var(--color-deepyellow) 25px);
     border-radius: 25px;
     box-shadow: inset 0 0 5px 5px var(--color-deepyellow);
     width: 50px;
 }
+
 article .modes {
     grid-area: 19 / 17 / 25 / 33;
     display: grid;
@@ -102,16 +118,20 @@ article .modes {
     width: 100%;
     overflow: hidden;
 }
+
 article .modes label {
     position: relative;
 }
+
 article .modes label input {
     background: repeating-linear-gradient(-45deg, var(--color-orange), var(--color-deepyellow) 25px);
     border-radius: 0px;
 }
+
 article .modes label input:checked {
     background: repeating-linear-gradient(45deg, var(--color-bloodorange), var(--color-deepyellow) 25px);
 }
+
 article .modes label[aria-label]::before {
     position: absolute;
     z-index: 1;
@@ -120,12 +140,12 @@ article .modes label[aria-label]::before {
     transform: translate(-50%, -50%);
     font-size: 12px;
     font-weight: bolder;
-    text-shadow:
-        0px 0px 5px var(--color-light),
-        0px 0px 5px var(--color-light),
-        0px 0px 5px var(--color-light),
-        0px 0px 5px var(--color-light);
+    text-shadow: 0px 0px 5px var(--color-light),
+    0px 0px 5px var(--color-light),
+    0px 0px 5px var(--color-light),
+    0px 0px 5px var(--color-light);
 }
+
 article .modes input {
     appearance: none;
     width: 100%;
@@ -133,12 +153,14 @@ article .modes input {
     background: repeating-linear-gradient(-45deg, var(--color-light), rgb(204, 204, 204) 10px);
     box-shadow: inset 0 0 5px 5px var(--color-deepyellow);
 }
+
 article .controls {
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
     grid-area: 25 / 17 / 33 / 33;
 }
+
 article .controls::after {
     content: '';
     position: absolute;
@@ -150,6 +172,7 @@ article .controls::after {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 5px 5px inset;
     pointer-events: none;
 }
+
 article .controls label {
     overflow: scroll;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 4px 4px inset;
@@ -158,6 +181,7 @@ article .controls label {
     width: 100%;
     height: 100%;
 }
+
 article .controls label::after {
     content: '';
     display: block;
@@ -166,19 +190,21 @@ article .controls label::after {
     background-color: var(--color-light);
     opacity: 1;
     background-image: radial-gradient(circle, var(--color-orange), var(--color-bloodorange)),
-        repeating-radial-gradient(
+    repeating-radial-gradient(
             circle,
             var(--color-red),
             var(--color-red),
             17.5px,
             transparent 25px,
             transparent 25px
-        );
+    );
     background-blend-mode: hard-light;
 }
+
 article input::-webkit-slider-thumb {
     appearance: none;
 }
+
 article .controls label input {
     display: none;
 }
