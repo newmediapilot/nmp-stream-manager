@@ -19,27 +19,46 @@ section {
     grid-template-columns: repeat(var(--grid-size), calc(100vw / var(--sizeX)));
     grid-template-rows: repeat(var(--grid-size), calc(100vh / var(--sizeY)));
 }
-@media (max-width: 768px) {
+@media (max-width: 768px) and (orientation: portrait) {
     section {
-        --mode: 'small';
+        --mode: 'small:portrait';
         --sizeX: 2;
         --sizeY: 4;
-        grid-template-columns: repeat(var(--grid-size), calc(100vw / var(--sizeX)));
-        grid-template-rows: repeat(var(--grid-size), calc(100vh / var(--sizeY)));
     }
 }
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (max-width: 768px) and (orientation: landscape) {
     section {
-        --mode: 'medium';
+        --mode: 'small:landscape';
+        --sizeX: 2;
+        --sizeY: 4;
+    }
+}
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+    section {
+        --mode: 'medium:portrait';
+        --sizeX: 4;
+        --sizeY: 5;
+    }
+}
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+    section {
+        --mode: 'medium:landscape';
         --sizeX: 4;
         --sizeY: 3;
-        grid-template-columns: repeat(var(--grid-size), calc(100vw / var(--sizeX)));
-        grid-template-rows: repeat(var(--grid-size), calc(100vh / var(--sizeY)));
     }
 }
-@media (min-width: 1025px) {
+@media (min-width: 1025px) and (orientation: portrait) {
     section {
-        --mode: 'large';
+        --mode: 'large:portrait';
+        --sizeX: 6;
+        --sizeY: 4;
+    }
+}
+@media (min-width: 1025px) and (orientation: landscape) {
+    section {
+        --mode: 'large:landscape';
+        --sizeX: 6;
+        --sizeY: 4;
     }
 }
 section article {
