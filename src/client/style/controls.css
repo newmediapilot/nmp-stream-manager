@@ -1,5 +1,5 @@
 html.edit-active nav input[type='checkbox'],
-html.edit-active nav aside >:not(#toggle-edit-dashboard) {
+html.edit-active nav aside > :not(#toggle-edit-dashboard) {
     display: none;
 }
 html.edit-active nav > label {
@@ -67,7 +67,7 @@ nav aside button:hover,
 nav aside button:active {
     background: repeating-linear-gradient(
         45deg,
-        rgba(0, 0, 0, 0.15) 0,
+        rgba(0, 0, 0, 0.15) 0px,
         rgba(0, 0, 0, 0.15) 2px,
         rgba(255, 255, 255, 0.15) 2px,
         rgba(255, 255, 255, 0.15) 4px
