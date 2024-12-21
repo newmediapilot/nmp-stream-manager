@@ -46,7 +46,14 @@
     }
 
     main {
-        transform: translateX(calc(calc(var(--_draw-tX) * -1%) + 33%)) translateY(calc(calc(var(--_draw-tY) * -1%) + 33%)) scaleX(calc(var(--_draw-sX) * 0.01)) scaleY(calc(var(--_draw-sY) * 0.01)) rotateX(calc(var(--_draw-rX) * 3.6deg)) rotateY(calc(var(--_draw-rY) * 3.6deg)) rotateZ(calc(var(--_draw-rotateZ) * 3.6deg));
+        opacity: var(--_feat-o);
+        transform: translateX(calc(calc(var(--_draw-tX) * -1%) + 33%))
+        translateY(calc(calc(var(--_draw-tY) * -1%) + 33%))
+        scaleX(calc(var(--_draw-sX) * 0.01))
+        scaleY(calc(var(--_draw-sY) * 0.01))
+        rotateX(calc(var(--_draw-rX) * 3.6deg))
+        rotateY(calc(var(--_draw-rY) * 3.6deg))
+        rotateZ(calc(var(--_draw-rotateZ) * 3.6deg));
     }
 </style>
 {%endblock%}
