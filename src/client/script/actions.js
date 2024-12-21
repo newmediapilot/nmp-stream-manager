@@ -151,6 +151,7 @@ const actionsCreateUpload = (editorEl) => {
                             actionButton && toggleReplayState();
                             inputEl.focus();
                             socketEmitReload();
+                            setFocusToken();
                             console.log('actionsCreateUpload :: success:', response.data);
                         }).catch(error => {
                             console.error('actionsCreateUpload :: error:', error);
