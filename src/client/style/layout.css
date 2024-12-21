@@ -90,11 +90,6 @@ article .layers label::after {
 article .layers label input:checked {
     background: purple;
     border-radius: 25px;
-    max-width: 60px;
-    align-self: flex-end;
-}
-article .layers label input:checked {
-    background: red;
 }
 article .modes {
     grid-area: 20 / 17 / 24 / 32;
