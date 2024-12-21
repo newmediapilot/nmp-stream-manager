@@ -10,7 +10,7 @@ section {
     scroll-snap-type: both;
 }
 section::after {
-    content:"";
+    content: '';
     height: 25vh;
     background: transparent;
     width: 100%;
