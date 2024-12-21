@@ -16,7 +16,7 @@ section {
 }
 html.edit-active section {
     --sizeX: 6;
-    --sizeY: 6;
+    --sizeY: 12;
 }
 @media (orientation: landscape) {
     section {
