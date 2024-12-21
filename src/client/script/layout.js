@@ -43,11 +43,17 @@ const applyLayoutStyles = () => {
             .replace(";}", "")
             .split(';')
             .map(e => e.split(':'))
-            .map(([key]) => layer.querySelector(`label[for="${String(key)}"]`))
-            .filter(label => !!label)
-            .map(label => {
-                //label.parentElement.insertBefore(label, label.parentElement.firstChild);
-                console.log('label', label);
+            .map(([key, value]) => {
+                return {
+                    el: layer.querySelector(`label[for="${String(key)}"]`),
+                    key: String(key),
+                    value: Number(value),
+                }
+            }).filter(({el}) => !!el)
+            .map((data) => {
+                const {el, value} = data;
+
+                return data;
             });
         console.log('payload', payload);
     });
