@@ -16,6 +16,10 @@ const DASHBOARD_BUTTON_CONFIG = {
             label: "30s",
             visibility: "ON",
         },
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
         {
             emoji: "❤",
             theme: "bloodorange",
@@ -32,6 +36,10 @@ const DASHBOARD_BUTTON_CONFIG = {
             label: "Ping",
             visibility: "ON",
         },
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
         {
             emoji: "👉",
             label: "Announce",
@@ -48,6 +56,10 @@ const DASHBOARD_BUTTON_CONFIG = {
             description: "a,audio,mp3,wav,webm",
             visibility: "ON",
         },
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
         {
             emoji: "👉",
             label: "Media",
@@ -56,6 +68,11 @@ const DASHBOARD_BUTTON_CONFIG = {
             description: "a,image,jpeg,gif,png,webp,bmp",
             visibility: "ON",
         },
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
     ],
 };
 const fs = require("fs");
