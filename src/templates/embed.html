@@ -15,10 +15,10 @@
 <style>
 
     :root {
-        --_feat-Zi: 0;
-        --_bpm-Zi: 1;
-        --_draw-Zi: 2;
-        --_med-Zi: 3
+        --_feat-layer: 0;
+        --_bpm-layer: 1;
+        --_draw-layer: 2;
+        --_med-layer: 3
     }
     iframe {
         width: 100vw;
@@ -38,10 +38,10 @@
 {%endblock%}
 {%block body%}
 <main>
-    <iframe style="z-index: var(--_feat-Zi)" src="{{public_routes.PANEL_FEATURE_EMBED}}#edit"></iframe>
-    <iframe style="z-index: var(--_bpm-Zi)" src="{{public_routes.PANEL_BPM_EMBED}}#edit"></iframe>
-    <iframe style="z-index: var(--_draw-Zi)" src="{{public_routes.PANEL_DRAW_EMBED}}#edit"></iframe>
-    <iframe style="z-index: var(--_med-Zi)" src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
+    <iframe style="z-index: var(--_feat-layer)" src="{{public_routes.PANEL_FEATURE_EMBED}}#edit"></iframe>
+    <iframe style="z-index: var(--_bpm-layer)" src="{{public_routes.PANEL_BPM_EMBED}}#edit"></iframe>
+    <iframe style="z-index: var(--_draw-layer)" src="{{public_routes.PANEL_DRAW_EMBED}}#edit"></iframe>
+    <iframe style="z-index: var(--_med-layer)" src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
 </main>
 {%endblock%}
 {%block scripts%}
