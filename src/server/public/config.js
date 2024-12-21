@@ -73,6 +73,18 @@ const DASHBOARD_BUTTON_CONFIG = {
         {type: "empty"},
         {type: "empty"},
         {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
+        {type: "empty"},
     ],
 };
 const fs = require("fs");
