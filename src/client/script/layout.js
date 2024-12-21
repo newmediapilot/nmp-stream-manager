@@ -73,6 +73,20 @@ const initializeLayoutClickTouch = () => {
         }, {passive: true});
     });
 };
+const enableLayerDragDrop = () => {
+    new Sortable(document.body.querySelector("section article .layers"), {
+        animation: 333,
+        forceFallback: true,
+        removeCloneOnHide: true,
+        ghostClass: "pointer-events-none",
+        onEnd: () => {
+            Array.from(document.querySelectorAll('section article .layers label')).forEach((e, i) => {
+                console.log('i', e, i);
+            });
+        },
+    });
+    document.body.querySelector("section .layers");
+};
 const sendLayoutInputValues = () => {
     let payload = document.head.querySelector('#public_module_styles')
         .innerHTML
