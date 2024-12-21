@@ -36,6 +36,7 @@ article {
     overflow: visible;
     grid-template-columns: repeat(32, calc(var(--cell-density)));
     grid-template-rows: repeat(32, calc(var(--cell-density)));
+    background: var(--color-bloodorange);
 }
 article .preview {
     position: relative;
