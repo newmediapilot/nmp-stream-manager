@@ -11,13 +11,14 @@ section {
 section {
     grid-template-columns: repeat(var(--grid-size), calc(100vw / 3));
     grid-template-rows: repeat(var(--grid-size), calc(100vh / 4));
-    transition: width 500ms ease-in-out,
-            height 500ms ease-in-out;
+    transition:
+        width 500ms ease-in-out,
+        height 500ms ease-in-out;
+    background: var(--color-dark);
 }
 html.edit-active section {
     width: 200vw;
     height: 200vh;
-    background: var(--color-dark);
 }
 @media (orientation: landscape) {
     section {
