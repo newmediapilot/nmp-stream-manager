@@ -15,7 +15,6 @@ main {
     background-repeat: repeat;
 }
 html.iframe main {
-    background: var(--color-bloodorange);
     box-sizing: border-box;
     background-color: var(--color-light);
     opacity: 0.6;
