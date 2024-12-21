@@ -12,16 +12,24 @@
             <iframe width="1920" height="1080" src="{{public_routes.PANEL_EMBED}}#edit"></iframe>
         </div>
         <div class="layers">
-            <label for="l2" aria-label="FEATURE"><input type="radio" name="mode" id="l2"></label>
-            <label for="l1" aria-label="BPM"><input type="radio" name="mode" id="l1"></label>
-            <label for="l3" aria-label="DRAW"><input type="radio" name="mode" id="l3"></label>
-            <label for="l4" aria-label="MEDIA"><input type="radio" name="mode" id="l4"></label>
+            <label for="feat" aria-label="FEATURE"><input type="radio" value="layer1" id="feat" name="layers">
+                <button aria-label="A"></button>
+            </label>
+            <label for="bpm" aria-label="BPM"><input type="radio" value="layer2" id="bpm" name="layers">
+                <button aria-label="A"></button>
+            </label>
+            <label for="draw" aria-label="DRAW"><input type="radio" value="layer3" id="draw" name="layers">
+                <button aria-label="A"></button>
+            </label>
+            <label for="med" aria-label="MEDIA"><input type="radio" value="layer4" id="med" name="layers">
+                <button aria-label="A"></button>
+            </label>
         </div>
         <div class="modes">
-            <label for="m1" aria-label="FADE"><input type="radio" name="mode" id="m1"></label>
-            <label for="m2" aria-label="MOVE"><input type="radio" name="mode" id="m2"></label>
-            <label for="m3" aria-label="SIZE"><input type="radio" name="mode" id="m3"></label>
-            <label for="m4" aria-label="RXYZ"><input type="radio" name="mode" id="m4"></label>
+            <label for="m1" aria-label="FADE"><input type="radio" name="o" id="m1"></label>
+            <label for="m2" aria-label="MOVE"><input type="radio" name="t" id="m2"></label>
+            <label for="m3" aria-label="SIZE"><input type="radio" name="s" id="m3"></label>
+            <label for="m4" aria-label="RXYZ"><input type="radio" name="r" id="m4"></label>
         </div>
         <div class="controls">
             <label>
@@ -59,5 +67,6 @@
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.preview', 'width', '--js-module-preview-width'));
     document.addEventListener("DOMContentLoaded", () => applyLayoutStyles());
     document.addEventListener("DOMContentLoaded", () => initializeLayoutClickTouch());
+    document.addEventListener("DOMContentLoaded", () => enableLayerDragDrop());
 </script>
 {%endblock%}
