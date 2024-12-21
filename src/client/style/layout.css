@@ -67,6 +67,7 @@ article .layers {
     box-sizing: border-box;
     padding: 19px;
     row-gap: 5px;
+    box-shadow: inset 0 0 5px 5px var(--color-deepyellow);
 }
 article .layers label {
     grid-template-columns: repeat(2, 1fr);
@@ -134,7 +135,6 @@ article .controls {
     overflow: hidden;
     box-sizing: border-box;
     border-radius: 25px;
-    box-shadow: inset 0 0 5px 5px var(--color-dark);
     grid-area: 25 / 17 / 32 / 32;
 }
 article .controls::after {
