@@ -23,7 +23,7 @@ html.edit-active section {
 @media (orientation: landscape) {
     section {
         grid-template-columns: repeat(var(--grid-size), calc(100vw / var(--sizeX)));
-        grid-template-rows: repeat(var(--grid-size), calc(100vw / var(--sizeY)));
+        grid-template-rows: repeat(var(--grid-size), calc(100vh / var(--sizeY)));
     }
 }
 @media (orientation: portrait) {
