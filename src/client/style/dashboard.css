@@ -3,9 +3,10 @@
     --sizeX: 3;
     --sizeY: 4;
 }
-html.edit-active section {
-    --sizeX: 6;
-    --sizeY: 12;
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 section {
     --mode: 'none-none';
@@ -18,6 +19,7 @@ section {
     background: var(--color-dark);
     grid-template-columns: repeat(var(--grid-size), calc(100vw / var(--sizeX)));
     grid-template-rows: repeat(var(--grid-size), calc(100vh / var(--sizeY)));
+    justify-content: center;
 }
 @media (max-width: 768px) and (orientation: portrait) {
     section {
@@ -26,11 +28,25 @@ section {
         --sizeY: 4;
     }
 }
+@media (max-width: 768px) and (orientation: portrait) {
+    html.edit-active section {
+        --mode: 'small:portrait:edit';
+        --sizeX: 6;
+        --sizeY: 8;
+    }
+}
 @media (max-width: 768px) and (orientation: landscape) {
     section {
         --mode: 'small:landscape';
         --sizeX: 2;
-        --sizeY: 4;
+        --sizeY: 3;
+    }
+}
+@media (max-width: 768px) and (orientation: landscape) {
+    html.edit-active section {
+        --mode: 'small:landscape:edit';
+        --sizeX: 7;
+        --sizeY: 8;
     }
 }
 @media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
@@ -40,11 +56,25 @@ section {
         --sizeY: 5;
     }
 }
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+    html.edit-active section {
+        --mode: 'medium:portrait:edit';
+        --sizeX: 6;
+        --sizeY: 8;
+    }
+}
 @media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
     section {
         --mode: 'medium:landscape';
         --sizeX: 4;
         --sizeY: 3;
+    }
+}
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+    html.edit-active section {
+        --mode: 'medium:landscape:edit';
+        --sizeX: 6;
+        --sizeY: 8;
     }
 }
 @media (min-width: 1025px) and (orientation: portrait) {
@@ -54,11 +84,25 @@ section {
         --sizeY: 4;
     }
 }
+@media (min-width: 1025px) and (orientation: portrait) {
+    html.edit-active section {
+        --mode: 'large:portrait:edit';
+        --sizeX: 6;
+        --sizeY: 4;
+    }
+}
 @media (min-width: 1025px) and (orientation: landscape) {
     section {
         --mode: 'large:landscape';
         --sizeX: 6;
         --sizeY: 4;
+    }
+}
+@media (min-width: 1025px) and (orientation: landscape) {
+    html.edit-active section {
+        --mode: 'large:landscape:edit';
+        --sizeX: 8;
+        --sizeY: 8;
     }
 }
 section article {
