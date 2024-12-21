@@ -70,13 +70,22 @@ article .layers label {
     justify-content: center;
     align-items: center;
 }
+article .layers label::after {
+    content: '';
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: blue;
+}
 article .layers label input {
     appearance: none;
     position: absolute;
     display: none;
 }
-article .layers label input:checked {
-    background: repeating-linear-gradient(90deg, var(--color-bloodorange), var(--color-deepyellow) 25px);
+article .layers label input:checked ~ article .layers label::after {
+    background: green;
 }
 article .layers label::before {
     position: absolute;
