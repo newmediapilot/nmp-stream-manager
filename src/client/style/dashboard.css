@@ -9,6 +9,7 @@ section {
     height: 100vh;
     overflow: scroll;
     position: relative;
+    scroll-snap-type: both;
 }
 section {
     background: var(--color-dark);
