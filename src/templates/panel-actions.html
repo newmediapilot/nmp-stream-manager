@@ -5,14 +5,14 @@
 {%endblock%}
 {%block body%}
 <section>
-    <ul>
+
         {%set feature_title_set = false%}
         {%for signal in "dashboard_signals_config"|getParam%}
         {%if signal.type == "announce"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
-        <li class="{{signal.theme}}" aria-label="Announce"></li>
+        <div class="{{signal.theme}}" aria-label="Announce"></div>
         {%endif%}
-        <li class="{{signal.theme}}">
+        <div class="{{signal.theme}}">
             <label id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
@@ -21,16 +21,16 @@
                 <button aria-label="{{signal.visibility}}"></button>
                 <textarea value="{{signal.description}}">{{signal.description}}</textarea>
             </label>
-        </li>
+        </div>
         {%endif%}
         {%endfor%}
         {%set feature_title_set = false%}
         {%for signal in "dashboard_signals_config"|getParam%}
         {%if signal.type == "media"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
-        <li class="{{signal.theme}}" aria-label="Media"></li>
+        <div class="{{signal.theme}}" aria-label="Media"></div>
         {%endif%}
-        <li class="{{signal.theme}}">
+        <div class="{{signal.theme}}">
             <label id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
@@ -39,16 +39,16 @@
                 <button aria-label="{{signal.visibility}}"></button>
                 <img />
             </label>
-        </li>
+        </div>
         {%endif%}
         {%endfor%}
         {%set feature_title_set = false%}
         {%for signal in "dashboard_signals_config"|getParam%}
         {%if signal.type == "sound"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
-        <li class="{{signal.theme}}" aria-label="Sound"></li>
+        <div class="{{signal.theme}}" aria-label="Sound"></div>
         {%endif%}
-        <li class="{{signal.theme}}">
+        <div class="{{signal.theme}}">
             <label id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
@@ -56,16 +56,16 @@
                 <button aria-label="🎶"></button>
                 <button aria-label="{{signal.visibility}}"></button>
             </label>
-        </li>
+        </div>
         {%endif%}
         {%endfor%}
         {%set feature_title_set = false%}
         {%for signal in "dashboard_signals_config"|getParam%}
         {%if signal.type == "feature"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
-        <li class="{{signal.theme}}" aria-label="Feature"></li>
+        <div class="{{signal.theme}}" aria-label="Feature"></div>
         {%endif%}
-        <li class="{{signal.theme}}">
+        <div class="{{signal.theme}}">
             <label id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
@@ -73,16 +73,16 @@
                 <button disabled></button>
                 <button aria-label="{{signal.visibility}}"></button>
             </label>
-        </li>
+        </div>
         {%endif%}
         {%endfor%}
         {%set feature_title_set = false%}
         {%for signal in "dashboard_signals_config"|getParam%}
         {%if signal.type == "mark"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
-        <li class="{{signal.theme}}" aria-label="Mark"></li>
+        <div class="{{signal.theme}}" aria-label="Mark"></div>
         {%endif%}
-        <li class="{{signal.theme}}">
+        <div class="{{signal.theme}}">
             <label id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
@@ -90,16 +90,16 @@
                 <button disabled></button>
                 <button aria-label="{{signal.visibility}}"></button>
             </label>
-        </li>
+        </div>
         {%endif%}
         {%endfor%}
         {%set feature_title_set = false%}
         {%for signal in "dashboard_signals_config"|getParam%}
         {%if signal.type == "ad"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
-        <li class="{{signal.theme}}" aria-label="Ad"></li>
+        <div class="{{signal.theme}}" aria-label="Ad"></div>
         {%endif%}
-        <li class="{{signal.theme}}">
+        <div class="{{signal.theme}}">
             <label id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}" disabled/>
@@ -107,16 +107,16 @@
                 <button disabled></button>
                 <button aria-label="{{signal.visibility}}"></button>
             </label>
-        </li>
+        </div>
         {%endif%}
         {%endfor%}
         {%set feature_title_set = false%}
         {%for signal in "dashboard_signals_config"|getParam%}
         {%if signal.type == "bpm"%}
         {%if not feature_title_set%}{%set feature_title_set = true%}
-        <li class="{{signal.theme}}" aria-label="BPM"></li>
+        <div class="{{signal.theme}}" aria-label="BPM"></div>
         {%endif%}
-        <li class="{{signal.theme}}">
+        <div class="{{signal.theme}}">
             <label id="{{loop.index0}}">
                 <button aria-label="{{signal.emoji}}"></button>
                 <input type="text" value="{{signal.label}}"/>
@@ -124,10 +124,10 @@
                 <button disabled></button>
                 <button aria-label="{{signal.visibility}}"></button>
             </label>
-        </li>
+        </div>
         {%endif%}
         {%endfor%}
-    </ul>
+
 </section>
 {%include "_home.njk"%}
 {%endblock%}

@@ -3,19 +3,24 @@ section {
     height: 100vh;
     overflow: hidden scroll;
     position: relative;
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     background: repeating-linear-gradient(-45deg, rgb(2, 2, 2), rgb(19, 19, 19) 15px);
     font-size: 300%;
+    scroll-snap-type: both;
 }
 section::after {
-    content: '';
-    height: 130px;
+    content:"";
+    height: 25vh;
     background: transparent;
     width: 100%;
     display: block;
 }
-section > ul > li[aria-label] {
+section > div {
+    scroll-snap-stop: normal;
+    scroll-snap-align: start;
+}
+section > div[aria-label] {
     display: flex;
     align-items: center;
     z-index: 1;
@@ -34,12 +39,12 @@ section label {
     display: grid;
     grid-template-columns: repeat(15, 25px);
     box-sizing: border-box;
-    padding: 10px 0;
+    padding: 10px 0px;
 }
-section > ul > li:not([aria-label]) label {
+section > div:not([aria-label]) label {
     grid-template-rows: repeat(3, 25px);
 }
-section > ul > li:not([aria-label]):nth-of-type(2) label {
+section > div:not([aria-label]):nth-of-type(2) label {
     grid-template-rows: repeat(10, 25px);
 }
 section label > [type='text'] {
@@ -131,40 +136,37 @@ section label > button:nth-of-type(4) {
     font-size: 20px;
     width: 40px;
 }
-#emoji-widget li.active {
-    box-shadow: inset 0 0 8px 8px var(--color-deepyellow);
-}
-section li.aqua,
+section div.aqua,
 section label.aqua,
 section label.aqua + #emoji-widget {
     background: var(--color-aqua);
 }
-section li.orange,
+section div.orange,
 section label.orange,
 section label.orange + #emoji-widget {
     background: var(--color-orange);
 }
-section li.bloodorange,
+section div.bloodorange,
 section label.bloodorange,
 section label.bloodorange + #emoji-widget {
     background: var(--color-bloodorange);
 }
-section li.purple,
+section div.purple,
 section label.purple,
 section label.purple + #emoji-widget {
     background: var(--color-purple);
 }
-section li.green,
+section div.green,
 section label.green,
 section label.green + #emoji-widget {
     background: var(--color-green);
 }
-section li.red,
+section div.red,
 section label.red,
 section label.red + #emoji-widget {
     background: var(--color-red);
 }
-section li.blue,
+section div.blue,
 section label.blue,
 section label.blue + #emoji-widget {
     background: var(--color-blue);
@@ -176,8 +178,8 @@ body > #emoji-widget {
     display: none;
 }
 #emoji-widget {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     display: grid;
     grid-template-columns: repeat(5, calc(20%));
     border-top: 5px dotted rgba(0, 0, 0, 0.1);
@@ -192,4 +194,7 @@ body > #emoji-widget {
     align-items: center;
     line-height: 0;
     height: 10vh;
+}
+#emoji-widget li.active {
+    box-shadow: inset 0 0 8px 8px var(--color-deepyellow);
 }

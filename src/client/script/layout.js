@@ -33,6 +33,24 @@ const applyLayoutStyles = () => {
             behavior: 'smooth',
         });
     });
+    Array.from(document.body.querySelectorAll('.layers')).forEach((layer) => {
+        const payloadHTML = document.head.querySelector('#public_module_styles').innerHTML;
+        if (payloadHTML.startsWith(":root{/*")) {
+            return;
+        }
+        let payload = payloadHTML
+            .replace(":root{", "")
+            .replace(";}", "")
+            .split(';')
+            .map(e => e.split(':'))
+            .map(([key]) => layer.querySelector(`label[for="${String(key)}"]`))
+            .filter(label => !!label)
+            .map(label => {
+                //label.parentElement.insertBefore(label, label.parentElement.firstChild);
+                console.log('label', label);
+            });
+        console.log('payload', payload);
+    });
 };
 const castLayoutInputValues = () => {
     Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
@@ -43,8 +61,10 @@ const castLayoutInputValues = () => {
         label.setAttribute('data-px-py', [px, py].join(' '))
     });
     const payload = [
-        ...Array.from(document.body.querySelectorAll('section .controls label input[type="range"]')).map(el => {return `${el.name}:${el.value}`;}),
-        ...Array.from(document.body.querySelectorAll('section .layers label input[type="radio"]')).map((el,index, arr) => {
+        ...Array.from(document.body.querySelectorAll('section .controls label input[type="range"]')).map(el => {
+            return `${el.name}:${el.value}`;
+        }),
+        ...Array.from(document.body.querySelectorAll('section .layers label input[type="radio"]')).map((el, index, arr) => {
             return `${el.id}:${arr.length - index - 1}`;
         })
     ].join(";");
