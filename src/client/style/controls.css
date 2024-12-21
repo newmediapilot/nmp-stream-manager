@@ -1,5 +1,8 @@
 html.edit-active nav input[type='checkbox'],
-html.edit-active nav aside button:not(#toggle-edit-dashboard) {
+html.edit-active nav aside >:not(#toggle-edit-dashboard) {
+    display: none;
+}
+html.edit-active nav > label {
     display: none;
 }
 nav {
@@ -11,11 +14,6 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-@media (display-mode: standalone) {
-    body nav {
-        bottom: 50px;
-    }
 }
 nav input[type='checkbox'] {
     display: none;
