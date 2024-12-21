@@ -7,20 +7,28 @@
 {%endblock%}
 {%block body%}
 <section>
+
     {%for config in "dashboard_signals_config"|getParam%}
+
     {%if config.type == "feature"%}
-    {####}{%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label%}
+    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label%}
     {%elif config.type == "mark"%}
-    {####}{%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.label%}
+    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.label%}
     {%else%}
-    {####}{%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description%}
+    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description%}
     {%endif%}
+
+    {%if config.type === "empty"%}
+    <article class="empty"></article>
+    {%else%}
     <article class="{{config.theme}}">
-        <button onmouseup="javascript:sendSignal(this, '{{data_href}}');" {%if config.visibility == "OFF"%}disabled{%endif%}>
+        <button onmouseup="javascript:sendSignal(this, '{{data_href}}');" {%if config.visibility=="OFF"%}disabled{%endif%}>
             <label aria-label="{{config.emoji}}"></label>
             <label aria-label="{{config.label}}"></label>
         </button>
     </article>
+    {%endif%}
+
     {%endfor%}
 </section>
 {%include "_controls.njk"%}
@@ -31,7 +39,7 @@
     <h3 aria-label="This link will open the dashboard on any device on your network."></h3>
     <canvas data-url="https://{{device_ip}}"></canvas>
     <button data-url="https://{{device_ip}}" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
-    <button onclick="javascript:document.body.querySelector('#qr-dialog').close();" aria-label="✅Done" ></button>
+    <button onclick="javascript:document.body.querySelector('#qr-dialog').close();" aria-label="✅Done"></button>
 </dialog>
 {%endblock%}
 {%block scripts%}
