@@ -3,9 +3,23 @@
 {%block cdn%}{%endblock%}
 {%block client%}{%endblock%}}
 {%block head%}
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="text/javascript" defer></script>
+<script crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" type="text/javascript" defer></script>
+<script defer src="../client/script/css_dev_watch.js?{{cacheBuster}}" type="text/javascript"></script>
+<script defer src="../client/script/iframe_detect.js?{{cacheBuster}}" type="text/javascript"></script>
+<script defer src="../client/script/socket.js?{{cacheBuster}}" type="text/javascript"></script>
+<script defer src="../client/script/get_path.js?{{cacheBuster}}" type="text/javascript"></script>
+<link rel="stylesheet" href="../client/style/variables.css?{{cacheBuster}}">
 <link rel="stylesheet" href="../client/style/base.css?{{cacheBuster}}">
 <link rel="stylesheet" href="../client/style/reset.css?{{cacheBuster}}">
 <style>
+
+    :root {
+        --_feat-Zi: 0;
+        --_bpm-Zi: 1;
+        --_draw-Zi: 2;
+        --_med-Zi: 3
+    }
     iframe {
         width: 100vw;
         height: 100vh;
@@ -13,20 +27,33 @@
         left: 0;
         top: 0;
     }
+
     main {
         width: 100vw;
         height: 100vh;
         position: relative;
     }
 </style>
+{%include "_style.njk"%}
 {%endblock%}
 {%block body%}
 <main>
-    <iframe src="{{public_routes.PANEL_FEATURE_EMBED}}#edit"></iframe>
-    <iframe src="{{public_routes.PANEL_BPM_EMBED}}#edit"></iframe>
-    <iframe src="{{public_routes.PANEL_DRAW_EMBED}}#edit"></iframe>
-    <iframe src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
+    <iframe style="z-index: var(--_feat-Zi)" src="{{public_routes.PANEL_FEATURE_EMBED}}#edit"></iframe>
+    <iframe style="z-index: var(--_bpm-Zi)" src="{{public_routes.PANEL_BPM_EMBED}}#edit"></iframe>
+    <iframe style="z-index: var(--_draw-Zi)" src="{{public_routes.PANEL_DRAW_EMBED}}#edit"></iframe>
+    <iframe style="z-index: var(--_med-Zi)" src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
 </main>
 {%endblock%}
 {%block scripts%}
+<script defer>
+    document.addEventListener("DOMContentLoaded", () => cssDevWatch());
+    document.addEventListener("DOMContentLoaded", () => iframeDetect());
+    document.addEventListener("DOMContentLoaded", () => socketConnect());
+    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
+        let style = payload.split('style:set:')[1];
+        document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
+
+    }));
+</script>
 {%endblock%}
