@@ -40,6 +40,9 @@ const dashboard = () => {
                     document.body.querySelector("#toggle-edit-dashboard").checked = false;
                 });
             payload = [];
+
+        }else{
+
         }
     });
 };
