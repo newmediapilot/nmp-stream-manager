@@ -12,7 +12,7 @@ section {
     position: relative;
     margin: 0px;
     padding: 0px;
-    background: var(--color-orange);
+    background: var(--color-green);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -60,12 +60,12 @@ article .preview iframe {
     height: 100%;
 }
 article .layers {
-    grid-area: 20 / 2 / 33 / 16;
+    grid-area: 19 / 1 / 33 / 16;
     background: var(--color-dark);
-    border-radius: 25px;
     padding: 15px;
     display: grid;
     grid-template-rows: repeat(4, calc(var(--cell-density) * 1.5));
+    border-bottom-right-radius: 25px;
 }
 article .layers ul {
     display: grid;
@@ -99,7 +99,6 @@ article .modes label input {
 }
 article .modes label input:checked {
     background: repeating-linear-gradient(45deg, var(--color-bloodorange), var(--color-deepyellow) 25px);
-    box-shadow: 0px 0px 10px inset;
 }
 article .modes label[aria-label]::before {
     position: absolute;
