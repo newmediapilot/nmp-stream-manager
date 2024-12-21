@@ -17,7 +17,6 @@ section {
     background: var(--color-dark);
     grid-template-columns: repeat(var(--grid-size), calc(100vw / var(--sizeX)));
     grid-template-rows: repeat(var(--grid-size), calc(100vh / var(--sizeY)));
-    justify-content: center;
 }
 @media (max-width: 768px) and (orientation: portrait) {
     section {
