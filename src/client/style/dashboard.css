@@ -26,8 +26,8 @@ html.edit-active section {
 }
 @media (orientation: portrait) {
     section {
-        grid-template-columns: repeat(var(--grid-size), calc(100vw / var(--sizeY)));
-        grid-template-rows: repeat(var(--grid-size), calc(100vw / var(--sizeX)));
+        grid-template-columns: repeat(var(--grid-size), calc(100vw / var(--sizeX)));
+        grid-template-rows: repeat(var(--grid-size), calc(100vh / var(--sizeY)));
     }
 }
 section article {
