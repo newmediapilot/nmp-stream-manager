@@ -53,7 +53,6 @@ article .preview iframe {
     position: absolute;
     left: 0px;
     top: 0px;
-    transform-origin: 0px 0px;
     width: 100%;
     height: 100%;
 }
@@ -69,12 +68,12 @@ article .layers label {
     border-width: 15px;
     border-style: solid;
     border-color: rgb(255, 195, 0) rgb(247, 127, 0) rgb(247, 127, 0) rgb(255, 195, 0);
+    background-image: linear-gradient(45deg, var(--color-deepyellow), #f77f00);
 }
 article .layers label input {
-    background-image: linear-gradient(45deg, var(--color-deepyellow), #f77f00);
     appearance: none;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    display: none;
 }
 article .layers label input:checked {
     background: repeating-linear-gradient(90deg, var(--color-bloodorange), var(--color-deepyellow) 25px);
@@ -82,9 +81,6 @@ article .layers label input:checked {
 article .layers label::before {
     position: absolute;
     z-index: 1;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     font-size: 25px;
     font-weight: bolder;
     text-shadow:
@@ -105,17 +101,11 @@ article .modes label {
     border-width: 15px;
     border-style: solid;
     border-color: rgb(255, 195, 0) rgb(247, 127, 0) rgb(247, 127, 0) rgb(255, 195, 0);
-}
-article .modes label input {
-}
-article .modes label input:checked {
+    background-image: linear-gradient(45deg, var(--color-deepyellow), #f77f00);
 }
 article .modes label::before {
     position: absolute;
     z-index: 1;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     font-size: 25px;
     font-weight: bolder;
     text-shadow:
@@ -125,10 +115,7 @@ article .modes label::before {
         0px 0px 5px var(--color-light);
 }
 article .modes input {
-    background-image: linear-gradient(45deg, var(--color-deepyellow), #f77f00);
-    appearance: none;
-    width: 100%;
-    height: 100%;
+    display: none;
 }
 article .controls {
     position: relative;
@@ -138,6 +125,7 @@ article .controls {
     border-width: 15px;
     border-style: solid;
     border-color: rgb(255, 195, 0) rgb(247, 127, 0) rgb(247, 127, 0) rgb(255, 195, 0);
+    background: var(--color-orange);
 }
 article .controls::after {
     content: '';
