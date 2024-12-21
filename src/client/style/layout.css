@@ -95,7 +95,7 @@ article .modes label {
     position: relative;
 }
 article .modes label input {
-    background: repeating-linear-gradient(-45deg, var(--color-light), var(--color-deepyellow) 25px);
+    background: repeating-linear-gradient(-45deg, var(--color-orange), var(--color-deepyellow) 25px);
 }
 article .modes label input:checked {
     background: repeating-linear-gradient(45deg, var(--color-bloodorange), var(--color-deepyellow) 25px);
@@ -127,9 +127,19 @@ article .controls {
     box-sizing: border-box;
     border-radius: 25px;
     box-shadow: inset 0 0 5px 5px var(--color-dark);
-}
-article .controls {
     grid-area: 25 / 17 / 33 / 32;
+}
+article .controls::after {
+    content: '';
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    box-shadow: inset 0 0 5px 5px var(--color-deepyellow);
+    border-radius: 25px;
+    pointer-events: none;
 }
 article .controls label {
     overflow: scroll;
