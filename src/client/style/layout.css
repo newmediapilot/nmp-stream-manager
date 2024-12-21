@@ -65,10 +65,10 @@ article .layers {
 }
 article .layers label {
     position: relative;
-    border-width: 15px;
-    border-style: solid;
-    border-color: rgb(255, 195, 0) rgb(247, 127, 0) rgb(247, 127, 0) rgb(255, 195, 0);
     background-image: linear-gradient(45deg, var(--color-deepyellow), #f77f00);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 article .layers label input {
     appearance: none;
@@ -98,10 +98,10 @@ article .modes {
 }
 article .modes label {
     position: relative;
-    border-width: 15px;
-    border-style: solid;
-    border-color: rgb(255, 195, 0) rgb(247, 127, 0) rgb(247, 127, 0) rgb(255, 195, 0);
     background-image: linear-gradient(45deg, var(--color-deepyellow), #f77f00);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 article .modes label::before {
     position: absolute;
