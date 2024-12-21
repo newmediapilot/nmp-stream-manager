@@ -26,9 +26,6 @@ section {
         grid-template-rows: repeat(var(--grid-size), calc(100vh / 5));
     }
 }
-html.edit-active section {
-    padding-right: 50px;
-}
 section article {
     display: flex;
     justify-content: center;
