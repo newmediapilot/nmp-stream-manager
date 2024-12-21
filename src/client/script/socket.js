@@ -41,18 +41,16 @@ const socketWatchDrawSet = (callback) => {
 const socketEmitReload = () => {
     axios.get(`${getPath("API_SIGNAL_CREATE")}?type=browser&description=reload`);
 };
-// Socket will only emit reload for pages which are inactive
+const setFocusToken = () => {
+    const timeout = 3000;
+    if (document.$setFocusTokenTo) clearTimeout(document.$setFocusTokenTo);
+    document.documentElement.classList.add('socket-watch-reload-focus');
+    document.$setFocusTokenTo = setTimeout(() => {
+        document.documentElement.classList.remove('socket-watch-reload-focus');
+    }, timeout);
+};
 const socketWatchReload = () => {
     console.log("socketConnect :: socketWatchReload");
-    const timeout = 3000;
-    let to = null;
-    const setFocusToken = () => {
-        if (to) clearTimeout(to);
-        document.documentElement.classList.add('socket-watch-reload-focus');
-        to = setTimeout(() => {
-            document.documentElement.classList.remove('socket-watch-reload-focus');
-        }, timeout);
-    };
     window.addEventListener('touchstart', setFocusToken);
     window.addEventListener('touchend', setFocusToken);
     window.addEventListener('mousedown', setFocusToken);
