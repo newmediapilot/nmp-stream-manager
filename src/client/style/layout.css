@@ -65,44 +65,17 @@ article .layers {
     box-sizing: border-box;
 }
 article .layers label {
-    grid-template-columns: repeat(8, calc(var(--cell-density) * 2));
-    display: grid;
+    position: relative;
 }
-article .layers label input {
-    display: none;
-}
-article .layers label div:nth-of-type(1) {
-    grid-area: 1 / 1 / 1 / 3;
-    background: repeating-linear-gradient(-45deg, var(--color-aqua), var(--color-blue) 25px);
-}
-article .layers label div:nth-of-type(2) {
-    grid-area: 1 / 3 / 1 / 12;
-    display: flex;
-    align-items: center;
-}
-article .layers label input:checked + div {
-    background: repeating-linear-gradient(45deg, var(--color-bloodorange), var(--color-deepyellow) 25px);
-}
-article .layers label div::before {
-    font-size: 2em;
-    color: var(--color-lightgreen);
-    align-self: center;
-    margin-left: 5px;
-}
-article .layers label::after {
-    background-size: 10px 10px;
-    background-image: repeating-linear-gradient(
-        -45deg,
-        rgba(255, 254, 255, 0.5) 0px,
-        rgba(255, 255, 255, 0.2) 1px,
-        rgba(255, 255, 255, 0.1) 0px,
-        rgba(255, 255, 255, 0.1) 50%
-    );
+article .layers label div {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
 }
 article .layers label input:checked {
-    background: repeating-linear-gradient(45deg, var(--color-bloodorange), var(--color-deepyellow) 25px);
-    box-shadow: inset 0 0 5px 5px var(--color-deepyellow);
-    grid-area: 1 / 3 / 1 / 1;
+    background: green;
     width: 100%;
     height: 100%;
     border-radius: 0px;
