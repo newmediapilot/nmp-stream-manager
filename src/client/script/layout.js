@@ -42,9 +42,12 @@ const castLayoutInputValues = () => {
         inputY.value = (Math.abs(inputY.max) * py);
         label.setAttribute('data-px-py', [px, py].join(' '))
     });
-    const payload = Array.from(document.body.querySelectorAll('input[type="range"]')).map((el) => {
-        return `${el.name}:${el.value}`;
-    }).join(";");
+    const payload = [
+        ...Array.from(document.body.querySelectorAll('section .controls label input[type="range"]')).map(el => {return `${el.name}:${el.value}`;}),
+        ...Array.from(document.body.querySelectorAll('section .layers label input[type="radio"]')).map((el,index) => {
+            return `${el.id}:${index}`;
+        })
+    ].join(";");
     if (payload) document.head.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
     payload && payload && axios.get(getPath("API_SIGNAL_CREATE"), {
         params: {
@@ -80,9 +83,7 @@ const enableLayerDragDrop = () => {
         removeCloneOnHide: true,
         ghostClass: "pointer-events-none",
         onEnd: () => {
-            Array.from(document.querySelectorAll('section article .layers label')).forEach((e, i) => {
-                console.log('i', e, i);
-            });
+            castLayoutInputValues();
         },
     });
     document.body.querySelector("section .layers");
