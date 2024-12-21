@@ -1,4 +1,4 @@
-const settingsCreateEmojis = (editorEl) => {
+const actionsCreateEmojis = (editorEl) => {
     const {id} = editorEl;
     const emojiWidgetEl = document.body.querySelector("#emoji-widget");
     const emojiWidgetTriggerEl = editorEl.querySelector("button:nth-of-type(1)");
@@ -49,7 +49,7 @@ const settingsCreateEmojis = (editorEl) => {
     });
 };
 
-const settingsCreateEditor = (editorEl) => {
+const actionsCreateEditor = (editorEl) => {
     const {id} = editorEl;
     const textInputEls = editorEl.querySelectorAll('[type="text"], textarea');
     const textInputElFocus = (textInputEl) => {
@@ -67,9 +67,9 @@ const settingsCreateEditor = (editorEl) => {
         ) {
             const field = (textInputEl.tagName.toLowerCase() === 'input') ?
                 'label' :
-                'cells';
+                'description';
             axios
-                .get("/api/config/update", {
+                .get(getPath('API_CONFIG_UPDATE'), {
                     params: {
                         type: "signals:field",
                         payload: JSON.stringify({
@@ -93,7 +93,7 @@ const settingsCreateEditor = (editorEl) => {
     });
 };
 
-const settingsCreateUpload = (editorEl) => {
+const actionsCreateUpload = (editorEl) => {
     let audio = null;
     const id = editorEl.id;
     const uploadButton = editorEl.querySelector('button:nth-of-type(2):not(:disabled)');
@@ -151,9 +151,9 @@ const settingsCreateUpload = (editorEl) => {
                             actionButton && toggleReplayState();
                             inputEl.focus();
                             socketEmitReload();
-                            console.log('settingsCreateUpload :: success:', response.data);
+                            console.log('actionsCreateUpload :: success:', response.data);
                         }).catch(error => {
-                            console.error('settingsCreateUpload :: error:', error);
+                            console.error('actionsCreateUpload :: error:', error);
                         })
                     };
                     reader.readAsDataURL(uploader.files[0]);
@@ -193,7 +193,7 @@ const settingsCreateUpload = (editorEl) => {
     }
 };
 
-const settingsToggle = (editorEl) => {
+const actionsToggle = (editorEl) => {
     const {id} = editorEl;
     const toggleButton = editorEl.querySelector('button:nth-of-type(4)');
     const updateButtons = () => {
@@ -238,9 +238,9 @@ const settingsToggle = (editorEl) => {
     updateButtons();
 };
 
-const settings = () => {
-    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsCreateEditor);
-    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsCreateEmojis);
-    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsCreateUpload);
-    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(settingsToggle);
+const actions = () => {
+    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(actionsCreateEditor);
+    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(actionsCreateEmojis);
+    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(actionsCreateUpload);
+    document.body.querySelectorAll("section ul li:not([aria-label]) label").forEach(actionsToggle);
 };
