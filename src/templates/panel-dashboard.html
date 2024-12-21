@@ -75,12 +75,12 @@
         // !document.documentElement.classList.contains('reduced-motion') &&
         anime({
             targets: "section button:not(:disabled)",
-            duration: 3333,
+            duration: 3500,
             delay: anime.stagger(50),
             easing: "easeInElastic(1, .6)",
             filter: "hue-rotate(360deg)",
             loopBegin: function (anim) {
-                setTimeout(anim.play, 6666);
+                setTimeout(anim.play, 9000);
             }
         });
     });
