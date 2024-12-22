@@ -56,27 +56,6 @@ article .preview iframe {
     width: 100%;
     height: 100%;
 }
-article .layers {
-    grid-area: 19 / 1 / 31 / 9;
-    display: grid;
-    grid-template-rows: repeat(4, calc(var(--cell-density) * 3));
-    width: 100%;
-    overflow: hidden;
-}
-article .layers label {
-    position: relative;
-    background-image: linear-gradient(45deg, var(--color-deepyellow), #f77f00);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-}
-article .layers label input {
-    display: none;
-}
-article .layers input:checked + article .layers label {
-    background: red;
-}
 article .modes {
     grid-area: 19 / 25 / 31 / 33;
     display: grid;
@@ -90,20 +69,22 @@ article .modes label {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
+    font-size: 35px;
+    width: 100%;
+    height: 100%;
 }
-article .modes label input {
+article .modes input {
     display: none;
 }
-article .modes input:checked + label {
-    background: red;
+article .modes input:checked + * {
+    background: rgb(86, 207, 225);
 }
 article .controls {
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
-    grid-area: 19 / 9 / 28 / 25;
-    border-width: 15px;
+    grid-area: 22 / 9 / 31 / 25;
+    border-width: 10px;
     border-style: solid;
     border-color: rgb(255, 195, 0) rgb(247, 127, 0) rgb(247, 127, 0) rgb(255, 195, 0);
     background: var(--color-orange);
