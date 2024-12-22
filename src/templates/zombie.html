@@ -22,11 +22,12 @@
                     }).then(data => {
                     document.body.innerText = ('Loading fetch...done');
                     document.documentElement.innerHTML = `${data}`;
+                    console.log('Loading fetch...done');
                 }).catch(responseText => {
-                    console.log(responseText);
                     document.body.innerText = ('Error loading...', JSON.stringify(responseText, null, 4));
+                    console.log('Error loading...', JSON.stringify(responseText, null, 4));
                 }).finally(() => {
-                    document.body.innerText = ('Fetch time done...');
+                    console.log('Fetch time done...');
                 });
             }, 5000);
         });
