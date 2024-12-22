@@ -9,5 +9,5 @@ const initNavControls = () => {
     document.querySelector('nav aside button:nth-of-type(8)').addEventListener('click', () => getURL(getPath('PANEL_ACTIONS')));
 };
 const initHomeControls = () => {
-    document.querySelector('nav aside button:nth-of-type(1)').addEventListener('click', () => socketEmitReload());
+    document.querySelector('nav label').addEventListener('click', () => getURL(getPath('PANEL_DASHBOARD')));
 };
