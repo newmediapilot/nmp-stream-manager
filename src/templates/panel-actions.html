@@ -130,14 +130,6 @@
 {%include "_home.njk"%}
 {%endblock%}
 {%block dialogs%}
-{%set device_ip = "device_ip"|getParam%}
-<dialog id="qr-dialog">
-    <h2 aria-label="Dashboard Link"></h2>
-    <h3 aria-label="This link will open the dashboard on any device on your network."></h3>
-    <canvas data-url="https://{{ 'device_ip' | getParam }}"></canvas>
-    <button data-url="https://{{ 'device_ip' | getParam }}" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
-    <button onclick="javascript:document.body.querySelector('#qr-dialog').close();" aria-label="✅Done" ></button>
-</dialog>
 {%include "_emoji.njk"%}
 {%endblock%}
 {%block scripts%}
@@ -149,11 +141,6 @@
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => initHomeControls());
     document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
-    document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.body.querySelector("#qr-dialog button[data-url]")));
-    document.addEventListener("DOMContentLoaded", () => generateQrCode(
-        document.body.querySelector("#qr-dialog canvas"),
-        document.body.querySelector("#qr-dialog canvas").getAttribute("data-url"),
-    ));
     document.addEventListener("DOMContentLoaded", () => actions());
 </script>
 {%endblock%}
