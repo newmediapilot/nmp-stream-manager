@@ -1,6 +1,7 @@
 require("dotenv").config();
 const ROUTES = require("./server/routes");
 const express = require("express");
+const cors = require('cors');
 const {logger} = require("./server/middleware/logger");
 const {paths} = require("./server/middleware/paths");
 const {startServices} = require("./server/start");
@@ -14,6 +15,10 @@ const app = express();
 app.use(express.json({ limit: '200mb' }));
 app.use(logger);
 app.use(paths);
+app.use(cors({
+    origin: 'https://dbdbdbdbdbgroup.com',
+    methods: ['GET'],
+}));
 app.all(ROUTES.TWITCH_LOGIN, twitchLogin);
 app.all(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess);
 app.all(ROUTES.INDEX, (req, res) => res.render("index"));
