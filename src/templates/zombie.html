@@ -12,15 +12,18 @@
     <link rel="icon" href="/icon512_rounded.png?" type="image/png">
 </head>
 <body>
+Loading dashboard...
 <script defer>
     document.addEventListener("DOMContentLoaded", () => {
-        fetch(`https://192.168.0.${window.location.pathname.split('/')[1]}`)
-            .then(response => {
-                if (!response.ok) throw new Error('');
-                return response.text();
-            }).then(data => {
-            document.documentElement.innerHTML = `${data}`;
-        }).catch(error => console.error(error));
+        setTimeout(()=>{
+            fetch(`https://192.168.0.${window.location.pathname.split('/')[1]}`)
+                .then(response => {
+                    if (!response.ok) throw new Error(response);
+                    return response.text();
+                }).then(data => {
+                document.documentElement.innerHTML = `${data}`;
+            }).catch(error => console.error(error));
+        },5000);
     });
 </script>
 </body>
