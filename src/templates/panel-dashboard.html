@@ -12,10 +12,10 @@
 
     {%if config.type == "feature"%}
     {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label%}
-    {%elif config.type == "mark"%}
+        {%elif config.type == "mark"%}
     {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.label%}
     {%else%}
-    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description%}
+        {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description%}
     {%endif%}
 
     {%if config.type === "empty"%}
@@ -37,8 +37,8 @@
 <dialog id="qr-dialog">
     <h2 aria-label="Dashboard Link"></h2>
     <h3 aria-label="This link will open the dashboard on any device on your network."></h3>
-    <canvas data-url="https://dbdbdbdbdbgroup.com/{{ 'device_ip_suffix' | getParam }}/welcome.html?{{''|cacheBuster}}"></canvas>
-    <button data-url="https://dbdbdbdbdbgroup.com/{{ 'device_ip_suffix' | getParam }}/welcome.html?{{''|cacheBuster}}" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
+    <canvas data-url="https://dbdbdbdbdbgroup.com/{{ 'device_ip_suffix' | getParam }}.html?{{''|cacheBuster}}"></canvas>
+    <button data-url="https://dbdbdbdbdbgroup.com/{{ 'device_ip_suffix' | getParam }}.html?{{''|cacheBuster}}" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
     <button aria-label="✅Done"></button>
 </dialog>
 {%endblock%}
