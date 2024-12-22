@@ -14,6 +14,12 @@ const socketWatchStyle = (callback) => {
         payload.startsWith('style:set:') && callback(payload);
     });
 };
+const socketWatchZombie = (callback) => {
+    console.log("socketConnect :: socketWatchZombie");
+    $socketIO.on("payload", (payload) => {
+        payload.startsWith('zombie:set:') && callback(payload);
+    });
+};
 const socketWatchFeatureSet = (callback) => {
     console.log("socketConnect :: socketWatchFeatureSet");
     $socketIO.on("payload", (payload) => {
