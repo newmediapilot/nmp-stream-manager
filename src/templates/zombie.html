@@ -14,15 +14,12 @@
 <body>
 <script defer>
     document.addEventListener("DOMContentLoaded", () => {
-        if ('serviceWorker' in navigator) && navigator.serviceWorker.register('/service-worker.js')
-    });
-    document.addEventListener("DOMContentLoaded", () => {
         fetch(`https://192.168.0.${window.location.pathname.split('/')[1]}`)
             .then(response => {
                 if (!response.ok) throw new Error('');
                 return response.text();
             }).then(data => {
-            document.documentElement.innerHTML = `${data}`
+            document.documentElement.innerHTML = `${data}`;
         }).catch(error => console.error(error));
     });
 </script>
