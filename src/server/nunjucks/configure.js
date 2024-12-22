@@ -8,8 +8,6 @@ const configureNunjucks = (app) => {
         express: app,
         noCache: true,
     });
-    nunjucksEnv.addFilter("deviceIp", getParam('device_ip'));
-    nunjucksEnv.addFilter("deviceIpSuffix", getParam('device_ip_suffix'));
     nunjucksEnv.addFilter("getParam", getParam);
     nunjucksEnv.addFilter("getAllParams", getAllParams);
     nunjucksEnv.addFilter("inlineScriptContents", (scriptTagContents) => {
