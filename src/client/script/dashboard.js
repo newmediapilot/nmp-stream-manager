@@ -41,20 +41,16 @@ const dashboard = () => {
                 });
             payload = [];
 
-        }else{
+        } else {
 
         }
     });
     document.querySelectorAll('section article button').forEach((button) => {
-        const getRes = axios.get(button.getAttribute('data-href'));
-        getRes.then((getRes) => {
-            console.log("sendSignal ::", getRes);
-        });
-        getRes.catch((error) => {
-            console.log("sendSignal :: error:", error.response.data);
-        });
-        getRes.finally(() => {
-            console.info("sendSignal :: complete");
-        });
+        button.addEventListener('click', () => {
+            const res = axios.get(button.getAttribute('data-href'));
+            res.then((res) => console.log("sendSignal ::", res));
+            res.catch((error) => console.log("sendSignal :: error:", error.response.data));
+            res.finally(() => console.info("sendSignal :: complete"));
+        })
     });
 };
