@@ -154,6 +154,7 @@ section article button {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    overflow: hidden;
 }
 section article button:active {
     border: 20px solid rgb(255, 255, 255);
