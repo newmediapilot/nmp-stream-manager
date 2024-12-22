@@ -56,6 +56,29 @@ article .preview iframe {
     width: 100%;
     height: 100%;
 }
+article .layers {
+    grid-area: 19 / 1 / 31 / 9;
+    display: grid;
+    grid-template-rows: repeat(4, calc(var(--cell-density) * 3));
+    width: 100%;
+    overflow: hidden;
+}
+article .layers label {
+    position: relative;
+    background-image: linear-gradient(45deg, var(--color-deepyellow), #f77f00);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    width: 100%;
+    height: 100%;
+}
+article .layers input {
+    display: none;
+}
+article .layers input:checked + * {
+    background: linear-gradient(45deg, var(--color-aqua), var(--color-light));
+}
 article .modes {
     grid-area: 19 / 25 / 31 / 33;
     display: grid;
@@ -77,7 +100,7 @@ article .modes input {
     display: none;
 }
 article .modes input:checked + * {
-    background: rgb(86, 207, 225);
+    background: linear-gradient(45deg, var(--color-aqua), var(--color-light));
 }
 article .controls {
     position: relative;
