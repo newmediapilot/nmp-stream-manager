@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>Welcome</title>
+    <meta charset="UTF-8">
     <meta name="description" content="This is a description.">
     <meta name="keywords" content="keyword">
     {% block client %}
@@ -42,8 +43,6 @@
         <meta name="{{ key }}" content="https://{{ 'device_ip' | getParam }}{{ value }}">
     {% endfor %}
     {% block head %}{% endblock %}
-    <meta charset="UTF-8">
-    <title></title>
     <meta name="viewport" content="width=device-width">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
