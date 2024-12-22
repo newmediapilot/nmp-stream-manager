@@ -23,9 +23,10 @@
                     document.body.innerText = ('Loading fetch...done');
                     document.documentElement.innerHTML = `${data}`;
                 }).catch(responseText => {
-                    console.warn(responseText);
+                    console.log(responseText);
                     document.body.innerText = ('Error loading...', JSON.stringify(responseText, null, 4));
-                    ;
+                }).finally(() => {
+                    document.body.innerText = ('Fetch time done...');
                 });
             }, 5000);
         });
