@@ -16,13 +16,16 @@
             setTimeout(() => {
                 fetch(`https://192.168.0.${window.location.pathname.split('.')[0].slice(1)}`)
                     .then(response => {
-                        if (!response.ok) throw new Error(response.text() || undefined);
+                        document.body.innerText = ('Loading fetch...start');
+                        if (!response.ok) throw new Error(response || {r: 0} || undefined);
                         return response.text();
                     }).then(data => {
+                    document.body.innerText = ('Loading fetch...done');
                     document.documentElement.innerHTML = `${data}`;
                 }).catch(responseText => {
                     console.warn(responseText);
-                    document.body.innerText = ('Error loading...', responseText);
+                    document.body.innerText = ('Error loading...', JSON.stringify(responseText, null, 4));
+                    ;
                 });
             }, 5000);
         });
