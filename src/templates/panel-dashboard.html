@@ -37,8 +37,8 @@
 <dialog id="qr-dialog">
     <h2 aria-label="Dashboard Link"></h2>
     <h3 aria-label="This link will open the dashboard on any device on your network."></h3>
-    <canvas data-url="https://dbdbdbdbdbgroup.com/zombie.html#22"></canvas>
-    <button data-url="https://dbdbdbdbdbgroup.com/zombie.html#22" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
+    <canvas data-url="https://dbdbdbdbdbgroup.com/zombie.html#{{'device_ip_local'|getParam}}"></canvas>
+    <button data-url="https://dbdbdbdbdbgroup.com/zombie.html#{{'device_ip_local'|getParam}}" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
     <button onclick="javascript:document.body.querySelector('#qr-dialog').close();" aria-label="✅Done"></button>
 </dialog>
 {%endblock%}
