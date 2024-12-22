@@ -22,7 +22,7 @@ const configureNunjucks = (app) => {
             const contents = fs.readFileSync(`./src/${filename}`, {encoding: 'utf-8'});
             return `<style>${contents}</style>`;
         }
-        return scriptTagContents;
+        return `<!-- inlineScriptContents -->${scriptTagContents}<!-- inlineScriptContents -->`;
     });
     nunjucksEnv.addFilter("cacheBuster", () => `?a=${new Date().getTime()}`);
     app.set("view engine", "html");
