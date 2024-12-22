@@ -15,13 +15,26 @@ const app = express();
 app.use(express.json({ limit: '200mb' }));
 app.use(logger);
 app.use(paths);
-app.use(cors({
-    origin: 'https://dbdbdbdbdbgroup.com',
-    methods: ['GET'],
-}));
-        res.set('Access-Control-Allow-Methods', 'GET');
-        res.set('Access-Control-Allow-Headers', 'Content-Type');
+app.all('*', (req, res, next) => {
+    const allowedOrigins = [
+        'https://dbdbdbdbdbgroup.com',
+        'https://192.168.8.22',
+    ];
+    const origin = req.get('Origin');
+    if (allowedOrigins.includes(origin) || !origin) {
+        res.set('Access-Control-Allow-Origin', origin);
+        res.set('Access-Control-Allow-Credentials', 'true');
+        res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
         res.set('Access-Control-Allow-Private-Network', 'true');
+        if (req.method === 'OPTIONS') {
+            return res.status(204).end();
+        }
+    } else {
+        return res.status(403).send('Forbidden');
+    }
+    next();
+});
 app.all(ROUTES.TWITCH_LOGIN, twitchLogin);
 app.all(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess);
 app.all(ROUTES.INDEX, (req, res) => res.render("index"));
