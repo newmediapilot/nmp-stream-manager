@@ -1,7 +1,7 @@
 {%extends "main.njk"%}
 {%set public_routes = 'public_routes'|getParam%}
 {%block head%}
-<link rel="stylesheet" href="../client/style/layout.css?{{cacheBuster}}">
+{{ '<link href="../client/style/layout.css?" rel="stylesheet">' | inlineScriptContents | safe }}
 {%include "_style.njk"%}
 {%endblock%}
 {%block body%}

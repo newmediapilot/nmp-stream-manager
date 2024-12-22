@@ -5,13 +5,13 @@
 {%block head%}
 <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="text/javascript" defer></script>
 <script crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" type="text/javascript" defer></script>
-<script defer src="../client/script/css_dev_watch.js?{{cacheBuster}}" type="text/javascript"></script>
-<script defer src="../client/script/iframe_detect.js?{{cacheBuster}}" type="text/javascript"></script>
-<script defer src="../client/script/socket.js?{{cacheBuster}}" type="text/javascript"></script>
-<script defer src="../client/script/get_path.js?{{cacheBuster}}" type="text/javascript"></script>
-<link rel="stylesheet" href="../client/style/variables.css?{{cacheBuster}}">
-<link rel="stylesheet" href="../client/style/base.css?{{cacheBuster}}">
-<link rel="stylesheet" href="../client/style/reset.css?{{cacheBuster}}">
+{{ '<script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+{{ '<script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+{{ '<script src="../client/script/socket.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+{{ '<script src="../client/script/get_path.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+{{ '<link href="../client/style/variables.css?" rel="stylesheet">' | inlineScriptContents | safe }}
+{{ '<link href="../client/style/reset.css?" rel="stylesheet">' | inlineScriptContents | safe }}
+{{ '<link href="../client/style/base.css?" rel="stylesheet">' | inlineScriptContents | safe }}
 <style>
 
     :root {

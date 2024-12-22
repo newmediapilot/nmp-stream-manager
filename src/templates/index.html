@@ -6,9 +6,10 @@
 <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?{{cacheBuster}}" type="text/javascript" defer></script>
 <script crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js?{{cacheBuster}}" type="text/javascript" defer></script>
 <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?{{cacheBuster}}" type="text/javascript" defer></script>
-<link href="../client/style/index.css?{{cacheBuster}}" rel="stylesheet">
-<script src="../client/script/service_worker.js?{{cacheBuster}}" defer type="text/javascript"></script>
-<script src="../client/script/reduced_motion.js?{{cacheBuster}}" defer type="text/javascript"></script>
+{{ '<link href="../client/style/index.css?" rel="stylesheet">' | inlineScriptContents | safe }}
+{{ '<script src="../client/script/service_worker.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+{{ '<script src="../client/script/reduced_motion.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+{%include "_style.njk"%}
 {%endblock%}
 {%block body%}
 <main>
