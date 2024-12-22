@@ -19,6 +19,9 @@ app.use(cors({
     origin: 'https://dbdbdbdbdbgroup.com',
     methods: ['GET'],
 }));
+        res.set('Access-Control-Allow-Methods', 'GET');
+        res.set('Access-Control-Allow-Headers', 'Content-Type');
+        res.set('Access-Control-Allow-Private-Network', 'true');
 app.all(ROUTES.TWITCH_LOGIN, twitchLogin);
 app.all(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess);
 app.all(ROUTES.INDEX, (req, res) => res.render("index"));
