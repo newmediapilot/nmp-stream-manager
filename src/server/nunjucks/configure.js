@@ -24,7 +24,7 @@ const configureNunjucks = (app) => {
         }
         return `<!-- inlineScriptContents -->${scriptTagContents}<!-- inlineScriptContents -->`;
     });
-    nunjucksEnv.addFilter("cacheBuster", () => `?a=${new Date().getTime()}`);
+    nunjucksEnv.addFilter("cacheBuster", () => `asdf`);
     app.set("view engine", "html");
     app.use(express.static("src/client"));
     appRef = app;
