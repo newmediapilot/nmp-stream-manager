@@ -7,16 +7,15 @@
 <script crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js?{{cacheBuster}}" type="text/javascript" defer></script>
 <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?{{cacheBuster}}" type="text/javascript" defer></script>
 {{ '<link href="../client/style/index.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-{{ '<script src="../client/service_worker.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
 {{ '<script src="../client/script/reduced_motion.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
 {%include "_style.njk"%}
 {%endblock%}
 {%block body%}
 <main>
-    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_LAYOUT}}"></iframe>
-    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_DASHBOARD}}"></iframe>
-    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_ACTIONS}}"></iframe>
-    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_DRAW}}"></iframe>
+    <iframe loading="eager" src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_LAYOUT}}"></iframe>
+    <iframe loading="eager" src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_DASHBOARD}}"></iframe>
+    <iframe loading="eager" src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_ACTIONS}}"></iframe>
+    <iframe loading="eager" src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_DRAW}}"></iframe>
 </main>
 {%endblock%}
 {%block scripts%}
@@ -25,10 +24,10 @@
 <script defer src="../client/script/debounce_function.js?{{cacheBuster}}" type="text/javascript"></script>
 <script defer>
     document.addEventListener("DOMContentLoaded", () => reducedMotion());
-    document.addEventListener("DOMContentLoaded", () => initServiceWorker());
     document.addEventListener("DOMContentLoaded", () => {
         let previousPath = null;
         window.addEventListener('message', function (e) {
+            console.log('e', e);
             if (e.origin === window.location.origin && e.data.type === "path") {
                 const currentPath = e.data.message;
                 const iframeEl = Array.from(document.body.querySelectorAll(`iframe[src="${currentPath}"]`))[0];
