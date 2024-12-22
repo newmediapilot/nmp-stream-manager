@@ -11,7 +11,7 @@ const {publicMediaUpdate} = require("./server/public/media");
 const {publicBpmPing} = require("./server/bpm/ping");
 const {twitchLogin, twitchLoginSuccess} = require("./server/twitch/login");
 const app = express();
-app.use(express.json({ limit: '200mb' }));
+app.use(express.json({limit: '200mb'}));
 app.use(logger);
 app.use(paths);
 app.all('*', (req, res, next) => {
@@ -21,9 +21,7 @@ app.all('*', (req, res, next) => {
     res.set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
     res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
     res.set('Access-Control-Allow-Private-Network', 'true');
-    if (req.method === 'OPTIONS') {
-        return res.status(204).end();
-    }
+    if (req.method === 'OPTIONS') return res.status(204).end();
     next();
 });
 app.all(ROUTES.TWITCH_LOGIN, twitchLogin);
