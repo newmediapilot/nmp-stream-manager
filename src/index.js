@@ -1,7 +1,6 @@
 require("dotenv").config();
 const ROUTES = require("./server/routes");
 const express = require("express");
-const cors = require('cors');
 const {logger} = require("./server/middleware/logger");
 const {paths} = require("./server/middleware/paths");
 const {startServices} = require("./server/start");
