@@ -10,24 +10,24 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="/icon512_rounded.png" type="image/png">
+    <script defer>
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                document.body.innerText = ('Loading dashboard...');
+                fetch(`https://192.168.0.${window.location.pathname.split('.')[0].slice(1)}`)
+                    .then(response => {
+                        if (!response.ok) throw new Error(response);
+                        return response.text();
+                    }).then(data => {
+                    document.documentElement.innerHTML = `${data}`;
+                }).catch(error => {
+                    console.error(error);
+                    document.body.innerText = ('Error loading...', JSON.parse(error, null, 4));
+                });
+            }, 5000);
+        });
+    </script>
 </head>
 <body>
-Loading dashboard...
-<script defer>
-    document.addEventListener("DOMContentLoaded", () => {
-        setTimeout(() => {
-            fetch(`https://192.168.0.${window.location.pathname.split('/')[1]}`)
-                .then(response => {
-                    if (!response.ok) throw new Error(response);
-                    return response.text();
-                }).then(data => {
-                document.documentElement.innerHTML = `${data}`;
-            }).catch(error => {
-                console.error(error);
-                document.body.prepend('Error loading...');
-            });
-        }, 5000);
-    });
-</script>
 </body>
 </html>
