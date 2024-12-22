@@ -45,4 +45,16 @@ const dashboard = () => {
 
         }
     });
+    document.querySelectorAll('section article button').forEach((button) => {
+        const getRes = axios.get(button.getAttribute('data-href'));
+        getRes.then((getRes) => {
+            console.log("sendSignal ::", getRes);
+        });
+        getRes.catch((error) => {
+            console.log("sendSignal :: error:", error.response.data);
+        });
+        getRes.finally(() => {
+            console.info("sendSignal :: complete");
+        });
+    });
 };
