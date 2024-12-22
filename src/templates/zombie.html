@@ -1,9 +1,3 @@
-{%extends "main.njk"%}
-{%block cdn%}{%endblock%}
-{%block client%}{%endblock%}}
-{%block head%}
-{%endblock%}
-{%block scripts%}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => {
         if (!document.location.hash) return;
@@ -16,4 +10,3 @@
         }).catch(error => console.error(error));
     });
 </script>
-{%endblock%}
