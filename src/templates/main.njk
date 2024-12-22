@@ -4,7 +4,7 @@
     <title>Welcome</title>
     <meta name="description" content="This is a description.">
     <meta name="keywords" content="keyword">
-    {%block client%}
+    {% block client %}
         {{ '<script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
         {{ '<script src="../client/script/reduced_motion.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
         {{ '<script src="../client/script/service_worker.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
@@ -29,8 +29,8 @@
         {{ '<link href="../client/style/scrollbar.css?" rel="stylesheet">' | inlineScriptContents | safe }}
         {{ '<link href="../client/style/controls.css?" rel="stylesheet">' | inlineScriptContents | safe }}
         {{ '<link href="../client/style/dialog.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-    {%endblock%}
-    {%block cdn%}
+    {% endblock %}
+    {% block cdn %}
         <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios@0.27.2/dist/axios.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
@@ -38,11 +38,15 @@
         <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js?" type="text/javascript" defer></script>
-    {%endblock%}
-    {%for key, value in 'public_routes'|getParam%}
-        <meta name="{{ key }}" content="{{ getIp }}{{ value }}">
-    {%endfor%}
-    {%block head%}{%endblock%}
+    {% endblock %}
+    {% for key, value in 'public_routes'|getParam %}
+        {% if key == "TWITCH_REDIRECT" %}
+        {% elif  key == "TWITCH_REDIRECT" %}
+        {% else %}
+            <meta name="{{ key }}" content="{{ getIp }}{{ value }}">
+        {% endif %}
+    {% endfor %}
+    {% block head %}{% endblock %}
     <meta charset="UTF-8">
     <title></title>
     <meta name="viewport" content="width=device-width">
@@ -52,8 +56,8 @@
     <link rel="icon" href="../client/icon512_rounded.png?" type="image/png">
 </head>
 <body>
-{%block body%}{%endblock%}
-{%block dialogs%}{%endblock%}
-{%block scripts%}{%endblock%}
+{% block body %}{% endblock %}
+{% block dialogs %}{% endblock %}
+{% block scripts %}{% endblock %}
 </body>
 </html>
