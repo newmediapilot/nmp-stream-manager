@@ -4,32 +4,31 @@
     <title>Welcome</title>
     <meta name="description" content="This is a description.">
     <meta name="keywords" content="keyword">
-    {%block client%}
+    {%block client%}bo
         {{ '<script src="../client/script/css_dev_watch.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        <script src="../client/script/css_dev_watch.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/reduced_motion.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/service_worker.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/get_url.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/get_path.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/autosize_input.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/actions.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/generate_qr_code.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/generate_copy_link.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/send_signal.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/dashboard.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/socket.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/scroll_snap.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/set_css_variable.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/iframe_detect.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/layout.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/detect_press_hold.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <script src="../client/script/debounce_function.js?{{ cacheBuster }}" defer type="text/javascript"></script>
-        <link href="../client/style/variables.css?{{ cacheBuster }}" rel="stylesheet">
-        <link href="../client/style/reset.css?{{ cacheBuster }}" rel="stylesheet">
-        <link href="../client/style/base.css?{{ cacheBuster }}" rel="stylesheet">
-        <link href="../client/style/scrollbar.css?{{ cacheBuster }}" rel="stylesheet">
-        <link href="../client/style/controls.css?{{ cacheBuster }}" rel="stylesheet">
-        <link href="../client/style/dialog.css?{{ cacheBuster }}" rel="stylesheet">
+        {{ '<script src="../client/script/reduced_motion.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/service_worker.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/get_url.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/get_path.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/autosize_input.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/actions.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/generate_qr_code.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/generate_copy_link.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/send_signal.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/dashboard.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/socket.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/scroll_snap.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/set_css_variable.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/iframe_detect.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/layout.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/detect_press_hold.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<script src="../client/script/debounce_function.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+        {{ '<link href="../client/style/variables.css?{{ cacheBuster }}" rel="stylesheet">' | inlineScriptContents | safe }}
+        {{ '<link href="../client/style/reset.css?{{ cacheBuster }}" rel="stylesheet">' | inlineScriptContents | safe }}
+        {{ '<link href="../client/style/base.css?{{ cacheBuster }}" rel="stylesheet">' | inlineScriptContents | safe }}
+        {{ '<link href="../client/style/scrollbar.css?{{ cacheBuster }}" rel="stylesheet">' | inlineScriptContents | safe }}
+        {{ '<link href="../client/style/controls.css?{{ cacheBuster }}" rel="stylesheet">' | inlineScriptContents | safe }}
+        {{ '<link href="../client/style/dialog.css?{{ cacheBuster }}" rel="stylesheet">' | inlineScriptContents | safe }}
     {%endblock%}
     {%block cdn%}
         <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js?{{ cacheBuster }}" defer crossorigin="anonymous" type="text/javascript"></script>
