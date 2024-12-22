@@ -6,11 +6,11 @@ fs.cpSync('./src/client/icon512_rounded.png', './.s3/icon512_rounded.png');
 fs.cpSync('./src/client/service-worker.js', './.s3/service-worker.js');
 const htmlString = fs.readFileSync('./src/templates/zombie.html', {encoding: 'utf-8'});
 const manifestJson = fs.readFileSync('./src/client/manifest.json', {encoding: 'utf-8'});
-[...Array.from({length: 255})].slice(1)
+[...Array.from({length: 254})]
     .forEach((a, index) => {
         const json = JSON.parse(String(manifestJson));
-        json.start_url = `/${index}/welcome.html`;
-        fs.mkdirSync(`.s3/${index}`);
-        fs.writeFileSync(`.s3/${index}/welcome.html`, htmlString, {encoding: 'utf-8'});
-        fs.writeFileSync(`.s3/${index}/manifest.json`, JSON.stringify(json), {encoding: 'utf-8'});
+        json.start_url = `/${index+1}/welcome.html`;
+        fs.mkdirSync(`.s3/${index+1}`);
+        fs.writeFileSync(`.s3/${index+1}/welcome.html`, htmlString, {encoding: 'utf-8'});
+        fs.writeFileSync(`.s3/${index+1}/manifest.json`, JSON.stringify(json), {encoding: 'utf-8'});
     });
