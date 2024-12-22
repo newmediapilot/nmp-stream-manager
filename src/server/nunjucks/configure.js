@@ -1,3 +1,4 @@
+const fs = require("fs");
 const nunjucks = require("nunjucks");
 const express = require("express");
 const {getParam, getAllParams} = require("../store/manager");
@@ -9,14 +10,18 @@ const configureNunjucks = (app) => {
     });
     nunjucksEnv.addFilter("getParam", getParam);
     nunjucksEnv.addFilter("getAllParams", getAllParams);
-    nunjucksEnv.addFilter("inlineScriptContents", (scriptTagContents) =>{
-        if(scriptTagContents.contains('../client/script/')) {
-
+    nunjucksEnv.addFilter("inlineScriptContents", (scriptTagContents) => {
+        let inputContents = String(scriptTagContents);
+        if (inputContents.includes('client/script')) {
+            const filename = inputContents.split('<script src="../')[1].split('?')[0];
+            const contents = fs.readFileSync(`./src/${filename}`, {encoding: 'utf-8'});
+            return `<script type="text/javascript" defer>${contents}</script>`;
         }
-        if(scriptTagContents.contains('../client/style/')) {
-
+        if (inputContents.includes('client/style')) {
+            const filename = inputContents.split('<link href="../')[1].split('?')[0];
+            const contents = fs.readFileSync(`./src/${filename}`, {encoding: 'utf-8'});
+            return `<style>${contents}</style>`;
         }
-        console.log('scriptTagContents', scriptTagContents);
         return scriptTagContents;
     });
     nunjucksEnv.addFilter("cacheBuster", () => `?a=${new Date().getTime()}`);
