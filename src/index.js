@@ -24,7 +24,7 @@ app.all('*', (req, res, next) => {
     if (allowedOrigins.includes(origin) || !origin) {
         res.set('Access-Control-Allow-Origin', origin);
         res.set('Access-Control-Allow-Credentials', 'true');
-        res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        res.set('Access-Control-Allow-Methods', 'GET');
         res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
         res.set('Access-Control-Allow-Private-Network', 'true');
         if (req.method === 'OPTIONS') {
