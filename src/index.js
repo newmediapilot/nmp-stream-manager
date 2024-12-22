@@ -21,6 +21,7 @@ app.all(ROUTES.PANEL_DASHBOARD, (req, res) => res.render("panel-dashboard"));
 app.all(ROUTES.PANEL_ACTIONS, (req, res) => res.render("panel-actions"));
 app.all(ROUTES.PANEL_LAYOUT, (req, res) => res.render("panel-layout"));
 app.all(ROUTES.PANEL_DRAW, (req, res) => res.render("panel-draw"));
+app.all(ROUTES.PANEL_ZOMBIE, (req, res) => res.render("zombie"));
 app.all(ROUTES.PANEL_EMBED, (req, res) => res.render("embed"));
 app.all(ROUTES.PANEL_FEATURE_EMBED, (req, res) => res.render("embed-feature"));
 app.all(ROUTES.PANEL_BPM_EMBED, (req, res) => res.render("embed-bpm"));
