@@ -39,12 +39,10 @@
         <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js?" type="text/javascript" defer></script>
     {% endblock %}
+    <meta name="deviceIp" content="{{ deviceIp }}">
+    <meta name="deviceIpSuffix" content="{{ deviceIpSuffix }}">
     {% for key, value in 'public_routes'|getParam %}
-        {% if key == "TWITCH_REDIRECT" %}
-        {% elif  key == "TWITCH_REDIRECT" %}
-        {% else %}
-            <meta name="{{ key }}" content="{{ getIp }}{{ value }}">
-        {% endif %}
+        <meta name="{{ key }}" content="{{ deviceIp }}{{ value }}">
     {% endfor %}
     {% block head %}{% endblock %}
     <meta charset="UTF-8">
