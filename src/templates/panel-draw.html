@@ -1,7 +1,8 @@
 {%extends "main.njk"%}
 {%set public_routes = "public_routes"|getParam%}
 {%block head%}
-{{ '<link href="../client/style/draw.css?" rel="stylesheet">' | inlineScriptContents | safe }}
+{{ '
+<link href="../client/style/draw.css?" rel="stylesheet">' | inlineScriptContents | safe }}
 <style>
     :root {
         --range-rotation-deg: 0;
@@ -111,8 +112,8 @@
                 e.touches[0].pageY - top,
             )
         };
-        document.querySelector('canvas').addEventListener("touchstart", (e) => document.touchStartMove(e));
-        document.querySelector('canvas').addEventListener("touchmove", (e) => document.touchStartMove(e));
+        document.querySelector('canvas').addEventListener("touchstart", (e) => document.touchStartMove(e), {passive: true});
+        document.querySelector('canvas').addEventListener("touchmove", (e) => document.touchStartMove(e), {passive: true});
     });
 </script>
 {%endblock%}
