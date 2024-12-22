@@ -5,6 +5,7 @@
     <meta name="description" content="This is a description.">
     <meta name="keywords" content="keyword">
     {%block client%}
+        {{ '<script src="../client/script/css_dev_watch.js?{{ cacheBuster }}" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
         <script src="../client/script/css_dev_watch.js?{{ cacheBuster }}" defer type="text/javascript"></script>
         <script src="../client/script/reduced_motion.js?{{ cacheBuster }}" defer type="text/javascript"></script>
         <script src="../client/script/service_worker.js?{{ cacheBuster }}" defer type="text/javascript"></script>
