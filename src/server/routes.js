@@ -4,6 +4,7 @@ const ROUTES = {
     API_STYLE_UPDATE: "/api/style/update",
     API_MEDIA_UPDATE: "/api/media/update",
     INDEX: "/",
+    PANEL_ZOMBIE: "/public/zombie",
     PANEL_DASHBOARD: "/public/dashboard",
     PANEL_ACTIONS: "/public/actions",
     PANEL_LAYOUT: "/public/layout",
