@@ -10,6 +10,13 @@ const configureNunjucks = (app) => {
     nunjucksEnv.addFilter("getParam", getParam);
     nunjucksEnv.addFilter("getAllParams", getAllParams);
     nunjucksEnv.addFilter("inlineScriptContents", (scriptTagContents) =>{
+        if(scriptTagContents.contains('../client/script/')) {
+
+        }
+        if(scriptTagContents.contains('../client/style/')) {
+
+        }
+        console.log('scriptTagContents', scriptTagContents);
         return scriptTagContents;
     });
     nunjucksEnv.addFilter("cacheBuster", () => `?a=${new Date().getTime()}`);
