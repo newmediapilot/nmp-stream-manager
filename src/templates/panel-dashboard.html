@@ -22,7 +22,7 @@
     <article class="empty"></article>
     {%else%}
     <article class="{{config.theme}}">
-        <button onmouseup="javascript:sendSignal(this, '{{data_href}}');" {%if config.visibility=="OFF"%}disabled{%endif%}>
+        <button data-href="{{data_href}}" {%if config.visibility=="OFF"%}disabled{%endif%}>
             <label aria-label="{{config.emoji}}"></label>
             <label aria-label="{{config.label}}"></label>
         </button>
@@ -39,7 +39,7 @@
     <h3 aria-label="This link will open the dashboard on any device on your network."></h3>
     <canvas data-url="https://dbdbdbdbdbgroup.com/zombie.html#{{ 'device_ip_suffix' | getParam }}"></canvas>
     <button data-url="https://dbdbdbdbdbgroup.com/zombie.html#{{ 'device_ip_suffix' | getParam }}" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
-    <button onclick="javascript:document.body.querySelector('#qr-dialog').close();" aria-label="✅Done"></button>
+    <button aria-label="✅Done"></button>
 </dialog>
 {%endblock%}
 {%block scripts%}
@@ -56,6 +56,9 @@
         document.body.querySelector("#qr-dialog canvas"),
         document.body.querySelector("#qr-dialog canvas").getAttribute("data-url"),
     ));
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelector('dialog button:last-of-type').addEventListener('click', () => document.body.querySelector('#qr-dialog').close())
+    });
     document.addEventListener("DOMContentLoaded", () => dashboard());
     document.addEventListener("DOMContentLoaded", () => {
         // !document.documentElement.classList.contains('reduced-motion') &&
