@@ -12,17 +12,17 @@
     <link rel="icon" href="/icon512_rounded.png" type="image/png">
     <script defer>
         document.addEventListener("DOMContentLoaded", () => {
+            document.body.innerText = ('Loading dashboard...');
             setTimeout(() => {
-                document.body.innerText = ('Loading dashboard...');
                 fetch(`https://192.168.0.${window.location.pathname.split('.')[0].slice(1)}`)
                     .then(response => {
-                        if (!response.ok) throw new Error(response);
+                        if (!response.ok) throw new Error(response.text() || undefined);
                         return response.text();
                     }).then(data => {
                     document.documentElement.innerHTML = `${data}`;
-                }).catch(error => {
-                    console.error(error);
-                    document.body.innerText = ('Error loading...', JSON.parse(error, null, 4));
+                }).catch(responseText => {
+                    console.warn(responseText);
+                    document.body.innerText = ('Error loading...', responseText);
                 });
             }, 5000);
         });
