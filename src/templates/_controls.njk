@@ -1,16 +1,15 @@
-{% set public_routes = 'public_routes'|getParam %}
 <nav>
     <input type="checkbox" id="toggle-nav-show">
     <label for="toggle-nav-show" aria-label="🧮"></label>
     <aside>
-        <button onclick="javascript:socketEmitReload()" aria-label="Reload"><em aria-label="🔄"></em></button>
-        <button onclick="javascript:document.body.querySelector('#qr-dialog').showModal()" aria-label="Show QR"><em aria-label="🔗"></em></button>
-        <button onclick="javascript:window.parent.location.href=getPath('PANEL_DASHBOARD')" aria-label="Dev"><em aria-label="⚙"></em></button>
-        <button onclick="javascript:window.parent.location.href=getPath('INDEX')" aria-label="App"><em aria-label="🕹️"></em></button>
-        <button onclick="javascript:getURL(getPath('TWITCH_LOGIN'))" aria-label="Login"><em aria-label="🔒"></em></button>
-        <button onclick="javascript:getURL(getPath('PANEL_DRAW'))" aria-label="Draw"><em aria-label="🖌️"></em></button>
-        <button onclick="javascript:getURL(getPath('PANEL_LAYOUT'))" aria-label="Layout"><em aria-label="🎬"></em></button>
-        <button onclick="javascript:getURL(getPath('PANEL_ACTIONS'))" aria-label="Actions"><em aria-label="⚡"></em></button>
+        <button aria-label="Reload"><em aria-label="🔄"></em></button>
+        <button aria-label="Show QR"><em aria-label="🔗"></em></button>
+        <button aria-label="Dev"><em aria-label="⚙"></em></button>
+        <button aria-label="App"><em aria-label="🕹️"></em></button>
+        <button aria-label="Login"><em aria-label="🔒"></em></button>
+        <button aria-label="Draw"><em aria-label="🖌️"></em></button>
+        <button aria-label="Layout"><em aria-label="🎬"></em></button>
+        <button aria-label="Actions"><em aria-label="⚡"></em></button>
         <button style="display:none;" id="toggle-edit-dashboard"></button>
     </aside>
 </nav>
