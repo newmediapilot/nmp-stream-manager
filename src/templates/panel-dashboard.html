@@ -2,7 +2,8 @@
 {%set device_ip = "device_ip"|getParam%}
 {%set public_routes = "public_routes"|getParam%}
 {%block head%}
-{{ '<link href="../client/style/dashboard.css?" rel="stylesheet">' | inlineScriptContents | safe }}
+{{ '
+<link href="../client/style/dashboard.css?" rel="stylesheet">' | inlineScriptContents | safe }}
 {%include "_style.njk"%}
 {%endblock%}
 {%block body%}
@@ -12,10 +13,10 @@
 
     {%if config.type == "feature"%}
     {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label%}
-        {%elif config.type == "mark"%}
+    {%elif config.type == "mark"%}
     {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.label%}
     {%else%}
-        {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description%}
+    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description%}
     {%endif%}
 
     {%if config.type === "empty"%}
@@ -65,7 +66,7 @@
         setInterval(dashboardSpinLabels, 10000);
         dashboardBlinkButtons();
         dashboardRotateHue();
-        dashboardSpinLabels();
+        setTimeout(() => dashboardSpinLabels(), 5000);
     });
 </script>
 {%endblock%}
