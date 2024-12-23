@@ -1,4 +1,13 @@
+require("dotenv").config();
 const fs = require('fs');
+const glob = require('glob');
+const AWS = require('aws-sdk');
+const s3 = new AWS.S3();
+AWS.config.update({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION,
+});
 fs.existsSync('.s3') && fs.rmdirSync('.s3', {recursive: true});
 fs.mkdirSync('.s3');
 fs.cpSync('./src/client/icon512_maskable.png', './.s3/icon512_maskable.png');
@@ -15,3 +24,6 @@ const manifestJson = fs.readFileSync('./src/client/manifest.json', {encoding: 'u
             fs.writeFileSync(`.s3/${index + 22}.json`, JSON.stringify(json), {encoding: 'utf-8'});
         }
     );
+glob.globSync(".s3/**/*.*").forEach(path => {
+    console.log(path);
+});
