@@ -31,7 +31,7 @@
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => {
         console.log("DOMContentLoaded");
-        const socket = io("http://192.268.0.??????????");
+        const socket = io("http://192.268.0.XX");
         socket.emit("exampleEvent", {message: "Hello from the client!"});
         socket.on("connect", () => {
             socket.emit("exampleEvent", {message: "Hello from the client!"});
