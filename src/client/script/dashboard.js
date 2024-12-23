@@ -86,6 +86,7 @@ dashboardSpinLabels = () => {
         targets: "section article label:nth-of-type(2)",
         duration: 8000,
         easing: 'linear',
+        delay: anime.stagger(800),
         translateX: [`${0}px`, `-${(width / 2)}px`]
     });
 };
