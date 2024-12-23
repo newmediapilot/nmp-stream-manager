@@ -87,6 +87,6 @@ dashboardSpinLabels = () => {
         duration: 8000,
         easing: 'linear',
         delay: anime.stagger(800),
-        translateX: [`${0}px`, `-${(width / 2)}px`]
+        translateX: [`${0}px`, `-${(width / 2) + 50}px`],
     });
 };
