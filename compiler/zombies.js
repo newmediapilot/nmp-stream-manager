@@ -24,7 +24,7 @@ fs.cpSync('./src/client/icon512_rounded.png', './.s3/icon512_rounded.png');
 });
 const paths = glob.globSync(".s3/**/*.*")
     .map((filePath, index, arr) => {
-        const html = htmlString.replace(`http://192.268.0.??????????`, `http://192.268.0.${index + 1}`)
+        const html = htmlString.replace(`://192.268.0.XX`, `://192.268.0.${22}`)
         fs.writeFileSync(`.s3/${index + 22}.html`, html, {encoding: 'utf-8'});
         const getContentType = (filePath) => {
             const ext = path.extname(filePath).toLowerCase();
