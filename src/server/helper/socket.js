@@ -4,7 +4,22 @@ const configureSocket = (server) => {
     if (!server) {
         throw new Error("Server instance is required to configure Socket.IO.");
     }
-    io = socketIo(server);
+    io = socketIo(server, {
+        cors: {
+            origin: (origin, callback) => {
+                if (!origin || (
+                    !origin.startsWith('https://192.268.0.') &&
+                    !origin.startsWith('https://dbdbdbdbdbgroup.com')
+                )) {
+                    callback(null, true);
+                } else {
+                    callback(new Error("CORS error"));
+                }
+            },
+            methods: ["GET", "POST"],
+            credentials: true,
+        }
+    });
     io.on("connection", (socket) => {
         console.log('socket', socket.handshake.address);
         console.log(process.cwd(), "Client connected");
