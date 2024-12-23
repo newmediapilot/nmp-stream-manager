@@ -18,10 +18,11 @@
     "express": "4.21.2",
     "glob": "11.0.0",
     "nunjucks": "3.2.4",
+    "prettier": "^3.4.2",
     "socket.io": "4.8.1",
     "sync-request": "6.1.0",
     "tmi.js": "1.8.5",
     "twitter-api-v2": "1.18.2",
-    "prettier": "^3.4.2"
+    "twitter-api-v2": "1.18.2"
   }
 }
