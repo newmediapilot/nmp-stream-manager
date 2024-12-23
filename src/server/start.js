@@ -28,6 +28,7 @@ async function startServices(app) {
         const certs = {
             key: fs.readFileSync("./localhost.key"),
             cert: fs.readFileSync("./localhost.crt"),
+            // passphrase: process.env.CERT_PASSPHRASE,
         };
         const httpsServer = https.createServer(certs, app).listen(443, () => {
             console.log(process.cwd(), "Server running on 443 at https://localhost");
