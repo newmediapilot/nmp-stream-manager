@@ -40,6 +40,11 @@ const dashboard = () => {
                     dashboardBlinkButtons();
                     document.querySelector('#toggle-nav-show').checked = false;
                     document.body.querySelector("#toggle-edit-dashboard").checked = false;
+                    containerEl.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: 'smooth'
+                    });
                 });
             payload = [];
         }
@@ -64,7 +69,7 @@ dashboardRotateHue = () => {
 };
 dashboardBlinkButtons = () => {
     anime({
-        targets: "html.iframe section button",
+        targets: "html section button",
         duration: 666,
         delay: anime.stagger(11),
         easing: "easeInOutCubic",
