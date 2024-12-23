@@ -9,6 +9,7 @@ section {
     font-size: 300%;
     scroll-snap-type: both;
 }
+
 section::after {
     content: '';
     height: 25vh;
@@ -16,10 +17,12 @@ section::after {
     width: 100%;
     display: block;
 }
+
 section > div {
     scroll-snap-stop: normal;
     scroll-snap-align: start;
 }
+
 section > div[aria-label] {
     display: flex;
     align-items: center;
@@ -31,22 +34,27 @@ section > div[aria-label] {
     min-height: calc(-80px + 5vh);
     padding-left: 10px;
 }
+
 section button {
     font-size: 40px;
     padding: 10px;
 }
+
 section label {
     display: grid;
     grid-template-columns: repeat(15, 25px);
     box-sizing: border-box;
     padding: 10px 0px;
 }
+
 section > div:not([aria-label]) label {
     grid-template-rows: repeat(3, 25px);
 }
+
 section > div:not([aria-label]):nth-of-type(2) label {
     grid-template-rows: repeat(10, 25px);
 }
+
 section label > [type='text'] {
     font-size: 25px;
     padding: 10px;
@@ -55,6 +63,7 @@ section label > [type='text'] {
     border-radius: 10px;
     width: 165px;
 }
+
 section label > img {
     border: 3px solid var(--color-light);
     border-radius: 10px;
@@ -66,9 +75,11 @@ section label > img {
     object-fit: contain;
     display: none;
 }
+
 section label > img[src] {
     display: block;
 }
+
 section label > textarea {
     font-size: 25px;
     grid-area: 5 / 3 / 11 / 16;
@@ -78,9 +89,11 @@ section label > textarea {
     padding: 10px;
     border: 3px solid var(--color-light);
 }
+
 section label > [type='text']:nth-of-type(2) {
     grid-row: 4 / 7;
 }
+
 section label > textarea:disabled,
 section label > [type='text']:disabled {
     color: var(--color-light);
@@ -88,15 +101,18 @@ section label > [type='text']:disabled {
     pointer-events: none;
     border: none;
 }
+
 section label > textarea:focus,
 section label > [type='text']:focus {
     background: var(--color-deepyellow);
     border-radius: 10px;
     border: none;
 }
+
 section label > button {
     line-height: 0;
 }
+
 section label > button:nth-of-type(1) {
     grid-area: 1 / 1 / 4 / 3;
     display: flex;
@@ -105,6 +121,7 @@ section label > button:nth-of-type(1) {
     justify-content: center;
     font-size: 30px;
 }
+
 section label > button:nth-of-type(2),
 section label > button:nth-of-type(3),
 section label > button:nth-of-type(4) {
@@ -114,16 +131,19 @@ section label > button:nth-of-type(4) {
     justify-content: center;
     align-items: center;
 }
+
 section label > button:disabled,
 section label > button:disabled,
 section label > button:disabled {
     opacity: 0.5;
 }
+
 section label > button:nth-of-type(2) {
     grid-area: 1 / 11 / 4 / 12;
     font-size: 30px;
     width: 40px;
 }
+
 section label > button:nth-of-type(3) {
     grid-area: 1 / 13 / 4 / 14;
     font-size: 30px;
@@ -131,67 +151,93 @@ section label > button:nth-of-type(3) {
     height: 60px;
     transition: transform 500ms linear;
 }
+
 section label > button:nth-of-type(4) {
     grid-area: 1 / 15 / 4 / 16;
     font-size: 20px;
     width: 40px;
 }
+
 section div.aqua,
 section label.aqua,
 section label.aqua + #emoji-widget {
     background: var(--color-aqua);
 }
+
 section div.orange,
 section label.orange,
 section label.orange + #emoji-widget {
     background: var(--color-orange);
 }
+
 section div.bloodorange,
 section label.bloodorange,
 section label.bloodorange + #emoji-widget {
     background: var(--color-bloodorange);
 }
+
 section div.purple,
 section label.purple,
 section label.purple + #emoji-widget {
     background: var(--color-purple);
 }
+
 section div.green,
 section label.green,
 section label.green + #emoji-widget {
     background: var(--color-green);
 }
+
 section div.red,
 section label.red,
 section label.red + #emoji-widget {
     background: var(--color-red);
 }
+
 section div.blue,
 section label.blue,
 section label.blue + #emoji-widget {
     background: var(--color-blue);
 }
+
 body > #emoji-widget {
     display: none;
 }
+
 #emoji-widget {
     display: none;
 }
+
 #emoji-widget {
+    display: grid;
+    grid-auto-rows: calc(100vw / 7);
     margin: 0px;
     padding: 0px;
-    display: grid;
-    grid-template-columns: repeat(12, calc(100%/12));
-    grid-auto-rows: 10vh;
     border-top: 5px dotted rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
 }
+
+@media (orientation: portrait) {
+    #emoji-widget {
+        grid-template-columns: repeat(12, calc(100vw / 7));
+        grid-auto-rows: calc(100vw / 7);
+    }
+}
+
+@media (orientation: landscape) {
+    #emoji-widget {
+        grid-template-columns: repeat(7, calc(100vw / 12));
+        grid-auto-rows: calc(100vw / 7);
+    }
+}
+
 #emoji-widget li {
     display: flex;
     justify-content: center;
     align-items: center;
     line-height: 0;
 }
+
 #emoji-widget li.active {
     box-shadow: inset 0 0 8px 8px var(--color-deepyellow);
 }
