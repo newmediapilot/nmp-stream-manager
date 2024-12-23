@@ -4,8 +4,9 @@
     <title>StreamDream</title>
     <meta charset="UTF-8">
     <meta name="description" content="This is a description.">
-    <meta name="referrer" content="unsafe-url">
     <meta name="keywords" content="keyword">
+    <link rel="icon" href="/icon512_rounded.png" type="image/png">
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
     <style>
         html, body {
             width: 100vw;
@@ -14,6 +15,7 @@
             margin: 0;
             padding: 0;
         }
+
         iframe {
             width: 100vw;
             height: 100vh;
@@ -27,11 +29,21 @@
 <body>
 <iframe></iframe>
 <script type="text/javascript">
-    // document.addEventListener("DOMContentLoaded", () => {
-    //     setTimeout(() => {
-    //         document.querySelector('iframe').src = `https://192.168.0.22`;
-    //     }, 1500);
-    // });
+    document.addEventListener("DOMContentLoaded", () => {
+        console.log("DOMContentLoaded");
+        const socket = io("http://192.268.0.??????????");
+        socket.emit("exampleEvent", {message: "Hello from the client!"});
+        socket.on("connect", () => {
+            socket.emit("exampleEvent", {message: "Hello from the client!"});
+            socket.on("serverMessage", (data) => {
+                console.log("Message from server:", data);
+            });
+        });
+        socket.on("disconnect", () => {
+            console.log("Disconnected from the server");
+        });
+        console.log("DOMContentLoaded.end");
+    });
 </script>
 </body>
 </html>
