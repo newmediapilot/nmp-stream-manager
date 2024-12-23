@@ -12,10 +12,10 @@
 {%endblock%}
 {%block body%}
 <main>
-    <iframe loading="eager" src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_LAYOUT}}"></iframe>
-    <iframe loading="eager" src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_DASHBOARD}}"></iframe>
-    <iframe loading="eager" src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_ACTIONS}}"></iframe>
-    <iframe loading="eager" src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_DRAW}}"></iframe>
+    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_LAYOUT}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; document-domain; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
+    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_DASHBOARD}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; document-domain; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
+    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_ACTIONS}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; document-domain; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
+    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_DRAW}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; document-domain; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
 </main>
 {%endblock%}
 {%block scripts%}
