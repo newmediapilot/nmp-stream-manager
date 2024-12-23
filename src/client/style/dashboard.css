@@ -145,7 +145,6 @@ section article button:disabled {
 
 section article button label {
     width: 100%;
-    text-align: center;
 }
 
 section article button label:nth-of-type(1) {
