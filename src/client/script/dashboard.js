@@ -37,12 +37,11 @@ const dashboard = () => {
                 })
                 .finally(() => {
                     socketEmitReload();
+                    dashboardBlinkButtons();
+                    document.querySelector('#toggle-nav-show').checked = false;
                     document.body.querySelector("#toggle-edit-dashboard").checked = false;
                 });
             payload = [];
-
-        } else {
-
         }
     });
     document.querySelectorAll('section article button').forEach((button) => {
@@ -53,4 +52,30 @@ const dashboard = () => {
             res.finally(() => console.info("sendSignal :: complete"));
         })
     });
+};
+dashboardRotateHue = () => {
+    anime({
+        targets: "section button:not(:disabled)",
+        duration: 3500,
+        delay: anime.stagger(50),
+        easing: "easeInElastic(1, .6)",
+        filter: "hue-rotate(360deg)"
+    });
+};
+dashboardBlinkButtons = () => {
+    anime({
+        targets: "html.iframe section button",
+        duration: 666,
+        delay: anime.stagger(11),
+        easing: "easeInOutCubic",
+        direction: "alternate",
+        borderTopWidth: ["20px", "200px"],
+        borderBottomWidth: ["20px", "200px"],
+        borderLeftWidth: ["20px", "200px"],
+        borderRightWidth: ["20px", "200px"],
+        borderRadius: ["15px", "30px"],
+    });
+};
+dashboardSpinLabels = () => {
+    console.log('dashboardSpinLabels');
 };
