@@ -10,6 +10,12 @@
     "uncombine": "node compiler/uncombine.js",
     "zombies": "node compiler/zombies.js"
   },
+  "name": "app-name",
+  "bin": "src/index.js",
+  "pkg": {
+    "outputPath": "dist",
+    "assets": [
+      "src/client/**/*"
   "dependencies": {
     "aws-sdk": "2.1692.0",
     "axios": "1.7.7",
@@ -17,6 +23,7 @@
     "dotenv": "16.4.5",
     "express": "4.21.2",
     "glob": "11.0.0",
+    "node-fetch": "2.6.12",
     "nunjucks": "3.2.4",
     "prettier": "^3.4.2",
     "socket.io": "4.8.1",
