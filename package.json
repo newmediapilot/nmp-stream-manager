@@ -11,12 +11,12 @@
     "zombies": "node compiler/zombies.js"
   },
   "dependencies": {
+    "aws-sdk": "2.1692.0",
     "axios": "1.7.7",
     "chalk": "2.4.2",
     "dotenv": "16.4.5",
     "express": "4.21.2",
     "glob": "11.0.0",
-    "minify": "^12.0.0",
     "nunjucks": "3.2.4",
     "socket.io": "4.8.1",
     "sync-request": "6.1.0",
