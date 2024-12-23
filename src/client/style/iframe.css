@@ -6,6 +6,7 @@ body {
     margin: 0 !important;
     width: 100vw !important;
 }
+
 main {
     width: 100vw;
     height: 100vh;
@@ -14,11 +15,8 @@ main {
     background-size: 7vw 7vh;
     background-repeat: repeat;
 }
+
 html.iframe main {
-    box-sizing: border-box;
-    background-color: var(--color-light);
-    opacity: 0.6;
-    background: radial-gradient(circle, transparent 20%, var(--color-light) 20%, var(--color-light) 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, var(--color-light) 20%, var(--color-light) 80%, transparent 80%, transparent) 32.5px 32.5px, linear-gradient(#000000 2.6px, transparent 2.6px) 0 -1.3px, linear-gradient(90deg, #000000 2.6px, var(--color-light) 2.6px) -1.3px 0;
-    background-size: 65px 65px, 65px 65px, 32.5px 32.5px, 32.5px 32.5px;
-    border: 32.5px solid var(--color-dark);
+    box-shadow: inset 0 0 30px 30px var(--color-dark);
+    opacity: 0.25;
 }
