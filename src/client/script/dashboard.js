@@ -81,14 +81,11 @@ dashboardBlinkButtons = () => {
     });
 };
 dashboardSpinLabels = () => {
-    !document.documentElement.classList.contains('reduced-motion') &&
-    document.querySelectorAll("section article label:nth-of-type(2)", label => {
-        anime({
-            targets: label,
-            duration: 8000,
-            loop: true,
-            easing: 'linear',
-            translateX: ['0%', '-50%'],
-        });
+    const {width} = document.querySelector("section article label:nth-of-type(2)").getBoundingClientRect();
+    !document.documentElement.classList.contains('reduced-motion') && anime({
+        targets: "section article label:nth-of-type(2)",
+        duration: 8000,
+        easing: 'linear',
+        translateX: [`${0}px`, `-${(width / 2)}px`]
     });
 };
