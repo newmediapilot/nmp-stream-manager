@@ -15,25 +15,23 @@
         document.addEventListener("DOMContentLoaded", () => {
             document.body.innerText = ('Loading dashboard...');
             setTimeout(() => {
-                fetch(`https://192.168.0.${window.location.pathname.split('.')[0].slice(1)}`)
-                    .then(response => {
-                        document.body.innerText = ('Loading fetch...start');
-                        if (!response.ok) throw new Error(response || {r: 0} || undefined);
-                        return response.text();
-                    }).then(data => {
-                    document.body.innerText = ('Loading fetch...done');
-                    document.documentElement.innerHTML = `${data}`;
-                    console.log('Loading fetch...done');
-                }).catch(responseText => {
-                    document.body.innerText = ('Error loading...', JSON.stringify(responseText, null, 4));
-                    console.log('Error loading...', JSON.stringify(responseText, null, 4));
-                }).finally(() => {
-                    console.log('Fetch time done...');
-                });
+               document.querySelector('iframe').src = `https://192.168.0.${window.location.pathname.split('.')[0].slice(1)}`;
             }, 5000);
         });
     </script>
+    <style>
+        body, html, iframe {
+            margin: 0;
+            padding: 0;
+            border: none;
+            background: none;
+            width: 100vw;
+            height: 100vw;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
+<iframe allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
 </body>
 </html>
