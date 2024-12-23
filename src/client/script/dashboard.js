@@ -81,12 +81,14 @@ dashboardBlinkButtons = () => {
     });
 };
 dashboardSpinLabels = () => {
-    console.log('dashboardSpinLabels');
-    !document.documentElement.classList.contains('reduced-motion') && anime({
-        targets: "section button:not(:disabled)",
-        duration: 3500,
-        delay: anime.stagger(50),
-        easing: "easeInElastic(1, .6)",
-        filter: "hue-rotate(360deg)"
+    !document.documentElement.classList.contains('reduced-motion') &&
+    document.querySelectorAll("section article label:nth-of-type(2)", label => {
+        anime({
+            targets: label,
+            duration: 8000,
+            loop: true,
+            easing: 'linear',
+            translateX: ['0%', '-50%'],
+        });
     });
 };
