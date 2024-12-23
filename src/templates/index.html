@@ -7,23 +7,29 @@
 <script crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js?{{''|cacheBuster}}" type="text/javascript" defer></script>
 <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?{{''|cacheBuster}}" type="text/javascript" defer></script>
 {{ '<link href="../client/style/index.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-{{ '<script src="../client/script/reduced_motion.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+{{ '<script src="../client/script/reduced_motion.js?" type="text/javascript" defer></script>' | inlineScriptContents | safe }}
 {%include "_style.njk"%}
 {%endblock%}
 {%block body%}
 <main>
-    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_LAYOUT}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; document-domain; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
-    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_DASHBOARD}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; document-domain; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
-    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_ACTIONS}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; document-domain; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
-    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_DRAW}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; document-domain; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
+    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_LAYOUT}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
+    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_DASHBOARD}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
+    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_ACTIONS}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
+    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_DRAW}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
 </main>
 {%endblock%}
 {%block scripts%}
-<script defer src="../client/script/socket.js?{{''|cacheBuster}}" type="text/javascript"></script>
-<script defer src="../client/script/detect_press_hold.js?{{''|cacheBuster}}" type="text/javascript"></script>
-<script defer src="../client/script/debounce_function.js?{{''|cacheBuster}}" type="text/javascript"></script>
+{{ '<script src="../client/script/socket.js?" type="text/javascript" defer></script>' | inlineScriptContents | safe }}
+{{ '<script src="../client/script/detect_press_hold.js?" type="text/javascript" defer></script>' | inlineScriptContents | safe }}
+{{ '<script src="../client/script/debounce_function.js?" type="text/javascript" defer></script>' | inlineScriptContents | safe }}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => reducedMotion());
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll('main iframe').forEach(iframe => {
+           console.log('iframe', iframe);
+        });
+        console.log('iframe?');
+    });
     document.addEventListener("DOMContentLoaded", () => {
         let previousPath = null;
         window.addEventListener('message', function (e) {
