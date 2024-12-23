@@ -179,12 +179,17 @@ const actionsCreateUpload = (editorEl) => {
             }
         };
         const displayMedia = () => {
-            if(!imageElement.src){
+            if (!imageElement.src) {
                 const cells = uploadButton.id.split(',');
                 const url = `/.media/${cells[0]}.${cells[2]}?${cells[1]}=${new Date().getTime()}`;
                 imageElement.src = url;
-            }else{
+                editorEl.style.gridTemplateRows = `repeat(3, 100px)`;
+                editorEl.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            } else {
                 imageElement.removeAttribute('src');
+                editorEl.style.gridTemplateRows = `repeat(3, 25px)`;
             }
         };
         actionButton.addEventListener('click', () => {
