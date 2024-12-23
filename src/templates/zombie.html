@@ -6,8 +6,26 @@
     <meta name="description" content="This is a description.">
     <meta name="referrer" content="unsafe-url">
     <meta name="keywords" content="keyword">
+    <style>
+        html, body,
+        iframe {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            background: none;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
-test
+<iframe></iframe>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+            document.querySelector('iframe').src = `https://192.168.0.22`;
+        }, 5000);
+    });
+</script>
 </body>
 </html>
