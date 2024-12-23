@@ -11,8 +11,7 @@ const dashboard = () => {
     toggleEl.innerHTML = states[0];
     toggleEl.style.display = 'block';
     const sortable = new Sortable(containerEl, {
-        // Swap: true,
-        // TODO: rewrite interpreter to use this
+        swap: true,
         animation: 333,
         forceFallback: true,
         removeCloneOnHide: true,
@@ -59,7 +58,7 @@ const dashboard = () => {
     });
 };
 dashboardRotateHue = () => {
-    anime({
+    !document.documentElement.classList.contains('reduced-motion') && anime({
         targets: "section button:not(:disabled)",
         duration: 3500,
         delay: anime.stagger(50),
@@ -68,7 +67,7 @@ dashboardRotateHue = () => {
     });
 };
 dashboardBlinkButtons = () => {
-    anime({
+    !document.documentElement.classList.contains('reduced-motion') && anime({
         targets: "html section button",
         duration: 666,
         delay: anime.stagger(11),
@@ -83,4 +82,11 @@ dashboardBlinkButtons = () => {
 };
 dashboardSpinLabels = () => {
     console.log('dashboardSpinLabels');
+    !document.documentElement.classList.contains('reduced-motion') && anime({
+        targets: "section button:not(:disabled)",
+        duration: 3500,
+        delay: anime.stagger(50),
+        easing: "easeInElastic(1, .6)",
+        filter: "hue-rotate(360deg)"
+    });
 };
