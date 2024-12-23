@@ -11,13 +11,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="/icon512_rounded.png" type="image/png">
-    <script defer>
-        document.addEventListener("DOMContentLoaded", () => {
-            setTimeout(() => {
-               document.querySelector('iframe').src = `https://192.168.0.${window.location.pathname.split('.')[0].slice(1)}`;
-            }, 5000);
-        });
-    </script>
     <style>
         body, html, iframe {
             margin: 0;
@@ -32,5 +25,12 @@
 </head>
 <body>
 <iframe allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+            document.querySelector('iframe').src = `https://192.168.0.${window.location.pathname.split('.')[0].slice(1)}`;
+        }, 5000);
+    });
+</script>
 </body>
 </html>
