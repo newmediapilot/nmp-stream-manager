@@ -28,7 +28,7 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
-            document.querySelector('iframe').src = `https://192.168.0.${window.location.pathname.split('.')[0].slice(1)}`;
+            document.querySelector('iframe').src = `https://192.168.0.${window.location.pathname.split('.')[0].slice(1)}/`;
         }, 5000);
     });
 </script>
