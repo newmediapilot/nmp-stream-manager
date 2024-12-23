@@ -117,7 +117,7 @@ const putConfig = (filePath, config) => {
         "putConfig :: file:",
         fileName,
         ":: contents :",
-        config.map((c) => c.label),
+        config.map((c) => (c.label || 'empty')),
     );
     fs.writeFileSync(fileName, JSON.stringify(config), {encoding: "utf-8"});
 };
