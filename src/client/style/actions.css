@@ -181,19 +181,16 @@ body > #emoji-widget {
     margin: 0px;
     padding: 0px;
     display: grid;
-    grid-template-columns: repeat(5, calc(20%));
+    grid-template-columns: repeat(12, calc(100%/12));
+    grid-auto-rows: 10vh;
     border-top: 5px dotted rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
-}
-.emoji-widget-instance,
-.emoji-widget-instance-trigger {
 }
 #emoji-widget li {
     display: flex;
     justify-content: center;
     align-items: center;
     line-height: 0;
-    height: 10vh;
 }
 #emoji-widget li.active {
     box-shadow: inset 0 0 8px 8px var(--color-deepyellow);
