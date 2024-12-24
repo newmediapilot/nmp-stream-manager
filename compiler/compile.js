@@ -53,5 +53,5 @@ globSync('./.src/**/*.js').forEach(path => {
 const index = fs.readFileSync('./.src/index.js', {encoding: 'utf-8'});
 const message = `console.log("Close this window to power off the app and its services. Happy Streaming!");`;
 fs.writeFileSync('./.src/index.js', `${index}\r\n${message}`, {encoding: 'utf-8'});
-execSync('cd .src/ && npm i --no-package-lock --production', {stdio: 'inherit'});
+execSync('cd .src/ && npm i --no-package-lock', {stdio: 'inherit'});
 execSync('pkg -d .src', {stdio: 'inherit'});
