@@ -50,6 +50,7 @@
         "node": "14.17.6",
         "pkg": "5.8.1",
         "prettier": "3.4.2",
-        "sync-request": "6.1.0"
+        "sync-request": "6.1.0",
+        "uglify-js": "^3.19.3"
     }
 }
