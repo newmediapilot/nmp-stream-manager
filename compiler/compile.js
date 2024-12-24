@@ -33,4 +33,4 @@ globSync('./src/**/*.*')
     });
 const packageJSON = fs.readFileSync('./package.json', {encoding: 'utf-8'});
 const packageObj = JSON.parse(String(packageJSON));
-fs.writeFileSync('./package.json', JSON.stringify(packageObj, null, 4), {encoding: 'utf-8'});
+fs.writeFileSync('./.src/package.json', JSON.stringify(packageObj, null, 4), {encoding: 'utf-8'});
