@@ -31,6 +31,8 @@ textarea {
         'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizelegibility;
+    overscroll-behavior: none;
+    scroll-behavior: auto;
 }
 [aria-label]::before {
     content: attr(aria-label);
