@@ -3,7 +3,7 @@
   "scripts": {
     "start": "npm run clean && node src/index.js",
     "clean": "rm -rf .signals.json .style.css .s3 dist",
-    "reset": "rm -rf node_modules && npm i --no-package-lock",
+    "reset": "rm -rf node_modules && npm i",
     "cert": "openssl req --nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
     "bpm": "rm -rf .bin && curl -L \"https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe\" -o \"./.bin\"",
     "combine": "node compiler/combine.js",
@@ -20,7 +20,7 @@
       "src/templates/**/*.*"
     ],
     "scripts": [
-      "src/server/**/*"
+      "src/server/**/*.*"
     ],
     "targets": [
       "node14-win-x64"
@@ -39,7 +39,7 @@
     "twitter-api-v2": "1.18.2",
     "wrap-ansi": "7.0.0"
   },
-  "devDepencencies" : {
+  "devDependencies": {
     "pkg": "5.8.1",
     "prettier": "3.4.2",
     "glob": "11.0.0",
