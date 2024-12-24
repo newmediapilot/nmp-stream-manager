@@ -12,7 +12,7 @@
             <iframe width="1920" height="1080" src="{{public_routes.PANEL_EMBED}}#edit"></iframe>
         </div>
         <div class="layers">
-            <input type="radio" name="layers" id="_feat-layer" checked/>
+            <input type="radio" name="layers" id="_feat-layer"/>
             <label for="_feat-layer" aria-label="FEAT"></label>
             <input type="radio" name="layers" id="_bpm-layer"/>
             <label for="_bpm-layer" aria-label="BPM"></label>
@@ -28,7 +28,7 @@
             </label>
         </div>
         <div class="modes">
-            <input type="radio" name="modes" id="opacity" checked/>
+            <input type="radio" name="modes" id="opacity"/>
             <label for="opacity" aria-label="🔍"></label>
             <input type="radio" name="modes" id="translate"/>
             <label for="translate" aria-label="🔁"></label>
@@ -68,6 +68,7 @@
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.preview', 'width', '--js-module-preview-width'));
     document.addEventListener("DOMContentLoaded", () => applyLayoutStyles());
     document.addEventListener("DOMContentLoaded", () => initializeLayoutClickTouch());
+    document.addEventListener("DOMContentLoaded", () => enableRadioButtons());
     // document.addEventListener("DOMContentLoaded", () => enableLayerDragDrop());
 </script>
 {%endblock%}
