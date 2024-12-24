@@ -8,18 +8,18 @@
         "combine": "node compiler/combine.js",
         "uncombine": "node compiler/uncombine.js",
         "zombies": "node compiler/zombies.js",
-        "compile": "rm -rf .package .src; npm run reset && node compiler/compile.js"
+        "compile": "npm run reset && node compiler/compile.js"
     },
     "name": "zombies",
-    "bin": "./index.js",
+    "bin": "./src/index.js",
     "pkg": {
         "outputPath": "./.package",
         "assets": [
-            "./client/**/**/*.*",
-            "./templates/**/*.*"
+            "./src/client/**/**/*.*",
+            "./src/templates/**/*.*"
         ],
         "scripts": [
-            "./server/**/*.*"
+            "./src/server/**/*.*"
         ],
         "targets": [
             "node14-win-x64"
