@@ -7,5 +7,6 @@ node_modules
 .signals
 .style
 .s3
+.package
 .combined.json
 src/client/.media/
