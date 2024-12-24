@@ -1,5 +1,4 @@
 const fs = require("fs");
-const {execSync} = require("child_process");
 const https = require("https");
 const {getIp} = require("./helper/ip");
 const {setParam} = require("./store/manager");
@@ -33,7 +32,6 @@ async function startServices(app) {
             console.log(process.cwd(), "Server running on 443 at https://localhost");
         });
         configureSocket(httpsServer);
-        execSync(`start https://${getIp()}`);
         await createBpmServer(app);
     } catch (err) {
         console.log(process.cwd(), "Error initializing services:", err);
