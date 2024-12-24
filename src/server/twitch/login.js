@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const fetch = require("fetch");
 const ROUTES = require("../routes");
 const {
     getSecret,

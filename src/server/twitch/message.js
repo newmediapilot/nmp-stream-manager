@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const fetch = require("fetch");
 const { getSecret } = require("../store/manager");
 async function twitchMessageCreate(message) {
   try {
