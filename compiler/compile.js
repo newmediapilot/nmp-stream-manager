@@ -27,6 +27,16 @@ globSync('./src/**/*.*')
                         return `"${key}"`;
                     });
             });
+            fileContents = fileContents.replace(new RegExp(`key: fs.readFileSync("./localhost.key")`, 'gm'),
+                (match) => {
+                    return `key: "${fs.readFileSync("./localhost.key")}"`;
+                }
+            );
+            fileContents = fileContents.replace(new RegExp(`cert: fs.readFileSync("./localhost.crt")`, 'gm'),
+                (match) => {
+                    return `cert: "${fs.readFileSync("./localhost.key")}"`;
+                }
+            );
             fs.writeFileSync(path, fileContents, {encoding: 'utf-8'});
         }
     });
@@ -38,5 +48,5 @@ delete packageObj.pkg;
 delete packageObj.scripts;
 packageObj.main = "index.js";
 fs.writeFileSync('./.src/package.json', JSON.stringify(packageObj, null, 4), {encoding: 'utf-8'});
-execSync('cd .src/ && npm i --no-package-lock');
+execSync('cd .src/ && npm i --no-package-lock', {stdio: 'inherit'});
 // execSync('npm run package', {stdio: 'inherit'});
