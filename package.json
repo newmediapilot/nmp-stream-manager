@@ -8,7 +8,7 @@
         "combine": "node compiler/combine.js",
         "uncombine": "node compiler/uncombine.js",
         "zombies": "node compiler/zombies.js",
-        "compile": "npm run reset && node compiler/compile.js"
+        "compile": "node compiler/compile.js"
     },
     "name": "zombies",
     "bin": "./src/index.js",
