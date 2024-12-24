@@ -1,14 +1,14 @@
 {
   "main": "src/index.js",
   "scripts": {
-    "start": "rm -rf .signals.json .style.css && node src/index.js",
-    "preview": "node compiler/compile.js",
-    "reset": "rm -rf node_modules && npm i",
+    "start": "npm run clean && node src/index.js",
+    "clean": "rm -rf .signals.json .style.css",
+    "reset": "rm -rf node_modules && npm i --no-package-lock",
     "cert": "openssl req --nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
     "bpm": "rm -rf .bin && curl -L \"https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe\" -o \"./.bin\"",
     "combine": "node compiler/combine.js",
     "uncombine": "node compiler/uncombine.js",
-    "pkg": "set DEBUG=pkg* && pkg .",
+    "package": "npm run reset && pkg -d .",
     "zombies": "node compiler/zombies.js"
   },
   "name": "app-name",
@@ -19,11 +19,11 @@
       "src/client/**/*"
     ],
     "scripts": [
-      "src/**/*.js",
-      "node_modules/axios/**/*.js"
+      "src/server/**/*",
+      "src/templates/**/*"
     ],
     "targets": [
-      "node16-win-x64"
+      "node14-win-x64"
     ]
   },
   "dependencies": {
@@ -32,6 +32,7 @@
     "dotenv": "16.4.5",
     "express": "4.21.2",
     "glob": "11.0.0",
+    "node": "14.17.6",
     "node-fetch": "2.6.12",
     "nunjucks": "3.2.4",
     "pkg": "5.8.1",
