@@ -2,6 +2,7 @@ const fs = require('fs');
 const {execSync} = require('child_process');
 const crypto = require('crypto');
 const {sync: globSync} = require('glob');
+const uglify = require('uglify-js');
 execSync('rm -rf ./.src');
 execSync('cp -r ./src ./.src');
 globSync('./src/**/*.*')
@@ -11,7 +12,6 @@ globSync('./src/**/*.*')
     })
     .map(path => {
         let fileContents = fs.readFileSync(path, {encoding: 'utf-8'});
-
         if (path.includes('/server/')) {
             [
                 "process.env.TWITCH_CLIENT_ID",
@@ -43,5 +43,10 @@ delete packageObj.devDependencies;
 delete packageObj.scripts;
 packageObj.main = "index.js";
 fs.writeFileSync('./.src/package.json', JSON.stringify(packageObj, null, 4), {encoding: 'utf-8'});
+globSync('./.src/**/*.js').forEach(path => {
+    let fileContents = fs.readFileSync(path, {encoding: 'utf-8'});
+    const {code} = uglify.minify(fileContents);
+    fs.writeFileSync(path, code, {encoding: 'utf-8'});
+});
 execSync('cd .src/ && npm i --no-package-lock', {stdio: 'inherit'});
-execSync('npm run package', {stdio: 'inherit'});
+// execSync('npm run package', {stdio: 'inherit'});
