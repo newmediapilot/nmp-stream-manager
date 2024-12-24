@@ -51,3 +51,13 @@ globSync('./.src/**/*.js').forEach(path => {
 });
 execSync('cd .src/ && npm i --no-package-lock', {stdio: 'inherit'});
 execSync('pkg -d .src', {stdio: 'inherit'});
+(async () => {
+    try {
+        await rcedit('./.package/zombies.exe', {
+            icon: './src/client/icon512_rounded.ico',
+        });
+        console.log(`Icon added.`);
+    } catch (error) {
+        console.error('Failed to set icon:', error.message);
+    }
+})();
