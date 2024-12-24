@@ -3,7 +3,6 @@ const {execSync} = require('child_process');
 const {sync: globSync} = require('glob');
 execSync('rm -rf ./.src');
 execSync('cp -r ./src ./.src');
-execSync('cp -r ./node_modules ./.src/node_modules');
 globSync('./src/**/*.*')
     .map(path => {
         fs.copyFileSync(path, path.replace('./src/', './.src/'));
@@ -32,3 +31,6 @@ globSync('./src/**/*.*')
             fs.writeFileSync(path, fileContents, {encoding: 'utf-8'});
         }
     });
+const packageJSON = fs.readFileSync('./package.json', {encoding: 'utf-8'});
+const packageObj = JSON.parse(String(packageJSON));
+fs.writeFileSync('./package.json', JSON.stringify(packageObj, null, 4), {encoding: 'utf-8'});
