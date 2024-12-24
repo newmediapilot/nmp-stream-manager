@@ -1,7 +1,5 @@
 const fs = require('fs');
 const {execSync} = require('child_process');
-// const crypto = require('crypto');
-const rcedit = require('rcedit');
 const {sync: globSync} = require('glob');
 const uglify = require('uglify-js');
 execSync('rm -rf ./.src');
@@ -51,13 +49,3 @@ globSync('./.src/**/*.js').forEach(path => {
 });
 execSync('cd .src/ && npm i --no-package-lock', {stdio: 'inherit'});
 execSync('pkg -d .src', {stdio: 'inherit'});
-(async () => {
-    try {
-        await rcedit('./.package/zombies.exe', {
-            icon: './src/client/icon512_rounded.ico',
-        });
-        console.log(`Icon added.`);
-    } catch (error) {
-        console.error('Failed to set icon:', error.message);
-    }
-})();
