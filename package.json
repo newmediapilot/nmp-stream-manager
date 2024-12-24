@@ -32,6 +32,7 @@
         "express": "4.21.2",
         "node-fetch": "2.6.12",
         "nunjucks": "3.2.4",
+        "open": "^10.1.0",
         "socket.io": "4.8.1",
         "strip-ansi": "6.0.1",
         "tmi.js": "1.8.5",
@@ -39,12 +40,13 @@
         "wrap-ansi": "7.0.0"
     },
     "devDependencies": {
-        "dotenv": "16.4.5",
         "aws-sdk": "2.1692.0",
+        "dotenv": "16.4.5",
         "glob": "7.2.3",
         "node": "14.17.6",
         "pkg": "5.8.1",
         "prettier": "3.4.2",
+        "rcedit": "^4.0.1",
         "sync-request": "6.1.0",
         "uglify-js": "^3.19.3"
     }
