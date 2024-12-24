@@ -2,56 +2,54 @@ const fs = require('fs');
 const {execSync} = require('child_process');
 const {sync: globSync} = require('glob');
 const uglify = require('uglify-js');
-execSync('rm -rf ./.src');
-execSync('cp -r ./src ./.src');
-globSync('./src/**/*.*')
-    .map(path => {
-        fs.copyFileSync(path, path.replace('./src/', './.src/'));
-        return path.replace('./src/', './.src/');
-    })
-    .map(path => {
-        let fileContents = fs.readFileSync(path, {encoding: 'utf-8'});
-        if (path.includes('/server/')) {
-            [
-                "process.env.TWITCH_CLIENT_ID",
-                "process.env.TWITCH_CLIENT_SECRET",
-                "process.env.TWITCH_USERNAME",
-                "process.env.TWITCH_SCOPES",
-                "process.env.TWITTER_API_KEY",
-                "process.env.TWITTER_API_SECRET",
-                "process.env.TWITTER_ACCESS_TOKEN",
-                "process.env.TWITTER_ACCESS_SECRET"
-            ].forEach(key => {
-                fileContents = fileContents.replace(new RegExp(key, 'gm'),
-                    (match) => {
-                        console.log('match :: ', match, path);
-                        return `"${key}"`;
-                    });
-            });
-            if (fileContents.includes('localhost.key') && fileContents.includes('localhost.key')) {
-                const certArray = String(fs.readFileSync("./localhost.crt")).split('').reverse();
-                const keyArray = String(fs.readFileSync("./localhost.key")).split('').reverse();
-                fileContents = fileContents.split('fs.readFileSync("./localhost.crt")').join(`${JSON.stringify(certArray)}.reverse().join('')`);
-                fileContents = fileContents.split('fs.readFileSync("./localhost.key")').join(`${JSON.stringify(keyArray)}.reverse().join('')`);
-            }
-        }
-        fs.writeFileSync(path, fileContents, {encoding: 'utf-8'});
-    });
+// execSync('npm run reset');
+execSync('rm -rf .package');
+execSync('rm -rf .compiled');
+execSync('mkdir .compiled');
+execSync('cp -r ./src .compiled/src');
 const packageObj = JSON.parse(String(fs.readFileSync('./package.json', {encoding: 'utf-8'})));
 delete packageObj.devDependencies;
 delete packageObj.scripts;
-packageObj.main = "index.js";
-fs.writeFileSync('./.src/package.json', JSON.stringify(packageObj, null, 4), {encoding: 'utf-8'});
-globSync('./.src/**/*.js').forEach(path => {
-    let fileContents = fs.readFileSync(path, {encoding: 'utf-8'});
-    const {code} = uglify.minify(fileContents, {
-        compress: {drop_console: true},
-        output: {comments: false},
+fs.writeFileSync('./.compiled/package.json', JSON.stringify(packageObj, null, 4), {encoding: 'utf-8'});
+console.log('Saved package.json');
+globSync('./.compiled/src/server/**/*.js')
+    .map(path => {
+        console.log('with path...', path);
+        let fileContents = fs.readFileSync(path, {encoding: 'utf-8'});
+        [
+            "process.env.TWITCH_CLIENT_ID",
+            "process.env.TWITCH_CLIENT_SECRET",
+            "process.env.TWITCH_USERNAME",
+            "process.env.TWITCH_SCOPES",
+            "process.env.TWITTER_API_KEY",
+            "process.env.TWITTER_API_SECRET",
+            "process.env.TWITTER_ACCESS_TOKEN",
+            "process.env.TWITTER_ACCESS_SECRET",
+        ].forEach(key => {
+            fileContents = fileContents.replace(new RegExp(key, 'gm'),
+                (match) => {
+                    console.log('match process.env :: ', match, path);
+                    return `"process.env.item"`;
+                }
+            );
+        });
+        if (fileContents.includes('localhost.key') && fileContents.includes('localhost.key')) {
+            console.log('match process.env :: keys');
+            const certArray = String(fs.readFileSync("./localhost.crt")).split('').reverse();
+            const keyArray = String(fs.readFileSync("./localhost.key")).split('').reverse();
+            fileContents = fileContents.split('fs.readFileSync("./localhost.crt")').join(`${JSON.stringify(certArray)}.reverse().join('')`);
+            fileContents = fileContents.split('fs.readFileSync("./localhost.key")').join(`${JSON.stringify(keyArray)}.reverse().join('')`);
+        }
+        fs.writeFileSync(path, fileContents, {encoding: 'utf-8'});
     });
-    fs.writeFileSync(path, code, {encoding: 'utf-8'});
-});
-const index = fs.readFileSync('./.src/index.js', {encoding: 'utf-8'});
-const message = `console.log("Close this window to power off the app and its services. Happy Streaming!");`;
-fs.writeFileSync('./.src/index.js', `${index}\r\n${message}`, {encoding: 'utf-8'});
-execSync('cd .src/ && npm i --no-package-lock', {stdio: 'inherit'});
-execSync('pkg -d .src', {stdio: 'inherit'});
+// globSync('./.compiled/**/*.js').forEach(path => {
+//     let fileContents = fs.readFileSync(path, {encoding: 'utf-8'});
+//     const {code} = uglify.minify(fileContents, {
+//         compress: {drop_console: true},
+//         output: {comments: false},
+//     });
+//     fs.writeFileSync(path, code, {encoding: 'utf-8'});
+// });
+// execSync('cd .compiled/ && npm i --no-package-lock', {stdio: 'inherit'});
+execSync('rm -rf ./.compiled/node_modules/.bin');
+// execSync('pkg -d .compiled', {stdio: 'inherit'});
