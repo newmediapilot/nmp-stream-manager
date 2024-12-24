@@ -5,7 +5,7 @@ const express = require("express");
 const {getParam, getAllParams} = require("../store/manager");
 const configureNunjucks = (app) => {
     const templatesPath = process.pkg ? process.pkg.entrypoint.split("\\").slice(0,-1).join("\\") + "\\templates" : "./src/templates";
-    const resourcePath = process.pkg ? process.pkg.entrypoint.split("\\").slice(0,-2).join("\\") : ".";
+    const pkgResourcePath = process.pkg ? process.pkg.entrypoint.split("\\").slice(0,-2).join("\\") : ".";
     const nunjucksEnv = nunjucks.configure(templatesPath, {
         autoescape: true,
         express: app,
@@ -17,12 +17,12 @@ const configureNunjucks = (app) => {
         let inputContents = String(scriptTagContents);
         if (inputContents.includes('client/script')) {
             const filename = inputContents.split('<script src="../')[1].split('?')[0];
-            const contents = fs.readFileSync(`${resourcePath}/src/${filename}`, {encoding: 'utf-8'});
+            const contents = fs.readFileSync(`${pkgResourcePath}/src/${filename}`, {encoding: 'utf-8'});
             return `<script type="text/javascript" defer>${contents}</script>`;
         }
         if (inputContents.includes('client/style')) {
             const filename = inputContents.split('<link href="../')[1].split('?')[0];
-            const contents = fs.readFileSync(`${resourcePath}/src/${filename}`, {encoding: 'utf-8'});
+            const contents = fs.readFileSync(`${pkgResourcePath}/src/${filename}`, {encoding: 'utf-8'});
             return `<style>${contents}</style>`;
         }
         return `<!-- inlineScriptContents -->${scriptTagContents}<!-- inlineScriptContents -->`;
