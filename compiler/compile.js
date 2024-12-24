@@ -40,10 +40,8 @@ globSync('./src/**/*.*')
     });
 const packageObj = JSON.parse(String(fs.readFileSync('./package.json', {encoding: 'utf-8'})));
 delete packageObj.devDependencies;
-delete packageObj.name;
-delete packageObj.bin;
-delete packageObj.pkg;
 delete packageObj.scripts;
 packageObj.main = "index.js";
 fs.writeFileSync('./.src/package.json', JSON.stringify(packageObj, null, 4), {encoding: 'utf-8'});
 execSync('cd .src/ && npm i --no-package-lock', {stdio: 'inherit'});
+execSync('npm run package', {stdio: 'inherit'});
