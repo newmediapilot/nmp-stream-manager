@@ -5,9 +5,10 @@ const express = require("express");
 const {getParam, getAllParams} = require("../store/manager");
 const configureNunjucks = (app) => {
     console.log('configure.process.pkg', process.pkg);
+    console.log('configure.process.pkg', process.pkg.path.resolve(__dirname, "../../templates"));
     console.log('configure.__dirname', __dirname);
     console.log('configure.process.execPath', process.execPath);
-    const templatesPath = process.pkg ? process.pkg.entrypoint.split("\\").slice(0,-1).join("\\") + "\\src\\templates" : "templates";
+    const templatesPath = process.pkg ? process.pkg.entrypoint.split("\\").slice(0,-1).join("\\") + "\\templates" : "templates";
     console.log('configure.templatesPath', templatesPath);
     const nunjucksEnv = nunjucks.configure(templatesPath, {
         autoescape: true,
