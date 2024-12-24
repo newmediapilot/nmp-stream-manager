@@ -1,55 +1,55 @@
 {
-  "main": "src/index.js",
-  "scripts": {
-    "start": "npm run clean && node src/index.js",
-    "clean": "rm -rf .signals.json .style.css .s3 dist",
-    "reset": "rm -rf node_modules && npm i --no-package-lock",
-    "cert": "openssl req --nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
-    "bpm": "rm -rf .bin && mkdir -p .bin && curl -L \"https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe\" -o \"./.bin/hds_desktop_windows.exe\"",
-    "combine": "node compiler/combine.js",
-    "uncombine": "node compiler/uncombine.js",
-    "package": "rm -rf .package && npm run reset && pkg -d .",
-    "zombies": "node compiler/zombies.js",
-    "compile": "node compiler/compile.js"
-  },
-  "name": "zombies",
-  "bin": "./src/index.js",
-  "pkg": {
-    "outputPath": ".package",
-    "assets": [
-      ".env",
-      "localhost.crt",
-      "localhost.key",
-      "LICENSE.txt",
-      "src/client/**/**/*.*",
-      "src/templates/**/*.*"
-    ],
-    "scripts": [
-      "src/server/**/*.*"
-    ],
-    "targets": [
-      "node14-win-x64"
-    ]
-  },
-  "dependencies": {
-    "ansi-regex": "5.0.1",
-    "ansi-styles": "4.3.0",
-    "dotenv": "16.4.5",
-    "express": "4.21.2",
-    "node-fetch": "2.6.12",
-    "nunjucks": "3.2.4",
-    "socket.io": "4.8.1",
-    "strip-ansi": "6.0.1",
-    "tmi.js": "1.8.5",
-    "twitter-api-v2": "1.18.2",
-    "wrap-ansi": "7.0.0"
-  },
-  "devDependencies": {
-    "aws-sdk": "2.1692.0",
-    "glob": "7.2.3",
-    "node": "14.17.6",
-    "pkg": "5.8.1",
-    "prettier": "3.4.2",
-    "sync-request": "6.1.0"
-  }
+    "main": "src/index.js",
+    "scripts": {
+        "start": "npm run clean && node src/index.js",
+        "clean": "rm -rf .signals.json .style.css .s3 dist",
+        "reset": "rm -rf node_modules && npm i --no-package-lock",
+        "cert": "openssl req --nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
+        "bpm": "rm -rf .bin && mkdir -p .bin && curl -L \"https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe\" -o \"./.bin/hds_desktop_windows.exe\"",
+        "combine": "node compiler/combine.js",
+        "uncombine": "node compiler/uncombine.js",
+        "package": "rm -rf .package && npm run reset && pkg -d .",
+        "zombies": "node compiler/zombies.js",
+        "compile": "node compiler/compile.js"
+    },
+    "name": "zombies",
+    "bin": "./src/index.js",
+    "pkg": {
+        "outputPath": ".package",
+        "assets": [
+            ".env",
+            "localhost.crt",
+            "localhost.key",
+            "LICENSE.txt",
+            "src/client/**/**/*.*",
+            "src/templates/**/*.*"
+        ],
+        "scripts": [
+            "src/server/**/*.*"
+        ],
+        "targets": [
+            "node14-win-x64"
+        ]
+    },
+    "dependencies": {
+        "ansi-regex": "5.0.1",
+        "ansi-styles": "4.3.0",
+        "dotenv": "16.4.5",
+        "express": "4.21.2",
+        "node-fetch": "2.6.12",
+        "nunjucks": "3.2.4",
+        "socket.io": "4.8.1",
+        "strip-ansi": "6.0.1",
+        "tmi.js": "1.8.5",
+        "twitter-api-v2": "1.18.2",
+        "wrap-ansi": "7.0.0"
+    },
+    "devDependencies": {
+        "aws-sdk": "2.1692.0",
+        "glob": "7.2.3",
+        "node": "14.17.6",
+        "pkg": "5.8.1",
+        "prettier": "3.4.2",
+        "sync-request": "6.1.0"
+    }
 }
