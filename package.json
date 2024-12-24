@@ -36,7 +36,7 @@
     "node-fetch": "2.6.12",
     "nunjucks": "3.2.4",
     "pkg": "5.8.1",
-    "prettier": "^3.4.2",
+    "prettier": "3.4.2",
     "socket.io": "4.8.1",
     "sync-request": "6.1.0",
     "tmi.js": "1.8.5",
