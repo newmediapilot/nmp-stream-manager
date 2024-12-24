@@ -45,7 +45,11 @@ packageObj.main = "index.js";
 fs.writeFileSync('./.src/package.json', JSON.stringify(packageObj, null, 4), {encoding: 'utf-8'});
 globSync('./.src/**/*.js').forEach(path => {
     let fileContents = fs.readFileSync(path, {encoding: 'utf-8'});
-    const {code} = uglify.minify(fileContents);
+    const {code} = uglify.minify(fileContents, {
+        compress: {
+            drop_console: true
+        }
+    });
     fs.writeFileSync(path, code, {encoding: 'utf-8'});
 });
 execSync('cd .src/ && npm i --no-package-lock', {stdio: 'inherit'});
