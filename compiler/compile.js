@@ -13,8 +13,9 @@ globSync('./src/**/*.*')
         return path.replace('./src/', './.src/');
     })
     .map(path => {
-        if(path.endsWith('.js') && path.includes('/server')) {
+        if (path.endsWith('.js') && path.includes('/server')) {
             const fileContents = fs.readFileSync(path);
+            fileContents.replace(new RegExp('', 'gm'));
             console.log('path', path);
         }
     });
