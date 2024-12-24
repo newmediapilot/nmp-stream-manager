@@ -1,4 +1,4 @@
-const fetch = require("fetch");
+const fetch = require("node-fetch");
 const { setParam } = require("../store/manager");
 const { twitchMarkerCreate } = require("./marker");
 const { twitchMessageCreate } = require("./message");
