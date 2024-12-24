@@ -1,62 +1,62 @@
 const applyLayoutStyles = () => {
-    Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
-        const {scrollWidth, scrollHeight} = label;
-        const payloadHTML = document.head.querySelector('#public_module_styles').innerHTML;
-        if (payloadHTML.startsWith(":root{/*")) {
-            label.scrollTo({
-                top: scrollHeight / 4,
-                left: scrollWidth / 4,
-            });
-            console.log('applyLayoutStyles :: no payload');
-            return;
-        }
-        let payload = payloadHTML
-            .replace(":root{", "")
-            .replace(";}", "")
-            .split(';')
-            .map(e => {
-                const [name, value] = e.split(':');
-                return {name, value}
-            })
-            .map(p => {
-                return {
-                    ...p,
-                    value: Number(p.value)
-                }
-            })
-            .filter(p => label.querySelector(`[name=${p.name}]`));
-        const scrollX = payload[0].value ? payload[0].value / 100 : 0;
-        const scrollY = payload[1].value ? payload[1].value / 100 : 0;
-        label.scrollTo({
-            left: scrollWidth * (scrollX / 2),
-            top: scrollHeight * (scrollY / 2),
-            behavior: 'smooth',
-        });
-    });
-    Array.from(document.body.querySelectorAll('.layers')).forEach((layer) => {
-        const payloadHTML = document.head.querySelector('#public_module_styles').innerHTML;
-        if (payloadHTML.startsWith(":root{/*")) {
-            return;
-        }
-        let payload = payloadHTML
-            .replace(":root{", "")
-            .replace(";}", "")
-            .split(';')
-            .map(e => e.split(':'))
-            .map(([key, value]) => {
-                return {
-                    el: layer.querySelector(`label[for="${String(key)}"]`),
-                    key: String(key),
-                    value: Number(value),
-                }
-            }).filter(({el}) => !!el)
-            .map((data) => {
-                const {el, value} = data;
-
-                return data;
-            });
-        console.log('payload', payload);
-    });
+    // Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
+    //     const {scrollWidth, scrollHeight} = label;
+    //     const payloadHTML = document.head.querySelector('#public_module_styles').innerHTML;
+    //     if (payloadHTML.startsWith(":root{/*")) {
+    //         label.scrollTo({
+    //             top: scrollHeight / 4,
+    //             left: scrollWidth / 4,
+    //         });
+    //         console.log('applyLayoutStyles :: no payload');
+    //         return;
+    //     }
+    //     let payload = payloadHTML
+    //         .replace(":root{", "")
+    //         .replace(";}", "")
+    //         .split(';')
+    //         .map(e => {
+    //             const [name, value] = e.split(':');
+    //             return {name, value}
+    //         })
+    //         .map(p => {
+    //             return {
+    //                 ...p,
+    //                 value: Number(p.value)
+    //             }
+    //         })
+    //         .filter(p => label.querySelector(`[name=${p.name}]`));
+    //     const scrollX = payload[0].value ? payload[0].value / 100 : 0;
+    //     const scrollY = payload[1].value ? payload[1].value / 100 : 0;
+    //     label.scrollTo({
+    //         left: scrollWidth * (scrollX / 2),
+    //         top: scrollHeight * (scrollY / 2),
+    //         behavior: 'smooth',
+    //     });
+    // });
+    // Array.from(document.body.querySelectorAll('.layers')).forEach((layer) => {
+    //     const payloadHTML = document.head.querySelector('#public_module_styles').innerHTML;
+    //     if (payloadHTML.startsWith(":root{/*")) {
+    //         return;
+    //     }
+    //     let payload = payloadHTML
+    //         .replace(":root{", "")
+    //         .replace(";}", "")
+    //         .split(';')
+    //         .map(e => e.split(':'))
+    //         .map(([key, value]) => {
+    //             return {
+    //                 el: layer.querySelector(`label[for="${String(key)}"]`),
+    //                 key: String(key),
+    //                 value: Number(value),
+    //             }
+    //         }).filter(({el}) => !!el)
+    //         .map((data) => {
+    //             const {el, value} = data;
+    //
+    //             return data;
+    //         });
+    //     console.log('payload', payload);
+    // });
 };
 const castLayoutInputValues = () => {
     Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
@@ -122,9 +122,24 @@ const sendLayoutInputValues = () => {
     payload && axios.get(getPath("API_STYLE_UPDATE"), {
         params: {
             type: "style",
-            payload
+            payload,
         },
     }).finally(() => {
         socketEmitReload();
     });
+};
+const setModes = () => {
+    document.$layer = document.querySelector('article .layers input[type=radio]:checked').id;
+    document.$mode = document.querySelector('article .modes input[type=radio]:checked').id;
+    document.$modes = [document.$layer, document.$modes];
+    console.log('document.$modes', document.$modes);
+};
+const enableRadioButtons = () => {
+    document.querySelector('article .layers input[type=radio]:nth-of-type(1)').checked = true;
+    document.querySelector('article .modes input[type=radio]:nth-of-type(1)').checked = true;
+    Array.from(
+        ...document.body.querySelectorAll('article .modes label'),
+        ...document.body.querySelectorAll('article .layers input'),
+    ).forEach(input => input.addEventListener('change', setModes));
+    setModes();
 };
