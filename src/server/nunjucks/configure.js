@@ -1,4 +1,3 @@
-const {__dirname} = require("node/globals");
 const fs = require("fs");
 const nunjucks = require("nunjucks");
 const express = require("express");
