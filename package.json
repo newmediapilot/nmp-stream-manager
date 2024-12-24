@@ -8,7 +8,7 @@
     "bpm": "rm -rf .bin && curl -L \"https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe\" -o \"./.bin\"",
     "combine": "node compiler/combine.js",
     "uncombine": "node compiler/uncombine.js",
-    "package": "npm run reset && pkg -d .",
+    "package": "rm -rf .package && npm run reset && pkg -d .",
     "zombies": "node compiler/zombies.js"
   },
   "name": "zombies",
