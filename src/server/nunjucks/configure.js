@@ -27,6 +27,5 @@ const configureNunjucks = (app) => {
     nunjucksEnv.addFilter("cacheBuster", () => new Date().getTime());
     app.set("view engine", "html");
     app.use(express.static("src/client"));
-    appRef = app;
 };
 module.exports = {configureNunjucks};
