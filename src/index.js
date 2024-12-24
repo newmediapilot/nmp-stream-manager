@@ -45,4 +45,3 @@ app.all(ROUTES.API_STYLE_UPDATE, publicStyleUpdate);
 app.all(ROUTES.API_MEDIA_UPDATE, publicMediaUpdate);
 app.all(ROUTES.API_BPM_PING, publicBpmPing);
 startServices(app);
-console.log("The app will shut down when you close this window.");
