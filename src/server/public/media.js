@@ -1,6 +1,20 @@
 const fs = require("fs");
 const {getParam} = require('../store/manager');
 const {configFieldUpdate} = require('./config');
+const publicMediaFetch = (req, res) => {
+    const originalSend = res.send;
+    res.send = (body) => {
+        if (
+            req.path.contains('media') &&
+            typeof body === 'string'
+        ) {
+            const matched = body.match(new RegExp("../client", "gm"));
+            body = body.replace(match, "");
+        }
+        originalSend.call(res, body);
+    };
+    next();
+};
 const publicMediaUpdate = (req, res) => {
     try {
         const {data, key, type, id} = req.body;
@@ -26,4 +40,5 @@ const publicMediaUpdate = (req, res) => {
 };
 module.exports = {
     publicMediaUpdate,
+    publicMediaFetch,
 };
