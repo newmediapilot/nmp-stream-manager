@@ -31,13 +31,13 @@ globSync('./src/**/*.*')
             fs.writeFileSync(path, fileContents, {encoding: 'utf-8'});
         }
     });
-const packageJSON = fs.readFileSync('./package.json', {encoding: 'utf-8'});
-const packageObj = JSON.parse(String(packageJSON));
+const packageObj = JSON.parse(String(fs.readFileSync('./package.json', {encoding: 'utf-8'})));
 delete packageObj.devDependencies;
 delete packageObj.name;
 delete packageObj.bin;
 delete packageObj.pkg;
 delete packageObj.scripts;
 packageObj.main = "index.js";
-
 fs.writeFileSync('./.src/package.json', JSON.stringify(packageObj, null, 4), {encoding: 'utf-8'});
+execSync('cd .src/ && npm i --no-package-lock');
+execSync('npm run package', {stdio: 'inherit'});
