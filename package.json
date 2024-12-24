@@ -14,8 +14,12 @@
   "name": "zombies",
   "bin": "src/index.js",
   "pkg": {
-    "outputPath": "dist",
+    "outputPath": ".package",
     "assets": [
+      ".env",
+      "localhost.crt",
+      "localhost.key",
+      "LICENSE.txt",
       "src/client/**/**/*.*",
       "src/templates/**/*.*"
     ],
