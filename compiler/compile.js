@@ -16,7 +16,6 @@ globSync('./src/**/*.*')
                 "process.env.TWITCH_CLIENT_SECRET",
                 "process.env.TWITCH_USERNAME",
                 "process.env.TWITCH_SCOPES",
-                "process.env.TWITCH_REDIRECT_URL",
                 "process.env.TWITTER_API_KEY",
                 "process.env.TWITTER_API_SECRET",
                 "process.env.TWITTER_ACCESS_TOKEN",
@@ -40,4 +39,4 @@ delete packageObj.scripts;
 packageObj.main = "index.js";
 fs.writeFileSync('./.src/package.json', JSON.stringify(packageObj, null, 4), {encoding: 'utf-8'});
 execSync('cd .src/ && npm i --no-package-lock');
-execSync('npm run package', {stdio: 'inherit'});
+// execSync('npm run package', {stdio: 'inherit'});
