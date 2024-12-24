@@ -12,6 +12,7 @@ const allowedParams = [
   "twitch_access_token_set",
   "twitch_refresh_token_set",
   "twitch_channel_id_set",
+  "public_module_styles",
 ];
 function loadSecrets() {
   if (fs.existsSync(".secrets")) {
