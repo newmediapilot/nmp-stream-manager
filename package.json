@@ -12,15 +12,15 @@
         "compile": "node compiler/compile.js"
     },
     "name": "zombies",
-    "bin": "./.src/index.js",
+    "bin": "./index.js",
     "pkg": {
         "outputPath": "./.package",
         "assets": [
-            "./.src/client/**/**/*.*",
-            "./.src/templates/**/*.*"
+            "./client/**/**/*.*",
+            "./templates/**/*.*"
         ],
         "scripts": [
-            "./.src/server/**/*.*"
+            "./server/**/*.*"
         ],
         "targets": [
             "node14-win-x64"
