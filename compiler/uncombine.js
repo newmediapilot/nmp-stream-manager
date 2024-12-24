@@ -26,4 +26,4 @@ function uncombine() {
     console.log(process.cwd(), "Error during uncombine process:", error);
   }
 }
-uncombine();I l
+uncombine();
