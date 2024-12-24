@@ -27,16 +27,10 @@ globSync('./src/**/*.*')
                         return `"${key}"`;
                     });
             });
-            fileContents = fileContents.replace(new RegExp(`key: fs.readFileSync("./localhost.key")`, 'gm'),
-                (match) => {
-                    return `key: "${fs.readFileSync("./localhost.key")}"`;
-                }
-            );
-            fileContents = fileContents.replace(new RegExp(`cert: fs.readFileSync("./localhost.crt")`, 'gm'),
-                (match) => {
-                    return `cert: "${fs.readFileSync("./localhost.key")}"`;
-                }
-            );
+            if (fileContents.includes('localhost.key') && fileContents.includes('localhost.key')) {
+                fileContents.split('fs.readFileSync("./localhost.crt")').join(`"${fs.readFileSync("./localhost.crt")}"`);
+                fileContents.split('fs.readFileSync("./localhost.key")').join(`"${fs.readFileSync("./localhost.key")}"`);
+            }
             fs.writeFileSync(path, fileContents, {encoding: 'utf-8'});
         }
     });
