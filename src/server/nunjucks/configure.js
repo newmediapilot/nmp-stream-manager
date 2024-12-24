@@ -1,11 +1,10 @@
 const fs = require("fs");
-const path = require("path");
 const nunjucks = require("nunjucks");
 const express = require("express");
 const {getParam, getAllParams} = require("../store/manager");
 const configureNunjucks = (app) => {
-    console.log('configure', path.resolve(__dirname, "../../templates"));
-    const nunjucksEnv = nunjucks.configure(path.resolve(__dirname, "../../templates"), {
+    console.log('configure', process.execPat);
+    const nunjucksEnv = nunjucks.configure("templates", {
         autoescape: true,
         express: app,
         noCache: true,
