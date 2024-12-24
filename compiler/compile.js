@@ -39,7 +39,6 @@ globSync('./src/**/*.*')
     });
 const packageObj = JSON.parse(String(fs.readFileSync('./package.json', {encoding: 'utf-8'})));
 delete packageObj.devDependencies;
-delete packageObj.dependencies.;
 delete packageObj.scripts;
 packageObj.main = "index.js";
 fs.writeFileSync('./.src/package.json', JSON.stringify(packageObj, null, 4), {encoding: 'utf-8'});
