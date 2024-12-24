@@ -7,8 +7,8 @@ node_modules
 .signals
 .style
 .s3
-.src
 .bin
 .package
+.compiled
 .combined.json
 src/client/.media/
