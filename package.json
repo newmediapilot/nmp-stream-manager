@@ -14,13 +14,13 @@
     "name": "zombies",
     "bin": "./.src/index.js",
     "pkg": {
-        "outputPath": ".package",
+        "outputPath": "./.package",
         "assets": [
-            "./src/client/**/**/*.*",
-            "./src/templates/**/*.*"
+            "./.src/client/**/**/*.*",
+            "./.src/templates/**/*.*"
         ],
         "scripts": [
-            "./src/server/**/*.*"
+            "./.src/server/**/*.*"
         ],
         "targets": [
             "node14-win-x64"
