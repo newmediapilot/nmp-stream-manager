@@ -9,6 +9,7 @@ const {publicSignalCreate} = require("./server/public/signal");
 const {publicConfigUpdate} = require("./server/public/config");
 const {publicStyleUpdate} = require("./server/public/style");
 const {publicMediaUpdate} = require("./server/public/media");
+const {publicMediaFetch} = require("./server/public/media");
 const {publicBpmPing} = require("./server/bpm/ping");
 const {twitchLogin, twitchLoginSuccess} = require("./server/twitch/login");
 const app = express();
@@ -25,6 +26,7 @@ app.all('*', (req, res, next) => {
     if (req.method === 'OPTIONS') return res.status(204).end();
     next();
 });
+app.use(publicMediaFetch);
 app.all(ROUTES.TWITCH_LOGIN, twitchLogin);
 app.all(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess);
 app.all(ROUTES.INDEX, (req, res) => res.render("index"));
