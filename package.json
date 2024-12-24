@@ -11,13 +11,13 @@
     "package": "npm run reset && pkg -d .",
     "zombies": "node compiler/zombies.js"
   },
-  "name": "app-name",
+  "name": "zombies",
   "bin": "src/index.js",
   "pkg": {
     "outputPath": "dist",
     "assets": [
-      "src/client/**/*",
-      "src/templates/**/*"
+      "src/client/**/**/*.*",
+      "src/templates/**/*.*"
     ],
     "scripts": [
       "src/server/**/*"
