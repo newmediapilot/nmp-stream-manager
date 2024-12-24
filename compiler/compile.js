@@ -8,4 +8,13 @@ globSync('./src/**/*.*')
     .sort((a, b) => a.length - b.length)
     .map(dir => !fs.existsSync(dir) && fs.mkdirSync(dir));
 globSync('./src/**/*.*')
-    .map(path => fs.copyFileSync(path, path.replace('./src/', './.src/')));
+    .map(path => {
+        fs.copyFileSync(path, path.replace('./src/', './.src/'));
+        return path.replace('./src/', './.src/');
+    })
+    .map(path => {
+        if(path.endsWith('.js') && path.includes('/server')) {
+            const fileContents = fs.readFileSync(path);
+            console.log('path', path);
+        }
+    });
