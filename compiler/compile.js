@@ -13,9 +13,26 @@ globSync('./src/**/*.*')
         return path.replace('./src/', './.src/');
     })
     .map(path => {
-        if (path.endsWith('.js') && path.includes('/server')) {
-            const fileContents = fs.readFileSync(path);
-            fileContents.replace(new RegExp('', 'gm'));
-            console.log('path', path);
+        if (path.includes('/server')) {
+            let fileContents = fs.readFileSync(path, {encoding: 'utf-8'});
+            [
+                "process.env.TWITCH_CLIENT_ID",
+                "process.env.TWITCH_CLIENT_SECRET",
+                "process.env.TWITCH_USERNAME",
+                "process.env.TWITCH_SCOPES",
+                "process.env.TWITCH_REDIRECT_URL",
+                "process.env.TWITTER_API_KEY",
+                "process.env.TWITTER_API_SECRET",
+                "process.env.TWITTER_ACCESS_TOKEN",
+                "process.env.TWITTER_ACCESS_SECRET"
+            ].forEach(key => {
+                fileContents = fileContents.replace(new RegExp(key, 'gm'),
+                    (match) => {
+                        console.log('match :: ', match, path);
+                        return `"${key}"`;
+                    });
+            });
+            fs.writeFileSync(path, fileContents, {encoding: 'utf-8'});
+            console.log()
         }
     });
