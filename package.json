@@ -2,13 +2,13 @@
     "main": "src/index.js",
     "scripts": {
         "start": "npm run clean && node src/index.js",
-        "clean": "rm -rf .signals.json .style.css .s3 dist",
-        "reset": "rm -rf node_modules && npm i --no-package-lock",
+        "clean": "rm .signals && rm .style && rm -rf .s3 && rm -rf .package",
+        "reset": "npm run clean && rm -rf node_modules && npm i --no-package-lock",
         "cert": "openssl req --nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
         "bpm": "rm -rf .bin && mkdir -p .bin && curl -L \"https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe\" -o \"./.bin/hds_desktop_windows.exe\"",
         "combine": "node compiler/combine.js",
         "uncombine": "node compiler/uncombine.js",
-        "package": "rm -rf .package && npm run reset && pkg -d .",
+        "package": "npm run reset && pkg -d .",
         "zombies": "node compiler/zombies.js",
         "compile": "node compiler/compile.js"
     },
@@ -51,8 +51,5 @@
         "pkg": "5.8.1",
         "prettier": "3.4.2",
         "sync-request": "6.1.0"
-    },
-    "engines": {
-      "node": "14.17.6"
     }
 }
