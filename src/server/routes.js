@@ -17,7 +17,7 @@ const ROUTES = {
     PANEL_BPM_EMBED: "/public/bpm/embed",
     API_BPM_PING: "/public/bpm/ping",
     TWITCH_LOGIN: "/twitch/login",
-    TWITCH_REDIRECT: process.env.TWITCH_REDIRECT_URL,
-    TWITCH_LOGIN_SUCCESS: process.env.TWITCH_REDIRECT_URL.split('https://localhost')[1],
+    TWITCH_REDIRECT: "https://localhost/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/",
+    TWITCH_LOGIN_SUCCESS: "https://localhost/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/".split('https://localhost')[1],
 };
 module.exports = ROUTES;
