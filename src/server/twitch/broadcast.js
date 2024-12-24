@@ -1,29 +1,15 @@
-/**
- * File: src\server\twitch\broadcast.js
- * Description: Logic and operations for src\server\twitch\broadcast.js.
- */
-
-const axios = require("axios");
+const fetch = require("fetch");
 const { getSecret } = require("../store/manager");
 const { twitchMessageCreate } = require("./message");
-
-/**
- * Updates the stream title using Twitch API.
- * @param {string} title - The title to set for the stream.
- * @returns {boolean} - True if the title was updated successfully, otherwise false.
- */
 async function setBroadcastTitle(title) {
   if (!title) {
     console.log(process.cwd(), "No title provided. Skipping update.");
     return false;
   }
-
   try {
     const accessToken = getSecret("twitch_access_token");
     const broadcasterId = getSecret("twitch_broadcaster_id");
-
     console.log(process.cwd(), "Setting stream title to:", title);
-
   const response = await fetch(`https://api.twitch.tv/helix/channels?broadcaster_id=${broadcasterId}`, {
       method: 'PATCH',
       headers: {
@@ -33,11 +19,9 @@ async function setBroadcastTitle(title) {
       },
       body: JSON.stringify({ title })
   });
-
     if (response.status === 204) {
       console.log(process.cwd(), "Stream title updated successfully.");
       await twitchMessageCreate("Stream title updated to: " + title);
-
       return title;
     } else {
       console.log(
@@ -56,5 +40,4 @@ async function setBroadcastTitle(title) {
     return false;
   }
 }
-
 module.exports = { setBroadcastTitle };

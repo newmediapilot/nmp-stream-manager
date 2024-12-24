@@ -1,4 +1,4 @@
-const axios = require("axios");
+const fetch = require("fetch");
 const { getSecret } = require("../store/manager");
 async function twitchMessageCreate(message) {
   try {

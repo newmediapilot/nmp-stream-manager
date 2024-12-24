@@ -1,4 +1,4 @@
-const axios = require("axios");
+const fetch = require("fetch");
 const { setParam } = require("../store/manager");
 const { twitchMarkerCreate } = require("./marker");
 const { twitchMessageCreate } = require("./message");

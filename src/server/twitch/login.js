@@ -1,4 +1,4 @@
-const axios = require("axios");
+const fetch = require("fetch");
 const ROUTES = require("../routes");
 const {
     getSecret,
