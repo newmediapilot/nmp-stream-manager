@@ -23,19 +23,13 @@ async function twitchLoginSuccess(req, res) {
     resetSecrets();
     const code = req.query.code;
     try {
-        const response = await axios.post(
-            "https://id.twitch.tv/oauth2/token",
-            null,
-            {
-                params: {
-                    client_id: process.env.TWITCH_CLIENT_ID,
-                    client_secret: process.env.TWITCH_CLIENT_SECRET,
-                    code: code,
-                    grant_type: "authorization_code",
-                    redirect_uri: ROUTES.TWITCH_REDIRECT,
-                },
-            },
-        );
+        const response = await fetch(`https://id.twitch.tv/oauth2/token?client_id=${process.env.TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&code=${code}&grant_type=authorization_code&redirect_uri=${ROUTES.TWITCH_REDIRECT}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+
         const accessToken = response.data.access_token;
         const refreshToken = response.data.refresh_token;
         setSecret("twitch_access_token", accessToken);
@@ -67,15 +61,13 @@ async function getBroadcasterId() {
             "Access Token:",
             String("X").repeat(accessToken.length),
         );
-        const response = await axios.get(
-            `https://api.twitch.tv/helix/users?login=${username}`,
-            {
-                headers: {
-                    "Client-ID": process.env.TWITCH_CLIENT_ID,
-                    Authorization: `Bearer ${accessToken}`, // Use the access token here
-                },
-            },
-        );
+        const response = await fetch(`https://api.twitch.tv/helix/users?login=${username}`, {
+            method: 'GET',
+            headers: {
+                'Client-ID': process.env.TWITCH_CLIENT_ID,
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
         if (response.data.data && response.data.data.length > 0) {
             const broadcasterId = response.data.data[0].id;
             console.log(
@@ -98,15 +90,13 @@ async function getChannelId() {
     try {
         const username = getParam("twitch_username");
         const accessToken = getSecret("twitch_access_token");
-        const response = await axios.get(
-            `https://api.twitch.tv/helix/users?login=${username}`,
-            {
-                headers: {
-                    "Client-ID": process.env.TWITCH_CLIENT_ID,
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            },
-        );
+        const response = await fetch(`https://api.twitch.tv/helix/users?login=${username}`, {
+            method: 'GET',
+            headers: {
+                'Client-ID': process.env.TWITCH_CLIENT_ID,
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
         if (response.data.data && response.data.data.length > 0) {
             const channelId = response.data.data[0].login;
             console.log(process.cwd(), "Channel ID fetched:", channelId);

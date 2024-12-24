@@ -16,15 +16,24 @@
     "outputPath": "dist",
     "assets": [
       "src/client/**/*"
+    ],
+    "scripts": [
+      "src/**/*.js",
+      "node_modules/axios/**/*.js"
+    ],
+    "targets": [
+      "node16-win-x64"
+    ]
+  },
   "dependencies": {
     "aws-sdk": "2.1692.0",
-    "axios": "1.7.7",
     "chalk": "2.4.2",
     "dotenv": "16.4.5",
     "express": "4.21.2",
     "glob": "11.0.0",
     "node-fetch": "2.6.12",
     "nunjucks": "3.2.4",
+    "pkg": "5.8.1",
     "prettier": "^3.4.2",
     "socket.io": "4.8.1",
     "sync-request": "6.1.0",

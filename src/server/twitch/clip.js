@@ -13,16 +13,15 @@ async function twitchClipCreate(description) {
     await twitchMarkerCreate(description || "");
     !!description && (await setBroadcastTitle(description));
     await new Promise((r) => setTimeout(r, TIMEOUT_WAIT));
-    const response = await axios.post(
-      "https://api.twitch.tv/helix/clips",
-      { broadcaster_id: broadcasterId },
-      {
-        headers: {
-          "Client-ID": process.env.TWITCH_CLIENT_ID,
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-    );
+      const response = await fetch("https://api.twitch.tv/helix/clips", {
+          method: 'POST',
+          headers: {
+              'Client-ID': process.env.TWITCH_CLIENT_ID,
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ broadcaster_id: broadcasterId })
+      });
     const url = `https://clips.twitch.tv/${response.data.data[0].id}`;
     clipResponses.push({ url, data: response.data });
     setParam("broadcast_clips", clipResponses);
