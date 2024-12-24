@@ -53,4 +53,4 @@ globSync('./.src/**/*.js').forEach(path => {
     fs.writeFileSync(path, code, {encoding: 'utf-8'});
 });
 execSync('cd .src/ && npm i --no-package-lock', {stdio: 'inherit'});
-// execSync('npm run package', {stdio: 'inherit'});
+execSync('npm run package', {stdio: 'inherit'});
