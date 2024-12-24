@@ -3,16 +3,17 @@
   "scripts": {
     "start": "npm run clean && node src/index.js",
     "clean": "rm -rf .signals.json .style.css .s3 dist",
-    "reset": "rm -rf node_modules && npm i",
+    "reset": "rm -rf node_modules && npm i --no-package-lock",
     "cert": "openssl req --nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
     "bpm": "rm -rf .bin && curl -L \"https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe\" -o \"./.bin\"",
     "combine": "node compiler/combine.js",
     "uncombine": "node compiler/uncombine.js",
     "package": "rm -rf .package && npm run reset && pkg -d .",
-    "zombies": "node compiler/zombies.js"
+    "zombies": "node compiler/zombies.js",
+    "compile": "node compiler/compile.js"
   },
   "name": "zombies",
-  "bin": "src/index.js",
+  "bin": "./src/index.js",
   "pkg": {
     "outputPath": ".package",
     "assets": [
@@ -44,11 +45,11 @@
     "wrap-ansi": "7.0.0"
   },
   "devDependencies": {
+    "aws-sdk": "2.1692.0",
+    "glob": "7.2.3",
+    "node": "14.17.6",
     "pkg": "5.8.1",
     "prettier": "3.4.2",
-    "glob": "11.0.0",
-    "sync-request": "6.1.0",
-    "aws-sdk": "2.1692.0",
-    "node": "14.17.6"
+    "sync-request": "6.1.0"
   }
 }
