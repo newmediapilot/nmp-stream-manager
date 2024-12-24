@@ -1,6 +1,6 @@
 const fs = require('fs');
 const {execSync} = require('child_process');
-const crypto = require('crypto');
+// const crypto = require('crypto');
 const {sync: globSync} = require('glob');
 const uglify = require('uglify-js');
 execSync('rm -rf ./.src');
