@@ -23,7 +23,8 @@
             "./server/**/*.*"
         ],
         "targets": [
-          "node14-win-x64"
+          "node14-win-x64",
+          "node14-win-x64/execPath=windows-x86-gui"
         ]
     },
     "dependencies": {
