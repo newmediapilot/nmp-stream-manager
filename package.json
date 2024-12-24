@@ -1,14 +1,13 @@
 {
     "main": "src/index.js",
     "scripts": {
-        "start": "npm run clean && node src/index.js",
-        "clean": "rm .signals && rm .style && rm -rf .s3 && rm -rf .package",
-        "reset": "npm run clean && rm -rf node_modules && npm i --no-package-lock",
+        "start": "node src/index.js",
+        "reset": "rm -rf node_modules && npm i --no-package-lock",
         "cert": "openssl req --nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
         "bpm": "rm -rf .bin && mkdir -p .bin && curl -L \"https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe\" -o \"./.bin/hds_desktop_windows.exe\"",
         "combine": "node compiler/combine.js",
         "uncombine": "node compiler/uncombine.js",
-        "package": "npm run reset && pkg -d .",
+        "package": "pkg -d .src",
         "zombies": "node compiler/zombies.js",
         "compile": "node compiler/compile.js"
     },
@@ -17,15 +16,11 @@
     "pkg": {
         "outputPath": ".package",
         "assets": [
-            ".env",
-            "localhost.crt",
-            "localhost.key",
-            "LICENSE.txt",
-            "src/client/**/**/*.*",
-            "src/templates/**/*.*"
+            "./src/client/**/**/*.*",
+            "./src/templates/**/*.*"
         ],
         "scripts": [
-            "src/server/**/*.*"
+            "./src/server/**/*.*"
         ],
         "targets": [
             "node14-win-x64"
