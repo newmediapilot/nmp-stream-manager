@@ -1,6 +1,7 @@
 const fs = require('fs');
 const {execSync} = require('child_process');
 // const crypto = require('crypto');
+const rcedit = require('rcedit');
 const {sync: globSync} = require('glob');
 const uglify = require('uglify-js');
 execSync('rm -rf ./.src');
@@ -49,5 +50,4 @@ globSync('./.src/**/*.js').forEach(path => {
     fs.writeFileSync(path, code, {encoding: 'utf-8'});
 });
 execSync('cd .src/ && npm i --no-package-lock', {stdio: 'inherit'});
-// execSync('pkg -d .src', {stdio: 'inherit'});
-execSync('mv ./.package/zombies.exe ./.package/StreamDream.exe', {stdio: 'inherit'});
+execSync('pkg -d .src', {stdio: 'inherit'});
