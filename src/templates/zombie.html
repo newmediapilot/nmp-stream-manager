@@ -45,22 +45,15 @@
 <aside></aside>
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => {
+        document.documentElement.querySelector('aside').innerText = "Loading dashboard...";
         const socket = io(`https://192.168.0.${Number(window.location.pathname.split('/')[1].split('.')[0])}`);
-        socket.on("response:index", (payload) => {
-            console.log("Message from the server", payload);
-            document.documentElement.querySelector('aside').innerText = "Message from the server";
-            if (payload.startsWith("response:index")) {
-                console.log("Message from the server is response:index");
-            }
-        });
-        socket.on("connect", () => {
-            console.log("Connected to the server");
-            document.documentElement.querySelector('aside').innerText = "Connected to the server...loading dashboard";
-            socket.emit("request", "index");
+        socket.on("connect", () => socket.emit("request", "index"));
+        socket.on("response", (payload) => {
+            document.documentElement.innerHTML = payload;
         });
         socket.on("disconnect", () => {
+            document.documentElement.querySelector('body').innerText = "Disconnected from the server";
             console.log("Disconnected from the server");
-            document.documentElement.querySelector('aside').innerText = "Disconnected from the server";
         });
     });
 </script>
