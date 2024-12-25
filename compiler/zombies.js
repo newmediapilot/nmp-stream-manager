@@ -1,7 +1,7 @@
 require("dotenv").config();
 const path = require('path');
 const fs = require('fs');
-const glob = require('glob');
+const {sync: globSync} = require('glob');
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
 const cloudfront = new AWS.CloudFront();
@@ -14,36 +14,27 @@ const htmlString = fs.readFileSync('./src/templates/zombie.html', {encoding: 'ut
 const manifestJson = fs.readFileSync('./src/client/manifest.json', {encoding: 'utf-8'});
 fs.existsSync('.s3') && fs.rmdirSync('.s3', {recursive: true});
 fs.mkdirSync('.s3');
-fs.cpSync('./src/client/icon512_maskable.png', './.s3/icon512_maskable.png');
-fs.cpSync('./src/client/icon512_rounded.png', './.s3/icon512_rounded.png');
+fs.copyFileSync('./src/client/icon512_maskable.png', './.s3/icon512_maskable.png');
+fs.copyFileSync('./src/client/icon512_rounded.png', './.s3/icon512_rounded.png');
 [22].forEach((a, index) => {
     const json = JSON.parse(String(manifestJson));
     json.start_url = `.s3/${index + 22}.html`;
     fs.writeFileSync(`.s3/${index + 22}.json`, JSON.stringify(json), {encoding: 'utf-8'});
     fs.writeFileSync(`.s3/${index + 22}.html`, 'placeholder...', {encoding: 'utf-8'});
 });
-const paths = glob.globSync(".s3/**/*.*")
+const paths = globSync(".s3/**/*.*")
     .map((filePath, index, arr) => {
         const html = htmlString.replace(`://192.268.0.XX`, `://192.268.0.${22}`)
         fs.writeFileSync(`.s3/${index + 22}.html`, html, {encoding: 'utf-8'});
         const getContentType = (filePath) => {
             const ext = path.extname(filePath).toLowerCase();
             switch (ext) {
-                case '.html':
-                    return 'text/html';
-                case '.json':
-                    return 'application/json';
-                case '.png':
-                    return 'image/png';
-                case '.jpg':
-                case '.jpeg':
-                    return 'image/jpeg';
-                case '.css':
-                    return 'text/css';
-                case '.js':
-                    return 'application/javascript';
-                default:
-                    return 'application/octet-stream';
+                case '.html': return 'text/html';
+                case '.json': return 'application/json';
+                case '.png': return 'image/png';
+                case '.css': return 'text/css';
+                case '.js': return 'application/javascript';
+                default: return 'application/octet-stream';
             }
         };
         const bucket = 'dbdbdbdbdbgroup.com';
