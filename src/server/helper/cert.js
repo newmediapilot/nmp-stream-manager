@@ -1,14 +1,34 @@
 const fs = require('fs');
-const {exec} = require('child_process');
-const installCertificate = () => {
-    fs.writeFileSync('./temp-cert.crt', fs.readFileSync("./localhost.crt"));
-    exec(`certutil -addstore "Root" "./temp-cert.crt"`, (err, stdout, stderr) => {
-        //fs.unlinkSync('./temp-cert.crt');
+const {execSync} = require('child_process');
+const {generate} = require('selfsigned');
+const {getParam, setSecret} = require('../store/manager');
+const configureCertificate = () => {
+    const keys = generate([
+            {name: 'countryName', value: 'Undisclosed'},
+            {name: 'stateOrProvinceName', value: 'Undisclosed'},
+            {name: 'localityName', value: 'Undisclosed'},
+            {name: 'organizationName', value: 'Home Network'},
+            {name: 'organizationalUnitName', value: 'Home Network'},
+            {name: 'commonName', value: getParam('device_ip')},
+        ],
+        {
+            days: 1,
+            keySize: 2048,
+            extensions: [
+                {name: 'keyUsage', digitalSignature: true, keyEncipherment: true},
+                {name: 'extKeyUsage', serverAuth: true},
+            ],
+        }
+    );
+    setSecret('keys', keys);
+    fs.writeFileSync('./cert.crt', keys['cert'], {encoding:'utf-8'});
+    execSync(`certutil -addstore "Root" "./cert.crt"`, (err, stdout, stderr) => {
         if (err) {
-            console.error('installCertificate:: error adding certificate:', stderr);
+            console.error('configureCertificate:: error adding certificate:', stderr);
         } else {
-            console.log('installCertificate :: certificate added successfully:', stdout);
+            console.log('configureCertificate :: certificate added successfully:', stdout);
         }
     });
+    fs.rmSync('./cert.crt');
 };
-module.exports = {installCertificate};
+module.exports = {configureCertificate};
