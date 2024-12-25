@@ -16,7 +16,7 @@ fs.existsSync('.s3') && fs.rmdirSync('.s3', {recursive: true});
 fs.mkdirSync('.s3');
 fs.copyFileSync('./src/client/icon512_maskable.png', './.s3/icon512_maskable.png');
 fs.copyFileSync('./src/client/icon512_rounded.png', './.s3/icon512_rounded.png');
-[22].forEach((a, index) => {
+[22].forEach(() => {
     const json = JSON.parse(String(manifestJson));
     json.start_url = `.s3/${22}.html`;
     fs.writeFileSync(`.s3/${22}.json`, JSON.stringify(json), {encoding: 'utf-8'});
@@ -24,7 +24,9 @@ fs.copyFileSync('./src/client/icon512_rounded.png', './.s3/icon512_rounded.png')
 });
 const paths = globSync(".s3/**/*.*")
     .map((filePath, index, arr) => {
-        const html = htmlString.replace(`://192.268.0.XX`, `://192.268.0.${22}`)
+        const html = htmlString
+            .replace(`://192.268.0.XX`, `://192.268.0.${22}`)
+            .replace("manifest.json", `${22}.json`);
         fs.writeFileSync(`.s3/${index + 22}.html`, html, {encoding: 'utf-8'});
         const getContentType = (filePath) => {
             const ext = path.extname(filePath).toLowerCase();
