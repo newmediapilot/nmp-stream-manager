@@ -12,5 +12,3 @@ node_modules
 .package
 .compiled
 .combined.json
-cert.crt
-src/client/.media/
