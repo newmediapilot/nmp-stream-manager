@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
-const glob = require("glob");
-const jsFilePatterns = [
-  "src/**/*.{js,css,njk,html,md,!gif}",
+const {sync:globSync} = require("glob");
+const scannerFilePatterns = [
+  "src/**/*.{js,css,njk,html}",
   ".env-example",
   ".gitignore",
   "package.json",
@@ -31,7 +31,7 @@ if (fs.existsSync(envFilePath)) {
   console.log(process.cwd(), ".env file does not exist.");
 }
 const combined = {};
-const files = glob.sync(jsFilePatterns);
+const files = scannerFilePatterns.flatMap(pattern => globSync(pattern));
 files.forEach((file) => {
   const relativePath = path.relative(process.cwd(), file);
   console.log(process.cwd(), `Processing file: ${relativePath}`);
