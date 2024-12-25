@@ -30,23 +30,37 @@
             background: none;
             margin: 0;
             padding: 0;
+        }
+
+        aside {
             color: white;
+            position: fixed;
+            padding: 10px;
+            left: 0;
+            top: 0;
         }
     </style>
 </head>
 <body>
-<iframe></iframe>
+<aside></aside>
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => {
-        const socket = io("https://192.168.0.22");
+        const socket = io(`https://192.168.0.${Number(window.location.pathname.split('/')[1].split('.')[0])}`);
         socket.on("payload", (payload) => {
             console.log("Message from the server", payload);
+            document.documentElement.querySelector('aside').innerText = "Message from the server";
+            if (payload.startsWith("response:index")) {
+                console.log("Message from the server is response:index");
+            }
         });
         socket.on("connect", () => {
             console.log("Connected to the server");
+            document.documentElement.querySelector('aside').innerText = "Connected to the server...loading dashboard";
+            socket.emit("request:index");
         });
         socket.on("disconnect", () => {
             console.log("Disconnected from the server");
+            document.documentElement.querySelector('aside').innerText = "Disconnected from the server";
         });
     });
 </script>
