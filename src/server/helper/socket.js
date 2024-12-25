@@ -6,16 +6,7 @@ const configureSocket = (server) => {
     }
     io = socketIo(server, {
         cors: {
-            origin: (origin, callback) => {
-                if (!origin || (
-                    !origin.startsWith('https://192.268.0.') &&
-                    !origin.startsWith('https://dbdbdbdbdbgroup.com')
-                )) {
-                    callback(null, true);
-                } else {
-                    callback(new Error("CORS error"));
-                }
-            },
+            origin: "https://dbdbdbdbdbgroup.com",
             methods: ["GET", "POST"],
             credentials: true,
         }
