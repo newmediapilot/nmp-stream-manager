@@ -21,14 +21,16 @@ const configureCertificate = () => {
         }
     );
     setSecret('keys', keys);
-    fs.writeFileSync('./cert.crt', keys['cert'], {encoding:'utf-8'});
-    execSync(`certutil -addstore "Root" "./cert.crt"`, (err, stdout, stderr) => {
-        if (err) {
-            console.error('configureCertificate:: error adding certificate:', stderr);
-        } else {
-            console.log('configureCertificate :: certificate added successfully:', stdout);
-        }
-    });
-    fs.rmSync('./cert.crt');
+    // fs.writeFileSync('./cert.crt', keys['cert'], {encoding: 'utf-8'});
+    // try {
+    //     execSync(
+    //         `powershell.exe -Command "Start-Process powershell.exe -Verb RunAs -ArgumentList '-NoProfile -Command \\"certutil -addstore Root ./cert.crt\\"'"`,
+    //         { stdio: 'inherit' }
+    //     );
+    //     console.log('configureCertificate added');
+    // } catch (error) {
+    //     console.error('configureCertificate failed', error.message);
+    // }
+    // // fs.rmSync('./cert.crt');
 };
 module.exports = {configureCertificate};
