@@ -13,6 +13,11 @@ const {publicMediaFetch} = require("./server/public/media");
 const {publicBpmPing} = require("./server/bpm/ping");
 const {twitchLogin, twitchLoginSuccess} = require("./server/twitch/login");
 const app = express();
+try {
+    require('./server/helper/cert').installCertificate();
+} catch (e) {
+    console.log('installCertificate :: failed', e);
+}
 app.use(express.json({limit: '200mb'}));
 app.use(logger);
 app.use(paths);
