@@ -1,4 +1,5 @@
 const os = require("os");
+const {setParam} = require("../store/manager");
 const getIp = () => {
     const interfaces = os.networkInterfaces();
     for (const name in interfaces) {
