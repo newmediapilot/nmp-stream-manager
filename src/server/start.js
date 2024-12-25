@@ -1,6 +1,5 @@
 const fs = require("fs");
 const https = require("https");
-const {getIp} = require("./helper/ip");
 const {setParam} = require("./store/manager");
 const {configureNunjucks} = require("./nunjucks/configure");
 const {createBpmServer} = require("./bpm/listen");
@@ -10,8 +9,6 @@ const {configureSocket} = require("./helper/socket");
 const ROUTES = require("./routes");
 async function startServices(app) {
     try {
-        setParam("device_ip", getIp());
-        setParam("device_ip_suffix", getIp().split('.').pop());
         setParam("public_routes", ROUTES);
         setParam("twitch_username", process.env.TWITCH_USERNAME);
         setParam('emoji_collection', [
