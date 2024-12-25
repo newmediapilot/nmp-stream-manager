@@ -15,6 +15,12 @@
             background: black;
             margin: 0;
             padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans',
+            'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizelegibility;
+            overscroll-behavior: none;
+            scroll-behavior: auto;
         }
 
         iframe {
@@ -24,6 +30,7 @@
             background: none;
             margin: 0;
             padding: 0;
+            color: white;
         }
     </style>
 </head>
@@ -31,12 +38,12 @@
 <iframe></iframe>
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => {
-        const socket = io("https://192.268.0.22");
+        const socket = io("https://192.168.0.22");
+        socket.on("payload", (payload) => {
+            console.log("Message from the server", payload);
+        });
         socket.on("connect", () => {
-            socket.emit("exampleEvent", {message: "Hello from the client!"});
-            socket.on("serverMessage", (data) => {
-                console.log("Message from server:", data);
-            });
+            console.log("Connected to the server");
         });
         socket.on("disconnect", () => {
             console.log("Disconnected from the server");
