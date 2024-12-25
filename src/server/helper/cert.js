@@ -1,5 +1,3 @@
-const fs = require('fs');
-const {execSync} = require('child_process');
 const {generate} = require('selfsigned');
 const {getParam, setSecret} = require('../store/manager');
 const configureCertificate = () => {
@@ -21,16 +19,5 @@ const configureCertificate = () => {
         }
     );
     setSecret('keys', keys);
-    // fs.writeFileSync('./cert.crt', keys['cert'], {encoding: 'utf-8'});
-    // try {
-    //     execSync(
-    //         `powershell.exe -Command "Start-Process powershell.exe -Verb RunAs -ArgumentList '-NoProfile -Command \\"certutil -addstore Root ./cert.crt\\"'"`,
-    //         { stdio: 'inherit' }
-    //     );
-    //     console.log('configureCertificate added');
-    // } catch (error) {
-    //     console.error('configureCertificate failed', error.message);
-    // }
-    // // fs.rmSync('./cert.crt');
 };
 module.exports = {configureCertificate};
