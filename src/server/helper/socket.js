@@ -1,9 +1,7 @@
+const axios = require("axios");
 const socketIo = require("socket.io");
 let io;
 const configureSocket = (server) => {
-    if (!server) {
-        throw new Error("configureSocket :: server instance is required to configure Socket.IO.");
-    }
     io = socketIo(server, {
         cors: {
             origin: "https://dbdbdbdbdbgroup.com",
@@ -12,21 +10,18 @@ const configureSocket = (server) => {
         }
     });
     io.on("connection", (socket) => {
-        console.log('socket', socket.handshake.address);
-        console.log(process.cwd(), "configureSocket :: client connected");
-        socket.on("payload", (data) => {
-            console.log(process.cwd(), "configureSocket :: received payload from client:", data);
-            ("request:index" === data) && sentRequestResponse(data.split(":")[1]);
-        });
-        socket.on("disconnect", () => {
-            console.log(process.cwd(), "configureSocket :: client disconnected");
-        });
+        console.log( "configureSocket :: client connected", socket.handshake.address);
+        socket.on("request", handleRequestMessage);
+        socket.on("disconnect", () => console.log( "configureSocket :: client disconnected"));
     });
-    console.log(process.cwd(), "sendPayload :: socket.IO configured and attached to server.");
+    console.log( "sendPayload :: configureSocket");
 };
-const sentRequestResponse = (type) => {
-    console.log("sentRequestResponse");
-    (type === "index") && io.emit("payload", "response:index");
+const handleRequestMessage = (data) => {
+    console.log("configureSocket :: handleRequestMessage", data);
+    if ("index" === data) {
+        io.emit("payload", "")
+        console.log("sentRequestResponse");
+    }
 };
 const sendPayload = (payload) => {
     if (!io) {
