@@ -39,32 +39,36 @@ globSync(".s3/*.html").map(() => {
         .replace("./manifest.json", `/${22}.json`);
     fs.writeFileSync(`.s3/${22}.html`, html, {encoding: 'utf-8'});
 });
-globSync(".s3/**/*.*").map((filePath, index, arr) => {
+const paths = globSync(".s3/**/*.*");
+paths.map((filePath, index, arr) => {
+    const fileContent = fs.readFileSync(filePath);
     const contentType = getContentType(filePath);
     s3.upload({
-        Bucket: bucket,
+        Bucket: 'dbdbdbdbdbgroup.com',
         Key: filePath.replace('.s3\\', ''),
         Body: fileContent,
         ContentType: contentType,
     }, (err, data) => {
         if (err) return console.error('Error uploading file:', err);
         console.log(`File uploaded successfully at ${data.Location}`);
-        (index >= arr.length - 1) && cloudfront.createInvalidation({
-            DistributionId: "E3IXY2ACIKURY1",
-            InvalidationBatch: {
-                CallerReference: `${Date.now().toString()}`,
-                Paths: {
-                    Quantity: paths.length,
-                    Items: paths,
+        if(index >= arr.length - 1) {
+            cloudfront.createInvalidation({
+                DistributionId: "E3IXY2ACIKURY1",
+                InvalidationBatch: {
+                    CallerReference: `${Date.now().toString()}`,
+                    Paths: {
+                        Quantity: paths.length,
+                        Items: paths.map(path => path.replace(".s3", "")),
+                    },
                 },
-            },
-        }, (err, data) => {
-            if (err) {
-                console.error("Error creating CloudFront invalidation:", err, paths);
-                return;
-            }
-            console.log("Invalidation created successfully:", data.Invalidation.Id, paths);
-        });
+            }, (err, data) => {
+                if (err) {
+                    console.error("Error creating CloudFront invalidation:", err, paths);
+                    return;
+                }
+                console.log("Invalidation created successfully:", data.Invalidation.Id, paths);
+            });
+        }
     });
     return filePath.replace('.s3\\', '/');
 });
