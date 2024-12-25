@@ -1,19 +1,26 @@
 const fs = require("fs");
+const path = require("path");
 const {getParam} = require('../store/manager');
 const {configFieldUpdate} = require('./config');
 const publicMediaFetch = (req, res, next) => {
-    const originalSend = res.send;
-    res.send = (body) => {
-        if (
-            (
-                req.path.includes('media')
-            ) &&
-            typeof body === 'string'
-        ) {
-            console.log('req.path', req.path);
-        }
-        originalSend.call(res, body);
-    };
+    if (
+        req.path.startsWith('/.media/')
+    ) {
+        const pkgResourcePath = process.pkg ? process.pkg.entrypoint.split("\\").slice(0,-2).join("\\") : ".";
+        const filePath = `${pkgResourcePath}/${req.path.split('?')[0]}`
+        const mimeType = (()=> {
+            switch (path.extname(req.path).toLowerCase()) {
+                case '.jpeg': return 'image/jpeg';
+                case '.png': return 'image/png';
+                case '.gif': return 'image/gif';
+                case '.webp': return 'image/webp';
+                default: return 'application/octet-stream';
+            }
+        })();
+        res.setHeader('Content-Type', mimeType);
+        console.log('filePath', filePath);
+        res.end(fs.readFileSync(filePath));
+    }
     next();
 };
 const publicMediaUpdate = (req, res) => {
