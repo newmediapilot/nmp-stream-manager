@@ -3,6 +3,7 @@ const {execSync} = require('child_process');
 const {sync: globSync} = require('glob');
 const uglify = require('uglify-js');
 // execSync('npm run reset');
+fs.existsSync('.media') && execSync('rm -rf .media');
 fs.existsSync('.package') && execSync('rm -rf .package');
 fs.existsSync('.compiled') && execSync('rm -rf .compiled');
 execSync('mkdir .compiled');
