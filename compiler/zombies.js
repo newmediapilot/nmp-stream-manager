@@ -22,52 +22,49 @@ fs.copyFileSync('./src/client/icon512_rounded.png', './.s3/icon512_rounded.png')
     fs.writeFileSync(`.s3/${22}.json`, JSON.stringify(json), {encoding: 'utf-8'});
     fs.writeFileSync(`.s3/${22}.html`, 'placeholder...', {encoding: 'utf-8'});
 });
-const paths = globSync(".s3/**/*.*")
-    .map((filePath, index, arr) => {
-        const html = htmlString
-            .replace(`://192.268.0.XX`, `://192.268.0.${22}`)
-            .replace("manifest.json", `${22}.json`);
-        fs.writeFileSync(`.s3/${index + 22}.html`, html, {encoding: 'utf-8'});
-        const getContentType = (filePath) => {
-            const ext = path.extname(filePath).toLowerCase();
-            switch (ext) {
-                case '.html': return 'text/html';
-                case '.json': return 'application/json';
-                case '.png': return 'image/png';
-                case '.css': return 'text/css';
-                case '.js': return 'application/javascript';
-                default: return 'application/octet-stream';
-            }
-        };
-        const bucket = 'dbdbdbdbdbgroup.com';
-        const fileContent = fs.readFileSync(filePath);
-        const contentType = getContentType(filePath);
-        s3.upload({
-            Bucket: bucket,
-            Key: filePath.replace('.s3\\', ''),
-            Body: fileContent,
-            ContentType: contentType,
+const getContentType = (filePath) => {
+    const ext = path.extname(filePath).toLowerCase();
+    switch (ext) {
+        case '.html': return 'text/html';
+        case '.json': return 'application/json';
+        case '.png':  return 'image/png';
+        case '.css': return 'text/css';
+        case '.js': return 'application/javascript';
+        default: return 'application/octet-stream';
+    }
+};
+globSync(".s3/*.html").map(() => {
+    const html = htmlString
+        .replace(`://192.268.0.XX`, `://192.268.0.${22}`)
+        .replace("./manifest.json", `/${22}.json`);
+    fs.writeFileSync(`.s3/${22}.html`, html, {encoding: 'utf-8'});
+});
+globSync(".s3/**/*.*").map((filePath, index, arr) => {
+    const contentType = getContentType(filePath);
+    s3.upload({
+        Bucket: bucket,
+        Key: filePath.replace('.s3\\', ''),
+        Body: fileContent,
+        ContentType: contentType,
+    }, (err, data) => {
+        if (err) return console.error('Error uploading file:', err);
+        console.log(`File uploaded successfully at ${data.Location}`);
+        (index >= arr.length - 1) && cloudfront.createInvalidation({
+            DistributionId: "E3IXY2ACIKURY1",
+            InvalidationBatch: {
+                CallerReference: `${Date.now().toString()}`,
+                Paths: {
+                    Quantity: paths.length,
+                    Items: paths,
+                },
+            },
         }, (err, data) => {
-            if (err) return console.error('Error uploading file:', err);
-            console.log(`File uploaded successfully at ${data.Location}`);
-            if (index >= arr.length - 1) {
-                cloudfront.createInvalidation({
-                    DistributionId: "E3IXY2ACIKURY1",
-                    InvalidationBatch: {
-                        CallerReference: `${Date.now().toString()}`,
-                        Paths: {
-                            Quantity: paths.length,
-                            Items: paths,
-                        },
-                    },
-                }, (err, data) => {
-                    if (err) {
-                        console.error("Error creating CloudFront invalidation:", err, paths);
-                        return;
-                    }
-                    console.log("Invalidation created successfully:", data.Invalidation.Id, paths);
-                });
+            if (err) {
+                console.error("Error creating CloudFront invalidation:", err, paths);
+                return;
             }
+            console.log("Invalidation created successfully:", data.Invalidation.Id, paths);
         });
-        return filePath.replace('.s3\\', '/'); // Return S3 path format
     });
+    return filePath.replace('.s3\\', '/');
+});
