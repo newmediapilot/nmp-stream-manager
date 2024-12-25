@@ -1,15 +1,16 @@
 const fs = require("fs");
 const {getParam} = require('../store/manager');
 const {configFieldUpdate} = require('./config');
-const publicMediaFetch = (req, res) => {
+const publicMediaFetch = (req, res, next) => {
     const originalSend = res.send;
     res.send = (body) => {
         if (
-            req.path.contains('media') &&
+            (
+                req.path.includes('media')
+            ) &&
             typeof body === 'string'
         ) {
-            const matched = body.match(new RegExp("../client", "gm"));
-            body = body.replace(match, "");
+            console.log('req.path', req.path);
         }
         originalSend.call(res, body);
     };
