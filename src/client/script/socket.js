@@ -7,6 +7,10 @@ const socketConnect = () => {
     document.$socketIO.on("connect", () => console.log("socketConnect :: connected to the socket server"));
     console.log("socketConnect :: socket connection start");
 };
+const socketWatchPathRequest = (callback) => {
+    console.log("socketConnect :: socketWatchPathRequest");
+    document.$socketIO.on("path", callback);
+};
 const socketWatchStyle = (callback) => {
     console.log("socketConnect :: socketWatchStyle");
     document.$socketIO.on("payload", (payload) => {
