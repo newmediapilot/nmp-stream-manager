@@ -28,7 +28,7 @@ async function twitchAdCreate(length) {
         );
         return true;
     } catch (error) {
-        console.log(process.cwd(), "Error starting advertisement:", error);
+        console.log( "Error starting advertisement:", error);
         return false;
     }
 }

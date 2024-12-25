@@ -8,7 +8,7 @@ const { twitchMessageCreate } = require("./message");
 const { twitchMarkerCreate } = require("./marker");
 const { setBroadcastTitle } = require("./broadcast");
 async function parseCommand(channel, tags, message) {
-  console.log(process.cwd(), "Message: ", message);
+  console.log( "Message: ", message);
   const isBroadcaster = tags["user-id"] === getSecret("twitch_broadcaster_id");
   const COMMANDS = {
     test: "test/",

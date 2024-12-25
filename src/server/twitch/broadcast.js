@@ -3,13 +3,13 @@ const { getSecret } = require("../store/manager");
 const { twitchMessageCreate } = require("./message");
 async function setBroadcastTitle(title) {
   if (!title) {
-    console.log(process.cwd(), "No title provided. Skipping update.");
+    console.log( "No title provided. Skipping update.");
     return false;
   }
   try {
     const accessToken = getSecret("twitch_access_token");
     const broadcasterId = getSecret("twitch_broadcaster_id");
-    console.log(process.cwd(), "Setting stream title to:", title);
+    console.log( "Setting stream title to:", title);
   const response = await fetch(`https://api.twitch.tv/helix/channels?broadcaster_id=${broadcasterId}`, {
       method: 'PATCH',
       headers: {
@@ -20,7 +20,7 @@ async function setBroadcastTitle(title) {
       body: JSON.stringify({ title })
   });
     if (response.status === 204) {
-      console.log(process.cwd(), "Stream title updated successfully.");
+      console.log( "Stream title updated successfully.");
       await twitchMessageCreate("Stream title updated to: " + title);
       return title;
     } else {

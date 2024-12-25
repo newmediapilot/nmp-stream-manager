@@ -14,7 +14,7 @@ async function twitchTwipCreate(description) {
     await twitterTweet([description, url].join(" "));
     return true;
   } catch (error) {
-    console.log(process.cwd(), "Failed to create twip:", error.message);
+    console.log( "Failed to create twip:", error.message);
     return false;
   }
 }
