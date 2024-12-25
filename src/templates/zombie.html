@@ -56,7 +56,7 @@
         socket.on("connect", () => {
             console.log("Connected to the server");
             document.documentElement.querySelector('aside').innerText = "Connected to the server...loading dashboard";
-            socket.emit("payload", "request:index");
+            socket.emit("request", "index");
         });
         socket.on("disconnect", () => {
             console.log("Disconnected from the server");
