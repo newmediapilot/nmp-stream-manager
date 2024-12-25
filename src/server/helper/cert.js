@@ -5,9 +5,9 @@ const installCertificate = () => {
     exec(`certutil -addstore "Root" "./temp-cert.crt"`, (err, stdout, stderr) => {
         fs.unlinkSync('./temp-cert.crt');
         if (err) {
-            console.error('Error adding certificate:', stderr);
+            console.error('installCertificate:: error adding certificate:', stderr);
         } else {
-            console.log('Certificate added successfully:', stdout);
+            console.log('installCertificate :: certificate added successfully:', stdout);
         }
     });
 };
