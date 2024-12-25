@@ -1,14 +1,13 @@
 package-lock.json
 node_modules
-.dist
 .idea
 .env
 .secrets
 .signals
 .style
-.s3
-.bin
 .media
-.package
+.s3
 .compiled
+.package
+.bin
 .combined.json
