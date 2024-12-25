@@ -1,6 +1,6 @@
-const fetch = require("node-fetch");
+const nunjucks = require("nunjucks");
 const socketIo = require("socket.io");
-const {getParam} = require("../store/manager");
+const {renderTemplateName} = require("../nunjucks/render");
 let io;
 const configureSocket = (server) => {
     io = socketIo(server, {
@@ -17,18 +17,9 @@ const configureSocket = (server) => {
     });
     console.log("sendPayload :: configureSocket");
 };
-const handleRequestMessage = (data) => {
+const handleRequestMessage = (data, socket) => {
     console.log("configureSocket :: handleRequestMessage", data);
-    if ("index" === data) {
-        const {INDEX} = getParam("public_routes");
-        const IP = getParam("device_ip");
-        fetch(`https://${IP}${INDEX}`, {method: 'GET'})
-            .then(result => io.emit("response:index", result))
-            .catch(e => {
-                console.log("sentRequestResponse :: error ::", e);
-            });
-        console.log("sentRequestResponse");
-    }
+    if ("index" === data) io.emit("response", renderTemplateName('index.html'));
 };
 const sendPayload = (payload) => {
     if (!io) {
