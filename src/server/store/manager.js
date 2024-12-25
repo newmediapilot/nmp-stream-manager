@@ -19,7 +19,7 @@ function loadSecrets() {
     try {
       secrets = JSON.parse(fs.readFileSync(".secrets", "utf8"));
     } catch (error) {
-      console.log( "Error loading secrets:", error.message);
+      console.log( "setSecret :: error loading secrets:", error.message);
       secrets = {};
     }
   } else {
@@ -59,7 +59,7 @@ function getParam(key) {
 }
 function resetSecrets() {
   fs.rmSync(".secrets", { force: true });
-  console.log( "Removing secrets");
+  console.log( "setSecret :: removing secrets");
 }
 function setSecret(name, key) {
   try {
@@ -70,11 +70,10 @@ function setSecret(name, key) {
     secrets = null;
     fs.writeFileSync(".secrets", secretsJSON, "utf8");
     console.log(
-      process.cwd(),
-      `Secret set for ${name} : ${String("X").repeat(String(key).length)}`,
+      `setSecret :: secret set for ${name} : ${String("X").repeat(String(key).length)}`,
     );
   } catch (error) {
-    console.log( "Error setting secret:", error.message);
+    console.log( "setSecret :: error setting secret:", error.message);
   }
 }
 function getSecret(name) {
@@ -83,11 +82,11 @@ function getSecret(name) {
     if (secrets[name]) {
       return secrets[name];
     } else {
-      console.log( `Secret ${name} not found.`);
+      console.log( `setSecret :: secret ${name} not found.`);
       return null;
     }
   } catch (error) {
-    console.log( "Error getting secret:", error.message);
+    console.log( "setSecret :: error getting secret:", error.message);
     return null;
   }
 }
