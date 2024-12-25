@@ -1,5 +1,6 @@
-const axios = require("axios");
+const fetch = require("node-fetch");
 const socketIo = require("socket.io");
+const {getParam} = require("../store/manager");
 let io;
 const configureSocket = (server) => {
     io = socketIo(server, {
@@ -10,16 +11,22 @@ const configureSocket = (server) => {
         }
     });
     io.on("connection", (socket) => {
-        console.log( "configureSocket :: client connected", socket.handshake.address);
+        console.log("configureSocket :: client connected", socket.handshake.address);
         socket.on("request", handleRequestMessage);
-        socket.on("disconnect", () => console.log( "configureSocket :: client disconnected"));
+        socket.on("disconnect", () => console.log("configureSocket :: client disconnected"));
     });
-    console.log( "sendPayload :: configureSocket");
+    console.log("sendPayload :: configureSocket");
 };
 const handleRequestMessage = (data) => {
     console.log("configureSocket :: handleRequestMessage", data);
     if ("index" === data) {
-        io.emit("payload", "")
+        const {INDEX} = getParam("public_routes");
+        const IP = getParam("device_ip");
+        fetch(`https://${IP}${INDEX}`, {method: 'GET'})
+            .then(result => io.emit("response:index", result))
+            .catch(e => {
+                console.log("sentRequestResponse :: error ::", e);
+            });
         console.log("sentRequestResponse");
     }
 };
