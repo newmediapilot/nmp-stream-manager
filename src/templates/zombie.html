@@ -32,7 +32,7 @@
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => {
         console.log("DOMContentLoaded");
-        const socket = io("https://192.268.0.22/socket.io/");
+        const socket = io("https://192.268.0.22/");
         console.log("DOMContentLoaded", socket);
         socket.emit("exampleEvent", {message: "Hello from the client!"});
         socket.on("connect", () => {
