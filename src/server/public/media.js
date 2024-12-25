@@ -17,7 +17,7 @@ const publicMediaFetch = (req, res, next) => {
             }
         })();
         res.setHeader('Content-Type', mimeType);
-        res.send(fs.readFileSync(`.${filePath}`));
+        fs.existsSync(`.${filePath}`) && res.send(fs.readFileSync(`.${filePath}`));
     }
     next();
 };
