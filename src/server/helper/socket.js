@@ -26,7 +26,7 @@ const configureSocket = (server) => {
 };
 const sentRequestResponse = (type) => {
     console.log("sentRequestResponse");
-    (type === "index") && socket.emit("payload", "response:index");
+    (type === "index") && io.emit("payload", "response:index");
 };
 const sendPayload = (payload) => {
     if (!io) {
