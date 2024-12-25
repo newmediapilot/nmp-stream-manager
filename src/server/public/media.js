@@ -6,8 +6,7 @@ const publicMediaFetch = (req, res, next) => {
     if (
         req.path.startsWith('/.media/')
     ) {
-        const pkgResourcePath = process.pkg ? process.pkg.entrypoint.split("\\").slice(0,-2).join("\\") : ".";
-        const filePath = `${pkgResourcePath}/${req.path.split('?')[0]}`
+        const filePath = `$${req.path.split('?')}`
         const mimeType = (()=> {
             switch (path.extname(req.path).toLowerCase()) {
                 case '.jpeg': return 'image/jpeg';
@@ -18,7 +17,6 @@ const publicMediaFetch = (req, res, next) => {
             }
         })();
         res.setHeader('Content-Type', mimeType);
-        console.log('filePath', filePath);
         res.end(fs.readFileSync(filePath));
     }
     next();
