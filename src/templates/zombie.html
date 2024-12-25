@@ -46,7 +46,7 @@
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => {
         const socket = io(`https://192.168.0.${Number(window.location.pathname.split('/')[1].split('.')[0])}`);
-        socket.on("payload", (payload) => {
+        socket.on("response:index", (payload) => {
             console.log("Message from the server", payload);
             document.documentElement.querySelector('aside').innerText = "Message from the server";
             if (payload.startsWith("response:index")) {
