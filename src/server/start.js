@@ -26,12 +26,13 @@ async function startServices(app) {
             cert: fs.readFileSync("./localhost.crt"),
         };
         const httpsServer = https.createServer(certs, app).listen(443, () => {
-            console.log( "Server running on 443 at https://localhost");
+            console.log("startServices :: server running on 443 at https://localhost");
         });
         configureSocket(httpsServer);
         await createBpmServer(app);
     } catch (err) {
-        console.log( "Error initializing services:", err);
+        console.log("startServices :: error initializing services:", err);
     }
 }
+
 module.exports = {startServices};
