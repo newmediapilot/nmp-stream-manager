@@ -33,9 +33,9 @@
             const vw = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-width'));
             const vh = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-height'));
             const translateValues = [
-                {translateX: `${1 * vw}vw`, translateY: `${0 * vh}vh`},
-                {translateX: `${0 * vw}vw`, translateY: `${0 * vh}vh`},
                 {translateX: `${-1 * vw}vw`, translateY: `${0 * vh}vh`},
+                {translateX: `${0 * vw}vw`, translateY: `${0 * vh}vh`},
+                {translateX: `${1 * vw}vw`, translateY: `${0 * vh}vh`},
                 {translateX: `${0 * vw}vw`, translateY: `${1 * vh}vh`},
             ];
             const {translateX, translateY} = translateValues[indexOf];
