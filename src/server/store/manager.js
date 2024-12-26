@@ -1,6 +1,6 @@
 const fs = require("fs");
 let paramsState = {};
-let secrets = null;
+let secrets = {};
 const allowedParams = [
     "dashboard_signals_config",
     "device_ip",
@@ -15,20 +15,6 @@ const allowedParams = [
     "twitch_refresh_token_set",
     "twitch_username",
 ];
-
-function loadSecrets() {
-    if (fs.existsSync(".secrets")) {
-        try {
-            secrets = JSON.parse(fs.readFileSync(".secrets", "utf8"));
-            console.log("loadSecrets :: done");
-        } catch (error) {
-            console.log("loadSecrets :: error loading secrets:", error.message);
-            secrets = {};
-        }
-    } else {
-        secrets = {};
-    }
-}
 
 function setParam(key, value, log = true) {
     if (!allowedParams.includes(key)) {
@@ -48,34 +34,18 @@ function getAllParams() {
 }
 
 function getParam(key) {
-    const value = paramsState[key];
-    if (value === undefined) {
-        // console.log(
-        //   process.cwd(),
-        //   "Warning: Attempted to get",
-        //   key,
-        //   "failed with",
-        //   value,
-        // );
-    } else {
-        // console.info(process.cwd(), "Get", key, "::", value);
-    }
-    return value;
+    return paramsState[key];
 }
 
 function resetSecrets() {
-    fs.rmSync(".secrets", {force: true});
+    fs.rmSync("secrets", {force: true});
     console.log("resetSecrets :: removing secrets");
 }
 
 function setSecret(name, key) {
     try {
-        loadSecrets();
         secrets[name] = key;
         setParam(`${name}_set`, true);
-        const secretsJSON = JSON.stringify(secrets, null, 2);
-        secrets = null;
-        fs.writeFileSync(".secrets", secretsJSON, "utf8");
         console.log(
             `setSecret :: secret set for ${name} : ${String("X").repeat(String(key).length)}`,
         );
@@ -86,7 +56,6 @@ function setSecret(name, key) {
 
 function getSecret(name) {
     try {
-        loadSecrets();
         if (secrets[name]) {
             return secrets[name];
         } else {
