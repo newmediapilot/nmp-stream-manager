@@ -26,26 +26,27 @@
     document.addEventListener("DOMContentLoaded", () => reducedMotion());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchRoute((payload)=>{
-
-        // const currentPath = data;
-        // const iframeEl = Array.from(document.body.querySelectorAll(`iframe[src="${currentPath}"]`))[0];
-        // const indexOf = Array.from(document.body.querySelectorAll("iframe")).indexOf(iframeEl);
-        // const vw = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-width'));
-        // const vh = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-height'));
-        // const translateValues = [
-        //     {translateX: `${1 * vw}vw`, translateY: `${0 * vh}vh`},
-        //     {translateX: `${0 * vw}vw`, translateY: `${0 * vh}vh`},
-        //     {translateX: `${-1 * vw}vw`, translateY: `${0 * vh}vh`},
-        //     {translateX: `${0 * vw}vw`, translateY: `${1 * vh}vh`},
-        // ];
-        // const {translateX, translateY} = translateValues[indexOf];
-        // !document.documentElement.classList.contains('reduced-motion') && anime({
-        //     targets: 'main',
-        //     translateX: translateX,
-        //     translateY: translateY,
-        //     duration: 333,
-        //     easing: 'linear',
-        // });
+        if(payload.startsWith('browser:route:')){
+            const currentPath =  payload.split('browser:route:')[1];
+            const iframeEl = Array.from(document.body.querySelectorAll(`iframe[src="${currentPath}"]`))[0];
+            const indexOf = Array.from(document.body.querySelectorAll("iframe")).indexOf(iframeEl);
+            const vw = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-width'));
+            const vh = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-height'));
+            const translateValues = [
+                {translateX: `${1 * vw}vw`, translateY: `${0 * vh}vh`},
+                {translateX: `${0 * vw}vw`, translateY: `${0 * vh}vh`},
+                {translateX: `${-1 * vw}vw`, translateY: `${0 * vh}vh`},
+                {translateX: `${0 * vw}vw`, translateY: `${1 * vh}vh`},
+            ];
+            const {translateX, translateY} = translateValues[indexOf];
+            !document.documentElement.classList.contains('reduced-motion') && anime({
+                targets: 'main',
+                translateX: translateX,
+                translateY: translateY,
+                duration: 333,
+                easing: 'linear',
+            });
+        }
     }));
 </script>
 {%endblock%}
