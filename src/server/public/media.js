@@ -4,7 +4,7 @@ const {getParam} = require('../store/manager');
 const {configFieldUpdate} = require('./config');
 const publicMediaFetch = (req, res, next) => {
     if (
-        req.path.startsWith('/.media/')
+        req.path.startsWith('/media/')
     ) {
         const filePath = `${req.path.split('?')}`
         const mimeType = (()=> {
@@ -27,8 +27,8 @@ const publicMediaUpdate = (req, res) => {
         if (!data || !key || !type || !id) {
             return res.status(400).json({error: 'Missing file data or id'});
         }
-        !fs.existsSync(`./.media`) && fs.mkdirSync(`./.media`);
-        fs.writeFileSync(`./.media/${key}.${type}`, Buffer.from(data, 'base64'));
+        !fs.existsSync(`./media`) && fs.mkdirSync(`./media`);
+        fs.writeFileSync(`./media/${key}.${type}`, Buffer.from(data, 'base64'));
         const cells = getParam("dashboard_signals_config")[id].description.split(',');
         const acceptTypes = cells.slice(2);
         const newCells = `${cells[0]},${cells[1]},${type},${acceptTypes.filter(t => t !== type).join(',')}`;
