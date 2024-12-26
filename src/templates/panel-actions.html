@@ -127,9 +127,6 @@
         {%endif%}
         {%endfor%}
 </section>
-<nav class="right">
-    <label aria-label="🧮"></label>
-</nav>
 {%endblock%}
 {%block dialogs%}
 <ul id="emoji-widget">
@@ -137,6 +134,9 @@
     <li aria-label="{{ emoji }}"></li>
     {%endfor%}
 </ul>
+<nav class="right">
+    <button aria-label="🧮"></button>
+</nav>
 {%endblock%}
 {%block scripts%}
 <script defer>
