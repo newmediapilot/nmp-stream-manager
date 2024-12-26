@@ -27,8 +27,8 @@ const draw = () => {
         payload = [];
         if (buttonTimeout) clearTimeout(buttonTimeout);
         buttonTimeout = setTimeout(() => {
-            document.querySelector('button:nth-of-type(2)').disabled = true;
-            document.querySelector('button:nth-of-type(3)').disabled = false;
+            document.querySelector('button:nth-of-type(1)').disabled = true;
+            document.querySelector('button:nth-of-type(2)').disabled = false;
         }, 300);
     };
     const drawPixel = (x, y) => {
@@ -43,8 +43,8 @@ const draw = () => {
         document.querySelector('[type=range]').value = capture.length;
         if (buttonTimeout) clearTimeout(buttonTimeout);
         buttonTimeout = setTimeout(() => {
+            document.querySelector('button:nth-of-type(1)').disabled = false;
             document.querySelector('button:nth-of-type(2)').disabled = false;
-            document.querySelector('button:nth-of-type(3)').disabled = false;
         }, 300);
     };
     const replayStart = () => {
@@ -65,8 +65,8 @@ const draw = () => {
             ctx.arc(x, y, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
             ctx.fill();
             document.querySelector('[type=range]').value = capture.length;
+            document.querySelector('button:nth-of-type(1)').disabled = true;
             document.querySelector('button:nth-of-type(2)').disabled = true;
-            document.querySelector('button:nth-of-type(3)').disabled = true;
             requestAnimationFrame(replayStart);
             document.querySelectorAll('[aria-label]').forEach(() => {
                 const {value, max} = document.querySelector('[type="range"]');
@@ -87,7 +87,6 @@ const draw = () => {
     };
     document.querySelector('canvas').addEventListener("touchstart", (e) => touchStartMove(e), {passive: true});
     document.querySelector('canvas').addEventListener("touchmove", (e) => touchStartMove(e), {passive: true});
-    document.querySelector('section button:nth-of-type(1)').addEventListener('click', () => getURL(getPath('PANEL_DASHBOARD')));
-    document.querySelector('section button:nth-of-type(2)').addEventListener('click', () => sendPayload());
-    document.querySelector('section button:nth-of-type(3)').addEventListener('click', () => clearCanvas());
+    document.querySelector('section button:nth-of-type(1)').addEventListener('click', () => sendPayload());
+    document.querySelector('section button:nth-of-type(2)').addEventListener('click', () => clearCanvas());
 };
