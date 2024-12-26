@@ -37,8 +37,6 @@ const dashboard = () => {
                 .finally(() => {
                     socketEmitReload();
                     dashboardBlinkButtons();
-                    document.querySelector('#toggle-nav-show').checked = false;
-                    document.body.querySelector("#toggle-edit-dashboard").checked = false;
                     containerEl.scrollTo({
                         top: 0,
                         left: 0,
