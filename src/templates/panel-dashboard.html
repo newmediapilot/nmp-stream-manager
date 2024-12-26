@@ -2,7 +2,8 @@
 {%set device_ip = "device_ip"|getParam%}
 {%set public_routes = "public_routes"|getParam%}
 {%block head%}
-{{ '<link href="../client/style/dashboard.css?" rel="stylesheet">' | inlineScriptContents | safe }}
+{{ '
+<link href="../client/style/dashboard.css?" rel="stylesheet">' | inlineScriptContents | safe }}
 {%include "_style.njk"%}
 {%endblock%}
 {%block body%}
@@ -28,13 +29,13 @@
     {%endfor%}
 </section>
 <nav class="controls">
-    <button aria-label="Draw"><em aria-label="🖌️"></em></button>
-    <button aria-label="Layout"><em aria-label="🎬"></em></button>
-    <button aria-label="Actions"><em aria-label="⚡"></em></button>
+    <button aria-label="Draw"><em aria-label="⬆"></em></button>
+    <button aria-label="Layout"><em aria-label="➡"></em></button>
+    <button aria-label="Actions"><em aria-label="⬅"></em></button>
     <button aria-label="Show QR"><em aria-label="🔗"></em></button>
     <button aria-label="Login"><em aria-label="🔒"></em></button>
     <button aria-label="App"><em aria-label="🕹️"></em></button>
-    <button aria-label="Dev"><em aria-label="⚙"></em></button>
+    <button aria-label="Dev"><em aria-label="🧪"></em></button>
     <button aria-label="Reload"><em aria-label="🔄"></em></button>
     <button id="toggle-edit-dashboard"></button>
 </nav>
