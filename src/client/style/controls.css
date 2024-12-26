@@ -1,33 +1,37 @@
 nav {
     position: fixed;
     z-index: 1;
-    grid-template-columns: repeat(10, calc(10vw));
+    grid-template-columns: repeat(11, calc(10vw));
     display: grid;
-    grid-template-rows: repeat(10, calc(10vh));
+    grid-template-rows: repeat(11, calc(10vh));
 }
 nav.controls {
     top: 0px;
     left: 0px;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
 }
 nav.controls button:nth-of-type(1) {
-    grid-area: 3 / 7 / 2 / 5;
+    grid-area: 1 / 5 / 2 / 7;
 }
 nav.controls button:nth-of-type(2) {
-    grid-area: 5 / 10 / 7 / 11;
+    grid-area: 5 / 10 / 7 / 10;
 }
 nav.controls button:nth-of-type(3) {
     grid-area: 5 / 1 / 7 / 2;
 }
 nav.controls button:nth-of-type(4) {
+    grid-area: 10 / 6 / 11 / 7;
 }
 nav.controls button:nth-of-type(5) {
+    grid-area: 10 / 5 / 11 / 6;
 }
 nav.controls button:nth-of-type(6) {
     grid-area: 10 / 3 / 11 / 2;
 }
 nav.controls button:nth-of-type(7) {
+    grid-area: 10 / 4 / 10 / 5;
 }
 nav.controls button:nth-of-type(8) {
     grid-area: 10 / 3 / 11 / 4;
