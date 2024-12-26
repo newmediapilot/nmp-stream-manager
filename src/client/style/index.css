@@ -35,8 +35,8 @@ main iframe {
 }
 
 main iframe:nth-of-type(1) {
-    grid-column-start: 1;
-    grid-column-end: 2;
+    grid-column-start: 3;
+    grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 3;
 }
@@ -49,8 +49,8 @@ main iframe:nth-of-type(2) {
 }
 
 main iframe:nth-of-type(3) {
-    grid-column-start: 3;
-    grid-column-end: 4;
+    grid-column-start: 1;
+    grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 3;
 }
