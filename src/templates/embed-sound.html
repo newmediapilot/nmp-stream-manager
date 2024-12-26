@@ -28,7 +28,7 @@
                 const cells = payload.split(":")[1].split(',');
                 const fileName = cells[0];
                 const fileSuffix = cells[2];
-                audio = new Audio(`/.media/${fileName}.${fileSuffix}`);
+                audio = new Audio(`/media/${fileName}.${fileSuffix}`);
                 audio.volume = 0.75;
                 audio.currentTime = 0;
                 audio.play();
