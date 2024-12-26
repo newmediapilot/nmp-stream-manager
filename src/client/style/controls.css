@@ -1,16 +1,15 @@
-html.edit-active nav input[type='checkbox'],
-html.edit-active nav aside > :not(#toggle-edit-dashboard) {
-    display: none;
-}
-html.edit-active nav > label {
-    display: none;
-}
 nav {
     position: fixed;
     z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+nav.controls {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
 }
 nav.top {
     top: 1.5%;
@@ -30,9 +29,6 @@ nav.left {
     top: 50%;
     left: 1.5%;
 }
-nav input[type='checkbox'] {
-    display: none;
-}
 nav label {
     position: relative;
     background: var(--color-light);
@@ -46,45 +42,4 @@ nav label {
     font-size: 2.5rem;
     line-height: 2.5rem;
     cursor: pointer;
-}
-nav aside {
-    display: none;
-    flex-direction: column;
-    background: var(--color-light);
-    border-radius: 8px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    min-width: 250px;
-    padding: 20px;
-    text-align: left;
-    bottom: calc(100% + 10px);
-}
-nav aside em {
-    font-style: normal;
-    display: inline-block;
-    min-width: 1.5em;
-    text-align: center;
-}
-nav input[type='checkbox']:checked ~ aside {
-    display: flex;
-}
-nav aside button {
-    color: var(--color-light);
-    border: none;
-    text-align: left;
-    font-size: 2rem;
-    width: 100%;
-    cursor: pointer;
-    padding: 6px 11px 8px 6px;
-}
-nav aside button:hover,
-nav aside button:active {
-    background: repeating-linear-gradient(
-        45deg,
-        rgba(0, 0, 0, 0.15) 0px,
-        rgba(0, 0, 0, 0.15) 2px,
-        rgba(255, 255, 255, 0.15) 2px,
-        rgba(255, 255, 255, 0.15) 4px
-    );
 }
