@@ -37,6 +37,7 @@ const dashboard = () => {
                 .finally(() => {
                     socketEmitReload();
                     dashboardBlinkButtons();
+                    dashboardFilterButtons(false);
                     containerEl.scrollTo({
                         top: 0,
                         left: 0,
@@ -44,6 +45,8 @@ const dashboard = () => {
                     });
                 });
             payload = [];
+        } else {
+            dashboardFilterButtons(true);
         }
     });
     document.querySelectorAll('section article button').forEach((button) => {
@@ -54,6 +57,10 @@ const dashboard = () => {
             res.finally(() => console.info("sendSignal :: complete"));
         })
     });
+};
+dashboardFilterButtons = (filterOut) => {
+    document.documentElement.style.setProperty('--controls-filter', String(filterOut ? 1 : 0));
+    // TODO: animate buttons out during edit
 };
 dashboardRotateHue = () => {
     !document.documentElement.classList.contains('reduced-motion') && anime({
