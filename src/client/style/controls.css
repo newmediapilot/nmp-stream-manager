@@ -1,44 +1,36 @@
 nav {
     position: fixed;
     z-index: 1;
-    display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 nav.controls {
-    top: 0;
-    left: 0;
+    top: 0px;
+    left: 0px;
     width: 100vw;
     height: 100vh;
 }
-
 nav.top {
     top: 1.5%;
     left: 50%;
     transform: translateX(-50%);
 }
-
 nav.right {
     top: 50%;
     right: 1.5%;
 }
-
 nav.bottom {
     bottom: 1.5%;
     left: 50%;
     transform: translateX(-50%);
 }
-
 nav.left {
     top: 50%;
     left: 1.5%;
 }
-
 nav button {
     background: var(--color-light);
 }
-
 nav button {
     display: block;
     width: 50px;
@@ -46,25 +38,22 @@ nav button {
     font-size: 30px;
     border-radius: 30px;
 }
-
 nav button::before {
     display: inline-block;
     visibility: hidden;
-    width: 0;
-    height: 0;
+    width: 0px;
+    height: 0px;
     line-height: 0;
     opacity: 0;
 }
-
 nav button span em {
     font-style: normal;
 }
-
 nav button span::before {
     display: inline-block;
     visibility: hidden;
-    width: 0;
-    height: 0;
+    width: 0px;
+    height: 0px;
     line-height: 0;
     opacity: 0;
 }
