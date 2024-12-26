@@ -13,17 +13,18 @@ const configureNunjucks = (app) => {
     nunjucksEnv.addFilter("getParam", getParam);
     nunjucksEnv.addFilter("getAllParams", getAllParams);
     nunjucksEnv.addFilter("inlineScriptContents", (scriptTagContents) => {
-        let inputContents = String(scriptTagContents);
-        if (inputContents.includes('client/script')) {
-            const filename = inputContents.split('<script src="../')[1].split('?')[0];
-            const contents = fs.readFileSync(`${pkgResourcePath}/src/${filename}`, {encoding: 'utf-8'});
-            return `<script type="text/javascript" defer>${contents}</script>`;
-        }
-        if (inputContents.includes('client/style')) {
-            const filename = inputContents.split('<link href="../')[1].split('?')[0];
-            const contents = fs.readFileSync(`${pkgResourcePath}/src/${filename}`, {encoding: 'utf-8'});
-            return `<style>${contents}</style>`;
-        }
+        // let inputContents = String(scriptTagContents);
+        // if (inputContents.includes('client/script')) {
+        //     const filename = inputContents.split('<script src="../')[1].split('?')[0];
+        //     const contents = fs.readFileSync(`${pkgResourcePath}/src/${filename}`, {encoding: 'utf-8'});
+        //     return `<script type="text/javascript" defer>${contents}</script>`;
+        // }
+        // if (inputContents.includes('client/style')) {
+        //     const filename = inputContents.split('<link href="../')[1].split('?')[0];
+        //     const contents = fs.readFileSync(`${pkgResourcePath}/src/${filename}`, {encoding: 'utf-8'});
+        //     return `<style>${contents}</style>`;
+        // }
+        console.log('configureNunjucks :: inlineScriptContents :: disabled');
         return `<!-- inlineScriptContents -->${scriptTagContents}<!-- inlineScriptContents -->`;
     });
     nunjucksEnv.addFilter("cacheBuster", () => new Date().getTime());
