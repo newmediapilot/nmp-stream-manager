@@ -10,9 +10,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-nav {
-    bottom: 150px;
-}
 input[type='range'] {
     background: repeating-linear-gradient(90deg, rgb(0, 0, 0) 0px, rgb(75, 75, 75) 25px);
 }
