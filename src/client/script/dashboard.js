@@ -15,29 +15,31 @@ const dashboard = () => {
         },
     });
     sortable.option("disabled", true);
+
+    document.querySelectorAll('nav button').forEach(button => button.style.display = 'none');
     document.querySelector('nav #toggle-controls-open').style.display = 'none';
     document.querySelector('nav #toggle-controls-close').style.display = 'flex';
+
     document.querySelector('nav #toggle-controls-open').addEventListener("click", () => {
-        document.querySelector('nav #toggle-controls-open').style.display = 'none';
+        document.querySelectorAll('nav button').forEach(button => button.style.display = 'none');
         document.querySelector('nav #toggle-controls-close').style.display = 'flex';
-
     });
+
     document.querySelector('nav #toggle-controls-close').addEventListener("click", () => {
-        document.querySelector('nav #toggle-controls-open').style.display = 'flex';
+        document.querySelectorAll('nav button').forEach(button => button.style.display = 'flex');
+        document.querySelector('nav #toggle-edit-dashboard-done').style.display = 'none';
         document.querySelector('nav #toggle-controls-close').style.display = 'none';
-
     });
-    document.querySelector('nav #toggle-edit-dashboard-edit').style.display = 'flex';
-    document.querySelector('nav #toggle-edit-dashboard-done').style.display = 'none';
+
     document.querySelector('nav #toggle-edit-dashboard-edit').addEventListener("click", () => {
-        document.querySelector('nav #toggle-edit-dashboard-edit').style.display = 'none';
+        document.querySelectorAll('nav button').forEach(button => button.style.display = 'none');
         document.querySelector('nav #toggle-edit-dashboard-done').style.display = 'flex';
         notifyEl.classList.add("edit-active");
         sortable.option("disabled", false);
     });
     document.querySelector('nav #toggle-edit-dashboard-done').addEventListener("click", () => {
-        document.querySelector('nav #toggle-edit-dashboard-edit').style.display = 'flex';
-        document.querySelector('nav #toggle-edit-dashboard-done').style.display = 'none';
+        document.querySelectorAll('nav button').forEach(button => button.style.display = 'none');
+        document.querySelector('nav #toggle-controls-close').style.display = 'flex';
         notifyEl.classList.remove("edit-active");
         sortable.option("disabled", true);
         axios.get(getPath('API_CONFIG_UPDATE'), {
