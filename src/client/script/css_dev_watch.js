@@ -34,10 +34,9 @@ const cssDevWatch = () => {
         clearInterval(interval);
     };
     cssDevWatch.start = () => {
-        // cssDevWatch.setMemory();
-        // interval = setInterval(() => cssDevWatch.check(), 1000);
-        // console.log('cssDevWatch.start ::', interval);
-        console.log('cssDevWatch.disabled');
+        cssDevWatch.setMemory();
+        interval = setInterval(() => cssDevWatch.check(), 1000);
+        console.log('cssDevWatch.start interval ::', interval);
     };
     cssDevWatch.check = () => {
         try {
