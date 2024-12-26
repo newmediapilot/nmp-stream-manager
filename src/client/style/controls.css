@@ -15,7 +15,7 @@ nav.controls button:nth-of-type(8) { grid-area: 10 / 4 / 11 / 5; }
 nav.controls button:nth-of-type(9) { grid-area: 11 / 6 / 12 / 7; }
 nav.controls button:nth-of-type(10) { grid-area: 11 / 6 / 12 / 7; }
 nav.controls button:nth-of-type(11) { grid-area: 10 / 8 / 11 / 9; }
-nav.controls button:nth-of-type(12) { grid-area: 11 / 1 / 12 / 2; }
+nav.controls button:nth-of-type(12) { grid-area: 11 / 6 / 12 / 7; }
 nav.top button { grid-area: 6 / 1 / 7 / 2; }
 nav.top button::before { content: "⬆"; }
 nav.right button { grid-area: 6 / 11 / 7 / 12; }
