@@ -51,7 +51,7 @@ async function publicSignalCreate(req, res) {
                 result = await sendPayload("browser:reload");
             }
             if (description.startsWith("route:")) {
-                result = await sendPayload(`browser:route:${description}`);
+                result = await sendPayload(`browser:route:${description.split("route:")[1]}`);
             }
         }
         if ("dev:css:write" === type) {
@@ -77,5 +77,4 @@ async function publicSignalCreate(req, res) {
         return res.status(400).send("Error: " + error);
     }
 }
-
 module.exports = {publicSignalCreate};
