@@ -8,9 +8,7 @@
 {%endblock%}
 {%block body%}
 <section>
-
     {%for config in "dashboard_signals_config"|getParam%}
-
     {%if config.type == "feature"%}
     {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label%}
     {%elif config.type == "mark"%}
@@ -18,7 +16,6 @@
     {%else%}
     {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description%}
     {%endif%}
-
     {%if config.type === "empty"%}
     <article class="empty"></article>
     {%else%}
@@ -29,10 +26,23 @@
         </button>
     </article>
     {%endif%}
-
     {%endfor%}
 </section>
-{%include "_controls.njk"%}
+<nav class="bottom">
+    <input type="checkbox" id="toggle-nav-show">
+    <label for="toggle-nav-show" aria-label="🧮"></label>
+    <aside>
+        <button aria-label="Reload"><em aria-label="🔄"></em></button>
+        <button aria-label="Show QR"><em aria-label="🔗"></em></button>
+        <button aria-label="Dev"><em aria-label="⚙"></em></button>
+        <button aria-label="App"><em aria-label="🕹️"></em></button>
+        <button aria-label="Login"><em aria-label="🔒"></em></button>
+        <button aria-label="Draw"><em aria-label="🖌️"></em></button>
+        <button aria-label="Layout"><em aria-label="🎬"></em></button>
+        <button aria-label="Actions"><em aria-label="⚡"></em></button>
+        <button style="display:none;" id="toggle-edit-dashboard"></button>
+    </aside>
+</nav>
 {%endblock%}
 {%block dialogs%}
 <dialog id="qr-dialog">
