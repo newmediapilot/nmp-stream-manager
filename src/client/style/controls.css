@@ -1,3 +1,7 @@
+:root {
+    --controls-filter: 0;
+}
+
 nav {
     position: fixed;
     z-index: 1;
@@ -9,11 +13,22 @@ nav {
     left: 0px;
     top: 0px;
 }
+
+nav button {
+    background: var(--color-light);
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+    border-radius: 30px;
+}
+
 nav.controls {
     top: 0px;
     left: 0px;
     overflow: hidden;
 }
+
 nav.controls button::before,
 nav.controls button span::before {
     display: inline-block;
@@ -23,50 +38,71 @@ nav.controls button span::before {
     line-height: 0;
     opacity: 0;
 }
+
 nav.controls button:nth-of-type(1) {
     grid-area: 1 / 6 / 2 / 7;
 }
+
 nav.controls button:nth-of-type(2) {
     grid-area: 6 / 11 / 7 / 12;
 }
+
 nav.controls button:nth-of-type(3) {
     grid-area: 6 / 1 / 7 / 2;
 }
+
 nav.controls button:nth-of-type(4) {
     grid-area: 11 / 6 / 12 / 7;
 }
+
 nav.controls button:nth-of-type(5) {
     grid-area: 11 / 5 / 12 / 6;
 }
+
 nav.controls button:nth-of-type(6) {
     grid-area: 11 / 3 / 12 / 2;
 }
+
 nav.controls button:nth-of-type(7) {
     grid-area: 11 / 4 / 12 / 5;
 }
+
 nav.controls button:nth-of-type(8) {
     grid-area: 11 / 3 / 12 / 4;
 }
+
 nav.controls button:nth-of-type(9) {
     grid-area: 11 / 1 / 12 / 2;
 }
+
 nav.top button {
     grid-area: 6 / 1 / 7 / 2;
 }
+
+nav.top button::before {
+    content: "⬆";
+}
+
 nav.right button {
     grid-area: 6 / 11 / 7 / 12;
 }
-nav.bottom button {
-    grid-area: 11 / 6 / 12 / 7;
+
+nav.right button::before {
+    content: "➡";
 }
+
 nav.left button {
     grid-area: 6 / 1 / 7 / 2;
 }
-nav button {
-    background: var(--color-light);
-    display: block;
-    width: 100%;
-    height: 100%;
-    font-size: 30px;
-    border-radius: 30px;
+
+nav.left button::before{
+    content: "⬅";
+}
+
+nav.bottom button {
+    grid-area: 11 / 6 / 12 / 7;
+}
+
+nav.bottom button::before {
+    content: "⬇";
 }
