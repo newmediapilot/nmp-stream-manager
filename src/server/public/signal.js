@@ -50,6 +50,9 @@ async function publicSignalCreate(req, res) {
             if ("reload" === description) {
                 result = await sendPayload("browser:reload");
             }
+            if (description.startsWith("route:")) {
+                result = await sendPayload(`browser:route:${description}`);
+            }
         }
         if ("dev:css:write" === type) {
             const {css, href} = JSON.parse(description);
@@ -65,7 +68,6 @@ async function publicSignalCreate(req, res) {
             if ("ad" === type) return res.status(400).send("Could not create ad. Are you online? Did you just run an ad?");
             if ("bpm" === type) return res.status(400).send("There was a problem BPM. Are you online? Is the app configured?");
             if ("feature" === type) return res.status(400).send("There was a problem requesting a streamer. Is the name correct?");
-            if ("reload" === type) return res.status(400).send("There was a problem requesting a reload.");
             return res.status(400).send("Error !result: " + type);
         }
         isCreating = false;
