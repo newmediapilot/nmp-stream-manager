@@ -15,13 +15,15 @@ const dashboard = () => {
         },
     });
     sortable.option("disabled", true);
+    document.querySelector('#toggle-edit-dashboard-edit').style.display = 'flex';
+    document.querySelector('#toggle-edit-dashboard-done').style.display = 'none';
     document.querySelector('#toggle-edit-dashboard-edit').addEventListener("click", () => {
         document.querySelector('#toggle-edit-dashboard-edit').style.display = 'none';
-        document.querySelector('#toggle-edit-dashboard-done').style.display = 'block';
+        document.querySelector('#toggle-edit-dashboard-done').style.display = 'flex';
         notifyEl.classList.add("edit-active");
     });
     document.querySelector('#toggle-edit-dashboard-done').addEventListener("click", () => {
-        document.querySelector('#toggle-edit-dashboard-edit').style.display = 'block';
+        document.querySelector('#toggle-edit-dashboard-edit').style.display = 'flex';
         document.querySelector('#toggle-edit-dashboard-done').style.display = 'none';
         notifyEl.classList.remove("edit-active");
         axios.get(getPath('API_CONFIG_UPDATE'), {
