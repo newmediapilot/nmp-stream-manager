@@ -55,3 +55,16 @@ nav button::before {
     line-height: 0;
     opacity: 0;
 }
+
+nav button span em {
+    font-style: normal;
+}
+
+nav button span::before {
+    display: inline-block;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    opacity: 0;
+}
