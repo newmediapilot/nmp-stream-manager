@@ -2,10 +2,9 @@ package-lock.json
 node_modules
 .idea
 .env
-.secrets
 signals
 style
-.media
+media
 .s3
 .compiled
 .package
