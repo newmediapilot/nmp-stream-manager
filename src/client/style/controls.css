@@ -54,10 +54,10 @@ nav.top button {
     grid-area: 6 / 1 / 7 / 2;
 }
 nav.right button {
-    grid-area: 6 / 1 / 7 / 2;
+    grid-area: 6 / 11 / 7 / 12;
 }
 nav.bottom button {
-    grid-area: 6 / 1 / 7 / 2;
+    grid-area: 11 / 6 / 12 / 7;
 }
 nav.left button {
     grid-area: 6 / 1 / 7 / 2;
