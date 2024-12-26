@@ -1,18 +1,21 @@
 nav {
     position: fixed;
     z-index: 1;
-    grid-template-columns: repeat(11, calc(9.09091vw));
+    max-width: 100vw;
+    max-height: 100vh;
     display: grid;
+    grid-template-columns: repeat(11, calc(9.09091vw));
     grid-template-rows: repeat(11, calc(9.09091vh));
+    left: 0px;
+    top: 0px;
 }
 nav.controls {
     top: 0px;
     left: 0px;
-    width: 100vw;
-    height: 100vh;
     overflow: hidden;
 }
-nav button span::before {
+nav.controls button::before,
+nav.controls button span::before {
     display: inline-block;
     visibility: hidden;
     width: 0px;
@@ -47,39 +50,23 @@ nav.controls button:nth-of-type(8) {
 nav.controls button:nth-of-type(9) {
     grid-area: 11 / 1 / 12 / 2;
 }
-nav.top {
-    top: 1.5%;
-    left: 50%;
-    transform: translateX(-50%);
+nav.top button {
+    grid-area: 6 / 1 / 7 / 2;
 }
-nav.right {
-    top: 50%;
-    right: 1.5%;
+nav.right button {
+    grid-area: 6 / 1 / 7 / 2;
 }
-nav.bottom {
-    bottom: 1.5%;
-    left: 50%;
-    transform: translateX(-50%);
+nav.bottom button {
+    grid-area: 6 / 1 / 7 / 2;
 }
-nav.left {
-    top: 50%;
-    left: 1.5%;
+nav.left button {
+    grid-area: 6 / 1 / 7 / 2;
 }
 nav button {
     background: var(--color-light);
-}
-nav button {
     display: block;
     width: 100%;
     height: 100%;
     font-size: 30px;
     border-radius: 30px;
-}
-nav button::before {
-    display: inline-block;
-    visibility: hidden;
-    width: 0px;
-    height: 0px;
-    line-height: 0;
-    opacity: 0;
 }
