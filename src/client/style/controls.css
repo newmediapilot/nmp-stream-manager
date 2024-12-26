@@ -7,13 +7,28 @@ html.edit-active nav > label {
 }
 nav {
     position: fixed;
-    bottom: 1.5%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+nav.top {
+    top: 1.5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+nav.right {
+    top: 50%;
+    right: 1.5%;
+}
+nav.bottom {
+    bottom: 1.5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+nav.left {
+    top: 50%;
+    left: 1.5%;
 }
 nav input[type='checkbox'] {
     display: none;
