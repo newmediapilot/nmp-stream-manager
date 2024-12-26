@@ -12,6 +12,14 @@ nav.controls {
     height: 100vh;
     overflow: hidden;
 }
+nav button span::before {
+    display: inline-block;
+    visibility: hidden;
+    width: 0px;
+    height: 0px;
+    line-height: 0;
+    opacity: 0;
+}
 nav.controls button:nth-of-type(1) {
     grid-area: 1 / 6 / 2 / 7;
 }
@@ -68,17 +76,6 @@ nav button {
     border-radius: 30px;
 }
 nav button::before {
-    display: inline-block;
-    visibility: hidden;
-    width: 0px;
-    height: 0px;
-    line-height: 0;
-    opacity: 0;
-}
-nav button span em {
-    font-style: normal;
-}
-nav button span::before {
     display: inline-block;
     visibility: hidden;
     width: 0px;
