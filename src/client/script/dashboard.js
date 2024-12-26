@@ -21,17 +21,19 @@ const dashboard = () => {
         document.querySelector('#toggle-edit-dashboard-edit').style.display = 'none';
         document.querySelector('#toggle-edit-dashboard-done').style.display = 'flex';
         notifyEl.classList.add("edit-active");
+        sortable.option("disabled", false);
     });
     document.querySelector('#toggle-edit-dashboard-done').addEventListener("click", () => {
         document.querySelector('#toggle-edit-dashboard-edit').style.display = 'flex';
         document.querySelector('#toggle-edit-dashboard-done').style.display = 'none';
         notifyEl.classList.remove("edit-active");
+        sortable.option("disabled", true);
         axios.get(getPath('API_CONFIG_UPDATE'), {
-                params: {
-                    type,
-                    payload: JSON.stringify(payload),
-                },
-            })
+            params: {
+                type,
+                payload: JSON.stringify(payload),
+            },
+        })
             .finally(() => {
                 socketEmitReload();
                 dashboardBlinkButtons();
