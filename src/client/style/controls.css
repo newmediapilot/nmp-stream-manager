@@ -1,9 +1,9 @@
 nav {
     position: fixed;
     z-index: 1;
-    grid-template-columns: repeat(11, calc(10vw));
+    grid-template-columns: repeat(11, calc(9.09091vw));
     display: grid;
-    grid-template-rows: repeat(11, calc(10vh));
+    grid-template-rows: repeat(11, calc(9.09091vh));
 }
 nav.controls {
     top: 0px;
@@ -13,31 +13,31 @@ nav.controls {
     overflow: hidden;
 }
 nav.controls button:nth-of-type(1) {
-    grid-area: 1 / 5 / 2 / 7;
+    grid-area: 1 / 6 / 2 / 7;
 }
 nav.controls button:nth-of-type(2) {
-    grid-area: 5 / 10 / 7 / 10;
+    grid-area: 6 / 11 / 7 / 12;
 }
 nav.controls button:nth-of-type(3) {
-    grid-area: 5 / 1 / 7 / 2;
+    grid-area: 6 / 1 / 7 / 2;
 }
 nav.controls button:nth-of-type(4) {
-    grid-area: 10 / 6 / 11 / 7;
+    grid-area: 11 / 6 / 12 / 7;
 }
 nav.controls button:nth-of-type(5) {
-    grid-area: 10 / 5 / 11 / 6;
+    grid-area: 11 / 5 / 12 / 6;
 }
 nav.controls button:nth-of-type(6) {
-    grid-area: 10 / 3 / 11 / 2;
+    grid-area: 11 / 3 / 12 / 2;
 }
 nav.controls button:nth-of-type(7) {
-    grid-area: 10 / 4 / 10 / 5;
+    grid-area: 11 / 4 / 12 / 5;
 }
 nav.controls button:nth-of-type(8) {
-    grid-area: 10 / 3 / 11 / 4;
+    grid-area: 11 / 3 / 12 / 4;
 }
 nav.controls button:nth-of-type(9) {
-    grid-area: 11 / 1 / 10 / 2;
+    grid-area: 11 / 1 / 12 / 2;
 }
 nav.top {
     top: 1.5%;
