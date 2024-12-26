@@ -112,7 +112,7 @@ const initializePublicConfigs = async (type) => {
     }
 };
 const putConfig = (filePath, config) => {
-    const fileName = path.resolve(`.${filePath}`);
+    const fileName = path.resolve(`${filePath}`);
     console.log(
         "putConfig :: file:",
         fileName,
