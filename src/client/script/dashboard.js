@@ -2,14 +2,7 @@ const dashboard = () => {
     let payload = [];
     const type = "signals:order";
     const containerEl = document.body.querySelector("section");
-    const toggleEl = document.body.querySelector("#toggle-edit-dashboard");
     const notifyEl = document.documentElement;
-    const states = [
-        `<span aria-label="Edit"><em aria-label="✏"></em></span>`,
-        `<span aria-label="Done"><em aria-label="☑"></em></span>`,
-    ];
-    toggleEl.innerHTML = states[0];
-    toggleEl.style.display = 'block';
     const sortable = new Sortable(containerEl, {
         swap: true,
         animation: 333,
@@ -22,32 +15,31 @@ const dashboard = () => {
         },
     });
     sortable.option("disabled", true);
-    toggleEl.addEventListener("click", () => {
-        sortable.option("disabled", !sortable.option("disabled"));
-        notifyEl.classList.toggle("edit-active");
-        toggleEl.innerHTML = sortable.option("disabled") ? states[0] : states[1];
-        if (sortable.option("disabled")) {
-            axios
-                .get(getPath('API_CONFIG_UPDATE'), {
-                    params: {
-                        type,
-                        payload: JSON.stringify(payload),
-                    },
-                })
-                .finally(() => {
-                    socketEmitReload();
-                    dashboardBlinkButtons();
-                    dashboardFilterButtons(false);
-                    containerEl.scrollTo({
-                        top: 0,
-                        left: 0,
-                        behavior: 'smooth'
-                    });
+    document.querySelector('#toggle-edit-dashboard-edit').addEventListener("click", () => {
+        document.querySelector('#toggle-edit-dashboard-edit').style.display = 'none';
+        document.querySelector('#toggle-edit-dashboard-done').style.display = 'block';
+        notifyEl.classList.add("edit-active");
+    });
+    document.querySelector('#toggle-edit-dashboard-done').addEventListener("click", () => {
+        document.querySelector('#toggle-edit-dashboard-edit').style.display = 'block';
+        document.querySelector('#toggle-edit-dashboard-done').style.display = 'none';
+        notifyEl.classList.remove("edit-active");
+        axios.get(getPath('API_CONFIG_UPDATE'), {
+                params: {
+                    type,
+                    payload: JSON.stringify(payload),
+                },
+            })
+            .finally(() => {
+                socketEmitReload();
+                dashboardBlinkButtons();
+                dashboardFilterButtons(false);
+                containerEl.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: 'smooth'
                 });
-            payload = [];
-        } else {
-            dashboardFilterButtons(true);
-        }
+            });
     });
     document.querySelectorAll('section article button').forEach((button) => {
         button.addEventListener('click', () => {
