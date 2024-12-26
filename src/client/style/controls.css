@@ -5,41 +5,53 @@ nav {
     flex-direction: column;
     align-items: center;
 }
+
 nav.controls {
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
 }
+
 nav.top {
     top: 1.5%;
     left: 50%;
     transform: translateX(-50%);
 }
+
 nav.right {
     top: 50%;
     right: 1.5%;
 }
+
 nav.bottom {
     bottom: 1.5%;
     left: 50%;
     transform: translateX(-50%);
 }
+
 nav.left {
     top: 50%;
     left: 1.5%;
 }
-nav label {
-    position: relative;
+
+nav button {
     background: var(--color-light);
-    width: 30px;
-    height: 30px;
-    border-radius: 999px;
-    padding: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    line-height: 2.5rem;
-    cursor: pointer;
+}
+
+nav button {
+    display: block;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    border-radius: 30px;
+}
+
+nav button::before {
+    display: inline-block;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    opacity: 0;
 }
