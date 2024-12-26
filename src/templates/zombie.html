@@ -51,8 +51,11 @@
         socket.on("response", (payload) => {
             document.documentElement.innerHTML = payload;
         });
+        socket.on("connect_error", () => {
+            document.documentElement.querySelector('aside').innerText = "App is offline";
+        });
         socket.on("disconnect", () => {
-            document.documentElement.querySelector('body').innerText = "Disconnected from the server";
+            document.documentElement.querySelector('aside').innerText = "App is disconnected";
             console.log("Disconnected from the server");
         });
     });
