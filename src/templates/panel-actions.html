@@ -127,10 +127,16 @@
         {%endif%}
         {%endfor%}
 </section>
-{%include "_home.njk"%}
+<nav class="right">
+    <label aria-label="🧮"></label>
+</nav>
 {%endblock%}
 {%block dialogs%}
-{%include "_emoji.njk"%}
+<ul id="emoji-widget">
+    {%for emoji in 'emoji_collection'|getParam%}
+    <li aria-label="{{ emoji }}"></li>
+    {%endfor%}
+</ul>
 {%endblock%}
 {%block scripts%}
 <script defer>
