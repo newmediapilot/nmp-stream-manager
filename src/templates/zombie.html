@@ -46,7 +46,7 @@
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => {
         document.documentElement.querySelector('aside').innerText = "Loading dashboard...";
-        const socket = io(`https://192.168.0.${Number(window.location.pathname.split('/')[1].split('.')[0])}`);
+        const socket = io(`https://192.168.0.${Number(window.location.pathname.split('/')[1].split('.')[0])}/public/dashboard`);
         socket.on("connect", () => socket.emit("request", "index"));
         socket.on("response", (payload) => {
             document.documentElement.innerHTML = payload;
