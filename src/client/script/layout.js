@@ -92,15 +92,15 @@ const setModes = () => {
     document.$layer = document.querySelector('article .layers input[type=radio]:checked').id;
     document.$mode = document.querySelector('article .modes input[type=radio]:checked').id;
     document.$modes = [document.$layer, document.$mode];
-    const {scrollWidth, scrollHeight} = document.querySelector('article .controls label');
-    const [x, y] = getPayloadValues();
-    const top = scrollHeight * (y.value / 200);
-    const left = scrollWidth * (x.value / 200);
-    document.querySelector('article .controls label').scrollTo({
-        top,
-        left,
-        behavior: "smooth",
-    });
+    // const {scrollWidth, scrollHeight} = document.querySelector('article .controls label');
+    // const [x, y] = getPayloadValues();
+    // const top = scrollHeight * (y.value / 200);
+    // const left = scrollWidth * (x.value / 200);
+    // document.querySelector('article .controls label').scrollTo({
+    //     top,
+    //     left,
+    //     behavior: "smooth",
+    // });
 };
 const enableRadioButtons = () => {
     Array.from(
