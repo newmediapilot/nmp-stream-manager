@@ -96,12 +96,12 @@ dashboardBlinkButtons = () => {
     });
 };
 dashboardSpinLabels = () => {
-    const {width} = document.querySelector("section article label:nth-of-type(2)").getBoundingClientRect();
-    !document.documentElement.classList.contains('reduced-motion') && anime({
-        targets: "section article label:nth-of-type(2)",
-        duration: 5000,
-        easing: 'linear',
-        delay: anime.stagger(1500),
-        translateX: [`${0}px`, `-${(width / 2)}px`],
-    });
+    // const {width} = document.querySelector("section article label:nth-of-type(2)").getBoundingClientRect();
+    // !document.documentElement.classList.contains('reduced-motion') && anime({
+    //     targets: "section article label:nth-of-type(2)",
+    //     duration: 5000,
+    //     easing: 'linear',
+    //     delay: anime.stagger(1500),
+    //     translateX: [`${0}px`, `-${(width / 2)}px`],
+    // });
 };
