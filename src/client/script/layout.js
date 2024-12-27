@@ -132,7 +132,7 @@ const setModes = () => {
     document.$layer = document.querySelector('article .layers input[type=radio]:checked').id;
     document.$mode = document.querySelector('article .modes input[type=radio]:checked').id;
     document.$modes = [document.$layer, document.$mode];
-    
+    ///// --_feat-tX:55;--_feat-tY:45 /////
     console.log('document.$modes', document.$modes);
 };
 const enableRadioButtons = () => {
@@ -141,7 +141,9 @@ const enableRadioButtons = () => {
             ...document.body.querySelectorAll('article .modes input'),
             ...document.body.querySelectorAll('article .layers input'),
         ]
-    ).forEach(input => input.addEventListener('change', setModes));
+    ).map(radio => {
+        return radio;
+    }).forEach(input => input.addEventListener('change', setModes));
     document.querySelector('article .layers input[type=radio]:nth-of-type(1)').checked = true;
     document.querySelector('article .modes input[type=radio]:nth-of-type(1)').checked = true;
     setModes();
