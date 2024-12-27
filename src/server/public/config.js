@@ -77,15 +77,7 @@ const DASHBOARD_BUTTON_CONFIG = {
         {type: "empty"},
         {type: "empty"},
         {type: "empty"},
-        {
-            // emoji: "❤",
-            // theme: "bloodorange",
-            // type: "bpm",
-            type: "empty",
-            // description: "bpm",
-            // label: "BPM",
-            // visibility: "ON",
-        },
+        {type: "empty"},
     ],
 };
 const fs = require("fs");
