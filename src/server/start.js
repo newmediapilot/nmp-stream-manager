@@ -1,7 +1,6 @@
 const https = require("https");
 const {setParam, getSecret} = require("./store/manager");
 const {configureNunjucks} = require("./nunjucks/configure");
-const {createBpmServer} = require("./bpm/listen");
 const {initializePublicConfigs} = require("./public/config");
 const {initializePublicStyles} = require("./public/style");
 const {configureSocket} = require("./helper/socket");
@@ -29,7 +28,6 @@ async function startServices(app) {
             console.log("startServices :: server running on 443 at https://localhost");
         });
         configureSocket(httpsServer);
-        await createBpmServer(app);
     } catch (err) {
         console.log("startServices :: error initializing services:", err);
     }

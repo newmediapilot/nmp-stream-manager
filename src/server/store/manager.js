@@ -7,7 +7,6 @@ const allowedParams = [
     "emoji_collection",
     "public_module_styles",
     "public_routes",
-    "sensor_bpm_rate",
     "twitch_access_token_set",
     "twitch_broadcaster_id_set",
     "twitch_channel_id_set",

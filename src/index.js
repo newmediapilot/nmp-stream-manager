@@ -10,7 +10,6 @@ const {publicConfigUpdate} = require("./server/public/config");
 const {publicStyleUpdate} = require("./server/public/style");
 const {publicMediaUpdate} = require("./server/public/media");
 const {publicMediaFetch} = require("./server/public/media");
-const {publicBpmPing} = require("./server/bpm/ping");
 const {twitchLogin, twitchLoginSuccess} = require("./server/twitch/login");
 const {configureIp} = require('./server/helper/ip');
 const {configureCertificate} = require('./server/helper/cert');
@@ -41,7 +40,6 @@ app.use(express.json({limit: '200mb'}))
     .all(ROUTES.PANEL_ZOMBIE, (req, res) => res.render("zombie"))
     .all(ROUTES.PANEL_EMBED, (req, res) => res.render("embed"))
     .all(ROUTES.PANEL_FEATURE_EMBED, (req, res) => res.render("embed-feature"))
-    .all(ROUTES.PANEL_BPM_EMBED, (req, res) => res.render("embed-bpm"))
     .all(ROUTES.PANEL_DRAW_EMBED, (req, res) => res.render("embed-draw"))
     .all(ROUTES.PANEL_SOUND_EMBED, (req, res) => res.render("embed-sound"))
     .all(ROUTES.PANEL_MEDIA_EMBED, (req, res) => res.render("embed-media"))
@@ -49,5 +47,4 @@ app.use(express.json({limit: '200mb'}))
     .all(ROUTES.API_CONFIG_UPDATE, publicConfigUpdate)
     .all(ROUTES.API_STYLE_UPDATE, publicStyleUpdate)
     .all(ROUTES.API_MEDIA_UPDATE, publicMediaUpdate)
-    .all(ROUTES.API_BPM_PING, publicBpmPing);
 startServices(app);

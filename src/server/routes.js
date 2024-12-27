@@ -14,10 +14,7 @@ const ROUTES = {
     PANEL_MEDIA_EMBED: "/public/media/embed",
     PANEL_DRAW_EMBED: "/public/draw/embed",
     PANEL_SOUND_EMBED: "/public/sound/embed",
-    PANEL_BPM_EMBED: "/public/bpm/embed",
-    API_BPM_PING: "/public/bpm/ping",
     TWITCH_LOGIN: "/twitch/login",
-    TWITCH_REDIRECT: "https://localhost/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/",
-    TWITCH_LOGIN_SUCCESS: "https://localhost/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/".split('https://localhost')[1],
+    TWITCH_LOGIN_SUCCESS: "/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/",
 };
 module.exports = ROUTES;

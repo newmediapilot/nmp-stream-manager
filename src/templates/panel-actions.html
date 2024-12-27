@@ -109,23 +109,6 @@
         </div>
         {%endif%}
         {%endfor%}
-        {%set feature_title_set = false%}
-        {%for signal in "dashboard_signals_config"|getParam%}
-        {%if signal.type == "bpm"%}
-        {%if not feature_title_set%}{%set feature_title_set = true%}
-        <div class="{{signal.theme}}" aria-label="BPM"></div>
-        {%endif%}
-        <div class="{{signal.theme}}">
-            <label id="{{loop.index0}}">
-                <button aria-label="{{signal.emoji}}"></button>
-                <input type="text" value="{{signal.label}}"/>
-                <button disabled></button>
-                <button disabled></button>
-                <button aria-label="{{signal.visibility}}"></button>
-            </label>
-        </div>
-        {%endif%}
-        {%endfor%}
 </section>
 {%endblock%}
 {%block dialogs%}

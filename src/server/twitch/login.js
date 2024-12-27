@@ -12,10 +12,9 @@ function twitchLogin(req, res) {
     const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
     const TWITCH_SCOPES = process.env.TWITCH_SCOPES;
     console.log( "twitchLogin start...");
-    console.log( "TWITCH_SCOPES:", TWITCH_SCOPES);
-    console.log( "ROUTES.TWITCH_REDIRECT:", ROUTES.TWITCH_REDIRECT);
     setParam("twitch_login_referrer", ROUTES.PANEL_DASHBOARD);
-    const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(ROUTES.TWITCH_REDIRECT)}&response_type=code&scope=${TWITCH_SCOPES}`;
+    const redirectURI = `https://${getParam("device_ip")}${encodeURIComponent(ROUTES.TWITCH_LOGIN_SUCCESS)}`;
+    const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${redirectURI}&response_type=code&scope=${TWITCH_SCOPES}`;
     console.log( "OAuth URL generated:", oauthUrl);
     res.redirect(oauthUrl);
 }
