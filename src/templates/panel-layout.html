@@ -1,7 +1,8 @@
 {%extends "main.njk"%}
 {%set public_routes = 'public_routes'|getParam%}
 {%block head%}
-{{ '<link href="../client/style/layout.css?" rel="stylesheet">' | inlineScriptContents | safe }}
+{{ '
+<link href="../client/style/layout.css?" rel="stylesheet">' | inlineScriptContents | safe }}
 {%include "_style.njk"%}
 {%endblock%}
 {%block body%}
@@ -69,6 +70,16 @@
     document.addEventListener("DOMContentLoaded", () => applyLayoutStyles());
     document.addEventListener("DOMContentLoaded", () => initializeLayoutClickTouch());
     document.addEventListener("DOMContentLoaded", () => enableRadioButtons());
+    document.addEventListener("DOMContentLoaded", () => {
+        const updateTransform = () => {
+            const {width} = document.querySelector('.preview').getBoundingClientRect();
+            const iframe = document.querySelector('iframe');
+            iframe.style.transform = `scale(${width / 1920})`;
+        };
+        window.addEventListener('orientationchange', updateTransform);
+        window.addEventListener('resize', updateTransform);
+        updateTransform();
+    });
     // document.addEventListener("DOMContentLoaded", () => enableLayerDragDrop());
 </script>
 {%endblock%}
