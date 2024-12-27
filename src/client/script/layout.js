@@ -1,6 +1,3 @@
-const applyLayoutStyles = () => {
-
-};
 const getPayloadValues = () => {
     return document.head.querySelector('#public_module_styles')
         .innerHTML.replace(":root{", "")
@@ -18,20 +15,26 @@ const getPayloadValues = () => {
         });
 };
 const castLayoutInputValues = () => {
-    Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
-        const {scrollWidth, scrollHeight} = label;
-        const [inputX, inputY] = [label.children[0], label.children[1]];
-        const [px, py] = [(label.scrollLeft / scrollWidth) || 0, (label.scrollTop / scrollHeight) || 0];
-        inputX.value = (Math.abs(inputX.max) * px);
-        inputY.value = (Math.abs(inputY.max) * py);
-        label.setAttribute('data-px-py', [px, py, label.scrollLeft, scrollWidth, label.scrollHeight, scrollHeight].join(' '))
-    });
+    const label = document.body.querySelector('.controls label');
+    const {scrollWidth, scrollHeight} = label;
+    const [layer, property] = document.$modes;
+    const inputs = Array.from(label.children)
+        .filter(input => input.name.includes(layer))
+        .filter(input => {
+            const ins = input.name.split('-').pop().substr(0, 1);
+            const prp = property.substr(0, 1);
+            return ins === prp;
+        });
+    console.log('inputs', inputs);
+    const [inputX, inputY, inputZ] = [label.children[0], label.children[1]];
+    const [px, py] = [(label.scrollLeft / scrollWidth) || 0, (label.scrollTop / scrollHeight) || 0];
+    inputX.value = (Math.abs(inputX.max) * px);
+    inputY.value = (Math.abs(inputY.max) * py);
+    // if Z do something
+    label.setAttribute('data-px-py', [px, py, label.scrollLeft, scrollWidth, label.scrollHeight, scrollHeight].join(' '));
     const payload = [
         ...Array.from(document.body.querySelectorAll('section .controls label input[type="range"]')).map(el => {
             return `${el.name}:${el.value}`;
-        }),
-        ...Array.from(document.body.querySelectorAll('section .layers label input[type="radio"]')).map((el, index, arr) => {
-            return `${el.id}:${arr.length - index - 1}`;
         })
     ].join(";");
     document.head.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
@@ -92,6 +95,7 @@ const setModes = () => {
     document.$layer = document.querySelector('article .layers input[type=radio]:checked').id;
     document.$mode = document.querySelector('article .modes input[type=radio]:checked').id;
     document.$modes = [document.$layer, document.$mode];
+    console.log('setModes', document.$modes);
     // const {scrollWidth, scrollHeight} = document.querySelector('article .controls label');
     // const [x, y] = getPayloadValues();
     // const top = scrollHeight * (y.value / 200);
