@@ -73,7 +73,6 @@
         document.body.querySelector("#qr-dialog canvas").getAttribute("data-url"),
     ));
     document.addEventListener("DOMContentLoaded", () => setCssVariable('.preview', 'width', '--js-module-preview-width'));
-    document.addEventListener("DOMContentLoaded", () => applyLayoutStyles());
     document.addEventListener("DOMContentLoaded", () => initializeLayoutClickTouch());
     document.addEventListener("DOMContentLoaded", () => enableRadioButtons());
     document.addEventListener("DOMContentLoaded", () => {
@@ -86,6 +85,5 @@
         window.addEventListener('resize', updateTransform);
         updateTransform();
     });
-    // document.addEventListener("DOMContentLoaded", () => enableLayerDragDrop());
 </script>
 {%endblock%}
