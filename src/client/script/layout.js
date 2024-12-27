@@ -131,13 +131,14 @@ const sendLayoutInputValues = () => {
 const setModes = () => {
     document.$layer = document.querySelector('article .layers input[type=radio]:checked').id;
     document.$mode = document.querySelector('article .modes input[type=radio]:checked').id;
-    document.$modes = [document.$layer, document.$modes];
+    document.$modes = [document.$layer, document.$mode];
+    
     console.log('document.$modes', document.$modes);
 };
 const enableRadioButtons = () => {
     Array.from(
         [
-            ...document.body.querySelectorAll('article .modes label'),
+            ...document.body.querySelectorAll('article .modes input'),
             ...document.body.querySelectorAll('article .layers input'),
         ]
     ).forEach(input => input.addEventListener('change', setModes));
