@@ -13,17 +13,21 @@
             <iframe width="1920" height="1080" src="{{public_routes.PANEL_EMBED}}#edit"></iframe>
         </div>
         <div class="layers">
-            <input type="radio" name="layers" id="_feat-layer"/>
-            <label for="_feat-layer" aria-label="FEAT"></label>
-            <input type="radio" name="layers" id="_draw-layer"/>
-            <label for="_draw-layer" aria-label="DRAW"></label>
-            <input type="radio" name="layers" id="_med-layer"/>
-            <label for="_med-layer" aria-label="MEDIA"></label>
+            <input type="radio" name="layers" id="_feat"/>
+            <label for="_feat" aria-label="FEAT"></label>
+            <input type="radio" name="layers" id="_draw"/>
+            <label for="_draw" aria-label="DRAW"></label>
+            <input type="radio" name="layers" id="_med"/>
+            <label for="_med" aria-label="MEDIA"></label>
         </div>
         <div class="controls">
             <label>
                 <input type="range" min="0" max="200" step="5.0" value="50" name="--_feat-tX"/>
                 <input type="range" min="0" max="200" step="5.0" value="50" name="--_feat-tY"/>
+                <input type="range" min="0" max="200" step="5.0" value="50" name="--_draw-tX"/>
+                <input type="range" min="0" max="200" step="5.0" value="50" name="--_draw-tY"/>
+                <input type="range" min="0" max="200" step="5.0" value="50" name="--_med-tX"/>
+                <input type="range" min="0" max="200" step="5.0" value="50" name="--_med-tY"/>
             </label>
         </div>
         <div class="modes">
