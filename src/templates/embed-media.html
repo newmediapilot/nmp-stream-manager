@@ -57,13 +57,9 @@
 </style>
 {%endblock%}
 {%block body%}
-{%for signal in "dashboard_signals_config"|getParam%}
-{%if signal.type == "bpm"%}
 <main>
     <img id="media-embed" src=""/>
 </main>
-{%endif%}
-{%endfor%}
 {%endblock%}
 {%block scripts%}
 <script defer>
