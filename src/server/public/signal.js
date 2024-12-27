@@ -4,7 +4,6 @@ const {twitchMarkerCreate} = require("../twitch/marker");
 const {twitchMessageCreate} = require("../twitch/message");
 const {twitchAdCreate} = require("../twitch/ads");
 const {sendPayload} = require("../helper/socket");
-const {getBpm} = require("../bpm/listen");
 let isCreating = false;
 
 async function publicSignalCreate(req, res) {
@@ -20,9 +19,6 @@ async function publicSignalCreate(req, res) {
         if ("mark" === type) {
             result = await twitchMarkerCreate(description);
             await twitchMessageCreate(`🤖 Marker set.`);
-        }
-        if ("bpm" === type) {
-            result = await twitchMessageCreate(getBpm());
         }
         if ("ad" === type) {
             result = await twitchAdCreate(description);
@@ -66,7 +62,6 @@ async function publicSignalCreate(req, res) {
             isCreating = false;
             if ("mark" === type) return res.status(400).send("Could not create marker. Are you online?");
             if ("ad" === type) return res.status(400).send("Could not create ad. Are you online? Did you just run an ad?");
-            if ("bpm" === type) return res.status(400).send("There was a problem BPM. Are you online? Is the app configured?");
             if ("feature" === type) return res.status(400).send("There was a problem requesting a streamer. Is the name correct?");
             return res.status(400).send("Error !result: " + type);
         }

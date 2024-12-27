@@ -1,5 +1,4 @@
 const { getSecret } = require("../store/manager");
-const { getBpm } = require("../bpm/listen");
 const { twitchAdCreate } = require("./ads");
 const { twitchClipCreate } = require("./clip");
 const { twitchTwipCreate } = require("../twitter/twip");
@@ -19,7 +18,6 @@ async function parseCommand(channel, tags, message) {
     mark: "mark/",
     shout: "shout/",
     title: "title/",
-    bpm: "bpm/",
   };
   let currentCommand;
   let currentMessage;
@@ -53,10 +51,6 @@ async function parseCommand(channel, tags, message) {
     await twitchMessageCreate(
       `📡 Shoutout to @${username}! Check them out and show them some love: ${twitchURL} 💜`,
     );
-    return true;
-  }
-  if (currentCommand === COMMANDS.bpm) {
-    await twitchMessageCreate(getBpm());
     return true;
   }
   if (isBroadcaster) {
