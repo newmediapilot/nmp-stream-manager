@@ -19,21 +19,6 @@
         box-sizing: border-box;
         object-fit: contain;
     }
-</style>
-<style>
-    :root {
-        --_draw-o: 1.0;
-        --_draw-tX: 0.0;
-        --_draw-tY: 0.0;
-        --_draw-sX: 100.0;
-        --_draw-sY: var(--_draw-sX);
-        --_draw-rX: 0.0;
-        --_draw-rY: 0.0;
-        --_draw-rotateZ: 0.0;
-    }
-</style>
-{%include "_style.njk"%}
-<style>
     main {
         width: 100vw;
         height: 100vh;
@@ -41,20 +26,32 @@
         justify-content: center;
         align-items: center;
     }
-
-    body {
-        perspective: 1920px;
+</style>
+<style>
+    :root {
+        --_draw-o: 100.0;
+        --_draw-tX: 50.0;
+        --_draw-tY: 50.0;
+        --_draw-sX: 50.0;
+        --_draw-sY: 50.0;
+        --_draw-rX: 50.0;
+        --_draw-rY: 50.0;
     }
-
+</style>
+{%include "_style.njk"%}
+<style>
+    body {
+        perspective: calc(3 * 1920px);
+        perspective-origin: calc(0.5 * 1920px) calc(0.5 * 1920px);
+    }
     main {
-        opacity: var(--_feat-o);
-        transform: translateX(calc(calc(var(--_draw-tX) * -1%) + 33%))
-        translateY(calc(calc(var(--_draw-tY) * -1%) + 33%))
-        scaleX(calc(var(--_draw-sX) * 0.01))
-        scaleY(calc(var(--_draw-sY) * 0.01))
-        rotateX(calc(var(--_draw-rX) * 3.6deg))
-        rotateY(calc(var(--_draw-rY) * 3.6deg))
-        rotateZ(calc(var(--_draw-rotateZ) * 3.6deg));
+        opacity: calc(var(--_draw-o)/100);
+        transform: translateX(calc(calc(var(--_draw-tX) * -1%) + 50%))
+        translateY(calc(calc(var(--_draw-tY) * -1%) + 50%))
+        scaleX(calc(calc(var(--_draw-sX) * 0.01) + 0.0))
+        scaleY(calc(calc(var(--_draw-sY) * 0.01) + 0.0))
+        rotateX(calc(calc(var(--_draw-rY) * 3.6deg) - 180deg))
+        rotateY(calc(calc(var(--_draw-rX) * 3.6deg) - 180deg));
     }
 </style>
 {%endblock%}
