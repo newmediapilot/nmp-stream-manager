@@ -22,17 +22,19 @@
         object-fit: contain;
         background: none;
     }
+    #media-embed[src=''] {
+        visibility: hidden;
+    }
 </style>
 <style>
     :root {
-        --med-o: 1.0;
-        --med-tX: 0.0;
-        --med-tY: 0.0;
-        --med-sX: 100.0;
-        --med-sY: var(--med-sX);
-        --med-rX: 0.0;
-        --med-rY: 0.0;
-        --med-rotateZ: 0.0;
+        --_med-o: 100.0;
+        --_med-tX: 50.0;
+        --_med-tY: 50.0;
+        --_med-sX: 50.0;
+        --_med-sY: 50.0;
+        --_med-rX: 50.0;
+        --_med-rY: 50.0;
     }
 </style>
 {%include "_style.njk"%}
@@ -42,17 +44,13 @@
         perspective-origin: calc(0.5 * 1920px) calc(0.5 * 1920px);
     }
     main {
-        opacity: var(--_bpm-o);
-        transform: translateX(calc(calc(var(--med-tX) * -1%) + 40%))
-        translateY(calc(calc(var(--med-tY) * -1%) + 40%))
-        scaleX(calc(var(--med-sX) * 0.01))
-        scaleY(calc(var(--med-sY) * 0.01))
-        rotateX(calc(var(--med-rX) * 3.6deg))
-        rotateY(calc(var(--med-rY) * -3.6deg))
-        rotateZ(calc(var(--med-rotateZ) * -3.6deg))
-    }
-    #media-embed[src=''] {
-        visibility: hidden;
+        opacity: calc(var(--_med-o)/100);
+        transform: translateX(calc(calc(var(--_med-tX) * -1%) + 50%))
+        translateY(calc(calc(var(--_med-tY) * -1%) + 50%))
+        scaleX(calc(calc(var(--_med-sX) * 0.01) + 0.0))
+        scaleY(calc(calc(var(--_med-sY) * 0.01) + 0.0))
+        rotateX(calc(calc(var(--_med-rY) * 3.6deg) - 180deg))
+        rotateY(calc(calc(var(--_med-rX) * 3.6deg) - 180deg));
     }
 </style>
 {%endblock%}
