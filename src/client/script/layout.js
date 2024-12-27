@@ -19,12 +19,12 @@ const getPayloadValues = () => {
 };
 const castLayoutInputValues = () => {
     Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
-        const {width, height} = label.getBoundingClientRect();
+        const {scrollWidth, scrollHeight} = label;
         const [inputX, inputY] = [label.children[0], label.children[1]];
-        const [px, py] = [(label.scrollLeft / width) || 0, (label.scrollTop / height) || 0];
+        const [px, py] = [(label.scrollLeft / scrollWidth) || 0, (label.scrollTop / scrollHeight) || 0];
         inputX.value = (Math.abs(inputX.max) * px);
         inputY.value = (Math.abs(inputY.max) * py);
-        label.setAttribute('data-px-py', [px, py, label.scrollLeft, width, label.scrollTop, height].join(' '))
+        label.setAttribute('data-px-py', [px, py, label.scrollLeft, scrollWidth, label.scrollHeight, scrollHeight].join(' '))
     });
     const payload = [
         ...Array.from(document.body.querySelectorAll('section .controls label input[type="range"]')).map(el => {
@@ -34,8 +34,8 @@ const castLayoutInputValues = () => {
             return `${el.id}:${arr.length - index - 1}`;
         })
     ].join(";");
-    if (payload) document.head.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
-    payload && payload && axios.get(getPath("API_SIGNAL_CREATE"), {
+    document.head.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
+    payload && axios.get(getPath("API_SIGNAL_CREATE"), {
         params: {
             type: "style",
             description: payload,
@@ -92,19 +92,13 @@ const setModes = () => {
     document.$layer = document.querySelector('article .layers input[type=radio]:checked').id;
     document.$mode = document.querySelector('article .modes input[type=radio]:checked').id;
     document.$modes = [document.$layer, document.$mode];
-    const {width, height} = document.querySelector('article .controls label').getBoundingClientRect();
+    const {scrollWidth, scrollHeight} = document.querySelector('article .controls label');
     const [x, y] = getPayloadValues();
-    const left = width * (x.value / 100);
-    const top = height * (y.value / 100);
-    console.log('width', width);
-    console.log('height', height);
-    console.log('left', left);
-    console.log('top', top);
-    console.log('x', x);
-    console.log('y', y);
+    const top = scrollHeight * (y.value / 200);
+    const left = scrollWidth * (x.value / 200);
     document.querySelector('article .controls label').scrollTo({
-        left,
         top,
+        left,
         behavior: "smooth",
     });
 };
