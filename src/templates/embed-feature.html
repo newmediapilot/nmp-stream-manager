@@ -23,7 +23,7 @@
 </style>
 <style>
     :root {
-        --_feat-o: 1.0;
+        --_feat-o: 100.0;
         --_feat-tX: 50.0;
         --_feat-tY: 50.0;
         --_feat-sX: 50.0;
@@ -39,7 +39,7 @@
         perspective-origin: calc(0.5 * 1920px) calc(0.5 * 1920px);
     }
     main {
-        opacity: var(--_feat-o);
+        opacity: calc(var(--_feat-o)/100);
         transform: translateX(calc(calc(var(--_feat-tX) * -1%) + 50%))
         translateY(calc(calc(var(--_feat-tY) * -1%) + 50%))
         scaleX(calc(calc(var(--_feat-sX) * 0.01) + 0.0))
