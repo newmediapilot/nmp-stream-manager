@@ -81,8 +81,25 @@ const server = globSync('./src/server/**/*.js')
             })(),
             path,
         };
-    })
-    .map(({content,path}) => `/** ${path} */${content}`)
+    });
+const index = server.splice(server.indexOf(server.find(({path}) => path.endsWith('index.js'))), 1);
+const output = [
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('manager.js'))), 1),
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('message.js'))), 1),
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('marker.js'))), 1),
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('broadcast.js'))), 1),
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('tweet.js'))), 1),
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('clip.js'))), 1),
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('twip.js'))), 1),
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('ads.js'))), 1),
+    ...server,
+    ...index,
+]
+    .map(({content, path}) => `/** start :: ${path} */\r\n${content}\r\n/** end :: ${path} */`)
     .join('\r\n');
 
-fs.writeFileSync('./.server.js', server, {encoding: 'utf-8'});
+fs.writeFileSync(
+    './.server.js',
+    output,
+    {encoding: 'utf-8'}
+);
