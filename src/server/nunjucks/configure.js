@@ -3,7 +3,7 @@ const nunjucks = require("nunjucks");
 const express = require("express");
 const {getParam, getAllParams} = require("../store/manager");
 const configureNunjucks = (app) => {
-    const nunjucksEnv = nunjucks.configure(templatesPath, {
+    const nunjucksEnv = nunjucks.configure('src/templates', {
         autoescape: true,
         express: app,
         noCache: true,
