@@ -57,7 +57,7 @@ const server = globSync('./src/server/**/*.js')
                         if (key.includes(',')) {
                             return `const [${key}] = [${key.split(',').map(k => `_${k.trim()}`)}];`;
                         } else {
-                            return `const {${key}} = {_${key}};`;
+                            return `const [${key}] = [_${key}];`;
                         }
                     } else {
                         return line;
@@ -82,21 +82,7 @@ const server = globSync('./src/server/**/*.js')
             path,
         };
     })
-    .sort(({path: a}, {path: b}) => {
-        const aIsIndex = a.endsWith('index.js') ? -1 : 0;
-        const bIsIndex = b.endsWith('index.js') ? -1 : 0;
-        return bIsIndex - aIsIndex;
-    })
-    .sort(({path: a}, {path: b}) => {
-        const aIsIndex = a.endsWith('manager.js') ? -1 : 0;
-        const bIsIndex = b.endsWith('manager.js') ? -1 : 0;
-        return aIsIndex - bIsIndex;
-    })
-    .sort(({path: a}, {path: b}) => {
-        const aIsIndex = a.endsWith('manager.js') ? -1 : 0;
-        const bIsIndex = b.endsWith('manager.js') ? -1 : 0;
-        return aIsIndex - bIsIndex;
-    })
-    .map(({content}) => content)
+    .map(({content,path}) => `/** ${path} */${content}`)
     .join('\r\n');
+
 fs.writeFileSync('./.server.js', server, {encoding: 'utf-8'});
