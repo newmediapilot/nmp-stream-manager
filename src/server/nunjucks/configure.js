@@ -1,4 +1,3 @@
-const fs = require("fs");
 const nunjucks = require("nunjucks");
 const express = require("express");
 const {getParam, getAllParams} = require("../store/manager");
