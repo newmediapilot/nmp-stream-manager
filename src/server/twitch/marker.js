@@ -1,6 +1,5 @@
 const fetch = require("node-fetch");
 const { getSecret } = require("../store/manager");
-const { createMessage } = require("../twitch/message");
 async function twitchMarkerCreate(description) {
   if (!description) {
     console.log( "No marker description provided. Skipping...");
