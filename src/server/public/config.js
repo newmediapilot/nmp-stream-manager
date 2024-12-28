@@ -172,9 +172,4 @@ const configFieldUpdate = (id, field, value) => {
     setParam("dashboard_signals_config", signalsTarget);
     putConfig("signals", signalsTarget);
 };
-module.exports = {
-    DASHBOARD_BUTTON_CONFIG,
-    initializePublicConfigs,
-    publicConfigUpdate,
-    configFieldUpdate,
-};
+module.exports = {DASHBOARD_BUTTON_CONFIG, initializePublicConfigs, publicConfigUpdate, configFieldUpdate};
