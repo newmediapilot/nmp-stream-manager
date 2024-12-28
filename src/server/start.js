@@ -4,7 +4,7 @@ const {configureNunjucks} = require("./nunjucks/configure");
 const {initializePublicConfigs} = require("./public/config");
 const {initializePublicStyles} = require("./public/style");
 const {configureSocket} = require("./helper/socket");
-const ROUTES = require("./routes");
+const {ROUTES} = require("./routes");
 
 async function startServices(app) {
     try {

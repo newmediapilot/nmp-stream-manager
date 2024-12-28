@@ -17,4 +17,4 @@ const ROUTES = {
     TWITCH_LOGIN: "/twitch/login",
     TWITCH_LOGIN_SUCCESS: "/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/",
 };
-module.exports = ROUTES;
+module.exports = {ROUTES};

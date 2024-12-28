@@ -1,7 +1,7 @@
 require('src/server/debug');
 require("dotenv").config();
 const fs = require("fs");
-const ROUTES = require("./routes");
+const {ROUTES} = require("./routes");
 const express = require("express");
 const {logger} = require("./middleware/logger");
 const {paths} = require("./middleware/paths");

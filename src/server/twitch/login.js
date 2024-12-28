@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const ROUTES = require("../routes");
+const {ROUTES} = require("../routes");
 const { getSecret, setSecret, getParam, setParam, resetSecrets} = require("../store/manager");
 const {watchMessages} = require("./stream");
 function twitchLogin(req, res) {
