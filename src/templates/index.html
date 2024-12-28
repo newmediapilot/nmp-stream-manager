@@ -8,7 +8,7 @@
 <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?{{''|cacheBuster}}" type="text/javascript" defer></script>
 {{ '<link href="../client/style/index.css?" rel="stylesheet">' | inlineScriptContents | safe }}
 {{ '<script src="../client/script/reduced_motion.js?" type="text/javascript" defer></script>' | inlineScriptContents | safe }}
-{%include "_style.njk"%}
+<style id="public_module_styles">:root{{'{'~'public_module_styles'|getParam ~';}'}}</style>
 {%endblock%}
 {%block body%}
 <main>
