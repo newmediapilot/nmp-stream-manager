@@ -36,11 +36,11 @@
 </style>
 {%include "_style.njk"%}
 <style>
-    html.iframe main {
-        box-shadow: inset 0 0 30px 30px var(--color-dark);
-    }
     html.iframe #embed {
-        box-shadow: inset 0 0 30px 30px var(--color-dark);
+        background-color: #757575;
+        opacity: 1;
+        background: radial-gradient(circle, transparent 20%, #757575 20%, #757575 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #757575 20%, #757575 80%, transparent 80%, transparent) 25px 25px, linear-gradient(#000000 2px, transparent 2px) 0 -1px, linear-gradient(90deg, #000000 2px, #757575 2px) -1px 0;
+        background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
         visibility: visible;
     }
     main {
@@ -81,7 +81,6 @@
         } else {
             document.body.querySelector('#embed').setAttribute('src', src);
         }
-        console.log('media', name, type, suffix);
     }));
 </script>
 {%endblock%}
