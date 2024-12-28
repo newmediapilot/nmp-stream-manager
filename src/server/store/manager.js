@@ -14,8 +14,7 @@ const allowedParams = [
     "twitch_refresh_token_set",
     "twitch_username",
 ];
-
-function setParam(key, value, log = true) {
+const setParam = (key, value, log = true) => {
     if (!allowedParams.includes(key)) {
         console.log(
             "setParam :: attempted to set unregistered key",
@@ -26,22 +25,18 @@ function setParam(key, value, log = true) {
     }
     paramsState[key] = value;
     log && console.log("setParam :: set", key, "::", value);
-}
-
-function getAllParams() {
+};
+const getAllParams = () => {
     return paramsState;
-}
-
-function getParam(key) {
+};
+const getParam = (key) => {
     return paramsState[key];
-}
-
-function resetSecrets() {
+};
+const resetSecrets = () => {
     fs.rmSync("secrets", {force: true});
     console.log("resetSecrets :: removing secrets");
-}
-
-function setSecret(name, key) {
+};
+const setSecret = (name, key) => {
     try {
         secrets[name] = key;
         setParam(`${name}_set`, true);
@@ -51,9 +46,8 @@ function setSecret(name, key) {
     } catch (error) {
         console.log("setSecret :: error setting secret:", error.message);
     }
-}
-
-function getSecret(name) {
+};
+const getSecret = (name) => {
     try {
         if (secrets[name]) {
             return secrets[name];
@@ -65,6 +59,5 @@ function getSecret(name) {
         console.log("getSecret :: error getting secret:", error.message);
         return null;
     }
-}
-
-module.exports = {setParam, getParam, getAllParams, setSecret, getSecret, resetSecrets};
+};
+module.exports = {setParam, getParam, getAllParams, setSecret, getSecret, resetSecrets };
