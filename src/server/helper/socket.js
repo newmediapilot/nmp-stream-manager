@@ -1,6 +1,4 @@
-const nunjucks = require("nunjucks");
 const socketIo = require("socket.io");
-const {renderTemplateName} = require("../nunjucks/render");
 let io;
 const configureSocket = (server) => {
     io = socketIo(server, {
@@ -12,14 +10,9 @@ const configureSocket = (server) => {
     });
     io.on("connection", (socket) => {
         console.log("configureSocket :: client connected", socket.handshake.address);
-        socket.on("request", handleRequestMessage);
         socket.on("disconnect", () => console.log("configureSocket :: client disconnected"));
     });
     console.log("sendPayload :: configureSocket");
-};
-const handleRequestMessage = (data, socket) => {
-    console.log("configureSocket :: handleRequestMessage", data);
-    if ("index" === data) io.emit("response", renderTemplateName('index.html'));
 };
 const sendPayload = (payload) => {
     if (!io) {
