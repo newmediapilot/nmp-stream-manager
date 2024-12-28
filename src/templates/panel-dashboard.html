@@ -4,7 +4,7 @@
 {%block head%}
 {{ '
 <link href="../client/style/dashboard.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-{%include "_style.njk"%}
+<style id="public_module_styles">:root{{'{'~'public_module_styles'|getParam ~';}'}}</style>
 {%endblock%}
 {%block body%}
 <section>
