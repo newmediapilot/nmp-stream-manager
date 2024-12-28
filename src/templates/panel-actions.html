@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-{%set public_routes = 'public_routes'|getParam%}
+{%set public_routes = "public_routes"|getParam%}
+{%set device_ip = "device_ip"|getParam%}
 <html lang="en">
 <head>
     <title>Actions</title>
@@ -28,7 +29,7 @@
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
     {% for key, value in public_routes%}
-    <meta name="{{key}}" content="{{'device_ip'|getParam}}{{value}}">
+    <meta name="{{key}}" content="https://{{device_ip}}{{value}}">
     {% endfor %}
     <link href="../client/style/actions.css?" rel="stylesheet">
     <script src="../client/script/actions.js?" defer type="text/javascript"></script>
