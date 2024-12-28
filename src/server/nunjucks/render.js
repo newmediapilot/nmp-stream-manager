@@ -1,5 +1,5 @@
 const nunjucks = require("nunjucks");
-const renderTemplateName = (key) => {
-    return nunjucks.render('index.html');
+const renderString = (res, content) => {
+    res.send(nunjucks.renderString(content));
 };
-module.exports = {renderTemplateName};
+module.exports = {renderString};
