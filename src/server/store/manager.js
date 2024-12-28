@@ -67,11 +67,4 @@ function getSecret(name) {
     }
 }
 
-module.exports = {
-    setParam,
-    getParam,
-    getAllParams,
-    setSecret,
-    getSecret,
-    resetSecrets,
-};
+module.exports = {setParam, getParam, getAllParams, setSecret, getSecret, resetSecrets};
