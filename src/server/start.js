@@ -1,5 +1,6 @@
 const https = require("https");
-const {setParam, getSecret} = require("./store/manager");
+const {getSecret} = require("./store/manager");
+const {setParam} = require("./store/manager");
 const {configureNunjucks} = require("./nunjucks/configure");
 const {initializePublicConfigs} = require("./public/config");
 const {initializePublicStyles} = require("./public/style");
