@@ -17,7 +17,7 @@ const {configureCertificate} = require('./helper/cert');
 configureIp();
 configureCertificate();
 const app = express();
-app.use(express.json({limit: '200mb'}))
+app.use(express.json({limit: '25mb'}))
     .use(logger)
     .use(paths)
     .all('*', (req, res, next) => {
