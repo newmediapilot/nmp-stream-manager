@@ -1,5 +1,6 @@
 require('debug');
 require("dotenv").config();
+const fs = require("fs");
 const ROUTES = require("./server/routes");
 const express = require("express");
 const {logger} = require("./server/middleware/logger");
@@ -11,6 +12,7 @@ const {publicStyleUpdate} = require("./server/public/style");
 const {publicMediaUpdate} = require("./server/public/media");
 const {publicMediaFetch} = require("./server/public/media");
 const {twitchLogin, twitchLoginSuccess} = require("./server/twitch/login");
+const {renderString} = require("./server/nunjucks/render");
 const {configureIp} = require('./server/helper/ip');
 const {configureCertificate} = require('./server/helper/cert');
 configureIp();
@@ -32,17 +34,17 @@ app.use(express.json({limit: '200mb'}))
     .use(publicMediaFetch)
     .all(ROUTES.TWITCH_LOGIN, twitchLogin)
     .all(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess)
-    .all(ROUTES.INDEX, (req, res) => res.render("index"))
-    .all(ROUTES.PANEL_DASHBOARD, (req, res) => res.render("panel-dashboard"))
-    .all(ROUTES.PANEL_ACTIONS, (req, res) => res.render("panel-actions"))
-    .all(ROUTES.PANEL_LAYOUT, (req, res) => res.render("panel-layout"))
-    .all(ROUTES.PANEL_DRAW, (req, res) => res.render("panel-draw"))
-    .all(ROUTES.PANEL_ZOMBIE, (req, res) => res.render("zombie"))
-    .all(ROUTES.PANEL_EMBED, (req, res) => res.render("embed"))
-    .all(ROUTES.PANEL_FEATURE_EMBED, (req, res) => res.render("embed-feature"))
-    .all(ROUTES.PANEL_DRAW_EMBED, (req, res) => res.render("embed-draw"))
-    .all(ROUTES.PANEL_SOUND_EMBED, (req, res) => res.render("embed-sound"))
-    .all(ROUTES.PANEL_MEDIA_EMBED, (req, res) => res.render("embed-media"))
+    .all(ROUTES.INDEX, (req, res) => renderString(res, fs.readFileSync('./src/templates/index.html', { encoding: 'utf-8' })))
+    .all(ROUTES.PANEL_DASHBOARD, (req, res) => renderString(res, fs.readFileSync('./src/templates/panel-dashboard.html', { encoding: 'utf-8' })))
+    .all(ROUTES.PANEL_ACTIONS, (req, res) => renderString(res, fs.readFileSync('./src/templates/panel-actions.html', { encoding: 'utf-8' })))
+    .all(ROUTES.PANEL_LAYOUT, (req, res) => renderString(res, fs.readFileSync('./src/templates/panel-layout.html', { encoding: 'utf-8' })))
+    .all(ROUTES.PANEL_DRAW, (req, res) => renderString(res, fs.readFileSync('./src/templates/panel-draw.html', { encoding: 'utf-8' })))
+    .all(ROUTES.PANEL_ZOMBIE, (req, res) => renderString(res, fs.readFileSync('./src/templates/zombie.html', { encoding: 'utf-8' })))
+    .all(ROUTES.PANEL_EMBED, (req, res) => renderString(res, fs.readFileSync('./src/templates/embed.html', { encoding: 'utf-8' })))
+    .all(ROUTES.PANEL_FEATURE_EMBED, (req, res) => renderString(res, fs.readFileSync('./src/templates/embed-feature.html', { encoding: 'utf-8' })))
+    .all(ROUTES.PANEL_DRAW_EMBED, (req, res) => renderString(res, fs.readFileSync('./src/templates/embed-draw.html', { encoding: 'utf-8' })))
+    .all(ROUTES.PANEL_SOUND_EMBED, (req, res) => renderString(res, fs.readFileSync('./src/templates/embed-sound.html', { encoding: 'utf-8' })))
+    .all(ROUTES.PANEL_MEDIA_EMBED, (req, res) => renderString(res, fs.readFileSync('./src/templates/embed-media.html', { encoding: 'utf-8' })))
     .all(ROUTES.API_SIGNAL_CREATE, publicSignalCreate)
     .all(ROUTES.API_CONFIG_UPDATE, publicConfigUpdate)
     .all(ROUTES.API_STYLE_UPDATE, publicStyleUpdate)
