@@ -11,3 +11,4 @@ media
 .package
 .bin
 .combined.json
+.server.js
