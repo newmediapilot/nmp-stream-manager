@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-{%set public_routes = 'public_routes'|getParam%}
+{%set public_routes = "public_routes"|getParam%}
+{%set device_ip = "device_ip"|getParam%}
 <html lang="en">
 <head>
     <title>OS</title>
@@ -21,10 +22,10 @@
 </head>
 <body>
 <main>
-    <iframe src="https://{{'device_ip'|getParam}}{{public_routes.PANEL_LAYOUT}}"></iframe>
-    <iframe src="https://{{'device_ip'|getParam}}{{public_routes.PANEL_DASHBOARD}}"></iframe>
-    <iframe src="https://{{'device_ip'|getParam}}{{public_routes.PANEL_ACTIONS}}"></iframe>
-    <iframe src="https://{{'device_ip'|getParam}}{{public_routes.PANEL_DRAW}}"></iframe>
+    <iframe src="https://{{device_ip}}{{public_routes.PANEL_LAYOUT}}"></iframe>
+    <iframe src="https://{{device_ip}}{{public_routes.PANEL_DASHBOARD}}"></iframe>
+    <iframe src="https://{{device_ip}}{{public_routes.PANEL_ACTIONS}}"></iframe>
+    <iframe src="https://{{device_ip}}{{public_routes.PANEL_DRAW}}"></iframe>
 </main>
 <script defer>
     document.addEventListener("DOMContentLoaded", () => reducedMotion());
