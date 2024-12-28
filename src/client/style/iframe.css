@@ -15,13 +15,3 @@ main {
     background-size: 7vw 7vh;
     background-repeat: repeat;
 }
-
-html.iframe main {
-    border: 5px dashed var(--color-dark);
-    box-sizing: border-box;
-}
-
-html.iframe iframe {
-    box-shadow: inset 0 0 30px 30px var(--color-dark);
-    opacity: 0.25;
-}
