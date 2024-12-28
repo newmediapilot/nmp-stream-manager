@@ -1,48 +1,57 @@
-{%extends "layout.html"%}
+<!DOCTYPE html>
 {%set public_routes = 'public_routes'|getParam%}
-{%block cdn%}{%endblock%}
-{%block client%}{%endblock%}}
-{%block head%}
-<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="text/javascript" defer></script>
-<script crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" type="text/javascript" defer></script>
-{{ '<script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-{{ '<script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-{{ '<script src="../client/script/socket.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-{{ '<script src="../client/script/get_path.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-{{ '<link href="../client/style/variables.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-{{ '<link href="../client/style/reset.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-{{ '<link href="../client/style/base.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-<style>
-
-    :root {
-        --_feat-layer: 0;
-        --_draw-layer: 1;
-        --_med-layer: 2
-    }
-    iframe {
-        width: 100vw;
-        height: 100vh;
-        position: absolute;
-        left: 0;
-        top: 0;
-    }
-
-    main {
-        width: 100vw;
-        height: 100vh;
-        position: relative;
-    }
-</style>
-<style id="public_module_styles">:root{{'{'~'public_module_styles'|getParam ~';}'}}</style>
-{%endblock%}
-{%block body%}
+<html lang="en">
+<head>
+    <title>StreamDream</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="This is a description.">
+    <meta name="referrer" content="unsafe-url">
+    <meta name="keywords" content="keyword">
+    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="text/javascript" defer></script>
+    <script crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" type="text/javascript" defer></script>
+    {{ '<script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+    {{ '<script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+    {{ '<script src="../client/script/socket.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+    {{ '<script src="../client/script/get_path.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
+    {{ '<link href="../client/style/variables.css?" rel="stylesheet">' | inlineScriptContents | safe }}
+    {{ '<link href="../client/style/reset.css?" rel="stylesheet">' | inlineScriptContents | safe }}
+    {{ '<link href="../client/style/base.css?" rel="stylesheet">' | inlineScriptContents | safe }}
+    <style>
+        :root {
+            --_feat-layer: 0;
+            --_draw-layer: 1;
+            --_med-layer: 2
+        }
+        iframe {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        iframe:nth-of-type(1) {
+            z-index: var(--_feat-layer);
+        }
+        iframe:nth-of-type(1) {
+            z-index: var(--_draw-layer);
+        }
+        iframe:nth-of-type(1) {
+            z-index: var(--_med-layer);
+        }
+        main {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+    </style>
+    <style id="public_module_styles">:root{{'{'~'public_module_styles'|getParam ~';}'}}</style>
+</head>
+<body>
 <main>
-    <iframe style="z-index: var(--_feat-layer)" src="{{public_routes.PANEL_FEATURE_EMBED}}#edit"></iframe>
-    <iframe style="z-index: var(--_draw-layer)" src="{{public_routes.PANEL_DRAW_EMBED}}#edit"></iframe>
-    <iframe style="z-index: var(--_med-layer)" src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
+    <iframe src="{{public_routes.PANEL_FEATURE_EMBED}}#edit"></iframe>
+    <iframe src="{{public_routes.PANEL_DRAW_EMBED}}#edit"></iframe>
+    <iframe src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
 </main>
-{%endblock%}
-{%block scripts%}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => cssDevWatch());
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
@@ -53,4 +62,4 @@
         document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
     }));
 </script>
-{%endblock%}
+<body>
