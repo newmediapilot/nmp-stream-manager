@@ -1,135 +1,162 @@
-{%extends "layout.html"%}
+<!DOCTYPE html>
 {%set public_routes = 'public_routes'|getParam%}
-{%block head%}
-{{ '<link href="../client/style/actions.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-{%endblock%}
-{%block body%}
-<section>
-        {%set feature_title_set = false%}
-        {%for signal in "dashboard_signals_config"|getParam%}
-        {%if signal.type == "announce"%}
-        {%if not feature_title_set%}{%set feature_title_set = true%}
-        <div class="{{signal.theme}}" aria-label="Announce"></div>
-        {%endif%}
-        <div class="{{signal.theme}}">
-            <label id="{{loop.index0}}">
-                <button aria-label="{{signal.emoji}}"></button>
-                <input type="text" value="{{signal.label}}"/>
-                <button disabled></button>
-                <button disabled></button>
-                <button aria-label="{{signal.visibility}}"></button>
-                <textarea value="{{signal.description}}">{{signal.description}}</textarea>
-            </label>
-        </div>
-        {%endif%}
+<html lang="en">
+<head>
+    <title>Actions</title>
+    <script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>
+    <script src="../client/script/reduced_motion.js?" defer type="text/javascript"></script>
+    <script src="../client/script/get_url.js?" defer type="text/javascript"></script>
+    <script src="../client/script/get_path.js?" defer type="text/javascript"></script>
+    <script src="../client/script/generate_qr_code.js?" defer type="text/javascript"></script>
+    <script src="../client/script/generate_copy_link.js?" defer type="text/javascript"></script>
+    <script src="../client/script/controls.js?" defer type="text/javascript"></script>
+    <script src="../client/script/socket.js?" defer type="text/javascript"></script>
+    <script src="../client/script/scroll_snap.js?" defer type="text/javascript"></script>
+    <script src="../client/script/variables.js?" defer type="text/javascript"></script>
+    <script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>
+    <link href="../client/style/variables.css?" rel="stylesheet">
+    <link href="../client/style/reset.css?" rel="stylesheet">
+    <link href="../client/style/base.css?" rel="stylesheet">
+    <link href="../client/style/scrollbar.css?" rel="stylesheet">
+    <link href="../client/style/controls.css?" rel="stylesheet">
+    <link href="../client/style/dialog.css?" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?"crossorigin="anonymous"  type="text/javascript" defer></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?"crossorigin="anonymous"  type="text/javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?"crossorigin="anonymous"  type="text/javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    {% for key, value in public_routes%}
+    <meta name="{{key}}" content="{{'device_ip'|getParam}}{{value}}">
+    {% endfor %}
+    <link href="../client/style/actions.css?" rel="stylesheet">
+    <script src="../client/script/actions.js?" defer type="text/javascript"></script>
+</head>
+<body>
+    <section>
+            {%set feature_title_set = false%}
+            {%for signal in "dashboard_signals_config"|getParam%}
+            {%if signal.type == "announce"%}
+            {%if not feature_title_set%}{%set feature_title_set = true%}
+            <div class="{{signal.theme}}" aria-label="Announce"></div>
+            {%endif%}
+            <div class="{{signal.theme}}">
+                <label id="{{loop.index0}}">
+                    <button aria-label="{{signal.emoji}}"></button>
+                    <input type="text" value="{{signal.label}}"/>
+                    <button disabled></button>
+                    <button disabled></button>
+                    <button aria-label="{{signal.visibility}}"></button>
+                    <textarea value="{{signal.description}}">{{signal.description}}</textarea>
+                </label>
+            </div>
+            {%endif%}
+            {%endfor%}
+            {%set feature_title_set = false%}
+            {%for signal in "dashboard_signals_config"|getParam%}
+            {%if signal.type == "media"%}
+            {%if not feature_title_set%}{%set feature_title_set = true%}
+            <div class="{{signal.theme}}" aria-label="Media"></div>
+            {%endif%}
+            <div class="{{signal.theme}}">
+                <label id="{{loop.index0}}">
+                    <button aria-label="{{signal.emoji}}"></button>
+                    <input type="text" value="{{signal.label}}"/>
+                    <button aria-label="⬆" id="{{signal.description}}"></button>
+                    <button aria-label="🔍"></button>
+                    <button aria-label="{{signal.visibility}}"></button>
+                    <img />
+                </label>
+            </div>
+            {%endif%}
+            {%endfor%}
+            {%set feature_title_set = false%}
+            {%for signal in "dashboard_signals_config"|getParam%}
+            {%if signal.type == "sound"%}
+            {%if not feature_title_set%}{%set feature_title_set = true%}
+            <div class="{{signal.theme}}" aria-label="Sound"></div>
+            {%endif%}
+            <div class="{{signal.theme}}">
+                <label id="{{loop.index0}}">
+                    <button aria-label="{{signal.emoji}}"></button>
+                    <input type="text" value="{{signal.label}}"/>
+                    <button aria-label="⬆" id="{{signal.description}}"></button>
+                    <button aria-label="🎶"></button>
+                    <button aria-label="{{signal.visibility}}"></button>
+                </label>
+            </div>
+            {%endif%}
+            {%endfor%}
+            {%set feature_title_set = false%}
+            {%for signal in "dashboard_signals_config"|getParam%}
+            {%if signal.type == "feature"%}
+            {%if not feature_title_set%}{%set feature_title_set = true%}
+            <div class="{{signal.theme}}" aria-label="Feature"></div>
+            {%endif%}
+            <div class="{{signal.theme}}">
+                <label id="{{loop.index0}}">
+                    <button aria-label="{{signal.emoji}}"></button>
+                    <input type="text" value="{{signal.label}}"/>
+                    <button disabled></button>
+                    <button disabled></button>
+                    <button aria-label="{{signal.visibility}}"></button>
+                </label>
+            </div>
+            {%endif%}
+            {%endfor%}
+            {%set feature_title_set = false%}
+            {%for signal in "dashboard_signals_config"|getParam%}
+            {%if signal.type == "mark"%}
+            {%if not feature_title_set%}{%set feature_title_set = true%}
+            <div class="{{signal.theme}}" aria-label="Mark"></div>
+            {%endif%}
+            <div class="{{signal.theme}}">
+                <label id="{{loop.index0}}">
+                    <button aria-label="{{signal.emoji}}"></button>
+                    <input type="text" value="{{signal.label}}"/>
+                    <button disabled></button>
+                    <button disabled></button>
+                    <button aria-label="{{signal.visibility}}"></button>
+                </label>
+            </div>
+            {%endif%}
+            {%endfor%}
+            {%set feature_title_set = false%}
+            {%for signal in "dashboard_signals_config"|getParam%}
+            {%if signal.type == "ad"%}
+            {%if not feature_title_set%}{%set feature_title_set = true%}
+            <div class="{{signal.theme}}" aria-label="Ad"></div>
+            {%endif%}
+            <div class="{{signal.theme}}">
+                <label id="{{loop.index0}}">
+                    <button aria-label="{{signal.emoji}}"></button>
+                    <input type="text" value="{{signal.label}}" disabled/>
+                    <button disabled></button>
+                    <button disabled></button>
+                    <button aria-label="{{signal.visibility}}"></button>
+                </label>
+            </div>
+            {%endif%}
+            {%endfor%}
+    </section>
+    <ul id="emoji-widget">
+        {%for emoji in 'emoji_collection'|getParam%}
+        <li aria-label="{{ emoji }}"></li>
         {%endfor%}
-        {%set feature_title_set = false%}
-        {%for signal in "dashboard_signals_config"|getParam%}
-        {%if signal.type == "media"%}
-        {%if not feature_title_set%}{%set feature_title_set = true%}
-        <div class="{{signal.theme}}" aria-label="Media"></div>
-        {%endif%}
-        <div class="{{signal.theme}}">
-            <label id="{{loop.index0}}">
-                <button aria-label="{{signal.emoji}}"></button>
-                <input type="text" value="{{signal.label}}"/>
-                <button aria-label="⬆" id="{{signal.description}}"></button>
-                <button aria-label="🔍"></button>
-                <button aria-label="{{signal.visibility}}"></button>
-                <img />
-            </label>
-        </div>
-        {%endif%}
-        {%endfor%}
-        {%set feature_title_set = false%}
-        {%for signal in "dashboard_signals_config"|getParam%}
-        {%if signal.type == "sound"%}
-        {%if not feature_title_set%}{%set feature_title_set = true%}
-        <div class="{{signal.theme}}" aria-label="Sound"></div>
-        {%endif%}
-        <div class="{{signal.theme}}">
-            <label id="{{loop.index0}}">
-                <button aria-label="{{signal.emoji}}"></button>
-                <input type="text" value="{{signal.label}}"/>
-                <button aria-label="⬆" id="{{signal.description}}"></button>
-                <button aria-label="🎶"></button>
-                <button aria-label="{{signal.visibility}}"></button>
-            </label>
-        </div>
-        {%endif%}
-        {%endfor%}
-        {%set feature_title_set = false%}
-        {%for signal in "dashboard_signals_config"|getParam%}
-        {%if signal.type == "feature"%}
-        {%if not feature_title_set%}{%set feature_title_set = true%}
-        <div class="{{signal.theme}}" aria-label="Feature"></div>
-        {%endif%}
-        <div class="{{signal.theme}}">
-            <label id="{{loop.index0}}">
-                <button aria-label="{{signal.emoji}}"></button>
-                <input type="text" value="{{signal.label}}"/>
-                <button disabled></button>
-                <button disabled></button>
-                <button aria-label="{{signal.visibility}}"></button>
-            </label>
-        </div>
-        {%endif%}
-        {%endfor%}
-        {%set feature_title_set = false%}
-        {%for signal in "dashboard_signals_config"|getParam%}
-        {%if signal.type == "mark"%}
-        {%if not feature_title_set%}{%set feature_title_set = true%}
-        <div class="{{signal.theme}}" aria-label="Mark"></div>
-        {%endif%}
-        <div class="{{signal.theme}}">
-            <label id="{{loop.index0}}">
-                <button aria-label="{{signal.emoji}}"></button>
-                <input type="text" value="{{signal.label}}"/>
-                <button disabled></button>
-                <button disabled></button>
-                <button aria-label="{{signal.visibility}}"></button>
-            </label>
-        </div>
-        {%endif%}
-        {%endfor%}
-        {%set feature_title_set = false%}
-        {%for signal in "dashboard_signals_config"|getParam%}
-        {%if signal.type == "ad"%}
-        {%if not feature_title_set%}{%set feature_title_set = true%}
-        <div class="{{signal.theme}}" aria-label="Ad"></div>
-        {%endif%}
-        <div class="{{signal.theme}}">
-            <label id="{{loop.index0}}">
-                <button aria-label="{{signal.emoji}}"></button>
-                <input type="text" value="{{signal.label}}" disabled/>
-                <button disabled></button>
-                <button disabled></button>
-                <button aria-label="{{signal.visibility}}"></button>
-            </label>
-        </div>
-        {%endif%}
-        {%endfor%}
-</section>
-{%endblock%}
-{%block dialogs%}
-<ul id="emoji-widget">
-    {%for emoji in 'emoji_collection'|getParam%}
-    <li aria-label="{{ emoji }}"></li>
-    {%endfor%}
-</ul>
-<nav class="right">
-    <button aria-label="🧮"></button>
-</nav>
-{%endblock%}
-{%block scripts%}
-<script defer>
-    document.addEventListener("DOMContentLoaded", () => cssDevWatch());
-    document.addEventListener("DOMContentLoaded", () => reducedMotion());
-    document.addEventListener("DOMContentLoaded", () => iframeDetect());
-    document.addEventListener("DOMContentLoaded", () => socketConnect());
-    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    document.addEventListener("DOMContentLoaded", () => initHomeControls());
-    document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
-    document.addEventListener("DOMContentLoaded", () => actions());
-</script>
-{%endblock%}
+    </ul>
+    <nav class="right">
+        <button aria-label="🧮"></button>
+    </nav>
+    <script defer>
+        document.addEventListener("DOMContentLoaded", () => cssDevWatch());
+        document.addEventListener("DOMContentLoaded", () => reducedMotion());
+        document.addEventListener("DOMContentLoaded", () => iframeDetect());
+        document.addEventListener("DOMContentLoaded", () => socketConnect());
+        document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+        document.addEventListener("DOMContentLoaded", () => initHomeControls());
+        document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
+        document.addEventListener("DOMContentLoaded", () => actions());
+    </script>
+</body>
+</html>

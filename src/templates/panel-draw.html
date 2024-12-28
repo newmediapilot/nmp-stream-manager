@@ -1,44 +1,69 @@
-{%extends "layout.html"%}
+<!DOCTYPE html>
+<html lang="en">
 {%set public_routes = "public_routes"|getParam%}
-{%block head%}
-{{ '
-<link href="../client/style/draw.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-<style>
-    :root {
-        --range-rotation-deg: 0;
-    }
-
-    section button {
-        transition: opacity 100ms ease-out;
-    }
-
-    section button:nth-of-type(2)::before {
-        transition: rotateZ 2000ms ease-in-out;
-        transform: rotateZ(var(--range-rotation-deg));
-    }
-</style>
-{%endblock%}
-{%block body%}
-<section>
-    <canvas></canvas>
-    <input type="range" min="0" max="2400" value="0" disabled>
-    <button disabled aria-label="🚀" disabled></button>
-    <button disabled aria-label="🧼" disabled></button>
-</section>
-{%endblock%}
-{%block dialogs%}
-<nav class="bottom">
-    <button aria-label="🧮"></button>
-</nav>
-{%endblock%}
-{%block scripts%}
-<script defer>
-    document.addEventListener("DOMContentLoaded", () => cssDevWatch());
-    document.addEventListener("DOMContentLoaded", () => reducedMotion());
-    document.addEventListener("DOMContentLoaded", () => iframeDetect());
-    document.addEventListener("DOMContentLoaded", () => socketConnect());
-    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    document.addEventListener("DOMContentLoaded", () => initHomeControls());
-    document.addEventListener("DOMContentLoaded", () => draw());
-</script>
-{%endblock%}
+<head>
+    <title>Draw</title>
+    <script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>
+    <script src="../client/script/reduced_motion.js?" defer type="text/javascript"></script>
+    <script src="../client/script/get_url.js?" defer type="text/javascript"></script>
+    <script src="../client/script/get_path.js?" defer type="text/javascript"></script>
+    <script src="../client/script/generate_qr_code.js?" defer type="text/javascript"></script>
+    <script src="../client/script/generate_copy_link.js?" defer type="text/javascript"></script>
+    <script src="../client/script/controls.js?" defer type="text/javascript"></script>
+    <script src="../client/script/socket.js?" defer type="text/javascript"></script>
+    <script src="../client/script/scroll_snap.js?" defer type="text/javascript"></script>
+    <script src="../client/script/variables.js?" defer type="text/javascript"></script>
+    <script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>
+    <link href="../client/style/variables.css?" rel="stylesheet">
+    <link href="../client/style/reset.css?" rel="stylesheet">
+    <link href="../client/style/base.css?" rel="stylesheet">
+    <link href="../client/style/scrollbar.css?" rel="stylesheet">
+    <link href="../client/style/controls.css?" rel="stylesheet">
+    <link href="../client/style/dialog.css?" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?"crossorigin="anonymous"  type="text/javascript" defer></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?"crossorigin="anonymous"  type="text/javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?"crossorigin="anonymous"  type="text/javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    {% for key, value in public_routes%}
+    <meta name="{{key}}" content="{{'device_ip'|getParam}}{{value}}">
+    {% endfor %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js?" type="text/javascript" defer></script>
+    <link href="../client/style/draw.css?" rel="stylesheet">
+    <script src="../client/script/draw.js?" defer type="text/javascript"></script>
+    <style>
+        :root {
+            --range-rotation-deg: 0;
+        }
+        section button {
+            transition: opacity 100ms ease-out;
+        }
+        section button:nth-of-type(2)::before {
+            transition: rotateZ 2000ms ease-in-out;
+            transform: rotateZ(var(--range-rotation-deg));
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <canvas></canvas>
+        <input type="range" min="0" max="2500" value="0" disabled>
+        <button aria-label="🚀" disabled></button>
+        <button aria-label="🧼" disabled></button>
+    </section>
+    <nav class="bottom">
+        <button aria-label="🧮"></button>
+    </nav>
+    <script defer>
+        document.addEventListener("DOMContentLoaded", () => cssDevWatch());
+        document.addEventListener("DOMContentLoaded", () => reducedMotion());
+        document.addEventListener("DOMContentLoaded", () => iframeDetect());
+        document.addEventListener("DOMContentLoaded", () => socketConnect());
+        document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+        document.addEventListener("DOMContentLoaded", () => initHomeControls());
+        document.addEventListener("DOMContentLoaded", () => draw());
+    </script>
+</body>
+</html>

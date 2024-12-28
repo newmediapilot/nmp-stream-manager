@@ -1,57 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>StreamDream</title>
-    <meta charset="UTF-8">
-    <meta name="description" content="This is a description.">
-    <meta name="referrer" content="unsafe-url">
-    <meta name="keywords" content="keyword">
-    {% block client %}
-        {{ '<script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<script src="../client/script/reduced_motion.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<script src="../client/script/get_url.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<script src="../client/script/get_path.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<script src="../client/script/actions.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<script src="../client/script/draw.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<script src="../client/script/generate_qr_code.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<script src="../client/script/generate_copy_link.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<script src="../client/script/dashboard.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<script src="../client/script/controls.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<script src="../client/script/socket.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<script src="../client/script/scroll_snap.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<script src="../client/script/variables.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<script src="../client/script/layout.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<script src="../client/script/debounce_function.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-        {{ '<link href="../client/style/variables.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-        {{ '<link href="../client/style/reset.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-        {{ '<link href="../client/style/base.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-        {{ '<link href="../client/style/scrollbar.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-        {{ '<link href="../client/style/controls.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-        {{ '<link href="../client/style/dialog.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-    {% endblock %}
-    {% block cdn %}
-        <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
-        <script src="https://cdn.jsdelivr.net/npm/axios@0.27.2/dist/axios.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
-        <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
-        <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
-        <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js?" type="text/javascript" defer></script>
-    {% endblock %}
-    {% for key, value in 'public_routes'|getParam %}
-        <meta name="{{ key }}" content="https://{{ 'device_ip' | getParam }}{{ value }}">
-    {% endfor %}
-    {% block head %}{% endblock %}
-    <meta name="viewport" content="width=device-width">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="icon" href="/icon512_rounded.png" type="image/png">
-    <link rel="manifest" href="/manifest.json">
-</head>
-<body>
-{% block body %}{% endblock %}
-{% block dialogs %}{% endblock %}
-{% block scripts %}{% endblock %}
-</body>
-</html>
+<!--  -->
+<script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>
+<script src="../client/script/reduced_motion.js?" defer type="text/javascript"></script>
+<script src="../client/script/get_url.js?" defer type="text/javascript"></script>
+<script src="../client/script/get_path.js?" defer type="text/javascript"></script>
+<script src="../client/script/generate_qr_code.js?" defer type="text/javascript"></script>
+<script src="../client/script/generate_copy_link.js?" defer type="text/javascript"></script>
+<script src="../client/script/controls.js?" defer type="text/javascript"></script>
+<script src="../client/script/socket.js?" defer type="text/javascript"></script>
+<script src="../client/script/scroll_snap.js?" defer type="text/javascript"></script>
+<script src="../client/script/variables.js?" defer type="text/javascript"></script>
+<script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>
+<link href="../client/style/variables.css?" rel="stylesheet">
+<link href="../client/style/reset.css?" rel="stylesheet">
+<link href="../client/style/base.css?" rel="stylesheet">
+<link href="../client/style/scrollbar.css?" rel="stylesheet">
+<link href="../client/style/controls.css?" rel="stylesheet">
+<link href="../client/style/dialog.css?" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+{% for key, value in public_routes%}
+<meta name="{{ key }}" content="https://device_ip' | getParam }}{{ value }}">
+{% endfor %}
+<!--  -->

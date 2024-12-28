@@ -1,27 +1,31 @@
-{%extends "layout.html"%}
+<!DOCTYPE html>
 {%set public_routes = 'public_routes'|getParam%}
-{%block cdn%}{%endblock%}
-{%block client%}{%endblock%}}
-{%block head%}
-<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?{{''|cacheBuster}}" type="text/javascript" defer></script>
-<script crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js?{{''|cacheBuster}}" type="text/javascript" defer></script>
-<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?{{''|cacheBuster}}" type="text/javascript" defer></script>
-{{ '<link href="../client/style/index.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-{{ '<script src="../client/script/reduced_motion.js?" type="text/javascript" defer></script>' | inlineScriptContents | safe }}
-<style id="public_module_styles">:root{{'{'~'public_module_styles'|getParam ~';}'}}</style>
-{%endblock%}
-{%block body%}
+<html lang="en">
+<head>
+    <title>OS</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="This is a description.">
+    <meta name="referrer" content="unsafe-url">
+    <meta name="keywords" content="keyword">
+    <meta name="viewport" content="width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="icon" href="/icon512_rounded.png" type="image/png">
+    <link rel="manifest" href="/manifest.json">
+    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?" type="text/javascript" defer></script>
+    <script crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js?" type="text/javascript" defer></script>
+    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" type="text/javascript" defer></script>
+    <script src="../client/script/socket.js?" defer type="text/javascript"></script>
+    <script src="../client/script/reduced_motion.js?" defer type="text/javascript"></script>
+    <link href="../client/style/index.css?" rel="stylesheet">
+</head>
+<body>
 <main>
-    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_LAYOUT}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
-    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_DASHBOARD}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
-    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_ACTIONS}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
-    <iframe src="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_DRAW}}" allow="fullscreen; autoplay; camera; microphone; geolocation; encrypted-media; display-capture; clipboard-read; clipboard-write; payment; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>
+    <iframe src="https://{{'device_ip'|getParam}}{{public_routes.PANEL_LAYOUT}}"></iframe>
+    <iframe src="https://{{'device_ip'|getParam}}{{public_routes.PANEL_DASHBOARD}}"></iframe>
+    <iframe src="https://{{'device_ip'|getParam}}{{public_routes.PANEL_ACTIONS}}"></iframe>
+    <iframe src="https://{{'device_ip'|getParam}}{{public_routes.PANEL_DRAW}}"></iframe>
 </main>
-{%endblock%}
-{%block scripts%}
-{{ '<script src="../client/script/socket.js?" type="text/javascript" defer></script>' | inlineScriptContents | safe }}
-{{ '<script src="../client/script/detect_press_hold.js?" type="text/javascript" defer></script>' | inlineScriptContents | safe }}
-{{ '<script src="../client/script/debounce_function.js?" type="text/javascript" defer></script>' | inlineScriptContents | safe }}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => reducedMotion());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
@@ -49,4 +53,5 @@
         }
     }));
 </script>
-{%endblock%}
+</body>
+</html>

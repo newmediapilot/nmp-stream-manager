@@ -1,116 +1,138 @@
+<!DOCTYPE html>
 {%extends "layout.html"%}
-{%set public_routes = 'public_routes'|getParam%}
-{%block head%}
-{{ '
-<link href="../client/style/layout.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-<style id="public_module_styles">:root{{'{'~'public_module_styles'|getParam ~';}'}}</style>
-{%endblock%}
-{%block body%}
-{%set public_routes = 'public_routes'|getParam%}
-<section>
-    <article>
-        <div class="preview">
-            <iframe width="1920" height="1080" src="{{public_routes.PANEL_EMBED}}#edit"></iframe>
-        </div>
-        <div class="layers">
-            <input type="radio" name="layers" id="_feat"/>
-            <label for="_feat" aria-label="FEAT"></label>
-            <input type="radio" name="layers" id="_draw"/>
-            <label for="_draw" aria-label="DRAW"></label>
-            <input type="radio" name="layers" id="_med"/>
-            <label for="_med" aria-label="MEDIA"></label>
-        </div>
-        <div class="controls">
-            <label>
-
-                <input type="range" min="0" max="200" step="1" value="50" name="--_feat-tX"/>
-                <input type="range" min="0" max="200" step="1" value="50" name="--_feat-tY"/>
-                <input type="range" min="0" max="200" step="1" value="50" name="--_feat-sX"/>
-                <input type="range" min="0" max="200" step="1" value="50" name="--_feat-sY"/>
-                <input type="range" min="0" max="200" step="2.5" value="100" name="--_feat-rX"/>
-                <input type="range" min="0" max="200" step="2.5" value="100" name="--_feat-rY"/>
-                <input type="range" min="0" max="200" step="2.5" value="100" name="--_feat-rZ"/>
-                <input type="range" min="0" max="200" step="1.0" value="200" name="--_feat-o"/>
-                <input type="range" min="0" max="200" step="1.0" value="200" name="--_feat-o"/>
-
-                <input type="range" min="0" max="200" step="1" value="50" name="--_draw-tX"/>
-                <input type="range" min="0" max="200" step="1" value="50" name="--_draw-tY"/>
-                <input type="range" min="0" max="200" step="1" value="50" name="--_draw-sX"/>
-                <input type="range" min="0" max="200" step="1" value="50" name="--_draw-sY"/>
-                <input type="range" min="0" max="200" step="2.5" value="100" name="--_draw-rX"/>
-                <input type="range" min="0" max="200" step="2.5" value="100" name="--_draw-rY"/>
-                <input type="range" min="0" max="200" step="2.5" value="100" name="--_draw-rZ"/>
-                <input type="range" min="0" max="200" step="1.0" value="200" name="--_draw-o"/>
-                <input type="range" min="0" max="200" step="1.0" value="200" name="--_draw-o"/>
-
-                <input type="range" min="0" max="200" step="1" value="50" name="--_med-tX"/>
-                <input type="range" min="0" max="200" step="1" value="50" name="--_med-tY"/>
-                <input type="range" min="0" max="200" step="1" value="50" name="--_med-sX"/>
-                <input type="range" min="0" max="200" step="1" value="50" name="--_med-sY"/>
-                <input type="range" min="0" max="200" step="2.5" value="100" name="--_med-rX"/>
-                <input type="range" min="0" max="200" step="2.5" value="100" name="--_med-rY"/>
-                <input type="range" min="0" max="200" step="2.5" value="100" name="--_med-rZ"/>
-                <input type="range" min="0" max="200" step="1.0" value="200" name="--_med-o"/>
-                <input type="range" min="0" max="200" step="1.0" value="200" name="--_med-o"/>
-
-            </label>
-        </div>
-        <div class="modes">
-            <input type="radio" name="modes" id="opacity"/>
-            <label for="opacity" aria-label="🕶️"></label>
-            <button aria-label="reset"></button>
-            <input type="radio" name="modes" id="translate"/>
-            <label for="translate" aria-label="🔁"></label>
-            <button aria-label="reset"></button>
-            <input type="radio" name="modes" id="scale"/>
-            <label for="scale" aria-label="🔍"></label>
-            <button aria-label="reset"></button>
-            <input type="radio" name="modes" id="rotate"/>
-            <label for="rotate" aria-label="🧊"></label>
-            <button aria-label="reset"></button>
-        </div>
-    </article>
-</section>
-<nav class="left">
-    <button aria-label="🧮"></button>
-</nav>
-{%endblock%}
-{%block dialogs%}
+{%set public_routes = "public_routes"|getParam%}
 {%set device_ip = "device_ip"|getParam%}
-<dialog id="qr-dialog">
-    <h2 aria-label="Embed Link"></h2>
-    <h3 aria-label="Use this link as a source input"></h3>
-    <canvas data-url="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_EMBED}}"></canvas>
-    <button data-url="https://{{ 'device_ip' | getParam }}{{public_routes.PANEL_EMBED}}" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
-    <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-dialog').close();"></button>
-</dialog>
-{%endblock%}
-{%block scripts%}
-<script defer>
-    document.addEventListener("DOMContentLoaded", () => cssDevWatch());
-    document.addEventListener("DOMContentLoaded", () => reducedMotion());
-    document.addEventListener("DOMContentLoaded", () => iframeDetect());
-    document.addEventListener("DOMContentLoaded", () => socketConnect());
-    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
-    document.addEventListener("DOMContentLoaded", () => initHomeControls());
-    document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.body.querySelector("#qr-dialog button[data-url]")));
-    document.addEventListener("DOMContentLoaded", () => generateQrCode(
-        document.body.querySelector("#qr-dialog canvas"),
-        document.body.querySelector("#qr-dialog canvas").getAttribute("data-url"),
-    ));
-    document.addEventListener("DOMContentLoaded", () => setCssVariable('.preview', 'width', '--js-module-preview-width'));
-    document.addEventListener("DOMContentLoaded", () => initializeLayoutClickTouch());
-    document.addEventListener("DOMContentLoaded", () => enableRadioButtons());
-    document.addEventListener("DOMContentLoaded", () => {
-        const updateTransform = () => {
-            const {width} = document.querySelector('.preview').getBoundingClientRect();
-            const iframe = document.querySelector('iframe');
-            iframe.style.transform = `scale(${width / 1920})`;
-        };
-        window.addEventListener('orientationchange', updateTransform);
-        window.addEventListener('resize', updateTransform);
-        updateTransform();
-    });
-</script>
-{%endblock%}
+<head lang="en">
+<head>
+    <title>Layout</title>
+    <script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>
+    <script src="../client/script/reduced_motion.js?" defer type="text/javascript"></script>
+    <script src="../client/script/get_url.js?" defer type="text/javascript"></script>
+    <script src="../client/script/get_path.js?" defer type="text/javascript"></script>
+    <script src="../client/script/generate_qr_code.js?" defer type="text/javascript"></script>
+    <script src="../client/script/generate_copy_link.js?" defer type="text/javascript"></script>
+    <script src="../client/script/controls.js?" defer type="text/javascript"></script>
+    <script src="../client/script/socket.js?" defer type="text/javascript"></script>
+    <script src="../client/script/scroll_snap.js?" defer type="text/javascript"></script>
+    <script src="../client/script/variables.js?" defer type="text/javascript"></script>
+    <script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>
+    <link href="../client/style/variables.css?" rel="stylesheet">
+    <link href="../client/style/reset.css?" rel="stylesheet">
+    <link href="../client/style/base.css?" rel="stylesheet">
+    <link href="../client/style/scrollbar.css?" rel="stylesheet">
+    <link href="../client/style/controls.css?" rel="stylesheet">
+    <link href="../client/style/dialog.css?" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?"crossorigin="anonymous"  type="text/javascript" defer></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?"crossorigin="anonymous"  type="text/javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?"crossorigin="anonymous"  type="text/javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    {% for key, value in public_routes%}
+    <meta name="{{key}}" content="{{'device_ip'|getParam}}{{value}}">
+    {% endfor %}
+    <link href="../client/style/layout.css?" rel="stylesheet">
+    <script src="../client/script/layout.js?" defer type="text/javascript"></script>
+    <style id="public_module_styles">:root{{'{'~'public_module_styles'|getParam ~';}'}}</style>
+</head>
+<body>
+    <section>
+        <article>
+            <div class="preview">
+                <iframe width="1920" height="1080" src="{{public_routes.PANEL_EMBED}}#edit"></iframe>
+            </div>
+            <div class="layers">
+                <input type="radio" name="layers" id="_feat"/>
+                <label for="_feat" aria-label="FEAT"></label>
+                <input type="radio" name="layers" id="_draw"/>
+                <label for="_draw" aria-label="DRAW"></label>
+                <input type="radio" name="layers" id="_med"/>
+                <label for="_med" aria-label="MEDIA"></label>
+            </div>
+            <div class="controls">
+                <label>
+                    <input type="range" min="0" max="200" step="1" value="50" name="--_feat-tX"/>
+                    <input type="range" min="0" max="200" step="1" value="50" name="--_feat-tY"/>
+                    <input type="range" min="0" max="200" step="1" value="50" name="--_feat-sX"/>
+                    <input type="range" min="0" max="200" step="1" value="50" name="--_feat-sY"/>
+                    <input type="range" min="0" max="200" step="2.5" value="100" name="--_feat-rX"/>
+                    <input type="range" min="0" max="200" step="2.5" value="100" name="--_feat-rY"/>
+                    <input type="range" min="0" max="200" step="2.5" value="100" name="--_feat-rZ"/>
+                    <input type="range" min="0" max="200" step="1.0" value="200" name="--_feat-o"/>
+                    <input type="range" min="0" max="200" step="1.0" value="200" name="--_feat-o"/>
+                    <input type="range" min="0" max="200" step="1" value="50" name="--_draw-tX"/>
+                    <input type="range" min="0" max="200" step="1" value="50" name="--_draw-tY"/>
+                    <input type="range" min="0" max="200" step="1" value="50" name="--_draw-sX"/>
+                    <input type="range" min="0" max="200" step="1" value="50" name="--_draw-sY"/>
+                    <input type="range" min="0" max="200" step="2.5" value="100" name="--_draw-rX"/>
+                    <input type="range" min="0" max="200" step="2.5" value="100" name="--_draw-rY"/>
+                    <input type="range" min="0" max="200" step="2.5" value="100" name="--_draw-rZ"/>
+                    <input type="range" min="0" max="200" step="1.0" value="200" name="--_draw-o"/>
+                    <input type="range" min="0" max="200" step="1.0" value="200" name="--_draw-o"/>
+                    <input type="range" min="0" max="200" step="1" value="50" name="--_med-tX"/>
+                    <input type="range" min="0" max="200" step="1" value="50" name="--_med-tY"/>
+                    <input type="range" min="0" max="200" step="1" value="50" name="--_med-sX"/>
+                    <input type="range" min="0" max="200" step="1" value="50" name="--_med-sY"/>
+                    <input type="range" min="0" max="200" step="2.5" value="100" name="--_med-rX"/>
+                    <input type="range" min="0" max="200" step="2.5" value="100" name="--_med-rY"/>
+                    <input type="range" min="0" max="200" step="2.5" value="100" name="--_med-rZ"/>
+                    <input type="range" min="0" max="200" step="1.0" value="200" name="--_med-o"/>
+                    <input type="range" min="0" max="200" step="1.0" value="200" name="--_med-o"/>
+                </label>
+            </div>
+            <div class="modes">
+                <input type="radio" name="modes" id="opacity"/>
+                <label for="opacity" aria-label="🕶️"></label>
+                <button aria-label="reset"></button>
+                <input type="radio" name="modes" id="translate"/>
+                <label for="translate" aria-label="🔁"></label>
+                <button aria-label="reset"></button>
+                <input type="radio" name="modes" id="scale"/>
+                <label for="scale" aria-label="🔍"></label>
+                <button aria-label="reset"></button>
+                <input type="radio" name="modes" id="rotate"/>
+                <label for="rotate" aria-label="🧊"></label>
+                <button aria-label="reset"></button>
+            </div>
+        </article>
+    </section>
+    <nav class="left">
+        <button aria-label="🧮"></button>
+    </nav>
+    <dialog id="qr-dialog">
+        <h2 aria-label="Embed Link"></h2>
+        <h3 aria-label="Use this link as a source input"></h3>
+        <canvas data-url="https://{{'device_ip'|getParam }}{{public_routes.PANEL_EMBED}}"></canvas>
+        <button data-url="https://{{'device_ip'|getParam }}{{public_routes.PANEL_EMBED}}" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
+        <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-dialog').close();"></button>
+    </dialog>
+    <script defer>
+        document.addEventListener("DOMContentLoaded", () => cssDevWatch());
+        document.addEventListener("DOMContentLoaded", () => reducedMotion());
+        document.addEventListener("DOMContentLoaded", () => iframeDetect());
+        document.addEventListener("DOMContentLoaded", () => socketConnect());
+        document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+        document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
+        document.addEventListener("DOMContentLoaded", () => initHomeControls());
+        document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.body.querySelector("#qr-dialog button[data-url]")));
+        document.addEventListener("DOMContentLoaded", () => generateQrCode(
+            document.body.querySelector("#qr-dialog canvas"),
+            document.body.querySelector("#qr-dialog canvas").getAttribute("data-url"),
+        ));
+        document.addEventListener("DOMContentLoaded", () => setCssVariable('.preview', 'width', '--js-module-preview-width'));
+        document.addEventListener("DOMContentLoaded", () => initializeLayoutClickTouch());
+        document.addEventListener("DOMContentLoaded", () => enableRadioButtons());
+        document.addEventListener("DOMContentLoaded", () => {
+            const updateTransform = () => {
+                const {width} = document.querySelector('.preview').getBoundingClientRect();
+                const iframe = document.querySelector('iframe');
+                iframe.style.transform = `scale(${width / 1920})`;
+            };
+            window.addEventListener('orientationchange', updateTransform);
+            window.addEventListener('resize', updateTransform);
+            updateTransform();
+        });
+    </script>
+</body>
+</html>

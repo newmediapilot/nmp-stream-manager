@@ -9,7 +9,11 @@ const scrollSnap = (containerEl) => {
             left: Number(window.location.hash.split('-')[2]),
         });
     }
-    containerEl.addEventListener('scroll', debounceFunction(() => {
-        window.location.hash = `scrollSnap-${containerEl.scrollTop}-${containerEl.scrollLeft}`;
-    }, 333));
+    let to = null;
+    containerEl.addEventListener('scroll', () => {
+        if (to) clearTimeout(to);
+        to = setTimeout(to => {
+            window.location.hash = `scrollSnap-${containerEl.scrollTop}-${containerEl.scrollLeft}`;
+        }, 333);
+    });
 };

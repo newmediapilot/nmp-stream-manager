@@ -1,12 +1,41 @@
-{%extends "layout.html"%}
+<!DOCTYPE html>
+<html lang="en">
 {%set device_ip = "device_ip"|getParam%}
 {%set public_routes = "public_routes"|getParam%}
-{%block head%}
-{{ '
-<link href="../client/style/dashboard.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-<style id="public_module_styles">:root{{'{'~'public_module_styles'|getParam ~';}'}}</style>
-{%endblock%}
-{%block body%}
+<head>
+    <title>Dashboard</title>
+    <script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>
+    <script src="../client/script/reduced_motion.js?" defer type="text/javascript"></script>
+    <script src="../client/script/get_url.js?" defer type="text/javascript"></script>
+    <script src="../client/script/get_path.js?" defer type="text/javascript"></script>
+    <script src="../client/script/generate_qr_code.js?" defer type="text/javascript"></script>
+    <script src="../client/script/generate_copy_link.js?" defer type="text/javascript"></script>
+    <script src="../client/script/controls.js?" defer type="text/javascript"></script>
+    <script src="../client/script/socket.js?" defer type="text/javascript"></script>
+    <script src="../client/script/scroll_snap.js?" defer type="text/javascript"></script>
+    <script src="../client/script/variables.js?" defer type="text/javascript"></script>
+    <script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>
+    <link href="../client/style/variables.css?" rel="stylesheet">
+    <link href="../client/style/reset.css?" rel="stylesheet">
+    <link href="../client/style/base.css?" rel="stylesheet">
+    <link href="../client/style/scrollbar.css?" rel="stylesheet">
+    <link href="../client/style/controls.css?" rel="stylesheet">
+    <link href="../client/style/dialog.css?" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?"crossorigin="anonymous"  type="text/javascript" defer></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?"crossorigin="anonymous"  type="text/javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?"crossorigin="anonymous"  type="text/javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    {% for key, value in public_routes%}
+    <meta name="{{key}}" content="{{'device_ip'|getParam}}{{value}}">
+    {% endfor %}
+    <link href="../client/style/dashboard.css?" rel="stylesheet">
+    <script src="../client/script/dashboard.js?" defer type="text/javascript"></script>
+    <style id="public_module_styles">:root{{'{'~'public_module_styles'|getParam ~';}'}}</style>
+</head>
+<body>
 <section>
     {%for config in "dashboard_signals_config"|getParam%}
     {%if config.type == "feature"%}
@@ -42,17 +71,13 @@
     <button id="toggle-edit-dashboard-edit" aria-label="Edit"><em aria-label="✏"></em></button>
     <button id="toggle-edit-dashboard-done" aria-label="Done"><em aria-label="✅"></em></button>
 </nav>
-{%endblock%}
-{%block dialogs%}
 <dialog id="qr-dialog">
     <h2 aria-label="Dashboard Link"></h2>
     <h3 aria-label="This link will open the dashboard on any device on your network."></h3>
-    <canvas data-url="https://dbdbdbdbdbgroup.com/{{ 'device_ip_suffix' | getParam }}.html?"></canvas>
-    <button data-url="https://dbdbdbdbdbgroup.com/{{ 'device_ip_suffix' | getParam }}.html?" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
+    <canvas data-url="https://dbdbdbdbdbgroup.com/{{'device_ip_suffix'|getParam}}.html?"></canvas>
+    <button data-url="https://dbdbdbdbdbgroup.com/{{'device_ip_suffix'|getParam}}.html?" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
     <button aria-label="✅Done"></button>
 </dialog>
-{%endblock%}
-{%block scripts%}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => reducedMotion());
     document.addEventListener("DOMContentLoaded", () => cssDevWatch());
@@ -78,4 +103,5 @@
         setTimeout(() => dashboardSpinLabels(), 5000);
     });
 </script>
-{%endblock%}
+</body>
+</html>

@@ -1,68 +1,70 @@
-{%extends "layout.html"%}
-{%block cdn%}{%endblock%}
-{%block client%}{%endblock%}}
-{%block head%}
-<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="text/javascript" defer></script>
-<script crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js" type="text/javascript" defer></script>
-{{ '<script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-{{ '<script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-{{ '<script src="../client/script/socket.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-{{ '<script src="../client/script/get_path.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-{{ '<link href="../client/style/variables.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-{{ '<link href="../client/style/reset.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-{{ '<link href="../client/style/base.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-{{ '<link href="../client/style/iframe.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-<style>
-    #embed {
-        width: 100vw;
-        height: 100vh;
-        object-fit: contain;
-        background: none;
-    }
-    #embed[src=''] {
-        visibility: hidden;
-    }
-</style>
-<style>
-    :root {
-        --_med-o: 100.0;
-        --_med-tX: 50.0;
-        --_med-tY: 50.0;
-        --_med-sX: 50.0;
-        --_med-sY: 50.0;
-        --_med-rX: 50.0;
-        --_med-rY: 50.0;
-    }
-</style>
-<style id="public_module_styles">:root{{'{'~'public_module_styles'|getParam ~';}'}}</style>
-<style>
-    html.iframe #embed {
-        background-color: #757575;
-        opacity: 1;
-        background: radial-gradient(circle, transparent 20%, #757575 20%, #757575 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #757575 20%, #757575 80%, transparent 80%, transparent) 25px 25px, linear-gradient(#000000 2px, transparent 2px) 0 -1px, linear-gradient(90deg, #000000 2px, #757575 2px) -1px 0;
-        background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
-        visibility: visible;
-    }
-    main {
-        perspective: calc(1 * 1920px);
-        transform: translateX(calc(calc(var(--_med-tX) * -1%) + 50%))
-        translateY(calc(calc(var(--_med-tY) * -1%) + 50%))
-        scaleX(calc(calc(var(--_med-sX) * 0.01) + 0.0))
-        scaleY(calc(calc(var(--_med-sY) * 0.01) + 0.0))
-    }
-    #embed {
-        opacity: calc(var(--_med-o)/100);
-        transform: rotateX(calc(calc(var(--_med-rY) * -1.8deg) - 90deg))
-        rotateY(calc(calc(var(--_med-rX) * -1.8deg) - 90deg));
-    }
-</style>
-{%endblock%}
-{%block body%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Media</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="This is a description.">
+    <meta name="referrer" content="unsafe-url">
+    <meta name="keywords" content="keyword">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?" type="text/javascript" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?" type="text/javascript" crossorigin="anonymous" defer></script>
+    <script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>
+    <script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>
+    <script src="../client/script/socket.js?" defer type="text/javascript"></script>
+    <script src="../client/script/get_path.js?" defer type="text/javascript"></script>
+    <link href="../client/style/variables.css?" rel="stylesheet">
+    <link href="../client/style/reset.css?" rel="stylesheet">
+    <link href="../client/style/base.css?" rel="stylesheet">
+    <link href="../client/style/iframe.css?" rel="stylesheet">
+    <style>
+        #embed {
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain;
+            background: none;
+        }
+        #embed[src=''] {
+            visibility: hidden;
+        }
+    </style>
+    <style>
+        :root {
+            --_med-o: 100.0;
+            --_med-tX: 50.0;
+            --_med-tY: 50.0;
+            --_med-sX: 50.0;
+            --_med-sY: 50.0;
+            --_med-rX: 50.0;
+            --_med-rY: 50.0;
+        }
+    </style>
+    <style id="public_module_styles">:root{{'{'~'public_module_styles'|getParam ~';}'}}</style>
+    <style>
+        html.iframe #embed {
+            background-color: #757575;
+            opacity: 1;
+            background: radial-gradient(circle, transparent 20%, #757575 20%, #757575 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #757575 20%, #757575 80%, transparent 80%, transparent) 25px 25px, linear-gradient(#000000 2px, transparent 2px) 0 -1px, linear-gradient(90deg, #000000 2px, #757575 2px) -1px 0;
+            background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
+            visibility: visible;
+        }
+        main {
+            perspective: calc(1 * 1920px);
+            transform: translateX(calc(calc(var(--_med-tX) * -1%) + 50%))
+            translateY(calc(calc(var(--_med-tY) * -1%) + 50%))
+            scaleX(calc(calc(var(--_med-sX) * 0.01) + 0.0))
+            scaleY(calc(calc(var(--_med-sY) * 0.01) + 0.0))
+        }
+        #embed {
+            opacity: calc(var(--_med-o)/100);
+            transform: rotateX(calc(calc(var(--_med-rY) * -1.8deg) - 90deg))
+            rotateY(calc(calc(var(--_med-rX) * -1.8deg) - 90deg));
+        }
+    </style>
+</head>
+<body>
 <main>
-    <img id="embed" src=""/>
+    <img id="embed" src="" alt="embed"/>
 </main>
-{%endblock%}
-{%block scripts%}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => cssDevWatch());
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
@@ -83,4 +85,5 @@
         }
     }));
 </script>
-{%endblock%}
+</body>
+</html>
