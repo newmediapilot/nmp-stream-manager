@@ -13,14 +13,31 @@ const server = globSync('./src/server/**/*.js')
         }
     })
     .map(({path, contents}) => {
-        if (path.startsWith('./src/server')) {
-            return {contents: contents, path};
-        } else {
-            return {contents, path};
-        }
+        return {
+            contents: (() => {
+                if (path.endsWith('index.js')) return contents;
+                let contentLines = contents.trim().split('\r\n');
+                const constBarrel = contentLines[contentLines.length - 1]
+                    .split('=')[1]
+                    .replace(';', '');
+                const barrelKeys = constBarrel
+                    .replace('{', '')
+                    .replace('}', '')
+                    .split(',')
+                    .map(key => key.trim())
+                    .map(key => `${key}:_${key}`)
+                    .join(',');
+                contentLines = [
+                    ...[`const {${barrelKeys}} = (() => {`],
+                    ...contentLines.map(line => line.replace('module.exports =', 'return')),
+                    ...[`})();`],
+                ];
+                return contentLines.join('\r\n');
+            })(),
+            path,
+        };
     })
     .map(({contents}) => contents)
     .join('');
-
 fs.writeFileSync('./.server.js', server, {encoding: 'utf-8'});
 console.log('concat :: path', server.substr(0, 400));
