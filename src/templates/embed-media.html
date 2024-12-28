@@ -39,18 +39,24 @@
 </style>
 {%include "_style.njk"%}
 <style>
-    body {
-        perspective: calc(3 * 1920px);
-        perspective-origin: calc(0.5 * 1920px) calc(0.5 * 1920px);
+    html.iframe main {
+        box-shadow: inset 0 0 30px 30px var(--color-dark);
+    }
+    html.iframe #media-embed {
+        box-shadow: inset 0 0 30px 30px var(--color-dark);
+        visibility: visible;
     }
     main {
-        opacity: calc(var(--_med-o)/100);
+        perspective: calc(1 * 1920px);
         transform: translateX(calc(calc(var(--_med-tX) * -1%) + 50%))
         translateY(calc(calc(var(--_med-tY) * -1%) + 50%))
         scaleX(calc(calc(var(--_med-sX) * 0.01) + 0.0))
         scaleY(calc(calc(var(--_med-sY) * 0.01) + 0.0))
-        rotateX(calc(calc(var(--_med-rY) * 3.6deg) - 180deg))
-        rotateY(calc(calc(var(--_med-rX) * 3.6deg) - 180deg));
+    }
+    #media-embed {
+        opacity: calc(var(--_med-o)/100);
+        transform: rotateX(calc(calc(var(--_med-rY) * -1.8deg) - 90deg))
+        rotateY(calc(calc(var(--_med-rX) * -1.8deg) - 90deg));
     }
 </style>
 {%endblock%}
