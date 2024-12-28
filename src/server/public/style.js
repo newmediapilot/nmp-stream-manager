@@ -47,7 +47,4 @@ const publicStyleUpdate = (req, res) => {
         console.log( "Done processing style");
     }
 };
-module.exports = {
-    initializePublicStyles,
-    publicStyleUpdate,
-};
+module.exports = {initializePublicStyles, publicStyleUpdate};
