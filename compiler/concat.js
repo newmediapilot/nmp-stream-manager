@@ -44,17 +44,21 @@ const server = globSync('./src/server/**/*.js')
             content: (() => {
                 let contentLines = content.trim().split('\r\n');
                 let outputLines = contentLines.map(line => {
-                    if (line.includes('require(".')) {
-                        // const {getParam, setSecret} = require('../store/manager');
-                        // const {getParam, setSecret} = {getParam:_getParam, setSecret:_setSecret};
-                        const key = line.trim()
+                    if (
+                        line.includes('require(".') ||
+                        line.includes("require('.")) {
+                        let key = line.trim()
                             .split('=')[0]
                             .replace('const', '')
                             .replace('{', '')
                             .replace('}', '')
                             .replace(' ', '')
                             .trim();
-                        return `const {${key}} = {_${key}};`;
+                        if (key.includes(',')) {
+                            return `const [${key}] = [${key.split(',').map(k => `_${k.trim()}`)}];`;
+                        } else {
+                            return `const {${key}} = {_${key}};`;
+                        }
                     } else {
                         return line;
                     }
@@ -67,6 +71,17 @@ const server = globSync('./src/server/**/*.js')
             path,
         };
     })
+    .map(({path, content}) => {
+        return {
+            content: (() => {
+                if (!path.endsWith('index.js')) return content;
+                console.log('concat :: index', path);
+                let contentLines = content.trim().split('\r\n');
+                return `(()=>{${contentLines.join('\r\n')}})()`;
+            })(),
+            path,
+        };
+    })
     .sort(({path: a}, {path: b}) => {
         const aIsIndex = a.endsWith('index.js') ? -1 : 0;
         const bIsIndex = b.endsWith('index.js') ? -1 : 0;
@@ -75,14 +90,13 @@ const server = globSync('./src/server/**/*.js')
     .sort(({path: a}, {path: b}) => {
         const aIsIndex = a.endsWith('manager.js') ? -1 : 0;
         const bIsIndex = b.endsWith('manager.js') ? -1 : 0;
-        return aIsIndex -bIsIndex;
+        return aIsIndex - bIsIndex;
     })
     .sort(({path: a}, {path: b}) => {
         const aIsIndex = a.endsWith('manager.js') ? -1 : 0;
         const bIsIndex = b.endsWith('manager.js') ? -1 : 0;
-        return aIsIndex -bIsIndex;
+        return aIsIndex - bIsIndex;
     })
     .map(({content}) => content)
     .join('\r\n');
 fs.writeFileSync('./.server.js', server, {encoding: 'utf-8'});
-// console.log('concat :: path', server.substr(0, 400));
