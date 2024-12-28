@@ -53,6 +53,7 @@ const initializeLayoutClickTouch = () => {
         label.addEventListener('mouseup', (e) => {
             label.removeEventListener('mousemove', castLayoutInputValues);
             sendLayoutInputValues();
+            setModes();
         });
         label.addEventListener('touchstart', (e) => {
             label.addEventListener('touchmove', castLayoutInputValues, {passive: true});
@@ -61,6 +62,7 @@ const initializeLayoutClickTouch = () => {
         label.addEventListener('touchend', (e) => {
             label.removeEventListener('touchmove', castLayoutInputValues);
             sendLayoutInputValues();
+            setModes();
         }, {passive: true});
     });
 };
@@ -87,23 +89,36 @@ const sendLayoutInputValues = () => {
             payload,
         },
     }).finally(() => {
-        // socketEmitReload();
+        socketEmitReload();
     });
 };
 const setModes = () => {
-    document.$layer = document.querySelector('article .layers input[type=radio]:checked').id;
-    document.$mode = document.querySelector('article .modes input[type=radio]:checked').id;
-    document.$modes = [document.$layer, document.$mode];
-    console.log('setModes', document.$modes);
+    document.$modes = [
+        document.querySelector('article .layers input[type=radio]:checked').id,
+        document.querySelector('article .modes input[type=radio]:checked').id
+    ];
+    getPayloadValues().forEach(({name, value}) => {
+        document.querySelectorAll(`[name=${name}]`).forEach(input => {
+            input.value = value;
+            input.setAttribute('value', value);
+        });
+    });
+    const controlValues = getPayloadValues()
+        .filter(({name}) => name.includes(document.$modes[0]))
+        .filter(({name}) => {
+            const mode = document.$modes[1].substr(0, 1);
+            const prop = name.split('-').pop().substr(0, 1);
+            return mode === prop;
+        });
+    const [x, y] = controlValues;
     const {scrollWidth, scrollHeight} = document.querySelector('article .controls label');
-    const [x, y] = getPayloadValues();
-    // const top = scrollHeight * (y.value / 200);
-    // const left = scrollWidth * (x.value / 200);
-    // document.querySelector('article .controls label').scrollTo({
-    //     top,
-    //     left,
-    //     behavior: "smooth",
-    // });
+    const top = scrollHeight * (y.value / 200);
+    const left = scrollWidth * (x.value / 200);
+    document.querySelector('article .controls label').scrollTo({
+        top,
+        left,
+        behavior: "smooth",
+    });
 };
 const enableRadioButtons = () => {
     Array.from(
