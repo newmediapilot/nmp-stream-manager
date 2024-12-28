@@ -44,7 +44,4 @@ const publicMediaUpdate = (req, res) => {
         console.log("publicMediaUpdate :: media processing done");
     }
 };
-module.exports = {
-    publicMediaUpdate,
-    publicMediaFetch,
-};
+module.exports = {publicMediaUpdate, publicMediaFetch};
