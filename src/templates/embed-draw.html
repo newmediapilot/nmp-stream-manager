@@ -13,18 +13,11 @@
 {{ '<link href="../client/style/base.css?" rel="stylesheet">' | inlineScriptContents | safe }}
 {{ '<link href="../client/style/iframe.css?" rel="stylesheet">' | inlineScriptContents | safe }}
 <style>
-    canvas {
-        width: 50vw;
-        height: 50vw;
-        box-sizing: border-box;
-        object-fit: contain;
-    }
-    main {
+    #embed {
         width: 100vw;
         height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        object-fit: contain;
+        background: none;
     }
 </style>
 <style>
@@ -41,7 +34,7 @@
 {%include "_style.njk"%}
 <style>
     html.iframe main {
-        bbox-shadow: inset 0 0 30px 30px var(--color-dark);
+        box-shadow: inset 0 0 30px 30px var(--color-dark);
     }
     html.iframe canvas {
         box-shadow: inset 0 0 30px 30px var(--color-dark);
@@ -53,7 +46,7 @@
         scaleX(calc(calc(var(--_draw-sX) * 0.01) + 0.0))
         scaleY(calc(calc(var(--_draw-sY) * 0.01) + 0.0))
     }
-    img {
+    #embed {
         opacity: calc(var(--_draw-o)/100);
         transform: rotateX(calc(calc(var(--_draw-rY) * -1.8deg) - 90deg))
         rotateY(calc(calc(var(--_draw-rX) * -1.8deg) - 90deg));
@@ -62,7 +55,7 @@
 {%endblock%}
 {%block body%}
 <main>
-    <canvas></canvas>
+    <canvas id="embed"></canvas>
 </main>
 {%endblock%}
 {%block scripts%}

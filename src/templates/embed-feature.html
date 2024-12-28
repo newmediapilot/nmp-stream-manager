@@ -13,10 +13,7 @@
 {{ '<link href="../client/style/base.css?" rel="stylesheet">' | inlineScriptContents | safe }}
 {{ '<link href="../client/style/iframe.css?" rel="stylesheet">' | inlineScriptContents | safe }}
 <style>
-    #feature-embed {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    #embed {
         width: 100vw;
         height: 100vh;
     }
@@ -35,9 +32,9 @@
 {%include "_style.njk"%}
 <style>
     html.iframe main {
-        bbox-shadow: inset 0 0 30px 30px var(--color-dark);
+        box-shadow: inset 0 0 30px 30px var(--color-dark);
     }
-    html.iframe iframe {
+    html.iframe #embed {
         box-shadow: inset 0 0 30px 30px var(--color-dark);
     }
     main {
@@ -47,7 +44,7 @@
         scaleX(calc(calc(var(--_feat-sX) * 0.01) + 0.0))
         scaleY(calc(calc(var(--_feat-sY) * 0.01) + 0.0))
     }
-    iframe {
+    #embed {
         opacity: calc(var(--_feat-o)/100);
         transform: rotateX(calc(calc(var(--_feat-rY) * -1.8deg) - 90deg))
         rotateY(calc(calc(var(--_feat-rX) * -1.8deg) - 90deg));
@@ -56,7 +53,7 @@
 {%endblock%}
 {%block body%}
 <main>
-    <iframe id="feature-embed"
+    <iframe id="embed"
             frameborder="0"
             allowfullscreen="true"
             scrolling="no"
@@ -100,7 +97,7 @@
             console.log('embed-feature :: no streamer found');
         } else {
             const URL = `https://player.twitch.tv/?channel=${streamerQueryParam}&parent=localhost&muted=false`;
-            const twitchEmbed = document.body.querySelector('#feature-embed');
+            const twitchEmbed = document.body.querySelector('#embed');
             twitchEmbed.src = URL;
         }
     });
