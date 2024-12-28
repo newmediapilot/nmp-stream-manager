@@ -31,11 +31,11 @@
 </style>
 {%include "_style.njk"%}
 <style>
-    html.iframe main {
-        box-shadow: inset 0 0 30px 30px var(--color-dark);
-    }
     html.iframe #embed {
-        box-shadow: inset 0 0 30px 30px var(--color-dark);
+        background-color: #757575;
+        opacity: 1;
+        background: radial-gradient(circle, transparent 20%, #757575 20%, #757575 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #757575 20%, #757575 80%, transparent 80%, transparent) 100px 100px, linear-gradient(#000000 8px, transparent 8px) 0 -4px, linear-gradient(90deg, #000000 8px, #757575 8px) -4px 0;
+        background-size: 200px 200px, 200px 200px, 100px 100px, 100px 100px;
     }
     main {
         perspective: calc(1 * 1920px);
@@ -44,10 +44,10 @@
         scaleX(calc(calc(var(--_feat-sX) * 0.01) + 0.0))
         scaleY(calc(calc(var(--_feat-sY) * 0.01) + 0.0))
     }
-    #embed {
+    #embed {z
         opacity: calc(var(--_feat-o)/100);
-        transform: rotateX(calc(calc(var(--_feat-rY) * -1.8deg) - 90deg))
-        rotateY(calc(calc(var(--_feat-rX) * -1.8deg) - 90deg));
+        transform: rotateX(calc(calc(var(--_feat-rY) * -.9deg) - 135deg));
+        rotateY(calc(calc(var(--_feat-rX) * -.9deg) - 135deg));
     }
 </style>
 {%endblock%}
