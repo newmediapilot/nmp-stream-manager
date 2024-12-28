@@ -1,17 +1,21 @@
-{%extends "layout.html"%}
-{%block cdn%}{%endblock%}
-{%block client%}{%endblock%}}
-{%block head%}
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?{{''|cacheBuster}}" type="text/javascript" crossorigin="anonymous" defer></script>
-<script src="https://cdn.socket.io/4.0.0/socket.io.min.js?{{''|cacheBuster}}" type="text/javascript" crossorigin="anonymous" defer></script>
-{{ '<script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-{{ '<script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-{{ '<script src="../client/script/socket.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-{{ '<script src="../client/script/get_path.js?" defer type="text/javascript"></script>' | inlineScriptContents | safe }}
-{{ '<link href="../client/style/variables.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-{{ '<link href="../client/style/reset.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-{{ '<link href="../client/style/base.css?" rel="stylesheet">' | inlineScriptContents | safe }}
-{{ '<link href="../client/style/iframe.css?" rel="stylesheet">' | inlineScriptContents | safe }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Draw</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="This is a description.">
+    <meta name="referrer" content="unsafe-url">
+    <meta name="keywords" content="keyword">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?{{''|cacheBuster}}" type="text/javascript" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?{{''|cacheBuster}}" type="text/javascript" crossorigin="anonymous" defer></script>
+    <script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>
+    <script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>
+    <script src="../client/script/socket.js?" defer type="text/javascript"></script>
+    <script src="../client/script/get_path.js?" defer type="text/javascript"></script>
+    <link href="../client/style/variables.css?" rel="stylesheet">
+    <link href="../client/style/reset.css?" rel="stylesheet">
+    <link href="../client/style/base.css?" rel="stylesheet">
+    <link href="../client/style/iframe.css?" rel="stylesheet">
 <style>
     #embed {
         width: 100vw;
@@ -53,13 +57,11 @@
         rotateY(calc(calc(var(--_draw-rX) * -1.8deg) - 90deg));
     }
 </style>
-{%endblock%}
-{%block body%}
+</head>
+<body>
 <main>
     <canvas id="embed"></canvas>
 </main>
-{%endblock%}
-{%block scripts%}
 <script defer>
     document.addEventListener("DOMContentLoaded", () => cssDevWatch());
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
@@ -111,4 +113,4 @@
         document.replayStart();
     }));
 </script>
-{%endblock%}
+</body>
