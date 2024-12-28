@@ -48,5 +48,5 @@ app.use(express.json({limit: '200mb'}))
     .all(ROUTES.API_SIGNAL_CREATE, publicSignalCreate)
     .all(ROUTES.API_CONFIG_UPDATE, publicConfigUpdate)
     .all(ROUTES.API_STYLE_UPDATE, publicStyleUpdate)
-    .all(ROUTES.API_MEDIA_UPDATE, publicMediaUpdate)
+    .all(ROUTES.API_MEDIA_UPDATE, publicMediaUpdate);
 startServices(app);
