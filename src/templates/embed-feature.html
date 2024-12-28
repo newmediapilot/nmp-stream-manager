@@ -39,13 +39,14 @@
         perspective-origin: calc(0.5 * 1920px) calc(0.5 * 1920px);
     }
     main {
-        transition: transform 1000ms linear, opacity 1000ms linear;
+        transition: transform 50ms linear, opacity 50ms linear;
+        opacity: calc(var(--_feat-o)/100);
         transform: translateX(calc(calc(var(--_feat-tX) * -1%) + 50%))
         translateY(calc(calc(var(--_feat-tY) * -1%) + 50%))
         scaleX(calc(calc(var(--_feat-sX) * 0.01) + 0.0))
         scaleY(calc(calc(var(--_feat-sY) * 0.01) + 0.0))
-        rotateX(calc(calc(var(--_feat-rY) * -1.8deg) - 180deg))
-        rotateY(calc(calc(var(--_feat-rX) * -1.8deg) - 0deg));
+        rotateX(calc(calc(var(--_feat-rY) * -1.8deg) - 90deg))
+        rotateY(calc(calc(var(--_feat-rX) * -1.8deg) - 90deg));
     }
 </style>
 {%endblock%}
