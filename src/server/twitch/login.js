@@ -1,12 +1,6 @@
 const fetch = require("node-fetch");
 const ROUTES = require("../routes");
-const {
-    getSecret,
-    setSecret,
-    getParam,
-    setParam,
-    resetSecrets,
-} = require("../store/manager");
+const { getSecret, setSecret, getParam, setParam, resetSecrets} = require("../store/manager");
 const {watchMessages} = require("./stream");
 function twitchLogin(req, res) {
     const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
