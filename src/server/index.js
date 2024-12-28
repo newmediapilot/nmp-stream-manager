@@ -1,4 +1,3 @@
-require('src/server/debug');
 require("dotenv").config();
 const fs = require("fs");
 const {ROUTES} = require("./routes");
