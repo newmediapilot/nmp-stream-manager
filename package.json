@@ -1,7 +1,7 @@
 {
-    "main": "src/index.js",
+    "main": "src/server/index.js",
     "scripts": {
-        "start": "node src/index.js",
+        "start": "node src/server/index.js",
         "reset": "rm -rf node_modules && npm i --no-package-lock",
         "cert": "openssl req --nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
         "bpm": "rm -rf .bin && mkdir -p .bin && curl -L \"https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe\" -o \"./.bin/hds_desktop_windows.exe\"",
@@ -11,7 +11,7 @@
         "compile": "node compiler/compile.js"
     },
     "name": "zombies",
-    "bin": "./src/index.js",
+    "bin": "./src/server/index.js",
     "pkg": {
         "outputPath": "./.package",
         "assets": [
