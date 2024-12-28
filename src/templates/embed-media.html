@@ -34,7 +34,7 @@
         --_med-rY: 50.0;
     }
 </style>
-{%include "_style.njk"%}
+<style id="public_module_styles">:root{{'{'~'public_module_styles'|getParam ~';}'}}</style>
 <style>
     html.iframe #embed {
         background-color: #757575;
