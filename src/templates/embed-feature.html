@@ -39,15 +39,17 @@
     }
     main {
         perspective: calc(1 * 1920px);
+        transition: transform 100ms;
         transform: translateX(calc(calc(var(--_feat-tX) * -1%) + 50%))
         translateY(calc(calc(var(--_feat-tY) * -1%) + 50%))
         scaleX(calc(calc(var(--_feat-sX) * 0.01) + 0.0))
         scaleY(calc(calc(var(--_feat-sY) * 0.01) + 0.0))
     }
-    #embed {z
+    #embed {
         opacity: calc(var(--_feat-o)/100);
-        transform: rotateX(calc(calc(var(--_feat-rY) * -.9deg) - 135deg));
-        rotateY(calc(calc(var(--_feat-rX) * -.9deg) - 135deg));
+        transition: transform 100ms, opacity 100ms;
+        transform: rotateX(calc(calc(var(--_feat-rY) * -1.8deg) - 90deg))
+        rotateY(calc(calc(var(--_feat-rX) * -1.8deg) - 90deg));
     }
 </style>
 {%endblock%}
