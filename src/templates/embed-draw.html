@@ -40,18 +40,23 @@
 </style>
 {%include "_style.njk"%}
 <style>
-    body {
-        perspective: calc(3 * 1920px);
-        perspective-origin: calc(0.5 * 1920px) calc(0.5 * 1920px);
+    html.iframe main {
+        bbox-shadow: inset 0 0 30px 30px var(--color-dark);
+    }
+    html.iframe canvas {
+        box-shadow: inset 0 0 30px 30px var(--color-dark);
     }
     main {
-        opacity: calc(var(--_draw-o)/100);
+        perspective: calc(1 * 1920px);
         transform: translateX(calc(calc(var(--_draw-tX) * -1%) + 50%))
         translateY(calc(calc(var(--_draw-tY) * -1%) + 50%))
         scaleX(calc(calc(var(--_draw-sX) * 0.01) + 0.0))
         scaleY(calc(calc(var(--_draw-sY) * 0.01) + 0.0))
-        rotateX(calc(calc(var(--_draw-rY) * 3.6deg) - 180deg))
-        rotateY(calc(calc(var(--_draw-rX) * 3.6deg) - 180deg));
+    }
+    img {
+        opacity: calc(var(--_draw-o)/100);
+        transform: rotateX(calc(calc(var(--_draw-rY) * -1.8deg) - 90deg))
+        rotateY(calc(calc(var(--_draw-rX) * -1.8deg) - 90deg));
     }
 </style>
 {%endblock%}
