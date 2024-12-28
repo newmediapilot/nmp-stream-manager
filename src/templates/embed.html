@@ -33,7 +33,7 @@
         position: relative;
     }
 </style>
-{%include "_style.njk"%}
+<style id="public_module_styles">:root{{'{'~'public_module_styles'|getParam ~';}'}}</style>
 {%endblock%}
 {%block body%}
 <main>
