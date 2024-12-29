@@ -173,7 +173,10 @@ const templates = globSync('./src/templates/**/*.*')
 
 templates.forEach(({path, content}) => {
     console.log('templates :: inject', path);
-    output = output.replace(`fs.readFileSync('${path}', {encoding: 'utf-8'})`, `${"`" + content + "`"}`);
+    output = output.replace(
+        `fs.readFileSync('${path}', {encoding: 'utf-8'})`,
+        `Buffer.from('${Buffer.from(content).toString('base64')}').toString('utf-8')`
+    );
 });
 
 fs.writeFileSync(
