@@ -10,21 +10,24 @@ AWS.config.update({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     region: process.env.AWS_REGION,
 });
-fs.existsSync('.s3') && fs.rmdirSync('.s3', {recursive: true});
-fs.mkdirSync('.s3');
 const getContentType = (filePath) => {
     const ext = path.extname(filePath).toLowerCase();
     switch (ext) {
-        case '.html': return 'text/html';
-        case '.json': return 'application/json';
-        case '.png':  return 'image/png';
-        case '.css': return 'text/css';
-        case '.js': return 'application/javascript';
-        default: return 'application/octet-stream';
+        case '.html':
+            return 'text/html';
+        case '.json':
+            return 'application/json';
+        case '.png':
+            return 'image/png';
+        case '.css':
+            return 'text/css';
+        case '.js':
+            return 'application/javascript';
+        default:
+            return 'application/octet-stream';
     }
 };
-
-const paths = globSync(".s3/**/*.*");
+const paths = globSync(".server.js");
 paths.map((filePath, index, arr) => {
     const fileContent = fs.readFileSync(filePath);
     const contentType = getContentType(filePath);
