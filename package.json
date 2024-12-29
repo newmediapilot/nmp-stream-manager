@@ -1,5 +1,5 @@
 {
-    "main": "src/server/index.js",
+    "main": "src/launch.js",
     "scripts": {
         "start": "node src/server/index.js",
         "reset": "rm -rf node_modules && npm i --no-package-lock",
