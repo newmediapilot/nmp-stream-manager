@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {%set public_routes = "public_routes"|getParamFilter%}
-{%set device_ip = "device_ip"|getParamFilter%}
 <html lang="en">
 <head>
     <title>OS</title>
@@ -13,19 +12,19 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="icon" href="/icon512_rounded.png" type="image/png">
     <link rel="manifest" href="/manifest.json">
-    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?" type="text/javascript" defer></script>
-    <script crossorigin="anonymous" src="https://cdn.socket.io/4.0.0/socket.io.min.js?" type="text/javascript" defer></script>
-    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" type="text/javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?" crossorigin="anonymous" type="text/javascript" defer></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?" crossorigin="anonymous"  type="text/javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" crossorigin="anonymous"  type="text/javascript" defer></script>
     <script src="../client/script/socket.js?" defer type="text/javascript"></script>
     <script src="../client/script/reduced_motion.js?" defer type="text/javascript"></script>
     <link href="../client/style/index.css?" rel="stylesheet">
 </head>
 <body>
 <main>
-    <iframe src="https://{{device_ip}}{{public_routes.PANEL_LAYOUT}}"></iframe>
-    <iframe src="https://{{device_ip}}{{public_routes.PANEL_DASHBOARD}}"></iframe>
-    <iframe src="https://{{device_ip}}{{public_routes.PANEL_ACTIONS}}"></iframe>
-    <iframe src="https://{{device_ip}}{{public_routes.PANEL_DRAW}}"></iframe>
+    <iframe src="{{public_routes.PANEL_LAYOUT}}"></iframe>
+    <iframe src="{{public_routes.PANEL_DASHBOARD}}"></iframe>
+    <iframe src="{{public_routes.PANEL_ACTIONS}}"></iframe>
+    <iframe src="{{public_routes.PANEL_DRAW}}"></iframe>
 </main>
 <script defer>
     document.addEventListener("DOMContentLoaded", () => reducedMotion());
