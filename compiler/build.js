@@ -1,9 +1,12 @@
-console.time("Build")
+console.time("Build :: complete")
 const {execSync} = require("child_process");
-execSync("node compiler/compile.js", {stdio: 'inherit'});
+console.log("Build :: concat");
 execSync("node compiler/concat.js", {stdio: 'inherit'});
+console.log("Build :: compile");
 execSync("node compiler/compile.js", {stdio: 'inherit'});
+console.log("Build :: s3");
 execSync("node compiler/s3.js", {stdio: 'inherit'});
+console.log("Build :: clean");
 execSync("rm -rf .compiled", {stdio: 'inherit'});
 execSync("rm -rf .server.js", {stdio: 'inherit'});
-console.log("Build complete", console.timeEnd("Build"));
+console.timeEnd("Build :: complete");
