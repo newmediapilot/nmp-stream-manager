@@ -1,3 +1,6 @@
+console.log("Loading dashboard...");
+const fetch = require('node_fetch');
+
 setTimeout(() => {
-    console.log('hello there');
+
 }, 10000);
