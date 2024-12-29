@@ -92,22 +92,37 @@ const server = globSync('./src/server/**/*.js')
             path,
         };
     });
+const routes = server.splice(server.indexOf(server.find(({path}) => path.endsWith('routes.js'))), 1);
+const manager = server.splice(server.indexOf(server.find(({path}) => path.endsWith('manager.js'))), 1);
+const message = server.splice(server.indexOf(server.find(({path}) => path.endsWith('message.js'))), 1);
+const ads = server.splice(server.indexOf(server.find(({path}) => path.endsWith('ads.js'))), 1);
+const broadcast = server.splice(server.indexOf(server.find(({path}) => path.endsWith('broadcast.js'))), 1);
+const clip = server.splice(server.indexOf(server.find(({path}) => path.endsWith('clip.js'))), 1);
+const tweet = server.splice(server.indexOf(server.find(({path}) => path.endsWith('tweet.js'))), 1);
+const marker = server.splice(server.indexOf(server.find(({path}) => path.endsWith('marker.js'))), 1);
+const twip = server.splice(server.indexOf(server.find(({path}) => path.endsWith('twip.js'))), 1);
+const commands = server.splice(server.indexOf(server.find(({path}) => path.endsWith('commands.js'))), 1);
+const stream = server.splice(server.indexOf(server.find(({path}) => path.endsWith('stream.js'))), 1);
 const index = server.splice(server.indexOf(server.find(({path}) => path.endsWith('index.js'))), 1);
 const output = [
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('manager.js'))), 1),
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('message.js'))), 1),
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('ads.js'))), 1),
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('broadcast.js'))), 1),
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('marker.js'))), 1),
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('clip.js'))), 1),
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('tweet.js'))), 1),
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('marker.js'))), 1),
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('twip.js'))), 1),
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('commands.js'))), 1),
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('stream.js'))), 1),
+    ...routes,
+    ...manager,
+    ...message,
+    ...ads,
+    ...broadcast,
+    ...marker,
+    ...clip,
+    ...tweet,
+    ...twip,
+    ...commands,
+    ...stream,
     ...server,
     ...index,
 ]
+    .map(({content, path}) => {
+        console.log('output :: path', path);
+        return ({content, path});
+    })
     .map(({content, path}) => `/** start :: ${path} */\r\n${content}\r\n/** end :: ${path} */`)
     .join('\r\n');
 
