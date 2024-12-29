@@ -28,7 +28,7 @@ const templates = globSync('./src/templates/**/*.*')
                         return `<style>${fs.readFileSync(`./src/${src}`, {encoding: "utf-8"})}</style>`;
                     }
                     if (line.includes('<script src="https://cdn.')) {
-                        const cdn = line.split('<script src="')[1].split('?" defer ')[0];
+                        const cdn = line.split('<script src="')[1].split('?" defer')[0];
                         const res = request('GET', cdn);
                         return `<script type="text/javascript">${res.getBody('utf-8')}</script>`;
                     }
