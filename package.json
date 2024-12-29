@@ -6,6 +6,7 @@
         "reset": "rm -rf node_modules && npm i --no-package-lock",
         "concat": "node compiler/concat.js",
         "combine": "node compiler/combine.js",
+        "launch": "node src/launch.js",
         "serve": "node .server.js"
     },
     "name": "app",
