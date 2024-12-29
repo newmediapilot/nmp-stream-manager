@@ -1,6 +1,7 @@
 {
     "main": "src/launch.js",
     "scripts": {
+        "launch": "node src/launch.js",
         "start": "node src/server/index.js",
         "reset": "rm -rf node_modules && npm i --no-package-lock",
         "cert": "openssl req --nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
