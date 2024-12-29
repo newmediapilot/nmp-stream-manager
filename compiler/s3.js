@@ -46,7 +46,7 @@ paths.map((filePath, index, arr) => {
                     CallerReference: `${Date.now().toString()}`,
                     Paths: {
                         Quantity: paths.length,
-                        Items: paths.map(path => path.replace(".s3", "")),
+                        Items: paths,
                     },
                 },
             }, (err, data) => {
