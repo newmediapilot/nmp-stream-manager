@@ -1,7 +1,7 @@
 const fs = require('fs');
 const {sync: globSync} = require('glob');
 const request = require('sync-request');
-const hash = Array.from({ length:1000}, () => Array(4).fill().map(() => String.fromCharCode(97 + Math.floor(Math.random() * 26))).join(''));
+const hash = Array.from({length: 1000}, () => Array(4).fill().map(() => String.fromCharCode(97 + Math.floor(Math.random() * 26))).join(''));
 const server = globSync('./src/server/**/*.*')
     .map(path => {
         console.log('server :: path', path);
@@ -178,7 +178,13 @@ templates.forEach(({path, content}) => {
         `Buffer.from('${Buffer.from(content).toString('base64')}', 'base64').toString('utf-8')`
     );
 });
-
+const Terser = require('terser');
+output = Terser.minify_sync(output, {
+    mangle: false,
+    compress: {
+        defaults: false,
+    }
+}).code;
 fs.writeFileSync(
     './.server.js',
     output,
