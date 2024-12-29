@@ -4,7 +4,9 @@ let secrets = {};
 const allowedParams = [
     "dashboard_signals_config",
     "device_ip",
+    "device_ip_suffix",
     "emoji_collection",
+    "keys_set",
     "public_module_styles",
     "public_routes",
     "twitch_access_token_set",
