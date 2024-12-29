@@ -1,23 +1,26 @@
 const nunjucks = require("nunjucks");
 const express = require("express");
 const {getParam} = require("../store/manager");
-const environment = (app = null) =>{
-    return nunjucks.configure('src/templates', {
+let env = null;
+const context = () => {
+    return {
+        public_routes: getParam('public_routes'),
+        device_ip: getParam('device_ip'),
+        device_ip_suffix: getParam('device_ip_suffix'),
+        dashboard_signals_config: getParam('dashboard_signals_config'),
+        public_module_styles: getParam('public_module_styles'),
+    }
+};
+const configureNunjucks = (app) => {
+    env = nunjucks.configure('src/templates', {
         autoescape: true,
         express: app,
         noCache: true,
     });
-};
-const configureNunjucks = (app) => {
-    const env = environment(app);
-    env.addFilter("getParamFilter", getParam);
     app.set("view engine", "html");
     app.use(express.static("src/client"));
 };
 const renderStringTemplate = (res, content) => {
-    const env = environment();
-    console.log('getParam', getParam);
-    env.addFilter("getParamFilter", getParam);
-    res.send(env.renderString(content));
+    res.send(env.renderString(content, context()));
 };
 module.exports = {configureNunjucks, renderStringTemplate};

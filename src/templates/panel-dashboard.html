@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-{%set public_routes = "public_routes"|getParamFilter%}
-{%set device_ip = "device_ip"|getParamFilter%}
 <html lang="en">
 <head>
     <title>Dashboard</title>
@@ -31,11 +29,11 @@
     {% for key, value in public_routes%}<meta name="{{key}}" content="{{value}}">{% endfor %}
     <link href="../client/style/dashboard.css?" rel="stylesheet">
     <script src="../client/script/dashboard.js?" defer type="text/javascript"></script>
-    <style id="public_module_styles">:root{{'{'~'public_module_styles'|getParamFilter ~';}'}}</style>
+    <style id="public_module_styles">:root{{public_module_styles}}</style>
 </head>
 <body>
 <section>
-    {%for config in "dashboard_signals_config"|getParamFilter%}
+    {%for config in dashboard_signals_config%}
     {%if config.type == "feature"%}
     {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label%}
     {%elif config.type == "mark"%}
@@ -72,8 +70,8 @@
 <dialog id="qr-dialog">
     <h2 aria-label="Dashboard Link"></h2>
     <h3 aria-label="This link will open the dashboard on any device on your network."></h3>
-    <canvas data-url="https://dbdbdbdbdbgroup.com/{{'device_ip_suffix'|getParamFilter}}.html?"></canvas>
-    <button data-url="https://dbdbdbdbdbgroup.com/{{'device_ip_suffix'|getParamFilter}}.html?" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
+    <canvas data-url="https://dbdbdbdbdbgroup.com/hello.html?"></canvas>
+    <button data-url="https://dbdbdbdbdbgroup.com/hello.html?" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
     <button aria-label="✅Done"></button>
 </dialog>
 <script>
