@@ -18,6 +18,7 @@
     <script src="../client/script/socket.js?" defer type="text/javascript"></script>
     <script src="../client/script/reduced_motion.js?" defer type="text/javascript"></script>
     <link href="../client/style/index.css?" rel="stylesheet">
+    {% for key, value in public_routes%}<meta name="{{key}}" content="{{value}}">{% endfor %}
 </head>
 <body>
 <main>

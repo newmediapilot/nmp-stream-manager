@@ -28,9 +28,7 @@
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
-    {% for key, value in public_routes%}
-    <meta name="{{key}}" content="https://{{value}}">
-    {% endfor %}
+    {% for key, value in public_routes%}<meta name="{{key}}" content="{{value}}">{% endfor %}
     <link href="../client/style/layout.css?" rel="stylesheet">
     <script src="../client/script/layout.js?" defer type="text/javascript"></script>
     <style id="public_module_styles">:root{{'{'~'public_module_styles'|getParamFilter ~';}'}}</style>
