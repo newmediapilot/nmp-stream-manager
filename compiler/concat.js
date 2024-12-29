@@ -1,6 +1,7 @@
 const fs = require('fs');
 const {sync: globSync} = require('glob');
 const request = require('sync-request');
+const hash = Array.from({ length:1000}, () => Array(4).fill().map(() => String.fromCharCode(97 + Math.floor(Math.random() * 26))).join(''));
 const server = globSync('./src/server/**/*.*')
     .map(path => {
         console.log('server :: path', path);
@@ -129,7 +130,6 @@ let output = [
     .map(({content, path}) => `/** start :: ${path} */\r\n${content}\r\n/** end :: ${path} */`)
     .join('\r\n');
 
-
 const templates = globSync('./src/templates/**/*.*')
     .map(path => {
         console.log('templates :: path', path);
@@ -170,6 +170,11 @@ const templates = globSync('./src/templates/**/*.*')
             path,
         };
     });
+
+templates.forEach(({path, content}) => {
+    console.log('templates :: inject', path);
+    output = output.replace(`fs.readFileSync('${path}', {encoding: 'utf-8'})`, `${"`" + content + "`"}`);
+});
 
 fs.writeFileSync(
     './.server.js',
