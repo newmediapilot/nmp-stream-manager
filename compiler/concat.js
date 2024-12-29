@@ -1,50 +1,6 @@
 const fs = require('fs');
 const {sync: globSync} = require('glob');
 const request = require('sync-request');
-const templates = globSync('./src/templates/**/*.*')
-    .map(path => {
-        console.log('templates :: path', path);
-        return path;
-    })
-    .map(path => {
-        const content = fs.readFileSync(path, {encoding: "utf-8"});
-        console.log('templates :: read', path);
-        return {
-            path,
-            content,
-        }
-    }).map(({path, content}) => {
-        console.log('templates :: inline', path);
-        return {
-            content: (() => {
-                let contentLines = content.trim().split('\r\n');
-                const outputLines = contentLines.map(line => {
-                    if (line.includes('<script src="../')) {
-                        const src = line.split('<script src="../')[1].split('?" defer ')[0];
-                        return `<script type="text/javascript">${fs.readFileSync(`./src/${src}`, {encoding: "utf-8"})}</script>`;
-                    }
-                    if (line.includes('<link href="../')) {
-                        const src = line.split('<link href="../')[1].split('?" rel=')[0];
-                        return `<style>${fs.readFileSync(`./src/${src}`, {encoding: "utf-8"})}</style>`;
-                    }
-                    if (line.includes('<script src="https://cdn.')) {
-                        const cdn = line.split('<script src="')[1].split('?" defer')[0];
-                        const res = request('GET', cdn);
-                        return `<script type="text/javascript">${res.getBody('utf-8')}</script>`;
-                    }
-                    return line;
-                });
-                return [
-                    ...outputLines,
-                ].join('\r\n')
-            })(),
-            path,
-        };
-    }).map(({path, content}) => {
-        fs.writeFileSync(`${path}2.html`, content, {type: 'utf-8'});
-    });
-console.log('templates', templates.length);
-process.exit(0);
 const server = globSync('./src/server/**/*.*')
     .map(path => {
         console.log('server :: path', path);
@@ -137,6 +93,7 @@ const server = globSync('./src/server/**/*.*')
             path,
         };
     });
+
 const routes = server.splice(server.indexOf(server.find(({path}) => path.endsWith('routes.js'))), 1);
 const manager = server.splice(server.indexOf(server.find(({path}) => path.endsWith('manager.js'))), 1);
 const message = server.splice(server.indexOf(server.find(({path}) => path.endsWith('message.js'))), 1);
@@ -172,102 +129,48 @@ let output = [
     .map(({content, path}) => `/** start :: ${path} */\r\n${content}\r\n/** end :: ${path} */`)
     .join('\r\n');
 
-[
-    "actions",
-    "actionsCreateEditor",
-    "actionsCreateEmojis",
-    "actionsCreateUpload",
-    "actionsToggle",
-    "applySignalsField",
-    "applySignalsOrder",
-    "castLayoutInputValues",
-    "clearCanvas",
-    "clearMemory",
-    "clickUploadButton",
-    "configFieldUpdate",
-    "configureCertificate",
-    "configureIp",
-    "configureNunjucks",
-    "configureSocket",
-    "createChanges",
-    "cssDevWatch",
-    "dashboard",
-    "dashboardBlinkButtons",
-    "dashboardFilterButtons",
-    "dashboardRotateHue",
-    "dashboardSpinLabels",
-    "displayMedia",
-    "draw",
-    "drawPixel",
-    "emojiElsClick",
-    "enableLayerDragDrop",
-    "enableRadioButtons",
-    "generateCopyLink",
-    "generateQrCode",
-    "getAllParams",
-    "getBroadcasterId",
-    "getChannelId",
-    "getConfig",
-    "getCssVariables",
-    "getIp",
-    "getParam",
-    "getPath",
-    "getPayloadValues",
-    "getSecret",
-    "getURL",
-    "iframeDetect",
-    "initHomeControls",
-    "initNavControls",
-    "initializeLayoutClickTouch",
-    "paths",
-    "publicConfigUpdate",
-    "publicMediaFetch",
-    "publicMediaUpdate",
-    "publicSignalCreate",
-    "publicStyleUpdate",
-    "putConfig",
-    "reducedMotion",
-    "renderStringTemplate",
-    "replayAudio",
-    "replayStart",
-    "resetSecrets",
-    "scrollSnap",
-    "send",
-    "sendLayoutInputValues",
-    "sendPayload",
-    "sendToggleState",
-    "setBroadcastTitle",
-    "setCssVariable",
-    "setFocusToken",
-    "setMemory",
-    "setModes",
-    "setParam",
-    "setSecret",
-    "socketConnect",
-    "socketEmitReload",
-    "socketWatchDrawSet",
-    "socketWatchFeatureSet",
-    "socketWatchMediaSet",
-    "socketWatchReload",
-    "socketWatchRoute",
-    "socketWatchSoundSet",
-    "socketWatchStyle",
-    "startServices",
-    "textInputElBlur",
-    "textInputElFocus",
-    "toggleReplayState",
-    "touchStartMove",
-    "twitchAdCreate",
-    "twitchClipCreate",
-    "twitchLogin",
-    "twitchLoginSuccess",
-    "twitchMarkerCreate",
-    "twitchMessageCreate",
-    "twitchTwipCreate",
-    "twitterTweet"
-].forEach(methodName => {
-    // output = output.replace(new RegExp(methodName, "gm"), `${methodName}2`)
-});
+
+const templates = globSync('./src/templates/**/*.*')
+    .map(path => {
+        console.log('templates :: path', path);
+        return path;
+    })
+    .map(path => {
+        const content = fs.readFileSync(path, {encoding: "utf-8"});
+        console.log('templates :: read', path);
+        return {
+            path,
+            content,
+        }
+    }).map(({path, content}) => {
+        console.log('templates :: inline', path);
+        return {
+            content: (() => {
+                let contentLines = content.trim().split('\r\n');
+                const outputLines = contentLines.map(line => {
+                    if (line.includes('<script src="../')) {
+                        const src = line.split('<script src="../')[1].split('?"')[0];
+                        return `<script type="text/javascript">${fs.readFileSync(`./src/${src}`, {encoding: "utf-8"})}</script>`;
+                    }
+                    if (line.includes('<link href="../')) {
+                        const src = line.split('<link href="../')[1].split('?"')[0];
+                        return `<style>${fs.readFileSync(`./src/${src}`, {encoding: "utf-8"})}</style>`;
+                    }
+                    if (line.includes('<script src="https://')) {
+                        const cdn = line.split('<script src="')[1].split('?"')[0];
+                        const res = request('GET', cdn);
+                        return `<script type="text/javascript">${res.getBody('utf-8')}</script>`;
+                    }
+                    return line;
+                });
+                return [
+                    ...outputLines,
+                ].join('\r\n')
+            })(),
+            path,
+        };
+    });
+
 fs.writeFileSync(
     './.server.js',
     output,
