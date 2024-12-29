@@ -1,15 +1,9 @@
 {
     "main": "src/launch.js",
     "scripts": {
-        "launch": "node src/launch.js",
+        "build": "node compiler/build.js",
         "start": "node src/server/index.js",
-        "reset": "rm -rf node_modules && npm i --no-package-lock",
-        "cert": "openssl req --nodes -new -x509 -keyout localhost.key -out localhost.crt -days 365",
-        "bpm": "rm -rf .bin && mkdir -p .bin && curl -L \"https://github.com/Rexios80/hds_desktop/releases/download/0.2.3/hds_desktop_windows.exe\" -o \"./.bin/hds_desktop_windows.exe\"",
-        "combine": "node compiler/combine.js",
-        "uncombine": "node compiler/uncombine.js",
-        "zombies": "node compiler/zombies.js",
-        "compile": "node compiler/compile.js"
+        "reset": "rm -rf node_modules && npm i --no-package-lock"
     },
     "name": "app",
     "bin": "./src/launch.js",
