@@ -17,10 +17,21 @@ const templates = globSync('./src/templates/**/*.*')
         return {
             content: (() => {
                 let contentLines = content.trim().split('\r\n');
-                contentLines = [
+                const outputLines = contentLines.map(line => {
+                    if (line.includes('<script src="../')) {
+                        const src = line.split('<script src="../')[1].split('')
+                    }
+                    if (line.includes('<script src="../')) {
+                        const href = line.split('<script src="../')[1]
+                    }
+                    if (line.includes('<link href="../')) {
+                        const href = line.split('<script src="../')[1]
+                    }
+                    return line;
+                });
+                return [
                     ...outputLines,
-                ];
-                return contentLines.join('\r\n')
+                ].join('\r\n')
             })(),
             path,
         };
