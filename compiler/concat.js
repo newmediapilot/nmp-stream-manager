@@ -12,9 +12,21 @@ const templates = globSync('./src/templates/**/*.*')
             path,
             content,
         }
+    }).map(({path, content}) => {
+        console.log('templates :: inline', path);
+        return {
+            content: (() => {
+                let contentLines = content.trim().split('\r\n');
+                contentLines = [
+                    ...outputLines,
+                ];
+                return contentLines.join('\r\n')
+            })(),
+            path,
+        };
     });
 console.log('templates', templates.length);
-// process.exit(0);
+process.exit(0);
 const server = globSync('./src/server/**/*.*')
     .map(path => {
         console.log('server :: path', path);
@@ -142,6 +154,102 @@ let output = [
     .map(({content, path}) => `/** start :: ${path} */\r\n${content}\r\n/** end :: ${path} */`)
     .join('\r\n');
 
+[
+    "actions",
+    "actionsCreateEditor",
+    "actionsCreateEmojis",
+    "actionsCreateUpload",
+    "actionsToggle",
+    "applySignalsField",
+    "applySignalsOrder",
+    "castLayoutInputValues",
+    "clearCanvas",
+    "clearMemory",
+    "clickUploadButton",
+    "configFieldUpdate",
+    "configureCertificate",
+    "configureIp",
+    "configureNunjucks",
+    "configureSocket",
+    "createChanges",
+    "cssDevWatch",
+    "dashboard",
+    "dashboardBlinkButtons",
+    "dashboardFilterButtons",
+    "dashboardRotateHue",
+    "dashboardSpinLabels",
+    "displayMedia",
+    "draw",
+    "drawPixel",
+    "emojiElsClick",
+    "enableLayerDragDrop",
+    "enableRadioButtons",
+    "generateCopyLink",
+    "generateQrCode",
+    "getAllParams",
+    "getBroadcasterId",
+    "getChannelId",
+    "getConfig",
+    "getCssVariables",
+    "getIp",
+    "getParam",
+    "getPath",
+    "getPayloadValues",
+    "getSecret",
+    "getURL",
+    "iframeDetect",
+    "initHomeControls",
+    "initNavControls",
+    "initializeLayoutClickTouch",
+    "paths",
+    "publicConfigUpdate",
+    "publicMediaFetch",
+    "publicMediaUpdate",
+    "publicSignalCreate",
+    "publicStyleUpdate",
+    "putConfig",
+    "reducedMotion",
+    "renderStringTemplate",
+    "replayAudio",
+    "replayStart",
+    "resetSecrets",
+    "scrollSnap",
+    "send",
+    "sendLayoutInputValues",
+    "sendPayload",
+    "sendToggleState",
+    "setBroadcastTitle",
+    "setCssVariable",
+    "setFocusToken",
+    "setMemory",
+    "setModes",
+    "setParam",
+    "setSecret",
+    "socketConnect",
+    "socketEmitReload",
+    "socketWatchDrawSet",
+    "socketWatchFeatureSet",
+    "socketWatchMediaSet",
+    "socketWatchReload",
+    "socketWatchRoute",
+    "socketWatchSoundSet",
+    "socketWatchStyle",
+    "startServices",
+    "textInputElBlur",
+    "textInputElFocus",
+    "toggleReplayState",
+    "touchStartMove",
+    "twitchAdCreate",
+    "twitchClipCreate",
+    "twitchLogin",
+    "twitchLoginSuccess",
+    "twitchMarkerCreate",
+    "twitchMessageCreate",
+    "twitchTwipCreate",
+    "twitterTweet"
+].forEach(methodName => {
+    // output = output.replace(new RegExp(methodName, "gm"), `${methodName}2`)
+});
 fs.writeFileSync(
     './.server.js',
     output,
