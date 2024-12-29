@@ -1,6 +1,5 @@
 const {getSecret} = require("../store/manager");
 const fetch = require("node-fetch");
-const {twitchMessageCreate} = require("./message");
 async function twitchAdCreate(length) {
     try {
         if (!length || length>180) length = 30;
@@ -23,9 +22,6 @@ async function twitchAdCreate(length) {
                 length: roundedLength
             })
         });
-        await twitchMessageCreate(
-            `🤖 Get ready, we're running a ${roundedLength} second ad!`,
-        );
         return true;
     } catch (error) {
         console.log( "Error starting advertisement:", error);
