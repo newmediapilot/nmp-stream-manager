@@ -12,9 +12,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="icon" href="/icon512_rounded.png" type="image/png">
     <link rel="manifest" href="/manifest.json">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?" crossorigin="anonymous" type="text/javascript" defer></script>
-    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?" crossorigin="anonymous"  type="text/javascript" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" crossorigin="anonymous"  type="text/javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?" defer crossorigin="anonymous"  type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous"  type="text/javascript"></script>
     <script src="../client/script/socket.js?" defer type="text/javascript"></script>
     <script src="../client/script/reduced_motion.js?" defer type="text/javascript"></script>
     <link href="../client/style/index.css?" rel="stylesheet">
@@ -26,7 +26,7 @@
     <iframe src="{{public_routes.PANEL_ACTIONS}}"></iframe>
     <iframe src="{{public_routes.PANEL_DRAW}}"></iframe>
 </main>
-<script defer>
+<script>
     document.addEventListener("DOMContentLoaded", () => reducedMotion());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchRoute((payload)=>{
