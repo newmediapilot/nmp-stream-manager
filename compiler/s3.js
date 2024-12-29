@@ -40,13 +40,15 @@ paths.map((filePath, index, arr) => {
         if (err) return console.error('Error uploading file:', err);
         console.log(`File uploaded successfully at ${data.Location}`);
         if(index >= arr.length - 1) {
+            console.log('paths.length', paths.length);
+            console.log('paths', paths);
             cloudfront.createInvalidation({
                 DistributionId: "E3IXY2ACIKURY1",
                 InvalidationBatch: {
                     CallerReference: `${Date.now().toString()}`,
                     Paths: {
                         Quantity: paths.length,
-                        Items: paths,
+                        Items: paths.map(path=>`demo/${path.slice(1)}`),
                     },
                 },
             }, (err, data) => {
