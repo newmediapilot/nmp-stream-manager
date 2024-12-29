@@ -1,8 +1,9 @@
 const nunjucks = require("nunjucks");
 const express = require("express");
 const {getParam} = require("../store/manager");
+let nunjucksEnv = {};
 const configureNunjucks = (app) => {
-    const nunjucksEnv = nunjucks.configure('src/templates', {
+    nunjucksEnv = nunjucks.configure('src/templates', {
         autoescape: true,
         express: app,
         noCache: true,
@@ -11,4 +12,7 @@ const configureNunjucks = (app) => {
     app.set("view engine", "html");
     app.use(express.static("src/client"));
 };
-module.exports = {configureNunjucks};
+const renderStringTemplate = (res, content) => {
+    res.send(nunjucksEnv.renderString(content));
+};
+module.exports = {configureNunjucks, renderStringTemplate};
