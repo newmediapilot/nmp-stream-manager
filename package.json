@@ -41,6 +41,6 @@
         "prettier": "3.4.2",
         "rcedit": "4.0.1",
         "sync-request": "6.1.0",
-        "uglify-js": "3.19.3"
+        "terser": "^5.37.0"
     }
 }
