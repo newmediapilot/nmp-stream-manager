@@ -1,20 +1,27 @@
 const fs = require('fs');
 const {sync: globSync} = require('glob');
+const templates = globSync('./src/templates/**/*.*');
+const client = globSync('./src/client/**/*.*').map(path => {
+    console.log('client :: path', path);
+    return path;
+});
+console.log('hello');
+process.exit(0);
 const server = globSync('./src/server/**/*.js')
     .map(path => {
-        console.log('concat :: path', path);
+        console.log('server :: path', path);
         return path;
     })
     .map(path => {
         const content = fs.readFileSync(path, {encoding: "utf-8"});
-        console.log('concat :: read', path);
+        console.log('server :: read', path);
         return {
             path,
             content,
         }
     })
     .map(({path, content}) => {
-        console.log('concat :: modularize', path);
+        console.log('server :: modularize', path);
         return {
             content: (() => {
                 if (path.endsWith('index.js')) return content;
@@ -49,7 +56,7 @@ const server = globSync('./src/server/**/*.js')
         };
     })
     .map(({path, content}) => {
-        console.log('concat :: connect', path);
+        console.log('server :: connect', path);
         return {
             content: (() => {
                 let contentLines = content.trim().split('\r\n');
@@ -85,7 +92,7 @@ const server = globSync('./src/server/**/*.js')
         return {
             content: (() => {
                 if (!path.endsWith('index.js')) return content;
-                console.log('concat :: index', path);
+                console.log('server :: index', path);
                 let contentLines = content.trim().split('\r\n');
                 return `(()=>{${contentLines.join('\r\n')}})()`;
             })(),
