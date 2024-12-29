@@ -1,5 +1,6 @@
 const fs = require('fs');
 const {sync: globSync} = require('glob');
+const request = require('sync-request');
 const templates = globSync('./src/templates/**/*.*')
     .map(path => {
         console.log('templates :: path', path);
@@ -19,13 +20,17 @@ const templates = globSync('./src/templates/**/*.*')
                 let contentLines = content.trim().split('\r\n');
                 const outputLines = contentLines.map(line => {
                     if (line.includes('<script src="../')) {
-                        const src = line.split('<script src="../')[1].split('')
-                    }
-                    if (line.includes('<script src="../')) {
-                        const href = line.split('<script src="../')[1]
+                        const src = line.split('<script src="../')[1].split('?" defer ')[0];
+                        return `<script type="text/javascript">${fs.readFileSync(`./src/${src}`, {encoding: "utf-8"})}</script>`;
                     }
                     if (line.includes('<link href="../')) {
-                        const href = line.split('<script src="../')[1]
+                        const src = line.split('<link href="../')[1].split('?" rel=')[0];
+                        return `<style>${fs.readFileSync(`./src/${src}`, {encoding: "utf-8"})}</style>`;
+                    }
+                    if (line.includes('<script src="https://cdn.')) {
+                        const cdn = line.split('<script src="')[1].split('?" defer ')[0];
+                        const res = request('GET', cdn);
+                        return `<script type="text/javascript">${res.getBody('utf-8')}</script>`;
                     }
                     return line;
                 });
@@ -35,6 +40,8 @@ const templates = globSync('./src/templates/**/*.*')
             })(),
             path,
         };
+    }).map(({path, content}) => {
+        fs.writeFileSync(`${path}2.html`, content, {type: 'utf-8'});
     });
 console.log('templates', templates.length);
 process.exit(0);
