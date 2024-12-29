@@ -10,16 +10,12 @@
         "zombies": "node compiler/zombies.js",
         "compile": "node compiler/compile.js"
     },
-    "name": "zombies",
-    "bin": "./src/server/index.js",
+    "name": "app",
+    "bin": "./src/launch.js",
     "pkg": {
         "outputPath": "./.package",
-        "assets": [
-            "./src/client/**/**/*.*",
-            "./src/templates/**/*.*"
-        ],
         "scripts": [
-            "./src/server/**/*.*"
+            "./src/launch.js"
         ],
         "targets": [
             "node14-win-x64"
