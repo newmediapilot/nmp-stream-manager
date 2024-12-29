@@ -48,7 +48,7 @@ paths.map((filePath, index, arr) => {
                     CallerReference: `${Date.now().toString()}`,
                     Paths: {
                         Quantity: paths.length,
-                        Items: paths.map(path=>`demo/${path.slice(1)}`),
+                        Items: paths,
                     },
                 },
             }, (err, data) => {
