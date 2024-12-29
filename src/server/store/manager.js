@@ -28,9 +28,6 @@ const setParam = (key, value, log = true) => {
     paramsState[key] = value;
     log && console.log("setParam :: set", key, "::", value);
 };
-const getAllParams = () => {
-    return paramsState;
-};
 const getParam = (key) => {
     return paramsState[key];
 };
@@ -62,4 +59,4 @@ const getSecret = (name) => {
         return null;
     }
 };
-module.exports = {setParam, getParam, getAllParams, setSecret, getSecret, resetSecrets };
+module.exports = {setParam, getParam, setSecret, getSecret, resetSecrets };
