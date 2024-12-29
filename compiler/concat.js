@@ -30,7 +30,17 @@ const server = globSync('./src/server/**/*.js')
                     .map(key => `${key}:_${key}`);
                 contentLines = [
                     ...[`const {${barrelKeys}} = (() => {`],
-                    ...contentLines.map(line => line.replace('module.exports =', 'return')),
+                    ...contentLines.map(line => line
+                        .replace('module.exports =', 'return')
+                        .replace('process.env.TWITCH_CLIENT_ID', '"process.env.TWITCH_CLIENT_ID"')
+                        .replace('process.env.TWITCH_CLIENT_SECRET', '"process.env.TWITCH_CLIENT_SECRET"')
+                        .replace('process.env.TWITCH_USERNAME', '"process.env.TWITCH_USERNAME"')
+                        .replace('process.env.TWITCH_SCOPES', '"process.env.TWITCH_SCOPES"')
+                        .replace('process.env.TWITTER_API_KEY', '"process.env.TWITTER_API_KEY"')
+                        .replace('process.env.TWITTER_API_SECRET', '"process.env.TWITTER_API_SECRET"')
+                        .replace('process.env.TWITTER_ACCESS_TOKEN', '"process.env.TWITTER_ACCESS_TOKEN"')
+                        .replace('process.env.TWITTER_ACCESS_SECRET', '"process.env.TWITTER_ACCESS_SECRET"')
+                    ),
                     ...[`})();`],
                 ];
                 return contentLines.join('\r\n');
@@ -86,12 +96,15 @@ const index = server.splice(server.indexOf(server.find(({path}) => path.endsWith
 const output = [
     ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('manager.js'))), 1),
     ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('message.js'))), 1),
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('marker.js'))), 1),
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('broadcast.js'))), 1),
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('tweet.js'))), 1),
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('clip.js'))), 1),
-    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('twip.js'))), 1),
     ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('ads.js'))), 1),
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('broadcast.js'))), 1),
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('marker.js'))), 1),
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('clip.js'))), 1),
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('tweet.js'))), 1),
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('marker.js'))), 1),
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('twip.js'))), 1),
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('commands.js'))), 1),
+    ...server.splice(server.indexOf(server.find(({path}) => path.endsWith('stream.js'))), 1),
     ...server,
     ...index,
 ]
