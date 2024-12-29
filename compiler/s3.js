@@ -33,7 +33,7 @@ paths.map((filePath, index, arr) => {
     const contentType = getContentType(filePath);
     s3.upload({
         Bucket: 'dbdbdbdbdbgroup.com',
-        Key: 'demo',
+        Key: 'demo/server.js',
         Body: fileContent,
         ContentType: contentType,
     }, (err, data) => {
