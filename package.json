@@ -3,7 +3,8 @@
     "scripts": {
         "build": "node compiler/build.js",
         "start": "node src/server/index.js",
-        "reset": "rm -rf node_modules && npm i --no-package-lock"
+        "reset": "rm -rf node_modules && npm i --no-package-lock",
+        "concat": "node compiler/concat.js"
     },
     "name": "app",
     "bin": "./src/launch.js",
