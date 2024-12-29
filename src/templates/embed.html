@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{%set public_routes = 'public_routes'|getParam%}
+{%set public_routes = 'public_routes'|getParamFilter%}
 <html lang="en">
 <head>
     <title>Embed</title>
@@ -44,7 +44,7 @@
             position: relative;
         }
     </style>
-    <style id="public_module_styles">:root{{'{'~'public_module_styles'|getParam ~';}'}}</style>
+    <style id="public_module_styles">:root{{'{'~'public_module_styles'|getParamFilter ~';}'}}</style>
 </head>
 <body>
 <main>
