@@ -175,7 +175,7 @@ templates.forEach(({path, content}) => {
     console.log('templates :: inject', path);
     output = output.replace(
         `fs.readFileSync('${path}', {encoding: 'utf-8'})`,
-        `Buffer.from('${Buffer.from(content).toString('base64')}').toString('utf-8')`
+        `Buffer.from('${Buffer.from(content).toString('base64')}', 'base64').toString('utf-8')`
     );
 });
 
