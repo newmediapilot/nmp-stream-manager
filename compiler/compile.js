@@ -1,9 +1,7 @@
 const {execSync} = require('child_process');
 const fs = require('fs');
 execSync('npm run reset');
-fs.existsSync('.media') && execSync('rm -rf .media');
 fs.existsSync('.package') && execSync('rm -rf .package');
-fs.existsSync('.server.js') && execSync('rm -rf .server.js');
 fs.existsSync('.compiled') && execSync('rm -rf .compiled');
 execSync('mkdir .compiled');
 execSync('cp -r ./src .compiled/src');
