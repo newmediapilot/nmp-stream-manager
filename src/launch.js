@@ -1,3 +1,3 @@
-await setTimeout(() => {
+setTimeout(() => {
     console.log('hello there');
 }, 10000);
