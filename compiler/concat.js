@@ -1,13 +1,21 @@
 const fs = require('fs');
 const {sync: globSync} = require('glob');
-const templates = globSync('./src/templates/**/*.*');
-const client = globSync('./src/client/**/*.*').map(path => {
-    console.log('client :: path', path);
-    return path;
-});
-console.log('hello');
-process.exit(0);
-const server = globSync('./src/server/**/*.js')
+const templates = globSync('./src/templates/**/*.*')
+    .map(path => {
+        console.log('templates :: path', path);
+        return path;
+    })
+    .map(path => {
+        const content = fs.readFileSync(path, {encoding: "utf-8"});
+        console.log('templates :: read', path);
+        return {
+            path,
+            content,
+        }
+    });
+console.log('templates', templates.length);
+// process.exit(0);
+const server = globSync('./src/server/**/*.*')
     .map(path => {
         console.log('server :: path', path);
         return path;
@@ -111,7 +119,8 @@ const twip = server.splice(server.indexOf(server.find(({path}) => path.endsWith(
 const commands = server.splice(server.indexOf(server.find(({path}) => path.endsWith('commands.js'))), 1);
 const stream = server.splice(server.indexOf(server.find(({path}) => path.endsWith('stream.js'))), 1);
 const index = server.splice(server.indexOf(server.find(({path}) => path.endsWith('index.js'))), 1);
-const output = [
+
+let output = [
     ...routes,
     ...manager,
     ...message,
