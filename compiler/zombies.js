@@ -10,18 +10,8 @@ AWS.config.update({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     region: process.env.AWS_REGION,
 });
-const htmlString = fs.readFileSync('./src/templates/zombie.html', {encoding: 'utf-8'});
-const manifestJson = fs.readFileSync('./src/client/manifest.json', {encoding: 'utf-8'});
 fs.existsSync('.s3') && fs.rmdirSync('.s3', {recursive: true});
 fs.mkdirSync('.s3');
-fs.copyFileSync('./src/client/icon512_maskable.png', './.s3/icon512_maskable.png');
-fs.copyFileSync('./src/client/icon512_rounded.png', './.s3/icon512_rounded.png');
-[22].forEach(() => {
-    const json = JSON.parse(String(manifestJson));
-    json.start_url = `/${22}.html`;
-    fs.writeFileSync(`.s3/${22}.json`, JSON.stringify(json), {encoding: 'utf-8'});
-    fs.writeFileSync(`.s3/${22}.html`, 'placeholder...', {encoding: 'utf-8'});
-});
 const getContentType = (filePath) => {
     const ext = path.extname(filePath).toLowerCase();
     switch (ext) {
@@ -33,19 +23,14 @@ const getContentType = (filePath) => {
         default: return 'application/octet-stream';
     }
 };
-globSync(".s3/*.html").map(() => {
-    const html = htmlString
-        .replace(`://192.268.0.XX`, `://192.268.0.${22}`)
-        .replace("./manifest.json", `/${22}.json`);
-    fs.writeFileSync(`.s3/${22}.html`, html, {encoding: 'utf-8'});
-});
+
 const paths = globSync(".s3/**/*.*");
 paths.map((filePath, index, arr) => {
     const fileContent = fs.readFileSync(filePath);
     const contentType = getContentType(filePath);
     s3.upload({
         Bucket: 'dbdbdbdbdbgroup.com',
-        Key: filePath.replace('.s3/', ''),
+        Key: 'demo',
         Body: fileContent,
         ContentType: contentType,
     }, (err, data) => {
