@@ -12,7 +12,7 @@ const {publicMediaUpdate} = require("./public/media");
 const {publicMediaFetch} = require("./public/media");
 const {twitchLogin} = require("./twitch/login");
 const {twitchLoginSuccess} = require("./twitch/login");
-const {renderStringTemplate} = require("./nunjucks/configure");
+const {renderStringTemplate} = require("./nunjucks/environment");
 const {configureIp} = require('./helper/ip');
 const {configureCertificate} = require('./helper/cert');
 configureIp();
