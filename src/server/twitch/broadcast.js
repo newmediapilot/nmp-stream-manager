@@ -1,6 +1,5 @@
 const fetch = require("node-fetch");
 const { getSecret } = require("../store/manager");
-const { twitchMessageCreate } = require("./message");
 async function setBroadcastTitle(title) {
   if (!title) {
     console.log( "No title provided. Skipping update.");
@@ -21,7 +20,6 @@ async function setBroadcastTitle(title) {
   });
     if (response.status === 204) {
       console.log( "Stream title updated successfully.");
-      await twitchMessageCreate("Stream title updated to: " + title);
       return title;
     } else {
       console.log(
