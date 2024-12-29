@@ -1,7 +1,6 @@
 const fetch = require("node-fetch");
 const { setParam } = require("../store/manager");
 const { twitchMarkerCreate } = require("./marker");
-const { twitchMessageCreate } = require("./message");
 const { setBroadcastTitle } = require("./broadcast");
 const { getSecret } = require("../store/manager");
 const TIMEOUT_WAIT = 2000;
@@ -26,7 +25,6 @@ async function twitchClipCreate(description) {
     clipResponses.push({ url, data: response.data });
     setParam("broadcast_clips", clipResponses);
     console.log( "Clip created:", url);
-    await twitchMessageCreate("🤖 Clip ready: " + url);
     return url;
   } catch (error) {
     console.log( "Failed to create clip:", error.message);
