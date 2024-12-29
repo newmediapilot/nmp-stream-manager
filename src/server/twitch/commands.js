@@ -6,7 +6,7 @@ const { twitterTweet } = require("../twitter/tweet");
 const { twitchMessageCreate } = require("./message");
 const { twitchMarkerCreate } = require("./marker");
 const { setBroadcastTitle } = require("./broadcast");
-async function parseCommand(channel, tags, message) {
+const parseCommand = async  (channel, tags, message)=> {
   console.log( "Message: ", message);
   const isBroadcaster = tags["user-id"] === getSecret("twitch_broadcaster_id");
   const COMMANDS = {
