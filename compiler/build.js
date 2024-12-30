@@ -7,11 +7,13 @@ Array.from({length})
     .forEach(hash => {
             console.log("Build :: concat ---------------=> ", hash);
             execSync(`node compiler/concat.js ${hash}`, {stdio: 'inherit'});
+            console.log("Build :: snapshot -------------=> ", hash);
+            execSync(`node compiler/snapshot.js`, {stdio: 'inherit'});
             console.log("Build :: compile --------------=> ", hash);
             execSync(`node compiler/compile.js ${hash}`, {stdio: 'inherit'});
             console.log("Build :: s3 -------------------=> ", hash);
             execSync(`node compiler/s3.js ${hash}`, {stdio: 'inherit'});
-            console.log("Build :: deployed ---=> ", hash);
+            console.log("Build :: deployed -------------=> ", hash);
         }
     );
 console.timeEnd("Build :: complete");
