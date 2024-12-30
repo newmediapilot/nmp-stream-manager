@@ -12,3 +12,4 @@ media
 .bin
 .combined.json
 .server.js
+.launch.js
