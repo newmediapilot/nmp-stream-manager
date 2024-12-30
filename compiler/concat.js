@@ -3,23 +3,23 @@ const {sync: globSync} = require('glob');
 const request = require('sync-request');
 const hash = Array.from({length: 1000}, () => Array(4).fill().map(() => String.fromCharCode(97 + Math.floor(Math.random() * 26))).join(''));
 const server = globSync('./src/server/**/*.*')
-    .map(path => {
-        console.log('server :: path', path);
-        return path;
+    .map(filePath => {
+        console.log('server :: filePath', filePath);
+        return filePath;
     })
-    .map(path => {
-        const content = fs.readFileSync(path, {encoding: "utf-8"});
-        console.log('server :: read', path);
+    .map(filePath => {
+        const content = fs.readFileSync(filePath, {encoding: "utf-8"});
+        console.log('server :: read', filePath);
         return {
-            path,
+            filePath,
             content,
         }
     })
-    .map(({path, content}) => {
-        console.log('server :: modularize', path);
+    .map(({filePath, content}) => {
+        console.log('server :: modularize', filePath);
         return {
             content: (() => {
-                if (path.endsWith('index.js')) return content;
+                if (filePath.endsWith('index.js')) return content;
                 let contentLines = content.trim().split('\r\n');
                 let exportLine = contentLines[contentLines.length - 1];
                 const constBarrel = exportLine
@@ -50,11 +50,11 @@ const server = globSync('./src/server/**/*.*')
                 ];
                 return contentLines.join('\r\n');
             })(),
-            path,
+            filePath,
         };
     })
-    .map(({path, content}) => {
-        console.log('server :: connect', path);
+    .map(({filePath, content}) => {
+        console.log('server :: connect', filePath);
         return {
             content: (() => {
                 let contentLines = content.trim().split('\r\n');
@@ -83,33 +83,33 @@ const server = globSync('./src/server/**/*.*')
                 ];
                 return contentLines.join('\r\n')
             })(),
-            path,
+            filePath,
         };
     })
-    .map(({path, content}) => {
+    .map(({filePath, content}) => {
         return {
             content: (() => {
-                if (!path.endsWith('index.js')) return content;
-                console.log('server :: index', path);
+                if (!filePath.endsWith('index.js')) return content;
+                console.log('server :: index', filePath);
                 let contentLines = content.trim().split('\r\n');
                 return `(()=>{${contentLines.join('\r\n')}})()`;
             })(),
-            path,
+            filePath,
         };
     });
 
-const routes = server.splice(server.indexOf(server.find(({path}) => path.endsWith('routes.js'))), 1);
-const manager = server.splice(server.indexOf(server.find(({path}) => path.endsWith('manager.js'))), 1);
-const message = server.splice(server.indexOf(server.find(({path}) => path.endsWith('message.js'))), 1);
-const ads = server.splice(server.indexOf(server.find(({path}) => path.endsWith('ads.js'))), 1);
-const broadcast = server.splice(server.indexOf(server.find(({path}) => path.endsWith('broadcast.js'))), 1);
-const clip = server.splice(server.indexOf(server.find(({path}) => path.endsWith('clip.js'))), 1);
-const tweet = server.splice(server.indexOf(server.find(({path}) => path.endsWith('tweet.js'))), 1);
-const marker = server.splice(server.indexOf(server.find(({path}) => path.endsWith('marker.js'))), 1);
-const twip = server.splice(server.indexOf(server.find(({path}) => path.endsWith('twip.js'))), 1);
-const commands = server.splice(server.indexOf(server.find(({path}) => path.endsWith('commands.js'))), 1);
-const stream = server.splice(server.indexOf(server.find(({path}) => path.endsWith('stream.js'))), 1);
-const index = server.splice(server.indexOf(server.find(({path}) => path.endsWith('index.js'))), 1);
+const routes = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('routes.js'))), 1);
+const manager = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('manager.js'))), 1);
+const message = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('message.js'))), 1);
+const ads = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('ads.js'))), 1);
+const broadcast = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('broadcast.js'))), 1);
+const clip = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('clip.js'))), 1);
+const tweet = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('tweet.js'))), 1);
+const marker = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('marker.js'))), 1);
+const twip = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('twip.js'))), 1);
+const commands = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('commands.js'))), 1);
+const stream = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('stream.js'))), 1);
+const index = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('index.js'))), 1);
 
 let output = [
     ...routes,
@@ -126,27 +126,27 @@ let output = [
     ...server,
     ...index,
 ]
-    .map(({content, path}) => {
-        console.log('output :: path', path);
-        return ({content, path});
+    .map(({content, filePath}) => {
+        console.log('output :: filePath', filePath);
+        return ({content, filePath});
     })
-    .map(({content, path}) => `/** start :: ${path} */\r\n${content}\r\n/** end :: ${path} */`)
+    .map(({content, filePath}) => `/** start :: ${filePath} */\r\n${content}\r\n/** end :: ${filePath} */`)
     .join('\r\n');
 
 const templates = globSync('./src/templates/**/*.*')
-    .map(path => {
-        console.log('templates :: path', path);
-        return path;
+    .map(filePath => {
+        console.log('templates :: filePath', filePath);
+        return filePath;
     })
-    .map(path => {
-        const content = fs.readFileSync(path, {encoding: "utf-8"});
-        console.log('templates :: read', path);
+    .map(filePath => {
+        const content = fs.readFileSync(filePath, {encoding: "utf-8"});
+        console.log('templates :: read', filePath);
         return {
-            path,
+            filePath,
             content,
         }
-    }).map(({path, content}) => {
-        console.log('templates :: inline', path);
+    }).map(({filePath, content}) => {
+        console.log('templates :: inline', filePath);
         return {
             content: (() => {
                 let contentLines = content.trim().split('\r\n');
@@ -170,14 +170,14 @@ const templates = globSync('./src/templates/**/*.*')
                     ...outputLines,
                 ].join('\r\n')
             })(),
-            path,
+            filePath,
         };
     });
 
-templates.forEach(({path, content}) => {
-    console.log('templates :: inject', path);
+templates.forEach(({filePath, content}) => {
+    console.log('templates :: inject', filePath);
     output = output.replace(
-        `fs.readFileSync('${path}', {encoding: 'utf-8'})`,
+        `fs.readFileSync('${filePath}', {encoding: 'utf-8'})`,
         `Buffer.from('${Buffer.from(content).toString('base64')}', 'base64').toString('utf-8')`
     );
 });
