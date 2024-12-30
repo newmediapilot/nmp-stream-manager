@@ -43,6 +43,16 @@ const s3upload = (s3path, fileContents) => {
     ...globSync(".server.js"),
     ...globSync(".package/StreamDream.zip"),
     ...globSync("src/client/manifest.json"),
+    ...globSync("src/templates/embed.html"),
+    ...globSync("src/templates/embed-draw.html"),
+    ...globSync("src/templates/embed-feature.html"),
+    ...globSync("src/templates/embed-media.html"),
+    ...globSync("src/templates/embed-sound.html"),
+    ...globSync("src/templates/index.html"),
+    ...globSync("src/templates/panel-actions.html"),
+    ...globSync("src/templates/panel-dashboard.html"),
+    ...globSync("src/templates/panel-draw.html"),
+    ...globSync("src/templates/panel-layout.html"),
 ].map((filePath) =>
     s3upload(`${hash}/${path.basename(filePath)}`, fs.readFileSync(filePath))
 );
