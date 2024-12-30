@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const {sync: globSync} = require('glob');
 const AWS = require('aws-sdk');
+const hash = process.argv[2] || 'demo';
 const s3 = new AWS.S3();
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -40,12 +41,16 @@ const s3upload = (s3path, fileContents) => {
 };
 [
     ...globSync(".server.js"),
-    ...globSync(".package/StreamDream.exe"),
+    ...globSync(".package/StreamDream.zip"),
     ...globSync("src/client/manifest.json"),
-].map((filePath) => s3upload(`${seat}/${path.basename(filePath)}`, fs.readFileSync(filePath)));
+].map((filePath) =>
+    s3upload(`${hash}/${path.basename(filePath)}`, fs.readFileSync(filePath))
+);
 [
     ...globSync("src/client/icon512_maskable.ico"),
     ...globSync("src/client/icon512_maskable.png"),
     ...globSync("src/client/icon512_rounded.ico"),
     ...globSync("src/client/icon512_rounded.png"),
-].map((filePath) => s3upload(`${path.basename(filePath)}`, fs.readFileSync(filePath)));
+].map((filePath) =>
+    s3upload(`${path.basename(filePath)}`, fs.readFileSync(filePath))
+);
