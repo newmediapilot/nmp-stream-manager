@@ -16,3 +16,4 @@ execSync('rm -rf ./.compiled/src/client/');
 execSync('rm -rf ./.compiled/src/server/');
 execSync('rm -rf ./.compiled/src/templates/');
 execSync('pkg -d .compiled', {stdio: 'inherit'});
+execSync('mv .package/app.exe .package/StreamDream.exe', { stdio: 'inherit' });
