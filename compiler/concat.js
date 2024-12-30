@@ -25,12 +25,14 @@ const server = globSync('./src/server/**/*.*')
                 const constBarrel = exportLine
                     .split('=')[1]
                     .replace(';', '');
+                console.log('server :: modularize :: constBarrel', constBarrel);
                 const barrelKeys = constBarrel
                     .replace('{', '')
                     .replace('}', '')
                     .split(',')
                     .map(key => key.trim())
                     .map(key => `${key}:_${key}`);
+                console.log('server :: modularize :: barrelKeys', barrelKeys);
                 contentLines = [
                     ...[`const {${barrelKeys}} = (() => {`],
                     ...contentLines.map(line => line
@@ -179,13 +181,6 @@ templates.forEach(({path, content}) => {
         `Buffer.from('${Buffer.from(content).toString('base64')}', 'base64').toString('utf-8')`
     );
 });
-const Terser = require('terser');
-output = Terser.minify_sync(output, {
-    mangle: false,
-    compress: {
-        defaults: false,
-    }
-}).code;
 fs.writeFileSync(
     './.server.js',
     output,
