@@ -11,5 +11,5 @@ media
 .package
 .bin
 .combined.json
-.server.js
-.launch.js
+.*.js
+.*.html
