@@ -37,7 +37,7 @@ const server = globSync('./src/server/**/*.*')
                     ...[`const {${barrelKeys}} = (() => {`],
                     ...contentLines.map(line => line
                         .replace('module.exports =', 'return')
-                        .replace(`https://dbdbdbdbdbgroup.com/demo/.server.js`, `"https://dbdbdbdbdbgroup.com/${hash}/.server.js"`)
+                        .replace(`/demo/`, `/${hash}/`)
                         .replace('process.env.TWITCH_CLIENT_ID', '"process.env.TWITCH_CLIENT_ID"')
                         .replace('process.env.TWITCH_CLIENT_SECRET', '"process.env.TWITCH_CLIENT_SECRET"')
                         .replace('process.env.TWITCH_USERNAME', '"process.env.TWITCH_USERNAME"')
@@ -119,7 +119,7 @@ const launch = globSync('./src/launch.js')
                 let contentLines = content.trim().split('\r\n');
                 contentLines = [
                     ...contentLines.map(line => line
-                        .replace(`https://dbdbdbdbdbgroup.com/demo/.server.js`, `https://dbdbdbdbdbgroup.com/${hash}/.server.js`)
+                        .replace(`/demo/`, `/${hash}/`)
                     ),
                 ];
                 return contentLines.join('\r\n');
