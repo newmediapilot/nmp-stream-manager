@@ -6,11 +6,13 @@ const {sync: globSync} = require('glob');
 const AWS = require('aws-sdk');
 const hash = process.argv[2] || 'demo';
 const s3 = new AWS.S3();
+
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     region: process.env.AWS_REGION,
 });
+
 const getContentType = (filePath) => {
     const ext = path.extname(filePath).toLowerCase();
     switch (ext) {
@@ -28,6 +30,7 @@ const getContentType = (filePath) => {
             return 'application/octet-stream';
     }
 };
+
 const s3upload = (s3path, fileContents) => {
     console.log(`s3upload :: file uploading ${s3path}`);
     s3.upload({
@@ -40,23 +43,17 @@ const s3upload = (s3path, fileContents) => {
         console.log(`s3upload :: file uploaded successfully at ${data.Location}`);
     });
 };
+
+[
+    ...globSync(".tplt-*.html"),
+].map((filePath) => s3upload(`${hash}/${path.basename(filePath).replace('.tplt-', '')}`, fs.readFileSync(filePath)));
+
 [
     ...globSync(".server.js"),
     ...globSync(".package/StreamDream.zip"),
     ...globSync("src/client/manifest.json"),
-    ...globSync("src/templates/embed.html"),
-    ...globSync("src/templates/embed-draw.html"),
-    ...globSync("src/templates/embed-feature.html"),
-    ...globSync("src/templates/embed-media.html"),
-    ...globSync("src/templates/embed-sound.html"),
-    ...globSync("src/templates/index.html"),
-    ...globSync("src/templates/panel-actions.html"),
-    ...globSync("src/templates/panel-dashboard.html"),
-    ...globSync("src/templates/panel-draw.html"),
-    ...globSync("src/templates/panel-layout.html"),
-].map((filePath) =>
-    s3upload(`${hash}/${path.basename(filePath)}`, fs.readFileSync(filePath))
-);
+].map((filePath) => s3upload(`${hash}/${path.basename(filePath)}`, fs.readFileSync(filePath)));
+
 [
     ...globSync("src/client/icon512_maskable.ico"),
     ...globSync("src/client/icon512_maskable.png"),
