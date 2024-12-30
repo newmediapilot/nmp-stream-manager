@@ -2,6 +2,7 @@ const fs = require('fs');
 const {exec} = require('child_process');
 const {execSync} = require('child_process');
 const server = exec('npm run serve', {stdio: 'inherit'});
+const hash = process.argv[2] || 'demo';
 [
     ['.tplt-index.html', execSync('curl -k https://localhost/demo/index.html', {stdio: 'pipe'})],
     ['.tplt-panel-dashboard.html', execSync('curl -k https://localhost/demo/panel-dashboard.html', {stdio: 'pipe'})],
@@ -16,11 +17,13 @@ const server = exec('npm run serve', {stdio: 'inherit'});
 ]
     .map(([a, b]) => [a, b.toString()])
     .forEach((payload, i, array) => {
-            const [a, b] = payload;
+            let [a, b] = payload;
             console.log('snapshot ::', a, i, '/', array.length - 1);
+            b = b.split('\r\n')
+                .map(line => line.replace('/demo/', `/${hash}/`))
+                .join('\r\n');
             fs.writeFileSync(a, b);
             if (i >= array.length - 1) {
-                console.log('snapshot :: end', server.pid);
                 process.kill(server.pid);
                 process.exit(0);
             }
