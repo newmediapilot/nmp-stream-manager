@@ -30,7 +30,6 @@ const parseCommand = async  (channel, tags, message)=> {
   }
   if (!currentCommand) {
     console.log(
-      process.cwd(),
       "Skipping no command found for:",
       message.substr(0, 20),
       "...",
@@ -38,7 +37,6 @@ const parseCommand = async  (channel, tags, message)=> {
     return false;
   } else {
     console.log(
-      process.cwd(),
       "Found command:",
       currentCommand,
       "with message",
@@ -55,7 +53,6 @@ const parseCommand = async  (channel, tags, message)=> {
   }
   if (isBroadcaster) {
     console.log(
-      process.cwd(),
       "BROADCASTER command:",
       currentCommand,
       "with message",

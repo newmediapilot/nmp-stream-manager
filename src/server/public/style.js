@@ -38,7 +38,6 @@ const publicStyleUpdate = (req, res) => {
         });
     } catch (error) {
         console.log(
-            process.cwd(),
             "Error processing style:",
             error.message,
         );

@@ -38,7 +38,6 @@ async function twitchLoginSuccess(req, res) {
         return res.send("OAuth tokens retrieved successfully");
     } catch (error) {
         console.log(
-            process.cwd(),
             "Error exchanging code for tokens:",
             error.response?.data || error.message,
         );
@@ -50,7 +49,6 @@ async function getBroadcasterId() {
         const username = getParam("twitch_username");
         const accessToken = getSecret("twitch_access_token");
         console.log(
-            process.cwd(),
             "Access Token:",
             String("X").repeat(accessToken.length),
         );
@@ -64,7 +62,6 @@ async function getBroadcasterId() {
         if (response.data.data && response.data.data.length > 0) {
             const broadcasterId = response.data.data[0].id;
             console.log(
-                process.cwd(),
                 "Broadcaster ID fetched:",
                 String("X").repeat(broadcasterId.length),
             );

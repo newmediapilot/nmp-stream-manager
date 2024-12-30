@@ -22,14 +22,12 @@ async function twitchMarkerCreate(description) {
           })
       });
     console.log(
-      process.cwd(),
       "Marker created successfully:",
       `${response.data.data[0]?.description}`,
     );
     return true;
   } catch (error) {
     console.log(
-      process.cwd(),
       "Error creating marker:",
       error.status,
       error?.message?.message,

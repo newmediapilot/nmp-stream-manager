@@ -17,7 +17,6 @@ const watchMessages = async () => {
         .connect()
         .then(() =>
             console.log(
-                process.cwd(),
                 "Connected to Twitch chat for channel:",
                 channel,
             ),

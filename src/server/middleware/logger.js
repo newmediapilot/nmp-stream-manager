@@ -1,6 +1,5 @@
 const logger = (req, res, next) => {
     console.info(
-        process.cwd(),
         "REQUEST =>",
         req.path,
         "PARAMS =>",

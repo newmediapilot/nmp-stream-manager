@@ -158,7 +158,6 @@ const publicConfigUpdate = (req, res) => {
         });
     } catch (error) {
         console.log(
-            process.cwd(),
             "Error processing configuration:",
             error.message,
         );

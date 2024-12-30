@@ -23,7 +23,6 @@ async function setBroadcastTitle(title) {
       return title;
     } else {
       console.log(
-        process.cwd(),
         "Failed to update stream title:",
         response.status,
       );
@@ -31,7 +30,6 @@ async function setBroadcastTitle(title) {
     }
   } catch (error) {
     console.log(
-      process.cwd(),
       "Error updating stream title:",
       error.response?.data || error.message,
     );

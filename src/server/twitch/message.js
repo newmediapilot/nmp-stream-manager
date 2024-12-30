@@ -23,7 +23,6 @@ async function twitchMessageCreate(message) {
     return true;
   } catch (error) {
     console.log(
-      process.cwd(),
       "Error sending message:",
       error.response?.data || error.message,
     );
