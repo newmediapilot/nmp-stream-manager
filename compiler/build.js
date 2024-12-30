@@ -1,4 +1,4 @@
-console.time("Build :: complete")
+console.time("Build :: complete");
 const {execSync} = require("child_process");
 console.log("Build :: concat");
 execSync("node compiler/concat.js", {stdio: 'inherit'});
