@@ -3,15 +3,11 @@ const paths = (req, res, next) => {
     res.send = (body) => {
         if (
             (
-                req.path === '/' ||
-                req.path.startsWith('/public/')
+                req.path.includes("/demo/")
             ) &&
             typeof body === 'string'
         ) {
-            const matched = body.match(new RegExp("../client", "gm"));
-            matched && matched.forEach(match => {
-                body = body.replace(match, "");
-            });
+            body = body.replace(new RegExp("../client", "gm"), "");
         }
         originalSend.call(res, body);
     };
