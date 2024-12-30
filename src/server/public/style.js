@@ -6,8 +6,8 @@ const initializePublicStyles = async (type) => {
     try {
         if (!fs.existsSync(path.resolve(`${type}`))) {
             console.log( "initializePublicStyles :: new file");
-            setParam("public_module_styles", '/*--_no-style:1;*/');
-            fs.writeFileSync(path.resolve(`${type}`), '/*--_no-style:1;*/', {encoding: "utf-8"});
+            setParam("public_module_styles", '/*--_empty:1;*/');
+            fs.writeFileSync(path.resolve(`${type}`), '/*--_empty:1;*/', {encoding: "utf-8"});
         } else {
             setParam("public_module_styles",
                 fs.readFileSync(path.resolve(`${type}`), "utf-8")
