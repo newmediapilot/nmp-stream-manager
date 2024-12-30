@@ -21,7 +21,8 @@ const server = globSync('./src/server/**/*.*')
             content: (() => {
                 if (path.endsWith('index.js')) return content;
                 let contentLines = content.trim().split('\r\n');
-                const constBarrel = contentLines[contentLines.length - 1]
+                let exportLine = contentLines[contentLines.length - 1];
+                const constBarrel = exportLine
                     .split('=')[1]
                     .replace(';', '');
                 const barrelKeys = constBarrel
