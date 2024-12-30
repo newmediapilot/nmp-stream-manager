@@ -1,11 +1,12 @@
 const {execSync} = require('child_process');
 const fs = require('fs');
-const hash = process.argv[2] || 'demo';
+// const hash = process.argv[2] || 'demo';
 execSync('npm run reset');
 fs.existsSync('.package') && execSync('rm -rf .package');
 fs.existsSync('.compiled') && execSync('rm -rf .compiled');
 execSync('mkdir .compiled');
 execSync('cp -r ./src .compiled/src');
+execSync('cp -r ./.launch.js .compiled/src/launch.js');
 const packageObj = JSON.parse(String(fs.readFileSync('./package.json', {encoding: 'utf-8'})));
 packageObj.main = packageObj.pkg.scripts;
 delete packageObj.devDependencies;
