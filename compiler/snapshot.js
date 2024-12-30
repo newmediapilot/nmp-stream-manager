@@ -4,15 +4,15 @@ const {execSync} = require('child_process');
 const server = exec('npm run serve', {stdio: 'inherit'});
 [
     ['.tplt-index.html', execSync('curl -k https://localhost/', {stdio: 'pipe'})],
-    ['.tplt-panel-dashboard.html', execSync('curl -k https://localhost/public/dashboard', {stdio: 'pipe'})],
-    ['.tplt-panel-actions.html', execSync('curl -k https://localhost/public/actions', {stdio: 'pipe'})],
-    ['.tplt-panel-layout.html', execSync('curl -k https://localhost/public/layout', {stdio: 'pipe'})],
-    ['.tplt-panel-draw.html', execSync('curl -k https://localhost/public/draw', {stdio: 'pipe'})],
-    ['.tplt-embed.html', execSync('curl -k https://localhost/public/embed', {stdio: 'pipe'})],
-    ['.tplt-embed-feature.html', execSync('curl -k https://localhost/public/feature/embed', {stdio: 'pipe'})],
-    ['.tplt-embed-media.html', execSync('curl -k https://localhost/public/media/embed', {stdio: 'pipe'})],
-    ['.tplt-embed-draw.html', execSync('curl -k https://localhost/public/draw/embed', {stdio: 'pipe'})],
-    ['.tplt-embed-sound.html', execSync('curl -k https://localhost/public/sound/embed', {stdio: 'pipe'})],
+    ['.tplt-panel-dashboard.html', execSync('curl -k https://localhost/panel-dashboard.html', {stdio: 'pipe'})],
+    ['.tplt-panel-actions.html', execSync('curl -k https://localhost/panel-actions.html', {stdio: 'pipe'})],
+    ['.tplt-panel-layout.html', execSync('curl -k https://localhost/panel-layout.html', {stdio: 'pipe'})],
+    ['.tplt-panel-draw.html', execSync('curl -k https://localhost/panel-draw.html', {stdio: 'pipe'})],
+    ['.tplt-embed.html', execSync('curl -k https://localhost/embed.html', {stdio: 'pipe'})],
+    ['.tplt-embed-feature.html', execSync('curl -k https://localhost/embed-feature.html', {stdio: 'pipe'})],
+    ['.tplt-embed-media.html', execSync('curl -k https://localhost/embed-media.html', {stdio: 'pipe'})],
+    ['.tplt-embed-draw.html', execSync('curl -k https://localhost/embed-draw.html', {stdio: 'pipe'})],
+    ['.tplt-embed-sound.html', execSync('curl -k https://localhost/embed-sound.html', {stdio: 'pipe'})],
 ]
     .map(([a, b]) => [a, b.toString()])
     .forEach((payload, i, array) => {
