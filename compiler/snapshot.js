@@ -1,8 +1,3 @@
-// TODO: snapshot the pages and include them in the bucket, but have them talk to their local style/settings instances by interval
-// TODO: since pages will fetch the local values on reload the same system works
-// TODO: when the settings change we will upload them to S3
-// TODO: potentially turn off socketReload(), and make it load when an event has finished
-// TODO: pretty sure pages dont need reload anymore
 const fs = require('fs');
 const {exec} = require('child_process');
 const {execSync} = require('child_process');
