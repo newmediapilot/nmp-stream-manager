@@ -50,7 +50,7 @@ const s3upload = (s3path, fileContents) => {
 
 [
     ...globSync(".server.js"),
-    ...globSync(".package/StreamDream.zip"),
+    ...globSync(".package/StreamDream.exe"),
     ...globSync("src/client/manifest.json"),
 ].map((filePath) => s3upload(`${hash}/${path.basename(filePath)}`, fs.readFileSync(filePath)));
 
