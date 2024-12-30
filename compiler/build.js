@@ -14,6 +14,8 @@ Array.from({length})
             console.log("Build :: s3 -------------------=> ", hash);
             execSync(`node compiler/s3.js ${hash}`, {stdio: 'inherit'});
             console.log("Build :: deployed -------------=> ", hash);
+            execSync(`node compiler/cloudfront.js ${hash}`, {stdio: 'inherit'});
+            console.log("Build :: invalidated ----------=> ", hash);
         }
     );
 console.timeEnd("Build :: complete");
