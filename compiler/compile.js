@@ -2,7 +2,6 @@ const {execSync} = require('child_process');
 const fs = require('fs');
 execSync('npm run reset');
 fs.existsSync('.package') && execSync('rm -rf .package');
-execSync('mkdir .compiled');
 execSync('cp -r ./src .compiled/src');
 execSync('cp -r ./.launch.js .compiled/src/launch.js');
 const packageObj = JSON.parse(String(fs.readFileSync('./package.json', {encoding: 'utf-8'})));
