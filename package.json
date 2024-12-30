@@ -41,7 +41,6 @@
         "pkg": "5.8.1",
         "prettier": "3.4.2",
         "rcedit": "4.0.1",
-        "sync-request": "6.1.0",
-        "terser": "^5.37.0"
+        "sync-request": "6.1.0"
     }
 }
