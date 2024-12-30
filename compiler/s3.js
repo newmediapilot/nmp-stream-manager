@@ -4,7 +4,6 @@ const fs = require('fs');
 const {sync: globSync} = require('glob');
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
-// const cloudfront = new AWS.CloudFront();
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -27,44 +26,25 @@ const getContentType = (filePath) => {
             return 'application/octet-stream';
     }
 };
-const paths = [
+const s3upload = (s3path, fileContents) => {
+    console.log(`s3upload :: file uploading ${s3path}`);
+    s3.upload({
+        Bucket: 'dbdbdbdbdbgroup.com',
+        Key: s3path,
+        Body: fileContents,
+        ContentType: getContentType(s3path),
+    }, (err, data) => {
+        if (err) return console.error('s3upload :: error uploading file:', err);
+        console.log(`s3upload :: file uploaded successfully at ${data.Location}`);
+    });
+};
+[
     ...globSync(".server.js"),
+    ...globSync("src/client/manifest.json"),
+].map((filePath, index, arr) => s3upload(`demo/${path.basename(filePath)}`, fs.readFileSync(filePath)));
+[
     ...globSync("src/client/icon512_maskable.ico"),
     ...globSync("src/client/icon512_maskable.png"),
     ...globSync("src/client/icon512_rounded.ico"),
     ...globSync("src/client/icon512_rounded.png"),
-    ...globSync("src/client/manifest.json"),
-];
-console.log('s3 :: paths', paths);
-paths.map((filePath, index, arr) => {
-        const fileContent = fs.readFileSync(filePath);
-        const contentType = getContentType(filePath);
-        s3.upload({
-            Bucket: 'dbdbdbdbdbgroup.com',
-            Key: `demo/${filePath.split('/').pop()}`,
-            Body: fileContent,
-            ContentType: contentType,
-        }, (err, data) => {
-            if (err) return console.error('Error uploading file:', err);
-            console.log(`File uploaded successfully at ${data.Location}`);
-            if (index >= arr.length - 1) {
-                // cloudfront.createInvalidation({
-                //     DistributionId: "E3IXY2ACIKURY1",
-                //     InvalidationBatch: {
-                //         CallerReference: `${Date.now().toString()}`,
-                //         Paths: {
-                //             Quantity: paths.length,
-                //             Items: paths,
-                //         },
-                //     },
-                // }, (err, data) => {
-                //     if (err) {
-                //         console.error("Error creating CloudFront invalidation:", err, paths);
-                //         return;
-                //     }
-                //     console.log("Invalidation created successfully:", data.Invalidation.Id, paths);
-                // });
-            }
-        });
-        return filePath.replace('.s3\\', '/');
-    });
+].map((filePath, index, arr) => s3upload(`${path.basename(filePath)}`, fs.readFileSync(filePath)));
