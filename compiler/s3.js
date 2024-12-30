@@ -27,45 +27,44 @@ const getContentType = (filePath) => {
             return 'application/octet-stream';
     }
 };
-const paths = globSync(
-    [
-        ".server.js",
-        "src/client/icon512_maskable.ico",
-        "src/client/icon512_maskable.png",
-        "src/client/icon512_rounded.ico",
-        "src/client/icon512_rounded.png",
-        "src/client/manifest.json",
-    ]
-);
+const paths = [
+    ...globSync(".server.js"),
+    ...globSync("src/client/icon512_maskable.ico"),
+    ...globSync("src/client/icon512_maskable.png"),
+    ...globSync("src/client/icon512_rounded.ico"),
+    ...globSync("src/client/icon512_rounded.png"),
+    ...globSync("src/client/manifest.json"),
+];
+console.log('s3 :: paths', paths);
 paths.map((filePath, index, arr) => {
-    const fileContent = fs.readFileSync(filePath);
-    const contentType = getContentType(filePath);
-    s3.upload({
-        Bucket: 'dbdbdbdbdbgroup.com',
-        Key: `demo/${filePath.split('/').pop()}`,
-        Body: fileContent,
-        ContentType: contentType,
-    }, (err, data) => {
-        if (err) return console.error('Error uploading file:', err);
-        console.log(`File uploaded successfully at ${data.Location}`);
-        if (index >= arr.length - 1) {
-            // cloudfront.createInvalidation({
-            //     DistributionId: "E3IXY2ACIKURY1",
-            //     InvalidationBatch: {
-            //         CallerReference: `${Date.now().toString()}`,
-            //         Paths: {
-            //             Quantity: paths.length,
-            //             Items: paths,
-            //         },
-            //     },
-            // }, (err, data) => {
-            //     if (err) {
-            //         console.error("Error creating CloudFront invalidation:", err, paths);
-            //         return;
-            //     }
-            //     console.log("Invalidation created successfully:", data.Invalidation.Id, paths);
-            // });
-        }
+        const fileContent = fs.readFileSync(filePath);
+        const contentType = getContentType(filePath);
+        s3.upload({
+            Bucket: 'dbdbdbdbdbgroup.com',
+            Key: `demo/${filePath.split('/').pop()}`,
+            Body: fileContent,
+            ContentType: contentType,
+        }, (err, data) => {
+            if (err) return console.error('Error uploading file:', err);
+            console.log(`File uploaded successfully at ${data.Location}`);
+            if (index >= arr.length - 1) {
+                // cloudfront.createInvalidation({
+                //     DistributionId: "E3IXY2ACIKURY1",
+                //     InvalidationBatch: {
+                //         CallerReference: `${Date.now().toString()}`,
+                //         Paths: {
+                //             Quantity: paths.length,
+                //             Items: paths,
+                //         },
+                //     },
+                // }, (err, data) => {
+                //     if (err) {
+                //         console.error("Error creating CloudFront invalidation:", err, paths);
+                //         return;
+                //     }
+                //     console.log("Invalidation created successfully:", data.Invalidation.Id, paths);
+                // });
+            }
+        });
+        return filePath.replace('.s3\\', '/');
     });
-    return filePath.replace('.s3\\', '/');
-});
