@@ -3,6 +3,7 @@ const {exec} = require('child_process');
 const {execSync} = require('child_process');
 const server = exec('npm run serve', {stdio: 'inherit'});
 [
+    ['.tplt-index.html', execSync('curl -k https://localhost/', {stdio: 'pipe'})],
     ['.tplt-panel-dashboard.html', execSync('curl -k https://localhost/public/dashboard', {stdio: 'pipe'})],
     ['.tplt-panel-actions.html', execSync('curl -k https://localhost/public/actions', {stdio: 'pipe'})],
     ['.tplt-panel-layout.html', execSync('curl -k https://localhost/public/layout', {stdio: 'pipe'})],
