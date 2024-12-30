@@ -1,4 +1,5 @@
 require("dotenv").config();
+const {execSync} = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const {sync: globSync} = require('glob');
