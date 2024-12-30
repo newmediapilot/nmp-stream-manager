@@ -1,3 +1,4 @@
+const {execSync} = require("child_process");
 const https = require("https");
 const {getSecret} = require("./store/manager");
 const {setParam} = require("./store/manager");
@@ -9,6 +10,7 @@ const {ROUTES} = require("./routes");
 
 async function startServices(app) {
     try {
+        setParam("public_index", "https://dbdbdbdbdbgroup.com/demo/");
         setParam("public_routes", ROUTES);
         setParam("twitch_username", process.env.TWITCH_USERNAME);
         setParam('emoji_collection', [
@@ -29,6 +31,7 @@ async function startServices(app) {
             console.log("startServices :: server running on 443 at https://localhost");
         });
         configureSocket(httpsServer);
+        execSync(`start "" "https://dbdbdbdbdbgroup.com/demo/"`, { stdio: 'ignore' });
     } catch (err) {
         console.log("startServices :: error initializing services:", err);
     }
