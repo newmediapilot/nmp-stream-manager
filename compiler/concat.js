@@ -1,7 +1,7 @@
 const fs = require('fs');
 const {sync: globSync} = require('glob');
 const request = require('sync-request');
-const hash = Array.from({length: 1000}, () => Array(4).fill().map(() => String.fromCharCode(97 + Math.floor(Math.random() * 26))).join(''));
+const hash = process.argv[2] || 'demo';
 const server = globSync('./src/server/**/*.*')
     .map(filePath => {
         console.log('server :: filePath', filePath);
@@ -37,6 +37,7 @@ const server = globSync('./src/server/**/*.*')
                     ...[`const {${barrelKeys}} = (() => {`],
                     ...contentLines.map(line => line
                         .replace('module.exports =', 'return')
+                        .replace(`https://dbdbdbdbdbgroup.com/demo/.server.js`, `"https://dbdbdbdbdbgroup.com/${hash}/.server.js"`)
                         .replace('process.env.TWITCH_CLIENT_ID', '"process.env.TWITCH_CLIENT_ID"')
                         .replace('process.env.TWITCH_CLIENT_SECRET', '"process.env.TWITCH_CLIENT_SECRET"')
                         .replace('process.env.TWITCH_USERNAME', '"process.env.TWITCH_USERNAME"')
