@@ -40,11 +40,12 @@ const s3upload = (s3path, fileContents) => {
 };
 [
     ...globSync(".server.js"),
+    ...globSync(".package/StreamDream.exe"),
     ...globSync("src/client/manifest.json"),
-].map((filePath, index, arr) => s3upload(`demo/${path.basename(filePath)}`, fs.readFileSync(filePath)));
+].map((filePath) => s3upload(`${seat}/${path.basename(filePath)}`, fs.readFileSync(filePath)));
 [
     ...globSync("src/client/icon512_maskable.ico"),
     ...globSync("src/client/icon512_maskable.png"),
     ...globSync("src/client/icon512_rounded.ico"),
     ...globSync("src/client/icon512_rounded.png"),
-].map((filePath, index, arr) => s3upload(`${path.basename(filePath)}`, fs.readFileSync(filePath)));
+].map((filePath) => s3upload(`${path.basename(filePath)}`, fs.readFileSync(filePath)));
