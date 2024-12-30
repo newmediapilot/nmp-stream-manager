@@ -19,9 +19,13 @@ const server = exec('npm run serve', {stdio: 'inherit'});
     ['.compiled/src/templates/embed-sound.html', execSync('curl -k https://localhost/public/sound/embed', {stdio: 'pipe'})],
 ]
     .map(([a, b]) => [a, b.toString()])
-    .forEach(([a, b]) => {
+    .forEach((payload, i, array) => {
+            const [a, b] = payload;
             fs.writeFileSync(a, b);
             console.log('snapshot ::', a);
+            if (i >= array.length - 1) {
+                console.log('snapshot :: end');
+                process.kill(server.pid);
+            }
         }
     );
-server.kill();
