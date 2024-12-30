@@ -1,46 +1,48 @@
 {
-    "main": "src/launch.js",
-    "scripts": {
-        "build": "node compiler/build.js",
-        "start": "node src/server/index.js",
-        "reset": "rm -rf node_modules && npm i --no-package-lock",
-        "concat": "node compiler/concat.js",
-        "combine": "node compiler/combine.js",
-        "launch": "node src/launch.js",
-        "serve": "node .server.js"
-    },
-    "name": "app",
-    "bin": "./src/launch.js",
-    "pkg": {
-        "outputPath": "./.package",
-        "scripts": [
-            "./src/launch.js"
-        ],
-        "targets": [
-            "node14-win-x64"
-        ]
-    },
-    "dependencies": {
-        "ansi-regex": "5.0.1",
-        "ansi-styles": "4.3.0",
-        "express": "4.21.2",
-        "node-fetch": "2.6.12",
-        "nunjucks": "3.2.4",
-        "selfsigned": "2.4.1",
-        "socket.io": "4.8.1",
-        "strip-ansi": "6.0.1",
-        "tmi.js": "1.8.5",
-        "twitter-api-v2": "1.18.2",
-        "dotenv": "16.4.5",
-        "wrap-ansi": "7.0.0"
-    },
-    "devDependencies": {
-        "aws-sdk": "2.1692.0",
-        "glob": "7.2.3",
-        "node": "14.17.6",
-        "pkg": "5.8.1",
-        "prettier": "3.4.2",
-        "rcedit": "4.0.1",
-        "sync-request": "6.1.0"
-    }
+  "main": "src/launch.js",
+  "scripts": {
+    "start": "node src/server/index.js",
+    "launch": "node src/launch.js",
+    "serve": "node .server.js",
+    "build": "node compiler/build.js",
+    "compile": "node compiler/compile.js",
+    "concat": "node compiler/concat.js",
+    "reset": "rm -rf node_modules && npm i --no-package-lock",
+    "s3": "node compiler/s3.js",
+    "uncombine": "node compiler/combine.js"
+  },
+  "name": "app",
+  "bin": "./src/launch.js",
+  "pkg": {
+    "outputPath": "./.package",
+    "scripts": [
+      "./src/launch.js"
+    ],
+    "targets": [
+      "node14-win-x64"
+    ]
+  },
+  "dependencies": {
+    "ansi-regex": "5.0.1",
+    "ansi-styles": "4.3.0",
+    "express": "4.21.2",
+    "node-fetch": "2.6.12",
+    "nunjucks": "3.2.4",
+    "selfsigned": "2.4.1",
+    "socket.io": "4.8.1",
+    "strip-ansi": "6.0.1",
+    "tmi.js": "1.8.5",
+    "twitter-api-v2": "1.18.2",
+    "dotenv": "16.4.5",
+    "wrap-ansi": "7.0.0"
+  },
+  "devDependencies": {
+    "aws-sdk": "2.1692.0",
+    "glob": "7.2.3",
+    "node": "14.17.6",
+    "pkg": "5.8.1",
+    "prettier": "3.4.2",
+    "rcedit": "4.0.1",
+    "sync-request": "6.1.0"
+  }
 }
