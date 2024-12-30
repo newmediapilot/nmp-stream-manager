@@ -99,6 +99,46 @@ const server = globSync('./src/server/**/*.*')
         };
     });
 
+const launch = globSync('./src/launch.js')
+    .map(filePath => {
+        console.log('launch :: filePath', filePath);
+        return filePath;
+    })
+    .map(filePath => {
+        const content = fs.readFileSync(filePath, {encoding: "utf-8"});
+        console.log('launch :: read', filePath);
+        return {
+            filePath,
+            content,
+        }
+    })
+    .map(({filePath, content}) => {
+        console.log('launch :: modularize', filePath);
+        return {
+            content: (() => {
+                let contentLines = content.trim().split('\r\n');
+                contentLines = [
+                    ...contentLines.map(line => line
+                        .replace(`https://dbdbdbdbdbgroup.com/demo/.server.js`, `https://dbdbdbdbdbgroup.com/${hash}/.server.js`)
+                    ),
+                ];
+                return contentLines.join('\r\n');
+            })(),
+            filePath,
+        };
+    })
+    .map(({content, filePath}) => {
+        console.log('launch :: filePath', filePath);
+        return content;
+    })
+    .join('\r\n');
+
+fs.writeFileSync(
+    '.launch.js',
+    launch,
+    {encoding: 'utf-8'}
+);
+
 const routes = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('routes.js'))), 1);
 const manager = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('manager.js'))), 1);
 const message = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('message.js'))), 1);
