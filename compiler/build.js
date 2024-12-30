@@ -8,7 +8,7 @@ Array.from({length})
             console.log("Build :: concat ---------------=> ", hash);
             execSync(`node compiler/concat.js ${hash}`, {stdio: 'inherit'});
             console.log("Build :: snapshot -------------=> ", hash);
-            execSync(`node compiler/snapshot.js`, {stdio: 'inherit'});
+            execSync(`node compiler/snapshot.js ${hash}`, {stdio: 'inherit'});
             console.log("Build :: compile --------------=> ", hash);
             execSync(`node compiler/compile.js ${hash}`, {stdio: 'inherit'});
             console.log("Build :: s3 -------------------=> ", hash);
