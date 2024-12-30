@@ -17,11 +17,13 @@ const server = exec('npm run serve', {stdio: 'inherit'});
     .map(([a, b]) => [a, b.toString()])
     .forEach((payload, i, array) => {
             const [a, b] = payload;
-            console.log('snapshot ::', a, i);
+            console.log('snapshot ::', a, i, '/', array.length - 1);
             fs.writeFileSync(a, b);
             if (i >= array.length - 1) {
-                console.log('snapshot :: end');
+                console.log('snapshot :: end', server.pid);
                 process.kill(server.pid);
+                process.exit(0);
             }
         }
     );
+
