@@ -3,6 +3,7 @@
   "scripts": {
     "start": "node src/server/index.js",
     "launch": "node src/launch.js",
+    "proxy": "node src/proxy.js",
     "serve": "node .server.js",
     "build": "node compiler/build.js",
     "cloudfront": "node compiler/cloudfront.js",
@@ -12,7 +13,7 @@
     "reset": "rm -rf node_modules && npm i --no-package-lock",
     "s3": "node compiler/s3.js",
     "snapshot": "node compiler/snapshot.js",
-    "uncombine": "node compiler/combine.js"
+    "uncombine": "node compiler/combine.js",
   },
   "name": "app",
   "bin": "./src/launch.js",
