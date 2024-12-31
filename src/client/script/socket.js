@@ -1,6 +1,8 @@
 const socketConnect = () => {
     if (document.$socketIO) return;
-    document.$socketIO = io();
+    document.$socketIO = io({
+        path: '/demo/socket.io',
+    });
     document.$socketIO.on("connect_error", (err) =>
         console.log("socketConnect :: connection error:", err),
     );
