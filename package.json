@@ -44,6 +44,7 @@
     "glob": "7.2.3",
     "node": "14.17.6",
     "pkg": "5.8.1",
+    "playwright": "^1.49.1",
     "prettier": "3.4.2",
     "rcedit": "4.0.1",
     "sync-request": "6.1.0"
