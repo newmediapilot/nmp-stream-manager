@@ -38,6 +38,7 @@ const server = globSync('./src/server/**/*.*')
                     ...contentLines.map(line => line
                         .replace('module.exports =', 'return')
                         .replace(`/demo/`, `/${hash}/`)
+                        .replace(`/api/`, `https://api.dbdbdbdbdbgroup.com/api/`)
                         .replace('process.env.TWITCH_CLIENT_ID', '"process.env.TWITCH_CLIENT_ID"')
                         .replace('process.env.TWITCH_CLIENT_SECRET', '"process.env.TWITCH_CLIENT_SECRET"')
                         .replace('process.env.TWITCH_USERNAME', '"process.env.TWITCH_USERNAME"')
@@ -196,7 +197,7 @@ const templates = globSync('./src/templates/**/*.*')
                         let src = line.split('<script src="../')[1].split('?"')[0];
                         let content = fs.readFileSync(`./src/${src}`, {encoding: "utf-8"});
                         content = content.split('\r\n')
-                            .map(line => line.replace('/demo/socket.io', `/${hash}/socket.io`))
+                            .map(line => line.replace('/demo/socket.io', `https://api.dbdbdbdbdbgroup.com/${hash}/socket.io`))
                             .join('\r\n');
                         return `<script type="text/javascript">${content}</script>`;
                     }
