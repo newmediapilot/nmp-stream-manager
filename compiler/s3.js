@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const {sync: globSync} = require('glob');
 const AWS = require('aws-sdk');
-const hash = process.argv[2] || 'demo';
+const hash = process.argv.pop() || 'demo';
 const s3 = new AWS.S3();
 
 AWS.config.update({
