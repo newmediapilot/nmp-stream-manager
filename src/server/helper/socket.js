@@ -2,11 +2,7 @@ const socketIo = require("socket.io");
 let io;
 const configureSocket = (server) => {
     io = socketIo(server, {
-        cors: {
-            origin: "https://dbdbdbdbdbgroup.com",
-            methods: ["GET", "POST"],
-            credentials: true,
-        }
+        path: '/demo/socket.io'
     });
     io.on("connection", (socket) => {
         console.log("configureSocket :: client connected", socket.handshake.address);
