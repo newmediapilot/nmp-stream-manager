@@ -1,7 +1,7 @@
 const fs = require('fs');
 const {sync: globSync} = require('glob');
 const request = require('sync-request');
-const hash = process.argv.pop() || 'demo';
+const hash = process.argv[2] || 'demo';
 const server = globSync('./src/server/**/*.*')
     .map(filePath => {
         console.log('server :: filePath', filePath);
