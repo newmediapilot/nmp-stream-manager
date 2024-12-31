@@ -2,6 +2,7 @@
   "main": "src/launch.js",
   "scripts": {
     "start": "node src/server/index.js",
+    "cert": "node src/cert.js",
     "launch": "node src/launch.js",
     "proxy": "node src/proxy.js",
     "serve": "node .server.js",
@@ -41,12 +42,13 @@
     "wrap-ansi": "7.0.0"
   },
   "devDependencies": {
+    "acme-client": "5.4.0",
     "aws-sdk": "2.1692.0",
     "execa": "5.1.1",
     "glob": "7.2.3",
     "node": "14.17.6",
     "pkg": "5.8.1",
-    "playwright": "^1.49.1",
+    "playwright": "1.49.1",
     "prettier": "3.4.2",
     "rcedit": "4.0.1",
     "sync-request": "6.1.0"
