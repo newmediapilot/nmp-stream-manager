@@ -6,6 +6,7 @@
     "serve": "node .server.js",
     "build": "node compiler/build.js",
     "cloudfront": "node compiler/cloudfront.js",
+    "combile": "node compiler/combile.js",
     "compile": "node compiler/compile.js",
     "concat": "node compiler/concat.js",
     "reset": "rm -rf node_modules && npm i --no-package-lock",
