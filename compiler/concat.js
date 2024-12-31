@@ -193,8 +193,12 @@ const templates = globSync('./src/templates/**/*.*')
                 let contentLines = content.trim().split('\r\n');
                 const outputLines = contentLines.map(line => {
                     if (line.includes('<script src="../')) {
-                        const src = line.split('<script src="../')[1].split('?"')[0];
-                        return `<script type="text/javascript">${fs.readFileSync(`./src/${src}`, {encoding: "utf-8"})}</script>`;
+                        let src = line.split('<script src="../')[1].split('?"')[0];
+                        let content = fs.readFileSync(`./src/${src}`, {encoding: "utf-8"});
+                        content = content.split('\r\n')
+                            .map(line => line.replace('/demo/socket.io', `/${hash}/socket.io`))
+                            .join('\r\n');
+                        return `<script type="text/javascript">${content}</script>`;
                     }
                     if (line.includes('<link href="../')) {
                         const src = line.split('<link href="../')[1].split('?"')[0];
