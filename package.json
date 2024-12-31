@@ -27,6 +27,7 @@
   "dependencies": {
     "ansi-regex": "5.0.1",
     "ansi-styles": "4.3.0",
+    "dotenv": "16.4.5",
     "express": "4.21.2",
     "node-fetch": "2.6.12",
     "nunjucks": "3.2.4",
@@ -35,11 +36,11 @@
     "strip-ansi": "6.0.1",
     "tmi.js": "1.8.5",
     "twitter-api-v2": "1.18.2",
-    "dotenv": "16.4.5",
     "wrap-ansi": "7.0.0"
   },
   "devDependencies": {
     "aws-sdk": "2.1692.0",
+    "execa": "5.1.1",
     "glob": "7.2.3",
     "node": "14.17.6",
     "pkg": "5.8.1",
