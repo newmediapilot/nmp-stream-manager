@@ -1,21 +1,25 @@
 console.time("Build :: complete");
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const {execSync} = require("child_process");
 const crypto = require("crypto");
+const execa = require("execa");
 let length = 1;
-Array.from({length})
-    .map((_, index) => crypto.createHash('sha256').update(String(index)).digest('hex'))
-    .forEach(hash => {
-            console.log("Build :: concat ---------------=> ", hash);
-            execSync(`node compiler/concat.js ${hash}`, {stdio: 'inherit'});
-            console.log("Build :: snapshot -------------=> ", hash);
-            execSync(`node compiler/snapshot.js ${hash}`, {stdio: 'inherit'});
-            console.log("Build :: compile --------------=> ", hash);
-            execSync(`node compiler/compile.js ${hash}`, {stdio: 'inherit'});
-            console.log("Build :: s3 -------------------=> ", hash);
-            execSync(`node compiler/s3.js ${hash}`, {stdio: 'inherit'});
-            console.log("Build :: deployed -------------=> ", hash);
-            execSync(`node compiler/cloudfront.js ${hash}`, {stdio: 'inherit'});
-            console.log("Build :: invalidating ----------=> ", hash);
-        }
-    );
-console.timeEnd("Build :: complete");
+(async () => {
+    try {
+        Array.from({length})
+            .map((_, index) => crypto.createHash('sha256').update(String(index)).digest('hex'))
+            .map(async (hash) => {
+                    const a = await execa('npm', ['run', 'concat', hash]);
+                    const b = await execa('npm', ['run', 'snapshot', hash]);
+                    const c = await execa('npm', ['run', 'compile', hash]);
+                    const d = await execa('npm', ['run', 's3', hash]);
+                    const e = await execa('npm', ['run', 'cloudfront', hash]);
+                    return [a, b, c, d, e];
+                }
+            );
+    } catch (error) {
+        console.error('build :: error', error.message);
+    } finally {
+        console.error('build :: done', length);
+    }
+})();
