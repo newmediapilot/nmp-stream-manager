@@ -15,7 +15,6 @@ let length = 1;
     ...globSync('style'),
     ...globSync('package-lock.json'),
 ].map(p => execSync(`rm -rf ${p}`));
-process.exit(0);
 Array.from({length})
     .map((_, index) => crypto.createHash('sha256').update(String(index)).digest('hex'))
     .forEach(hash => {
