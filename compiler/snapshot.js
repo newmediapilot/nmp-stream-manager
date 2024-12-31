@@ -3,25 +3,39 @@ const {exec, execSync} = require('child_process');
 const {sync: globSync} = require('glob');
 const {chromium} = require('playwright');
 const hash = process.argv[2] || 'demo';
-console.log('snapshot :: hash', hash);
-exec('npm run serve', {stdio: 'inherit'});
-execSync('sleep 5');
 (async () => {
+    console.log('snapshot :: hash', hash);
+    const server = exec('npm run serve', {stdio: 'inherit'});
+    console.log('snapshot :: server');
+    execSync('sleep 5');
     const browser = await chromium.launch();
     const context = await browser.newContext({
-        ignoreHTTPSErrors: true
+        ignoreHTTPSErrors: true,
     });
     const page = await context.newPage();
-    globSync('./src/templates/**/*.html')
-        .map(async (path, index, {length}) => {
-            const url = `https://192.168.0.22/${hash}/${path.split('/').pop()}`;
-            console.log('snapshot :: path', path, url, `${index + 1}/${length}`);
-            await page.goto(url, {waitUntil: 'load'});
-            fs.writeFileSync(
-                `.tplt-${path.split('/').pop()}`,
-                await page.content(),
-                {encoding: 'utf-8'}
-            );
-        });
-    await browser.close(); // Close the browser
+    try {
+        const paths = globSync('./src/templates/**/*.html');
+        for (const [index, path] of paths.entries()) {
+            try {
+                const fileName = path.split('/').pop();
+                const url = `https://192.168.0.22/${hash}/${fileName}`;
+                console.log('snapshot :: path', path);
+                console.log('snapshot :: url', url, `${index + 1}/${paths.length}`);
+                await page.goto(url, {waitUntil: 'load'});
+                const content = await page.content();
+                // TODO: pre-process as well since it should work with html-minify heavy
+                fs.writeFileSync(`.tplt-${fileName}`, content, {encoding: 'utf-8'});
+                console.log('snapshot :: write', `.tplt-${fileName}`);
+            } catch (error) {
+                console.error('snapshot :: error', path, error.message);
+            }
+        }
+    } catch (error) {
+        console.error('snapshot :: error', error.message);
+    } finally {
+        console.log('snapshot :: done');
+        await browser.close();
+        server.kill();
+        process.exit(0);
+    }
 })();
