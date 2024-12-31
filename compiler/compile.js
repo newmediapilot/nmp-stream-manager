@@ -1,5 +1,6 @@
 const {execSync} = require('child_process');
 const fs = require('fs');
+const hash = process.argv.pop() || 'demo';
 execSync('npm run reset');
 fs.existsSync('.package') && execSync('rm -rf .package');
 execSync('cp -r ./src .compiled/src');
