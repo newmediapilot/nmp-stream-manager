@@ -2,8 +2,6 @@ const {execSync} = require('child_process');
 const fs = require('fs');
 const hash = process.argv[2] || 'demo';
 execSync('npm run reset');
-fs.existsSync('.package') && execSync('rm -rf .package');
-fs.existsSync('.compiled') && execSync('rm -rf .compiled');
 fs.mkdirSync('.compiled');
 execSync('cp -r ./src .compiled/src');
 execSync('cp -r ./.launch.js .compiled/src/launch.js');
