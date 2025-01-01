@@ -1,6 +1,7 @@
 require("dotenv").config();
 const AWS = require('aws-sdk');
-const value = process.argv[2] || 'test';
+const recordName = process.argv[2] || 'recordName';
+const recordValue = process.argv[2] || 'recordValue';
 (async () => {
     try {
         AWS.config.update({
@@ -16,12 +17,12 @@ const value = process.argv[2] || 'test';
                     {
                         Action: 'UPSERT',
                         ResourceRecordSet: {
-                            Name: 'dbdbdbdbdbgroup.com.',
+                            Name: recordName,
                             Type: 'TXT',
                             TTL: 300,
                             ResourceRecords: [
                                 {
-                                    Value: `"${value}"`
+                                    Value: `"${recordValue}"`
                                 }
                             ]
                         }
