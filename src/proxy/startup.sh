@@ -5,9 +5,20 @@ curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -
 sudo yum install -y nodejs
 node -v
 npm -v
-cat << 'EOF' > /home/ec2-user/proxy.js
-console.log("HELLO_FROM_NODE_JS");
+mkdir -p /home/ec2-user/proxy-app
+cd /home/ec2-user/proxy-app
+npm init -y
+npm install express
+cat << 'EOF' > proxy.js
+const express = require('express');
+const app = express();
+const port = 80;
+app.get('/', (req, res) => {
+  res.send('Hello from Express!');
+});
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 EOF
-sudo chown ec2-user:ec2-user /home/ec2-user/proxy.js
-cd /home/ec2-user
+sudo chown -R ec2-user:ec2-user /home/ec2-user/proxy-app
 node proxy.js > app.log 2>&1 &
