@@ -1,7 +1,7 @@
 try {
     (async () => {
-        //
+        
     })();
-} catch (e) {
-    console.log("cert :: error", e);
+} catch (error) {
+    console.error("cert :: error", error);
 }
