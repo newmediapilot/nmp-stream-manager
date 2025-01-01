@@ -3,7 +3,7 @@
   "scripts": {
     "start": "node src/server/index.js",
     "cert": "node src/proxy/cert.js",
-    "route53": "node src/proxy/route53.js",
+    "ec2": "node src/proxy/ec2.js",
     "launch": "node src/launch.js",
     "serve": "node .server.js",
     "build": "node compiler/build.js",
