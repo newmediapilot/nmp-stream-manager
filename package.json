@@ -3,8 +3,8 @@
   "scripts": {
     "start": "node src/server/index.js",
     "cert": "node src/proxy/cert.js",
+    "route53": "node src/proxy/route53.js",
     "launch": "node src/launch.js",
-    "proxy": "node src/proxy/proxy.js",
     "serve": "node .server.js",
     "build": "node compiler/build.js",
     "cloudfront": "node compiler/cloudfront.js",
