@@ -6,6 +6,7 @@ signals
 style
 media
 .s3
+.cert
 .compiled
 .concat
 .package
