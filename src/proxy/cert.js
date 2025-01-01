@@ -1,5 +1,6 @@
 require("dotenv").config();
 const AWS = require('aws-sdk');
+const value = process.argv[2] || 'test';
 (async () => {
     try {
         AWS.config.update({
@@ -7,7 +8,7 @@ const AWS = require('aws-sdk');
             secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
             region: process.env.AWS_REGION,
         });
-        const route53 = new AWS.Route53({ region: process.env.AWS_REGION });
+        const route53 = new AWS.Route53({region: process.env.AWS_REGION});
         const params = {
             HostedZoneId: process.env.AWS_HOSTED_ZONE_ID,
             ChangeBatch: {
@@ -20,7 +21,7 @@ const AWS = require('aws-sdk');
                             TTL: 300,
                             ResourceRecords: [
                                 {
-                                    Value: '"zip zap zippidy zaw"'
+                                    Value: `"${value}"`
                                 }
                             ]
                         }

@@ -2,9 +2,9 @@
   "main": "src/launch.js",
   "scripts": {
     "start": "node src/server/index.js",
-    "cert": "node src/cert.js",
+    "cert": "node src/proxy/cert.js",
     "launch": "node src/launch.js",
-    "proxy": "node src/proxy.js",
+    "proxy": "node src/proxy/proxy.js",
     "serve": "node .server.js",
     "build": "node compiler/build.js",
     "cloudfront": "node compiler/cloudfront.js",
