@@ -1,75 +1,47 @@
 require("dotenv").config();
-try {
-    (async () => {
-        const ACME = require('acme');
-        const fs = require('fs');
-        const AWS = require('aws-sdk');
-        const acme = ACME.create({
-            maintainerEmail: 'marcin+acme@newmediapilot.com',
-            packageAgent: 'stream-dream/v1.0.0',
-            notify: (event, details) => {
-                console.log(`ACME Event: ${event}`, details);
-            }
+const acme = require('acme-client');
+const fs = require('fs');
+const {execSync} = require('child_process');
+const AWS = require('aws-sdk');
+
+(async () => {
+    try {
+        const client = new acme.Client({
+            directoryUrl: acme.directory.letsencrypt.production,
+            accountKey: await acme.crypto.createPrivateKey()
         });
-        const directoryUrl = 'https://acme-v02.api.letsencrypt.org/directory';
-        await acme.init(directoryUrl);
-        const accountKey = await acme.forge.createPrivateKey();
-        const account = await acme.accounts.create({
-            subscriberEmail: 'marcin+acme@newmediapilot.com',
-            agreeToTerms: true,
-            accountKey
+        await client.createAccount({
+            termsOfServiceAgreed: true,
+            contact: ['mailto:marcin+acme@newmediapilot.com']
         });
-        const csr = await acme.forge.createCsr({
+        const domainKey = await acme.crypto.createPrivateKey();
+        const [csr, csrPem] = await acme.crypto.createCsr({
             commonName: 'dbdbdbdbdbgroup.com',
             altNames: ['api.dbdbdbdbdbgroup.com']
-        });
+        }, domainKey);
         const route53 = new AWS.Route53();
-        const addTxtRecordToRoute53 = async (recordName, recordValue) => {
-            const params = {
-                HostedZoneId: process.env.AWS_HOSTED_ZONE_ID,
-                ChangeBatch: {
-                    Changes: [
-                        {
-                            Action: 'UPSERT',
-                            ResourceRecordSet: {
-                                Name: recordName,
-                                Type: 'TXT',
-                                TTL: 300,
-                                ResourceRecords: [
-                                    {
-                                        Value: `"${recordValue}"`
-                                    }
-                                ]
-                            }
-                        }
-                    ]
-                }
-            };
-            await route53.changeResourceRecordSets(params).promise();
-            console.log(`cert :: TXT record ${recordName} added successfully.`);
-        };
         const challenges = {
             'dns-01': {
-                set: async ({identifier, challenge, keyAuthorization}) => {
-                    const domain = identifier.value;
+                create: async (authz, challenge, keyAuthorization) => {
+                    const domain = authz.identifier.value;
                     const recordName = `_acme-challenge.${domain}`;
                     const recordValue = keyAuthorization;
-                    await addTxtRecordToRoute53(recordName, recordValue);
+                    execSync(`npm run route53 ${recordName} ${recordValue}`);
                 }
             }
         };
-        const certificate = await acme.certificates.create({
-            account,
-            accountKey,
+        const cert = await client.auto({
             csr,
-            domains: ['api.dbdbdbdbdbgroup.com'],
-            challenges
+            email: 'marcin+acme@newmediapilot.com',
+            termsOfServiceAgreed: true,
+            challengeCreateFn: challenges['dns-01'].create
         });
-        fs.writeFileSync('cert.pem', certificate.cert);
-        fs.writeFileSync('chain.pem', certificate.chain);
-        fs.writeFileSync('fullchain.pem', certificate.fullchain);
-        fs.writeFileSync('privkey.pem', certificate.privkey);
-    })();
-} catch (e) {
-    console.log('cert :: error', e);
-}
+        fs.writeFileSync('cert.pem', cert.cert);
+        fs.writeFileSync('chain.pem', cert.chain);
+        fs.writeFileSync('fullchain.pem', cert.fullchain);
+        fs.writeFileSync('privkey.pem', domainKey);
+        console.log('Certificate obtained successfully.');
+    } catch (e) {
+        console.log('cert :: error', e);
+    }
+})();
