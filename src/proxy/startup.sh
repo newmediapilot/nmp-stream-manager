@@ -17,8 +17,8 @@ app.get('/', (req, res) => {
   res.send('Hello from Express!');
 });
 const certs = {
-    key: 'key-xxx',
-    cert: 'cert-xxx',
+    key: `key-xxx`,
+    cert: `cert-xxx`,
 };
 https.createServer(certs, app).listen(443, () => {
     console.log('Server running on https://localhost');
