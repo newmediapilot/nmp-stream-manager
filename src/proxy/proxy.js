@@ -11,10 +11,13 @@ const httpsServer = https
     .listen(443, () => {
         console.log('Server running');
     });
-// const io = socketIo(httpsServer, {
-//     path: '/demo/socket.io'
-// });
-// io.on("connection", (socket) => {
-//     console.log("proxy :: client connected", socket.handshake.address);
-//     socket.on("disconnect", () => console.log("proxy :: client disconnected"));
-// });
+[
+    '/demo/socket.io',
+].map(path => {
+    console.log("proxy :: created", path);
+    const io = socketIo(httpsServer, {path});
+    io.on("connection", (socket) => {
+        console.log("proxy :: connected", path);
+        socket.on("disconnect", () => console.log("proxy :: disconnected", path));
+    });
+});
