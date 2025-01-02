@@ -10,20 +10,7 @@ cd /home/ec2-user/proxy-app
 sudo npm init -y
 sudo npm install express
 sudo tee proxy.js > /dev/null << 'EOF'
-const express = require('express');
-const https = require('https');
-const app = express();
-app.get('/', (req, res) => {
-  res.send('Hello from Express!');
-});
-const certs = {
-    key: `key-xxx`,
-    cert: `cert-xxx`,
-};
-https.createServer(certs, app)
-.listen(443, () => {
-    console.log('Server running on https://localhost');
-});
+/** proxy.js **/
 EOF
 sudo chown -R ec2-user:ec2-user /home/ec2-user/proxy-app
 cd /home/ec2-user/proxy-app
