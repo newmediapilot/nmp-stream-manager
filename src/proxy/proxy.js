@@ -2,7 +2,7 @@ const express = require('express');
 const https = require('https');
 const app = express();
 app.all('/', (req, res) => {
-    res.send('Service online.', req.path);
+    res.send(`Service online ${req.path}`);
 });
 https
     .createServer({
@@ -10,5 +10,5 @@ https
         cert: `cert-xxx`,
     }, app)
     .listen(443, () => {
-        console.log('Server running on https://localhost');
+        console.log('Server running');
     });
