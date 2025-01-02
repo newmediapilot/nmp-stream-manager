@@ -5,6 +5,7 @@ const fs = require("fs");
 const {sync: globSync} = require("glob");
 const crypto = require("crypto");
 let length = 1;
+console.timeEnd("build :: clean");
 [
     ...globSync('.*.html'),
     ...globSync('.package'),
@@ -15,19 +16,17 @@ let length = 1;
     ...globSync('style'),
     ...globSync('package-lock.json'),
 ].map(p => execSync(`rm -rf ${p}`));
-Array.from({length})
+console.timeEnd("build :: start");
+const hashes = Array.from({length})
     .map((_, index) => crypto.createHash('sha256').update(String(index)).digest('hex'))
-    .forEach(hash => {
+    .map(hash => {
             execSync(`npm run concat ${hash}`, {stdio: 'inherit'});
             execSync(`npm run snapshot ${hash}`, {stdio: 'inherit'});
             execSync(`npm run compile ${hash}`, {stdio: 'inherit'});
             execSync(`npm run s3 ${hash}`, {stdio: 'inherit'});
             execSync(`npm run cloudfront ${hash}`, {stdio: 'inherit'});
-            execSync(`npm run ec2 ${length}`, {stdio: 'inherit'});
-            fs.existsSync('.package') && execSync('rm -rf .package');
-            fs.existsSync('.compiled') && execSync('rm -rf .compiled');
-            fs.existsSync('.launch') && execSync('rm -rf .launch');
-            fs.existsSync('.server') && execSync('rm -rf .server');
+            return hash;
         }
     );
-console.timeEnd("Build :: complete");
+execSync(`npm run ec2 ${hashes.join(' ')}`, {stdio: 'inherit'});
+console.timeEnd("build :: complete");
