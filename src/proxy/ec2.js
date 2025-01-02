@@ -2,6 +2,7 @@ require("dotenv").config();
 const fs = require('fs');
 const AWS = require('aws-sdk');
 const ec2 = new AWS.EC2();
+const length = Number(process.argv[2] || '1');
 try {
     (async () => {
         console.log('ec2 :: generate proxy');
