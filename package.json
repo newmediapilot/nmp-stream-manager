@@ -4,7 +4,7 @@
     "start": "node src/server/index.js",
     "cert": "node src/proxy/cert.js",
     "ec2": "node src/proxy/ec2.js",
-    "ssh": "ssh -i C:\\Users\\marcinzajkowski\\Desktop\\desktop\\aaknot\\server\\.cert\\ssh.pem ec2-user@ec2-54-225-191-237.compute-1.amazonaws.com",
+    "ssh": "ssh -i C:\\Users\\marcinzajkowski\\Desktop\\desktop\\aaknot\\server\\.cert\\ssh.pem ec2-user@ec2-54-144-125-126.compute-1.amazonaws.com",
     "launch": "node src/launch.js",
     "serve": "node .server.js",
     "build": "node compiler/build.js",
