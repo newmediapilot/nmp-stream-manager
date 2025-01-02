@@ -38,7 +38,6 @@ const server = globSync('./src/server/**/*.*')
                     ...contentLines.map(line => line
                         .replace('module.exports =', 'return')
                         .replace(`/demo/`, `/${hash}/`)
-                        .replace(`/api/`, `https://api.dbdbdbdbdbgroup.com/api/`)
                         .replace('process.env.TWITCH_CLIENT_ID', '"process.env.TWITCH_CLIENT_ID"')
                         .replace('process.env.TWITCH_CLIENT_SECRET', '"process.env.TWITCH_CLIENT_SECRET"')
                         .replace('process.env.TWITCH_USERNAME', '"process.env.TWITCH_USERNAME"')
