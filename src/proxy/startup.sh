@@ -1,14 +1,27 @@
 #!/bin/bash
-set -e
+
+# Update the system
 sudo yum update -y
+
+# Install required build tools
 sudo yum install -y gcc-c++ make
+
+# Install Node.js
 curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -
 sudo yum install -y nodejs
+
+# Create project directory
 sudo mkdir -p /home/ec2-user/
-sudo chown -R ec2-user:ec2-user /home/ec2-user/
 cd /home/ec2-user/
-su - ec2-user -c "npm init -y && npm install express socket.io"
-sudo tee /home/ec2-user/proxy.js > /dev/null << 'EOF'
+
+# Initialize Node.js project
+sudo npm init -y
+
+# Install required Node.js packages
+sudo npm install express
+sudo npm install socket.io
+
+# Create proxy.js file
+sudo tee proxy.js > /dev/null << 'EOF'
 /** proxy.js **/
 EOF
-su - ec2-user -c "node /home/ec2-user/proxy.js"
