@@ -23,6 +23,7 @@ Array.from({length})
             execSync(`npm run compile ${hash}`, {stdio: 'inherit'});
             execSync(`npm run s3 ${hash}`, {stdio: 'inherit'});
             execSync(`npm run cloudfront ${hash}`, {stdio: 'inherit'});
+            execSync(`npm run ec2 ${length}`, {stdio: 'inherit'});
             fs.existsSync('.package') && execSync('rm -rf .package');
             fs.existsSync('.compiled') && execSync('rm -rf .compiled');
             fs.existsSync('.launch') && execSync('rm -rf .launch');
