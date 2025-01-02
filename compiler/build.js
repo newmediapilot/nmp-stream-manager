@@ -5,7 +5,6 @@ const fs = require("fs");
 const {sync: globSync} = require("glob");
 const crypto = require("crypto");
 let length = 1;
-console.timeEnd("build :: clean");
 [
     ...globSync('.*.html'),
     ...globSync('.package'),
@@ -16,7 +15,7 @@ console.timeEnd("build :: clean");
     ...globSync('style'),
     ...globSync('package-lock.json'),
 ].map(p => execSync(`rm -rf ${p}`));
-console.timeEnd("build :: start");
+console.log("build :: start");
 const hashes = Array.from({length})
     .map((_, index) => crypto.createHash('sha256').update(String(index)).digest('hex'))
     .map(hash => {
