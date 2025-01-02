@@ -1,4 +1,3 @@
-// https://44.219.16.37/
 const fs = require('fs');
 const proxy = fs.readFileSync('./src/proxy/proxy.js', {encoding: 'utf-8'})
     .split('\r\n')
