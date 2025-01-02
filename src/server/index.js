@@ -4,6 +4,7 @@ const {ROUTES} = require("./routes");
 const express = require("express");
 const {logger} = require("./middleware/logger");
 const {paths} = require("./middleware/paths");
+const {api} = require("./middleware/api");
 const {startServices} = require("./start");
 const {publicSignalCreate} = require("./public/signal");
 const {publicConfigUpdate} = require("./public/config");
@@ -21,6 +22,7 @@ const app = express();
 app.use(express.json({limit: '25mb'}))
     .use(logger)
     .use(paths)
+    .use(api)
     .use(publicMediaFetch)
     .all(ROUTES.TWITCH_LOGIN, twitchLogin)
     .all(ROUTES.TWITCH_LOGIN_SUCCESS, twitchLoginSuccess)
