@@ -24,7 +24,6 @@ try {
             .map(line => line.replace('/** proxy.js **/', `${proxy}`))
             .join('\r\n');
         fs.writeFileSync('.startup.sh', startup, {encoding: 'utf-8'});
-        return process.exit(0);
         console.log('ec2 :: begin with', process.env.AWS_INSTANCE_ID);
         AWS.config.update({
             accessKeyId: process.env.AWS_ACCESS_KEY_ID,
