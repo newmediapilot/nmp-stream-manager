@@ -12,5 +12,4 @@ sudo npm install socket.io
 sudo tee proxy.js > /dev/null << 'EOF'
 /** proxy.js **/
 EOF
-sudo chown -R ec2-user:ec2-user /home/ec2-user/
 sudo node /home/ec2-user/proxy.js
