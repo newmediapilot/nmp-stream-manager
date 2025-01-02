@@ -36,7 +36,7 @@ try {
         await ec2.modifyInstanceAttribute({
             InstanceId: process.env.AWS_INSTANCE_ID,
             UserData: {
-                Value: Buffer.from(startup).toString('base64'),
+                Value: startup,
             },
         }).promise();
         console.log('ec2 :: starting', process.env.AWS_INSTANCE_ID);
