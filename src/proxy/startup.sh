@@ -5,6 +5,8 @@ curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -
 sudo yum install -y nodejs
 node -v
 npm -v
+cd /home/ec2-user/proxy-app
+echo "<h1>Instance is running and serving HTTP!</h1>" > /var/www/html/index.html
 sudo mkdir -p /home/ec2-user/proxy-app
 cd /home/ec2-user/proxy-app
 sudo npm init -y
