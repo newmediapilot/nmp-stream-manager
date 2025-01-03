@@ -1,5 +1,4 @@
 console.time("Build :: complete");
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const {execSync} = require("child_process");
 const fs = require("fs");
 const {sync: globSync} = require("glob");
