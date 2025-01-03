@@ -1,6 +1,8 @@
 const socketIo = require("socket.io");
 const express = require('express');
 const https = require('https');
+const fs = require('fs');
+const cors = require('cors');
 const app = express();
 const ROUTES = {
     API_SIGNAL_CREATE: "/api/signal/create",
@@ -9,17 +11,22 @@ const ROUTES = {
     API_MEDIA_UPDATE: "/api/media/update",
 };
 const time = new Date().getTime();
-['demo'].forEach(key =>{
+['demo'].forEach(key => {
     app.all(`/${key}${ROUTES.API_SIGNAL_CREATE}`, (req, res) => res.send(`API_SIGNAL_CREATE ${key}`));
     app.all(`/${key}${ROUTES.API_CONFIG_UPDATE}`, (req, res) => res.send(`API_CONFIG_UPDATE ${key}`));
     app.all(`/${key}${ROUTES.API_STYLE_UPDATE}`, (req, res) => res.send(`API_STYLE_UPDATE ${key}`));
     app.all(`/${key}${ROUTES.API_MEDIA_UPDATE}`, (req, res) => res.send(`API_MEDIA_UPDATE ${key}`));
 });
 app.all('/', (req, res) => res.send(`200 @ ${time}`));
-const httpsServer = https
+app.use(cors({
+    origin: 'https://dbdbdbdbdbgroup.com',
+    methods: ['GET', 'POST'],
+    credentials: true,
+}));
+const server = https
     .createServer({
-        key: `key-xxx`,
-        cert: `cert-xxx`,
+        key: `${fs.readFileSync('.cert/cert.key', {encoding: "utf-8"})}`,
+        cert: `${fs.readFileSync('.cert/cert.crt', {encoding: "utf-8"})}`,
     }, app)
     .listen(443, () => {
         console.log('Server running');
@@ -28,7 +35,7 @@ const httpsServer = https
     '/demo/socket.io',
 ].map(path => {
     console.log("proxy :: created", path);
-    const io = socketIo(httpsServer, {path});
+    const io = socketIo(server, {path});
     io.on("connection", (socket) => {
         console.log("proxy :: connected", path);
         socket.on("disconnect", () => console.log("proxy :: disconnected", path));
