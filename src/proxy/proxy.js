@@ -2,15 +2,31 @@ const socketIo = require("socket.io");
 const express = require('express');
 const https = require('https');
 const app = express();
-const {ROUTES} = require('../server/routes');
+const ROUTES = {
+    API_SIGNAL_CREATE: "/api/signal/create",
+    API_CONFIG_UPDATE: "/api/config/update",
+    API_STYLE_UPDATE: "/api/style/update",
+    API_MEDIA_UPDATE: "/api/media/update",
+};
+const time = new Date().getTime();
 app.use((req, res, next) => {
-    if (['demo'].find(key => req.path.includes(key))) return next();
-    res.status(403).send('403');
+    if (['demo'].find(key => req.path.includes(key))) {
+        if (req.path.endsWith(ROUTES.API_CONFIG_UPDATE)) {
+            res.status(200).send('ROUTES.API_CONFIG_UPDATE');
+        }
+        if (req.path.endsWith(ROUTES.API_CONFIG_UPDATE)) {
+            res.status(200).send('ROUTES.API_CONFIG_UPDATE');
+        }
+        if (req.path.endsWith(ROUTES.API_STYLE_UPDATE)) {
+            res.status(200).send('ROUTES.API_STYLE_UPDATE');
+        }
+        if (req.path.endsWith(ROUTES.API_MEDIA_UPDATE)) {
+            res.status(200).send('ROUTES.API_MEDIA_UPDATE');
+        }
+    } else {
+        res.status(403).send(`403@${time}`);
+    }
 });
-app.all(`/${ROUTES.API_SIGNAL_CREATE}`, (req, res) => res.send(`ROUTES.API_SIGNAL_CREATE`));
-app.all(`/${ROUTES.API_CONFIG_UPDATE}`, (req, res) => res.send(`ROUTES.API_CONFIG_UPDATE`));
-app.all(`/${ROUTES.API_STYLE_UPDATE}`, (req, res) => res.send(`ROUTES.API_STYLE_UPDATE`));
-app.all(`/${ROUTES.API_MEDIA_UPDATE}`, (req, res) => res.send(`ROUTES.API_MEDIA_UPDATE`));
 app.all('/', (req, res) => res.send(`200`));
 const httpsServer = https
     .createServer({
