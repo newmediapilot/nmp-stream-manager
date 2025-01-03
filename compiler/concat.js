@@ -38,7 +38,7 @@ const server = globSync('./src/server/**/*.*')
                     ...contentLines.map(line => line
                         .replace('module.exports =', 'return')
                         .replace(`/demo/`, `/${hash}/`)
-                        .replace(`/api/`, `/${hash}/api/`)
+                        .replace(`/api/`, `https://api.dbdbdbdbdbgroup.com/${hash}/api/`)
                         .replace(`io("https://192.168.0.22"`, `io("https://api.dbdbdbdbdbgroup.com"`)
                         .replace('baseURL = ""', 'baseURL = "https://api.dbdbdbdbdbgroup.com"')
                         .replace('process.env.TWITCH_CLIENT_ID', '"process.env.TWITCH_CLIENT_ID"')
