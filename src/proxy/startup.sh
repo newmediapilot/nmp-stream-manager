@@ -10,6 +10,6 @@ cd /home/ec2-user/
 sudo -u ec2-user npm init -y
 sudo -u ec2-user npm install express
 sudo -u ec2-user npm install socket.io
-sudo tee proxy.js > /dev/null << 'EOF'
+cat > proxy.js << EOF
 /** proxy.js **/
 EOF
