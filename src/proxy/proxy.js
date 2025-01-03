@@ -19,9 +19,8 @@ const time = new Date().getTime();
 });
 app.all('/', (req, res) => res.send(`200 @ ${time}`));
 app.use(cors({
-    origin: 'https://dbdbdbdbdbgroup.com',
+    origin: '*',
     methods: ['GET', 'POST'],
-    credentials: true,
 }));
 const server = https
     .createServer({
@@ -35,7 +34,13 @@ const server = https
     '/demo/socket.io',
 ].map(path => {
     console.log("proxy :: created", path);
-    const io = socketIo(server, {path});
+    const io = socketIo(server, {
+        path,
+        cors: {
+            origin: "*",
+            methods: ["GET", "POST"],
+        },
+    });
     io.on("connection", (socket) => {
         console.log("proxy :: connected", path);
         socket.on("disconnect", () => console.log("proxy :: disconnected", path));
