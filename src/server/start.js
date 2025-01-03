@@ -35,6 +35,6 @@ const startServices = async (app) => {
     } catch (err) {
         console.log("startServices :: error initializing services:", err);
     }
-}
+};
 
 module.exports = {startServices};
