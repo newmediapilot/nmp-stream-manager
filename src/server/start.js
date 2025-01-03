@@ -8,7 +8,7 @@ const {initializePublicStyles} = require("./public/style");
 const {configureSocket} = require("./helper/socket");
 const {ROUTES} = require("./routes");
 
-async function startServices(app) {
+const startServices = async (app) => {
     try {
         setParam("public_index", "https://dbdbdbdbdbgroup.com/demo/");
         setParam("public_routes", ROUTES);
@@ -31,7 +31,7 @@ async function startServices(app) {
             console.log("startServices :: server running on 443 at https://localhost");
         });
         configureSocket(httpsServer);
-        execSync(`start "" "https://dbdbdbdbdbgroup.com/demo/"`, { stdio: 'ignore' });
+        execSync(`start "" "https://dbdbdbdbdbgroup.com/demo/"`, {stdio: 'ignore'});
     } catch (err) {
         console.log("startServices :: error initializing services:", err);
     }
