@@ -10,6 +10,8 @@ const ROUTES = {
     API_STYLE_UPDATE: "/api/style/update",
     API_MEDIA_UPDATE: "/api/media/update",
 };
+app.options('*', cors());
+app.use(cors());
 const time = new Date().getTime();
 ['demo'].forEach(key => {
     app.all(`/${key}${ROUTES.API_SIGNAL_CREATE}`, (req, res) => res.send(`API_SIGNAL_CREATE ${key}`));
@@ -18,10 +20,6 @@ const time = new Date().getTime();
     app.all(`/${key}${ROUTES.API_MEDIA_UPDATE}`, (req, res) => res.send(`API_MEDIA_UPDATE ${key}`));
 });
 app.all('/', (req, res) => res.send(`200 @ ${time}`));
-app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST'],
-}));
 const server = https
     .createServer({
         key: `${fs.readFileSync('.cert/cert.key', {encoding: "utf-8"})}`,
