@@ -1,6 +1,5 @@
 console.time("build :: complete");
 const {execSync} = require("child_process");
-const fs = require("fs");
 const {sync: globSync} = require("glob");
 const crypto = require("crypto");
 let length = 1;
