@@ -2,7 +2,7 @@ require("dotenv").config();
 const fs = require('fs');
 const AWS = require('aws-sdk');
 const ec2 = new AWS.EC2();
-const hashes = process.argv.slice(2).length ? process.argv.slice(2) : ["demo","mode", "edmo"];
+const hashes = process.argv.slice(2).length ? process.argv.slice(2) : ["demo"];
 try {
     (async () => {
         console.log('ec2 :: generate proxy');
@@ -11,13 +11,6 @@ try {
             .map(line => line.replace('${fs.readFileSync(\'.cert/cert.crt\', {encoding: "utf-8"})}', `${fs.readFileSync('.cert/cert.crt', {encoding: 'utf-8'})}`))
             .map(line => line.replace('${fs.readFileSync(\'.cert/cert.key\', {encoding: "utf-8"})}', `${fs.readFileSync('.cert/cert.key', {encoding: 'utf-8'})}`))
             .map(line => line.replace(`'demo'`, `${hashes.map(h=>`'${h}'`).join(',')}`))
-            .map(line => {
-                const list = hashes.map(h => `"/${h}/socket.io"`);
-                return line.replace(
-                    "'/demo/socket.io',",
-                    `${list.join(',')}`
-                );
-            })
             .join('\r\n');
         console.log('ec2 :: generate startup');
         const startup = fs.readFileSync('./src/proxy/startup.sh', {encoding: 'utf-8'})
