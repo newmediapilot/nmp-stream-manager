@@ -9,7 +9,7 @@ sudo mkdir -p /home/ec2-user
 sudo chown ec2-user:ec2-user /home/ec2-user
 sudo -u ec2-user bash -c "
   npm init -y
-  npm install express socket.io
+  npm install express socket.io cors
 "
 cat >/home/ec2-user/proxy.js <<'EOF'
 /** proxy.js **/
