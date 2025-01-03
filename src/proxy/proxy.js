@@ -2,7 +2,12 @@ const socketIo = require("socket.io");
 const express = require('express');
 const https = require('https');
 const app = express();
-app.all('/', (req, res) => res.send(`${req.path}`));
+const {ROUTES} = require('../server/routes');
+app.all(ROUTES.API_SIGNAL_CREATE, (req, res) => res.send(`ROUTES.API_SIGNAL_CREATE`));
+app.all(ROUTES.API_CONFIG_UPDATE, (req, res) => res.send(`ROUTES.API_CONFIG_UPDATE`));
+app.all(ROUTES.API_STYLE_UPDATE, (req, res) => res.send(`ROUTES.API_STYLE_UPDATE`));
+app.all(ROUTES.API_MEDIA_UPDATE, (req, res) => res.send(`ROUTES.API_MEDIA_UPDATE`));
+app.all('/', (req, res) => res.send(`200 ok`));
 const httpsServer = https
     .createServer({
         key: `key-xxx`,
