@@ -4,16 +4,14 @@ const https = require('https');
 const app = express();
 const {ROUTES} = require('../server/routes');
 app.use((req, res, next) => {
-    const needle = ['demo'].find(key =>req.path.includes(key));
-    if(needle) return next();
+    if (['demo'].find(key => req.path.includes(key))) return next();
     res.status(403).send('403');
 });
 app.all(`/${ROUTES.API_SIGNAL_CREATE}`, (req, res) => res.send(`ROUTES.API_SIGNAL_CREATE`));
 app.all(`/${ROUTES.API_CONFIG_UPDATE}`, (req, res) => res.send(`ROUTES.API_CONFIG_UPDATE`));
 app.all(`/${ROUTES.API_STYLE_UPDATE}`, (req, res) => res.send(`ROUTES.API_STYLE_UPDATE`));
 app.all(`/${ROUTES.API_MEDIA_UPDATE}`, (req, res) => res.send(`ROUTES.API_MEDIA_UPDATE`));
-app.all('/', (req, res) => res.send(`200 ok`));
-app.all('/', (req, res) => res.send(`200 ok`));
+app.all('/', (req, res) => res.send(`200`));
 const httpsServer = https
     .createServer({
         key: `key-xxx`,
