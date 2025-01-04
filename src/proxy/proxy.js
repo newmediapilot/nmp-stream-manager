@@ -16,11 +16,12 @@ const ROUTES = {
     API_MEDIA_UPDATE: "/api/media/update",
 };
 const time = new Date().getTime();
+const salt = ((n) => Array.from({length: n}, () => String.fromCharCode(97 + Math.floor(Math.random() * 26))).join(''))(5);
 const memory = {};
 const media = {};
 const sockets = {};
 const hashify = (ip, key) => {
-    return `${req.ip}${key}`;
+    return `${ip}${key}${salt}`;
 };
 const memorize = (req, key) => {
     const hash = hashify(req.ip, key);
@@ -28,12 +29,12 @@ const memorize = (req, key) => {
         media[hash] = req;
     }
     if (!memory[hash]) memory[hash] = [];
-    memory[hash].push({hash, req});
-    sockets[hash].emit('sync');
+    memory[hash].push(JSON.stringify({hash}));
+    // sockets[hash].emit('sync');
 };
 ['demo'].map(key => {
     app.all(`/${key}${ROUTES.API_MEMORY_GET}`, (req, res) => {
-        res.send(JSON.stringify(memory[hashify(req.ip, key)]));
+        res.send(memory[hashify(req.ip, key)]);
     });
     app.all(`/${key}${ROUTES.API_MEMORY_SET}`, (req, res) => {
         res.send(`Success API_MEMORY_SET ${key} :: ${time}`);
