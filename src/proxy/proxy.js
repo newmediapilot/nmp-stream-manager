@@ -8,39 +8,36 @@ app.set('trust proxy', true);
 app.options('*', cors());
 app.use(cors());
 const ROUTES = {
+    API_MEMORY_GET: "/api/memory/get",
+    API_MEMORY_SET: "/api/memory/set",
     API_SIGNAL_CREATE: "/api/signal/create",
     API_CONFIG_UPDATE: "/api/config/update",
     API_STYLE_UPDATE: "/api/style/update",
     API_MEDIA_UPDATE: "/api/media/update",
 };
 const time = new Date().getTime();
-const memory = [];
-const config = {};
+const memory = {};
 const media = {};
-const style = {};
 const sockets = {};
 const hashify = (ip, key) => {
     return `${req.ip}${key}`;
 };
 const memorize = (req, key) => {
     const hash = hashify(req.ip, key);
-    if (req.path.endsWith(ROUTES.API_CONFIG_UPDATE)) {
-        config[hash] = req;//TODO: update in memory
-    }
-    if (req.path.endsWith(ROUTES.API_STYLE_UPDATE)) {
-        style[hash] = req;//TODO: update in memory
-    }
     if (req.path.endsWith(ROUTES.API_MEDIA_UPDATE)) {
-        media[hash] = req;//TODO: update in memory
+        media[hash] = req;
     }
-    //TODO: push to mem-stack
-    memory.push({hash, req});
-    // TODO: notify app of change
-    // TODO: app will read back the memory value and replay
-    // TODO: app will send back config and style and write to mem
+    if (!memory[hash]) memory[hash] = [];
+    memory[hash].push({hash, req});
     sockets[hash].emit('sync');
 };
 ['demo'].map(key => {
+    app.all(`/${key}${ROUTES.API_MEMORY_GET}`, (req, res) => {
+        res.send(JSON.stringify(memory[hashify(req.ip, key)]));
+    });
+    app.all(`/${key}${ROUTES.API_MEMORY_SET}`, (req, res) => {
+        res.send(`Success API_MEMORY_SET ${key} :: ${time}`);
+    });
     app.all(`/${key}${ROUTES.API_SIGNAL_CREATE}`, (req, res) => {
         memorize(req, key);
         res.send(`Success API_SIGNAL_CREATE ${key} :: ${time}`);
