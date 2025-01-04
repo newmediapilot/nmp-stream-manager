@@ -5,15 +5,17 @@ const configureSocket = () => {
     io = ioClient("https://api.dbdbdbdbdbgroup.com", {
         path: '/demo/socket.io',
         transports: ["websocket"],
+        rejectUnauthorized: false,
     });
-    io.on("connection", (socket) => {
-        console.log("configureSocket :: client connected", socket.handshake.address);
-        socket.on("sync", () => {
-            console.log('configureSocket :: sync', getMemory.toString());
-        });
-        socket.on("disconnect", () => console.log("configureSocket :: client disconnected"));
+    io.on("connect", () => {
+        console.log("configureSocket :: client connect");
+        io.on("sync", () => getMemory());
+        io.on("disconnect", () => console.log("configureSocket :: client disconnected"));
     });
-    console.log("sendPayload :: configureSocket");
+    io.on("connect_error", (err) => {
+        console.log("configureSocket :: connection error:", err);
+    });
+    console.log("sendPayload :: configureSocket initialized");
 };
 const sendPayload = (payload) => {
     if (!io) {
