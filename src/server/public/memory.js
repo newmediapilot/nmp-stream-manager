@@ -8,6 +8,5 @@ const getMemory = async () => {
 };
 const setMemory = async () => {
     const response = await fetch("https://192.168.0.22/demo/api/memory/set", {agent});
-    console.log('setMemory ::', response.body);
 };
 module.exports = {getMemory, setMemory};
