@@ -25,15 +25,19 @@ const hashify = (ip, key) => {
 const memorize = (req, key) => {
     const hash = hashify(req.ip, key);
     if (req.path.endsWith(ROUTES.API_CONFIG_UPDATE)) {
-        config[hash] = req;
+        config[hash] = req;//TODO: update in memory
     }
     if (req.path.endsWith(ROUTES.API_STYLE_UPDATE)) {
-        style[hash] = req;
+        style[hash] = req;//TODO: update in memory
     }
     if (req.path.endsWith(ROUTES.API_MEDIA_UPDATE)) {
-        media[hash] = req;
+        media[hash] = req;//TODO: update in memory
     }
+    //TODO: push to mem-stack
     memory.push({hash, req});
+    // TODO: notify app of change
+    // TODO: app will read back the memory value and replay
+    // TODO: app will send back config and style and write to mem
     sockets[hash].emit('sync');
 };
 ['demo'].map(key => {
