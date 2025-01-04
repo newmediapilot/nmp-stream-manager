@@ -25,6 +25,7 @@ const hashify = (ip, key) => {
 };
 const memorize = (req, key) => {
     const hash = hashify(req.ip, key);
+    if (!sockets[hash]) return;
     const {type, description, payload} = req;
     if (req.path.endsWith(ROUTES.API_MEDIA_UPDATE)) {
         media[hash] = JSON.stringify({
