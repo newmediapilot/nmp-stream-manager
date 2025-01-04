@@ -1,13 +1,10 @@
-const socketIo = require("socket.io");
+const ioClient = require("socket.io-client");
 const {getMemory} = require("../public/memory");
 let io;
 const configureSocket = (server) => {
-    io = socketIo(server, {
+    io = ioClient("https://api.dbdbdbdbdbgroup.com", {
         path: '/demo/socket.io',
-        cors: {
-            origin: "https://192.168.0.22",
-            methods: ["GET", "POST"]
-        }
+        transports: ["websocket"],
     });
     io.on("connection", (socket) => {
         console.log("configureSocket :: client connected", socket.handshake.address);
