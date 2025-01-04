@@ -16,6 +16,7 @@ const configureSocket = () => {
         console.log("configureSocket :: connection error:", err);
     });
     console.log("sendPayload :: configureSocket initialized");
+    getMemory()
 };
 const sendPayload = (payload) => {
     if (!io) {
