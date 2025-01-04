@@ -5,16 +5,16 @@ const configureSocket = (server) => {
     io = socketIo(server, {
         path: '/demo/socket.io',
         cors: {
-            origin: "https://192.168.0.22/",
+            origin: "https://192.168.0.22",
             methods: ["GET", "POST"]
         }
     });
     io.on("connection", (socket) => {
         console.log("configureSocket :: client connected", socket.handshake.address);
+        socket.on("sync", () => {
+            console.log('configureSocket :: sync', getMemory.toString());
+        });
         socket.on("disconnect", () => console.log("configureSocket :: client disconnected"));
-    });
-    io.on("sync", () => {
-        console.log('configureSocket :: sync', getMemory.toString());
     });
     console.log("sendPayload :: configureSocket");
 };
