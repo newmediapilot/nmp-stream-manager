@@ -74,13 +74,17 @@ const server = https
         path,
         cors: {
             origin: "*",
-            methods: ["GET", "POST"]
+            methods: ["GET", "POST"],
         },
     });
     io.on("connection", (socket) => {
-        socket.on("disconnect", () => console.log("proxy :: disconnected", socket.handshake.address, key));
         sockets[hashify(socket.handshake.address, key)] = io;
         console.log("proxy :: connected", socket.handshake.address, key);
+        socket.on("disconnect", () => {
+            console.log("proxy :: disconnected", socket.handshake.address, key);
+            sockets[hashify(socket.handshake.address, key)] = null;
+            memory[hashify(socket.handshake.address, key)] = {};
+        });
     });
     console.log("proxy :: ready", key, path);
 });
