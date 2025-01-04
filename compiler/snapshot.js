@@ -6,8 +6,9 @@ const hash = process.argv[2] || 'demo';
 (async () => {
     console.log('snapshot :: hash', hash);
     const server = exec('npm run serve', {stdio: 'inherit'});
+    console.log('snapshot :: wait 10s');
+    execSync('sleep 10');
     console.log('snapshot :: server');
-    execSync('sleep 5');
     const browser = await chromium.launch();
     const context = await browser.newContext({
         ignoreHTTPSErrors: true,
