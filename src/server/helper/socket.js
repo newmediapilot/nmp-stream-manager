@@ -1,7 +1,7 @@
 const ioClient = require("socket.io-client");
 const {getMemory} = require("../public/memory");
 let io;
-const configureSocket = (server) => {
+const configureSocket = () => {
     io = ioClient("https://api.dbdbdbdbdbgroup.com", {
         path: '/demo/socket.io',
         transports: ["websocket"],
