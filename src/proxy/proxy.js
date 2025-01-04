@@ -29,7 +29,7 @@ const memorize = (req, key) => {
     const {type, description, payload} = req.query;
     if (req.path.endsWith(ROUTES.API_MEDIA_UPDATE)) {
         media[hash] = JSON.stringify({
-            hash, type, description, payload
+            path, type, description, payload
         });
     }
     if (!memory[hash] || !memory[hash].length) {
