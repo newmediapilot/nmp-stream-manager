@@ -5,9 +5,9 @@ const {chromium} = require('playwright');
 const hash = process.argv[2] || 'demo';
 (async () => {
     console.log('snapshot :: hash', hash);
-    const server = exec('npm run serve', {stdio: 'inherit'});
-    console.log('snapshot :: wait 10s');
-    execSync('sleep 10');
+    const server = exec('npm run server', {stdio: 'inherit'});
+    console.log('snapshot :: wait 5s');
+    execSync('sleep 5');
     console.log('snapshot :: server');
     const browser = await chromium.launch();
     const context = await browser.newContext({
