@@ -18,7 +18,7 @@ const hash = process.argv[2] || 'demo';
         for (const [index, path] of paths.entries()) {
             try {
                 const fileName = path.split('/').pop();
-                const url = `https://192.168.0.22/${hash}/${fileName}`;
+                const url = `https://localhost/${hash}/${fileName}`;
                 console.log('snapshot :: path', path);
                 console.log('snapshot :: url', url, `${index + 1}/${paths.length}`);
                 await page.goto(url, {waitUntil: 'load'});
