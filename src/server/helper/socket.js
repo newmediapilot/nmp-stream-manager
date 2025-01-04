@@ -1,4 +1,5 @@
 const socketIo = require("socket.io");
+const memory = require("../public/memory");
 let io;
 const configureSocket = (server) => {
     io = socketIo(server, {
@@ -7,6 +8,9 @@ const configureSocket = (server) => {
     io.on("connection", (socket) => {
         console.log("configureSocket :: client connected", socket.handshake.address);
         socket.on("disconnect", () => console.log("configureSocket :: client disconnected"));
+    });
+    io.on("sync", (socket) => {
+        console.log('configureSocket :: sync');
     });
     console.log("sendPayload :: configureSocket");
 };
