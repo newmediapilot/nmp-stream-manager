@@ -25,16 +25,12 @@ const hashify = (ip, key) => {
 };
 const memorize = (req, key) => {
     const hash = hashify(req.ip, key);
-    const path = req.path;
     if (!sockets[hash]) return;
-    const {type, description, payload} = req.query;
-    if (req.path.endsWith(ROUTES.API_MEDIA_UPDATE)) {
-        media[hash] = JSON.stringify([path, type, description, payload]);
-    }
     if (!memory[hash] || !memory[hash].length) {
         memory[hash] = [];
     }
-    memory[hash].push(JSON.stringify([path, type, description, payload]));
+    const {method, url, path, query, params, body} = req;
+    memory[hash].push(JSON.stringify([method, url, path, query, params, body]));
     sockets[hash].emit('sync');
 };
 ['demo'].map(key => {
