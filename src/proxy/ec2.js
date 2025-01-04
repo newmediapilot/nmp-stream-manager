@@ -6,14 +6,16 @@ const hashes = process.argv.slice(2).length ? process.argv.slice(2) : ["demo"];
 try {
     (async () => {
         console.log('ec2 :: generate proxy');
-        const proxy = fs.readFileSync('./src/proxy/proxy.js', {encoding: 'utf-8'})
+        const proxy = fs
+            .readFileSync('./src/proxy/proxy.js', {encoding: 'utf-8'})
             .split('\r\n')
             .map(line => line.replace('${fs.readFileSync(\'.cert/cert.crt\', {encoding: "utf-8"})}', `${fs.readFileSync('.cert/cert.crt', {encoding: 'utf-8'})}`))
             .map(line => line.replace('${fs.readFileSync(\'.cert/cert.key\', {encoding: "utf-8"})}', `${fs.readFileSync('.cert/cert.key', {encoding: 'utf-8'})}`))
             .map(line => line.replace(`'demo'`, `${hashes.map(h=>`'${h}'`).join(',')}`))
             .join('\r\n');
         console.log('ec2 :: generate startup');
-        const startup = fs.readFileSync('./src/proxy/startup.sh', {encoding: 'utf-8'})
+        const startup = fs
+            .readFileSync('./src/proxy/startup.sh', {encoding: 'utf-8'})
             .split('\r\n')
             .map(line => line.replace('/** proxy.js **/', `${proxy}`))
             .join('\r\n');
