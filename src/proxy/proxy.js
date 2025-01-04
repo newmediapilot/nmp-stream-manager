@@ -29,14 +29,12 @@ const memorize = (req, key) => {
     if (!sockets[hash]) return;
     const {type, description, payload} = req.query;
     if (req.path.endsWith(ROUTES.API_MEDIA_UPDATE)) {
-        media[hash] = JSON.stringify({
-            path, type, description, payload
-        });
+        media[hash] = JSON.stringify([path, type, description, payload]);
     }
     if (!memory[hash] || !memory[hash].length) {
         memory[hash] = [];
     }
-    memory[hash].push(JSON.stringify({hash, type, description, payload}));
+    memory[hash].push(JSON.stringify([path, type, description, payload]));
     sockets[hash].emit('sync');
 };
 ['demo'].map(key => {
