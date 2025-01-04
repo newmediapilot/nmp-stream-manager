@@ -3,7 +3,11 @@ const {getMemory} = require("../public/memory");
 let io;
 const configureSocket = (server) => {
     io = socketIo(server, {
-        path: '/demo/socket.io'
+        path: '/demo/socket.io',
+        cors: {
+            origin: "https://192.168.0.22/",
+            methods: ["GET", "POST"]
+        }
     });
     io.on("connection", (socket) => {
         console.log("configureSocket :: client connected", socket.handshake.address);
