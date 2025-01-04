@@ -43,6 +43,7 @@ const server = globSync('./src/server/**/*.*')
                         .replace(`'/demo/socket.io'`, `'/${hash}/socket.io'`)
                         .replace(`/demo/api/memory/get`, `https://api.dbdbdbdbdbgroup.com/${hash}/api/memory/get`)
                         .replace(`/demo/api/memory/set`, `https://api.dbdbdbdbdbgroup.com/${hash}/api/memory/set`)
+                        .replace(`origin: "https://192.168.0.22/"`, `origin: "https://api.dbdbdbdbdbgroup.com/"`)
                         .replace('baseURL = ""', 'baseURL = "https://api.dbdbdbdbdbgroup.com"')
                         .replace('process.env.TWITCH_CLIENT_ID', '"process.env.TWITCH_CLIENT_ID"')
                         .replace('process.env.TWITCH_CLIENT_SECRET', '"process.env.TWITCH_CLIENT_SECRET"')
@@ -157,10 +158,14 @@ const twip = server.splice(server.indexOf(server.find(({filePath}) => filePath.e
 const commands = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('commands.js'))), 1);
 const stream = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('stream.js'))), 1);
 const index = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('index.js'))), 1);
+const memory = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('memory.js'))), 1);
+const socket = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('socket.js'))), 1);
 
 let output = [
     ...routes,
     ...manager,
+    ...memory,
+    ...socket,
     ...message,
     ...ads,
     ...broadcast,
