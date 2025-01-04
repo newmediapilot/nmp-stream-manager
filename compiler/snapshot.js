@@ -21,7 +21,7 @@ const hash = process.argv[2] || 'demo';
                 const url = `https://localhost/${hash}/${fileName}`;
                 console.log('snapshot :: path', path);
                 console.log('snapshot :: url', url, `${index + 1}/${paths.length}`);
-                await page.goto(url, {waitUntil: 'load'});
+                await page.goto(url, {waitUntil: 'networkidle'});
                 const content = await page.content();
                 // TODO: pre-process as well since it should work with html-minify heavy
                 fs.writeFileSync(`.tplt-${fileName}`, content, {encoding: 'utf-8'});
