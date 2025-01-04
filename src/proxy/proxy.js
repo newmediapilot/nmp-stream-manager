@@ -32,9 +32,7 @@ const memorize = (req, key) => {
         });
     }
     if (!memory[hash]) memory[hash] = [];
-    memory[hash].push(JSON.stringify({
-        hash, type, description, payload
-    }));
+    memory[hash].push(JSON.stringify({hash, type, description, payload}));
     sockets[hash].emit('sync');
 };
 ['demo'].map(key => {
