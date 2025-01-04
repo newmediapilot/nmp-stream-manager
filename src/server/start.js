@@ -30,7 +30,7 @@ const startServices = async (app) => {
         const httpsServer = https.createServer(certs, app).listen(443, () => {
             console.log("startServices :: server running on 443 at https://localhost");
         });
-        configureSocket(httpsServer);
+        configureSocket();
         execSync(`start "" "https://dbdbdbdbdbgroup.com/demo/"`, {stdio: 'ignore'});
     } catch (err) {
         console.log("startServices :: error initializing services:", err);
