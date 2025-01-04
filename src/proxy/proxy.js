@@ -32,7 +32,9 @@ const memorize = (req, key) => {
             hash, type, description, payload
         });
     }
-    if (!memory[hash]) memory[hash] = [];
+    if (!memory[hash] || !memory[hash].length) {
+        memory[hash] = [];
+    }
     memory[hash].push(JSON.stringify({hash, type, description, payload}));
     sockets[hash].emit('sync');
 };
@@ -44,21 +46,16 @@ const memorize = (req, key) => {
     app.all(`/${key}${ROUTES.API_MEMORY_SET}`, (req, res) => {
         res.send(`Success API_MEMORY_SET ${key} :: ${time}`);
     });
-    app.all(`/${key}${ROUTES.API_SIGNAL_CREATE}`, (req, res) => {
-        memorize(req, key);
-        res.send(`Success API_SIGNAL_CREATE ${key} :: ${time}`);
-    });
-    app.all(`/${key}${ROUTES.API_CONFIG_UPDATE}`, (req, res) => {
-        memorize(req, key);
-        res.send(`Success API_CONFIG_UPDATE ${key} :: ${time}`);
-    });
-    app.all(`/${key}${ROUTES.API_STYLE_UPDATE}`, (req, res) => {
-        memorize(req, key);
-        res.send(`Success API_STYLE_UPDATE ${key} :: ${time}`);
-    });
-    app.all(`/${key}${ROUTES.API_MEDIA_UPDATE}`, (req, res) => {
-        memorize(req, key);
-        res.send(`Success API_MEDIA_UPDATE ${key} :: ${time}`);
+    [
+        `/${key}${ROUTES.API_SIGNAL_CREATE}`,
+        `/${key}${ROUTES.API_CONFIG_UPDATE}`,
+        `/${key}${ROUTES.API_STYLE_UPDATE}`,
+        `/${key}${ROUTES.API_MEDIA_UPDATE}`,
+    ].map(path => {
+        app.all(path, (req, res) => {
+            memorize(req, key);
+            res.send(`Success API_SIGNAL_CREATE ${key} :: ${time}`);
+        });
     });
 });
 app.all('/', (req, res) => res.send(`200 @ ${time}`));
