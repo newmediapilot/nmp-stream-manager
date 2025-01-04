@@ -2,7 +2,7 @@ const https = require("https");
 const fetch = require("node-fetch");
 const agent = new https.Agent({rejectUnauthorized: false});
 const getMemory = async () => {
-    const response = await fetch("https://192.168.0.22/demo/api/memory/get", {agent});
+    const response = await fetch("https://localhost/demo/api/memory/get", {agent});
     const memory = await response.json();
     for (let i = 0; i < memory.length; i++) {
         // await write to self
@@ -10,6 +10,6 @@ const getMemory = async () => {
     }
 };
 const setMemory = async () => {
-    const response = await fetch("https://192.168.0.22/demo/api/memory/set", {agent});
+    const response = await fetch("https://localhost/demo/api/memory/set", {agent});
 };
 module.exports = {getMemory, setMemory};
