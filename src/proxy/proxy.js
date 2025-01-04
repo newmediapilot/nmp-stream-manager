@@ -30,7 +30,7 @@ const memorize = (req, key) => {
     }
     if (!memory[hash]) memory[hash] = [];
     memory[hash].push(JSON.stringify({hash}));
-    // sockets[hash].emit('sync');
+    sockets[hash].emit('sync');
 };
 ['demo'].map(key => {
     app.all(`/${key}${ROUTES.API_MEMORY_GET}`, (req, res) => {
