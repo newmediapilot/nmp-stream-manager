@@ -2,6 +2,10 @@ const fs = require("fs");
 const path = require("path");
 const {getParam} = require('../store/manager');
 const {configFieldUpdate} = require('./config');
+const initializeMedia = () => {
+    console.log( "initializeMedia :: start");
+    if (!fs.existsSync(`media`)) fs.mkdirSync('media')
+};
 const publicMediaFetch = (req, res, next) => {
     if (
         req.path.startsWith('/media/')
@@ -44,4 +48,4 @@ const publicMediaUpdate = (req, res) => {
         console.log("publicMediaUpdate :: media processing done");
     }
 };
-module.exports = {publicMediaUpdate, publicMediaFetch};
+module.exports = {publicMediaUpdate, publicMediaFetch, initializeMedia};
