@@ -1,6 +1,6 @@
 const socketConnect = () => {
     if (document.$socketIO) return;
-    document.$socketIO = io("https://192.168.0.22", {
+    document.$socketIO = io("https://localhost", {
         path: '/demo/socket.io',
     });
     document.$socketIO.on("connect_error", (err) =>
