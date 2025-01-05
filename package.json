@@ -8,7 +8,7 @@
     "ssh": "ssh -i C:\\Users\\marcinzajkowski\\Desktop\\desktop\\aaknot\\server\\.cert\\ssh.pem ec2-user@ec2-54-225-191-237.compute-1.amazonaws.com",
     "launch": "node src/launch.js",
     "server": "node .server.js",
-    "build": "node compiler/build.js",
+    "build": "npm run reset && node compiler/build.js",
     "cloudfront": "node compiler/cloudfront.js",
     "combine": "node compiler/combine.js",
     "compile": "node compiler/compile.js",
