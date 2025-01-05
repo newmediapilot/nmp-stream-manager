@@ -10,19 +10,17 @@ const getMemory = async () => {
         for (let i = 0; i < memory.length; i++) {
             const [method, url, body] = JSON.parse(memory[i]);
             const path = `https://localhost${url}`;
-            if (url.includes(ROUTES.API_SIGNAL_CREATE)) {
-                result = await fetch(path, {agent, method});
-            }
-            if (url.includes(ROUTES.API_CONFIG_UPDATE)) {
-                result = await fetch(path, {agent, method});
-            }
-            if (url.includes(ROUTES.API_STYLE_UPDATE)) {
+            if (
+                url.includes(ROUTES.API_CONFIG_UPDATE) ||
+                url.includes(ROUTES.API_STYLE_UPDATE) ||
+                url.includes(ROUTES.API_SIGNAL_CREATE)
+            ) {
                 result = await fetch(path, {agent, method});
             }
             if (url.includes(ROUTES.API_MEDIA_UPDATE)) {
                 result = await fetch(path, {agent, method, body});
             }
-            console.log('memory :: fetch', path);
+            console.log('memory :: fetch', result);
         }
     } catch (error) {
         console.log('memory :: error', error)
