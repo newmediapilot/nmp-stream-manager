@@ -9,7 +9,7 @@ const hash = process.argv[2] || 'demo';
     console.log('snapshot :: wait 5s');
     execSync('sleep 5');
     console.log('snapshot :: server');
-    const browser = await chromium.launch();
+    const browser = await chromium.launch({headless:false});
     const context = await browser.newContext({
         ignoreHTTPSErrors: true,
     });
