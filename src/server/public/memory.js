@@ -10,14 +10,12 @@ const getMemory = async () => {
             try {
                 const [method, url, body] = JSON.parse(memory[i]);
                 const path = `https://localhost${url}`;
-                if (url.includes(`/api/media/update`)) {
+                if (url.includes(`api/media/update`)) {
                     result = await fetch(path.replace('/api/','/memory/'), {agent, method, body});
-                    console.log('memory :: loop /media/*', result);
                 }else{
                     result = await fetch(path.replace('/api/','/memory/'), {agent, method});
-                    console.log('memory :: loop *', result);
                 }
-                console.log('memory :: loop fetch', result);
+                console.log('memory :: loop fetch done', result.status);
             } catch (error) {
                 console.log('memory :: loop error', error);
             }
