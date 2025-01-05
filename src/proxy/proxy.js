@@ -69,6 +69,7 @@ const server = https
     console.log("proxy :: create", key, path);
     const io = socketIo(server, {
         path,
+        rejectUnauthorized: false,
         cors: {
             origin: "*",
             methods: ["GET", "POST"],
