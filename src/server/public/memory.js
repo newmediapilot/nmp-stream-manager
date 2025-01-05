@@ -1,6 +1,5 @@
 const https = require("https");
 const fetch = require("node-fetch");
-const {ROUTES} = require("../routes");
 const agent = new https.Agent({rejectUnauthorized: false});
 const getMemory = async () => {
     try {
@@ -8,22 +7,23 @@ const getMemory = async () => {
         const response = await fetch("https://localhost/demo/api/memory/get", {agent});
         const memory = await response.json();
         for (let i = 0; i < memory.length; i++) {
-            const [method, url, body] = JSON.parse(memory[i]);
-            const path = `https://localhost${url}`;
-            if (
-                url.includes(ROUTES.API_CONFIG_UPDATE) ||
-                url.includes(ROUTES.API_STYLE_UPDATE) ||
-                url.includes(ROUTES.API_SIGNAL_CREATE)
-            ) {
-                result = await fetch(path, {agent, method});
+            try {
+                const [method, url, body] = JSON.parse(memory[i]);
+                const path = `https://localhost${url}`;
+                if (url.includes(`/api/media/update`)) {
+                    result = await fetch(path.replace('/api/','/memory/'), {agent, method, body});
+                    console.log('memory :: loop /media/*', result);
+                }else{
+                    result = await fetch(path.replace('/api/','/memory/'), {agent, method});
+                    console.log('memory :: loop *', result);
+                }
+                console.log('memory :: loop fetch', result);
+            } catch (error) {
+                console.log('memory :: loop error', error);
             }
-            if (url.includes(ROUTES.API_MEDIA_UPDATE)) {
-                result = await fetch(path, {agent, method, body});
-            }
-            console.log('memory :: fetch', result);
         }
-    } catch (error) {
-        console.log('memory :: error', error)
+    } catch (error2) {
+        console.log('memory :: root error', error2);
     }
 };
 const setMemory = async () => {
