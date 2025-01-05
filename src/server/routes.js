@@ -1,4 +1,8 @@
 const ROUTES = {
+    MEMORY_SIGNAL_CREATE: "/memory/signal/create",
+    MEMORY_CONFIG_UPDATE: "/memory/config/update",
+    MEMORY_STYLE_UPDATE: "/memory/style/update",
+    MEMORY_MEDIA_UPDATE: "/memory/media/update",
     API_SIGNAL_CREATE: "/api/signal/create",
     API_CONFIG_UPDATE: "/api/config/update",
     API_STYLE_UPDATE: "/api/style/update",
