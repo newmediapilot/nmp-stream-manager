@@ -26,9 +26,7 @@ const hashify = (ip, key) => {
 const memorize = (req, key) => {
     const hash = hashify(req.ip, key);
     if (!sockets[hash]) return;
-    if (!memory[hash] || !memory[hash].length) {
-        memory[hash] = [];
-    }
+    if (!memory[hash] || !memory[hash].length) memory[hash] = [];
     const {method, url, body} = req;
     memory[hash].push(JSON.stringify([method, url, body]));
     sockets[hash].emit('sync');
