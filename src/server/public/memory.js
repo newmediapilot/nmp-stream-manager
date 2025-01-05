@@ -8,20 +8,21 @@ const getMemory = async () => {
         const response = await fetch("https://localhost/demo/api/memory/get", {agent});
         const memory = await response.json();
         for (let i = 0; i < memory.length; i++) {
-            const [method, url, query, body] = JSON.parse(memory[i]);
+            const [method, url, body] = JSON.parse(memory[i]);
+            const path = `https://localhost${url}`;
             if (url.includes(ROUTES.API_SIGNAL_CREATE)) {
-                result = await fetch(`${ROUTES.API_SIGNAL_CREATE}?type=${query.type}&description=${query.description}`, {agent,method});
+                result = await fetch(path, {agent, method});
             }
             if (url.includes(ROUTES.API_CONFIG_UPDATE)) {
-                result = await fetch(`${ROUTES.API_CONFIG_UPDATE}?type=${query.type}&description=${query.description}`, {agent,method});
+                result = await fetch(path, {agent, method});
             }
             if (url.includes(ROUTES.API_STYLE_UPDATE)) {
-                result = await fetch(`${ROUTES.API_STYLE_UPDATE}?type=${query.type}&description=${query.description}`, {agent,method});
+                result = await fetch(path, {agent, method});
             }
             if (url.includes(ROUTES.API_MEDIA_UPDATE)) {
-                result = await fetch(`${ROUTES.API_STYLE_UPDATE}?type=${query.type}&description=${query.description}`, {agent,method, body});
+                result = await fetch(path, {agent, method, body});
             }
-            console.log('memory :: fetch', url, result);
+            console.log('memory :: fetch', path);
         }
     } catch (error) {
         console.log('memory :: error', error)
