@@ -31,7 +31,7 @@ const publicMediaUpdate = (req, res) => {
         if (!data || !key || !type || !id) {
             return res.status(400).json({error: 'Missing file data or id'});
         }
-        !fs.existsSync(`./media`) && fs.mkdirSync(`./media`);
+        console.log("publicMediaUpdate :: path", `./media/${key}.${type}`);
         fs.writeFileSync(`./media/${key}.${type}`, Buffer.from(data, 'base64'));
         const cells = getParam("dashboard_signals_config")[id].description.split(',');
         const acceptTypes = cells.slice(2);
