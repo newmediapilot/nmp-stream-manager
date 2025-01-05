@@ -29,8 +29,8 @@ const memorize = (req, key) => {
     if (!memory[hash] || !memory[hash].length) {
         memory[hash] = [];
     }
-    const {method, url, query, body} = req;
-    memory[hash].push(JSON.stringify([method, url, query, body]));
+    const {method, url, body} = req;
+    memory[hash].push(JSON.stringify([method, url, body]));
     sockets[hash].emit('sync');
 };
 ['demo'].map(key => {
