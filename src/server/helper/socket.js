@@ -4,8 +4,11 @@ let io;
 const configureSocket = () => {
     io = ioClient("https://api.dbdbdbdbdbgroup.com", {
         path: '/demo/socket.io',
-        transports: ["websocket"],
         rejectUnauthorized: false,
+        cors: {
+            origin: "*",
+            methods: ["GET", "POST"],
+        },
     });
     io.on("connect", () => {
         console.log("configureSocket :: client connect");
