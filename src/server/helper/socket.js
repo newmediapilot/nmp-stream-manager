@@ -12,12 +12,10 @@ const configureSocket = () => {
     });
     io.on("connect", () => {
         console.log("configureSocket :: client connect socket.id", io.id);
-        io.on("sync", () => getMemory());
-        io.on("disconnect", () => console.log("configureSocket :: client disconnected"));
     });
-    io.on("connect_error", (err) => {
-        console.log("configureSocket :: connection error:", err);
-    });
+    io.on("sync", () => getMemory());
+    io.on("disconnect", () => console.log("configureSocket :: client disconnected"));
+    io.on("connect_error", (err) => console.log("configureSocket :: connection error:", err));
     console.log("configureSocket :: configureSocket initialized");
 };
 const sendPayload = (payload) => {
