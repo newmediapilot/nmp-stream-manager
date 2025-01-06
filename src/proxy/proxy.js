@@ -7,6 +7,7 @@ const app = express();
 app.set('trust proxy', true);
 app.options('*', cors());
 app.use(cors());
+app.use(express.json({limit: '25mb'}));
 const ROUTES = {
     API_MEDIA_GET: "/media/:path",
     API_MEMORY_GET: "/api/memory/get",
