@@ -232,7 +232,7 @@ const templates = globSync('./src/templates/**/*.*')
                         return `<script type="text/javascript">${res.getBody('utf-8')}</script>`;
                     }
                     return line
-                        .replace("/media/", "https://api.dbdbdbdbdbgroup.com/media/")
+                        .replace(new RegExp("\"/media/\"", "gm"), "https://api.dbdbdbdbdbgroup.com/media/")
                 });
                 return [
                     ...outputLines,
