@@ -74,8 +74,9 @@ const server = https
         },
     });
     io.on("connection", (socket) => {
-        sockets[hashify(socket.handshake.address, key)] = io;
+        sockets[hashify(socket.handshake.address, key)] = socket;
         console.log("proxy :: connected", socket.handshake.address, key);
+        socket.join("dbdbdbdbdbgroup");
         socket.on("disconnect", () => {
             console.log("proxy :: disconnected", socket.handshake.address, key);
             sockets[hashify(socket.handshake.address, key)] = null;
