@@ -18,7 +18,7 @@ const configureSocket = () => {
     io.on("connect_error", (err) => {
         console.log("configureSocket :: connection error:", err);
     });
-    console.log("sendPayload :: configureSocket initialized");
+    console.log("configureSocket :: configureSocket initialized");
 };
 const sendPayload = (payload) => {
     if (!io) {
