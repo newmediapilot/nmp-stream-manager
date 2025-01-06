@@ -6,7 +6,9 @@ const socketConnect = () => {
     document.$socketIO.on("connect_error", (err) =>
         console.log("socketConnect :: connection error:", err),
     );
-    document.$socketIO.on("connect", () => console.log("socketConnect :: connected to the socket server"));
+    document.$socketIO.on("connect", () => {
+        console.log("socketConnect :: connected to the socket server document.$socketIO.id", document.$socketIO.id);
+    });
     console.log("socketConnect :: socket connection start");
 };
 const socketWatchStyle = (callback) => {
