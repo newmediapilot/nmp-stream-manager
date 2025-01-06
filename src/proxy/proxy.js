@@ -36,13 +36,13 @@ const memorize = (req, key) => {
     app.all(`/${key}${ROUTES.API_MEMORY_GET}`, (req, res) => {
         res.send(memory[hashify(req.ip, key)]);
         memory[hashify(req.ip, key)] = [];
+        res.send(`Success API_MEMORY_GET ${req.url} ${key}`);
     });
     app.all(`/${key}${ROUTES.API_MEMORY_SET}`, (req, res) => {
-        res.send(`Success API_MEMORY_SET ${key} :: ${time}`);
+        res.send(`Success API_MEMORY_SET ${req.url} ${key}`);
     });
     app.all(`/${key}${ROUTES.API_MEDIA_GET}`, (req, res) => {
-        const { path } = req.params;
-        res.send(`Success API_MEDIA_GET ${key} :: ${req.path} :: ${path}`);
+        res.send(`Success API_MEDIA_GET ${req.url} ${key} ${req.params.path}`);
     });
     [
         `/${key}${ROUTES.API_SIGNAL_CREATE}`,
@@ -52,7 +52,7 @@ const memorize = (req, key) => {
     ].map(path => {
         app.all(path, (req, res) => {
             memorize(req, key);
-            res.send(`Success API_SIGNAL_CREATE ${key} :: ${time}`);
+            res.send(`Success API_SIGNAL_CREATE ${req.url} ${key}`);
         });
     });
 });
