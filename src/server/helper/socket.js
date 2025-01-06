@@ -12,7 +12,6 @@ const configureSocket = () => {
     });
     io.on("connect", () => {
         console.log("configureSocket :: client connect socket.id", io.id);
-        console.log("configureSocket :: client connect socket.handshake.address", io.handshake.address);
         io.on("sync", () => getMemory());
         io.on("disconnect", () => console.log("configureSocket :: client disconnected"));
     });
