@@ -8,6 +8,7 @@ app.set('trust proxy', true);
 app.options('*', cors());
 app.use(cors());
 const ROUTES = {
+    API_MEDIA_GET: "/media/:path",
     API_MEMORY_GET: "/api/memory/get",
     API_MEMORY_SET: "/api/memory/set",
     API_SIGNAL_CREATE: "/api/signal/create",
@@ -38,6 +39,10 @@ const memorize = (req, key) => {
     });
     app.all(`/${key}${ROUTES.API_MEMORY_SET}`, (req, res) => {
         res.send(`Success API_MEMORY_SET ${key} :: ${time}`);
+    });
+    app.all(`/${key}${ROUTES.API_MEDIA_GET}`, (req, res) => {
+        const { path } = req.params;
+        res.send(`Success API_MEDIA_GET ${key} :: ${req.path} :: ${path}`);
     });
     [
         `/${key}${ROUTES.API_SIGNAL_CREATE}`,
