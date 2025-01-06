@@ -29,12 +29,12 @@ const memorize = (req, key) => {
     if (!sockets[hash]) return;
     if (!memory[hash] || !memory[hash].length) memory[hash] = [];
     const {method, url, body} = req;
+    console.log('proxy :: memorize ::', hash, method, url, body);
     memory[hash].push(JSON.stringify([method, url, body]));
     sockets[hash].to("dbdbdbdbdbgroup").emit('sync');
 };
 ['demo'].map(key => {
     app.all(`/${key}${ROUTES.API_MEMORY_GET}`, (req, res) => {
-        res.send(memory[hashify(req.ip, key)]);
         memory[hashify(req.ip, key)] = [];
         res.send(`Success API_MEMORY_GET ${req.url} ${key}`);
     });
