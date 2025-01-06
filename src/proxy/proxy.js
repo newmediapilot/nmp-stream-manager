@@ -74,17 +74,18 @@ const server = https
         },
     });
     io.on("connection", (socket) => {
+        console.log("proxy :: connection", socket.handshake.address, key);
         socket.join("dbdbdbdbdbgroup");
+        socket.on("payload", (payload) => {
+            socket.to("dbdbdbdbdbgroup").emit("payload", payload);
+            console.log("proxy :: payload", payload);
+        });
+        sockets[hashify(socket.handshake.address, key)] = socket;
         socket.on("disconnect", () => {
             console.log("proxy :: disconnected", socket.handshake.address, key);
             sockets[hashify(socket.handshake.address, key)] = null;
             memory[hashify(socket.handshake.address, key)] = {};
         });
-        socket.on("payload", (payload) => {
-            socket.on("dbdbdbdbdbgroup").broadcast("payload", payload);
-            console.log("proxy :: payload", payload);
-        });
-        sockets[hashify(socket.handshake.address, key)] = socket;
         console.log("proxy :: connected", socket.handshake.address, key);
     });
     console.log("proxy :: ready", key, path);
