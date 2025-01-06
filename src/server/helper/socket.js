@@ -2,7 +2,7 @@ const ioClient = require("socket.io-client");
 const {getMemory} = require("../public/memory");
 let io;
 const configureSocket = () => {
-    io = ioClient("https://api.dbdbdbdbdbgroup.com", {
+    io = ioClient("https://localhost", {
         path: '/demo/socket.io',
         rejectUnauthorized: false,
         cors: {
@@ -30,7 +30,9 @@ const sendPayload = (payload) => {
         return false;
     }
     try {
-        io.emit("payload", payload);
+        io.emit("payload", payload, (response) => {
+            console.log("sendPayload :: sending payload response:", response, payload);
+        });
         console.log("sendPayload :: sending payload:", payload);
         return true;
     } catch (err) {
