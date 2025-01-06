@@ -80,11 +80,12 @@ const server = https
             sockets[hashify(socket.handshake.address, key)] = null;
             memory[hashify(socket.handshake.address, key)] = {};
         });
+        socket.on("payload", (payload) => {
+            socket.on("dbdbdbdbdbgroup").broadcast("payload", payload);
+            console.log("proxy :: payload", payload);
+        });
         sockets[hashify(socket.handshake.address, key)] = socket;
         console.log("proxy :: connected", socket.handshake.address, key);
-    });
-    io.on("payload", (payload) => {
-        console.log("proxy :: payload", payload);
     });
     console.log("proxy :: ready", key, path);
 });
