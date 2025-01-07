@@ -42,30 +42,42 @@ const memorize = (req, key) => {
     });
     app.all(`/${key}${ROUTES.API_MEMORY_SET}`, (req, res) => {
         const hash = hashify(req.ip, key);
-        const {path, payload} = res.body;
+        const {path, payload} = req.body;
         if (!media[hash]) media[hash] = {};
         media[hash][path] = payload;
-        res.send(`Success API_MEMORY_SET ${req.url} ${key} ${path} ${payload}`);
+        console.log(`proxy :: API_MEMORY_SET ::`, req.body, path, payload);
+        res.send("200");
     });
     app.all(`/${key}${ROUTES.API_MEDIA_GET}`, (req, res) => {
         const hash = hashify(req.ip, key);
         const reqPath = req.params.path;
         const payload = media[hash][path];
-        const mimeType = (()=> {
+        const mimeType = (() => {
             switch (path.extname(reqPath).toLowerCase()) {
-                case '.jpeg': return 'image/jpeg';
-                case '.jpg': return 'image/jpeg';
-                case '.png': return 'image/png';
-                case '.gif': return 'image/gif';
-                case '.webp': return 'image/webp';
-                case '.bmp': return 'image/bmp';
-                case '.mp3': return 'audio/mpeg';
-                case '.wav': return 'audio/wav';
-                case '.webm': return 'video/webm';
-                default: return 'application/octet-stream';
+                case '.jpeg':
+                    return 'image/jpeg';
+                case '.jpg':
+                    return 'image/jpeg';
+                case '.png':
+                    return 'image/png';
+                case '.gif':
+                    return 'image/gif';
+                case '.webp':
+                    return 'image/webp';
+                case '.bmp':
+                    return 'image/bmp';
+                case '.mp3':
+                    return 'audio/mpeg';
+                case '.wav':
+                    return 'audio/wav';
+                case '.webm':
+                    return 'video/webm';
+                default:
+                    return 'application/octet-stream';
             }
         })();
         res.setHeader('Content-Type', mimeType);
+        console.log(`proxy :: API_MEDIA_GET :: ${reqPath} ${media[hash]}`);
         res.send(payload);
     });
     [
@@ -75,8 +87,9 @@ const memorize = (req, key) => {
         `/${key}${ROUTES.API_MEDIA_UPDATE}`,
     ].map(path => {
         app.all(path, (req, res) => {
+            console.log(`proxy :: ${path}`);
             memorize(req, key);
-            res.send(`Success API_SIGNAL_CREATE ${req.url} ${key}`);
+            res.send("200");
         });
     });
 });
