@@ -232,7 +232,8 @@ const templates = globSync('./src/templates/**/*.*')
                         return `<script type="text/javascript">${res.getBody('utf-8')}</script>`;
                     }
                     return line
-                        .replace(new RegExp("/media/", "gm"), "https://api.dbdbdbdbdbgroup.com/media/")
+                        .replace("/media/${cells[0]}.${cells[2]}", "https://api.dbdbdbdbdbgroup.com/media/${cells[0]}.${cells[2]}")
+                        .replace("/media/${cells[0]}.${cells[2]}", "https://api.dbdbdbdbdbgroup.com/media/${cells[0]}.${cells[2]}")
                 });
                 return [
                     ...outputLines,
