@@ -2,6 +2,7 @@ const socketIo = require("socket.io");
 const express = require('express');
 const https = require('https');
 const fs = require('fs');
+const path = require('path');
 const cors = require('cors');
 const app = express();
 app.set('trust proxy', true);
@@ -40,10 +41,32 @@ const memorize = (req, key) => {
         memory[hashify(req.ip, key)] = [];
     });
     app.all(`/${key}${ROUTES.API_MEMORY_SET}`, (req, res) => {
-        res.send(`Success API_MEMORY_SET ${req.url} ${key}`);
+        const hash = hashify(req.ip, key);
+        const {path, payload} = res.body;
+        if (!media[hash]) media[hash] = {};
+        media[hash][path] = payload;
+        res.send(`Success API_MEMORY_SET ${req.url} ${key} ${path} ${payload}`);
     });
     app.all(`/${key}${ROUTES.API_MEDIA_GET}`, (req, res) => {
-        res.send(`Success API_MEDIA_GET ${req.url} ${key} ${req.params.path}`);
+        const hash = hashify(req.ip, key);
+        const reqPath = req.params.path;
+        const payload = media[hash][path];
+        const mimeType = (()=> {
+            switch (path.extname(reqPath).toLowerCase()) {
+                case '.jpeg': return 'image/jpeg';
+                case '.jpg': return 'image/jpeg';
+                case '.png': return 'image/png';
+                case '.gif': return 'image/gif';
+                case '.webp': return 'image/webp';
+                case '.bmp': return 'image/bmp';
+                case '.mp3': return 'audio/mpeg';
+                case '.wav': return 'audio/wav';
+                case '.webm': return 'video/webm';
+                default: return 'application/octet-stream';
+            }
+        })();
+        res.setHeader('Content-Type', mimeType);
+        res.send(payload);
     });
     [
         `/${key}${ROUTES.API_SIGNAL_CREATE}`,
