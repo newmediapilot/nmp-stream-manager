@@ -1,5 +1,5 @@
 const ioClient = require("socket.io-client");
-const {getMemory} = require("../public/memory");
+const {getMemory, setMemory} = require("../public/memory");
 let io;
 const configureSocket = () => {
     io = ioClient("https://localhost", {
@@ -12,6 +12,7 @@ const configureSocket = () => {
     });
     io.on("connect", () => {
         console.log("configureSocket :: client connect socket.id", io.id);
+        setMemory();
     });
     io.on("sync", () => getMemory());
     io.on("disconnect", () => console.log("configureSocket :: client disconnected"));
