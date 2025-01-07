@@ -34,7 +34,6 @@ const startServices = async (app) => {
             console.log("startServices :: server running on 443 at https://localhost");
         });
         configureSocket();
-        setMemory();
         execSync(`start "" "https://dbdbdbdbdbgroup.com/demo/"`, {stdio: 'ignore'});
     } catch (err) {
         console.log("startServices :: error initializing services:", err);
