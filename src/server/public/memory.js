@@ -9,16 +9,26 @@ const getMemory = async () => {
         for (let i = 0; i < memory.length; i++) {
             try {
                 const [method, url, body] = JSON.parse(memory[i]);
-                // console.log('memory :: method', method);
-                console.log('memory :: url', url);
-                // console.log('memory :: body', body);
                 const path = `https://localhost${url}`;
                 if (url.includes(`api/media/update`)) {
                     console.log('memory :: [media]');
-                    result = await fetch(path.replace('/api/', '/memory/'), {agent, method, body:{method, url, body}});
+                    result = await fetch(path.replace('/api/', '/memory/'),
+                        {
+                            agent,
+                            method,
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({method, url, body}),
+                        }
+                    );
                 } else {
                     console.log('memory :: [signal]');
-                    result = await fetch(path.replace('/api/', '/memory/'), {agent, method});
+                    result = await fetch(path.replace('/api/', '/memory/'),
+                        {
+                            agent,
+                            headers: {'Content-Type': 'application/json'},
+                            method,
+                        }
+                    );
                 }
                 console.log('memory :: loop status', result.status);
             } catch (error) {
