@@ -36,8 +36,8 @@ const memorize = (req, key) => {
 };
 ['demo'].map(key => {
     app.all(`/${key}${ROUTES.API_MEMORY_GET}`, (req, res) => {
+        res.send(memory[hashify(req.ip, key)]);
         memory[hashify(req.ip, key)] = [];
-        res.send(`Success API_MEMORY_GET ${req.url} ${key}`);
     });
     app.all(`/${key}${ROUTES.API_MEMORY_SET}`, (req, res) => {
         res.send(`Success API_MEMORY_SET ${req.url} ${key}`);
