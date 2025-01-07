@@ -1,5 +1,7 @@
+const fs = require("fs");
 const https = require("https");
 const fetch = require("node-fetch");
+const {sync: globSync} = require('glob');
 const agent = new https.Agent({rejectUnauthorized: false});
 const getMemory = async () => {
     try {
@@ -38,6 +40,22 @@ const getMemory = async () => {
     }
 };
 const setMemory = async () => {
-    const response = await fetch("https://localhost/demo/api/memory/set", {agent});
+    const memory = globSync('./media/**.*')
+        .map(path => {
+            return {
+                path,
+                payload: fs.readFileSync(path),
+            };
+        });
+    console.log('setMemory :: memory', memory);
+    for (let i = 0; i < memory.length; i++) {
+        const {path, payload} = memory[i];
+        const result = await fetch("https://localhost/demo/api/memory/set", {
+            agent,
+            method: "POST",
+            body: {path, payload}
+        });
+        console.log('setMemory memory :: result status', result.status);
+    }
 };
 module.exports = {getMemory, setMemory};
