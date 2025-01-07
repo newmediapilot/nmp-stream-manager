@@ -11,17 +11,15 @@ const getMemory = async () => {
                 const [method, url, body] = JSON.parse(memory[i]);
                 const path = `https://localhost${url}`;
                 if (url.includes(`api/media/update`)) {
-                    console.log('memory :: [media]');
                     result = await fetch(path.replace('/api/', '/memory/'),
                         {
                             agent,
                             method,
                             headers: {'Content-Type': 'application/json'},
-                            body: JSON.stringify({method, url, body}),
+                            body: JSON.stringify({...body}),
                         }
                     );
                 } else {
-                    console.log('memory :: [signal]');
                     result = await fetch(path.replace('/api/', '/memory/'),
                         {
                             agent,
