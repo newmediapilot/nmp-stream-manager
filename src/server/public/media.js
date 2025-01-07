@@ -11,12 +11,17 @@ const publicMediaFetch = (req, res, next) => {
         req.path.startsWith('/media/')
     ) {
         const filePath = `${req.path.split('?')}`
-        const mimeType = (()=> {
+        const mimeType = (() => {
             switch (path.extname(req.path).toLowerCase()) {
                 case '.jpeg': return 'image/jpeg';
+                case '.jpg': return 'image/jpeg';
                 case '.png': return 'image/png';
                 case '.gif': return 'image/gif';
                 case '.webp': return 'image/webp';
+                case '.bmp': return 'image/bmp';
+                case '.mp3': return 'audio/mpeg';
+                case '.wav': return 'audio/wav';
+                case '.webm': return 'video/webm';
                 default: return 'application/octet-stream';
             }
         })();
