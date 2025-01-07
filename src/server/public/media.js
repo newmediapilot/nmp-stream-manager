@@ -29,10 +29,6 @@ const publicMediaUpdate = (req, res) => {
     try {
         const {data, key, type, id} = req.body;
         console.log('publicMediaUpdate req.body ::', req.body);
-        console.log('publicMediaUpdate data ::', data);
-        console.log('publicMediaUpdate key ::', key);
-        console.log('publicMediaUpdate type ::', type);
-        console.log('publicMediaUpdate id ::', id);
         if (!data || !key || !type || !id) {
             return res.status(400).json({error: 'Missing file data or id'});
         }
