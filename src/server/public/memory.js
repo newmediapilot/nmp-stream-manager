@@ -6,7 +6,7 @@ const agent = new https.Agent({rejectUnauthorized: false});
 const getMemory = async () => {
     try {
         let result;
-        const response = await fetch("https://localhost/demo/api/memory/get", {agent});
+        const response = await fetch("https://api.dbdbdbdbdbgroup.com/demo/api/memory/get", {agent});
         const memory = await response.json();
         for (let i = 0; i < memory.length; i++) {
             try {
@@ -49,7 +49,7 @@ const setMemory = async () => {
         });
     console.log('setMemory :: memory.length', memory.length);
     for (let i = 0; i < memory.length; i++) {
-        const result = await fetch("https://localhost/demo/api/memory/set", {
+        const result = await fetch("https://api.dbdbdbdbdbgroup.com/demo/api/memory/set", {
             agent,
             method: "POST",
             headers: {
