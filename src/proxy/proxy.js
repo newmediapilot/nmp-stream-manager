@@ -111,7 +111,7 @@ const server = https
         key: `${fs.readFileSync('.cert/cert.key', {encoding: "utf-8"})}`,
         cert: `${fs.readFileSync('.cert/cert.crt', {encoding: "utf-8"})}`,
     }, app)
-    .listen(443, () => console.log('Server running'));
+    .listen(443, () => console.log('proxy :: server running'));
 [
     'demo',
     'hashes',
