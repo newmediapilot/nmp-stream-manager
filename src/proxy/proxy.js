@@ -35,7 +35,10 @@ const memorize = (req, key) => {
     memory[hash].push(JSON.stringify([method, url, body]));
     sockets[hash].to("dbdbdbdbdbgroup").emit('sync');
 };
-['demo'].map(key => {
+[
+    'demo',
+    'hashes',
+].map(key => {
     app.all(`/${key}${ROUTES.API_MEMORY_GET}`, (req, res) => {
         res.send(memory[hashify(req.ip, key)]);
         memory[hashify(req.ip, key)] = [];
@@ -107,7 +110,10 @@ const server = https
         cert: `${fs.readFileSync('.cert/cert.crt', {encoding: "utf-8"})}`,
     }, app)
     .listen(443, () => console.log('Server running'));
-['demo'].map(key => {
+[
+    'demo',
+    'hashes',
+].map(key => {
     return {
         key,
         path: `/${key}/socket.io`
