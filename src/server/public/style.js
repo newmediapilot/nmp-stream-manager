@@ -9,9 +9,7 @@ const initializePublicStyles = async (type) => {
             setParam("public_module_styles", '/*--_empty:1;*/');
             fs.writeFileSync(path.resolve(`${type}`), '/*--_empty:1;*/', {encoding: "utf-8"});
         } else {
-            setParam("public_module_styles",
-                fs.readFileSync(path.resolve(`${type}`), "utf-8")
-            );
+            setParam("public_module_styles", fs.readFileSync(path.resolve(`${type}`), "utf-8"));
             console.log("initializePublicStyles :: load file");
         }
         sendStyle();
@@ -35,9 +33,7 @@ const publicStyleUpdate = (req, res) => {
             fs.writeFileSync(path.resolve(`${type}`), payload, {encoding: "utf-8"});
             console.log("publicStyleUpdate :: style", payload);
         }
-        res.status(200).json({
-            message: "publicStyleUpdate :: style for " + type + " updated successfully.",
-        });
+        res.status(200).json({message: "publicStyleUpdate :: style for " + type + " updated successfully."});
     } catch (error) {
         console.log(
             "Error processing style:",
