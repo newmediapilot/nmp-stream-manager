@@ -16,6 +16,7 @@ let length = 1;
 console.log("build :: start");
 const hashes = Array.from({length})
     .map((_, index) => crypto.createHash('sha256').update(String(index)).digest('hex'))
+    .map((_, index) => 'demo')
     .map(hash => {
             execSync(`npm run concat ${hash}`, {stdio: 'inherit'});
             execSync(`npm run snapshot ${hash}`, {stdio: 'inherit'});
