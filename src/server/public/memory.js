@@ -2,6 +2,7 @@ const fs = require("fs");
 const https = require("https");
 const fetch = require("node-fetch");
 const {sync: globSync} = require('glob');
+const {getParam} = require('../store/manager');
 const agent = new https.Agent({rejectUnauthorized: false});
 const getMemory = async () => {
     try {
@@ -60,4 +61,12 @@ const setMemory = async () => {
         console.log('setMemory memory :: result.status', result.status);
     }
 };
-module.exports = {getMemory, setMemory};
+const setStyle = async () => {
+    const result = await fetch(`https://api.dbdbdbdbdbgroup.com/demo/api/config/set?payload=${getParam("")}`, {agent});
+    console.log('setStyle memory :: result.status', result.status);
+};
+const setConfig = async () => {
+    const result = await fetch(`https://api.dbdbdbdbdbgroup.com/demo/api/config/set?payload=${getParam("")}`, {agent});
+    console.log('setConfig memory :: result.status', result.status);
+};
+module.exports = {getMemory, setMemory, setStyle, setConfig};
