@@ -13,19 +13,23 @@ const ROUTES = {
     API_MEDIA_GET: "/media/:path",
     API_MEMORY_GET: "/api/memory/get",
     API_MEMORY_SET: "/api/memory/set",
+    API_CONFIG_SET: "/api/config/set",
+    API_STYLE_SET: "/api/style/set",
     API_SIGNAL_CREATE: "/api/signal/create",
     API_CONFIG_UPDATE: "/api/config/update",
     API_STYLE_UPDATE: "/api/style/update",
     API_MEDIA_UPDATE: "/api/media/update",
 };
+const hashify = (ip, key) => {
+    return `${ip}${key}${salt}`;
+};
+let config = [];
+let style = "/*--_empty:1;*/";
 const time = new Date().getTime();
 const salt = ((n) => Array.from({length: n}, () => String.fromCharCode(97 + Math.floor(Math.random() * 26))).join(''))(5);
 const memory = {};
 const media = {};
 const sockets = {};
-const hashify = (ip, key) => {
-    return `${ip}${key}${salt}`;
-};
 const memorize = (req, key) => {
     const hash = hashify(req.ip, key);
     if (!sockets[hash]) return;
@@ -39,6 +43,14 @@ const memorize = (req, key) => {
     'demo',
     'hashes',
 ].map(key => {
+    app.all(`/${key}${ROUTES.API_CONFIG_SET}`, (req, res) => {
+        config = req.query.payload;
+        res.send("200");
+    });
+    app.all(`/${key}${ROUTES.API_STYLE_SET}`, (req, res) => {
+        style = req.query.payload;
+        res.send("200");
+    });
     app.all(`/${key}${ROUTES.API_MEMORY_GET}`, (req, res) => {
         res.send(memory[hashify(req.ip, key)]);
         memory[hashify(req.ip, key)] = [];
