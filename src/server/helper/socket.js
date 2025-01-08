@@ -2,7 +2,7 @@ const ioClient = require("socket.io-client");
 const {getMemory, setMemory} = require("../public/memory");
 let io;
 const configureSocket = () => {
-    io = ioClient("https://localhost", {
+    io = ioClient("https://api.dbdbdbdbdbgroup.com", {
         path: '/demo/socket.io',
         rejectUnauthorized: false,
         cors: {
