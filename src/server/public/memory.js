@@ -44,18 +44,20 @@ const setMemory = async () => {
         .map(path => {
             return {
                 path,
-                payload: fs.readFileSync(path),
+                payload: fs.readFileSync(path, {encoding: 'base64'}),
             };
         });
-    console.log('setMemory :: memory', memory);
+    console.log('setMemory :: memory.length', memory.length);
     for (let i = 0; i < memory.length; i++) {
-        const {path, payload} = memory[i];
         const result = await fetch("https://localhost/demo/api/memory/set", {
             agent,
             method: "POST",
-            body: {path, payload}
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(memory[i]),
         });
-        console.log('setMemory memory :: result status', result.status);
+        console.log('setMemory memory :: result.status', result.status);
     }
 };
 module.exports = {getMemory, setMemory};
