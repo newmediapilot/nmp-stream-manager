@@ -77,26 +77,16 @@ const memorize = (req, key) => {
         console.log(`proxy :: API_MEDIA_GET :: reqPayload ${media[hash]} ${reqPayload.length}`);
         const mimeType = (() => {
             switch (path.extname(reqPath).toLowerCase()) {
-                case '.jpeg':
-                    return 'image/jpeg';
-                case '.jpg':
-                    return 'image/jpeg';
-                case '.png':
-                    return 'image/png';
-                case '.gif':
-                    return 'image/gif';
-                case '.webp':
-                    return 'image/webp';
-                case '.bmp':
-                    return 'image/bmp';
-                case '.mp3':
-                    return 'audio/mpeg';
-                case '.wav':
-                    return 'audio/wav';
-                case '.webm':
-                    return 'video/webm';
-                default:
-                    return 'application/octet-stream';
+                case '.jpeg': return 'image/jpeg';
+                case '.jpg': return 'image/jpeg';
+                case '.png': return 'image/png';
+                case '.gif': return 'image/gif';
+                case '.webp': return 'image/webp';
+                case '.bmp': return 'image/bmp';
+                case '.mp3':  return 'audio/mpeg';
+                case '.wav': return 'audio/wav';
+                case '.webm': return 'video/webm';
+                default: return 'application/octet-stream';
             }
         })();
         res.setHeader('Content-Type', mimeType);
