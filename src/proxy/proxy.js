@@ -42,16 +42,24 @@ const memorize = (req, key) => {
     });
     app.all(`/${key}${ROUTES.API_MEMORY_SET}`, (req, res) => {
         const hash = hashify(req.ip, key);
-        const {path, payload} = req.body;
+        const reqPath = req.body.path;
+        const reqPayload = req.body.payload;
         if (!media[hash]) media[hash] = {};
-        media[hash][path] = payload;
-        console.log(`proxy :: API_MEMORY_SET ::`, req.body, path, payload);
+        media[hash][reqPath] = Buffer.from(reqPayload, 'base64');
+        console.log(`proxy :: API_MEMORY_SET :: ${hash} ${reqPath} ${reqPayload.length}`);
+        console.log(`proxy :: API_MEMORY_SET :: keys ${Object.keys(media[hash])}`);
         res.send("200");
     });
     app.all(`/${key}${ROUTES.API_MEDIA_GET}`, (req, res) => {
         const hash = hashify(req.ip, key);
         const reqPath = req.params.path;
-        const payload = media[hash][path];
+        const reqPayload = Object.keys(media[hash])
+            .filter(key => key.includes(reqPath))
+            .map(key => media[hash][key])
+            .pop();
+        console.log(`proxy :: API_MEDIA_GET :: reqPath ${reqPath}`);
+        console.log(`proxy :: API_MEDIA_GET :: keys ${Object.keys(media[hash])}`);
+        console.log(`proxy :: API_MEDIA_GET :: reqPayload ${media[hash]} ${reqPayload.length}`);
         const mimeType = (() => {
             switch (path.extname(reqPath).toLowerCase()) {
                 case '.jpeg':
@@ -77,8 +85,7 @@ const memorize = (req, key) => {
             }
         })();
         res.setHeader('Content-Type', mimeType);
-        console.log(`proxy :: API_MEDIA_GET :: ${reqPath} ${media[hash]}`);
-        res.send(payload);
+        res.send(reqPayload);
     });
     [
         `/${key}${ROUTES.API_SIGNAL_CREATE}`,
