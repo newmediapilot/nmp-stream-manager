@@ -30,9 +30,6 @@ async function publicSignalCreate(req, res) {
         if ("feature" === type) {
             result = await sendPayload(description);
         }
-        if ("style" === type) {
-            result = await sendPayload(`style:set:${description}`);
-        }
         if ("draw" === type) {
             result = await sendPayload(`draw:${description}`);
         }
@@ -41,6 +38,12 @@ async function publicSignalCreate(req, res) {
         }
         if ("media" === type) {
             result = await sendPayload(`media:set:${description}`);
+        }
+        if ("style" === type) {
+            result = await sendPayload(`style:set:${description}`);
+        }
+        if ("config" === type) {
+            result = await sendPayload(`config:set:${description}`);
         }
         if ("browser" === type) {
             if ("reload" === description) {
