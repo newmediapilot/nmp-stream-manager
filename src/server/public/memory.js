@@ -62,11 +62,11 @@ const setMemory = async () => {
     }
 };
 const setStyle = async () => {
-    const result = await fetch(`https://api.dbdbdbdbdbgroup.com/demo/api/config/set?payload=${getParam("")}`, {agent});
-    console.log('setStyle memory :: result.status', result.status);
+    const result = await fetch(`https://api.dbdbdbdbdbgroup.com/demo/api/config/set?payload=${getParam("public_module_styles")}`, {agent});
+    console.log('setStyle memory :: result.status', result.status, getParam("public_module_styles"));
 };
 const setConfig = async () => {
-    const result = await fetch(`https://api.dbdbdbdbdbgroup.com/demo/api/config/set?payload=${getParam("")}`, {agent});
-    console.log('setConfig memory :: result.status', result.status);
+    const result = await fetch(`https://api.dbdbdbdbdbgroup.com/demo/api/config/set?payload=${getParam("dashboard_signals_config")}`, {agent});
+    console.log('setConfig memory :: result.status', result.status, getParam("dashboard_signals_config"));
 };
 module.exports = {getMemory, setMemory, setStyle, setConfig};
