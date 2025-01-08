@@ -112,6 +112,7 @@ const putConfig = (filePath, config) => {
         ":: contents :",
         config.map((c) => (c.label || 'empty')),
     );
+    sendConfig();
     fs.writeFileSync(fileName, JSON.stringify(config), {encoding: "utf-8"});
 };
 const getConfig = (type) => {
