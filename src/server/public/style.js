@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const {setParam} = require("../store/manager");
-const {sendStyle} = require("../public/memory");
+const {broadcastStyle} = require("../public/memory");
 const initializePublicStyles = async (type) => {
     console.log("initializePublicStyles :: start");
     try {
@@ -13,7 +13,7 @@ const initializePublicStyles = async (type) => {
             setParam("public_module_styles", fs.readFileSync(path.resolve(`${type}`), "utf-8"));
             console.log("initializePublicStyles :: load file");
         }
-        sendStyle();
+        broadcastStyle();
         console.log("initializePublicStyles :: success");
         return true;
     } catch (e) {
@@ -30,7 +30,7 @@ const publicStyleUpdate = (req, res) => {
         console.log("publicStyleUpdate", type, payload);
         if ("style" === type) {
             setParam("public_module_styles", payload);
-            sendStyle();
+            broadcastStyle();
             fs.writeFileSync(path.resolve(`${type}`), payload, {encoding: "utf-8"});
             console.log("publicStyleUpdate :: style", payload);
         }

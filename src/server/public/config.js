@@ -82,7 +82,7 @@ const DASHBOARD_BUTTON_CONFIG = {
 };
 const fs = require("fs");
 const path = require("path");
-const {sendConfig} = require("../public/memory");
+const {broadcastConfig} = require("../public/memory");
 const {setParam, getParam} = require("../store/manager");
 const initializePublicConfigs = async (type) => {
     console.log("initializePublicConfigs :: start");
@@ -108,7 +108,7 @@ const initializePublicConfigs = async (type) => {
 const putConfig = (filePath, config) => {
     const fileName = path.resolve(`${filePath}`);
     console.log("putConfig :: file:", fileName, ":: contents :", config.map((c) => (c.label || 'empty')));
-    sendConfig();
+    broadcastConfig();
     fs.writeFileSync(fileName, JSON.stringify(config), {encoding: "utf-8"});
 };
 const getConfig = (type) => {
