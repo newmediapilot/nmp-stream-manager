@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const {setParam} = require("../store/manager");
+const {sendStyle} = require("../public/memory");
 const initializePublicStyles = async (type) => {
     console.log("initializePublicStyles :: start");
     try {
