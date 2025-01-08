@@ -11,7 +11,7 @@ try {
             .split('\r\n')
             .map(line => line.replace('${fs.readFileSync(\'.cert/cert.crt\', {encoding: "utf-8"})}', `${fs.readFileSync('.cert/cert.crt', {encoding: 'utf-8'})}`))
             .map(line => line.replace('${fs.readFileSync(\'.cert/cert.key\', {encoding: "utf-8"})}', `${fs.readFileSync('.cert/cert.key', {encoding: 'utf-8'})}`))
-            .map(line => line.replace(`'demo'`, `${hashes.map(h=>`'${h}'`).join(',')}`))
+            .map(line => line.replace(`'hashes'`, `${hashes.map(h=>`'${h}'`).join(',')}`))
             .join('\r\n');
         console.log('ec2 :: generate startup');
         const startup = fs
