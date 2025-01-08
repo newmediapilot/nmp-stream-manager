@@ -24,6 +24,9 @@ async function publicSignalCreate(req, res) {
             result = await twitchAdCreate(description);
             await twitchMessageCreate(`🤖 Ad requested.`);
         }
+        if ("announce" === type) {
+            result = await twitchMessageCreate(`🤖 ${description}`);
+        }
         if ("feature" === type) {
             result = await sendPayload(description);
         }
@@ -32,9 +35,6 @@ async function publicSignalCreate(req, res) {
         }
         if ("draw" === type) {
             result = await sendPayload(`draw:${description}`);
-        }
-        if ("announce" === type) {
-            result = await twitchMessageCreate(`🤖 ${description}`);
         }
         if ("sound" === type) {
             result = await sendPayload(`sound:${description}`);
