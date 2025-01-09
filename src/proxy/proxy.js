@@ -39,7 +39,6 @@ const memorize = (req, key) => {
 };
 [
     'demo',
-    'hashes',
 ].map(key => {
     app.all(`/${key}${ROUTES.API_CONFIG_SET}`, (req, res) => {
         const hash = hashify(req.ip, key);
@@ -124,7 +123,6 @@ const server = https
     .listen(443, () => console.log('proxy :: server running'));
 [
     'demo',
-    'hashes',
 ].map(key => {
     return {
         key,
