@@ -44,16 +44,14 @@ const memorize = (req, key) => {
         const hash = hashify(req.ip, key);
         if (!sockets[hash]) return;
         config[hash] = req.query.payload;
-        // sockets[hash].to("dbdbdbdbdbgroup").emit('payload', `config:set:${style[hash]}`);
-        sockets[hash].emit('payload', `config:set:${style[hash]}`);
-        console.log(`proxy :: API_CONFIG_SET :: ${hash} ${config[hash]}`);
+        sockets[hash].emit('payload', `config:set:${JSON.stringify(config[hash])}`);
+        console.log(`proxy :: API_CONFIG_SET :: ${hash} ${JSON.stringify(config[hash])}`);
         res.send(`200 @ ${time}`);
     });
     app.all(`/${key}${ROUTES.API_STYLE_SET}`, (req, res) => {
         const hash = hashify(req.ip, key);
         if (!sockets[hash]) return;
         style[hash] = req.query.payload;
-        // sockets[hash].to("dbdbdbdbdbgroup").emit('payload', `style:set:${style[hash]}`);
         sockets[hash].emit('payload', `style:set:${style[hash]}`);
         console.log(`proxy :: API_STYLE_SET :: ${hash} ${style[hash]}`);
         res.send(`200 @ ${time}`);
