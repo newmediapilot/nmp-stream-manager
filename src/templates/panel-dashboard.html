@@ -27,32 +27,155 @@
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
-    {% for key, value in public_routes%}<meta name="{{key}}" content="{{value}}">{% endfor %}
+    {% for key, value in public_routes%}
+    <meta name="{{key}}" content="{{value}}">
+    {% endfor %}
     <link href="../client/style/dashboard.css?" rel="stylesheet">
     <script src="../client/script/dashboard.js?" defer type="text/javascript"></script>
-    <style id="public_module_styles">:root{{public_module_styles}}</style>
+    <style id="public_module_styles">:root {
+
+    {
+        public_module_styles
+    }
+    }</style>
 </head>
 <body>
 <section>
-    {%for config in dashboard_signals_config%}
-    {%if config.type == "feature"%}
-    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label%}
-    {%elif config.type == "mark"%}
-    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.label%}
-    {%else%}
-    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description%}
-    {%endif%}
-    {%if config.type === "empty"%}
-    <article class="empty"></article>
-    {%else%}
-    <article class="{{config.theme}}">
-        <button data-href="{{data_href}}" {%if config.visibility=="OFF"%}disabled{%endif%}>
-            <label aria-label="{{config.emoji}}"></label>
-            <label aria-label="{{config.label}}"></label>
-        </button>
+
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
     </article>
-    {%endif%}
-    {%endfor%}
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+    <article class="empty">
+        <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
+    </article>
+
+    <!--    {%for config in dashboard_signals_config%}-->
+    <!--    {%if config.type == "feature"%}-->
+    <!--    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label%}-->
+    <!--    {%elif config.type == "mark"%}-->
+    <!--    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.label%}-->
+    <!--    {%else%}-->
+    <!--    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description%}-->
+    <!--    {%endif%}-->
+    <!--    {%if config.type === "empty"%}-->
+    <!--    <article class="empty"></article>-->
+    <!--    {%else%}-->
+    <!--    <article class="{{config.theme}}">-->
+    <!--        <button data-href="{{data_href}}" {%if config.visibility=="OFF"%}disabled{%endif%}>-->
+    <!--            <label aria-label="{{config.emoji}}"></label>-->
+    <!--            <label aria-label="{{config.label}}"></label>-->
+    <!--        </button>-->
+    <!--    </article>-->
+    <!--    {%endif%}-->
+    <!--    {%endfor%}-->
+
 </section>
 <nav class="controls">
     <button aria-label="Draw"><em aria-label="🎨"></em></button>
@@ -82,8 +205,11 @@
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => socketWatchConfig((payload) => {
-        let config = payload.split('config:set:')[1];
-        console.log('socketWatchConfig payload', config);
+        const signals = JSON.parse(payload.split('config:set:')[1]);
+        signals.forEach(signal => {
+            console.log('socketWatchConfig signal', signal);
+            document.body.querySelector(``);
+        });
     }));
     document.addEventListener("DOMContentLoaded", () => initNavControls());
     document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
