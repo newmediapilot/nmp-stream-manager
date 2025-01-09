@@ -101,7 +101,7 @@ const memorize = (req, key) => {
         app.all(path, (req, res) => {
             console.log(`proxy :: ${path}`);
             memorize(req, key);
-            res.send("200");
+            res.send(`200 @ ${time}`);
         });
     });
 });
