@@ -49,6 +49,7 @@ const memorize = (req, key) => {
     });
     app.all(`/${key}${ROUTES.API_STYLE_SET}`, (req, res) => {
         style = req.query.payload;
+        res.send(`200 @ ${time}`);
     });
     app.all(`/${key}${ROUTES.API_MEMORY_GET}`, (req, res) => {
         res.send(memory[hashify(req.ip, key)]);
