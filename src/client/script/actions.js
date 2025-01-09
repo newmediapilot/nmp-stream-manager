@@ -102,7 +102,7 @@ const actionsCreateUpload = (editorEl) => {
     const inputEl = editorEl.querySelector('[type="text"]');
     const toggleReplayState = () => {
         const cells = uploadButton.id.split(',');
-        const url = `https://api.dbdbdbdbdbgroup.com/media/${cells[0]}.${cells[2]}?${cells[1]}=${new Date().getTime()}`;
+        const url = `https://api.dbdbdbdbdbgroup.com/demo/media/${cells[0]}.${cells[2]}?${cells[1]}=${new Date().getTime()}`;
         console.log('toggleReplayState :: checking ::', url);
         axios.get(url).then(() => {
             if (audio) {
@@ -181,7 +181,7 @@ const actionsCreateUpload = (editorEl) => {
         const displayMedia = () => {
             if (!imageElement.src) {
                 const cells = uploadButton.id.split(',');
-                const url = `https://api.dbdbdbdbdbgroup.com/media/${cells[0]}.${cells[2]}?${cells[1]}=${new Date().getTime()}`;
+                const url = `https://api.dbdbdbdbdbgroup.com/demo/media/${cells[0]}.${cells[2]}?${cells[1]}=${new Date().getTime()}`;
                 imageElement.src = url;
                 editorEl.style.gridTemplateRows = `repeat(3, 100px)`;
                 editorEl.scrollIntoView({
