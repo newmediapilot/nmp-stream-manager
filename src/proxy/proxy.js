@@ -63,7 +63,7 @@ const memorize = (req, key) => {
         media[hash][reqPath] = Buffer.from(reqPayload, 'base64');
         console.log(`proxy :: API_MEMORY_SET :: ${hash} ${reqPath} ${reqPayload.length}`);
         console.log(`proxy :: API_MEMORY_SET :: keys ${Object.keys(media[hash])}`);
-        res.send("200");
+        res.send(`200 @ ${time}`);
     });
     app.all(`/${key}${ROUTES.API_MEDIA_GET}`, (req, res) => {
         const hash = hashify(req.ip, key);
