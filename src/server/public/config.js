@@ -96,6 +96,7 @@ const initializePublicConfigs = async (type) => {
             setParam("dashboard_signals_config", getConfig("signals"));
             console.log("initializePublicConfigs :: load file");
         }
+        broadcastConfig();
         console.log("initializePublicConfigs :: success");
         return true;
     } catch (e) {
@@ -108,7 +109,6 @@ const initializePublicConfigs = async (type) => {
 const putConfig = (filePath, config) => {
     const fileName = path.resolve(`${filePath}`);
     console.log("putConfig :: file:", fileName, ":: contents :", config.map((c) => (c.label || 'empty')));
-    broadcastConfig();
     fs.writeFileSync(fileName, JSON.stringify(config), {encoding: "utf-8"});
 };
 const getConfig = (type) => {
@@ -142,6 +142,7 @@ const publicConfigUpdate = (req, res) => {
     try {
         if (type === "signals:order") putConfig("signals", applySignalsOrder(payload));
         if (type === "signals:field") putConfig("signals", applySignalsField(payload));
+        broadcastConfig();
         res.status(200).json({message: "Configuration for " + type + " updated successfully."});
     } catch (error) {
         console.log("publicConfigUpdate :: error processing configuration:", error.message);
@@ -154,5 +155,6 @@ const configFieldUpdate = (id, field, value) => {
     signalsTarget[Number(id)][field] = value;
     setParam("dashboard_signals_config", signalsTarget);
     putConfig("signals", signalsTarget);
+    broadcastConfig();
 };
 module.exports = {initializePublicConfigs, publicConfigUpdate, configFieldUpdate};
