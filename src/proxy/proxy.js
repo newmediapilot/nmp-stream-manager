@@ -74,7 +74,7 @@ const memorize = (req, key) => {
             .pop();
         console.log(`proxy :: API_MEDIA_GET :: reqPath ${reqPath}`);
         console.log(`proxy :: API_MEDIA_GET :: keys ${Object.keys(media[hash])}`);
-        console.log(`proxy :: API_MEDIA_GET :: reqPayload ${media[hash]} ${reqPayload.length}`);
+        console.log(`proxy :: API_MEDIA_GET :: reqPayload ${media[hash]} ${reqPayload && reqPayload.length}`);
         const mimeType = (() => {
             switch (path.extname(reqPath).toLowerCase()) {
                 case '.jpeg': return 'image/jpeg';
