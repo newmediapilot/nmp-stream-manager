@@ -35,7 +35,7 @@ const memorize = (req, key) => {
     if (!sockets[hash]) return;
     if (!memory[hash] || !memory[hash].length) memory[hash] = [];
     const {method, url, body} = req;
-    console.log('proxy :: memorize ::', hash, method, url, body);
+    console.log(`proxy :: memorize :: ${hash} ${method} ${url} ${body}`);
     memory[hash].push(JSON.stringify([method, url, body]));
     sockets[hash].to("dbdbdbdbdbgroup").emit('sync');
 };
