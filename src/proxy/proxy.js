@@ -45,6 +45,7 @@ const memorize = (req, key) => {
 ].map(key => {
     app.all(`/${key}${ROUTES.API_CONFIG_SET}`, (req, res) => {
         config = req.query.payload;
+        res.send(`200 @ ${time}`);
     });
     app.all(`/${key}${ROUTES.API_STYLE_SET}`, (req, res) => {
         style = req.query.payload;
