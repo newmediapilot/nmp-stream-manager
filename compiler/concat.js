@@ -115,7 +115,6 @@ const server = globSync('./src/server/**/*.*')
             filePath,
         };
     });
-
 const launch = globSync('./src/launch.js')
     .map(filePath => {
         console.log('launch :: filePath', filePath);
@@ -149,13 +148,11 @@ const launch = globSync('./src/launch.js')
         return content;
     })
     .join('\r\n');
-
 fs.writeFileSync(
     '.launch.js',
     launch,
     {encoding: 'utf-8'}
 );
-
 const routes = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('routes.js'))), 1);
 const manager = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('manager.js'))), 1);
 const message = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('message.js'))), 1);
@@ -170,7 +167,6 @@ const stream = server.splice(server.indexOf(server.find(({filePath}) => filePath
 const index = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('index.js'))), 1);
 const memory = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('memory.js'))), 1);
 const socket = server.splice(server.indexOf(server.find(({filePath}) => filePath.endsWith('socket.js'))), 1);
-
 let output = [
     ...routes,
     ...manager,
@@ -194,7 +190,6 @@ let output = [
     })
     .map(({content, filePath}) => `/** start :: ${filePath} */\r\n${content}\r\n/** end :: ${filePath} */`)
     .join('\r\n');
-
 const templates = globSync('./src/templates/**/*.*')
     .map(filePath => {
         console.log('templates :: filePath', filePath);
@@ -231,6 +226,7 @@ const templates = globSync('./src/templates/**/*.*')
                         const res = request('GET', cdn);
                         return `<script type="text/javascript">${res.getBody('utf-8')}</script>`;
                     }
+                    line = line.replace(new RegExp('content="/demo/', "gm"), `content="/${hash}/`);
                     return line;
                 });
                 return [
@@ -240,7 +236,6 @@ const templates = globSync('./src/templates/**/*.*')
             filePath,
         };
     });
-
 templates.forEach(({filePath, content}) => {
     console.log('templates :: inject', filePath);
     output = output.replace(
