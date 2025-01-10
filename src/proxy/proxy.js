@@ -35,7 +35,7 @@ const memorize = (req, key) => {
     const {method, url, body} = req;
     console.log(`proxy :: memorize :: ${hash} ${method} ${url} ${body}`);
     memory[hash].push(JSON.stringify([method, url, body]));
-    sockets[hash].emit('sync');
+    sockets[hash].to('dbdbdbdbdbgroup').emit('sync');
 };
 [
     'demo',
@@ -44,7 +44,7 @@ const memorize = (req, key) => {
         const hash = hashify(req.ip, key);
         if (!sockets[hash]) return;
         config[hash] = req.query.payload;
-        sockets[hash].emit('payload', `config:set:${JSON.stringify(config[hash])}`);
+        sockets[hash].to('dbdbdbdbdbgroup').emit('payload', `config:set:${JSON.stringify(config[hash])}`);
         console.log(`proxy :: API_CONFIG_SET :: ${hash} ${JSON.stringify(config[hash])}`);
         res.send(`200 @ ${time}`);
     });
@@ -52,7 +52,7 @@ const memorize = (req, key) => {
         const hash = hashify(req.ip, key);
         if (!sockets[hash]) return;
         style[hash] = req.query.payload;
-        sockets[hash].emit('payload', `style:set:${style[hash]}`);
+        sockets[hash].to('dbdbdbdbdbgroup').emit('payload', `style:set:${style[hash]}`);
         console.log(`proxy :: API_STYLE_SET :: ${hash} ${style[hash]}`);
         res.send(`200 @ ${time}`);
     });
@@ -133,11 +133,12 @@ const server = https
     });
     io.on("connection", (socket) => {
         const hash = hashify(socket.handshake.address, key);
-        socket.on("payload", (payload) => socket.emit("payload", payload));
+        socket.join('dbdbdbdbdbgroup');
+        socket.on("payload", (payload) => socket.to('dbdbdbdbdbgroup').emit("payload", payload));
         socket.on("disconnect", () => console.log("proxy :: disconnected", socket.id, socket.handshake.address, key));
         sockets[hash] = socket;
-        style[hash] && sockets[hash].emit('payload', `style:set:${style[hash]}`);
-        config[hash] && sockets[hash].emit('payload', `config:set:${JSON.stringify(config[hash])}`);
+        style[hash] && sockets[hash].to('dbdbdbdbdbgroup').emit('payload', `style:set:${style[hash]}`);
+        config[hash] && sockets[hash].to('dbdbdbdbdbgroup').emit('payload', `config:set:${JSON.stringify(config[hash])}`);
         console.log("proxy :: connected", socket.id, socket.handshake.address, key);
     });
     console.log("proxy :: created", key, path);
