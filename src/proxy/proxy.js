@@ -134,13 +134,7 @@ const server = https
     io.on("connection", (socket) => {
         const hash = hashify(socket.handshake.address, key);
         socket.on("payload", (payload) => socket.emit("payload", payload));
-        socket.on("disconnect", () => {
-            console.log("proxy :: disconnected", socket.id, socket.handshake.address, key);
-            sockets[hash] = undefined;
-            memory[hash] = undefined;
-            config[hash] = undefined;
-            style[hash] = undefined;
-        });
+        socket.on("disconnect", () => console.log("proxy :: disconnected", socket.id, socket.handshake.address, key));
         sockets[hash] = socket;
         style[hash] && sockets[hash].emit('payload', `style:set:${style[hash]}`);
         config[hash] && sockets[hash].emit('payload', `config:set:${JSON.stringify(config[hash])}`);
