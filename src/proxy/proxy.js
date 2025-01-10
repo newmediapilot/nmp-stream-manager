@@ -137,14 +137,8 @@ const server = https
         },
     });
     io.on("connection", (socket) => {
-        console.log("proxy :: connection", socket.handshake.address, key);
         const hash = hashify(socket.handshake.address, key);
-        socket.join("dbdbdbdbdbgroup");
-        socket.on("payload", (payload) => {
-            socket.to("dbdbdbdbdbgroup").emit("payload", payload);
-            console.log("proxy :: payload", payload);
-        });
-        sockets[hash] = socket;
+        socket.on("payload", (payload) => socket.emit("payload", payload));
         socket.on("disconnect", () => {
             console.log("proxy :: disconnected", socket.handshake.address, key);
             sockets[hash] = undefined;
@@ -152,6 +146,7 @@ const server = https
             config[hash] = {};
             style[hash] = {};
         });
+        sockets[hash] = socket;
         console.log("proxy :: connected", socket.handshake.address, key);
     });
     console.log("proxy :: ready", key, path);
