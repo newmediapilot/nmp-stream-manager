@@ -226,7 +226,26 @@ const templates = globSync('./src/templates/**/*.*')
                         const res = request('GET', cdn);
                         return `<script type="text/javascript">${res.getBody('utf-8')}</script>`;
                     }
-                    line = line.replace(new RegExp('content="/demo/', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/`);
+                    line = line.replace(new RegExp('content="/demo/memory/signal/create', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/memory/signal/create`);
+                    line = line.replace(new RegExp('content="/demo/memory/config/update', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/memory/config/update`);
+                    line = line.replace(new RegExp('content="/demo/memory/style/update', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/memory/style/update`);
+                    line = line.replace(new RegExp('content="/demo/memory/media/update', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/memory/media/update`);
+                    line = line.replace(new RegExp('content="/demo/api/signal/create', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/api/signal/create`);
+                    line = line.replace(new RegExp('content="/demo/api/config/update', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/api/config/update`);
+                    line = line.replace(new RegExp('content="/demo/api/style/update', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/api/style/update`);
+                    line = line.replace(new RegExp('content="/demo/api/media/update', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/api/media/update`);
+                    line = line.replace(new RegExp('content="/demo/index.html', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/index.html`);
+                    line = line.replace(new RegExp('content="/demo/panel-dashboard.html', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/panel-dashboard.html`);
+                    line = line.replace(new RegExp('content="/demo/panel-actions.html', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/panel-actions.html`);
+                    line = line.replace(new RegExp('content="/demo/panel-layout.html', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/panel-layout.html`);
+                    line = line.replace(new RegExp('content="/demo/panel-draw.html', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/panel-draw.html`);
+                    line = line.replace(new RegExp('content="/demo/embed.html', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/embed.html`);
+                    line = line.replace(new RegExp('content="/demo/embed-feature.html', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/embed-feature.html`);
+                    line = line.replace(new RegExp('content="/demo/embed-media.html', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/embed-media.html`);
+                    line = line.replace(new RegExp('content="/demo/embed-draw.html', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/embed-draw.html`);
+                    line = line.replace(new RegExp('content="/demo/embed-sound.html', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/embed-sound.html`);
+                    line = line.replace(new RegExp('content="/demo/twitch/login', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/twitch/login`);
+                    line = line.replace(new RegExp('content="/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/', "gm"), `content="https://api.dbdbdbdbdbgroup.com/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/`);
                     return line;
                 });
                 return [
