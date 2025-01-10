@@ -42,13 +42,13 @@
             position: relative;
         }
     </style>
-    <style id="public_module_styles">:root{{public_module_styles}}</style>
+    <style id="public_module_styles"></style>
 </head>
 <body>
 <main>
-    <iframe src="{{public_routes.PANEL_FEATURE_EMBED}}#edit"></iframe>
-    <iframe src="{{public_routes.PANEL_DRAW_EMBED}}#edit"></iframe>
-    <iframe src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
+    <iframe></iframe>
+    <iframe></iframe>
+    <iframe></iframe>
 </main>
 <script>
     document.addEventListener("DOMContentLoaded", () => cssDevWatch());
@@ -59,6 +59,11 @@
         let style = payload.split('style:set:')[1];
         document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
     }));
+    document.addEventListener("DOMContentLoaded", () => {
+        document.body.querySelectorAll('iframe')[0].src = `${getPath('PANEL_FEATURE_EMBED')}#edit`;
+        document.body.querySelectorAll('iframe')[1].src = `${getPath('PANEL_DRAW_EMBED')}#edit`;
+        document.body.querySelectorAll('iframe')[2].src = `${getPath('PANEL_MEDIA_EMBED')}#edit`;
+    });
 </script>
 </body>
 </html>
