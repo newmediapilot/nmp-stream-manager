@@ -1,5 +1,5 @@
 const ioClient = require("socket.io-client");
-const {getMemory, setMemory} = require("../public/memory");
+const {getMemory, setMemory, broadcastConfig, broadcastStyle} = require("../public/memory");
 let io;
 const configureSocket = () => {
     io = ioClient("https://api.dbdbdbdbdbgroup.com", {
@@ -12,6 +12,8 @@ const configureSocket = () => {
     });
     io.on("connect", () => {
         console.log("configureSocket :: client connect socket.id", io.id);
+        broadcastConfig();
+        broadcastStyle();
         setMemory();
     });
     io.on("sync", () => {
@@ -19,7 +21,7 @@ const configureSocket = () => {
         getMemory();
     });
     io.on("disconnect", () => console.log("configureSocket :: client disconnected"));
-    io.on("connect_error", (err) => console.log("configureSocket :: connection error:", err));
+    io.on("connect_error", (err) => console.log("configureSocket :: connection offline"));
     console.log("configureSocket :: configureSocket initialized");
 };
 const sendPayload = (payload) => {
@@ -38,7 +40,7 @@ const sendPayload = (payload) => {
         console.log("sendPayload :: sending payload:", payload);
         return true;
     } catch (err) {
-        console.log("sendPayload :: error sending payload:", err);
+        console.log("sendPayload :: error payload");
         return false;
     }
 };
