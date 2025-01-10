@@ -68,7 +68,6 @@ const memorize = (req, key) => {
         const reqPayload = req.body.payload;
         if (!media[hash]) media[hash] = {};
         media[hash][reqPath] = Buffer.from(reqPayload, 'base64');
-        console.log(`proxy :: API_MEMORY_SET :: ${hash} ${reqPath} ${reqPayload.length}`);
         console.log(`proxy :: API_MEMORY_SET :: keys ${Object.keys(media[hash])}`);
         res.send(`200 @ ${time}`);
     });
@@ -79,9 +78,7 @@ const memorize = (req, key) => {
             .filter(key => key.includes(reqPath))
             .map(key => media[hash][key])
             .pop();
-        console.log(`proxy :: API_MEDIA_GET :: reqPath ${reqPath}`);
         console.log(`proxy :: API_MEDIA_GET :: keys ${Object.keys(media[hash])}`);
-        console.log(`proxy :: API_MEDIA_GET :: reqPayload ${media[hash]} ${reqPayload && reqPayload.length}`);
         const mimeType = (() => {
             switch (path.extname(reqPath).toLowerCase()) {
                 case '.jpeg': return 'image/jpeg';
@@ -106,7 +103,6 @@ const memorize = (req, key) => {
         `/${key}${ROUTES.API_MEDIA_UPDATE}`,
     ].map(path => {
         app.all(path, (req, res) => {
-            console.log(`proxy :: ${path}`);
             memorize(req, key);
             res.send(`200 @ ${time}`);
         });
@@ -127,7 +123,6 @@ const server = https
         path: `/${key}/socket.io`
     }
 }).map(({key, path}) => {
-    console.log("proxy :: create", key, path);
     const io = socketIo(server, {
         path,
         rejectUnauthorized: false,
@@ -140,14 +135,16 @@ const server = https
         const hash = hashify(socket.handshake.address, key);
         socket.on("payload", (payload) => socket.emit("payload", payload));
         socket.on("disconnect", () => {
-            console.log("proxy :: disconnected", socket.handshake.address, key);
+            console.log("proxy :: disconnected", socket.id, socket.handshake.address, key);
             sockets[hash] = undefined;
-            memory[hash] = {};
-            config[hash] = {};
-            style[hash] = {};
+            memory[hash] = undefined;
+            config[hash] = undefined;
+            style[hash] = undefined;
         });
         sockets[hash] = socket;
-        console.log("proxy :: connected", socket.handshake.address, key);
+        style[hash] && sockets[hash].emit('payload', `style:set:${style[hash]}`);
+        config[hash] && sockets[hash].emit('payload', `config:set:${JSON.stringify(config[hash])}`);
+        console.log("proxy :: connected", socket.id, socket.handshake.address, key);
     });
-    console.log("proxy :: ready", key, path);
+    console.log("proxy :: created", key, path);
 });
