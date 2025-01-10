@@ -49,7 +49,6 @@ const dashboard = () => {
             },
         })
             .finally(() => {
-                socketEmitReload();
                 dashboardBlinkButtons();
                 dashboardFilterButtons(false);
                 containerEl.scrollTo({
