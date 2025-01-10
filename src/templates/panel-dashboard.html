@@ -3,6 +3,7 @@
 <head>
     <title>Dashboard</title>
     <meta charset="UTF-8">
+    <link rel="icon" href="/icon512_rounded.png" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/axios@1.5.1/dist/axios.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
@@ -201,17 +202,18 @@
         const signals = JSON.parse(data);
         signals.forEach((signal, index) => {
             const type = signal.type;
-            if (type === "empty") return;
             const {description, emoji, label, theme, visibility} = signal;
             const articleEl = document.body.querySelector('section').children[index];
             const buttonEl = articleEl.querySelector('button');
             const emojiEl = articleEl.querySelector('label:nth-of-type(1)');
             const labelEl = articleEl.querySelector('label:nth-of-type(2)');
             buttonEl.disabled = (visibility === "OFF");
-            articleEl.setAttribute('class', theme);
-            emojiEl.setAttribute('aria-label', emoji);
-            labelEl.setAttribute('aria-label', label);
-            if (type === "mark") {
+            articleEl.setAttribute('class', theme || "empty");
+            emojiEl.setAttribute('aria-label', emoji || "");
+            labelEl.setAttribute('aria-label', label || "");
+            if (type === "empty") {
+                buttonEl.setAttribute('data-href', ``);
+            } else if (type === "mark") {
                 buttonEl.setAttribute('data-href', `https://localhost/${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${label}`);
             } else if (type === "feature") {
                 buttonEl.setAttribute('data-href', `https://localhost/${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}:${label}`);
