@@ -226,7 +226,7 @@ const templates = globSync('./src/templates/**/*.*')
                         const res = request('GET', cdn);
                         return `<script type="text/javascript">${res.getBody('utf-8')}</script>`;
                     }
-                    line = line.replace(new RegExp('content="/demo/', "gm"), `content="/${hash}/`);
+                    line = line.replace(new RegExp('content="/demo/', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/`);
                     return line;
                 });
                 return [
