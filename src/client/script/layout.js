@@ -88,8 +88,6 @@ const sendLayoutInputValues = () => {
             type: "style",
             payload,
         },
-    }).finally(() => {
-        socketEmitReload();
     });
 };
 const setModes = () => {
