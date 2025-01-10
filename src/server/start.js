@@ -6,7 +6,6 @@ const {configureNunjucks} = require("./nunjucks/environment");
 const {initializePublicConfigs} = require("./public/config");
 const {initializePublicStyles} = require("./public/style");
 const {initializeMedia} = require("./public/media");
-const {setMemory} = require("./public/memory");
 const {configureSocket} = require("./helper/socket");
 const {ROUTES} = require("./routes");
 
