@@ -214,11 +214,11 @@
             if (type === "empty") {
                 buttonEl.setAttribute('data-href', ``);
             } else if (type === "mark") {
-                buttonEl.setAttribute('data-href', `https://localhost/${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${label}`);
+                buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${label}`);
             } else if (type === "feature") {
-                buttonEl.setAttribute('data-href', `https://localhost/${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}:${label}`);
+                buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}:${label}`);
             } else {
-                buttonEl.setAttribute('data-href', `https://localhost/${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}`);
+                buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}`);
             }
             console.log('socketWatchConfig :: signal', signal);
         });
