@@ -37,8 +37,6 @@ const actionsCreateEmojis = (editorEl) => {
                                 value: el.getAttribute("aria-label"),
                             }),
                         },
-                    }).finally(() => {
-                        socketEmitReload();
                     });
                 });
             });
@@ -78,8 +76,7 @@ const actionsCreateEditor = (editorEl) => {
                             value: textInputEl.value,
                         }),
                     },
-                })
-                .finally(() => socketEmitReload());
+                });
         }
         textInputEl.disabled = true;
         setTimeout(() => {
@@ -150,7 +147,6 @@ const actionsCreateUpload = (editorEl) => {
                             uploadButton.setAttribute("id", newCells);
                             actionButton && toggleReplayState();
                             inputEl.focus();
-                            socketEmitReload();
                             setFocusToken();
                             console.log('actionsCreateUpload :: success:', response.data);
                         }).catch(error => {
@@ -237,7 +233,6 @@ const actionsToggle = (editorEl) => {
             toggleButton.setAttribute('aria-label', state);
         }).finally(() => {
             toggleButton.disabled = false;
-            socketEmitReload();
         });
     };
     toggleButton.addEventListener('click', sendToggleState);
