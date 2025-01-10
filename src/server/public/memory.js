@@ -37,7 +37,7 @@ const getMemory = async () => {
             }
         }
     } catch (error2) {
-        console.log('memory :: root error', error2);
+        console.log('memory :: root error');
     }
 };
 const setMemory = async () => {
@@ -66,7 +66,7 @@ const broadcastStyle = async () => {
         const result = await fetch(`https://api.dbdbdbdbdbgroup.com/demo/${"api"}/style/set?payload=${JSON.stringify(getParam("public_module_styles"))}`, {agent});
         console.log('broadcastStyle memory :: result.status', result.status);
     } catch (e) {
-        console.log('broadcastStyle :: error', e);
+        console.log('broadcastStyle :: error');
     }
 };
 const broadcastConfig = async () => {
@@ -74,7 +74,7 @@ const broadcastConfig = async () => {
         const result = await fetch(`https://api.dbdbdbdbdbgroup.com/demo/${"api"}/config/set?payload=${JSON.stringify(getParam("dashboard_signals_config"))}`, {agent});
         console.log('broadcastConfig memory :: result.status', result.status);
     } catch (e) {
-        console.log('broadcastConfig :: error', e);
+        console.log('broadcastConfig :: error');
     }
 };
 module.exports = {getMemory, setMemory, broadcastStyle, broadcastConfig};
