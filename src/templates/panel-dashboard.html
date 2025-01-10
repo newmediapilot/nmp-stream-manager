@@ -3,6 +3,13 @@
 <head>
     <title>Dashboard</title>
     <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.5.1/dist/axios.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
     <script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>
     <script src="../client/script/reduced_motion.js?" defer type="text/javascript"></script>
     <script src="../client/script/get_url.js?" defer type="text/javascript"></script>
@@ -14,30 +21,17 @@
     <script src="../client/script/scroll_snap.js?" defer type="text/javascript"></script>
     <script src="../client/script/variables.js?" defer type="text/javascript"></script>
     <script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>
+    <script src="../client/script/dashboard.js?" defer type="text/javascript"></script>
     <link href="../client/style/variables.css?" rel="stylesheet">
     <link href="../client/style/reset.css?" rel="stylesheet">
     <link href="../client/style/base.css?" rel="stylesheet">
     <link href="../client/style/scrollbar.css?" rel="stylesheet">
     <link href="../client/style/controls.css?" rel="stylesheet">
     <link href="../client/style/dialog.css?" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.5.1/dist/axios.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
-    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
-    {% for key, value in public_routes%}
-    <meta name="{{key}}" content="{{value}}">
-    {% endfor %}
     <link href="../client/style/dashboard.css?" rel="stylesheet">
-    <script src="../client/script/dashboard.js?" defer type="text/javascript"></script>
-    <style id="public_module_styles">:root {
-
-    {
-        public_module_styles
-    }
-    }</style>
+    <meta name="API_SIGNAL_CREATE" content="/api/signal/create">
+    <meta name="API_CONFIG_UPDATE" content="/api/config/update">
+    <style id="public_module_styles"></style>
 </head>
 <body>
 <section>
@@ -156,26 +150,6 @@
         <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
     </article>
 
-    <!--    {%for config in dashboard_signals_config%}-->
-    <!--    {%if config.type == "feature"%}-->
-    <!--    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description ~ ":" ~ config.label%}-->
-    <!--    {%elif config.type == "mark"%}-->
-    <!--    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.label%}-->
-    <!--    {%else%}-->
-    <!--    {%set data_href = public_routes.API_SIGNAL_CREATE ~ "?type=" ~ config.type ~ "&description=" ~ config.description%}-->
-    <!--    {%endif%}-->
-    <!--    {%if config.type === "empty"%}-->
-    <!--    <article class="empty"></article>-->
-    <!--    {%else%}-->
-    <!--    <article class="{{config.theme}}">-->
-    <!--        <button data-href="{{data_href}}" {%if config.visibility=="OFF"%}disabled{%endif%}>-->
-    <!--            <label aria-label="{{config.emoji}}"></label>-->
-    <!--            <label aria-label="{{config.label}}"></label>-->
-    <!--        </button>-->
-    <!--    </article>-->
-    <!--    {%endif%}-->
-    <!--    {%endfor%}-->
-
 </section>
 <nav class="controls">
     <button aria-label="Draw"><em aria-label="🎨"></em></button>
@@ -205,10 +179,26 @@
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => socketWatchConfig((payload) => {
-        const signals = JSON.parse(payload.split('config:set:')[1]);
-        signals.forEach(signal => {
+        const data = JSON.parse(payload.split('config:set:')[1]);
+        const signals = JSON.parse(data);
+        signals.forEach((signal, index) => {
+            const {description, emoji, label, theme, type, visibility} = signal;
+            const articleEl = document.body.children[index];
+            const buttonEl = articleEl.querySelector('button');
+            const emojiEl = articleEl.querySelector('label:nth-of-type(1)');
+            const labelEl = articleEl.querySelector('label:nth-of-type(2)');
+            buttonEl.disabled = (visibility === "OFF");
+            articleEl.setAttribute('class', theme);
+            emojiEl.setAttribute('aria-label', emoji);
+            labelEl.setAttribute('aria-label', label);
+            if (type === "mark") {
+                buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${label}`);
+            } else if (type === "feature") {
+                buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}:${label}`);
+            } else {
+                buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}`);
+            }
             console.log('socketWatchConfig signal', signal);
-            document.body.querySelector(``);
         });
     }));
     document.addEventListener("DOMContentLoaded", () => initNavControls());
