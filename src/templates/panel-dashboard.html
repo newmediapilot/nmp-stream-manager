@@ -183,7 +183,7 @@
         const signals = JSON.parse(data);
         signals.forEach((signal, index) => {
             const {description, emoji, label, theme, type, visibility} = signal;
-            const articleEl = document.body.children[index];
+            const articleEl = document.body.querySelector('section').children[index];
             const buttonEl = articleEl.querySelector('button');
             const emojiEl = articleEl.querySelector('label:nth-of-type(1)');
             const labelEl = articleEl.querySelector('label:nth-of-type(2)');
@@ -192,13 +192,13 @@
             emojiEl.setAttribute('aria-label', emoji);
             labelEl.setAttribute('aria-label', label);
             if (type === "mark") {
-                buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${label}`);
+                buttonEl.setAttribute('data-href', `https://localhost/${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${label}`);
             } else if (type === "feature") {
-                buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}:${label}`);
+                buttonEl.setAttribute('data-href', `https://localhost/${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}:${label}`);
             } else {
-                buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}`);
+                buttonEl.setAttribute('data-href', `https://localhost/${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}`);
             }
-            console.log('socketWatchConfig signal', signal);
+            console.log('socketWatchConfig :: signal', signal);
         });
     }));
     document.addEventListener("DOMContentLoaded", () => initNavControls());
