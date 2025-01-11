@@ -172,6 +172,8 @@
         document.addEventListener("DOMContentLoaded", () => socketWatchConfig((payload) => {
             const data = JSON.parse(payload.split('config:set:')[1]);
             const signals = JSON.parse(data);
+            const titleEls = document.body.querySelectorAll('section > div[aria-label]');
+            const editorEls = document.body.querySelectorAll('section > div:not([aria-label])');
             signals.forEach((signal, index) => {
                 const type = signal.type;
                 const {description, emoji, label, theme, visibility} = signal;
