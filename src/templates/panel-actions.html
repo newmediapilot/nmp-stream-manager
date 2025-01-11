@@ -54,12 +54,7 @@
 </head>
 <body>
     <section>
-            {%set feature_title_set = false%}
-            {%for signal in dashboard_signals_config%}
-            {%if signal.type == "announce"%}
-            {%if not feature_title_set%}{%set feature_title_set = true%}
             <div class="{{signal.theme}}" aria-label="Announce"></div>
-            {%endif%}
             <div class="{{signal.theme}}">
                 <label id="{{loop.index0}}">
                     <button aria-label="{{signal.emoji}}"></button>
@@ -70,14 +65,7 @@
                     <textarea value="{{signal.description}}">{{signal.description}}</textarea>
                 </label>
             </div>
-            {%endif%}
-            {%endfor%}
-            {%set feature_title_set = false%}
-            {%for signal in dashboard_signals_config%}
-            {%if signal.type == "media"%}
-            {%if not feature_title_set%}{%set feature_title_set = true%}
             <div class="{{signal.theme}}" aria-label="Media"></div>
-            {%endif%}
             <div class="{{signal.theme}}">
                 <label id="{{loop.index0}}">
                     <button aria-label="{{signal.emoji}}"></button>
@@ -88,14 +76,7 @@
                     <img />
                 </label>
             </div>
-            {%endif%}
-            {%endfor%}
-            {%set feature_title_set = false%}
-            {%for signal in dashboard_signals_config%}
-            {%if signal.type == "sound"%}
-            {%if not feature_title_set%}{%set feature_title_set = true%}
             <div class="{{signal.theme}}" aria-label="Sound"></div>
-            {%endif%}
             <div class="{{signal.theme}}">
                 <label id="{{loop.index0}}">
                     <button aria-label="{{signal.emoji}}"></button>
@@ -105,14 +86,7 @@
                     <button aria-label="{{signal.visibility}}"></button>
                 </label>
             </div>
-            {%endif%}
-            {%endfor%}
-            {%set feature_title_set = false%}
-            {%for signal in dashboard_signals_config%}
-            {%if signal.type == "feature"%}
-            {%if not feature_title_set%}{%set feature_title_set = true%}
             <div class="{{signal.theme}}" aria-label="Feature"></div>
-            {%endif%}
             <div class="{{signal.theme}}">
                 <label id="{{loop.index0}}">
                     <button aria-label="{{signal.emoji}}"></button>
@@ -122,14 +96,7 @@
                     <button aria-label="{{signal.visibility}}"></button>
                 </label>
             </div>
-            {%endif%}
-            {%endfor%}
-            {%set feature_title_set = false%}
-            {%for signal in dashboard_signals_config%}
-            {%if signal.type == "mark"%}
-            {%if not feature_title_set%}{%set feature_title_set = true%}
             <div class="{{signal.theme}}" aria-label="Mark"></div>
-            {%endif%}
             <div class="{{signal.theme}}">
                 <label id="{{loop.index0}}">
                     <button aria-label="{{signal.emoji}}"></button>
@@ -139,14 +106,7 @@
                     <button aria-label="{{signal.visibility}}"></button>
                 </label>
             </div>
-            {%endif%}
-            {%endfor%}
-            {%set feature_title_set = false%}
-            {%for signal in dashboard_signals_config%}
-            {%if signal.type == "ad"%}
-            {%if not feature_title_set%}{%set feature_title_set = true%}
             <div class="{{signal.theme}}" aria-label="Ad"></div>
-            {%endif%}
             <div class="{{signal.theme}}">
                 <label id="{{loop.index0}}">
                     <button aria-label="{{signal.emoji}}"></button>
@@ -156,13 +116,49 @@
                     <button aria-label="{{signal.visibility}}"></button>
                 </label>
             </div>
-            {%endif%}
-            {%endfor%}
     </section>
     <ul id="emoji-widget">
-        {%for emoji in emoji_collection%}
-        <li aria-label="{{ emoji }}"></li>
-        {%endfor%}
+        <li aria-label="✨"></li>
+        <li aria-label="📢"></li>
+        <li aria-label="❤"></li>
+        <li aria-label="⏰"></li>
+        <li aria-label="🥊"></li>
+        <li aria-label="🧐"></li>
+        <li aria-label="🎬"></li>
+        <li aria-label="👾"></li>
+        <li aria-label="🌟"></li>
+        <li aria-label="🍕"></li>
+        <li aria-label="🎮"></li>
+        <li aria-label="🔥"></li>
+        <li aria-label="🎧"></li>
+        <li aria-label="💎"></li>
+        <li aria-label="🕹️"></li>
+        <li aria-label="🖥️"></li>
+        <li aria-label="🚀"></li>
+        <li aria-label="🌈"></li>
+        <li aria-label="👑"></li>
+        <li aria-label="💥"></li>
+        <li aria-label="🌍"></li>
+        <li aria-label="🎤"></li>
+        <li aria-label="🎨"></li>
+        <li aria-label="🎸"></li>
+        <li aria-label="🎹"></li>
+        <li aria-label="🚗"></li>
+        <li aria-label="🦄"></li>
+        <li aria-label="🐉"></li>
+        <li aria-label="💡"></li>
+        <li aria-label="🍎"></li>
+        <li aria-label="🔗"></li>
+        <li aria-label="⚙"></li>
+        <li aria-label="🧑"></li>
+        <li aria-label="🔒"></li>
+        <li aria-label="🎬"></li>
+        <li aria-label="⚡"></li>
+        <li aria-label="🌀"></li>
+        <li aria-label="✅"></li>
+        <li aria-label="🔄"></li>
+        <li aria-label="✏"></li>
+        <li aria-label="🌐"></li>
     </ul>
     <nav class="right">
         <button aria-label="🧮"></button>
@@ -174,8 +170,13 @@
         document.addEventListener("DOMContentLoaded", () => socketConnect());
         document.addEventListener("DOMContentLoaded", () => socketWatchReload());
         document.addEventListener("DOMContentLoaded", () => socketWatchConfig((payload) => {
-            let config = payload.split('config:set:')[1];
-            // console.log('socketWatchConfig payload', config);
+            const data = JSON.parse(payload.split('config:set:')[1]);
+            const signals = JSON.parse(data);
+            signals.forEach((signal, index) => {
+                const type = signal.type;
+                const {description, emoji, label, theme, visibility} = signal;
+                // console.log('socketWatchConfig :: signal', signal);
+            });
         }));
         document.addEventListener("DOMContentLoaded", () => initHomeControls());
         document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
