@@ -50,7 +50,8 @@
 </head>
 <body>
     <section>
-            <div class="{{signal.theme}}" aria-label="Announce"></div>
+
+            <div class="{{signal.theme}}" aria-label=""></div>
             <div class="{{signal.theme}}">
                 <label id="{{loop.index0}}">
                     <button aria-label="{{signal.emoji}}"></button>
@@ -61,7 +62,8 @@
                     <textarea value="{{signal.description}}">{{signal.description}}</textarea>
                 </label>
             </div>
-            <div class="{{signal.theme}}" aria-label="Media"></div>
+
+            <div class="{{signal.theme}}" aria-label=""></div>
             <div class="{{signal.theme}}">
                 <label id="{{loop.index0}}">
                     <button aria-label="{{signal.emoji}}"></button>
@@ -72,7 +74,8 @@
                     <img />
                 </label>
             </div>
-            <div class="{{signal.theme}}" aria-label="Sound"></div>
+
+            <div class="{{signal.theme}}" aria-label=""></div>
             <div class="{{signal.theme}}">
                 <label id="{{loop.index0}}">
                     <button aria-label="{{signal.emoji}}"></button>
@@ -82,7 +85,8 @@
                     <button aria-label="{{signal.visibility}}"></button>
                 </label>
             </div>
-            <div class="{{signal.theme}}" aria-label="Feature"></div>
+
+            <div class="{{signal.theme}}" aria-label=""></div>
             <div class="{{signal.theme}}">
                 <label id="{{loop.index0}}">
                     <button aria-label="{{signal.emoji}}"></button>
@@ -92,7 +96,8 @@
                     <button aria-label="{{signal.visibility}}"></button>
                 </label>
             </div>
-            <div class="{{signal.theme}}" aria-label="Mark"></div>
+
+            <div class="{{signal.theme}}" aria-label=""></div>
             <div class="{{signal.theme}}">
                 <label id="{{loop.index0}}">
                     <button aria-label="{{signal.emoji}}"></button>
@@ -102,7 +107,8 @@
                     <button aria-label="{{signal.visibility}}"></button>
                 </label>
             </div>
-            <div class="{{signal.theme}}" aria-label="Ad"></div>
+
+            <div class="{{signal.theme}}" aria-label=""></div>
             <div class="{{signal.theme}}">
                 <label id="{{loop.index0}}">
                     <button aria-label="{{signal.emoji}}"></button>
@@ -112,6 +118,7 @@
                     <button aria-label="{{signal.visibility}}"></button>
                 </label>
             </div>
+
     </section>
     <ul id="emoji-widget">
         <li aria-label="✨"></li>
@@ -167,13 +174,46 @@
         document.addEventListener("DOMContentLoaded", () => socketWatchReload());
         document.addEventListener("DOMContentLoaded", () => socketWatchConfig((payload) => {
             const data = JSON.parse(payload.split('config:set:')[1]);
-            const signals = JSON.parse(data);
-            const titleEls = document.body.querySelectorAll('section > div[aria-label]');
-            const editorEls = document.body.querySelectorAll('section > div:not([aria-label])');
-            signals.forEach((signal, index) => {
-                const type = signal.type;
-                const {description, emoji, label, theme, visibility} = signal;
-                // console.log('socketWatchConfig :: signal', signal);
+            const parsed = JSON.parse(data);
+            const signals = parsed
+                .filter(s => !(s.type==="empty"));
+            [
+                signals.find(s => s.type === 'announce'),
+                signals.find(s => s.type === 'media'),
+                signals.find(s => s.type === 'sound'),
+                signals.find(s => s.type === 'feature'),
+                signals.find(s => s.type === 'mark'),
+                signals.find(s => s.type === 'ad'),
+            ].map((signal, index) =>{
+                const {type, theme} = signal;
+                const title = type.charAt(0).toUpperCase() + type.slice(1);
+                document.body.querySelectorAll('section > div[aria-label]')[index].setAttribute('aria-label', title);
+                document.body.querySelectorAll('section > div[aria-label]')[index].setAttribute('class', theme);
+                return signal;
+            });
+            let counter = 0;
+            [
+                ...parsed.filter(s => s.type === 'announce'),
+                ...parsed.filter(s => s.type === 'media'),
+                ...parsed.filter(s => s.type === 'sound'),
+                ...parsed.filter(s => s.type === 'feature'),
+                ...parsed.filter(s => s.type === 'mark'),
+                ...parsed.filter(s => s.type === 'ad'),
+            ].map((signal) => {
+                if(signal.type !== 'empty') {
+                    // <div class="{{signal.theme}}">
+                    //     <label id="{{loop.index0}}">
+                    //     <button aria-label="{{signal.emoji}}"></button>
+                    //     <input type="text" value="{{signal.label}}"/>
+                    //     <button aria-label="⬆" id="{{signal.description}}"></button>
+                    //     <button aria-label="🎶"></button>
+                    //     <button aria-label="{{signal.visibility}}"></button>
+                    //     </label>
+                    // </div>
+                    const {theme} = signal;
+                    document.body.querySelectorAll('section > div:not([aria-label])')[counter].setAttribute('class', theme);
+                    counter++;
+                }
             });
         }));
         document.addEventListener("DOMContentLoaded", () => initHomeControls());
