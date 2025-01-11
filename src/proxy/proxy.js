@@ -44,8 +44,8 @@ const memorize = (req, key) => {
         const hash = hashify(req.ip, key);
         if (!sockets[hash]) return;
         config[hash] = req.query.payload;
-        sockets[hash].to('dbdbdbdbdbgroup').emit('payload', `config:set:${JSON.stringify(config[hash]).substr(0,50)}...`);
-        console.log(`proxy :: API_CONFIG_SET :: ${hash} ${JSON.stringify(config[hash])}`);
+        sockets[hash].to('dbdbdbdbdbgroup').emit('payload', `config:set:${JSON.stringify(config[hash])}`);
+        console.log(`proxy :: API_CONFIG_SET :: ${hash} ${JSON.stringify(config[hash]).substr(0,50)}...`);
         res.send(`200 @ ${time}`);
     });
     app.all(`/${key}${ROUTES.API_STYLE_SET}`, (req, res) => {
@@ -137,8 +137,8 @@ const server = https
         socket.on("payload", (payload) => socket.to('dbdbdbdbdbgroup').emit("payload", payload));
         socket.on("disconnect", () => console.log("proxy :: disconnected", hash, socket.id, socket.handshake.address, key));
         sockets[hash] = socket;
-        style[hash] && sockets[hash].to('dbdbdbdbdbgroup').emit('payload', `style:set:${style[hash]}`);
-        config[hash] && sockets[hash].to('dbdbdbdbdbgroup').emit('payload', `config:set:${JSON.stringify(config[hash])}`);
+        style[hash] && sockets[hash].emit('payload', `style:set:${style[hash]}`);
+        config[hash] && sockets[hash].emit('payload', `config:set:${JSON.stringify(config[hash])}`);
         console.log("proxy :: connected", hash, socket.id, socket.handshake.address, key);
     });
     console.log("proxy :: created", key, path);
