@@ -1,11 +1,11 @@
 {
   "main": "src/launch.js",
   "scripts": {
+    "dev": "npm run build && npm run start",
     "start": "node src/server/index.js",
     "cert": "node src/proxy/cert.js",
     "ec2": "node src/proxy/ec2.js",
     "proxy": "node src/proxy/proxy.js",
-    "ssh": "ssh -i C:\\Users\\marcinzajkowski\\Desktop\\desktop\\aaknot\\server\\.cert\\ssh.pem ec2-user@ec2-54-225-191-237.compute-1.amazonaws.com",
     "launch": "node src/launch.js",
     "server": "node .server.js",
     "build": "npm run reset && node compiler/build.js",
