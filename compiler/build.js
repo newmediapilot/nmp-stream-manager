@@ -20,6 +20,9 @@ const hashes = Array.from({length})
         .update(String(index))
         .digest('hex')
     )
+    .map((hash, index) => {
+        return (0 === index) ? 'demo' : hash;
+    })
     .map(hash => {
             execSync(`npm run concat ${hash}`, {stdio: 'inherit'});
             execSync(`npm run snapshot ${hash}`, {stdio: 'inherit'});
