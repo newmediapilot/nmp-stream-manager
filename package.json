@@ -1,7 +1,6 @@
 {
   "main": "src/launch.js",
   "scripts": {
-    "dev": "npm run build && npm run start",
     "start": "node src/server/index.js",
     "cert": "node src/proxy/cert.js",
     "ec2": "node src/proxy/ec2.js",
