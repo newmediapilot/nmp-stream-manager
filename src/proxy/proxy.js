@@ -73,8 +73,10 @@ const memorize = (req, key) => {
     });
     app.all(`/${key}${ROUTES.API_MEDIA_GET}`, (req, res) => {
         const hash = hashify(req.ip, key);
+        const keys = Object.keys(media[hash]);
+        if(!keys.length) res.status(404).send(`404 @ ${time}`);
         const reqPath = req.params.path;
-        const reqPayload = Object.keys(media[hash])
+        const reqPayload = keys
             .filter(k => k.includes(reqPath))
             .map(k => media[hash][k])
             .pop();
@@ -100,7 +102,8 @@ const memorize = (req, key) => {
         const hash = hashify(req.ip, key);
         const {data, type} = req.body;
         const name = req.body.key;
-        memory[hash][`${name}.${type}`] = Buffer.from(data, 'base64');
+        if (!media[hash]) media[hash] = {};
+        media[hash][`${name}.${type}`] = Buffer.from(data, 'base64');
     });
     [
         `/${key}${ROUTES.API_SIGNAL_CREATE}`,
@@ -141,7 +144,10 @@ const server = https
         const hash = hashify(socket.handshake.address, key);
         socket.join('dbdbdbdbdbgroup');
         socket.on("payload", (payload) => socket.to('dbdbdbdbdbgroup').emit("payload", payload));
-        socket.on("disconnect", () => console.log("proxy :: disconnected", hash, socket.id, socket.handshake.address, key));
+        socket.on("disconnect", () => {
+            media[hash] = {};
+            console.log("proxy :: disconnected", hash, socket.id, socket.handshake.address, key)
+        });
         sockets[hash] = socket;
         style[hash] && sockets[hash].emit('payload', `style:set:${style[hash]}`);
         config[hash] && sockets[hash].emit('payload', `config:set:${JSON.stringify(config[hash])}`);
