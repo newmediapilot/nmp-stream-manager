@@ -199,6 +199,7 @@
                     formEl.setAttribute('class', theme);
                     formEl.querySelector('label').setAttribute('id', indexOf);
                     formEl.querySelector('button:nth-of-type(1)').setAttribute('aria-label', emoji);
+                    formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
                     formEl.querySelector('input[type=text]').value = label;
                     formEl.querySelector('input[type=text]').disabled = "OFF" === visibility;
                     if (type === 'announce') formEl.querySelector('textarea').innerText = description;
