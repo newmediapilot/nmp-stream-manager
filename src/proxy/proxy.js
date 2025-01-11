@@ -75,8 +75,8 @@ const memorize = (req, key) => {
         const hash = hashify(req.ip, key);
         const reqPath = req.params.path;
         const reqPayload = Object.keys(media[hash])
-            .filter(key => key.includes(reqPath))
-            .map(key => media[hash][key])
+            .filter(k => k.includes(reqPath))
+            .map(k => media[hash][k])
             .pop();
         console.log(`proxy :: API_MEDIA_GET :: keys ${Object.keys(media[hash])}`);
         const mimeType = (() => {
