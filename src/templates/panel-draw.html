@@ -77,10 +77,6 @@
         document.addEventListener("DOMContentLoaded", () => iframeDetect());
         document.addEventListener("DOMContentLoaded", () => socketConnect());
         document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-        document.addEventListener("DOMContentLoaded", () => socketWatchConfig((payload) => {
-            let config = payload.split('config:set:')[1];
-            // console.log('socketWatchConfig payload', config);
-        }));
         document.addEventListener("DOMContentLoaded", () => initHomeControls());
         document.addEventListener("DOMContentLoaded", () => draw());
     </script>
