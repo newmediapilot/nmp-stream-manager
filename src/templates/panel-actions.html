@@ -199,22 +199,51 @@
                     formEl.setAttribute('class', theme);
                     formEl.querySelector('label').setAttribute('id', indexOf);
                     formEl.querySelector('button:nth-of-type(1)').setAttribute('aria-label', emoji);
-                    formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
+                    formEl.querySelector('button:nth-of-type(2)').setAttribute('id', description);
                     formEl.querySelector('input[type=text]').setAttribute("value", label);
-                    formEl.querySelector('input[type=text]').disabled = "OFF" === visibility;
-                    if (type === 'announce') formEl.querySelector('textarea').innerText = description;
-                    if (type === 'announce') formEl.querySelector('textarea').value = description;
-                    if (type === 'announce') formEl.querySelector('textarea').disabled = "OFF" === visibility;
-                    if (type === 'media') formEl.querySelector('button:nth-of-type(2)').setAttribute('id', description);
-                    if (type === 'sound') formEl.querySelector('button:nth-of-type(2)').setAttribute('id', description);
-                    if (type === 'media') formEl.querySelector('button:nth-of-type(2)').disabled = "OFF" === visibility;
-                    if (type === 'sound') formEl.querySelector('button:nth-of-type(2)').disabled = "OFF" === visibility;
+                    if (type === 'announce') {
+                        formEl.querySelector('textarea').innerText = description;
+                        formEl.querySelector('textarea').value = description;
+                        formEl.querySelector('textarea').disabled = "OFF" === visibility;
+                        formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
+                        formEl.querySelector('button:nth-of-type(2)').disabled = true;
+                        formEl.querySelector('button:nth-of-type(2)').disabled = true;
+                        formEl.querySelector('button:nth-of-type(4)').disabled = "OFF" === visibility;
+                    }
+                    if (type === 'media') {
+                        formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
+                        formEl.querySelector('button:nth-of-type(2)').disabled = "OFF" === visibility;
+                        formEl.querySelector('button:nth-of-type(3)').disabled = "OFF" === visibility;
+                        formEl.querySelector('button:nth-of-type(4)').disabled = "OFF" === visibility;
+                    }
+                    if (type === 'sound') {
+                        formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
+                        formEl.querySelector('button:nth-of-type(2)').disabled = "OFF" === visibility;
+                        formEl.querySelector('button:nth-of-type(3)').disabled = "OFF" === visibility;
+                        formEl.querySelector('button:nth-of-type(4)').disabled = "OFF" === visibility;
+                    }
+                    if (type === 'feature') {
+                        formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
+                        formEl.querySelector('button:nth-of-type(2)').disabled = true;
+                        formEl.querySelector('button:nth-of-type(3)').disabled = true;
+                        formEl.querySelector('button:nth-of-type(4)').disabled = "OFF" === visibility;
+                    }
+                    if (type === 'mark') {
+                        formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
+                        formEl.querySelector('button:nth-of-type(2)').disabled = true;
+                        formEl.querySelector('button:nth-of-type(3)').disabled = true;
+                        formEl.querySelector('button:nth-of-type(4)').disabled = "OFF" === visibility;
+                    }
+                    if (type === 'ad') {
+                        formEl.querySelector('input[type=text]').disabled = true;
+                        formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
+                        formEl.querySelector('button:nth-of-type(2)').disabled = true;
+                        formEl.querySelector('button:nth-of-type(3)').disabled = true;
+                        formEl.querySelector('button:nth-of-type(4)').disabled = "OFF" === visibility;
+                    }
                     formEl.querySelector('button:nth-of-type(4)').setAttribute('aria-label', visibility);
-                    console.log({theme, emoji, label, description, visibility, type});
                 });
-
             actions();
-
         }));
         document.addEventListener("DOMContentLoaded", () => initHomeControls());
         document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
