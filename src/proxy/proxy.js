@@ -44,7 +44,7 @@ const memorize = (req, key) => {
         const hash = hashify(req.ip, key);
         if (!sockets[hash]) return;
         config[hash] = req.query.payload;
-        sockets[hash].to('dbdbdbdbdbgroup').emit('payload', `config:set:${JSON.stringify(config[hash])}`);
+        sockets[hash].to('dbdbdbdbdbgroup').emit('payload', `config:set:${JSON.stringify(config[hash]).substr(0,50)}...`);
         console.log(`proxy :: API_CONFIG_SET :: ${hash} ${JSON.stringify(config[hash])}`);
         res.send(`200 @ ${time}`);
     });
