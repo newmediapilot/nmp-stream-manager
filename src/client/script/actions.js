@@ -97,6 +97,7 @@ const actionsCreateUpload = (editorEl) => {
     const inputEl = editorEl.querySelector('[type="text"]');
     const toggleReplayState = () => {
         const cells = uploadButton.id.split(',');
+        console.log('uploadButton.id', uploadButton.id);
         const url = `https://api.dbdbdbdbdbgroup.com/demo/media/${cells[0]}.${cells[2]}?${cells[1]}=${new Date().getTime()}`;
         console.log('toggleReplayState :: checking ::', url);
         axios.get(url).then(() => {
@@ -237,6 +238,10 @@ const actionsToggle = (editorEl) => {
 };
 
 const actions = () => {
+    const bodySectionEl = document.body.querySelector("section");
+    const innerHTML = bodySectionEl.innerHTML;
+    bodySectionEl.innerHTML = "";
+    bodySectionEl.innerHTML = innerHTML;
     document.body.querySelectorAll("section > div:not([aria-label]) label").forEach(actionsCreateEditor);
     document.body.querySelectorAll("section > div:not([aria-label]) label").forEach(actionsCreateEmojis);
     document.body.querySelectorAll("section > div:not([aria-label]) label").forEach(actionsCreateUpload);
