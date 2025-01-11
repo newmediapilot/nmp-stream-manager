@@ -200,10 +200,14 @@
                     formEl.querySelector('label').setAttribute('id', indexOf);
                     formEl.querySelector('button:nth-of-type(1)').setAttribute('aria-label', emoji);
                     formEl.querySelector('input[type=text]').value = label;
+                    formEl.querySelector('input[type=text]').disabled = "OFF" === visibility;
                     if (type === 'announce') formEl.querySelector('textarea').innerText = description;
                     if (type === 'announce') formEl.querySelector('textarea').value = description;
-                    (type === 'media') && formEl.querySelector('button:nth-of-type(2)').setAttribute('id', description);
-                    (type === 'sound') && formEl.querySelector('button:nth-of-type(2)').setAttribute('id', description);
+                    if (type === 'announce') formEl.querySelector('textarea').disabled = "OFF" === visibility;
+                    if (type === 'media') formEl.querySelector('button:nth-of-type(2)').setAttribute('id', description);
+                    if (type === 'sound') formEl.querySelector('button:nth-of-type(2)').setAttribute('id', description);
+                    if (type === 'media') formEl.querySelector('button:nth-of-type(2)').disabled = "OFF" === visibility;
+                    if (type === 'sound') formEl.querySelector('button:nth-of-type(2)').disabled = "OFF" === visibility;
                     formEl.querySelector('button:nth-of-type(4)').setAttribute('aria-label', visibility);
                     console.log('action ::', theme, emoji, label, description, visibility, type);
                 });
