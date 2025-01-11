@@ -1,5 +1,4 @@
 const actionsCreateEmojis = (editorEl) => {
-    const {id} = editorEl;
     const emojiWidgetEl = document.body.querySelector("#emoji-widget");
     const emojiWidgetTriggerEl = editorEl.querySelector("button:nth-of-type(1)");
     let emojiWidgetInstanceEl;
@@ -32,7 +31,7 @@ const actionsCreateEmojis = (editorEl) => {
                         params: {
                             type: "signals:field",
                             payload: JSON.stringify({
-                                id,
+                                id: editorEl.id,
                                 field: "emoji",
                                 value: el.getAttribute("aria-label"),
                             }),
@@ -48,7 +47,6 @@ const actionsCreateEmojis = (editorEl) => {
 };
 
 const actionsCreateEditor = (editorEl) => {
-    const {id} = editorEl;
     const textInputEls = editorEl.querySelectorAll('[type="text"], textarea');
     const textInputElFocus = (textInputEl) => {
         textInputEl.$value = textInputEl.value;
@@ -71,7 +69,7 @@ const actionsCreateEditor = (editorEl) => {
                     params: {
                         type: "signals:field",
                         payload: JSON.stringify({
-                            id,
+                            id: editorEl.id,
                             field,
                             value: textInputEl.value,
                         }),
@@ -196,7 +194,6 @@ const actionsCreateUpload = (editorEl) => {
 };
 
 const actionsToggle = (editorEl) => {
-    const {id} = editorEl;
     const toggleButton = editorEl.querySelector('button:nth-of-type(4)');
     const updateButtons = () => {
         let state = toggleButton.getAttribute('aria-label');
@@ -223,7 +220,7 @@ const actionsToggle = (editorEl) => {
             params: {
                 type: "signals:field",
                 payload: JSON.stringify({
-                    id,
+                    id: editorEl.id,
                     field: "visibility",
                     value: state,
                 }),
