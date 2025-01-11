@@ -96,6 +96,12 @@ const memorize = (req, key) => {
         res.setHeader('Content-Type', mimeType);
         res.send(reqPayload);
     });
+    app.all(`/${key}${ROUTES.API_MEDIA_UPDATE}`, (req, res) => {
+        const hash = hashify(req.ip, key);
+        const {data, type} = req.body;
+        const name = req.body.key;
+        memory[hash][`${name}.${type}`] = Buffer.from(data, 'base64');
+    });
     [
         `/${key}${ROUTES.API_SIGNAL_CREATE}`,
         `/${key}${ROUTES.API_CONFIG_UPDATE}`,
