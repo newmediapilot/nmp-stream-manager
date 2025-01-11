@@ -59,7 +59,7 @@ const memorize = (req, key) => {
     app.all(`/${key}${ROUTES.API_MEMORY_GET}`, (req, res) => {
         const hash = hashify(req.ip, key);
         res.send(memory[hash]);
-        console.log(`proxy :: API_MEMORY_GET`, memory[hash].length);
+        console.log(`proxy :: API_MEMORY_GET :: ${memory[hash].length}`);
         memory[hash] = [];
     });
     app.all(`/${key}${ROUTES.API_MEMORY_SET}`, (req, res) => {
@@ -135,11 +135,11 @@ const server = https
         const hash = hashify(socket.handshake.address, key);
         socket.join('dbdbdbdbdbgroup');
         socket.on("payload", (payload) => socket.to('dbdbdbdbdbgroup').emit("payload", payload));
-        socket.on("disconnect", () => console.log("proxy :: disconnected", socket.id, socket.handshake.address, key));
+        socket.on("disconnect", () => console.log("proxy :: disconnected", hash, socket.id, socket.handshake.address, key));
         sockets[hash] = socket;
         style[hash] && sockets[hash].to('dbdbdbdbdbgroup').emit('payload', `style:set:${style[hash]}`);
         config[hash] && sockets[hash].to('dbdbdbdbdbgroup').emit('payload', `config:set:${JSON.stringify(config[hash])}`);
-        console.log("proxy :: connected", socket.id, socket.handshake.address, key);
+        console.log("proxy :: connected", hash, socket.id, socket.handshake.address, key);
     });
     console.log("proxy :: created", key, path);
 });
