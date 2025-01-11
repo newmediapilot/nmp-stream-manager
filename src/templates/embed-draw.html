@@ -67,10 +67,6 @@
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    document.addEventListener("DOMContentLoaded", () => socketWatchConfig((payload) => {
-        let config = payload.split('config:set:')[1];
-        // console.log('socketWatchConfig payload', config);
-    }));
     document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
         let style = payload.split('style:set:')[1];
         document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
