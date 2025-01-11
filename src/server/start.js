@@ -14,13 +14,6 @@ const startServices = async (app) => {
         setParam("public_index", "https://dbdbdbdbdbgroup.com/demo/");
         setParam("public_routes", ROUTES);
         setParam("twitch_username", process.env.TWITCH_USERNAME);
-        setParam('emoji_collection', [
-            "✨", "📢", "❤", "⏰", "🥊", "🧐", "🎬", "👾", "🌟", "🍕",
-            "🎮", "🔥", "🎧", "💎", "🕹️", "🖥️", "🚀", "🌈", "👑", "💥",
-            "🌍", "🎤", "🎨", "🎸", "🎹", "🚗", "🦄", "🐉", "💡", "🍎",
-            "🔗", "⚙", "🧑", "🔒", "🎬️", "⚡", "🌀", "✅", "🔄",
-            "✏", "🌐"
-        ]);
         await initializePublicConfigs("signals");
         await initializePublicStyles("style");
         initializeMedia();
