@@ -89,7 +89,6 @@ const actionsCreateEditor = (editorEl) => {
 };
 
 const actionsCreateUpload = (editorEl) => {
-    let audio = null;
     let buster = new Date().getTime();
     const id = editorEl.id;
     const uploadButton = editorEl.querySelector('button:nth-of-type(2):not(:disabled)');
@@ -98,26 +97,10 @@ const actionsCreateUpload = (editorEl) => {
     const inputEl = editorEl.querySelector('[type="text"]');
     const toggleReplayState = () => {
         const cells = uploadButton.id.split(',');
-        console.log('uploadButton.id', uploadButton.id);
         const url = `https://api.dbdbdbdbdbgroup.com/demo/media/${cells[0]}.${cells[2]}?${cells[1]}=${buster}`;
         console.log('toggleReplayState :: checking ::', url);
         axios.get(url).then(() => {
-            if (audio) {
-                audio = undefined;
-            }
-            audio = new Audio(url);
-            audio.volume = 0.75;
-            audio.addEventListener('timeupdate', () => {
-                if (audio.currentTime > 0) {
-                    const value = (audio.currentTime / audio.duration) * 360;
-                    editorEl.querySelector('button:nth-of-type(3)').style.transform = `rotateZ(${value}deg)`;
-                }
-                if (audio.currentTime >= audio.duration) {
-                    audio.currentTime = 0;
-                    audio.pause();
-                }
-            });
-            actionButton.disabled = false;
+                actionButton.disabled = false;
         }).catch(() => {
                 console.log('toggleReplayState :: no sound ::', url);
                 actionButton.disabled = true;
@@ -167,14 +150,13 @@ const actionsCreateUpload = (editorEl) => {
         toggleReplayState();
         const cells = uploadButton.id.split(',');
         const type = cells[1];
-        const replayAudio = () => {
-            console.log('replayAudio :: currentTime ::', audio.currentTime);
-            if (audio.currentTime > 0) {
-                audio.pause();
-                audio.currentTime = 0;
-            } else {
-                audio.play();
-            }
+        const playAudio = () => {
+            const cells = uploadButton.id.split(',');
+            const url = `https://api.dbdbdbdbdbgroup.com/demo/media/${cells[0]}.${cells[2]}?${cells[1]}=${buster}`;
+            document.$audio && document.$audio.pause();
+            document.$audio = new Audio(url);
+            document.$audio.play();
+            console.log('playAudio :: ', url);
         };
         const displayMedia = () => {
             if (!imageElement.src) {
@@ -191,7 +173,7 @@ const actionsCreateUpload = (editorEl) => {
             }
         };
         actionButton.addEventListener('click', () => {
-            "audio" === type && replayAudio();
+            "audio" === type && playAudio();
             "image" === type && displayMedia();
         });
     }
