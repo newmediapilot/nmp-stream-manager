@@ -50,66 +50,66 @@
 </head>
 <body>
     <section>
-            <div class="" aria-label=""></div>
-            <div class="">
-                <label id="1">
-                    <button aria-label=""></button>
-                    <input type="text" value=""/>
-                    <button></button>
-                    <button></button>
-                    <button aria-label=""></button>
-                    <textarea></textarea>
+            <div class="none" aria-label="..."></div>
+            <div class="none">
+                <label id="">
+                    <button aria-label="..."></button>
+                    <input type="text" value="..."/>
+                    <button readonly></button>
+                    <button readonly></button>
+                    <button aria-label="..."></button>
+                    <textarea>...</textarea>
                 </label>
             </div>
-            <div class="" aria-label=""></div>
-            <div class="">
-                <label id="1">
-                    <button aria-label=""></button>
-                    <input type="text" value=""/>
+            <div class="none" aria-label="..."></div>
+            <div class="none">
+                <label id="">
+                    <button aria-label="..."></button>
+                    <input type="text" value="..."/>
                     <button aria-label="⬆" id=""></button>
                     <button aria-label="🔍"></button>
-                    <button aria-label=""></button>
+                    <button aria-label="..."></button>
                     <img />
                 </label>
             </div>
-            <div class="" aria-label=""></div>
-            <div class="">
-                <label id="1">
-                    <button aria-label=""></button>
-                    <input type="text" value=""/>
+            <div class="none" aria-label="..."></div>
+            <div class="none">
+                <label id="">
+                    <button aria-label="..."></button>
+                    <input type="text" value="..."/>
                     <button aria-label="⬆" id=""></button>
                     <button aria-label="🎶"></button>
-                    <button aria-label=""></button>
+                    <button aria-label="..."></button>
                 </label>
             </div>
-            <div class="" aria-label=""></div>
-            <div class="">
-                <label id="1">
-                    <button aria-label=""></button>
-                    <input type="text" value=""/>
-                    <button></button>
-                    <button></button>
-                    <button aria-label=""></button>
+            <div class="none" aria-label="..."></div>
+            <div class="none">
+                <label id="">
+                    <button aria-label="..."></button>
+                    <input type="text" value="..."/>
+                    <button readonly></button>
+                    <button readonly></button>
+                    <button aria-label="..."></button>
                 </label>
             </div>
-            <div class="" aria-label=""></div>
-            <div class="">
-                <label id="1">
-                    <button aria-label=""></button>
-                    <input type="text" value=""/>
-                    <button></button>
-                    <button></button>
-                    <button aria-label=""></button>
+            <div class="none" aria-label="..."></div>
+            <div class="none">
+                <label id="">
+                    <button aria-label="..."></button>
+                    <input type="text" value="..."/>
+                    <button readonly></button>
+                    <button readonly></button>
+                    <button aria-label="..."></button>
                 </label>
             </div>
-            <div class="" aria-label=""></div>
-            <div class="">
-                <label id="1">
-                    <button aria-label=""></button>
-                    <input type="text" value="" disabled/>
-                    <button></button>
-                    <button></button>
-                    <button aria-label=""></button>
+            <div class="none" aria-label="..."></div>
+            <div class="none">
+                <label id="">
+                    <button aria-label="..."></button>
+                    <input type="text" readonly value=""/>
+                    <button readonly></button>
+                    <button readonly></button>
+                    <button aria-label="..."></button>
                 </label>
             </div>
     </section>
@@ -230,7 +230,8 @@
                         formEl.querySelector('button:nth-of-type(3)').disabled = true;
                     }
                     if (type === 'ad') {
-                        formEl.querySelector('input[type=text]').disabled = true;
+                        console.log('type ad???');
+                        formEl.querySelector('input').disabled = true;
                         formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
                         formEl.querySelector('button:nth-of-type(2)').disabled = true;
                         formEl.querySelector('button:nth-of-type(3)').disabled = true;
