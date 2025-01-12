@@ -105,6 +105,7 @@ const actionsCreateUpload = (editorEl) => {
                 audio = undefined;
             }
             audio = new Audio(url);
+            audio = new Audio(url);
             audio.volume = 0.75;
             audio.addEventListener('timeupdate', () => {
                 if (audio.currentTime > 0) {
@@ -198,7 +199,7 @@ const actionsToggle = (editorEl) => {
     const toggleButton = editorEl.querySelector('button:nth-of-type(4)');
     const updateButtons = () => {
         let state = toggleButton.getAttribute('aria-label');
-        editorEl.querySelectorAll('button:not(:nth-of-type(3)), input, textarea').forEach((el) => {
+        editorEl.querySelectorAll('button[aria-label], input, textarea').forEach((el) => {
             if (el !== toggleButton) {
                 if (state === "ON") {
                     el.disabled = false;
@@ -238,10 +239,10 @@ const actionsToggle = (editorEl) => {
 };
 
 const actions = () => {
-    const bodySectionEl = document.body.querySelector("section");
-    const innerHTML = bodySectionEl.innerHTML;
-    bodySectionEl.innerHTML = "";
-    bodySectionEl.innerHTML = innerHTML;
+    const bodyEl = document.body.querySelector("section");
+    const innerHTML = bodyEl.innerHTML;
+    bodyEl.innerHTML = "";
+    bodyEl.innerHTML = innerHTML;
     document.body.querySelectorAll("section > div:not([aria-label]) label").forEach(actionsCreateEditor);
     document.body.querySelectorAll("section > div:not([aria-label]) label").forEach(actionsCreateEmojis);
     document.body.querySelectorAll("section > div:not([aria-label]) label").forEach(actionsCreateUpload);
