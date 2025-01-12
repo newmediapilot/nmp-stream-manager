@@ -73,10 +73,10 @@ const memorize = (req, key) => {
     });
     app.all(`/${key}${ROUTES.API_MEDIA_GET}`, (req, res) => {
         const hash = hashify(req.ip, key);
-        const keys = Object.keys(media[hash]);
-        if(!keys.length) {
+        if(!media[hash]) {
             return res.status(404).send(`404 @ ${time}`);
         }
+        const keys = Object.keys(media[hash]);
         const reqPath = req.params.path;
         const reqPayload = keys
             .filter(k => k.includes(reqPath))
