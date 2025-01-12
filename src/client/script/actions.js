@@ -90,6 +90,7 @@ const actionsCreateEditor = (editorEl) => {
 
 const actionsCreateUpload = (editorEl) => {
     let audio = null;
+    let buster = new Date().getTime();
     const id = editorEl.id;
     const uploadButton = editorEl.querySelector('button:nth-of-type(2):not(:disabled)');
     const actionButton = editorEl.querySelector('button:nth-of-type(3):not(:disabled)');
@@ -98,7 +99,7 @@ const actionsCreateUpload = (editorEl) => {
     const toggleReplayState = () => {
         const cells = uploadButton.id.split(',');
         console.log('uploadButton.id', uploadButton.id);
-        const url = `https://api.dbdbdbdbdbgroup.com/demo/media/${cells[0]}.${cells[2]}?${cells[1]}=${new Date().getTime()}`;
+        const url = `https://api.dbdbdbdbdbgroup.com/demo/media/${cells[0]}.${cells[2]}?${cells[1]}=${buster}`;
         console.log('toggleReplayState :: checking ::', url);
         axios.get(url).then(() => {
             if (audio) {
@@ -154,6 +155,7 @@ const actionsCreateUpload = (editorEl) => {
                         })
                     };
                     reader.readAsDataURL(uploader.files[0]);
+                    buster = new Date().getTime();
                 }
                 uploader.remove();
             });
@@ -177,7 +179,7 @@ const actionsCreateUpload = (editorEl) => {
         const displayMedia = () => {
             if (!imageElement.src) {
                 const cells = uploadButton.id.split(',');
-                const url = `https://api.dbdbdbdbdbgroup.com/demo/media/${cells[0]}.${cells[2]}?${cells[1]}=${new Date().getTime()}`;
+                const url = `https://api.dbdbdbdbdbgroup.com/demo/media/${cells[0]}.${cells[2]}?${cells[1]}=${buster}`;
                 imageElement.src = url;
                 editorEl.style.gridTemplateRows = `repeat(3, 100px)`;
                 editorEl.scrollIntoView({
