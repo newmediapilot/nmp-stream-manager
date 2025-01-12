@@ -41,14 +41,14 @@
     "strip-ansi": "6.0.1",
     "tmi.js": "1.8.5",
     "twitter-api-v2": "1.18.2",
-    "wrap-ansi": "7.0.0"
+    "wrap-ansi": "7.0.0",
+    "glob": "7.2.3"
   },
   "devDependencies": {
     "acme": "3.0.3",
     "acme-client": "5.4.0",
     "aws-sdk": "2.1692.0",
     "execa": "5.1.1",
-    "glob": "7.2.3",
     "node": "16.20.2",
     "pkg": "5.8.1",
     "playwright": "1.49.1",
