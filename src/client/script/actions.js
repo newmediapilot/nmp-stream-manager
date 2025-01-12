@@ -201,7 +201,7 @@ const actionsToggle = (editorEl) => {
     const toggleButton = editorEl.querySelector('button:nth-of-type(4)');
     const updateButtons = () => {
         let state = toggleButton.getAttribute('aria-label');
-        editorEl.querySelectorAll('button[aria-label], input, textarea').forEach((el) => {
+        editorEl.querySelectorAll('button:not([readonly]), input:not([readonly]), textarea:not([readonly])').forEach((el) => {
             if (el !== toggleButton) {
                 if (state === "ON") {
                     el.disabled = false;
