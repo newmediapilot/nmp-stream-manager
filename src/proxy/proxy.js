@@ -73,19 +73,16 @@ const memorize = (req, key) => {
     });
     app.all(`/${key}${ROUTES.API_MEDIA_GET}`, (req, res) => {
         const hash = hashify(req.ip, key);
-        if(!media[hash]) {
-            return res.status(404).send(`404 @ ${time}`);
-        }
+        if(!media[hash]) return res.status(404).send(`404 @ media ${time}`);
         const keys = Object.keys(media[hash]);
-        if(!keys.length) {
-            return res.status(404).send(`404 @ ${time}`);
-        }
+        if(!keys.length) return res.status(404).send(`404 @ keys ${time}`);
         const reqPath = req.params.path;
         const reqPayload = keys
             .filter(k => k.includes(reqPath))
             .map(k => media[hash][k])
             .pop();
-        console.log(`proxy :: API_MEDIA_GET :: keys ${Object.keys(media[hash])}`);
+        if(!reqPayload) return res.status(404).send(`404 @ payload ${time}`);
+        console.log(`proxy :: API_MEDIA_GET :: keys :: ${Object.keys(media[hash])} :1: ${reqPath} :2: ${reqPayload ? reqPayload.length : reqPayload}`);
         const mimeType = (() => {
             switch (path.extname(reqPath).toLowerCase()) {
                 case '.jpeg': return 'image/jpeg';
