@@ -106,6 +106,7 @@ const memorize = (req, key) => {
         const name = req.body.key;
         if (!media[hash]) media[hash] = {};
         media[hash][`${name}.${type}`] = Buffer.from(data, 'base64');
+        console.log(`proxy :: API_MEDIA_UPDATE :: ${media[hash]} ${hash} ${name}.${type}`);
         memorize(req, key);
     });
     [
