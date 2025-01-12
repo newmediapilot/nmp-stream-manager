@@ -91,8 +91,8 @@ const actionsCreateEditor = (editorEl) => {
 const actionsCreateUpload = (editorEl) => {
     let buster = new Date().getTime();
     const id = editorEl.id;
-    const uploadButton = editorEl.querySelector('button:nth-of-type(2):not(:disabled)');
-    const actionButton = editorEl.querySelector('button:nth-of-type(3):not(:disabled)');
+    const uploadButton = editorEl.querySelector('button:nth-of-type(2):not([read-only])');
+    const actionButton = editorEl.querySelector('button:nth-of-type(3):not([read-only])');
     const imageElement = editorEl.querySelector('img');
     const inputEl = editorEl.querySelector('[type="text"]');
     const toggleReplayState = () => {
