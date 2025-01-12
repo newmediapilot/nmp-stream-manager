@@ -106,7 +106,6 @@ const actionsCreateUpload = (editorEl) => {
                 audio = undefined;
             }
             audio = new Audio(url);
-            audio = new Audio(url);
             audio.volume = 0.75;
             audio.addEventListener('timeupdate', () => {
                 if (audio.currentTime > 0) {
@@ -135,9 +134,11 @@ const actionsCreateUpload = (editorEl) => {
                 if (uploader.files[0]) {
                     const reader = new FileReader();
                     reader.onloadend = () => {
+                        console.log('actionsCreateUpload :: file loaded');
                         const type = uploader.files[0].name.split('.').pop();
                         const acceptTypes = cells.slice(2);
                         const newCells = `${cells[0]},${cells[1]},${type},${acceptTypes.filter(t => t !== type).join(',')}`;
+                        uploadButton.setAttribute("id", newCells);
                         axios.post(getPath("API_MEDIA_UPDATE"),
                             {
                                 data: reader.result.split(',')[1],
@@ -145,7 +146,6 @@ const actionsCreateUpload = (editorEl) => {
                                 type,
                                 id,
                             }).then(response => {
-                            uploadButton.setAttribute("id", newCells);
                             actionButton && toggleReplayState();
                             inputEl.focus();
                             setFocusToken();
