@@ -68,7 +68,7 @@ const memorize = (req, key) => {
         const reqPayload = req.body.payload;
         if (!media[hash]) media[hash] = {};
         media[hash][reqPath] = Buffer.from(reqPayload, 'base64');
-        console.log(`proxy :: API_MEMORY_SET :: keys ${Object.keys(media[hash])}`);
+        console.log(`proxy :: API_MEMORY_SET :: keys ${Object.keys(media[hash])} ${reqPayload.length}`);
         res.send(`200 @ ${time}`);
     });
     app.all(`/${key}${ROUTES.API_MEDIA_GET}`, (req, res) => {
@@ -77,6 +77,9 @@ const memorize = (req, key) => {
             return res.status(404).send(`404 @ ${time}`);
         }
         const keys = Object.keys(media[hash]);
+        if(!keys.length) {
+            return res.status(404).send(`404 @ ${time}`);
+        }
         const reqPath = req.params.path;
         const reqPayload = keys
             .filter(k => k.includes(reqPath))
@@ -106,12 +109,12 @@ const memorize = (req, key) => {
         const name = req.body.key;
         if (!media[hash]) media[hash] = {};
         media[hash][`${name}.${type}`] = Buffer.from(data, 'base64');
+        memorize(req, key);
     });
     [
         `/${key}${ROUTES.API_SIGNAL_CREATE}`,
         `/${key}${ROUTES.API_CONFIG_UPDATE}`,
         `/${key}${ROUTES.API_STYLE_UPDATE}`,
-        `/${key}${ROUTES.API_MEDIA_UPDATE}`,
     ].map(path => {
         app.all(path, (req, res) => {
             memorize(req, key);
@@ -147,7 +150,6 @@ const server = https
         socket.join('dbdbdbdbdbgroup');
         socket.on("payload", (payload) => socket.to('dbdbdbdbdbgroup').emit("payload", payload));
         socket.on("disconnect", () => {
-            media[hash] = {};
             console.log("proxy :: disconnected", hash, socket.id, socket.handshake.address, key)
         });
         sockets[hash] = socket;
