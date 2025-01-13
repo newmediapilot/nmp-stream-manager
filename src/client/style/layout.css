@@ -13,7 +13,7 @@ article .layers { grid-area: 19 / 1 / 31 / 9; display: grid; grid-template-rows:
 article .layers label { position: relative; display: flex; justify-content: center; align-items: center; font-size: 35px; width: 100%; height: 100%; border-width: 7px; border-style: solid; border-color: rgb(255, 195, 0) rgb(247, 127, 0) rgb(255, 100, 0) rgb(255, 195, 0); background: var(--color-orange); box-sizing: border-box; }
 article .layers input { display: none; }
 article .layers input:checked + * { background: linear-gradient(45deg, var(--color-aqua), var(--color-light)); }
-article .modes { grid-area: 19 / 25 / 31 / 33; display: grid; grid-template-rows: repeat(4, calc(var(--cell-density) * 3)); width: 100%; overflow: hidden; }
+article .modes { grid-area: 19 / 25 / 31 / 33; display: grid; grid-template-rows: repeat(4, calc(var(--cell-density) * 3)); width: 100%; overflow: hidden; grid-template-columns: repeaT(4,calc(var(--cell-density)*2)); }
 article .modes label { position: relative; display: flex; justify-content: center; align-items: center; font-size: 30px; width: 100%; height: 100%; border-width: 7px; border-style: solid; border-color: rgb(255, 195, 0) rgb(247, 127, 0) rgb(255, 100, 0) rgb(255, 195, 0); background: var(--color-orange); box-sizing: border-box; }
 article .modes input { display: none; }
 article .modes input:checked + * { background: linear-gradient(45deg, var(--color-aqua), var(--color-light)); }
