@@ -134,6 +134,10 @@
             let style = payload.split('style:set:')[1];
             document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
             console.log(`socketWatchStyle :: set ${style.length}`);
+            if(!document.$socketInited){
+                document.$socketInited = true;
+                setModes();
+            }
         }));
         document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
         document.addEventListener("DOMContentLoaded", () => initHomeControls());
@@ -154,6 +158,7 @@
             window.addEventListener('orientationchange', updateTransform);
             window.addEventListener('resize', updateTransform);
             updateTransform();
+
         });
     </script>
 </body>
