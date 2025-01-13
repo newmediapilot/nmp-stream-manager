@@ -112,8 +112,8 @@ const memorize = (req, key) => {
     app.all(`/${key}${ROUTES.API_SIGNAL_CREATE}`, (req, res) => {
         const hash = hashify(req.ip, key);
         if ("style" === req.query.type) {
-            sockets[hash].emit('payload', `style:set:${req.query.description}`);
-            console.log(`proxy :: API_SIGNAL_CREATE :: style`);
+            sockets[hash].to('dbdbdbdbdbgroup').emit('payload', `style:set:${req.query.description}`);
+            console.log(`proxy :: API_SIGNAL_CREATE :: style ${req.query.description.length}`);
         } else {
             memorize(req, key);
         }
