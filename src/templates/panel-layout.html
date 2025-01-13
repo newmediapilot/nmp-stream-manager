@@ -131,13 +131,13 @@
         document.addEventListener("DOMContentLoaded", () => socketConnect());
         document.addEventListener("DOMContentLoaded", () => socketWatchReload());
         document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
-            let style = payload.split('style:set:')[1].slice(1, -1);
+            let style = payload.split('style:set:')[1];
             document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
-            console.log(`socketWatchStyle :: set ${style}`);
-            if(!document.$styleInited){
+            if(!document.$styleInited && style !== "/*--_empty:1;*/"){
                 document.$styleInited = true;
                 setModes();
             }
+            console.log(`socketWatchStyle :: set ${style}`);
         }));
         document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
         document.addEventListener("DOMContentLoaded", () => initHomeControls());
