@@ -127,5 +127,4 @@ const enableRadioButtons = () => {
     ).forEach(input => input.addEventListener('change', setModes));
     document.querySelector('article .layers input[type=radio]:nth-of-type(1)').checked = true;
     document.querySelector('article .modes input[type=radio]:nth-of-type(1)').checked = true;
-    setModes();
 };
