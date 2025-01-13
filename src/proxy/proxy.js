@@ -154,12 +154,10 @@ const server = https
     });
     io.on("connection", (socket) => {
         const hash = hashify(socket.handshake.address, key);
+        sockets[hash] = io;
         socket.join('dbdbdbdbdbgroup');
-        socket.on("payload", (payload) => socket.to('dbdbdbdbdbgroup').emit("payload", payload));
-        socket.on("disconnect", () => {
-            console.log("proxy :: disconnected", hash, socket.id, socket.handshake.address, key)
-        });
-        sockets[hash] = socket;
+        socket.on("payload", (payload) => sockets[hash].to('dbdbdbdbdbgroup').emit("payload", payload));
+        socket.on("disconnect", () => console.log("proxy :: disconnected", hash, socket.id, socket.handshake.address, key));
         style[hash] && sockets[hash].emit('payload', `style:set:${style[hash]}`);
         config[hash] && sockets[hash].emit('payload', `config:set:${JSON.stringify(config[hash])}`);
         console.log("proxy :: connected", hash, socket.id, socket.handshake.address, key);
