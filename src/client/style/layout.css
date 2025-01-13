@@ -193,7 +193,7 @@ article .controls label::after {
             var(--color-red),
             17.5px,
             transparent 25px,
-            transparent 25pxs
+            transparent 25px
     );
     background-blend-mode: hard-light;
 }
