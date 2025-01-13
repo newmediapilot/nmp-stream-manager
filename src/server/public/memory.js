@@ -59,7 +59,7 @@ const setMemory = async () => {
 };
 const broadcastStyle = async () => {
     try {
-        const result = await fetch(`https://api.dbdbdbdbdbgroup.com/demo/${"api"}/style/set?payload=${JSON.stringify(getParam("public_module_styles"))}`, {agent});
+        const result = await fetch(`https://api.dbdbdbdbdbgroup.com/demo/${"api"}/style/set?payload=${getParam("public_module_styles")}`, {agent});
         console.log('broadcastStyle memory :: result.status', result.status);
     } catch (e) {
         console.log('broadcastStyle :: error');
