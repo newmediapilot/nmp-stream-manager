@@ -109,8 +109,17 @@ const memorize = (req, key) => {
         console.log(`proxy :: API_MEDIA_UPDATE :: ${media[hash]} ${hash} ${name}.${type}`);
         memorize(req, key);
     });
+    app.all(`/${key}${ROUTES.API_SIGNAL_CREATE}`, (req, res) => {
+        const hash = hashify(req.ip, key);
+        if ("style" === req.query.type) {
+            sockets[hash].emit('payload', `style:set:${req.query.description}`);
+            console.log(`proxy :: API_SIGNAL_CREATE :: style`);
+        } else {
+            memorize(req, key);
+        }
+        res.send(`200 @ ${time}`);
+    });
     [
-        `/${key}${ROUTES.API_SIGNAL_CREATE}`,
         `/${key}${ROUTES.API_CONFIG_UPDATE}`,
         `/${key}${ROUTES.API_STYLE_UPDATE}`,
     ].map(path => {
