@@ -216,8 +216,8 @@
             } else {
                 buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}`);
             }
-            // console.log('socketWatchConfig :: signal', signal);
         });
+        console.log('socketWatchConfig :: set');
     }));
     document.addEventListener("DOMContentLoaded", () => initNavControls());
     document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
