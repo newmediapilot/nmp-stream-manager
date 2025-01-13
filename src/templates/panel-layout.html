@@ -134,9 +134,8 @@
             let style = payload.split('style:set:')[1];
             document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
             console.log(`socketWatchStyle :: set ${style.length}`);
-            if(!document.$socketInited){
-                document.$socketInited = true;
-                setModes();
+            if(!document.$styleInited){
+                document.$styleInited = setModes();
             }
         }));
         document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
