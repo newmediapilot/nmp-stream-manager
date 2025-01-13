@@ -73,7 +73,7 @@
     document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
         let style = payload.split('style:set:')[1];
         document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
-        console.log('socketWatchStyle :: set');
+        console.log(`socketWatchStyle :: set ${style.length}`);
     }));
     document.addEventListener("DOMContentLoaded", () => socketWatchMediaSet((payload) => {
         let cells = payload.split('media:set:')[1];
