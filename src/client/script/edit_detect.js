@@ -1,5 +1,5 @@
 const editDetect = () => {
-    if(document.location.hash === '#edit') {
-        document.documentElement.classList.add('iframe');
+    if (document.location.hash.includes('edit')) {
+        document.documentElement.classList.add('edit');
     }
 };
