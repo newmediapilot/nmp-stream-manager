@@ -79,7 +79,7 @@
     document.addEventListener("DOMContentLoaded", () => socketWatchMediaSet((payload) => {
         let cells = payload.split('media:set:')[1];
         const [name, type, suffix] = cells.split(',');
-        const src = `https://api.dbdbdbdbdbgroup.com/media/${name}.${suffix}`;
+        const src = `https://api.dbdbdbdbdbgroup.com/demo/media/${name}.${suffix}`;
         if (document.body.querySelector('#embed').getAttribute('src') === src) {
             document.body.querySelector('#embed').setAttribute('src', '');
         } else {
