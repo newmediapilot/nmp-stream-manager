@@ -27,6 +27,8 @@ const castLayoutInputValues = () => {
     const [px, py] = [(label.scrollLeft / scrollWidth) || 0, (label.scrollTop / scrollHeight) || 0];
     inputX.value = (Math.abs(inputX.max) * px);
     inputY.value = (Math.abs(inputY.max) * py);
+    inputX.setAttribute("value", (Math.abs(inputX.max) * px));
+    inputY.setAttribute("value", (Math.abs(inputY.max) * py));
     if (inputZ) {
         console.log('inputZ', inputZ);
     }
@@ -121,7 +123,16 @@ const setModes = () => {
 const enableUndoButton = () => {
     const button = document.querySelector('article .effects button');
     button.addEventListener('click', () => {
-        console.log('undo!');
+        const [layer, property] = document.$modes;
+        const inputs = Array.from(document.querySelectorAll('article .controls input'))
+            .filter(input => input.name.includes(layer))
+            .filter(input => {
+                const prop = input.name.split('-').pop().substr(0, 1);
+                return property.substr(0, 1) === prop;
+            }).map(input => {
+                input.value = input.max / 2;
+            });
+        // setModes();
     });
 };
 const enableRadioButtons = () => {
