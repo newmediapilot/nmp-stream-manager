@@ -12,6 +12,7 @@
     "combine": "node compiler/combine.js",
     "compile": "node compiler/compile.js",
     "concat": "node compiler/concat.js",
+    "manifest": "node compiler/manifest.js",
     "reset": "rm -rf node_modules && npm i --no-package-lock",
     "s3": "node compiler/s3.js",
     "snapshot": "node compiler/snapshot.js",
