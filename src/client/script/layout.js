@@ -119,6 +119,7 @@ const setModes = () => {
         left,
         behavior: "smooth",
     });
+    document.querySelector('article .controls').setAttribute('id', document.$modes[1]);
 };
 const enableUndoButton = () => {
     const button = document.querySelector('article .effects button');
