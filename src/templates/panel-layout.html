@@ -140,7 +140,7 @@
                 document.$styleInited = true;
                 setModes();
             }
-            // console.log(`socketWatchStyle :: set ${style}`);
+            console.log(`socketWatchStyle :: layout :: set ${style}`);
         }));
         document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
         document.addEventListener("DOMContentLoaded", () => initHomeControls());
