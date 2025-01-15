@@ -98,6 +98,7 @@ const memorize = (req, key) => {
             }
         })();
         res.setHeader('Content-Type', mimeType);
+        console.log("proxy :: API_MEDIA_GET :: sending...");
         res.send(reqPayload);
     });
     app.all(`/${key}${ROUTES.API_MEDIA_UPDATE}`, (req, res) => {
