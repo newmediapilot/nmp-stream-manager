@@ -19,8 +19,8 @@
     <link href="../client/style/iframe.css?" rel="stylesheet">
     <style>
         #embed {
-            width: 100vw;
-            height: 100vh;
+            min-width: 100vw;
+            min-height: 100vh;
             object-fit: contain;
         }
         #embed[src=''] {
@@ -73,7 +73,7 @@
     document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
         let style = payload.split('style:set:')[1];
         document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
-        // console.log(`socketWatchStyle :: media :: set ${style}`);
+        console.log(`socketWatchStyle :: media :: set ${style}`);
     }));
     document.addEventListener("DOMContentLoaded", () => socketWatchMediaSet((payload) => {
         let cells = payload.split('media:set:')[1];
