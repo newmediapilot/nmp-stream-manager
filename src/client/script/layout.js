@@ -118,6 +118,12 @@ const setModes = () => {
         behavior: "smooth",
     });
 };
+const enableUndoButton = () => {
+    const button = document.querySelector('article .effects button');
+    button.addEventListener('click', () => {
+        console.log('undo!');
+    });
+};
 const enableRadioButtons = () => {
     Array.from(
         [
@@ -125,6 +131,7 @@ const enableRadioButtons = () => {
             ...document.body.querySelectorAll('article .layers input'),
         ]
     ).forEach(input => input.addEventListener('change', setModes));
+    enableUndoButton();
     document.querySelector('article .layers input[type=radio]:nth-of-type(1)').checked = true;
     document.querySelector('article .modes input[type=radio]:nth-of-type(1)').checked = true;
 };
