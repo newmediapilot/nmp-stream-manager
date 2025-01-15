@@ -236,17 +236,15 @@ article .controls[id="translate"] label::after {
 article .controls[id="scale"] label::after {
     background-color: #e5e5f7;
     opacity: 1;
-    background-image: linear-gradient(-45deg, #e5e5f7, #e5e5f7 50%, #000000 50%, #000000);
-    background-size: 40px 40px;
+    background-image: radial-gradient(circle at center center, #000000, #e5e5f7), repeating-radial-gradient(circle at center center, #000000, #000000, 40px, transparent 80px, transparent 40px);
+    background-blend-mode: multiply;
 }
 
 article .controls[id="rotate"] label::after {
-    background-color: rgb(229, 229, 247);
+    background-color: #e5e5f7;
     opacity: 1;
-    background-image: linear-gradient(30deg, rgb(0, 0, 0) 12%, transparent 12.5%, transparent 87%, rgb(0, 0, 0) 87.5%, rgb(0, 0, 0)), linear-gradient(150deg, rgb(0, 0, 0) 12%, transparent 12.5%, transparent 87%, rgb(0, 0, 0) 87.5%, rgb(0, 0, 0)), linear-gradient(30deg, rgb(0, 0, 0) 12%, transparent 12.5%, transparent 87%, rgb(0, 0, 0) 87.5%, rgb(0, 0, 0)), linear-gradient(150deg, rgb(0, 0, 0) 12%, transparent 12.5%, transparent 87%, rgb(0, 0, 0) 87.5%, rgb(0, 0, 0)), linear-gradient(60deg, rgba(0, 0, 0, 0.467) 25%, transparent 25.5%, transparent 75%, rgba(0, 0, 0, 0.467) 75%, rgba(0, 0, 0, 0.467)), linear-gradient(60deg, rgba(0, 0, 0, 0.467) 25%, transparent 25.5%, transparent 75%, rgba(0, 0, 0, 0.467) 75%, rgba(0, 0, 0, 0.467));
-    background-size: 54px 95px;
-    background-position: 0px 0px, 0px 0px, 27px 47px, 27px 47px, 0px 0px, 27px 47px;
-    background-blend-mode: darken;
+    background-image: radial-gradient(circle at center center, #000000, #e5e5f7), repeating-radial-gradient(circle at center center, #000000, #000000, 4px, transparent 8px, transparent 4px);
+    background-blend-mode: multiply;
 }
 
 article input::-webkit-slider-thumb {
