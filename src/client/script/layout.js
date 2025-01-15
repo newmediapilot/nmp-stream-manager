@@ -123,16 +123,14 @@ const setModes = () => {
 const enableUndoButton = () => {
     const button = document.querySelector('article .effects button');
     button.addEventListener('click', () => {
-        const [layer, property] = document.$modes;
-        const inputs = Array.from(document.querySelectorAll('article .controls input'))
-            .filter(input => input.name.includes(layer))
-            .filter(input => {
-                const prop = input.name.split('-').pop().substr(0, 1);
-                return property.substr(0, 1) === prop;
-            }).map(input => {
-                input.value = input.max / 2;
-            });
-        // setModes();
+        const {scrollWidth, scrollHeight} = document.querySelector('article .controls label');
+        const top = scrollHeight * .25;
+        const left = scrollWidth * .25;
+        document.querySelector('article .controls label').scrollTo({
+            top,
+            left,
+        });
+        castLayoutInputValues();
     });
 };
 const enableRadioButtons = () => {
