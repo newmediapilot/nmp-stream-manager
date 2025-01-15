@@ -27,6 +27,7 @@ const hashes = Array.from({length})
             execSync(`npm run concat ${hash}`, {stdio: 'inherit'});
             execSync(`npm run snapshot ${hash}`, {stdio: 'inherit'});
             // execSync(`npm run compile ${hash}`, {stdio: 'inherit'});
+            execSync(`npm run manifest ${hash}`, {stdio: 'inherit'});
             execSync(`npm run s3 ${hash}`, {stdio: 'inherit'});
             execSync(`npm run cloudfront ${hash}`, {stdio: 'inherit'});
             return hash;
