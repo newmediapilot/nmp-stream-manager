@@ -86,11 +86,10 @@ const {broadcastConfig} = require("../public/memory");
 const {setParam, getParam} = require("../store/manager");
 const initializePublicConfigs = async (type) => {
     console.log("initializePublicConfigs :: start");
-    const fileName = path.resolve(`${type}`);
     try {
-        if (!fs.existsSync(fileName)) {
+        if (!fs.existsSync(`${type}`)) {
             setParam("dashboard_signals_config", DASHBOARD_BUTTON_CONFIG.signals);
-            putConfig("signals", DASHBOARD_BUTTON_CONFIG.signals);
+            putConfig(`${type}`, DASHBOARD_BUTTON_CONFIG.signals);
             console.log("initializePublicConfigs :: new file");
         } else {
             setParam("dashboard_signals_config", getConfig("signals"));
@@ -107,12 +106,11 @@ const initializePublicConfigs = async (type) => {
     }
 };
 const putConfig = (filePath, config) => {
-    const fileName = path.resolve(`${filePath}`);
-    console.log("putConfig :: file:", fileName, ":: contents :", config.map((c) => (c.label || 'empty')));
-    fs.writeFileSync(fileName, JSON.stringify(config), {encoding: "utf-8"});
+    console.log("putConfig :: file:", filePath, ":: contents :", config.map((c) => (c.label || 'empty')));
+    fs.writeFileSync(filePath, JSON.stringify(config), {encoding: "utf-8"});
 };
 const getConfig = (type) => {
-    const fileName = path.resolve(`.${type}`);
+    const fileName = path.resolve(`${type}`);
     console.log("getConfig :: file:", fileName);
     return JSON.parse(fs.readFileSync(fileName, "utf-8"));
 };
