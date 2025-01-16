@@ -127,6 +127,12 @@
         document.addEventListener("DOMContentLoaded", () => iframeDetect());
         document.addEventListener("DOMContentLoaded", () => socketConnect());
         document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+        document.addEventListener("DOMContentLoaded", () => socketWatchConfig((payload) => {
+            const data = JSON.parse(payload.split('config:set:')[1]);
+            const parsed = JSON.parse(data);
+            document.$preview = parsed.filter(s => s.type==="media")[0];
+            console.log(`socketWatchConfig :: document.$preview :: set`, document.$preview);
+        }));
         document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
             let style = payload.split('style:set:')[1];
             document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
