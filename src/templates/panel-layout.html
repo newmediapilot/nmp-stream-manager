@@ -130,7 +130,11 @@
         document.addEventListener("DOMContentLoaded", () => socketWatchConfig((payload) => {
             const data = JSON.parse(payload.split('config:set:')[1]);
             const parsed = JSON.parse(data);
-            document.$preview = parsed.filter(s => s.type==="media")[0];
+            const media = parsed.filter(s => s.type === "media")[0];
+            const feature = parsed.filter(s => s.type === "feature")[0];
+            document.querySelector('section article .layers label[for="_med"]').setAttribute('aria-label', media.label);
+            document.querySelector('section article .layers label[for="_feat"]').setAttribute('aria-label', feature.label);
+            document.$preview = media;
             console.log(`socketWatchConfig :: document.$preview :: set`, document.$preview);
         }));
         document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
