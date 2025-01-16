@@ -121,8 +121,14 @@ const setModes = () => {
     });
     document.querySelector('article .controls').setAttribute('id', document.$modes[1]);
 };
+const enablePreviewButton = () => {
+    const button = document.querySelector('article .effects button:nth-of-type(1)');
+    button.addEventListener('click', () => {
+        
+    });
+};
 const enableUndoButton = () => {
-    const button = document.querySelector('article .effects button');
+    const button = document.querySelector('article .effects button:nth-of-type(2)');
     button.addEventListener('click', () => {
         const {scrollWidth, scrollHeight} = document.querySelector('article .controls label');
         const top = scrollHeight * .25;
@@ -141,6 +147,7 @@ const enableRadioButtons = () => {
             ...document.body.querySelectorAll('article .layers input'),
         ]
     ).forEach(input => input.addEventListener('change', setModes));
+    enablePreviewButton();
     enableUndoButton();
     document.querySelector('article .layers input[type=radio]:nth-of-type(1)').checked = true;
     document.querySelector('article .modes input[type=radio]:nth-of-type(1)').checked = true;
