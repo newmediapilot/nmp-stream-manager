@@ -86,7 +86,7 @@ const {broadcastConfig} = require("../public/memory");
 const {setParam, getParam} = require("../store/manager");
 const initializePublicConfigs = async (type) => {
     console.log("initializePublicConfigs :: start");
-    const fileName = path.resolve(`.${type}`);
+    const fileName = path.resolve(`${type}`);
     try {
         if (!fs.existsSync(fileName)) {
             setParam("dashboard_signals_config", DASHBOARD_BUTTON_CONFIG.signals);
