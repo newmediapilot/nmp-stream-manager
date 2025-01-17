@@ -133,12 +133,22 @@
             document.querySelector('section article .layers label[for="_med"]').setAttribute('aria-label', media.label);
             document.querySelector('section article .layers label[for="_feat"]').setAttribute('aria-label', feature.label);
             document.querySelector('section article .layers label[for="_draw"]').setAttribute('aria-label', "draw");
-            const {type, description} = media;
-            const href = `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}`;
-            const res = axios.get(href);
-            res.then((res) => console.log("socketWatchConfig :: sendSignal ::", res));
-            res.catch((error) => console.log("socketWatchConfig :: sendSignal :: error:", error.response.data));
-            res.finally(() => console.info("socketWatchConfig :: sendSignal :: complete"));
+            if (media) {
+                const {type, description} = media;
+                const href = `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}`;
+                const res = axios.get(href);
+                res.then((res) => console.log("socketWatchConfig :: sendSignal :: feature media", res));
+                res.catch((error) => console.log("socketWatchConfig :: sendSignal :: media error", error.response.data));
+                res.finally(() => console.info("socketWatchConfig :: sendSignal :: media complete"));
+            }
+            if (feature) {
+                const {type, description, label} = feature;
+                const href = `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}:${label}`;
+                const res = axios.get(href);
+                res.then((res) => console.log("socketWatchConfig :: sendSignal :: feature res", res));
+                res.catch((error) => console.log("socketWatchConfig :: sendSignal :: feature error", error.response.data));
+                res.finally(() => console.info("socketWatchConfig :: sendSignal :: feature complete"));
+            }
             console.log(`socketWatchConfig :: document.$preview :: set`, document.$preview);
         }));
         document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
