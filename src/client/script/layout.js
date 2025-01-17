@@ -121,14 +121,6 @@ const setModes = () => {
     });
     document.querySelector('article .controls').setAttribute('id', document.$modes[1]);
 };
-const enablePreviewImage = () => {
-    const {type, description} = document.$preview;
-    const href = `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}`;
-    const res = axios.get(href);
-    res.then((res) => console.log("enablePreviewImage :: sendSignal ::", res));
-    res.catch((error) => console.log("enablePreviewImage :: sendSignal :: error:", error.response.data));
-    res.finally(() => console.info("enablePreviewImage :: sendSignal :: complete"));
-};
 const enableUndoButton = () => {
     const button = document.querySelector('article .effects button:nth-of-type(2)');
     button.addEventListener('click', () => {
