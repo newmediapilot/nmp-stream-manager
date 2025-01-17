@@ -56,11 +56,11 @@
             </div>
             <div class="layers">
                 <input type="radio" name="layers" id="_feat"/>
-                <label for="_feat" aria-label="FEAT"></label>
+                <label for="_feat" aria-label="..."></label>
                 <input type="radio" name="layers" id="_draw"/>
-                <label for="_draw" aria-label="DRAW"></label>
+                <label for="_draw" aria-label="..."></label>
                 <input type="radio" name="layers" id="_med"/>
-                <label for="_med" aria-label="MEDIA"></label>
+                <label for="_med" aria-label="..."></label>
             </div>
             <div class="effects">
                 <button aria-label="🖼️"></button>
@@ -132,7 +132,9 @@
             const feature = parsed.filter(s => s.type === "feature")[0];
             document.querySelector('section article .layers label[for="_med"]').setAttribute('aria-label', media.label);
             document.querySelector('section article .layers label[for="_feat"]').setAttribute('aria-label', feature.label);
+            document.querySelector('section article .layers label[for="_draw"]').setAttribute('aria-label', "draw");
             document.$preview = media;
+            enablePreviewImage();
             console.log(`socketWatchConfig :: document.$preview :: set`, document.$preview);
         }));
         document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
