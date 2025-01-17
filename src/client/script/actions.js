@@ -135,6 +135,8 @@ const actionsCreateUpload = (editorEl) => {
                             console.log('actionsCreateUpload :: success:', response.data);
                         }).catch(error => {
                             console.error('actionsCreateUpload :: error:', error);
+                        }).finally(()=>{
+                            socketEmitReload();
                         })
                     };
                     reader.readAsDataURL(uploader.files[0]);
