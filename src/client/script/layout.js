@@ -121,16 +121,13 @@ const setModes = () => {
     });
     document.querySelector('article .controls').setAttribute('id', document.$modes[1]);
 };
-const enablePreviewButton = () => {
-    const button = document.querySelector('article .effects button:nth-of-type(1)');
-    button.addEventListener('click', () => {
-        const {type, description} = document.$preview;
-        const href = `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}`;
-        const res = axios.get(href);
-        res.then((res) => console.log("enablePreviewButton :: sendSignal ::", res));
-        res.catch((error) => console.log("enablePreviewButton :: sendSignal :: error:", error.response.data));
-        res.finally(() => console.info("enablePreviewButton :: sendSignal :: complete"));
-    });
+const enablePreviewImage = () => {
+    const {type, description} = document.$preview;
+    const href = `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}`;
+    const res = axios.get(href);
+    res.then((res) => console.log("enablePreviewImage :: sendSignal ::", res));
+    res.catch((error) => console.log("enablePreviewImage :: sendSignal :: error:", error.response.data));
+    res.finally(() => console.info("enablePreviewImage :: sendSignal :: complete"));
 };
 const enableUndoButton = () => {
     const button = document.querySelector('article .effects button:nth-of-type(2)');
@@ -152,7 +149,7 @@ const enableRadioButtons = () => {
             ...document.body.querySelectorAll('article .layers input'),
         ]
     ).forEach(input => input.addEventListener('change', setModes));
-    enablePreviewButton();
+    enablePreviewImage();
     enableUndoButton();
     document.querySelector('article .layers input[type=radio]:nth-of-type(1)').checked = true;
     document.querySelector('article .modes input[type=radio]:nth-of-type(1)').checked = true;
