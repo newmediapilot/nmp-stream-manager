@@ -50,6 +50,7 @@
             const currentPath =  payload.split('browser:route:')[1];
             const iframeEl = Array.from(document.body.querySelectorAll(`iframe[src="${currentPath}"]`))[0];
             const indexOf = Array.from(document.body.querySelectorAll("iframe")).indexOf(iframeEl);
+            if(indexOf === -1) return;
             const vw = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-width'));
             const vh = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-height'));
             const translateValues = [
