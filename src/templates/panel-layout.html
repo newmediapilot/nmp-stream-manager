@@ -137,7 +137,7 @@
         document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
             let style = payload.split('style:set:')[1];
             document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
-            if(!document.$styleInited && style !== "/*--_empty:1;*/"){
+            if(!document.$styleInited || style === "/*--_empty:1;*/"){
                 document.$styleInited = true;
                 setModes();
             }
