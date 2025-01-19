@@ -106,13 +106,12 @@ const initializePublicConfigs = async (type) => {
     }
 };
 const putConfig = (filePath, config) => {
-    console.log("putConfig :: file:", filePath, ":: contents :", config.map((c) => (c.label || 'empty')));
+    console.log("putConfig :: file:", filePath);
     fs.writeFileSync(filePath, JSON.stringify(config), {encoding: "utf-8"});
 };
-const getConfig = (type) => {
-    const fileName = path.resolve(`${type}`);
-    console.log("getConfig :: file:", fileName);
-    return JSON.parse(fs.readFileSync(fileName, "utf-8"));
+const getConfig = (filePath) => {
+    console.log("getConfig :: file:", filePath);
+    return JSON.parse(String(fs.readFileSync(filePath, {encoding: "utf-8"})));
 };
 const applySignalsOrder = (payloadJSON) => {
     const payloadAction = payloadJSON ? JSON.parse(payloadJSON) : [];
