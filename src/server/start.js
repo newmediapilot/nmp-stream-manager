@@ -14,9 +14,6 @@ const startServices = async (app) => {
         setParam("public_index", "https://dbdbdbdbdbgroup.com/demo/");
         setParam("public_routes", ROUTES);
         setParam("twitch_username", process.env.TWITCH_USERNAME);
-        await initializePublicConfigs("signals");
-        await initializePublicStyles("style");
-        initializeMedia();
         configureNunjucks(app);
         const certs = {
             key: getSecret('keys')['private'],
@@ -25,6 +22,9 @@ const startServices = async (app) => {
         https.createServer(certs, app).listen(443, () => {
             console.log("startServices :: server running on 443 at https://localhost");
         });
+        await initializePublicConfigs("signals");
+        await initializePublicStyles("style");
+        initializeMedia();
         configureSocket();
         execSync(`start "" "https://dbdbdbdbdbgroup.com/demo/"`, {stdio: 'ignore'});
     } catch (err) {
