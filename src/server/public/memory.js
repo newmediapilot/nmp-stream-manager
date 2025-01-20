@@ -2,41 +2,34 @@ const fs = require("fs");
 const https = require("https");
 const fetch = require("node-fetch");
 const {sync: globSync} = require('glob');
+const {ROUTES} = require('../routes');
 const {getParam} = require('../store/manager');
 const agent = new https.Agent({rejectUnauthorized: false});
 const getMemory = async () => {
     try {
         let result;
         const response = await fetch("https://api.dbdbdbdbdbgroup.com/demo/api/memory/get", {agent});
-        const memory = await response.json();
+        const memory = await response.text();
         for (let i = 0; i < memory.length; i++) {
             try {
                 const [method, url, body] = JSON.parse(memory[i]);
-                const path = `https://localhost${url}`;
-                if (url.includes(`api/media/update`)) {
-                    result = await fetch(path.replace('/api/', '/memory/'), {
-                        agent,
-                        method,
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({...body}),
-                    });
-                } else {
-                    result = await fetch(path.replace('/api/', '/memory/'), {
-                        agent,
-                        headers: {'Content-Type': 'application/json'},
-                        method,
-                    });
-                }
-                console.log('memory :: loop status', result.status);
-            } catch (error) {
-                console.log('memory :: loop error', error);
+                result = await fetch(ROUTES.MEMORY_MEDIA_UPDATE, {
+                    agent,
+                    headers: {'Content-Type': 'application/json'},
+                    method,
+                    ...(url.includes(`api/media/update`) ? {body: JSON.stringify(body)} : {})
+                });
+                console.log('getMemory  :: for status', result.status);
+            } catch (err) {
+                console.log('getMemory :: for error', err);
             }
         }
-    } catch (error2) {
-        console.log('memory :: root error');
+        console.log('getMemory :: root done');
+    } catch (error) {
+        console.log('getMemory :: root error', error);
     }
 };
-const setMemory = async () => {
+const sendMedia = async () => {
     const memory = globSync('./media/**.*')
         .map(path => {
             return {
@@ -44,7 +37,7 @@ const setMemory = async () => {
                 payload: fs.readFileSync(path, {encoding: 'base64'}),
             };
         });
-    console.log('setMemory :: memory.length', memory.length);
+    console.log('sendMedia :: memory.length', memory.length);
     for (let i = 0; i < memory.length; i++) {
         const result = await fetch("https://api.dbdbdbdbdbgroup.com/demo/api/memory/set", {
             agent,
@@ -54,23 +47,25 @@ const setMemory = async () => {
             },
             body: JSON.stringify(memory[i]),
         });
-        console.log('setMemory memory :: result.status', result.status);
+        console.log('sendMedia :: result.status', result.status);
     }
+    console.log('sendMedia :: done');
+    return true;
 };
-const broadcastStyle = async () => {
+const sendStyle = async () => {
     try {
         const result = await fetch(`https://api.dbdbdbdbdbgroup.com/demo/${"api"}/style/set?payload=${getParam("public_module_styles")}`, {agent});
-        console.log('broadcastStyle memory :: result.status', result.status);
-    } catch (e) {
-        console.log('broadcastStyle :: error');
+        console.log('sendStyle memory :: result.status', result.status);
+    } catch (error) {
+        console.log('sendStyle :: error', error);
     }
 };
-const broadcastConfig = async () => {
+const sendConfig = async () => {
     try {
         const result = await fetch(`https://api.dbdbdbdbdbgroup.com/demo/${"api"}/config/set?payload=${JSON.stringify(getParam("dashboard_signals_config"))}`, {agent});
-        console.log('broadcastConfig memory :: result.status', result.status);
-    } catch (e) {
-        console.log('broadcastConfig :: error');
+        console.log('sendConfig memory :: result.status', result.status);
+    } catch (error) {
+        console.log('sendConfig :: error', error);
     }
 };
-module.exports = {getMemory, setMemory, broadcastStyle, broadcastConfig};
+module.exports = {getMemory, sendMedia, sendStyle, sendConfig};

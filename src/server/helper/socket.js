@@ -1,5 +1,5 @@
 const ioClient = require("socket.io-client");
-const {getMemory, setMemory, broadcastConfig, broadcastStyle} = require("../public/memory");
+const {getMemory, sendMedia, sendConfig, sendStyle} = require("../public/memory");
 let io;
 const configureSocket = () => {
     io = ioClient("https://api.dbdbdbdbdbgroup.com", {
@@ -12,9 +12,6 @@ const configureSocket = () => {
     });
     io.on("connect", () => {
         console.log("configureSocket :: client connect socket.id", io.id);
-        broadcastConfig();
-        broadcastStyle();
-        setMemory();
     });
     io.on("sync", () => {
         console.log("configureSocket :: sync", io.id);

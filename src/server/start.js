@@ -7,6 +7,7 @@ const {initializePublicConfigs} = require("./public/config");
 const {initializePublicStyles} = require("./public/style");
 const {initializeMedia} = require("./public/media");
 const {configureSocket} = require("./helper/socket");
+const {sendMedia, sendConfig, sendStyle} = require("./public/memory");
 const {ROUTES} = require("./routes");
 
 const startServices = async (app) => {
@@ -24,6 +25,9 @@ const startServices = async (app) => {
         });
         await initializePublicConfigs("signals");
         await initializePublicStyles("style");
+        await sendMedia();
+        await sendConfig();
+        await sendStyle();
         initializeMedia();
         configureSocket();
         execSync(`start "" "https://dbdbdbdbdbgroup.com/demo/"`, {stdio: 'ignore'});

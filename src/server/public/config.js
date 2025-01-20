@@ -82,7 +82,7 @@ const DASHBOARD_BUTTON_CONFIG = {
 };
 const fs = require("fs");
 const path = require("path");
-const {broadcastConfig} = require("../public/memory");
+const {sendConfig} = require("../public/memory");
 const {setParam, getParam} = require("../store/manager");
 const initializePublicConfigs = async (type) => {
     console.log("initializePublicConfigs :: start");
@@ -95,7 +95,7 @@ const initializePublicConfigs = async (type) => {
             setParam("dashboard_signals_config", getConfig("signals"));
             console.log("initializePublicConfigs :: load file");
         }
-        broadcastConfig();
+        sendConfig();
         console.log("initializePublicConfigs :: success");
         return true;
     } catch (e) {
@@ -139,7 +139,7 @@ const publicConfigUpdate = (req, res) => {
     try {
         if (type === "signals:order") putConfig("signals", applySignalsOrder(payload));
         if (type === "signals:field") putConfig("signals", applySignalsField(payload));
-        broadcastConfig();
+        sendConfig();
         res.status(200).json({message: "Configuration for " + type + " updated successfully."});
     } catch (error) {
         console.log("publicConfigUpdate :: error processing configuration:", error.message);
@@ -152,6 +152,6 @@ const configFieldUpdate = (id, field, value) => {
     signalsTarget[Number(id)][field] = value;
     setParam("dashboard_signals_config", signalsTarget);
     putConfig("signals", signalsTarget);
-    broadcastConfig();
+    sendConfig();
 };
 module.exports = {initializePublicConfigs, publicConfigUpdate, configFieldUpdate};
