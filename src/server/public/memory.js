@@ -37,7 +37,6 @@ const sendMedia = async () => {
                 payload: fs.readFileSync(path, {encoding: 'base64'}),
             };
         });
-    console.log('sendMedia :: memory.length', memory.length);
     for (let i = 0; i < memory.length; i++) {
         const result = await fetch("https://api.dbdbdbdbdbgroup.com/demo/api/memory/set", {
             agent,
