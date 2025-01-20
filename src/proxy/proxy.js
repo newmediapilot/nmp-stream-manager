@@ -66,7 +66,7 @@ const memorize = (req, key) => {
         const hash = hashify(req.ip, key);
         res.setHeader('Content-Type', 'text/plain');
         res.send(style[hash]);
-        console.log(`proxy :: API_CONFIG_GET :: ${memory[hash].length}`);
+        console.log(`proxy :: API_STYLE_GET :: ${memory[hash].length}`);
     });
     app.all(`/${key}${ROUTES.API_MEMORY_SET}`, (req, res) => {
         const hash = hashify(req.ip, key);
