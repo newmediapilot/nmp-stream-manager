@@ -14,7 +14,9 @@ const ROUTES = {
     API_MEMORY_GET: "/api/memory/get",
     API_MEMORY_SET: "/api/memory/set",
     API_CONFIG_SET: "/api/config/set",
+    API_CONFIG_GET: "/api/config/get",
     API_STYLE_SET: "/api/style/set",
+    API_STYLE_GET: "/api/style/get",
     API_SIGNAL_CREATE: "/api/signal/create",
     API_CONFIG_UPDATE: "/api/config/update",
     API_STYLE_UPDATE: "/api/style/update",
@@ -44,23 +46,27 @@ const memorize = (req, key) => {
         const hash = hashify(req.ip, key);
         if (!sockets[hash]) return;
         config[hash] = req.query.payload;
-        sockets[hash].to('dbdbdbdbdbgroup').emit('payload', `config:set:${JSON.stringify(config[hash])}`);
-        console.log(`proxy :: API_CONFIG_SET :: ${hash} ${JSON.stringify(config[hash]).substr(0,50)}...`);
+        console.log(`proxy :: API_CONFIG_SET :: ${hash} ${JSON.stringify(config[hash]).substr(0, 50)}...`);
         res.send(`200 @ ${time}`);
+    });
+    app.all(`/${key}${ROUTES.API_CONFIG_GET}`, (req, res) => {
+        const hash = hashify(req.ip, key);
+        res.setHeader('Content-Type', 'application/json');
+        res.send(config[hash]);
+        console.log(`proxy :: API_CONFIG_GET :: ${hash} ${JSON.stringify(config[hash]).substr(0, 50)}...`);
     });
     app.all(`/${key}${ROUTES.API_STYLE_SET}`, (req, res) => {
         const hash = hashify(req.ip, key);
         if (!sockets[hash]) return;
         style[hash] = req.query.payload;
-        sockets[hash].to('dbdbdbdbdbgroup').emit('payload', `style:set:${style[hash]}`);
         console.log(`proxy :: API_STYLE_SET :: ${hash} ${style[hash]}`);
         res.send(`200 @ ${time}`);
     });
-    app.all(`/${key}${ROUTES.API_MEMORY_GET}`, (req, res) => {
+    app.all(`/${key}${ROUTES.API_STYLE_GET}`, (req, res) => {
         const hash = hashify(req.ip, key);
-        res.send(memory[hash]);
-        console.log(`proxy :: API_MEMORY_GET :: ${memory[hash].length}`);
-        memory[hash] = [];
+        res.setHeader('Content-Type', 'text/plain');
+        res.send(style[hash]);
+        console.log(`proxy :: API_CONFIG_GET :: ${memory[hash].length}`);
     });
     app.all(`/${key}${ROUTES.API_MEMORY_SET}`, (req, res) => {
         const hash = hashify(req.ip, key);
@@ -71,17 +77,24 @@ const memorize = (req, key) => {
         console.log(`proxy :: API_MEMORY_SET :: keys ${Object.keys(media[hash])} ${reqPayload.length}`);
         res.send(`200 @ ${time}`);
     });
+    app.all(`/${key}${ROUTES.API_MEMORY_GET}`, (req, res) => {
+        const hash = hashify(req.ip, key);
+        res.setHeader('Content-Type', 'application/json');
+        res.send(style[hash]);
+        console.log(`proxy :: API_MEMORY_GET :: ${memory[hash].length}`);
+        memory[hash] = [];
+    });
     app.all(`/${key}${ROUTES.API_MEDIA_GET}`, (req, res) => {
         const hash = hashify(req.ip, key);
-        if(!media[hash]) return res.status(404).send(`404 @ media ${time}`);
+        if (!media[hash]) return res.status(404).send(`404 @ media ${time}`);
         const keys = Object.keys(media[hash]);
-        if(!keys.length) return res.status(404).send(`404 @ keys ${time}`);
+        if (!keys.length) return res.status(404).send(`404 @ keys ${time}`);
         const reqPath = req.params.path;
         const reqPayload = keys
             .filter(k => k.includes(reqPath))
             .map(k => media[hash][k])
             .pop();
-        if(!reqPayload) return res.status(404).send(`404 @ payload ${time}`);
+        if (!reqPayload) return res.status(404).send(`404 @ payload ${time}`);
         console.log(`proxy :: API_MEDIA_GET :: keys :: ${Object.keys(media[hash])} :1: ${reqPath} :2: ${reqPayload ? reqPayload.length : reqPayload}`);
         const mimeType = (() => {
             switch (path.extname(reqPath).toLowerCase()) {
@@ -98,10 +111,10 @@ const memorize = (req, key) => {
             }
         })();
         res.setHeader('Content-Type', mimeType);
-        console.log("proxy :: API_MEDIA_GET :: sending...");
+        console.log("proxy :: API_MEDIA_GET :: sending...", req.params.path, mimeType);
         res.send(reqPayload);
     });
-    app.all(`/${key}${ROUTES.API_MEDIA_UPDATE}`, (req, res) => {
+    app.all(`/${key}${ROUTES.API_MEDIA_UPDATE}`, (req,_) => {
         const hash = hashify(req.ip, key);
         const {data, type} = req.body;
         const name = req.body.key;
@@ -137,9 +150,7 @@ const server = https
         cert: `${fs.readFileSync('.cert/cert.crt', {encoding: "utf-8"})}`,
     }, app)
     .listen(443, () => console.log('proxy :: server running'));
-[
-    'demo',
-].map(key => {
+['demo'].map(key => {
     return {
         key,
         path: `/${key}/socket.io`
@@ -158,10 +169,10 @@ const server = https
         sockets[hash] = io;
         socket.join('dbdbdbdbdbgroup');
         socket.on("payload", (payload) => sockets[hash].to('dbdbdbdbdbgroup').emit("payload", payload));
-        socket.on("disconnect", () => console.log("proxy :: disconnected", hash, socket.id, socket.handshake.address, key));
-        style[hash] && sockets[hash].emit('payload', `style:set:${style[hash]}`);
-        config[hash] && sockets[hash].emit('payload', `config:set:${JSON.stringify(config[hash])}`);
         console.log("proxy :: connected", hash, socket.id, socket.handshake.address, key);
+        socket.on("disconnect", () => {
+            console.log("proxy :: disconnected", hash, socket.id, socket.handshake.address, key)
+        });
     });
     console.log("proxy :: created", key, path);
 });
