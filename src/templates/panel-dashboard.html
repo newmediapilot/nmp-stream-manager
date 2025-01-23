@@ -30,6 +30,7 @@
     <link href="../client/style/controls.css?" rel="stylesheet">
     <link href="../client/style/dialog.css?" rel="stylesheet">
     <link href="../client/style/dashboard.css?" rel="stylesheet">
+    <meta name="API_CONFIG_GET" content="https://api.dbdbdbdbdbgroup.com/demo/api/config/get">
     <meta name="API_SIGNAL_CREATE" content="https://api.dbdbdbdbdbgroup.com/demo/api/signal/create">
     <meta name="API_CONFIG_UPDATE" content="https://api.dbdbdbdbdbgroup.com/demo/api/config/update">
     <meta name="API_STYLE_UPDATE" content="https://api.dbdbdbdbdbgroup.com/demo/api/style/update">
@@ -193,32 +194,36 @@
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    document.addEventListener("DOMContentLoaded", () => socketWatchConfig((payload) => {
-        const data = JSON.parse(payload.split('config:set:')[1]);
-        const signals = JSON.parse(data);
-        signals.forEach((signal, index) => {
-            const type = signal.type;
-            const {description, emoji, label, theme, visibility} = signal;
-            const articleEl = document.body.querySelector('section').children[index];
-            const buttonEl = articleEl.querySelector('button');
-            const emojiEl = articleEl.querySelector('label:nth-of-type(1)');
-            const labelEl = articleEl.querySelector('label:nth-of-type(2)');
-            buttonEl.disabled = (visibility === "OFF");
-            articleEl.setAttribute('class', theme || "empty");
-            emojiEl.setAttribute('aria-label', emoji || "");
-            labelEl.setAttribute('aria-label', label || "");
-            if (type === "empty") {
-                buttonEl.setAttribute('data-href', ``);
-            } else if (type === "mark") {
-                buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${label}`);
-            } else if (type === "feature") {
-                buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}:${label}`);
-            } else {
-                buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}`);
-            }
-        });
-        console.log('socketWatchConfig :: set');
-    }));
+    document.addEventListener("DOMContentLoaded", () => {
+        const processConfig = (signals) =>{
+            signals.forEach((signal, index) => {
+                const type = signal.type;
+                const {description, emoji, label, theme, visibility} = signal;
+                const articleEl = document.body.querySelector('section').children[index];
+                const buttonEl = articleEl.querySelector('button');
+                const emojiEl = articleEl.querySelector('label:nth-of-type(1)');
+                const labelEl = articleEl.querySelector('label:nth-of-type(2)');
+                buttonEl.disabled = (visibility === "OFF");
+                articleEl.setAttribute('class', theme || "empty");
+                emojiEl.setAttribute('aria-label', emoji || "");
+                labelEl.setAttribute('aria-label', label || "");
+                if (type === "empty") {
+                    buttonEl.setAttribute('data-href', ``);
+                } else if (type === "mark") {
+                    buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${label}`);
+                } else if (type === "feature") {
+                    buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}:${label}`);
+                } else {
+                    buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}`);
+                }
+            });
+            console.log('socketWatchConfig :: set');
+        };
+        const res = axios.get(getPath("API_CONFIG_GET"));
+        res.then((res) => processConfig(res.data));
+        res.catch((error) => console.log("API_CONFIG_GET :: error:", error.response.data));
+        res.finally(_ => console.info("API_CONFIG_GET :: complete"));
+    });
     document.addEventListener("DOMContentLoaded", () => initNavControls());
     document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
     document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.body.querySelector("#qr-dialog button[data-url]")));
