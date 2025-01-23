@@ -11,7 +11,7 @@ section {
 }
 
 section::after {
-    content: '';
+    content: "";
     height: 25vh;
     background: transparent;
     width: 100%;
@@ -55,7 +55,7 @@ section > div:not([aria-label]):nth-of-type(2) label {
     grid-template-rows: repeat(10, 25px);
 }
 
-section label > [type='text'] {
+section label > [type="text"] {
     font-size: 25px;
     padding: 10px;
     grid-area: 1 / 3 / 4 / 12;
@@ -90,20 +90,18 @@ section label > textarea {
     border: 3px solid var(--color-light);
 }
 
-section label > [type='text']:nth-of-type(2) {
+section label > [type="text"]:nth-of-type(2) {
     grid-row: 4 / 7;
 }
 
-section label > textarea:disabled,
-section label > [type='text']:disabled {
+section label > textarea:disabled, section label > [type="text"]:disabled {
     color: var(--color-light);
     opacity: 0.5;
     pointer-events: none;
     border: none;
 }
 
-section label > textarea:focus,
-section label > [type='text']:focus {
+section label > textarea:focus, section label > [type="text"]:focus {
     background: var(--color-deepyellow);
     border-radius: 10px;
     border: none;
@@ -122,9 +120,7 @@ section label > button:nth-of-type(1) {
     font-size: 30px;
 }
 
-section label > button:nth-of-type(2),
-section label > button:nth-of-type(3),
-section label > button:nth-of-type(4) {
+section label > button:nth-of-type(2), section label > button:nth-of-type(3), section label > button:nth-of-type(4) {
     background: var(--color-deepyellow);
     border-radius: 25px;
     display: flex;
@@ -132,9 +128,7 @@ section label > button:nth-of-type(4) {
     align-items: center;
 }
 
-section label > button:disabled,
-section label > button:disabled,
-section label > button:disabled {
+section label > button:disabled, section label > button:disabled, section label > button:disabled {
     opacity: 0.5;
 }
 
@@ -158,45 +152,31 @@ section label > button:nth-of-type(4) {
     width: 40px;
 }
 
-section div.aqua,
-section label.aqua,
-section label.aqua + #emoji-widget {
+section div.aqua, section label.aqua, section label.aqua + #emoji-widget {
     background: var(--color-aqua);
 }
 
-section div.orange,
-section label.orange,
-section label.orange + #emoji-widget {
+section div.orange, section label.orange, section label.orange + #emoji-widget {
     background: var(--color-orange);
 }
 
-section div.bloodorange,
-section label.bloodorange,
-section label.bloodorange + #emoji-widget {
+section div.bloodorange, section label.bloodorange, section label.bloodorange + #emoji-widget {
     background: var(--color-bloodorange);
 }
 
-section div.purple,
-section label.purple,
-section label.purple + #emoji-widget {
+section div.purple, section label.purple, section label.purple + #emoji-widget {
     background: var(--color-purple);
 }
 
-section div.green,
-section label.green,
-section label.green + #emoji-widget {
+section div.green, section label.green, section label.green + #emoji-widget {
     background: var(--color-green);
 }
 
-section div.red,
-section label.red,
-section label.red + #emoji-widget {
+section div.red, section label.red, section label.red + #emoji-widget {
     background: var(--color-red);
 }
 
-section div.blue,
-section label.blue,
-section label.blue + #emoji-widget {
+section div.blue, section label.blue, section label.blue + #emoji-widget {
     background: var(--color-blue);
 }
 
@@ -210,24 +190,25 @@ body > #emoji-widget {
 
 #emoji-widget {
     display: grid;
-    grid-auto-rows: calc(100vw / 7);
+    grid-auto-rows: calc(14.2857vw);
     margin: 0px;
     padding: 0px;
     border-top: 5px dotted rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
+    font-size: 35px;
 }
 
 @media (orientation: portrait) {
     #emoji-widget {
-        grid-template-columns: repeat(12, calc(100vw / 7));
-        grid-auto-rows: calc(100vw / 7);
+        grid-template-columns: repeat(12, calc(14.2857vw));
+        grid-auto-rows: calc(14.2857vw);
     }
 }
 
 @media (orientation: landscape) {
     #emoji-widget {
-        grid-template-columns: repeat(7, calc(100vw / 12));
-        grid-auto-rows: calc(100vw / 7);
+        grid-template-columns: repeat(12, calc(8.33333vw));
+        grid-auto-rows: calc(14.2857vw);
     }
 }
 
