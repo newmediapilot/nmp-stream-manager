@@ -9,11 +9,12 @@ const getMemory = async () => {
     try {
         let result;
         const response = await fetch("https://api.dbdbdbdbdbgroup.com/demo/api/memory/get", {agent});
-        const memory = await response.text();
+        const memory = await response.json();
         for (let i = 0; i < memory.length; i++) {
             try {
                 const [method, url, body] = JSON.parse(memory[i]);
-                result = await fetch(ROUTES.MEMORY_MEDIA_UPDATE, {
+                const path = `https://localhost${url}`;
+                result = await fetch(path.replace('/demo/', '/'), {
                     agent,
                     headers: {'Content-Type': 'application/json'},
                     method,
@@ -24,7 +25,7 @@ const getMemory = async () => {
                 console.log('getMemory :: for error', err);
             }
         }
-        console.log('getMemory :: root done');
+        console.log('getMemory :: root done', memory);
     } catch (error) {
         console.log('getMemory :: root error', error);
     }
