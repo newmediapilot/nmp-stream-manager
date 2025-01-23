@@ -30,6 +30,7 @@
     <link href="../client/style/controls.css?" rel="stylesheet">
     <link href="../client/style/dialog.css?" rel="stylesheet">
     <link href="../client/style/actions.css?" rel="stylesheet">
+    <meta name="API_CONFIG_GET" content="https://api.dbdbdbdbdbgroup.com/demo/api/config/get">
     <meta name="API_SIGNAL_CREATE" content="https://api.dbdbdbdbdbgroup.com/demo/api/signal/create">
     <meta name="API_CONFIG_UPDATE" content="https://api.dbdbdbdbdbgroup.com/demo/api/config/update">
     <meta name="API_STYLE_UPDATE" content="https://api.dbdbdbdbdbgroup.com/demo/api/style/update">
@@ -165,79 +166,84 @@
         document.addEventListener("DOMContentLoaded", () => iframeDetect());
         document.addEventListener("DOMContentLoaded", () => socketConnect());
         document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-        document.addEventListener("DOMContentLoaded", () => socketWatchConfig((payload) => {
-            const data = JSON.parse(payload.split('config:set:')[1]);
-            const parsed = JSON.parse(data);
-            const signals = parsed
-                .filter(s => !(s.type==="empty"));
-            [
-                signals.find(s => s.type === 'announce'),
-                signals.find(s => s.type === 'media'),
-                signals.find(s => s.type === 'sound'),
-                signals.find(s => s.type === 'feature'),
-                signals.find(s => s.type === 'mark'),
-                signals.find(s => s.type === 'ad'),
-            ].map((signal, index) =>{
-                const {type, theme} = signal;
-                const title = type.charAt(0).toUpperCase() + type.slice(1);
-                document.body.querySelectorAll('section > div[aria-label]')[index].setAttribute('aria-label', title);
-                document.body.querySelectorAll('section > div[aria-label]')[index].setAttribute('class', theme);
-                return signal;
-            });
-            [
-                ...parsed.filter(s => s.type === 'announce'),
-                ...parsed.filter(s => s.type === 'media'),
-                ...parsed.filter(s => s.type === 'sound'),
-                ...parsed.filter(s => s.type === 'feature'),
-                ...parsed.filter(s => s.type === 'mark'),
-                ...parsed.filter(s => s.type === 'ad'),
-            ]
-                .map((signal) => parsed.indexOf(signal))
-                .map((indexOf, index) => {
-                    const formEl = document.body.querySelectorAll('section > div:not([aria-label])')[index];
-                    const {theme, emoji, label, description, visibility, type} = parsed[indexOf];
-                    formEl.setAttribute('class', theme);
-                    formEl.querySelector('label').setAttribute('id', indexOf);
-                    formEl.querySelector('button:nth-of-type(1)').setAttribute('aria-label', emoji);
-                    formEl.querySelector('button:nth-of-type(4)').setAttribute('aria-label', visibility);
-                    formEl.querySelector('button:nth-of-type(2)').setAttribute('id', description);
-                    formEl.querySelector('input[type=text]').setAttribute("value", label);
-                    if (type === 'announce') {
-                        formEl.querySelector('textarea').innerText = description;
-                        formEl.querySelector('textarea').disabled = "OFF" === visibility;
-                        formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
-                        formEl.querySelector('button:nth-of-type(2)').disabled = true;
-                        formEl.querySelector('button:nth-of-type(3)').disabled = true;
-                    }
-                    if (type === 'media') {
-                        formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
-                        formEl.querySelector('button:nth-of-type(2)').disabled = "OFF" === visibility;
-                        formEl.querySelector('button:nth-of-type(3)').disabled = "OFF" === visibility;
-                    }
-                    if (type === 'sound') {
-                        formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
-                        formEl.querySelector('button:nth-of-type(2)').disabled = "OFF" === visibility;
-                        formEl.querySelector('button:nth-of-type(3)').disabled = "OFF" === visibility;
-                    }
-                    if (type === 'feature') {
-                        formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
-                        formEl.querySelector('button:nth-of-type(2)').disabled = true;
-                        formEl.querySelector('button:nth-of-type(3)').disabled = true;
-                    }
-                    if (type === 'mark') {
-                        formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
-                        formEl.querySelector('button:nth-of-type(2)').disabled = true;
-                        formEl.querySelector('button:nth-of-type(3)').disabled = true;
-                    }
-                    if (type === 'ad') {
-                        formEl.querySelector('input').disabled = true;
-                        formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
-                        formEl.querySelector('button:nth-of-type(2)').disabled = true;
-                        formEl.querySelector('button:nth-of-type(3)').disabled = true;
-                    }
+        document.addEventListener("DOMContentLoaded", () => {
+            const processConfig = (signals) =>{
+                const parsed = signals.slice(0);
+                signals
+                    .filter(s => !(s.type==="empty"));
+                [
+                    signals.find(s => s.type === 'announce'),
+                    signals.find(s => s.type === 'media'),
+                    signals.find(s => s.type === 'sound'),
+                    signals.find(s => s.type === 'feature'),
+                    signals.find(s => s.type === 'mark'),
+                    signals.find(s => s.type === 'ad'),
+                ].map((signal, index) =>{
+                    const {type, theme} = signal;
+                    const title = type.charAt(0).toUpperCase() + type.slice(1);
+                    document.body.querySelectorAll('section > div[aria-label]')[index].setAttribute('aria-label', title);
+                    document.body.querySelectorAll('section > div[aria-label]')[index].setAttribute('class', theme);
+                    return signal;
                 });
-            actions();
-        }));
+                [
+                    ...parsed.filter(s => s.type === 'announce'),
+                    ...parsed.filter(s => s.type === 'media'),
+                    ...parsed.filter(s => s.type === 'sound'),
+                    ...parsed.filter(s => s.type === 'feature'),
+                    ...parsed.filter(s => s.type === 'mark'),
+                    ...parsed.filter(s => s.type === 'ad'),
+                ]
+                    .map((signal) => parsed.indexOf(signal))
+                    .map((indexOf, index) => {
+                        const formEl = document.body.querySelectorAll('section > div:not([aria-label])')[index];
+                        const {theme, emoji, label, description, visibility, type} = parsed[indexOf];
+                        formEl.setAttribute('class', theme);
+                        formEl.querySelector('label').setAttribute('id', indexOf);
+                        formEl.querySelector('button:nth-of-type(1)').setAttribute('aria-label', emoji);
+                        formEl.querySelector('button:nth-of-type(4)').setAttribute('aria-label', visibility);
+                        formEl.querySelector('button:nth-of-type(2)').setAttribute('id', description);
+                        formEl.querySelector('input[type=text]').setAttribute("value", label);
+                        if (type === 'announce') {
+                            formEl.querySelector('textarea').innerText = description;
+                            formEl.querySelector('textarea').disabled = "OFF" === visibility;
+                            formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
+                            formEl.querySelector('button:nth-of-type(2)').disabled = true;
+                            formEl.querySelector('button:nth-of-type(3)').disabled = true;
+                        }
+                        if (type === 'media') {
+                            formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
+                            formEl.querySelector('button:nth-of-type(2)').disabled = "OFF" === visibility;
+                            formEl.querySelector('button:nth-of-type(3)').disabled = "OFF" === visibility;
+                        }
+                        if (type === 'sound') {
+                            formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
+                            formEl.querySelector('button:nth-of-type(2)').disabled = "OFF" === visibility;
+                            formEl.querySelector('button:nth-of-type(3)').disabled = "OFF" === visibility;
+                        }
+                        if (type === 'feature') {
+                            formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
+                            formEl.querySelector('button:nth-of-type(2)').disabled = true;
+                            formEl.querySelector('button:nth-of-type(3)').disabled = true;
+                        }
+                        if (type === 'mark') {
+                            formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
+                            formEl.querySelector('button:nth-of-type(2)').disabled = true;
+                            formEl.querySelector('button:nth-of-type(3)').disabled = true;
+                        }
+                        if (type === 'ad') {
+                            formEl.querySelector('input').disabled = true;
+                            formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
+                            formEl.querySelector('button:nth-of-type(2)').disabled = true;
+                            formEl.querySelector('button:nth-of-type(3)').disabled = true;
+                        }
+                    });
+                actions();
+            };
+            const res = axios.get(getPath("API_CONFIG_GET"));
+            res.then((res) => processConfig(res.data));
+            res.catch((error) => console.log("API_CONFIG_GET :: error:", error.response.data));
+            res.finally(_ => console.info("API_CONFIG_GET :: complete"));
+        });
         document.addEventListener("DOMContentLoaded", () => initHomeControls());
         document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
     </script>
