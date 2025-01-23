@@ -125,24 +125,24 @@
         document.addEventListener("DOMContentLoaded", () => iframeDetect());
         document.addEventListener("DOMContentLoaded", () => socketConnect());
         document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-        document.addEventListener("DOMContentLoaded", () => socketWatchConfig((payload) => {
-            const data = JSON.parse(payload.split('config:set:')[1]);
-            const parsed = JSON.parse(data);
-            const media = parsed.filter(s => s.type === "media")[0];
-            const feature = parsed.filter(s => s.type === "feature")[0];
-            document.querySelector('section article .layers label[for="_med"]').setAttribute('aria-label', media.label);
-            document.querySelector('section article .layers label[for="_feat"]').setAttribute('aria-label', feature.label);
-            document.querySelector('section article .layers label[for="_draw"]').setAttribute('aria-label', "draw");
-        }));
-        document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
-            let style = payload.split('style:set:')[1];
-            document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
-            if(!document.$styleInited || style === "/*--_empty:1;*/"){
-                document.$styleInited = true;
-                setModes();
-            }
-            console.log(`socketWatchStyle :: layout :: set ${style}`);
-        }));
+        document.addEventListener("DOMContentLoaded", () => {
+            // socketWatchConfig((payload) => {
+            //     const data = JSON.parse(payload.split('config:set:')[1]);
+            //     const parsed = JSON.parse(data);
+            //     const media = parsed.filter(s => s.type === "media")[0];
+            //     const feature = parsed.filter(s => s.type === "feature")[0];
+            //     document.querySelector('section article .layers label[for="_med"]').setAttribute('aria-label', media.label);
+            //     document.querySelector('section article .layers label[for="_feat"]').setAttribute('aria-label', feature.label);
+            //     document.querySelector('section article .layers label[for="_draw"]').setAttribute('aria-label', "draw");
+            // })
+            // let style = payload.split('style:set:')[1];
+            // document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
+            // if(!document.$styleInited || style === "/*--_empty:1;*/"){
+            //     document.$styleInited = true;
+            //     setModes();
+            // }
+            // console.log(`socketWatchStyle :: layout :: set ${style}`);
+        });
         document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
         document.addEventListener("DOMContentLoaded", () => initHomeControls());
         document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.body.querySelector("#qr-dialog button[data-url]")));
