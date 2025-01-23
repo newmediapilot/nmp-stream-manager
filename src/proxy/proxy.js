@@ -80,7 +80,7 @@ const memorize = (req, key) => {
     app.all(`/${key}${ROUTES.API_MEMORY_GET}`, (req, res) => {
         const hash = hashify(req.ip, key);
         res.setHeader('Content-Type', 'application/json');
-        res.send(style[hash]);
+        res.send(memory[hash]);
         console.log(`proxy :: API_MEMORY_GET :: ${memory[hash].length}`);
         memory[hash] = [];
     });
