@@ -193,22 +193,22 @@ body > #emoji-widget {
     grid-auto-rows: calc(14.2857vw);
     margin: 0px;
     padding: 0px;
-    border-top: 5px dotted rgba(0, 0, 0, 0.1);
+    border-top: 5px dotted rgba(0, 0, 0, 0.35);
     box-sizing: border-box;
     font-size: 35px;
 }
 
 @media (orientation: portrait) {
     #emoji-widget {
-        grid-template-columns: repeat(12, calc(14.2857vw));
-        grid-auto-rows: calc(14.2857vw);
+        grid-template-columns: repeat(12, calc(8.33333vw));
+        grid-auto-rows: calc(8.33333vw);
     }
 }
 
 @media (orientation: landscape) {
     #emoji-widget {
-        grid-template-columns: repeat(12, calc(8.33333vw));
-        grid-auto-rows: calc(14.2857vw);
+        grid-template-columns: repeat(15, calc(6.66667vw));
+        grid-auto-rows: calc(6.66667vw);
     }
 }
 
