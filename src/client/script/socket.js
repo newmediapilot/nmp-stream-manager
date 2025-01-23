@@ -17,12 +17,6 @@ const socketWatchStyle = (callback) => {
         payload.startsWith('style:set:') && callback(payload);
     });
 };
-const socketWatchConfig = (callback) => {
-    console.log("socketConnect :: socketWatchConfig");
-    document.$socketIO.on("payload", (payload) => {
-        payload.startsWith('config:set:') && callback(payload);
-    });
-};
 const socketWatchFeatureSet = (callback) => {
     console.log("socketConnect :: socketWatchFeatureSet");
     document.$socketIO.on("payload", (payload) => {
