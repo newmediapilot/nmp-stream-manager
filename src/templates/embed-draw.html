@@ -72,6 +72,8 @@
         rotateY(calc(calc(var(--_draw-rX) * -1.8deg) - 90deg))
         rotateZ(0deg)
         scaleX(-1);
+        box-sizing: border-box;
+        border: 20px solid orangered;
     }
 </style>
 </head>
@@ -107,9 +109,9 @@
             canvas.height = document.body.getBoundingClientRect().height;
             canvas.style.width = `${canvas.width}px`;
             canvas.style.height = `${canvas.height}px`;
-        }
+        };
+        window.addEventListener('resize', updateCanvas);
         updateCanvas();
-        document.addEventListener('resize', updateCanvas);
     });
     document.addEventListener("DOMContentLoaded", () => socketWatchDrawSet((payload) => {
         if (document.$drawing) {
@@ -128,9 +130,10 @@
             }, 5000);
         };
         document.replayStart = () => {
+            console.log('playback',playback);
             if (playback.length) {
-                const x = playback.shift();
-                const y = playback.shift();
+                const x = canvas.width * Number(playback.shift());
+                const y = canvas.height * Number(playback.shift());
                 ctx.fillStyle = "#2fffa5";
                 ctx.beginPath();
                 ctx.arc(x, y, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
