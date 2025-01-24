@@ -48,15 +48,6 @@ const draw = () => {
         }, 300);
     };
     const replayStart = () => {
-        const colors = [
-            getComputedStyle(document.documentElement).getPropertyValue('--color-dark'),
-            getComputedStyle(document.documentElement).getPropertyValue('--color-gray'),
-            getComputedStyle(document.documentElement).getPropertyValue('--color-aqua'),
-            getComputedStyle(document.documentElement).getPropertyValue('--color-aqua'),
-            getComputedStyle(document.documentElement).getPropertyValue('--color-aqua'),
-            getComputedStyle(document.documentElement).getPropertyValue('--color-aqua'),
-            getComputedStyle(document.documentElement).getPropertyValue('--color-aqua'),
-        ];
         if (Number(document.querySelector('[type=range]').value) > 0) {
             const x = capture.shift();
             const y = capture.shift();
