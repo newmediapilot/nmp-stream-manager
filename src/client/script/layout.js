@@ -122,8 +122,10 @@ const setModes = () => {
     document.querySelector('article .controls').setAttribute('id', document.$modes[1]);
 };
 const enableUndoButton = () => {
-    const button = document.querySelector('article .effects button:nth-of-type(2)');
-    button.addEventListener('click', () => {
+    document.querySelector('article .effects button:nth-of-type(1)').addEventListener('click', () => {
+        document.body.querySelector('#qr-dialog').showModal();
+    });
+    document.querySelector('article .effects button:nth-of-type(2)').addEventListener('click', () => {
         const {scrollWidth, scrollHeight} = document.querySelector('article .controls label');
         const top = scrollHeight * .25;
         const left = scrollWidth * .25;
