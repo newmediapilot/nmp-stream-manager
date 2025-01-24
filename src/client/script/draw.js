@@ -31,22 +31,41 @@ const draw = () => {
             document.querySelector('button:nth-of-type(2)').disabled = false;
         }, 300);
     };
-    const drawPixel = (x, y) => {
-        ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-blue').trim();
-        ctx.beginPath();
-        ctx.arc(x, y, pixelSize / 2, 0, Math.PI * 2, false);
-        ctx.fill();
-        capture.push(Number(x/canvas.width).toFixed(3));
-        payload.push(Number(x/canvas.width).toFixed(3));
-        capture.push(Number(y/canvas.height).toFixed(3));
-        payload.push(Number(y/canvas.height).toFixed(3));
-        document.querySelector('[type=range]').value = capture.length;
-        if (buttonTimeout) clearTimeout(buttonTimeout);
-        buttonTimeout = setTimeout(() => {
-            document.querySelector('button:nth-of-type(1)').disabled = false;
-            document.querySelector('button:nth-of-type(2)').disabled = false;
-        }, 300);
-    };
+    const drawPixel = (() => {
+        let lastX = null;
+        let lastY = null;
+        return (x, y) => {
+            const steps = 10; // Adjust for smoothness
+            const radius = pixelSize / 2;
+            if (lastX !== null && lastY !== null) {
+                for (let i = 1; i <= steps; i++) {
+                    const interpX = lastX + (x - lastX) * (i / steps);
+                    const interpY = lastY + (y - lastY) * (i / steps);
+
+                    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-blue').trim();
+                    ctx.beginPath();
+                    ctx.arc(interpX, interpY, radius, 0, Math.PI * 2, false);
+                    ctx.fill();
+                }
+            }
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-blue').trim();
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+            ctx.fill();
+            lastX = x;
+            lastY = y;
+            capture.push(Number(x / canvas.width).toFixed(3));
+            payload.push(Number(x / canvas.width).toFixed(3));
+            capture.push(Number(y / canvas.height).toFixed(3));
+            payload.push(Number(y / canvas.height).toFixed(3));
+            document.querySelector('[type=range]').value = capture.length;
+            if (buttonTimeout) clearTimeout(buttonTimeout);
+            buttonTimeout = setTimeout(() => {
+                document.querySelector('button:nth-of-type(1)').disabled = false;
+                document.querySelector('button:nth-of-type(2)').disabled = false;
+            }, 300);
+        };
+    })();
     const replayStart = () => {
         if (Number(document.querySelector('[type=range]').value) > 0) {
             const x = capture.shift();
