@@ -36,10 +36,10 @@ const draw = () => {
         ctx.beginPath();
         ctx.arc(x, y, pixelSize / 2, 0, Math.PI * 2, false);
         ctx.fill();
-        capture.push(Math.round(x));
-        payload.push(Math.round(x));
-        capture.push(Math.round(y));
-        payload.push(Math.round(y));
+        capture.push(Number(x/canvas.width).toFixed(3));
+        payload.push(Number(x/canvas.width).toFixed(3));
+        capture.push(Number(y/canvas.height).toFixed(3));
+        payload.push(Number(y/canvas.height).toFixed(3));
         document.querySelector('[type=range]').value = capture.length;
         if (buttonTimeout) clearTimeout(buttonTimeout);
         buttonTimeout = setTimeout(() => {
