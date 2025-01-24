@@ -30,6 +30,7 @@
     <link href="../client/style/controls.css?" rel="stylesheet">
     <link href="../client/style/dialog.css?" rel="stylesheet">
     <link href="../client/style/layout.css?" rel="stylesheet">
+    <meta name="API_STYLE_GET" content="https://api.dbdbdbdbdbgroup.com/demo/api/style/get">
     <meta name="API_CONFIG_GET" content="https://api.dbdbdbdbdbgroup.com/demo/api/config/get">
     <meta name="API_SIGNAL_CREATE" content="https://api.dbdbdbdbdbgroup.com/demo/api/signal/create">
     <meta name="API_CONFIG_UPDATE" content="https://api.dbdbdbdbdbgroup.com/demo/api/config/update">
@@ -127,22 +128,29 @@
         document.addEventListener("DOMContentLoaded", () => socketConnect());
         document.addEventListener("DOMContentLoaded", () => socketWatchReload());
         document.addEventListener("DOMContentLoaded", () => {
-            // socketWatchConfig((payload) => {
-            //     const data = JSON.parse(payload.split('config:set:')[1]);
-            //     const parsed = JSON.parse(data);
-            //     const media = parsed.filter(s => s.type === "media")[0];
-            //     const feature = parsed.filter(s => s.type === "feature")[0];
-            //     document.querySelector('section article .layers label[for="_med"]').setAttribute('aria-label', media.label);
-            //     document.querySelector('section article .layers label[for="_feat"]').setAttribute('aria-label', feature.label);
-            //     document.querySelector('section article .layers label[for="_draw"]').setAttribute('aria-label', "draw");
-            // })
-            // let style = payload.split('style:set:')[1];
-            // document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
-            // if(!document.$styleInited || style === "/*--_empty:1;*/"){
-            //     document.$styleInited = true;
-            //     setModes();
-            // }
-            // console.log(`socketWatchStyle :: layout :: set ${style}`);
+            const processStyle = (payload) => {
+                let style = payload.split('style:set:')[1];
+                document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
+                console.log(`processStyle :: set ${style}`);
+            };
+            const res = axios.get(getPath("API_STYLE_GET"));
+            res.then((res) => processStyle(res.data));
+            res.catch((error) => console.log("API_STYLE_GET :: error:", error.response.data));
+            res.finally(_ => console.info("API_STYLE_GET :: complete"));
+        });
+        document.addEventListener("DOMContentLoaded", () => {
+            const processConfig = (signals) => {
+                const media = signals.filter(s => s.type === "media")[0];
+                const feature = signals.filter(s => s.type === "feature")[0];
+                document.querySelector('section article .layers label[for="_med"]').setAttribute('aria-label', media.label);
+                document.querySelector('section article .layers label[for="_feat"]').setAttribute('aria-label', feature.label);
+                document.querySelector('section article .layers label[for="_draw"]').setAttribute('aria-label', "draw");
+                console.log('socketWatchConfig :: set', signals);
+            };
+            const res = axios.get(getPath("API_CONFIG_GET"));
+            res.then((res) => processConfig(res.data));
+            res.catch((error) => console.log("API_CONFIG_GET :: error:", error.response.data));
+            res.finally(_ => console.info("API_CONFIG_GET :: complete"));
         });
         document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
         document.addEventListener("DOMContentLoaded", () => initHomeControls());
