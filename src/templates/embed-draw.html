@@ -98,17 +98,7 @@
         const pixelSize = 20;
         const playback = payload.split(":")[1].split(",");
         const canvas = document.querySelector("canvas");
-        canvas.width = canvas.getBoundingClientRect().width;
-        canvas.height = canvas.getBoundingClientRect().height;
         const ctx = document.querySelector("canvas").getContext("2d");
-        if (canvas.width > canvas.height) {
-            canvas.width = canvas.height;
-        }
-        if (canvas.height > canvas.width) {
-            canvas.height = canvas.width;
-        }
-        canvas.style.width = `${canvas.width}px`;
-        canvas.style.height = `${canvas.height}px`;
         document.replayDone = () => {
             document.$drawing = setTimeout(() => {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
