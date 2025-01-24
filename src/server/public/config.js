@@ -81,7 +81,6 @@ const DASHBOARD_BUTTON_CONFIG = {
     ],
 };
 const fs = require("fs");
-const path = require("path");
 const {sendConfig} = require("../public/memory");
 const {setParam, getParam} = require("../store/manager");
 const initializePublicConfigs = async (type) => {
