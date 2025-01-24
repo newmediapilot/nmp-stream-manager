@@ -132,10 +132,22 @@
             if (playback.length) {
                 const x = canvas.width * Number(playback.shift());
                 const y = canvas.height * Number(playback.shift());
+                if (document.$pXY) {
+                    const [lastX, lastY] = document.$pXY;
+                    const steps = 10;
+                    for (let i = 1; i <= steps; i++) {
+                        const interpX = lastX + (x - lastX) * (i / steps);
+                        const interpY = lastY + (y - lastY) * (i / steps);
+                        ctx.beginPath();
+                        ctx.arc(interpX, interpY, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
+                        ctx.fill();
+                    }
+                }
                 ctx.fillStyle = "#2fffa5";
                 ctx.beginPath();
                 ctx.arc(x, y, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
                 ctx.fill();
+                document.$pXY = [x, y];
                 requestAnimationFrame(document.replayStart);
             } else {
                 document.replayDone();
