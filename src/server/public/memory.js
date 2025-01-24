@@ -13,8 +13,8 @@ const getMemory = async () => {
         for (let i = 0; i < memory.length; i++) {
             try {
                 const [method, url, body] = JSON.parse(memory[i]);
-                const path = `https://localhost${url}`;
-                result = await fetch(path.replace('/demo/', '/'), {
+                const path = `https://localhost${url}`.replace('/api/', '/memory/');
+                result = await fetch(path, {
                     agent,
                     headers: {'Content-Type': 'application/json'},
                     method,
