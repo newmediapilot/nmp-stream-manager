@@ -127,6 +127,14 @@
         document.addEventListener("DOMContentLoaded", () => iframeDetect());
         document.addEventListener("DOMContentLoaded", () => socketConnect());
         document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+        document.addEventListener("DOMContentLoaded", () => generateCopyLink(document.body.querySelector("#qr-dialog button[data-url]")));
+        document.addEventListener("DOMContentLoaded", () => generateQrCode(
+            document.body.querySelector("#qr-dialog canvas"),
+            document.body.querySelector("#qr-dialog canvas").getAttribute("data-url"),
+        ));
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector('dialog button:last-of-type').addEventListener('click', () => document.body.querySelector('#qr-dialog').close())
+        });
         document.addEventListener("DOMContentLoaded", () => {
             const processStyle = (payload) => {
                 let style = payload.split('style:set:')[1];
