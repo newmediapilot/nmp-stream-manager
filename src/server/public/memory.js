@@ -20,7 +20,7 @@ const getMemory = async () => {
                     method,
                     ...(url.includes(`api/media/update`) ? {body: JSON.stringify(body)} : {})
                 });
-                console.log('getMemory  :: for status', result.status);
+                console.log('getMemory :: for status', result.status);
             } catch (err) {
                 console.log('getMemory :: for error', err);
             }
