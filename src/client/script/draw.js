@@ -35,17 +35,18 @@ const draw = () => {
         let lastX = null;
         let lastY = null;
         return (x, y) => {
-            const steps = 10; // Adjust for smoothness
             const radius = pixelSize / 2;
-            if (lastX !== null && lastY !== null) {
-                for (let i = 1; i <= steps; i++) {
-                    const interpX = lastX + (x - lastX) * (i / steps);
-                    const interpY = lastY + (y - lastY) * (i / steps);
-
-                    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-blue').trim();
-                    ctx.beginPath();
-                    ctx.arc(interpX, interpY, radius, 0, Math.PI * 2, false);
-                    ctx.fill();
+            if (Math.abs(lastX - x) < 100){
+                const steps = 30;
+                if (lastX !== null && lastY !== null) {
+                    for (let i = 1; i <= steps; i++) {
+                        const interpX = lastX + (x - lastX) * (i / steps);
+                        const interpY = lastY + (y - lastY) * (i / steps);
+                        ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-blue').trim();
+                        ctx.beginPath();
+                        ctx.arc(interpX, interpY, radius, 0, Math.PI * 2, false);
+                        ctx.fill();
+                    }
                 }
             }
             ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-blue').trim();
