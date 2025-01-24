@@ -1,3 +1,4 @@
+const DEFAULT_STYLE = "--_feat-tX:50;--_feat-tY:50;--_feat-sX:50;--_feat-sY:50;--_feat-rX:50;--_feat-rY:50;--_feat-rZ:100;--_feat-o:50;--_feat-o:50;--_draw-tX:50;--_draw-tY:50;--_draw-sX:50;--_draw-sY:50;--_draw-rX:50;--_draw-rY:50;--_draw-rZ:100;--_draw-o:200;--_draw-o:200;--_med-tX:50;--_med-tY:50;--_med-sX:50;--_med-sY:50;--_med-rX:50;--_med-rY:50;--_med-rZ:100;--_med-o:50;--_med-o:50";
 const fs = require("fs");
 const path = require("path");
 const {setParam} = require("../store/manager");
@@ -7,8 +8,8 @@ const initializePublicStyles = async (type) => {
     try {
         if (!fs.existsSync(path.resolve(`${type}`))) {
             console.log("initializePublicStyles :: new file");
-            setParam("public_module_styles", '/*--_empty:1;*/');
-            fs.writeFileSync(path.resolve(`${type}`), '/*--_empty:1;*/', {encoding: "utf-8"});
+            setParam("public_module_styles", DEFAULT_STYLE);
+            fs.writeFileSync(path.resolve(`${type}`), DEFAULT_STYLE, {encoding: "utf-8"});
         } else {
             setParam("public_module_styles", fs.readFileSync(path.resolve(`${type}`), "utf-8"));
             console.log("initializePublicStyles :: load file");
