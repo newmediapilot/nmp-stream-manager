@@ -15,7 +15,7 @@ const draw = () => {
     };
     const sendPayload = () => {
         replayStart();
-        payload.length && axios.get("/api/signal/create", {
+        payload.length && axios.get(getPath("API_SIGNAL_CREATE"), {
             params: {
                 type: "draw",
                 description: payload.join(','),
