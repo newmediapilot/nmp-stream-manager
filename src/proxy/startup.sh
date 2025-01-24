@@ -15,4 +15,4 @@ cat >/home/ec2-user/proxy.js <<'EOF'
 /** proxy.js **/
 EOF
 sudo chown ec2-user:ec2-user /home/ec2-user/proxy.js
-sudo node /home/ec2-user/proxy.js &
+#sudo node /home/ec2-user/proxy.js &
