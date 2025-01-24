@@ -129,7 +129,6 @@
             }, 5000);
         };
         document.replayStart = () => {
-            console.log('playback',playback);
             if (playback.length) {
                 const x = canvas.width * Number(playback.shift());
                 const y = canvas.height * Number(playback.shift());
