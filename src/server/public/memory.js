@@ -2,7 +2,6 @@ const fs = require("fs");
 const https = require("https");
 const fetch = require("node-fetch");
 const {sync: globSync} = require('glob');
-const {ROUTES} = require('../routes');
 const {getParam} = require('../store/manager');
 const agent = new https.Agent({rejectUnauthorized: false});
 const getMemory = async () => {
