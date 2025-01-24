@@ -136,10 +136,10 @@
             document.querySelector('dialog button:last-of-type').addEventListener('click', () => document.body.querySelector('#qr-dialog').close())
         });
         document.addEventListener("DOMContentLoaded", () => {
-            const processStyle = (payload) => {
-                let style = payload.split('style:set:')[1];
+            const processStyle = (style) => {
                 document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
                 console.log(`processStyle :: set ${style}`);
+                setModes();
             };
             const res = axios.get(getPath("API_STYLE_GET"));
             res.then((res) => processStyle(res.data));
