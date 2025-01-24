@@ -112,6 +112,8 @@
         const featuredName = payload.split(':').pop();
         if (streamerQueryParam !== featuredName) {
             getURL(`${window.location.origin}${window.location.pathname}?featuredName=${payload.split(':').pop()}`);
+        }else{
+            getURL(`${window.location.origin}${window.location.pathname}`);
         }
     }));
     document.addEventListener("DOMContentLoaded", () => {
