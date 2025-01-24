@@ -117,8 +117,8 @@
     <dialog id="qr-dialog">
         <h2 aria-label="Embed Link"></h2>
         <h3 aria-label="Use this link as a source input"></h3>
-        <canvas data-url="{{public_routes.PANEL_EMBED}}"></canvas>
-        <button data-url="{{public_routes.PANEL_EMBED}}" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
+        <canvas data-url="https://localhost{{public_routes.PANEL_EMBED}}"></canvas>
+        <button data-url="https://localhost{{public_routes.PANEL_EMBED}}" aria-label="Click to Copy Link!" data-click-text="Link Copied!"></button>
         <button aria-label="✅Done" onclick="javascript:document.body.querySelector('#qr-dialog').close();"></button>
     </dialog>
     <script>
