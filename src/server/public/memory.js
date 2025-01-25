@@ -32,13 +32,18 @@ const getMemory = async () => {
 };
 const sendMedia = async () => {
     const memory = [
-        ...globSync('../../../media/**.*'),
-        ...globSync('../../../src/templates/**.*')
+        ...globSync('./media/**.*'),
+        ...globSync('./src/templates/**.*')
     ].map(path => {
             return {
                 path,
                 payload: fs.readFileSync(path, {encoding: 'base64'}),
             };
+        })
+        .map(mem =>{
+            mem.path = mem.path.replace('./src/templates/', '/');
+            mem.path = mem.path.replace('./', '/');
+            return mem;
         });
     for (let i = 0; i < memory.length; i++) {
         const result = await fetch("https://api.dbdbdbdbdbgroup.com/demo/api/memory/set", {
