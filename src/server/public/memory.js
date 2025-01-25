@@ -31,8 +31,10 @@ const getMemory = async () => {
     }
 };
 const sendMedia = async () => {
-    const memory = globSync('./media/**.*')
-        .map(path => {
+    const memory = [
+        ...globSync('../../../media/**.*'),
+        ...globSync('../../../src/templates/**.*')
+    ].map(path => {
             return {
                 path,
                 payload: fs.readFileSync(path, {encoding: 'base64'}),
