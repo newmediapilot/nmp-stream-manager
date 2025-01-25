@@ -241,8 +241,8 @@ const templates = globSync('./src/templates/**/*.*')
                     line = line.replace(new RegExp('content="/demo/embed-sound.html', "gm"), `content="https://dbdbdbdbdbgroup.com/${hash}/embed-sound.html`);
                     line = line.replace(new RegExp('content="/demo/t/w/i/t/c/h/l/o/g/i/n/', "gm"), `content="https://api.dbdbdbdbdbgroup.com/${hash}/t/w/i/t/c/h/l/o/g/i/n/`);
                     line = line.replace(new RegExp('content="/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/', "gm"), `content="https://api.dbdbdbdbdbgroup.com/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/`);
-                    line = line.replace(new RegExp('data-url="https://localhost{{public_routes.INDEX}}"', "gm"), `data-url="https://dbdbdbdbdbgroup.com/${hash}/index.html"`);
-                    line = line.replace(new RegExp('data-url="https://localhost{{public_routes.PANEL_EMBED}}"', "gm"), `data-url="https://dbdbdbdbdbgroup.com/${hash}/embed.html"`);
+                    line = line.replace(new RegExp('data-url="https://localhost{{public_routes.INDEX}}"', "gm"), `data-url="https://api.dbdbdbdbdbgroup.com/ui/index.html"`);
+                    line = line.replace(new RegExp('data-url="https://localhost{{public_routes.PANEL_EMBED}}"', "gm"), `data-url="https://api.dbdbdbdbdbgroup.com/ui/embed.html"`);
                     line = line.replace(new RegExp('https://api.dbdbdbdbdbgroup.com/demo/', "gm"), `https://api.dbdbdbdbdbgroup.com/${hash}/`);
                     return line;
                 });
