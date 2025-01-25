@@ -7,6 +7,7 @@ const ROUTES = {
     API_CONFIG_UPDATE: "/api/config/update",
     API_STYLE_UPDATE: "/api/style/update",
     API_MEDIA_UPDATE: "/api/media/update",
+    START: "/demo/start.html",
     INDEX: "/demo/index.html",
     PANEL_DASHBOARD: "/demo/panel-dashboard.html",
     PANEL_ACTIONS: "/demo/panel-actions.html",
