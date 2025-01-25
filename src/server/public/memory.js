@@ -41,8 +41,8 @@ const sendMedia = async () => {
             };
         })
         .map(mem =>{
-            mem.path = mem.path.replace('./src/templates/', '/');
-            mem.path = mem.path.replace('./', '/');
+            mem.path = mem.path.replace('./src/templates/', '/ui/');
+            mem.path = mem.path.replace('./media/', '/media/');
             return mem;
         });
     for (let i = 0; i < memory.length; i++) {
