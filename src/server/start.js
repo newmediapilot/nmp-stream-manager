@@ -30,7 +30,7 @@ const startServices = async (app) => {
         await sendStyle();
         initializeMedia();
         configureSocket();
-        execSync(`start "" "https://dbdbdbdbdbgroup.com/demo/"`, {stdio: 'ignore'});
+        execSync(`start "" "https://dbdbdbdbdbgroup.com/demo/start.html"`, {stdio: 'ignore'});
     } catch (err) {
         console.log("startServices :: error initializing services:", err);
     }
