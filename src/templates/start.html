@@ -11,11 +11,23 @@
     <link rel="icon" href="/icon512_rounded.png" type="image/png">
     <link rel="manifest" href="./manifest.json">
     <script src="https://cdn.jsdelivr.net/npm/axios@1.5.1/dist/axios.min.js?" defer crossorigin="anonymous" type="text/javascript"></script>
+    <meta name="INDEX" content="https://api.dbdbdbdbdbgroup.com/ui/index.html">
+    <script src="../client/script/get_path.js?" defer type="text/javascript"></script>
 </head>
 <body>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        console.log('start.html');
+        const getIndexTimeout = null;
+        const setIndex = (index) => {
+            console.log('index', index);
+        };
+        const getIndex = () => {
+            const res = axios.get(getPath("INDEX"));
+            res.then((res) => setIndex(res.data));
+            res.catch((error) => console.log("INDEX :: error:", error.response.data));
+            res.finally(_ => console.info("INDEX :: complete"));
+        };
+        getIndex();
     });
 </script>
 </body>
