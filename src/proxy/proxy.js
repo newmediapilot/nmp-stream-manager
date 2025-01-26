@@ -37,6 +37,7 @@ const salt = ((n) => Array.from({length: n}, () => String.fromCharCode(97 + Math
 const hashify = (ip, key) => `${ip}${key}${salt}`;
 const memory = {};
 const media = {};
+const ui = {};
 const config = {};
 const style = {};
 const sockets = {};
@@ -62,11 +63,10 @@ const memorize = (req, key) => {
     ROUTES.UI_GET_SOUND_EMBED,
 ].map(route => {
     app.all(route, (req, res) => {
-        const hash = hashify(req.ip, key);
-        if (!media[hash]) return res.status(404).send(`404 @ ui ${time}`);
+        if (!ui[route]) return res.status(404).send(`404 @ ui ${time}`);
         res.setHeader('Content-Type', 'text/html');
-        res.send(media[hash][route]);
-    })
+        res.send(ui[route]);
+    });
 });
 [
     'demo',
@@ -102,8 +102,13 @@ const memorize = (req, key) => {
         const reqPath = req.body.path;
         const reqPayload = req.body.payload;
         if (!media[hash]) media[hash] = {};
-        media[hash][reqPath] = Buffer.from(reqPayload, 'base64');
-        console.log(`proxy :: API_MEMORY_SET :: keys ${Object.keys(media[hash])} ${reqPayload.length}`);
+        if (reqPath.endsWith('html')) {
+            ui[reqPath] = Buffer.from(reqPayload, 'base64');
+            console.log(`proxy :: API_MEMORY_SET :: keys ${Object.keys(ui[reqPath])} ${reqPayload.length}`);
+        } else {
+            media[hash][reqPath] = Buffer.from(reqPayload, 'base64');
+            console.log(`proxy :: API_MEMORY_SET :: keys ${Object.keys(media[hash])} ${reqPayload.length}`);
+        }
         res.send(`200 @ ${time}`);
     });
     app.all(`/${key}${ROUTES.API_MEMORY_GET}`, (req, res) => {
