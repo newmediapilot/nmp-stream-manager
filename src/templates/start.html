@@ -15,16 +15,19 @@
     <script src="../client/script/get_path.js?" defer type="text/javascript"></script>
 </head>
 <body>
+Loading dashboard...
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const getIndexTimeout = null;
-        const setIndex = (index) => {
-            console.log('index', index);
-        };
         const getIndex = () => {
             const res = axios.get(getPath("INDEX"));
-            res.then((res) => setIndex(res.data));
-            res.catch((error) => console.log("INDEX :: error:", error.response.data));
+            res.then(res => {
+                document.documentElement.innerHTML = res.data;
+            });
+            res.catch(err => {
+                console.info("INDEX :: catch", err);
+                setTimeout(getIndex, 1000);
+                console.info("INDEX :: retrying...");
+            });
             res.finally(_ => console.info("INDEX :: complete"));
         };
         getIndex();
