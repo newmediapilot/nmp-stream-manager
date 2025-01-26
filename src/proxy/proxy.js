@@ -21,6 +21,16 @@ const ROUTES = {
     API_CONFIG_UPDATE: "/api/config/update",
     API_STYLE_UPDATE: "/api/style/update",
     API_MEDIA_UPDATE: "/api/media/update",
+    UI_GET_INDEX: "/ui/index.html",
+    UI_GET_DASHBOARD: "/ui/panel-dashboard.html",
+    UI_GET_ACTIONS: "/ui/panel-actions.html",
+    UI_GET_LAYOUT: "/ui/panel-layout.html",
+    UI_GET_DRAW: "/ui/panel-draw.html",
+    UI_GET_EMBED: "/ui/embed.html",
+    UI_GET_FEATURE_EMBED: "/ui/embed-feature.html",
+    UI_GET_MEDIA_EMBED: "/ui/embed-media.html",
+    UI_GET_DRAW_EMBED: "/ui/embed-draw.html",
+    UI_GET_SOUND_EMBED: "/ui/embed-sound.html",
 };
 const time = new Date().getTime();
 const salt = ((n) => Array.from({length: n}, () => String.fromCharCode(97 + Math.floor(Math.random() * 26))).join(''))(5);
