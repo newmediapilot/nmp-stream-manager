@@ -104,10 +104,10 @@ const memorize = (req, key) => {
         if (!media[hash]) media[hash] = {};
         if (reqPath.endsWith('html')) {
             ui[reqPath] = Buffer.from(reqPayload, 'base64');
-            console.log(`proxy :: API_MEMORY_SET :: keys ${Object.keys(ui[reqPath])} ${reqPayload.length}`);
+            console.log(`proxy :: API_MEMORY_SET :: ${reqPayload.length}`);
         } else {
             media[hash][reqPath] = Buffer.from(reqPayload, 'base64');
-            console.log(`proxy :: API_MEMORY_SET :: keys ${Object.keys(media[hash])} ${reqPayload.length}`);
+            console.log(`proxy :: API_MEMORY_SET :: ${reqPayload.length}`);
         }
         res.send(`200 @ ${time}`);
     });
