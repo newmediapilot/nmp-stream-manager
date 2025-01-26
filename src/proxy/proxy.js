@@ -50,6 +50,25 @@ const memorize = (req, key) => {
     sockets[hash].to('dbdbdbdbdbgroup').emit('sync');
 };
 [
+    ROUTES.UI_GET_INDEX,
+    ROUTES.UI_GET_DASHBOARD,
+    ROUTES.UI_GET_ACTIONS,
+    ROUTES.UI_GET_LAYOUT,
+    ROUTES.UI_GET_DRAW,
+    ROUTES.UI_GET_EMBED,
+    ROUTES.UI_GET_FEATURE_EMBED,
+    ROUTES.UI_GET_MEDIA_EMBED,
+    ROUTES.UI_GET_DRAW_EMBED,
+    ROUTES.UI_GET_SOUND_EMBED,
+].map(route => {
+    app.all(route, (req, res) => {
+        const hash = hashify(req.ip, key);
+        if (!media[hash]) return res.status(404).send(`404 @ ui ${time}`);
+        res.setHeader('Content-Type', 'text/html');
+        res.send(media[hash][route]);
+    })
+});
+[
     'demo',
 ].map(key => {
     app.all(`/${key}${ROUTES.API_CONFIG_SET}`, (req, res) => {
@@ -108,23 +127,33 @@ const memorize = (req, key) => {
         console.log(`proxy :: API_MEDIA_GET :: keys :: ${Object.keys(media[hash])} :1: ${reqPath} :2: ${reqPayload ? reqPayload.length : reqPayload}`);
         const mimeType = (() => {
             switch (path.extname(reqPath).toLowerCase()) {
-                case '.jpeg': return 'image/jpeg';
-                case '.jpg': return 'image/jpeg';
-                case '.png': return 'image/png';
-                case '.gif': return 'image/gif';
-                case '.webp': return 'image/webp';
-                case '.bmp': return 'image/bmp';
-                case '.mp3': return 'audio/mpeg';
-                case '.wav': return 'audio/wav';
-                case '.webm': return 'video/webm';
-                default: return 'application/octet-stream';
+                case '.jpeg':
+                    return 'image/jpeg';
+                case '.jpg':
+                    return 'image/jpeg';
+                case '.png':
+                    return 'image/png';
+                case '.gif':
+                    return 'image/gif';
+                case '.webp':
+                    return 'image/webp';
+                case '.bmp':
+                    return 'image/bmp';
+                case '.mp3':
+                    return 'audio/mpeg';
+                case '.wav':
+                    return 'audio/wav';
+                case '.webm':
+                    return 'video/webm';
+                default:
+                    return 'application/octet-stream';
             }
         })();
         res.setHeader('Content-Type', mimeType);
         console.log("proxy :: API_MEDIA_GET :: sending...", req.params.path, mimeType);
         res.send(reqPayload);
     });
-    app.all(`/${key}${ROUTES.API_MEDIA_UPDATE}`, (req,_) => {
+    app.all(`/${key}${ROUTES.API_MEDIA_UPDATE}`, (req, _) => {
         const hash = hashify(req.ip, key);
         const {data, type} = req.body;
         const name = req.body.key;
