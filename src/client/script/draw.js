@@ -36,7 +36,7 @@ const draw = () => {
         let lastY = null;
         return (x, y) => {
             const radius = pixelSize / 2;
-            if (Math.abs(lastX - x) < 100){
+            if (Math.abs(lastX - x) < 100) {
                 const steps = 30;
                 if (lastX !== null && lastY !== null) {
                     for (let i = 1; i <= steps; i++) {
@@ -96,8 +96,23 @@ const draw = () => {
             e.touches[0].pageY - top,
         )
     };
+    const mouseStartMove = (e) => {
+        if (!document.$mousedown) return;
+        const {left, top} = document.querySelector('canvas').getBoundingClientRect();
+        drawPixel(
+            e.pageX - left,
+            e.pageY - top,
+        )
+    };
     document.querySelector('canvas').addEventListener("touchstart", (e) => touchStartMove(e), {passive: true});
     document.querySelector('canvas').addEventListener("touchmove", (e) => touchStartMove(e), {passive: true});
+    document.querySelector('canvas').addEventListener("mousemove", (e) => mouseStartMove(e));
+    document.querySelector('canvas').addEventListener("mousedown", () => {
+        document.$mousedown = true;
+    });
+    document.querySelector('canvas').addEventListener("mouseup", () => {
+        document.$mousedown = false;
+    });
     document.querySelector('section button:nth-of-type(1)').addEventListener('click', () => sendPayload());
     document.querySelector('section button:nth-of-type(2)').addEventListener('click', () => clearCanvas());
 };
