@@ -119,7 +119,12 @@
         }
     }));
     document.addEventListener("DOMContentLoaded", () => {
-        if ('#edit' === window.location.hash) return;
+        if ('#edit' === window.location.hash) {
+            const URL = `https://player.twitch.tv/?channel=aaknot&parent=localhost&&parent=dbdbdbdbdbgroup.com&muted=false`;
+            const twitchEmbed = document.body.querySelector('#embed');
+            twitchEmbed.src = URL;
+            return;
+        }
         const urlParams = new URLSearchParams(window.location.search);
         const streamerQueryParam = urlParams.get('featuredName');
         if (!streamerQueryParam) {
