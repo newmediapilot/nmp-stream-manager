@@ -35,6 +35,10 @@ const draw = () => {
         let lastX = null;
         let lastY = null;
         return (x, y) => {
+            const {value, max} = document.querySelector('[type=range]');
+            if(Number(value) >= Number(max)) {
+                return;
+            }
             const radius = pixelSize / 2;
             if (Math.abs(lastX - x) < 100) {
                 const steps = 30;
