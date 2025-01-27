@@ -25,7 +25,6 @@ const startServices = async (app) => {
         });
         await initializePublicConfigs("signals");
         await initializePublicStyles("style");
-        await sendUI();
         await sendMedia();
         await sendConfig();
         await sendStyle();
