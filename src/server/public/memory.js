@@ -33,7 +33,6 @@ const getMemory = async () => {
 const sendMedia = async () => {
     const memory = [
         ...globSync('./media/**.*'),
-        ...globSync('./src/templates/**.*')
     ].map(path => {
             return {
                 path,
@@ -41,7 +40,6 @@ const sendMedia = async () => {
             };
         })
         .map(mem =>{
-            mem.path = mem.path.replace('./src/templates/', '/ui/');
             mem.path = mem.path.replace('./media/', '/media/');
             return mem;
         });
