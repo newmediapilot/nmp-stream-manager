@@ -7,7 +7,7 @@ const {initializePublicConfigs} = require("./public/config");
 const {initializePublicStyles} = require("./public/style");
 const {initializeMedia} = require("./public/media");
 const {configureSocket} = require("./helper/socket");
-const {sendUI, sendMedia, sendConfig, sendStyle} = require("./public/memory");
+const {sendMedia, sendConfig, sendStyle} = require("./public/memory");
 const {ROUTES} = require("./routes");
 
 const startServices = async (app) => {
