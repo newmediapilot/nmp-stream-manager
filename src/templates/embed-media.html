@@ -106,13 +106,18 @@
     }));
     document.addEventListener("DOMContentLoaded", () => socketWatchMediaSet((payload) => {
         let cells = payload.split('media:set:')[1];
-        const [name, type, suffix] = cells.split(',');
+        const [name, suffix] = cells.split(',');
         const src = `https://api.dbdbdbdbdbgroup.com/demo/media/${name}.${suffix}`;
         if (document.body.querySelector('#embed').getAttribute('src') === src) {
             document.body.querySelector('#embed').setAttribute('src', '');
         } else {
             document.body.querySelector('#embed').setAttribute('src', src);
         }
+    }));
+    document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
+        let style = payload.split('style:set:')[1];
+        document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
+        console.log(`socketWatchStyle :: media :: set ${style}`);
     }));
 </script>
 </body>
