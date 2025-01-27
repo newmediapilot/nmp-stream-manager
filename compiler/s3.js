@@ -44,7 +44,7 @@ const s3upload = (s3path, fileContents) => {
 };
 
 [
-    ...globSync(".tplt-start.html"),
+    ...globSync(".tplt-*.html"),
 ].map((filePath) => s3upload(`${hash}/${path.basename(filePath).replace('.tplt-', '')}`, fs.readFileSync(filePath)));
 
 [
