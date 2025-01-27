@@ -41,6 +41,7 @@
             height: 100%;
             object-fit: contain;
         }
+
         #embed[src=''] {
             visibility: hidden;
         }
@@ -60,22 +61,18 @@
     <style id="public_module_styles"></style>
     <style>
         html.edit #embed {
-            box-shadow: inset 0 0 25px 25px rgb(calc(255 * var(--_med-sel)), 0, 0);
+
         }
+
         main {
             perspective: calc(1 * 1920px);
-            transform: translateX(calc(calc(var(--_med-tX) * -1%) + 50%))
-            translateY(calc(calc(var(--_med-tY) * -1%) + 50%))
+            transform: translateX(calc(calc(var(--_med-tX) * -1%) + 50%)) translateY(calc(calc(var(--_med-tY) * -1%) + 50%))
         }
+
         #embed {
             box-sizing: border-box;
-            opacity: calc(var(--_med-o)/100);
-            transform:  scaleX(calc(calc(var(--_med-sX) * 0.01) + 0.0))
-            scaleY(calc(calc(var(--_med-sY) * 0.01) + 0.0))
-            rotateX(calc(calc(var(--_med-rY) * 1.8deg) - 90deg))
-            rotateY(calc(calc(var(--_med-rX) * -1.8deg) - 90deg))
-            rotateZ(0deg)
-            scaleX(-1);
+            opacity: calc(var(--_med-o) / 100);
+            transform: scaleX(calc(calc(var(--_med-sX) * 0.01) + 0.0)) scaleY(calc(calc(var(--_med-sY) * 0.01) + 0.0)) rotateX(calc(calc(var(--_med-rY) * 1.8deg) - 90deg)) rotateY(calc(calc(var(--_med-rX) * -1.8deg) - 90deg)) rotateZ(0deg) scaleX(-1);
         }
     </style>
 </head>
@@ -106,9 +103,10 @@
     }));
     document.addEventListener("DOMContentLoaded", () => socketWatchMediaSet((payload) => {
         let cells = payload.split('media:set:')[1];
-        const [name, suffix] = cells.split(',');
+        const [name, _, suffix] = cells.split(',');
         const src = `https://api.dbdbdbdbdbgroup.com/demo/media/${name}.${suffix}`;
         if (document.body.querySelector('#embed').getAttribute('src') === src) {
+            if ('#edit' === window.location.hash) return;
             document.body.querySelector('#embed').setAttribute('src', '');
         } else {
             document.body.querySelector('#embed').setAttribute('src', src);
