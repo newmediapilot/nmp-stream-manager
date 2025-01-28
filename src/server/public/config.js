@@ -73,7 +73,7 @@ const DASHBOARD_BUTTON_CONFIG = {
             label: "SoundB",
             theme: "red",
             type: "sound",
-            description: "a,audio,mp3,wav,webm",
+            description: "b,audio,mp3,wav,webm",
             visibility: "ON",
         },
         {type: "empty"},
