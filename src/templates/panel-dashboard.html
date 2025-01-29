@@ -236,6 +236,7 @@
     document.addEventListener("DOMContentLoaded", () => {
         document.querySelector('dialog button:last-of-type').addEventListener('click', () => document.body.querySelector('#qr-dialog').close())
     });
+    document.addEventListener("DOMContentLoaded", () => dashboardWatchResize());
     document.addEventListener("DOMContentLoaded", () => dashboard());
     document.addEventListener("DOMContentLoaded", () => {
         setInterval(dashboardRotateHue, 10000);
