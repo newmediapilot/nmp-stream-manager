@@ -18,6 +18,7 @@ const configureSocket = () => {
         (async()=>{
             await getMemory();
             io.emit("sync:done");
+            console.log("configureSocket :: sync:done", io.id);
         })();
     });
     io.on("disconnect", () => console.log("configureSocket :: client disconnected"));
