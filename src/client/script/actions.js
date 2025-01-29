@@ -179,8 +179,8 @@ const actionsCreateUpload = (editorEl) => {
             "image" === type && displayMedia();
         });
     }
-    socketWatchSync(()=>{
-        console.log('socketWatchSync :: toggleReplayState');
+    socketWatchSyncDone(()=>{
+        console.log('socketWatchSyncDone :: toggleReplayState');
         if (!!actionButton) {
             toggleReplayState();
         }
