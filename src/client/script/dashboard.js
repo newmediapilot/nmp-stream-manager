@@ -107,7 +107,6 @@ dashboardSpinLabels = () => {
     document.querySelectorAll('section article:not(.empty)').forEach(article => {
         const {width: btnWidth} = article.querySelector("button").getBoundingClientRect();
         const {width: lblWidth} = article.querySelector("label:nth-of-type(2)").getBoundingClientRect();
-        console.log('btnWidth', btnWidth, 'lblWidth', lblWidth);
         if (lblWidth < btnWidth) return;
         anime({
             targets: article.querySelector("label:nth-of-type(2)"),
