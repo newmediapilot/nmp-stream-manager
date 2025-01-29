@@ -13,7 +13,6 @@
     <script src="../client/script/edit_detect.js?" defer type="text/javascript"></script>
     <script src="../client/script/socket.js?" defer type="text/javascript"></script>
     <script src="../client/script/get_path.js?" defer type="text/javascript"></script>
-    <script src="../client/script/get_url.js?" defer type="text/javascript"></script>
     <link href="../client/style/variables.css?" rel="stylesheet">
     <link href="../client/style/reset.css?" rel="stylesheet">
     <link href="../client/style/base.css?" rel="stylesheet">
@@ -107,9 +106,9 @@
         const streamerQueryParam = urlParams.get('featuredMedia');
         const featuredMedia = payload.split(':').pop();
         if (streamerQueryParam !== featuredMedia) {
-            getURL(`${window.location.origin}${window.location.pathname}?featuredMedia=${payload.split(':').pop()}`);
+            window.location.href = (`${window.location.origin}${window.location.pathname}?featuredMedia=${payload.split(':').pop()}`);
         } else {
-            getURL(`${window.location.origin}${window.location.pathname}`);
+            window.location.href = (`${window.location.origin}${window.location.pathname}`);
         }
     }));
     document.addEventListener("DOMContentLoaded", () => {
