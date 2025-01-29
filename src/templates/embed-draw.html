@@ -114,14 +114,16 @@
         updateCanvas();
     });
     document.addEventListener("DOMContentLoaded", () => {
+        const queue = [];
         document.$drawPayload = (payload) => {
+            queue.push(payload.split(":")[1].split(","));
             if (document.$drawing) {
                 console.log('socketWatchDrawSet busy...');
                 return;
             }
             document.$drawing = true;
             const pixelSize = 20;
-            let playback = payload.split(":")[1].split(",");
+            let playback = queue.pop();
             const replay = [...playback];
             const canvas = document.querySelector("canvas");
             const ctx = document.querySelector("canvas").getContext("2d");
@@ -131,6 +133,11 @@
                     document.$drawing = false;
                     if ('#edit' === window.location.hash) {
                         playback = [...replay];
+                        document.replayStart();
+                        return;
+                    }
+                    if (queue.length) {
+                        playback = queue.pop();
                         document.replayStart();
                     }
                 }, 5000)
