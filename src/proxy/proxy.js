@@ -31,6 +31,7 @@ const ROUTES = {
     UI_GET_MEDIA_EMBED: "/ui/embed-media.html",
     UI_GET_DRAW_EMBED: "/ui/embed-draw.html",
     UI_GET_SOUND_EMBED: "/ui/embed-sound.html",
+    TWITCH_LOGIN: "/t/w/i/t/c/h/l/o/g/i/n/",
 };
 const time = new Date().getTime();
 const salt = ((n) => Array.from({length: n}, () => String.fromCharCode(97 + Math.floor(Math.random() * 26))).join(''))(5);
@@ -71,6 +72,9 @@ const memorize = (req, key) => {
 [
     'demo',
 ].map(key => {
+    app.all(`/${key}${ROUTES.TWITCH_LOGIN}`, (req, res) => {
+
+    });
     app.all(`/${key}${ROUTES.API_CONFIG_SET}`, (req, res) => {
         const hash = hashify(req.ip, key);
         if (!sockets[hash]) return;
