@@ -218,6 +218,7 @@
                     buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}`);
                 }
             });
+            dashboardSpinLabels();
             console.log('socketWatchConfig :: set');
         };
         const res = axios.get(getPath("API_CONFIG_GET"));
@@ -238,10 +239,8 @@
     document.addEventListener("DOMContentLoaded", () => dashboard());
     document.addEventListener("DOMContentLoaded", () => {
         setInterval(dashboardRotateHue, 10000);
-        setInterval(dashboardSpinLabels, 10000);
         dashboardBlinkButtons();
         dashboardRotateHue();
-        setTimeout(() => dashboardSpinLabels(), 5000);
     });
 </script>
 </body>
