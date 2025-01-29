@@ -47,6 +47,7 @@ const memorize = (req, key) => {
     const redirect_uri = `https://api.dbdbdbdbdbgroup.com/${ROUTES.TWITCH_LOGIN_SUCCESS}`;
     const twitch_login_referrer = `https://dbdbdbdbdbgroup.com/${key}/index.html`;
     app.all(`/${key}${ROUTES.TWITCH_LOGIN}`, (req, res) => {
+        console.log(`proxy :: TWITCH_LOGIN`);
         res.redirect(`https://id.twitch.tv/oauth2/authorize?client_id=${process.env.TWITCH_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code&scope=${process.env.TWITCH_SCOPES}`);
     });
     app.all(`${ROUTES.TWITCH_LOGIN_SUCCESS}`, (req, res) => {
@@ -56,6 +57,7 @@ const memorize = (req, key) => {
             method: 'GET',
             url: `/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/?code=${code}`,
         }, key);
+        console.log(`proxy :: TWITCH_LOGIN_SUCCESS`);
         res.redirect(twitch_login_referrer);
     });
     app.all(`/${key}${ROUTES.API_CONFIG_SET}`, (req, res) => {
