@@ -9,8 +9,6 @@ let length = 1;
     ...globSync('.compiled'),
     ...globSync('.launch'),
     ...globSync('.server'),
-    ...globSync('signals'),
-    ...globSync('style'),
     ...globSync('package-lock.json'),
 ].map(p => execSync(`rm -rf ${p}`));
 console.log("build :: start");
