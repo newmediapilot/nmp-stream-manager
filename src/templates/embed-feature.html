@@ -118,7 +118,7 @@
     }));
     document.addEventListener("DOMContentLoaded", () => {
         const urlParams = new URLSearchParams(window.location.search);
-        const streamerQueryParam = ('#edit' === window.location.hash) ? 'aaknot' : urlParams.get('featuredName');
+        const streamerQueryParam = urlParams.get('featuredName');
         if (!streamerQueryParam) {
             console.log('embed-feature :: no streamer found');
         } else {
