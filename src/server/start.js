@@ -14,7 +14,6 @@ const startServices = async (app) => {
     try {
         setParam("public_index", "https://dbdbdbdbdbgroup.com/demo/");
         setParam("public_routes", ROUTES);
-        setParam("twitch_username", process.env.TWITCH_USERNAME);
         configureNunjucks(app);
         const certs = {
             key: getSecret('keys')['private'],
