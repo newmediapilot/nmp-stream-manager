@@ -13,9 +13,12 @@ const configureSocket = () => {
     io.on("connect", () => {
         console.log("configureSocket :: client connect socket.id", io.id);
     });
-    io.on("sync", () => {
+    io.on("sync", ()=>{
         console.log("configureSocket :: sync", io.id);
-        getMemory();
+        (async()=>{
+            await getMemory();
+            io.emit("sync:done");
+        })();
     });
     io.on("disconnect", () => console.log("configureSocket :: client disconnected"));
     io.on("connect_error", (err) => console.log("configureSocket :: connection offline"));
