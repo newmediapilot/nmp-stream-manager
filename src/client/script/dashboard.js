@@ -67,9 +67,18 @@ const dashboard = () => {
         })
     });
 };
+dashboardWatchResize = () => {
+    const containerEl = document.body.querySelector("section");
+    window.addEventListener('resize', ()=>{
+        containerEl.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+    });
+};
 dashboardFilterButtons = (filterOut) => {
     document.documentElement.style.setProperty('--controls-filter', String(filterOut ? 1 : 0));
-    // TODO: animate buttons out during edit
 };
 dashboardRotateHue = () => {
     if (document.documentElement.classList.contains('reduced-motion')) {
