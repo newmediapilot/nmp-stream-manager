@@ -72,7 +72,10 @@ dashboardFilterButtons = (filterOut) => {
     // TODO: animate buttons out during edit
 };
 dashboardRotateHue = () => {
-    !document.documentElement.classList.contains('reduced-motion') && anime({
+    if(document.documentElement.classList.contains('reduced-motion')) {
+        return;
+    }
+    anime({
         targets: "section button:not(:disabled)",
         duration: 3500,
         delay: anime.stagger(50),
@@ -81,7 +84,10 @@ dashboardRotateHue = () => {
     });
 };
 dashboardBlinkButtons = () => {
-    !document.documentElement.classList.contains('reduced-motion') && anime({
+    if(document.documentElement.classList.contains('reduced-motion')) {
+        return;
+    }
+    anime({
         targets: "html section button",
         duration: 666,
         delay: anime.stagger(11),
@@ -95,12 +101,15 @@ dashboardBlinkButtons = () => {
     });
 };
 dashboardSpinLabels = () => {
-    // const {width} = document.querySelector("section article label:nth-of-type(2)").getBoundingClientRect();
-    // !document.documentElement.classList.contains('reduced-motion') && anime({
-    //     targets: "section article label:nth-of-type(2)",
-    //     duration: 5000,
-    //     easing: 'linear',
-    //     delay: anime.stagger(1500),
-    //     translateX: [`${0}px`, `-${(width / 2)}px`],
-    // });
+    if(document.documentElement.classList.contains('reduced-motion')) {
+        return;
+    }
+    const {width} = document.querySelector("section article label:nth-of-type(2)").getBoundingClientRect();
+    anime({
+        targets: "section article label:nth-of-type(2)",
+        duration: 5000,
+        easing: 'linear',
+        delay: anime.stagger(1500),
+        translateX: [`${0}px`, `-${(width / 2)}px`],
+    });
 };
