@@ -72,7 +72,7 @@ dashboardFilterButtons = (filterOut) => {
     // TODO: animate buttons out during edit
 };
 dashboardRotateHue = () => {
-    if(document.documentElement.classList.contains('reduced-motion')) {
+    if (document.documentElement.classList.contains('reduced-motion')) {
         return;
     }
     anime({
@@ -84,7 +84,7 @@ dashboardRotateHue = () => {
     });
 };
 dashboardBlinkButtons = () => {
-    if(document.documentElement.classList.contains('reduced-motion')) {
+    if (document.documentElement.classList.contains('reduced-motion')) {
         return;
     }
     anime({
@@ -101,15 +101,22 @@ dashboardBlinkButtons = () => {
     });
 };
 dashboardSpinLabels = () => {
-    if(document.documentElement.classList.contains('reduced-motion')) {
+    if (document.documentElement.classList.contains('reduced-motion')) {
         return;
     }
-    const {width} = document.querySelector("section article label:nth-of-type(2)").getBoundingClientRect();
-    anime({
-        targets: "section article label:nth-of-type(2)",
-        duration: 5000,
-        easing: 'linear',
-        delay: anime.stagger(1500),
-        translateX: [`${0}px`, `-${(width / 2)}px`],
+    document.querySelectorAll('section article:not(.empty)').forEach(article => {
+        const {width: btnWidth} = article.querySelector("button").getBoundingClientRect();
+        const {width: lblWidth} = article.querySelector("label:nth-of-type(2)").getBoundingClientRect();
+        console.log('btnWidth', btnWidth, 'lblWidth', lblWidth);
+        if (lblWidth < btnWidth) return;
+        anime({
+            targets: article.querySelector("label:nth-of-type(2)"),
+            duration: 18000,
+            easing: 'easeInOutSine',
+            delay: Math.random() * 1500,
+            translateX: [`${0}px`, `-${(lblWidth / 2)}px`, `${0}px`],
+            loop: true,
+            direction: 'alternate',
+        });
     });
 };
