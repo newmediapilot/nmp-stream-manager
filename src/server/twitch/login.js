@@ -6,7 +6,6 @@ function twitchLogin(req, res) {
     const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
     const TWITCH_SCOPES = process.env.TWITCH_SCOPES;
     console.log( "twitchLogin start...");
-    setParam("twitch_login_referrer", ROUTES.PANEL_DASHBOARD);
     const redirectURI = `https://${getParam("device_ip")}${encodeURIComponent(ROUTES.TWITCH_LOGIN_SUCCESS)}`;
     const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${redirectURI}&response_type=code&scope=${TWITCH_SCOPES}`;
     console.log( "OAuth URL generated:", oauthUrl);
@@ -15,6 +14,8 @@ function twitchLogin(req, res) {
 async function twitchLoginSuccess(req, res) {
     resetSecrets();
     const code = req.query.code;
+    const twitch_login_referrer = req.query.twitch_login_referrer;
+    setParam("twitch_login_referrer", twitch_login_referrer);
     try {
         const response = await fetch(`https://id.twitch.tv/oauth2/token?client_id=${process.env.TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&code=${code}&grant_type=authorization_code&redirect_uri=${ROUTES.TWITCH_REDIRECT}`, {
             method: 'POST',
@@ -22,7 +23,6 @@ async function twitchLoginSuccess(req, res) {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
-
         const accessToken = response.data.access_token;
         const refreshToken = response.data.refresh_token;
         setSecret("twitch_access_token", accessToken);
