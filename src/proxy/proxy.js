@@ -213,6 +213,7 @@ const server = https
         sockets[hash] = io;
         socket.join('dbdbdbdbdbgroup');
         socket.on("payload", (payload) => sockets[hash].to('dbdbdbdbdbgroup').emit("payload", payload));
+        socket.on("sync:done", () => sockets[hash].to('dbdbdbdbdbgroup').emit("sync:done"));
         console.log("proxy :: connected", hash, socket.id, socket.handshake.address, key);
         socket.on("disconnect", () => {
             console.log("proxy :: disconnected", hash, socket.id, socket.handshake.address, key)
