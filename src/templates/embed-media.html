@@ -13,6 +13,7 @@
     <script src="../client/script/edit_detect.js?" defer type="text/javascript"></script>
     <script src="../client/script/socket.js?" defer type="text/javascript"></script>
     <script src="../client/script/get_path.js?" defer type="text/javascript"></script>
+    <script src="../client/script/get_url.js?" defer type="text/javascript"></script>
     <link href="../client/style/variables.css?" rel="stylesheet">
     <link href="../client/style/reset.css?" rel="stylesheet">
     <link href="../client/style/base.css?" rel="stylesheet">
@@ -102,16 +103,27 @@
         console.log(`socketWatchStyle :: media :: set ${style}`);
     }));
     document.addEventListener("DOMContentLoaded", () => socketWatchMediaSet((payload) => {
-        let cells = payload.split('media:set:')[1];
-        const [name, _, suffix] = cells.split(',');
-        const src = `https://api.dbdbdbdbdbgroup.com/demo/media/${name}.${suffix}`;
-        if (document.body.querySelector('#embed').getAttribute('src') === src) {
-            if ('#edit' === window.location.hash) return;
-            document.body.querySelector('#embed').setAttribute('src', '');
+        const urlParams = new URLSearchParams(window.location.search);
+        const streamerQueryParam = urlParams.get('featuredMedia');
+        const featuredMedia = payload.split(':').pop();
+        if (streamerQueryParam !== featuredMedia) {
+            getURL(`${window.location.origin}${window.location.pathname}?featuredMedia=${payload.split(':').pop()}`);
         } else {
-            document.body.querySelector('#embed').setAttribute('src', src);
+            getURL(`${window.location.origin}${window.location.pathname}`);
         }
     }));
+    document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const mediaQueryParam = urlParams.get('featuredMedia');
+        if (!mediaQueryParam) {
+            console.log('embed-feature :: no media found');
+        } else {
+            const [name, _, suffix] = mediaQueryParam.split(',');
+            const src = `https://api.dbdbdbdbdbgroup.com/demo/media/${name}.${suffix}`;
+            document.body.querySelector('#embed').setAttribute('src', src);
+            console.log('mediaQueryParam', mediaQueryParam);
+        }
+    });
 </script>
 </body>
 </html>
