@@ -32,6 +32,7 @@ const ROUTES = {
     UI_GET_DRAW_EMBED: "/ui/embed-draw.html",
     UI_GET_SOUND_EMBED: "/ui/embed-sound.html",
     TWITCH_LOGIN: "/t/w/i/t/c/h/l/o/g/i/n/",
+    TWITCH_LOGIN_SUCCESS: "/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/",
 };
 const time = new Date().getTime();
 const salt = ((n) => Array.from({length: n}, () => String.fromCharCode(97 + Math.floor(Math.random() * 26))).join(''))(5);
@@ -73,6 +74,11 @@ const memorize = (req, key) => {
     'demo',
 ].map(key => {
     app.all(`/${key}${ROUTES.TWITCH_LOGIN}`, (req, res) => {
+        const redirectURI = `https://dbdbdbdbdbgroup.com/`;
+        const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${process.env.TWITCH_CLIENT_ID}&redirect_uri=${redirectURI}&response_type=code&scope=${process.env.TWITCH_SCOPES}`;
+        res.redirect(oauthUrl);
+    });
+    app.all(`${ROUTES.TWITCH_LOGIN_SUCCESS}`, (req, res) => {
 
     });
     app.all(`/${key}${ROUTES.API_CONFIG_SET}`, (req, res) => {
