@@ -108,6 +108,7 @@
         if (streamerQueryParam !== featuredMedia) {
             window.location.href = (`${window.location.origin}${window.location.pathname}?featuredMedia=${payload.split(':').pop()}`);
         } else {
+            if ('#edit' === window.location.hash) return;
             window.location.href = (`${window.location.origin}${window.location.pathname}`);
         }
     }));
