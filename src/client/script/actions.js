@@ -179,6 +179,12 @@ const actionsCreateUpload = (editorEl) => {
             "image" === type && displayMedia();
         });
     }
+    socketWatchSync(()=>{
+        console.log('socketWatchSync :: toggleReplayState');
+        if (!!actionButton) {
+            toggleReplayState();
+        }
+    });
 };
 
 const actionsToggle = (editorEl) => {
