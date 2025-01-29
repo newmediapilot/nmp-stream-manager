@@ -39,7 +39,6 @@ const salt = ((n) => Array.from({length: n}, () => String.fromCharCode(97 + Math
 const hashify = (ip, key) => `${ip}${key}${salt}`;
 const memory = {};
 const media = {};
-const ui = {};
 const config = {};
 const style = {};
 const sockets = {};
@@ -53,33 +52,29 @@ const memorize = (req, key) => {
     sockets[hash].to('dbdbdbdbdbgroup').emit('sync');
 };
 [
-    ROUTES.UI_GET_INDEX,
-    ROUTES.UI_GET_DASHBOARD,
-    ROUTES.UI_GET_ACTIONS,
-    ROUTES.UI_GET_LAYOUT,
-    ROUTES.UI_GET_DRAW,
-    ROUTES.UI_GET_EMBED,
-    ROUTES.UI_GET_FEATURE_EMBED,
-    ROUTES.UI_GET_MEDIA_EMBED,
-    ROUTES.UI_GET_DRAW_EMBED,
-    ROUTES.UI_GET_SOUND_EMBED,
-].map(route => {
-    app.all(route, (req, res) => {
-        if (!ui[route]) return res.status(404).send(`404 @ ui ${time}`);
-        res.setHeader('Content-Type', 'text/html');
-        res.send(ui[route]);
-    });
-});
-[
     'demo',
 ].map(key => {
+    const redirectURI = `https://api.dbdbdbdbdbgroup.com/${ROUTES.TWITCH_LOGIN_SUCCESS}`;
     app.all(`/${key}${ROUTES.TWITCH_LOGIN}`, (req, res) => {
-        const redirectURI = `https://dbdbdbdbdbgroup.com/`;
         const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${process.env.TWITCH_CLIENT_ID}&redirect_uri=${redirectURI}&response_type=code&scope=${process.env.TWITCH_SCOPES}`;
         res.redirect(oauthUrl);
     });
     app.all(`${ROUTES.TWITCH_LOGIN_SUCCESS}`, (req, res) => {
-
+        const hash = hashify(req.ip, key);
+        const code = req.query.code;
+        fetch(`https://id.twitch.tv/oauth2/token?client_id=${process.env.TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&code=${code}&grant_type=authorization_code&redirect_uri=${redirectURI}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(response => {
+            if (!sockets[hash]) return;
+            const memory = {
+                method: `GET`,
+                url: `/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/?code=${code}`,
+            };
+        });
+        res.send(`200 @ ${time}`);
     });
     app.all(`/${key}${ROUTES.API_CONFIG_SET}`, (req, res) => {
         const hash = hashify(req.ip, key);
