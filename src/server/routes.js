@@ -17,7 +17,7 @@ const ROUTES = {
     PANEL_MEDIA_EMBED: "/demo/embed-media.html",
     PANEL_DRAW_EMBED: "/demo/embed-draw.html",
     PANEL_SOUND_EMBED: "/demo/embed-sound.html",
-    TWITCH_LOGIN: "/demo/t/w/i/t/c/h/l/o/g/i/n/",
+    TWITCH_LOGIN: "/t/w/i/t/c/h/l/o/g/i/n/",
     TWITCH_LOGIN_SUCCESS: "/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/",
 };
 module.exports = {ROUTES};
