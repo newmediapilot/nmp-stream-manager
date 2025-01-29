@@ -54,7 +54,9 @@
     <section>
         <article>
             <div class="preview">
-                <iframe width="1920" height="1080" src="{{public_routes.PANEL_EMBED}}#edit"></iframe>
+                <iframe width="1920" height="1080" src="{{public_routes.PANEL_DRAW_EMBED}}#edit"></iframe>
+                <iframe width="1920" height="1080" src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
+                <iframe width="1920" height="1080" src="{{public_routes.PANEL_FEATURE_EMBED}}#edit"></iframe>
             </div>
             <div class="layers">
                 <input type="radio" name="layers" id="_feat"/>
@@ -173,8 +175,9 @@
         document.addEventListener("DOMContentLoaded", () => {
             const updateTransform = () => {
                 const {width} = document.querySelector('.preview').getBoundingClientRect();
-                const iframe = document.querySelector('iframe');
-                iframe.style.transform = `scale(${width / 1920})`;
+                document.querySelectorAll('iframe').forEach(iframe =>{
+                    iframe.style.transform = `scale(${width / 1920})`;
+                });
             };
             window.addEventListener('orientationchange', updateTransform);
             window.addEventListener('resize', updateTransform);
