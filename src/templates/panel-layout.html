@@ -152,16 +152,23 @@
             const processConfig = (signals) => {
                 const media = signals.filter(s => s.type === "media")[0];
                 const feature = signals.filter(s => s.type === "feature")[0];
-                document.querySelector('section article .layers label[for="_med"]').setAttribute('aria-label', media.label);
                 document.querySelector('section article .layers label[for="_feat"]').setAttribute('aria-label', feature.label);
+                document.querySelector('section article .layers label[for="_med"]').setAttribute('aria-label', media.label);
                 document.querySelector('section article .layers label[for="_draw"]').setAttribute('aria-label', "draw");
+                document.querySelector('iframe:nth-of-type(1)').src = `${getPath('PANEL_FEATURE_EMBED')}?featuredName=${feature.label}#edit`;
                 document.querySelector('iframe:nth-of-type(2)').src = `${getPath('PANEL_MEDIA_EMBED')}?featuredMedia=${media.description}#edit`;
                 console.log('socketWatchConfig :: set', signals);
             };
-            const res = axios.get(getPath("API_CONFIG_GET"));
-            res.then((res) => processConfig(res.data));
-            res.catch((error) => console.log("API_CONFIG_GET :: error:", error.response.data));
-            res.finally(_ => console.info("API_CONFIG_GET :: complete"));
+            const fetchConfig = ()=>{
+                const res = axios.get(getPath("API_CONFIG_GET"));
+                res.then((res) => processConfig(res.data));
+                res.catch((error) => console.log("API_CONFIG_GET :: error:", error.response.data));
+                res.finally(_ => console.info("API_CONFIG_GET :: complete"));
+            };
+            socketWatchSyncDone(()=>{
+                fetchConfig();
+            });
+            fetchConfig();
         });
         document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
         document.addEventListener("DOMContentLoaded", () => initHomeControls());
