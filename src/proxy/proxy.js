@@ -54,27 +54,19 @@ const memorize = (req, key) => {
 [
     'demo',
 ].map(key => {
-    const redirectURI = `https://api.dbdbdbdbdbgroup.com/${ROUTES.TWITCH_LOGIN_SUCCESS}`;
+    const redirect_uri = `https://api.dbdbdbdbdbgroup.com/${ROUTES.TWITCH_LOGIN_SUCCESS}`;
+    const twitch_login_referrer = `https://dbdbdbdbdbgroup.com/${key}/index.html`;
     app.all(`/${key}${ROUTES.TWITCH_LOGIN}`, (req, res) => {
-        const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${process.env.TWITCH_CLIENT_ID}&redirect_uri=${redirectURI}&response_type=code&scope=${process.env.TWITCH_SCOPES}`;
-        res.redirect(oauthUrl);
+        res.redirect(`https://id.twitch.tv/oauth2/authorize?client_id=${process.env.TWITCH_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code&scope=${process.env.TWITCH_SCOPES}`);
     });
     app.all(`${ROUTES.TWITCH_LOGIN_SUCCESS}`, (req, res) => {
-        const hash = hashify(req.ip, key);
         const code = req.query.code;
-        fetch(`https://id.twitch.tv/oauth2/token?client_id=${process.env.TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&code=${code}&grant_type=authorization_code&redirect_uri=${redirectURI}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).then(response => {
-            if (!sockets[hash]) return;
-            const memory = {
-                method: `GET`,
-                url: `/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/?code=${code}`,
-            };
-        });
-        res.send(`200 @ ${time}`);
+        memorize({
+            ip: req.ip,
+            method: 'GET',
+            url: `/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/?code=${code}`,
+        }, key);
+        res.redirect(twitch_login_referrer);
     });
     app.all(`/${key}${ROUTES.API_CONFIG_SET}`, (req, res) => {
         const hash = hashify(req.ip, key);
