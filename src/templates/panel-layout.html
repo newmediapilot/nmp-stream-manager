@@ -54,9 +54,9 @@
     <section>
         <article>
             <div class="preview">
-                <iframe width="1920" height="1080" src="{{public_routes.PANEL_DRAW_EMBED}}#edit"></iframe>
-                <iframe width="1920" height="1080" src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
                 <iframe width="1920" height="1080" src="{{public_routes.PANEL_FEATURE_EMBED}}#edit"></iframe>
+                <iframe width="1920" height="1080" src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
+                <iframe width="1920" height="1080" src="{{public_routes.PANEL_DRAW_EMBED}}#edit"></iframe>
             </div>
             <div class="layers">
                 <input type="radio" name="layers" id="_feat"/>
@@ -155,6 +155,7 @@
                 document.querySelector('section article .layers label[for="_med"]').setAttribute('aria-label', media.label);
                 document.querySelector('section article .layers label[for="_feat"]').setAttribute('aria-label', feature.label);
                 document.querySelector('section article .layers label[for="_draw"]').setAttribute('aria-label', "draw");
+                document.querySelector('iframe:nth-of-type(2)').src = `${getPath('PANEL_MEDIA_EMBED')}?featuredMedia=${media.description}#edit`;
                 console.log('socketWatchConfig :: set', signals);
             };
             const res = axios.get(getPath("API_CONFIG_GET"));
