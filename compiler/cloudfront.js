@@ -7,7 +7,7 @@ AWS.config.update({
     region: process.env.AWS_REGION,
 });
 cloudFront.createInvalidation({
-    DistributionId: "E3IXY2ACIKURY1",
+    DistributionId: process.env.AWS_DISTRIBUTION_ID,
     InvalidationBatch: {
         CallerReference: `invalidate-${Date.now()}`,
         Paths: {
