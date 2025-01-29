@@ -167,7 +167,9 @@
         }
     });
     document.addEventListener("DOMContentLoaded", () => socketWatchDrawSet((payload) => {
-        if ('#edit' === window.location.hash) return;
+        if ('#edit' === window.location.hash) {
+            return;
+        }
         document.$drawPayload(payload);
     }));
     document.addEventListener("DOMContentLoaded", () => {
