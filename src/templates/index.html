@@ -62,13 +62,23 @@
                 {translateX: `${0 * vw}vw`, translateY: `${1 * vh}vh`},
             ];
             const {translateX, translateY} = translateValues[indexOf];
-            !document.documentElement.classList.contains('reduced-motion') && anime({
-                targets: 'main',
-                translateX: translateX,
-                translateY: translateY,
-                duration: 333,
-                easing: 'linear',
-            });
+            if(document.documentElement.classList.contains('reduced-motion')){
+                anime({
+                    targets: 'main',
+                    translateX: translateX,
+                    translateY: translateY,
+                    duration: 1,
+                    easing: 'linear',
+                });
+            }else{
+                anime({
+                    targets: 'main',
+                    translateX: translateX,
+                    translateY: translateY,
+                    duration: 333,
+                    easing: 'linear',
+                });
+            }
         }
     }));
     document.addEventListener("DOMContentLoaded", () => {
