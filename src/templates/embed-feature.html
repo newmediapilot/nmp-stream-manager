@@ -107,13 +107,13 @@
         console.log(`socketWatchStyle :: feature :: set ${style}`);
     }));
     document.addEventListener("DOMContentLoaded", () => socketWatchFeatureSet((payload) => {
-        if ('#edit' === window.location.hash) return;
         const urlParams = new URLSearchParams(window.location.search);
         const streamerQueryParam = urlParams.get('featuredName');
         const featuredName = payload.split(':').pop();
         if (streamerQueryParam !== featuredName) {
             window.location.href = (`${window.location.origin}${window.location.pathname}?featuredName=${payload.split(':').pop()}`);
         }else{
+            if ('#edit' === window.location.hash) return;
             window.location.href = (`${window.location.origin}${window.location.pathname}`);
         }
     }));
