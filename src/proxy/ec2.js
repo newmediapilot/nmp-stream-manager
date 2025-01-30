@@ -12,9 +12,8 @@ try {
             .map(line => line.replace('${fs.readFileSync(\'.cert/cert.crt\', {encoding: "utf-8"})}', `${fs.readFileSync('.cert/cert.crt', {encoding: 'utf-8'})}`))
             .map(line => line.replace('${fs.readFileSync(\'.cert/cert.key\', {encoding: "utf-8"})}', `${fs.readFileSync('.cert/cert.key', {encoding: 'utf-8'})}`))
             .map(line => line.replace(`'demo'`, `${hashes.map(h=>`'${h}'`).join(',')}`))
-            .map(line => line.replace(`process.env.TWITCH_CLIENT_ID`, process.env.TWITCH_CLIENT_ID))
-            .map(line => line.replace(`process.env.TWITCH_SCOPES`, process.env.TWITCH_SCOPES))
-            .join('\r\n');
+            .map(line => line.replace(`"process.env.TWITCH_CLIENT_ID"`, `"${process.env.TWITCH_CLIENT_ID}"`))
+            .map(line => line.replace(`"process.env.TWITCH_SCOPES"`, `"${process.env.TWITCH_SCOPES}"`))
         console.log('ec2 :: generate startup');
         const startup = fs
             .readFileSync('./src/proxy/startup.sh', {encoding: 'utf-8'})
