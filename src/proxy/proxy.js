@@ -44,22 +44,24 @@ const memorize = (req, key) => {
 [
     'demo',
 ].map(key => {
-    const redirect_uri = `https://api.dbdbdbdbdbgroup.com/${ROUTES.TWITCH_LOGIN_SUCCESS}`;
+    const redirect_uri = `https://api.dbdbdbdbdbgroup.com/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/`;
     const twitch_login_referrer = `https://dbdbdbdbdbgroup.com/${key}/index.html`;
     app.all(`/${key}${ROUTES.TWITCH_LOGIN}`, (req, res) => {
-        console.log(`proxy :: TWITCH_LOGIN`);
-        const TWITCH_SCOPES = "process.env.TWITCH_SCOPES";
-        const TWITCH_CLIENT_ID = "process.env.TWITCH_CLIENT_ID";
-        res.redirect(`https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code&scope=${TWITCH_SCOPES}`);
+        const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
+        const TWITCH_SCOPES = process.env.TWITCH_SCOPES;
+        console.log(`proxy :: TWITCH_LOGIN :: TWITCH_CLIENT_ID`, TWITCH_CLIENT_ID);
+        console.log(`proxy :: TWITCH_LOGIN :: TWITCH_SCOPES`, TWITCH_SCOPES);
+        const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code&scope=${TWITCH_SCOPES}`;
+        res.redirect(oauthUrl);
     });
     app.all(`${ROUTES.TWITCH_LOGIN_SUCCESS}`, (req, res) => {
         const code = req.query.code;
         memorize({
             ip: req.ip,
             method: 'GET',
-            url: `${ROUTES.TWITCH_LOGIN_SUCCESS}?code=${code}`,
+            url: `/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/?code=${code}`,
         }, key);
-        console.log(`proxy :: TWITCH_LOGIN_SUCCESS`);
+        console.log(`proxy :: TWITCH_LOGIN_SUCCESS`, code);
         res.redirect(twitch_login_referrer);
     });
     app.all(`/${key}${ROUTES.API_CONFIG_SET}`, (req, res) => {
