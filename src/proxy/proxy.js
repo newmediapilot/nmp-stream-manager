@@ -48,8 +48,8 @@ const memorize = (req, key) => {
     const twitch_login_referrer = `https://dbdbdbdbdbgroup.com/${key}/index.html`;
     app.all(`/${key}${ROUTES.TWITCH_LOGIN}`, (req, res) => {
         console.log(`proxy :: TWITCH_LOGIN`);
-        const TWITCH_SCOPES = `process.env.TWITCH_SCOPES`;
-        const TWITCH_CLIENT_ID = `process.env.TWITCH_CLIENT_ID`;
+        const TWITCH_SCOPES = "process.env.TWITCH_SCOPES";
+        const TWITCH_CLIENT_ID = "process.env.TWITCH_CLIENT_ID";
         res.redirect(`https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code&scope=${TWITCH_SCOPES}`);
     });
     app.all(`${ROUTES.TWITCH_LOGIN_SUCCESS}`, (req, res) => {
