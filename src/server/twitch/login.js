@@ -14,8 +14,6 @@ function twitchLogin(req, res) {
 async function twitchLoginSuccess(req, res) {
     resetSecrets();
     const code = req.query.code;
-    const twitch_login_referrer = req.query.twitch_login_referrer;
-    setParam("twitch_login_referrer", twitch_login_referrer);
     try {
         const response = await fetch(`https://id.twitch.tv/oauth2/token?client_id=${process.env.TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&code=${code}&grant_type=authorization_code&redirect_uri=${ROUTES.TWITCH_REDIRECT}`, {
             method: 'POST',
@@ -30,11 +28,6 @@ async function twitchLoginSuccess(req, res) {
         await getBroadcasterId();
         await getChannelId();
         await watchMessages();
-        const referrer = getParam("twitch_login_referrer");
-        if (referrer) {
-            setParam("twitch_login_referrer", undefined);
-            return res.redirect(referrer);
-        }
         return res.send("OAuth tokens retrieved successfully");
     } catch (error) {
         console.log(

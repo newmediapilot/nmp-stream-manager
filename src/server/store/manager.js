@@ -11,7 +11,6 @@ const allowedParams = [
     "twitch_access_token_set",
     "twitch_broadcaster_id_set",
     "twitch_channel_id_set",
-    "twitch_login_referrer",
     "twitch_refresh_token_set",
     "twitch_username",
 ];
