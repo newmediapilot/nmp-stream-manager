@@ -57,7 +57,7 @@ const memorize = (req, key) => {
         memorize({
             ip: req.ip,
             method: 'GET',
-            url: `/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/?code=${code}`,
+            url: `${ROUTES.TWITCH_LOGIN_SUCCESS}?code=${code}`,
         }, key);
         console.log(`proxy :: TWITCH_LOGIN_SUCCESS`);
         res.redirect(twitch_login_referrer);
