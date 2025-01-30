@@ -166,7 +166,9 @@
                 res.finally(_ => console.info("API_CONFIG_GET :: complete"));
             };
             socketWatchSyncDone(()=>{
-                fetchConfig();
+                setTimeout(()=>{
+                    fetchConfig();
+                }, 1000);
             });
             fetchConfig();
         });
