@@ -259,10 +259,18 @@
                     });
                 actions();
             };
-            const res = axios.get(getPath("API_CONFIG_GET"));
-            res.then((res) => processConfig(res.data));
-            res.catch((error) => console.log("API_CONFIG_GET :: error:", error.response.data));
-            res.finally(_ => console.info("API_CONFIG_GET :: complete"));
+            const fetchConfig = ()=>{
+                const res = axios.get(getPath("API_CONFIG_GET"));
+                res.then((res) => processConfig(res.data));
+                res.catch((error) => console.log("API_CONFIG_GET :: error:", error.response.data));
+                res.finally(_ => console.info("API_CONFIG_GET :: complete"));
+            };
+            socketWatchSyncDone(()=>{
+                setTimeout(()=>{
+                    fetchConfig();
+                }, 1000);
+            });
+            fetchConfig();
         });
         document.addEventListener("DOMContentLoaded", () => initHomeControls());
         document.addEventListener("DOMContentLoaded", () => scrollSnap(document.body.querySelector("body > section")));
