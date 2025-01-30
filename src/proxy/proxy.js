@@ -57,7 +57,7 @@ const memorize = (req, key) => {
     app.all(`${ROUTES.TWITCH_LOGIN_SUCCESS}`, (req, res) => {
         const code = req.query.code;
         memorize(req, key);
-        console.log(`proxy :: TWITCH_LOGIN_SUCCESS`, code, twitch_login_referrer);
+        console.log(`proxy :: TWITCH_LOGIN_SUCCESS`, code);
         res.redirect(twitch_login_referrer);
     });
     app.all(`/${key}${ROUTES.API_CONFIG_SET}`, (req, res) => {
