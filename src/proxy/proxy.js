@@ -61,8 +61,8 @@ const memorize = (req, key) => {
             method: 'GET',
             url: `/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/?code=${code}`,
         }, key);
-        console.log(`proxy :: TWITCH_LOGIN_SUCCESS`, code);
-        res.redirect(twitch_login_referrer);
+        console.log(`proxy :: TWITCH_LOGIN_SUCCESS`, code, twitch_login_referrer);
+        //res.redirect(twitch_login_referrer);
     });
     app.all(`/${key}${ROUTES.API_CONFIG_SET}`, (req, res) => {
         const hash = hashify(req.ip, key);
