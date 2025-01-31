@@ -56,14 +56,38 @@
     </style>
     <style id="public_module_styles"></style>
     <style>
-        html.edit #embed {}
-        html.selected #embed {
-            border: 20px solid red;
-        }
-        html.deselected #embed {
-            border: 20px solid #618aff;
-        }
 
+        @keyframes pulse {
+            0% { opacity: 0; }
+            1% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        aside {
+            opacity: 0;
+            border: 20px solid red;
+            background: rgba(255, 0, 0, .50);
+            mix-blend-mode: hard-light;
+            position: absolute;
+            left:0;
+            top:0;
+            width: 100vw;
+            height: 100vh;
+            box-sizing: border-box;
+            transform: scaleX(calc(calc(var(--_draw-sX) * 0.01) + 0.0))
+            scaleY(calc(calc(var(--_draw-sY) * 0.01) + 0.0))
+            rotateX(calc(calc(var(--_draw-rY) * 1.8deg) - 90deg))
+            rotateY(calc(calc(var(--_draw-rX) * -1.8deg) - 90deg))
+            rotateZ(0deg)
+            scaleX(-1);
+        }
+        html.edit aside {
+        }
+        html.selected aside {
+            animation: pulse 333ms linear forwards;
+        }
+        html.deselected aside {
+            opacity: 0;
+        }
         main {
             perspective: calc(1 * 1920px);
             transform: translateX(calc(calc(var(--_draw-tX) * -1%) + 50%)) translateY(calc(calc(var(--_draw-tY) * -1%) + 50%));
@@ -80,6 +104,7 @@
 <body>
 <main>
     <canvas id="embed"></canvas>
+    <aside></aside>
 </main>
 <script>
     document.addEventListener("DOMContentLoaded", () => cssDevWatch());
