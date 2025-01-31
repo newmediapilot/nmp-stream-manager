@@ -1,13 +1,13 @@
 const fetch = require("node-fetch");
 const {ROUTES} = require("../routes");
-const { getSecret, setSecret, getParam, setParam, resetSecrets} = require("../store/manager");
+const { getSecret, setSecret, getParam, resetSecrets} = require("../store/manager");
 const {watchMessages} = require("./stream");
+const redirectURI = `https://localhost${ROUTES.TWITCH_LOGIN_SUCCESS}`;
 function twitchLogin(req, res) {
     const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
     const TWITCH_SCOPES = process.env.TWITCH_SCOPES;
     console.log( "twitchLogin start...");
-    const redirectURI = `https://${getParam("device_ip")}${encodeURIComponent(ROUTES.TWITCH_LOGIN_SUCCESS)}`;
-    const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${redirectURI}&response_type=code&scope=${TWITCH_SCOPES}`;
+    const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectURI)}&response_type=code&scope=${TWITCH_SCOPES}`;
     console.log( "OAuth URL generated:", oauthUrl);
     res.redirect(oauthUrl);
 }
@@ -15,23 +15,23 @@ async function twitchLoginSuccess(req, res) {
     resetSecrets();
     const code = req.query.code;
     try {
-        const response = await fetch(`https://id.twitch.tv/oauth2/token?client_id=${process.env.TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&code=${code}&grant_type=authorization_code&redirect_uri=${ROUTES.TWITCH_REDIRECT}`, {
+        const url = `https://id.twitch.tv/oauth2/token?client_id=${process.env.TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&code=${code}&grant_type=authorization_code&redirect_uri=${encodeURIComponent(redirectURI)}`;
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
-        const accessToken = response.data.access_token;
-        const refreshToken = response.data.refresh_token;
-        setSecret("twitch_access_token", accessToken);
-        setSecret("twitch_refresh_token", refreshToken);
+        const json = await response.json();
+        setSecret("twitch_access_token", json.access_token);
+        setSecret("twitch_refresh_token", json.refresh_token);
         await getBroadcasterId();
         await getChannelId();
         await watchMessages();
         return res.send("OAuth tokens retrieved successfully");
     } catch (error) {
         console.log(
-            "Error exchanging code for tokens:",
+            "twitchLoginSuccess :: error",
             error.response?.data || error.message,
         );
         return res.send("Failed to get OAuth tokens");
