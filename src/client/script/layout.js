@@ -120,6 +120,17 @@ const setModes = () => {
         behavior: "smooth",
     });
     document.querySelector('article .controls').setAttribute('id', document.$modes[1]);
+    const radios = Array.from(document.querySelectorAll('.layers input[type=radio]'));
+    const checkedIndex = radios.findIndex(radio => radio.checked);
+    document.querySelectorAll('.preview iframe').forEach((iframe, index) => {
+        if (checkedIndex === index) {
+            iframe.contentDocument.documentElement.classList.remove('deselected');
+            iframe.contentDocument.documentElement.classList.add('selected');
+        } else {
+            iframe.contentDocument.documentElement.classList.remove('selected');
+            iframe.contentDocument.documentElement.classList.add('deselected');
+        }
+    })
 };
 const enableUndoButton = () => {
     document.querySelector('article .effects button:nth-of-type(1)').addEventListener('click', () => {
