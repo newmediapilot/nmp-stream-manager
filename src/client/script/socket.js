@@ -71,7 +71,6 @@ const socketWatchReload = () => {
     window.addEventListener('keydown', setFocusToken);
     window.addEventListener('keyup', setFocusToken);
     document.$socketIO.on("payload", (payload) => {
-        if ('#edit' === window.location.hash) return;
         if ("browser:reload" === payload) {
             !document.documentElement.classList.contains('socket-watch-reload-focus') && window.location.reload();
         }
