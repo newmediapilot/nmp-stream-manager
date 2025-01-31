@@ -57,6 +57,7 @@
         @keyframes pulse {
             0% { opacity: 0; }
             1% { opacity: 1; }
+            50% { opacity: 1; }
             100% { opacity: 0; }
         }
         aside {
@@ -80,7 +81,7 @@
         html.edit aside {
         }
         html.selected aside {
-            animation: pulse 333ms linear forwards;
+            animation: pulse 1s linear forwards;
         }
         html.deselected aside {
             opacity: 0;
