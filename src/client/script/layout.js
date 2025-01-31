@@ -120,10 +120,9 @@ const setModes = () => {
         behavior: "smooth",
     });
     document.querySelector('article .controls').setAttribute('id', document.$modes[1]);
-    const radios = Array.from(document.querySelectorAll('.layers input[type=radio]'));
-    const checkedIndex = radios.findIndex(radio => radio.checked);
-    document.querySelectorAll('.preview iframe').forEach((iframe, index) => {
-        if (checkedIndex === index) {
+    document.querySelectorAll('.preview iframe').forEach((iframe) => {
+        console.log(iframe.name, document.$modes[0]);
+        if (iframe.name === document.$modes[0]) {
             iframe.contentDocument.documentElement.classList.remove('deselected');
             iframe.contentDocument.documentElement.classList.add('selected');
         } else {
