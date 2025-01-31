@@ -6,7 +6,7 @@ const {configureNunjucks} = require("./nunjucks/environment");
 const {initializePublicConfigs} = require("./public/config");
 const {initializePublicStyles} = require("./public/style");
 const {initializeMedia} = require("./public/media");
-const {configureSocket} = require("./helper/socket");
+const {configureSocket, sendPayload} = require("./helper/socket");
 const {sendMedia, sendConfig, sendStyle} = require("./public/memory");
 const {ROUTES} = require("./routes");
 
@@ -29,7 +29,8 @@ const startServices = async (app) => {
         await sendStyle();
         initializeMedia();
         configureSocket();
-        execSync(`start "" "https://dbdbdbdbdbgroup.com/demo/index.html"`, {stdio: 'ignore'});
+        sendPayload("browser:reload");
+        // execSync(`start "" "https://dbdbdbdbdbgroup.com/demo/index.html"`, {stdio: 'ignore'});
     } catch (err) {
         console.log("startServices :: error initializing services:", err);
     }
