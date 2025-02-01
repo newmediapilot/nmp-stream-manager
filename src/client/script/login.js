@@ -4,8 +4,8 @@ function login() {
     const inputEl = dialogEl.querySelector('input[type=text]');
     buttonEl.addEventListener('click', () => {
         if (inputEl.value.length > 1) {
-            const url = `${getPath('TWITCH_LOGIN')}?username=${inputEl.value}`;
-            console.log('url', url);
+            const href = `${getPath('TWITCH_LOGIN')}?username=${inputEl.value}`;
+            window.location.href = href;
         }
     });
     inputEl.addEventListener('change', () => {
