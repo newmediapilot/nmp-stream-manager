@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 const {ROUTES} = require("../routes");
-const { getSecret, setSecret, getParam, resetSecrets} = require("../store/manager");
+const { getSecret, setSecret, getParam, setParam, resetSecrets} = require("../store/manager");
 const {watchMessages} = require("./stream");
 const redirectURI = `https://localhost${ROUTES.TWITCH_LOGIN_SUCCESS}`;
 function twitchLogin(req, res) {
@@ -14,6 +14,7 @@ function twitchLogin(req, res) {
 async function twitchLoginSuccess(req, res) {
     resetSecrets();
     const code = req.query.code;
+    const state = req.query.state;
     try {
         const url = `https://id.twitch.tv/oauth2/token?client_id=${process.env.TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&code=${code}&grant_type=authorization_code&redirect_uri=${encodeURIComponent(redirectURI)}`;
         const response = await fetch(url, {
@@ -23,6 +24,7 @@ async function twitchLoginSuccess(req, res) {
             }
         });
         const json = await response.json();
+        setParam("twitch_username", state);
         setSecret("twitch_access_token", json.access_token);
         setSecret("twitch_refresh_token", json.refresh_token);
         await getBroadcasterId();
@@ -52,8 +54,10 @@ async function getBroadcasterId() {
                 'Authorization': `Bearer ${accessToken}`
             }
         });
-        if (response.data.data && response.data.data.length > 0) {
-            const broadcasterId = response.data.data[0].id;
+        const json = await response.json();
+        console.log('getBroadcasterId :: json', json);
+        if (json.data && json.data.length > 0) {
+            const broadcasterId = json.data[0].id;
             console.log(
                 "Broadcaster ID fetched:",
                 String("X").repeat(broadcasterId.length),
@@ -80,8 +84,10 @@ async function getChannelId() {
                 'Authorization': `Bearer ${accessToken}`
             }
         });
-        if (response.data.data && response.data.data.length > 0) {
-            const channelId = response.data.data[0].login;
+        const json = await response.json();
+        console.log('getChannelId :: json', json);
+        if (json.data && json.data.length > 0) {
+            const channelId = json.data[0].login;
             console.log( "Channel ID fetched:", channelId);
             setSecret("twitch_channel_id", channelId);
             return channelId;
