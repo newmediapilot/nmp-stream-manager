@@ -49,9 +49,10 @@ const memorize = (req, key) => {
     app.all(`/${key}${ROUTES.TWITCH_LOGIN}`, (req, res) => {
         const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
         const TWITCH_SCOPES = process.env.TWITCH_SCOPES;
+        const TWITCH_USERNAME = req.query.username;
         console.log(`proxy :: TWITCH_LOGIN :: TWITCH_CLIENT_ID`, TWITCH_CLIENT_ID);
         console.log(`proxy :: TWITCH_LOGIN :: TWITCH_SCOPES`, TWITCH_SCOPES);
-        const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code&scope=${TWITCH_SCOPES}`;
+        const oauthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code&state=${TWITCH_USERNAME}&scope=${TWITCH_SCOPES}`;
         res.redirect(oauthUrl);
     });
     app.all(`${ROUTES.TWITCH_LOGIN_SUCCESS}`, (req, res) => {
