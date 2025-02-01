@@ -23,6 +23,7 @@
     <script src="../client/script/variables.js?" defer type="text/javascript"></script>
     <script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>
     <script src="../client/script/dashboard.js?" defer type="text/javascript"></script>
+    <script src="../client/script/login.js?" defer type="text/javascript"></script>
     <link href="../client/style/variables.css?" rel="stylesheet">
     <link href="../client/style/reset.css?" rel="stylesheet">
     <link href="../client/style/base.css?" rel="stylesheet">
@@ -52,7 +53,6 @@
 </head>
 <body>
 <section>
-
     <article class="empty">
         <button data-href="" disabled><label aria-label=""></label><label aria-label=""></label></button>
     </article>
@@ -183,8 +183,8 @@
     <button id="toggle-edit-dashboard-done" aria-label="Done"><em aria-label="✅"></em></button>
 </nav>
 <dialog id="login-dialog">
-    <h1>Enter Username:</h1>
-    <input type="text">
+    <h1>Enter Username</h1>
+    <input max="255" type="text">
     <button aria-label="Login"></button>
 </dialog>
 <dialog id="qr-dialog">
@@ -246,6 +246,7 @@
     });
     document.addEventListener("DOMContentLoaded", () => dashboardWatchResize());
     document.addEventListener("DOMContentLoaded", () => dashboard());
+    document.addEventListener("DOMContentLoaded", () => login());
     document.addEventListener("DOMContentLoaded", () => {
         setInterval(dashboardRotateHue, 10000);
         dashboardBlinkButtons();
