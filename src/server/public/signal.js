@@ -1,4 +1,5 @@
 const fs = require("fs");
+const prettier = require("prettier");
 const {execSync} = require("child_process");
 const {twitchMarkerCreate} = require("../twitch/marker");
 const {twitchMessageCreate} = require("../twitch/message");
@@ -52,10 +53,11 @@ async function publicSignalCreate(req, res) {
         }
         if ("dev:css:write" === type) {
             const {css, href} = JSON.parse(description);
-            const formatted = css;
             const path = "./src/client/style/" + href.split("/style/")[1].split('?').join('');
-            fs.writeFileSync(path, formatted, {encoding: 'utf-8'});
-            execSync(`prettier --config ./.prettierrc --write ${path}`);
+            fs.writeFileSync(path, css, {encoding: 'utf-8'});
+            prettier.format(css, {filepath: path, parser: "css"}).then(formatted => {
+                fs.writeFileSync(path, formatted, "utf8");
+            });
             result = 1;
         }
         if (!result) {
