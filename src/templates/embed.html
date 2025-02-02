@@ -81,7 +81,6 @@
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => editDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
-    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => {
         const edit = document.documentElement.classList.contains('edit') ? '#edit' : '';
         document.body.querySelectorAll('iframe')[0].src = `${getPath('PANEL_FEATURE_EMBED')}${edit}`;
