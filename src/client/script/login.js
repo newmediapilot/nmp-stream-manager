@@ -7,7 +7,11 @@ function login() {
         if (inputEl.value.length > 1) {
             const href = `${getPath('TWITCH_LOGIN')}?username=${inputEl.value}`;
             localStorage.setItem("username", inputEl.value);
-            window.location.href = href;
+            if (window.parent !== window) {
+                window.parent.location.href = href;
+            } else {
+                window.location.href = href;
+            }
         }
     });
     inputEl.addEventListener('change', () => {
