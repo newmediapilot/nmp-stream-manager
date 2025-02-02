@@ -50,6 +50,14 @@ const DASHBOARD_BUTTON_CONFIG = {
         },
         {
             emoji: "👉",
+            theme: "purple",
+            type: "mark",
+            description: "match:checkpoint",
+            label: "Ping",
+            visibility: "ON",
+        },
+        {
+            emoji: "👉",
             label: "Announce",
             theme: "green",
             type: "announce",
@@ -88,8 +96,6 @@ const DASHBOARD_BUTTON_CONFIG = {
             description: "b,audio,mp3,wav,webm",
             visibility: "ON",
         },
-        {type: "empty"},
-        {type: "empty"},
         {type: "empty"},
         {type: "empty"},
         {type: "empty"},
