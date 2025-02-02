@@ -164,6 +164,7 @@
                     }
                     if (queue.length) {
                         playback = queue.pop();
+                        document.$fillStyle = atob(playback.pop());
                         document.replayStart();
                     }
                 }, 5000)
