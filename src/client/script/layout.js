@@ -121,7 +121,6 @@ const setModes = () => {
     });
     document.querySelector('article .controls').setAttribute('id', document.$modes[1]);
     document.querySelectorAll('.preview iframe').forEach((iframe) => {
-        console.log(iframe.name, document.$modes[0]);
         if (iframe.name === document.$modes[0]) {
             iframe.contentDocument.documentElement.classList.remove('deselected');
             iframe.contentDocument.documentElement.classList.add('selected');
