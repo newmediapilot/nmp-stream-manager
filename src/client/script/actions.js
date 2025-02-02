@@ -36,7 +36,9 @@ const actionsCreateEmojis = (editorEl) => {
                                 value: el.getAttribute("aria-label"),
                             }),
                         },
-                    });
+                    }).finally(() => {
+                        socketEmitReload();
+                    })
                 });
             });
         }
@@ -100,7 +102,7 @@ const actionsCreateUpload = (editorEl) => {
         const url = `https://api.dbdbdbdbdbgroup.com/demo/media/${cells[0]}.${cells[2]}?${cells[1]}=${buster}`;
         console.log('toggleReplayState :: checking ::', url);
         axios.get(url).then(() => {
-                actionButton.disabled = false;
+            actionButton.disabled = false;
         }).catch(() => {
                 console.log('toggleReplayState :: no sound ::', url);
                 actionButton.disabled = true;
@@ -133,9 +135,7 @@ const actionsCreateUpload = (editorEl) => {
                             inputEl.focus();
                             setFocusToken();
                             console.log('actionsCreateUpload :: success:', response.data);
-                        }).catch(error => {
-                            console.error('actionsCreateUpload :: error:', error);
-                        }).finally(()=>{
+                        }).finally(() => {
                             socketEmitReload();
                         })
                     };
@@ -179,7 +179,7 @@ const actionsCreateUpload = (editorEl) => {
             "image" === type && displayMedia();
         });
     }
-    socketWatchSyncDone(()=>{
+    socketWatchSyncDone(() => {
         console.log('socketWatchSyncDone :: toggleReplayState');
         if (!!actionButton) {
             toggleReplayState();
@@ -219,11 +219,12 @@ const actionsToggle = (editorEl) => {
                     value: state,
                 }),
             },
-        }).then(() => {
+        }).catch(() => {
             updateButtons();
             toggleButton.setAttribute('aria-label', state);
         }).finally(() => {
             toggleButton.disabled = false;
+            socketEmitReload();
         });
     };
     toggleButton.addEventListener('click', sendToggleState);
