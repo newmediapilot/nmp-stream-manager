@@ -18,7 +18,7 @@ const draw = () => {
         payload.length && axios.get(getPath("API_SIGNAL_CREATE"), {
             params: {
                 type: "draw",
-                description: payload.join(','),
+                description: [...payload, btoa(document.$fillStyle)].join(','),
             },
         });
     };
