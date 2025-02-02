@@ -66,17 +66,18 @@ const actionsCreateEditor = (editorEl) => {
             const field = (textInputEl.tagName.toLowerCase() === 'input') ?
                 'label' :
                 'description';
-            axios
-                .get(getPath('API_CONFIG_UPDATE'), {
-                    params: {
-                        type: "signals:field",
-                        payload: JSON.stringify({
-                            id: editorEl.id,
-                            field,
-                            value: textInputEl.value,
-                        }),
-                    },
-                });
+            axios.get(getPath('API_CONFIG_UPDATE'), {
+                params: {
+                    type: "signals:field",
+                    payload: JSON.stringify({
+                        id: editorEl.id,
+                        field,
+                        value: textInputEl.value,
+                    }),
+                },
+            }).finally(() => {
+                socketEmitReload();
+            });
         }
         textInputEl.disabled = true;
         setTimeout(() => {
