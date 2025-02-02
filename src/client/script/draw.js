@@ -49,14 +49,14 @@ const draw = () => {
                     for (let i = 1; i <= steps; i++) {
                         const interpX = lastX + (x - lastX) * (i / steps);
                         const interpY = lastY + (y - lastY) * (i / steps);
-                        ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-blue').trim();
+                        ctx.fillStyle = document.$fillStyle;
                         ctx.beginPath();
                         ctx.arc(interpX, interpY, radius, 0, Math.PI * 2, false);
                         ctx.fill();
                     }
                 }
             }
-            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-blue').trim();
+            ctx.fillStyle = document.$fillStyle;
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, Math.PI * 2, false);
             ctx.fill();
@@ -94,7 +94,7 @@ const draw = () => {
                     }
                 }
             }
-            ctx.fillStyle = document.$fillStyle || "#4b4b4b";
+            ctx.fillStyle = "#919191";
             ctx.beginPath();
             ctx.arc(x, y, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
             ctx.fill();
