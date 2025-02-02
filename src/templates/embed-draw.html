@@ -166,8 +166,6 @@
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                     document.$drawing = false;
                     if ('#edit' === window.location.hash) {
-                        playback = [...replay];
-                        document.replayStart();
                         return;
                     }
                     if (queue.length) {
