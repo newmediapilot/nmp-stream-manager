@@ -27,9 +27,9 @@ const draw = () => {
         payload = [];
         if (buttonTimeout) clearTimeout(buttonTimeout);
         buttonTimeout = setTimeout(() => {
-            document.querySelector('button:nth-of-type(1)').disabled = true;
-            document.querySelector('button:nth-of-type(2)').disabled = true;
-            document.querySelector('button:nth-of-type(3)').disabled = true;
+            document.querySelector('button:nth-of-type(1)').disabled = false;
+            document.querySelector('button:nth-of-type(2)').disabled = false;
+            document.querySelector('button:nth-of-type(3)').disabled = false;
             document.querySelector('button:nth-of-type(4)').disabled = true;
             document.querySelector('button:nth-of-type(5)').disabled = false;
         }, 300);
@@ -39,7 +39,7 @@ const draw = () => {
         let lastY = null;
         return (x, y) => {
             const {value, max} = document.querySelector('[type=range]');
-            if(Number(value) >= Number(max)) {
+            if (Number(value) >= Number(max)) {
                 return;
             }
             const radius = pixelSize / 2;
@@ -94,7 +94,7 @@ const draw = () => {
                     }
                 }
             }
-            ctx.fillStyle = "#2fffa5";
+            ctx.fillStyle = document.$fillStyle || "#4b4b4b";
             ctx.beginPath();
             ctx.arc(x, y, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
             ctx.fill();
@@ -131,9 +131,6 @@ const draw = () => {
             e.pageY - top,
         )
     };
-    const toggleColour = (e) => {
-        console.log('toggleColour', e);
-    };
     document.querySelector('canvas').addEventListener("touchstart", (e) => touchStartMove(e), {passive: true});
     document.querySelector('canvas').addEventListener("touchmove", (e) => touchStartMove(e), {passive: true});
     document.querySelector('canvas').addEventListener("mousemove", (e) => mouseStartMove(e));
@@ -143,9 +140,16 @@ const draw = () => {
     document.querySelector('canvas').addEventListener("mouseup", () => {
         document.$mousedown = false;
     });
-    document.querySelector('section button:nth-of-type(1)').addEventListener('click', () => toggleColour());
-    document.querySelector('section button:nth-of-type(2)').addEventListener('click', () => toggleColour());
-    document.querySelector('section button:nth-of-type(3)').addEventListener('click', () => toggleColour());
+    [
+        document.querySelector('section button:nth-of-type(1)'),
+        document.querySelector('section button:nth-of-type(2)'),
+        document.querySelector('section button:nth-of-type(3)'),
+    ].forEach((button, index, array) => {
+        button.addEventListener('click', () => {
+            array.forEach(b => b.setAttribute('aria-label', (b === button) ? "🖍️️" : ""));
+            document.$fillStyle = window.getComputedStyle(button).backgroundColor;
+        });
+    });
     document.querySelector('section button:nth-of-type(4)').addEventListener('click', () => sendPayload());
     document.querySelector('section button:nth-of-type(5)').addEventListener('click', () => clearCanvas());
 };
