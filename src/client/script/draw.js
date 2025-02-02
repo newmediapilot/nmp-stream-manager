@@ -131,6 +131,6 @@ const draw = () => {
     document.querySelector('canvas').addEventListener("mouseup", () => {
         document.$mousedown = false;
     });
-    document.querySelector('section button:nth-of-type(1)').addEventListener('click', () => sendPayload());
-    document.querySelector('section button:nth-of-type(2)').addEventListener('click', () => clearCanvas());
+    document.querySelector('section button:nth-of-type(4)').addEventListener('click', () => sendPayload());
+    document.querySelector('section button:nth-of-type(5)').addEventListener('click', () => clearCanvas());
 };
