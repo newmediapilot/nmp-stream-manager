@@ -94,10 +94,25 @@ section button:nth-of-type(3) {
 
 section button:nth-of-type(4) {
     background: var(--color-bloodorange);
-    grid-area: 23 / 7 / 31 / 13;
+    grid-area: 27 / 1 / 31 / 3;
 }
 
 section button:nth-of-type(5) {
+    background: var(--color-pink);
+    grid-area: 27 / 3 / 31 / 5;
+}
+
+section button:nth-of-type(6) {
+    background: var(--color-aqua);
+    grid-area: 27 / 5 / 31 / 7;
+}
+
+section button:nth-of-type(7) {
+    background: var(--color-bloodorange);
+    grid-area: 23 / 7 / 31 / 13;
+}
+
+section button:nth-of-type(8) {
     background: var(--color-red);
     grid-area: 23 / 13 / 31 / 16;
 }
