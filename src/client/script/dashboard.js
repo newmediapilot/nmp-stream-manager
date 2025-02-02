@@ -47,16 +47,16 @@ const dashboard = () => {
                 type,
                 payload: JSON.stringify(payload),
             },
-        })
-            .finally(() => {
-                dashboardBlinkButtons();
-                dashboardFilterButtons(false);
-                containerEl.scrollTo({
-                    top: 0,
-                    left: 0,
-                    behavior: 'smooth'
-                });
+        }).finally(() => {
+            dashboardBlinkButtons();
+            dashboardFilterButtons(false);
+            containerEl.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
             });
+            socketEmitReload();
+        });
     });
     document.querySelectorAll('section article button').forEach((button) => {
         button.addEventListener('click', () => {
