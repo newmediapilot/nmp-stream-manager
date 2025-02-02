@@ -133,7 +133,31 @@ const enableUndoButton = () => {
         castLayoutInputValues();
     });
 };
+const enableDragDropCheckbox = () => {
+    const checkBoxEl = document.querySelectorAll('article .modes input[type=checkbox]')[0];
+    const containerEl = document.querySelector('article .layers');
+    const sortable = new Sortable(containerEl, {
+        swap: true,
+        animation: 333,
+        forceFallback: true,
+        removeCloneOnHide: true,
+        onEnd: (event) => {
+            //
+        }
+    });
+    checkBoxEl.addEventListener('change', () => {
+        console.log('enableDragDropCheckbox', checkBoxEl.checked);
+        if (checkBoxEl.checked) {
+            containerEl.classList.add("edit-active");
+        }else{
+            containerEl.classList.remove("edit-active");
+        }
+        sortable.option("disabled", checkBoxEl.checked);
+    });
+};
 const enableRadioButtons = () => {
+    document.querySelector('article .layers input[type=radio]:nth-of-type(1)').checked = true;
+    document.querySelector('article .modes input[type=radio]:nth-of-type(1)').checked = true;
     Array.from(
         [
             ...document.body.querySelectorAll('article .modes input'),
@@ -141,6 +165,5 @@ const enableRadioButtons = () => {
         ]
     ).forEach(input => input.addEventListener('change', setModes));
     enableUndoButton();
-    document.querySelector('article .layers input[type=radio]:nth-of-type(1)').checked = true;
-    document.querySelector('article .modes input[type=radio]:nth-of-type(1)').checked = true;
+    enableDragDropCheckbox();
 };
