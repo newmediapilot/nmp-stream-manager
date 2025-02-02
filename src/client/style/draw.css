@@ -78,23 +78,23 @@ section button:disabled {
 }
 
 section button:nth-of-type(1) {
-    background: var(--color-aqua);
-    grid-area: 23 / 1 / 31 / 4;
+    background: var(--color-red);
+    grid-area: 23 / 1 / 31 / 3;
 }
 
 section button:nth-of-type(2) {
-    background: var(--color-aqua);
-    grid-area: 23 / 4 / 31 / 7;
+    background: var(--color-green);
+    grid-area: 23 / 3 / 31 / 5;
 }
 
 section button:nth-of-type(3) {
-    background: var(--color-aqua);
-    grid-area: 23 / 7 / 31 / 10;
+    background: var(--color-blue);
+    grid-area: 23 / 5 / 31 / 7;
 }
 
 section button:nth-of-type(4) {
     background: var(--color-bloodorange);
-    grid-area: 23 / 10 / 31 / 13;
+    grid-area: 23 / 7 / 31 / 13;
 }
 
 section button:nth-of-type(5) {
