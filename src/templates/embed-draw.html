@@ -163,11 +163,11 @@
             const ctx = document.querySelector("canvas").getContext("2d");
             document.replayDone = () => {
                 setTimeout(() => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    document.$drawing = false;
                     if ('#edit' === window.location.hash) {
                         return;
                     }
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    document.$drawing = false;
                     if (queue.length) {
                         playback = queue.pop();
                         document.$fillStyle = atob(playback.pop());
