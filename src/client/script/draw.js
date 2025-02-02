@@ -145,6 +145,9 @@ const draw = () => {
         document.querySelector('section button:nth-of-type(2)'),
         document.querySelector('section button:nth-of-type(3)'),
     ].forEach((button, index, array) => {
+        if (0 === index) {
+            document.$fillStyle = window.getComputedStyle(button).backgroundColor;
+        }
         button.addEventListener('click', () => {
             array.forEach(b => b.setAttribute('aria-label', (b === button) ? "🖍️️" : ""));
             document.$fillStyle = window.getComputedStyle(button).backgroundColor;
