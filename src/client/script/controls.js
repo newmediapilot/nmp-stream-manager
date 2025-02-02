@@ -5,7 +5,6 @@ const initNavControls = () => {
     document.querySelector('nav button:nth-of-type(4)').addEventListener('click', () => document.body.querySelector('#qr-dialog').showModal());
     document.querySelector('nav button:nth-of-type(5)').addEventListener('click', () => {
         document.body.querySelector('#login-dialog').showModal();
-        // window.parent.location.href = getPath('TWITCH_LOGIN');
     });
     document.querySelector('nav button:nth-of-type(6)').addEventListener('click', () => window.parent.location.href = getPath('INDEX'));
     document.querySelector('nav button:nth-of-type(7)').addEventListener('click', () => window.parent.location.href = getPath('PANEL_DASHBOARD'));
