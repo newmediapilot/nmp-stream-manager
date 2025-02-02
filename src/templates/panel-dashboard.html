@@ -201,7 +201,7 @@
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => socketWatchReload());
     document.addEventListener("DOMContentLoaded", () => {
-        const processConfig = (signals) =>{
+        const processConfig = (signals) => {
             signals.forEach((signal, index) => {
                 const type = signal.type;
                 const {description, emoji, label, theme, visibility} = signal;
@@ -226,7 +226,7 @@
             dashboardSpinLabels();
             console.log('socketWatchConfig :: set');
         };
-        const fetchConfig = ()=>{
+        const fetchConfig = () => {
             const res = axios.get(getPath("API_CONFIG_GET"));
             res.then((res) => processConfig(res.data));
             res.catch((error) => console.log("API_CONFIG_GET :: error:", error.response.data));
@@ -248,7 +248,9 @@
     document.addEventListener("DOMContentLoaded", () => dashboard());
     document.addEventListener("DOMContentLoaded", () => login());
     document.addEventListener("DOMContentLoaded", () => {
-        setInterval(dashboardRotateHue, 10000);
+        setInterval(()=>{
+            dashboardRotateHue();
+        }, 10000);
         dashboardBlinkButtons();
         dashboardRotateHue();
     });
