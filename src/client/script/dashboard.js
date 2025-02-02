@@ -119,7 +119,7 @@ dashboardSpinLabels = () => {
         if (lblWidth < btnWidth) return;
         anime({
             targets: article.querySelector("label:nth-of-type(2)"),
-            duration: 18000,
+            duration: 14000,
             easing: 'easeInOutSine',
             delay: Math.random() * 1500,
             translateX: [`${0}px`, `-${(lblWidth / 2)}px`, `${0}px`],
