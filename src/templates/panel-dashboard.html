@@ -242,7 +242,7 @@
         document.body.querySelector("#qr-dialog canvas").getAttribute("data-url"),
     ));
     document.addEventListener("DOMContentLoaded", () => {
-        document.querySelector('dialog button:last-of-type').addEventListener('click', () => document.body.querySelector('#qr-dialog').close())
+        document.querySelector('#qr-dialog button:last-of-type').addEventListener('click', () => document.body.querySelector('#qr-dialog').close())
     });
     document.addEventListener("DOMContentLoaded", () => dashboardWatchResize());
     document.addEventListener("DOMContentLoaded", () => dashboard());
