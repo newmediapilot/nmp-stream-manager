@@ -149,6 +149,7 @@
             document.$drawing = true;
             const pixelSize = 20;
             let playback = queue.pop();
+            document.$fillStyle = atob(playback.pop());
             const replay = [...playback];
             const canvas = document.querySelector("canvas");
             const ctx = document.querySelector("canvas").getContext("2d");
