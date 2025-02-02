@@ -152,8 +152,9 @@ const enableDragDropCheckbox = () => {
         }else{
             containerEl.classList.remove("edit-active");
         }
-        sortable.option("disabled", checkBoxEl.checked);
+        sortable.option("disabled", !checkBoxEl.checked);
     });
+    sortable.option("disabled", !checkBoxEl.checked);
 };
 const enableRadioButtons = () => {
     document.querySelector('article .layers input[type=radio]:nth-of-type(1)').checked = true;
