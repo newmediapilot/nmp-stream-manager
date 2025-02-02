@@ -118,8 +118,7 @@ article .modes {
     background-size: 4px 4px;
 }
 
-article .modes label,
-article .modes button {
+article .modes label, article .modes button {
     position: relative;
     display: flex;
     justify-content: center;
@@ -150,20 +149,8 @@ article .modes label:nth-of-type(4) {
     grid-area: 1 / 4 / 1 / 5;
 }
 
-article .modes button:nth-of-type(1) {
-    grid-area: 2 / 1 / 2 / 2;
-}
-
-article .modes button:nth-of-type(2) {
-    grid-area: 2 / 2 / 3 / 1;
-}
-
-article .modes button:nth-of-type(3) {
-    grid-area: 3 / 1 / 4 / 2;
-}
-
-article .modes button:nth-of-type(4) {
-    grid-area: 4 / 1 / 5 / 2;
+article .modes label:nth-of-type(5) {
+    grid-area: 3 / 1 / 5 / 2;
 }
 
 article .modes input {
