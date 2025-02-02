@@ -73,12 +73,26 @@ const draw = () => {
     })();
     const replayStart = () => {
         if (Number(document.querySelector('[type=range]').value) > 0) {
-            const x = capture.shift();
-            const y = capture.shift();
-            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-aqua').trim();
+            const x = canvas.width * Number(capture.shift());
+            const y = canvas.height * Number(capture.shift());
+            if (document.$pXY) {
+                const [lastX, lastY] = document.$pXY;
+                if (Math.abs(lastX - x) < 100) {
+                    const steps = 10;
+                    for (let i = 1; i <= steps; i++) {
+                        const interpX = lastX + (x - lastX) * (i / steps);
+                        const interpY = lastY + (y - lastY) * (i / steps);
+                        ctx.beginPath();
+                        ctx.arc(interpX, interpY, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
+                        ctx.fill();
+                    }
+                }
+            }
+            ctx.fillStyle = "#2fffa5";
             ctx.beginPath();
             ctx.arc(x, y, (pixelSize * 1.25) / 2, 0, Math.PI * 2, false);
             ctx.fill();
+            document.$pXY = [x, y];
             document.querySelector('[type=range]').value = capture.length;
             document.querySelector('button:nth-of-type(1)').disabled = true;
             document.querySelector('button:nth-of-type(2)').disabled = true;
