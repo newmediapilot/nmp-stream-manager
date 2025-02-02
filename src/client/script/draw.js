@@ -72,12 +72,12 @@ const draw = () => {
             document.querySelector('[type=range]').value = capture.length;
             if (buttonTimeout) clearTimeout(buttonTimeout);
             buttonTimeout = setTimeout(() => {
-                document.querySelector('button:nth-of-type(1)').disabled = false;
-                document.querySelector('button:nth-of-type(2)').disabled = false;
-                document.querySelector('button:nth-of-type(3)').disabled = false;
-                document.querySelector('button:nth-of-type(4)').disabled = false;
-                document.querySelector('button:nth-of-type(5)').disabled = false;
-                document.querySelector('button:nth-of-type(6)').disabled = false;
+                document.querySelector('button:nth-of-type(1)').disabled = true;
+                document.querySelector('button:nth-of-type(2)').disabled = true;
+                document.querySelector('button:nth-of-type(3)').disabled = true;
+                document.querySelector('button:nth-of-type(4)').disabled = true;
+                document.querySelector('button:nth-of-type(5)').disabled = true;
+                document.querySelector('button:nth-of-type(6)').disabled = true;
                 document.querySelector('button:nth-of-type(7)').disabled = false;
                 document.querySelector('button:nth-of-type(8)').disabled = false;
             }, 300);
