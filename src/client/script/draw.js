@@ -30,8 +30,11 @@ const draw = () => {
             document.querySelector('button:nth-of-type(1)').disabled = false;
             document.querySelector('button:nth-of-type(2)').disabled = false;
             document.querySelector('button:nth-of-type(3)').disabled = false;
-            document.querySelector('button:nth-of-type(4)').disabled = true;
+            document.querySelector('button:nth-of-type(4)').disabled = false;
             document.querySelector('button:nth-of-type(5)').disabled = false;
+            document.querySelector('button:nth-of-type(6)').disabled = false;
+            document.querySelector('button:nth-of-type(7)').disabled = true;
+            document.querySelector('button:nth-of-type(8)').disabled = false;
         }, 300);
     };
     const drawPixel = (() => {
@@ -74,6 +77,9 @@ const draw = () => {
                 document.querySelector('button:nth-of-type(3)').disabled = false;
                 document.querySelector('button:nth-of-type(4)').disabled = false;
                 document.querySelector('button:nth-of-type(5)').disabled = false;
+                document.querySelector('button:nth-of-type(6)').disabled = false;
+                document.querySelector('button:nth-of-type(7)').disabled = false;
+                document.querySelector('button:nth-of-type(8)').disabled = false;
             }, 300);
         };
     })();
@@ -105,6 +111,9 @@ const draw = () => {
             document.querySelector('button:nth-of-type(3)').disabled = true;
             document.querySelector('button:nth-of-type(4)').disabled = true;
             document.querySelector('button:nth-of-type(5)').disabled = true;
+            document.querySelector('button:nth-of-type(6)').disabled = true;
+            document.querySelector('button:nth-of-type(7)').disabled = true;
+            document.querySelector('button:nth-of-type(8)').disabled = true;
             requestAnimationFrame(replayStart);
             document.querySelectorAll('[aria-label]').forEach(() => {
                 const {value, max} = document.querySelector('[type="range"]');
@@ -144,6 +153,9 @@ const draw = () => {
         document.querySelector('section button:nth-of-type(1)'),
         document.querySelector('section button:nth-of-type(2)'),
         document.querySelector('section button:nth-of-type(3)'),
+        document.querySelector('section button:nth-of-type(4)'),
+        document.querySelector('section button:nth-of-type(5)'),
+        document.querySelector('section button:nth-of-type(6)'),
     ].forEach((button, index, array) => {
         if (0 === index) {
             document.$fillStyle = window.getComputedStyle(button).backgroundColor;
@@ -153,6 +165,6 @@ const draw = () => {
             document.$fillStyle = window.getComputedStyle(button).backgroundColor;
         });
     });
-    document.querySelector('section button:nth-of-type(4)').addEventListener('click', () => sendPayload());
-    document.querySelector('section button:nth-of-type(5)').addEventListener('click', () => clearCanvas());
+    document.querySelector('section button:nth-of-type(7)').addEventListener('click', () => sendPayload());
+    document.querySelector('section button:nth-of-type(8)').addEventListener('click', () => clearCanvas());
 };
