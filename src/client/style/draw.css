@@ -73,16 +73,31 @@ section button::after {
     mix-blend-mode: multiply;
 }
 
-section button:nth-of-type(1):disabled, section button:nth-of-type(2):disabled, section button:nth-of-type(3):disabled {
+section button:disabled {
     opacity: 0.5;
 }
 
 section button:nth-of-type(1) {
     background: var(--color-aqua);
-    grid-area: 23 / 6 / 31 / 11;
+    grid-area: 23 / 1 / 31 / 4;
 }
 
 section button:nth-of-type(2) {
+    background: var(--color-aqua);
+    grid-area: 23 / 4 / 31 / 7;
+}
+
+section button:nth-of-type(3) {
+    background: var(--color-aqua);
+    grid-area: 23 / 7 / 31 / 10;
+}
+
+section button:nth-of-type(4) {
+    background: var(--color-bloodorange);
+    grid-area: 23 / 10 / 31 / 13;
+}
+
+section button:nth-of-type(5) {
     background: var(--color-red);
-    grid-area: 23 / 11 / 31 / 16;
+    grid-area: 23 / 13 / 31 / 16;
 }
