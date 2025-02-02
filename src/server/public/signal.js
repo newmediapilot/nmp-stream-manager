@@ -1,5 +1,14 @@
 const fs = require("fs");
 const prettier = require("prettier");
+const prettierConfig = {
+    "singleQuote": true,
+    "trailingComma": "none",
+    "tabWidth": 4,
+    "useTabs": false,
+    "semi": true,
+    "bracketSpacing": true,
+    "printWidth": 120
+};
 const {execSync} = require("child_process");
 const {twitchMarkerCreate} = require("../twitch/marker");
 const {twitchMessageCreate} = require("../twitch/message");
@@ -55,7 +64,7 @@ async function publicSignalCreate(req, res) {
             const {css, href} = JSON.parse(description);
             const path = "./src/client/style/" + href.split("/style/")[1].split('?').join('');
             fs.writeFileSync(path, css, {encoding: 'utf-8'});
-            prettier.format(css, {filepath: path, parser: "css"}).then(formatted => {
+            prettier.format(css, {...prettierConfig, filepath: path, parser: "css"}).then(formatted => {
                 fs.writeFileSync(path, formatted, "utf8");
             });
             result = 1;
