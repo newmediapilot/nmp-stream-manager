@@ -28,7 +28,10 @@ const draw = () => {
         if (buttonTimeout) clearTimeout(buttonTimeout);
         buttonTimeout = setTimeout(() => {
             document.querySelector('button:nth-of-type(1)').disabled = true;
-            document.querySelector('button:nth-of-type(2)').disabled = false;
+            document.querySelector('button:nth-of-type(2)').disabled = true;
+            document.querySelector('button:nth-of-type(3)').disabled = true;
+            document.querySelector('button:nth-of-type(4)').disabled = true;
+            document.querySelector('button:nth-of-type(5)').disabled = false;
         }, 300);
     };
     const drawPixel = (() => {
@@ -68,6 +71,9 @@ const draw = () => {
             buttonTimeout = setTimeout(() => {
                 document.querySelector('button:nth-of-type(1)').disabled = false;
                 document.querySelector('button:nth-of-type(2)').disabled = false;
+                document.querySelector('button:nth-of-type(3)').disabled = false;
+                document.querySelector('button:nth-of-type(4)').disabled = false;
+                document.querySelector('button:nth-of-type(5)').disabled = false;
             }, 300);
         };
     })();
@@ -96,6 +102,9 @@ const draw = () => {
             document.querySelector('[type=range]').value = capture.length;
             document.querySelector('button:nth-of-type(1)').disabled = true;
             document.querySelector('button:nth-of-type(2)').disabled = true;
+            document.querySelector('button:nth-of-type(3)').disabled = true;
+            document.querySelector('button:nth-of-type(4)').disabled = true;
+            document.querySelector('button:nth-of-type(5)').disabled = true;
             requestAnimationFrame(replayStart);
             document.querySelectorAll('[aria-label]').forEach(() => {
                 const {value, max} = document.querySelector('[type="range"]');
@@ -122,6 +131,9 @@ const draw = () => {
             e.pageY - top,
         )
     };
+    const toggleColour = (e) => {
+        console.log('toggleColour', e);
+    };
     document.querySelector('canvas').addEventListener("touchstart", (e) => touchStartMove(e), {passive: true});
     document.querySelector('canvas').addEventListener("touchmove", (e) => touchStartMove(e), {passive: true});
     document.querySelector('canvas').addEventListener("mousemove", (e) => mouseStartMove(e));
@@ -131,6 +143,9 @@ const draw = () => {
     document.querySelector('canvas').addEventListener("mouseup", () => {
         document.$mousedown = false;
     });
+    document.querySelector('section button:nth-of-type(1)').addEventListener('click', () => toggleColour());
+    document.querySelector('section button:nth-of-type(2)').addEventListener('click', () => toggleColour());
+    document.querySelector('section button:nth-of-type(3)').addEventListener('click', () => toggleColour());
     document.querySelector('section button:nth-of-type(4)').addEventListener('click', () => sendPayload());
     document.querySelector('section button:nth-of-type(5)').addEventListener('click', () => clearCanvas());
 };
