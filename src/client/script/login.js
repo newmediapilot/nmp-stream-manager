@@ -7,8 +7,8 @@ function login() {
         if (inputEl.value.length > 1) {
             const href = `${getPath('TWITCH_LOGIN')}?username=${inputEl.value}`;
             localStorage.setItem("username", inputEl.value);
-            if (window.parent !== window) {
-                window.parent.location.href = href;
+            if (window.self !== window.top) {
+                window.top.location.href = href;
             } else {
                 window.location.href = href;
             }
@@ -17,5 +17,5 @@ function login() {
     inputEl.addEventListener('change', () => {
         buttonEl.disabled = (inputEl.value.length === 0);
     });
-    buttonEl.disabled = true;
+    buttonEl.disabled = (inputEl.value.length === 0);
 }
