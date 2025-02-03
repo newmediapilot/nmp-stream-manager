@@ -1,6 +1,3 @@
-:root {
-    --controls-filter: 0;
-}
 nav {
     position: fixed;
     z-index: 1;
@@ -87,6 +84,7 @@ nav.controls button:nth-of-type(12) {
 nav.controls button:nth-of-type(13) {
     grid-area: 1 / 1 / 1 / 1;
 }
+
 nav.top button {
     grid-area: 6 / 1 / 7 / 2;
 }
