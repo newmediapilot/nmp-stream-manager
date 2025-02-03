@@ -37,8 +37,8 @@
     <style>
         :root {
             --_feat-layer: 0;
-            --_draw-layer: 1;
-            --_med-layer: 2
+            --_med-layer: 1;
+            --_draw-layer: 2;
         }
 
         iframe {
@@ -53,12 +53,12 @@
             z-index: var(--_feat-layer);
         }
 
-        iframe:nth-of-type(1) {
-            z-index: var(--_draw-layer);
+        iframe:nth-of-type(2) {
+            z-index: var(--_med-layer);
         }
 
-        iframe:nth-of-type(1) {
-            z-index: var(--_med-layer);
+        iframe:nth-of-type(3) {
+            z-index: var(--_draw-layer);
         }
 
         main {
@@ -68,13 +68,6 @@
         }
     </style>
     <style id="public_module_styles"></style>
-    <style>
-        :root {
-            --_feat-layer: 0;
-            --_feat-draw: 1;
-            --_feat-med: 2;
-        }
-    </style>
 </head>
 <body>
 <main>
@@ -107,7 +100,6 @@
         document.body.querySelectorAll('iframe')[0].src = `${getPath('PANEL_FEATURE_EMBED')}${edit}`;
         document.body.querySelectorAll('iframe')[1].src = `${getPath('PANEL_MEDIA_EMBED')}${edit}`;
         document.body.querySelectorAll('iframe')[2].src = `${getPath('PANEL_DRAW_EMBED')}${edit}`;
-        //
         document.body.querySelectorAll('iframe')[3].src = `${getPath('PANEL_SOUND_EMBED')}${edit}`;
     });
 </script>
