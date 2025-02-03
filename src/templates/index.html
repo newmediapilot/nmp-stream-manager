@@ -87,6 +87,24 @@
         document.body.querySelectorAll('iframe')[2].src = getPath('PANEL_ACTIONS');
         document.body.querySelectorAll('iframe')[3].src = getPath('PANEL_DRAW');
     });
+    document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(()=>{
+            anime({
+                targets: 'main',
+                scale: 1/3,
+                duration: 333,
+                easing: 'easeInOutQuad',
+            });
+        },2000);
+        setTimeout(()=>{
+            anime({
+                targets: 'main',
+                scale: 1,
+                duration: 333,
+                easing: 'easeInOutQuad',
+            });
+        },4000);
+    });
 </script>
 </body>
 </html>
