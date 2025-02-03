@@ -36,7 +36,11 @@ const castLayoutInputValues = () => {
     const payload = [
         ...Array.from(document.body.querySelectorAll('section .controls label input[type="range"]')).map(el => {
             return `${el.name}:${el.value}`;
-        })
+        }),
+        ...Array.from(document.body.querySelectorAll('section .layers div')).map((div, index) => {
+            const {name, id} = div.querySelector('input[type=radio]');
+            return `--${id}-${name}:${index}`;
+        }),
     ].join(";");
     document.head.querySelector('#public_module_styles').innerHTML = `:root{${payload};}`;
     payload && axios.get(getPath("API_SIGNAL_CREATE"), {
@@ -116,7 +120,7 @@ const setModes = () => {
             iframe.contentDocument.documentElement.classList.remove('selected');
             iframe.contentDocument.documentElement.classList.add('deselected');
         }
-    })
+    });
 };
 const enableUndoButton = () => {
     document.querySelector('article .effects button:nth-of-type(1)').addEventListener('click', () => {
@@ -141,15 +145,12 @@ const enableDragDropCheckbox = () => {
         animation: 333,
         forceFallback: true,
         removeCloneOnHide: true,
-        onEnd: (event) => {
-            //
-        }
+        onEnd: castLayoutInputValues
     });
     checkBoxEl.addEventListener('change', () => {
-        console.log('enableDragDropCheckbox', checkBoxEl.checked);
         if (checkBoxEl.checked) {
             containerEl.classList.add("edit-active");
-        }else{
+        } else {
             containerEl.classList.remove("edit-active");
         }
         sortable.option("disabled", !checkBoxEl.checked);
