@@ -96,6 +96,12 @@
                 scale: 1,
                 duration: document.documentElement.classList.contains('reduced-motion') ? 1 : 300,
                 easing: 'linear',
+                complete: ()=> {
+                    document.body.querySelectorAll('iframe')[0].style.display = 'flex';
+                    document.body.querySelectorAll('iframe')[1].style.display = 'flex';
+                    document.body.querySelectorAll('iframe')[2].style.display = 'flex';
+                    document.body.querySelectorAll('iframe')[3].style.display = 'flex';
+                }
             });
         }
     }));
