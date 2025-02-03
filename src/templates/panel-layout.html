@@ -181,12 +181,14 @@
         });
         document.addEventListener("DOMContentLoaded", () => {
             const processConfig = (signals) => {
+
                 const media = signals.filter(s => s.type === "media");
                 const feature = signals.filter(s => s.type === "feature");
 
-                document.querySelector('section article .layers label[for="_feat"]').setAttribute('aria-label', feature[0].label);
-                document.querySelector('section article .layers label[for="_med"]').setAttribute('aria-label', media[0].label);
-                document.querySelector('section article .layers label[for="_draw"]').setAttribute('aria-label', "draw");
+                document.querySelector('section article .layers div:nth-of-type(1) label').setAttribute('aria-label', feature[0].label);
+                document.querySelector('section article .layers div:nth-of-type(2) label').setAttribute('aria-label', media[0].label);
+                document.querySelector('section article .layers div:nth-of-type(3) label').setAttribute('aria-label', media[1].label);
+                document.querySelector('section article .layers div:nth-of-type(4) label').setAttribute('aria-label', "draw");
 
                 document.querySelector('iframe:nth-of-type(1)').src = `${getPath('PANEL_FEATURE_EMBED')}?featuredName=${feature[0].label}#edit`;
                 document.querySelector('iframe:nth-of-type(2)').src = `${getPath('PANEL_MEDIA_EMBED')}?featuredMedia=${media[0].description}#edit`;
