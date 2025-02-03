@@ -45,7 +45,7 @@ const DASHBOARD_BUTTON_CONFIG = {
             theme: "purple",
             type: "mark",
             description: "marker",
-            label: "Ping",
+            label: "Fight",
             visibility: "ON",
         },
         {
@@ -61,7 +61,7 @@ const DASHBOARD_BUTTON_CONFIG = {
             theme: "purple",
             type: "mark",
             description: "marker",
-            label: "Ping",
+            label: "Funny",
             visibility: "ON",
         },
         {
