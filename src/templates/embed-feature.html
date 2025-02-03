@@ -43,7 +43,6 @@
     </style>
     <style>
         :root {
-            --_med-lay: 0;
             --_feat-o: 100.0;
             --_feat-tX: 50.0;
             --_feat-tY: 50.0;
@@ -51,7 +50,7 @@
             --_feat-sY: 50.0;
             --_feat-rX: 50.0;
             --_feat-rY: 50.0;
-            --_feat-spin: 50.0;
+            --_feat-spin: 0;
         }
     </style>
     <style id="public_module_styles"></style>
@@ -77,7 +76,7 @@
             scaleY(calc(calc(var(--_feat-sY) * 0.01) + 0.0))
             rotateX(calc(calc(var(--_feat-rY) * 1.8deg) - 90deg))
             rotateY(calc(calc(var(--_feat-rX) * -1.8deg) - 90deg))
-            rotateZ(0deg)
+            rotateZ(calc(calc(var(--_feat-spin) * -1.8deg)))
             scaleX(-1);
         }
         html.edit aside {
@@ -100,7 +99,7 @@
             scaleY(calc(calc(var(--_feat-sY) * 0.01) + 0.0))
             rotateX(calc(calc(var(--_feat-rY) * 1.8deg) - 90deg))
             rotateY(calc(calc(var(--_feat-rX) * -1.8deg) - 90deg))
-            rotateZ(0deg)
+            rotateZ(calc(calc(var(--_feat-spin) * -1.8deg)))
             scaleX(-1);
         }
     </style>
