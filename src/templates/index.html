@@ -59,11 +59,20 @@
         if (payload.startsWith('browser:route:')) {
             document.$currentPath = payload.split('browser:route:')[1];
             if (document.$currentPath === 'world') {
+                document.body.querySelectorAll('iframe')[0].style.display = 'none';
+                document.body.querySelectorAll('iframe')[2].style.display = 'none';
+                document.body.querySelectorAll('iframe')[3].style.display = 'none';
                 anime({
                     targets: 'main, aside',
                     scale: 1 / 3.1,
-                    duration: document.documentElement.classList.contains('reduced-motion') ? 1 : 900,
+                    duration: document.documentElement.classList.contains('reduced-motion') ? 1 : 300,
                     easing: 'easeInOutQuad',
+                    complete: ()=> {
+                        document.body.querySelectorAll('iframe')[0].style.display = 'flex';
+                        document.body.querySelectorAll('iframe')[1].style.display = 'flex';
+                        document.body.querySelectorAll('iframe')[2].style.display = 'flex';
+                        document.body.querySelectorAll('iframe')[3].style.display = 'flex';
+                    }
                 });
                 enableWorldNav();
                 return;
@@ -85,7 +94,7 @@
                 translateX: translateX,
                 translateY: translateY,
                 scale: 1,
-                duration: document.documentElement.classList.contains('reduced-motion') ? 1 : 600,
+                duration: document.documentElement.classList.contains('reduced-motion') ? 1 : 300,
                 easing: 'linear',
             });
         }
@@ -95,6 +104,9 @@
         document.body.querySelectorAll('iframe')[1].src = getPath('PANEL_DASHBOARD');
         document.body.querySelectorAll('iframe')[2].src = getPath('PANEL_ACTIONS');
         document.body.querySelectorAll('iframe')[3].src = getPath('PANEL_DRAW');
+        document.body.querySelectorAll('iframe')[0].style.display = 'none';
+        document.body.querySelectorAll('iframe')[2].style.display = 'none';
+        document.body.querySelectorAll('iframe')[3].style.display = 'none';
         configureWorldNav();
     });
 </script>
