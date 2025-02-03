@@ -31,6 +31,7 @@ article .preview {
         40px 70px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 5px 5px inset;
     grid-area: 1 / 1 / 19 / 33;
+    z-index: 100;
 }
 article .preview iframe {
     transform-origin: left top;
@@ -139,7 +140,7 @@ article .modes label:nth-of-type(4) {
     grid-area: 1 / 4 / 1 / 5;
 }
 article .modes label:nth-of-type(5) {
-    grid-area: 3 / 1 / 2 / 3;
+    grid-area: 3 / 1 / 2 / 2;
 }
 article .modes label:nth-of-type(6) {
     grid-area: 3 / 1 / 5 / 3;
