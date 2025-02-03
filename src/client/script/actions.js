@@ -180,12 +180,6 @@ const actionsCreateUpload = (editorEl) => {
             "image" === type && displayMedia();
         });
     }
-    socketWatchSyncDone(() => {
-        console.log('socketWatchSyncDone :: toggleReplayState');
-        if (!!actionButton) {
-            toggleReplayState();
-        }
-    });
 };
 
 const actionsToggle = (editorEl) => {
