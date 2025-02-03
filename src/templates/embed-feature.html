@@ -137,6 +137,7 @@
         console.log(`socketWatchStyle :: feature :: set ${style}`);
     }));
     document.addEventListener("DOMContentLoaded", () => socketWatchFeatureSet((payload) => {
+        if ('#edit' === window.location.hash) return;
         const urlParams = new URLSearchParams(window.location.search);
         const streamerQueryParam = urlParams.get('featuredName');
         const featuredName = payload.split(':').pop();
