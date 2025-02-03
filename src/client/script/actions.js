@@ -77,12 +77,12 @@ const actionsCreateEditor = (editorEl) => {
                 },
             }).finally(() => {
                 socketEmitReload();
+                textInputEl.disabled = true;
+                setTimeout(() => {
+                    textInputEl.disabled = false;
+                }, 1000);
             });
         }
-        textInputEl.disabled = true;
-        setTimeout(() => {
-            textInputEl.disabled = false;
-        }, 1000);
     };
     textInputEls.forEach((textInputEl) => {
         textInputEl.addEventListener("focus", ({target}) => textInputElFocus(target));
