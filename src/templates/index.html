@@ -58,15 +58,14 @@
     document.addEventListener("DOMContentLoaded", () => socketWatchRoute((payload) => {
         if (payload.startsWith('browser:route:')) {
             document.$currentPath = payload.split('browser:route:')[1];
-            if (!document.$previousPath || (document.$previousPath === document.$currentPath)) {
+            if (document.$currentPath === 'world') {
                 anime({
                     targets: 'main, aside',
                     scale: 1 / 3.1,
                     duration: document.documentElement.classList.contains('reduced-motion') ? 1 : 900,
-                    easing: 'easeInOutQuad'
+                    easing: 'easeInOutQuad',
                 });
                 enableWorldNav();
-                document.$previousPath = document.$currentPath;
                 return;
             }
             const iframeEl = Array.from(document.body.querySelectorAll(`iframe[src="${document.$currentPath}"]`))[0];
@@ -80,7 +79,6 @@
                 {translateX: `${1 * vw}vw`, translateY: `${0 * vh}vh`},
                 {translateX: `${0 * vw}vw`, translateY: `${1 * vh}vh`},
             ];
-            document.$previousPath = document.$currentPath;
             const {translateX, translateY} = translateValues[indexOf];
             anime({
                 targets: 'main',
