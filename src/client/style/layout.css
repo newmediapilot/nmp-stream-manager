@@ -47,7 +47,7 @@ article .layers {
     grid-template-rows: auto;
     background-image: radial-gradient(circle, var(--color-deepyellow), var(--color-bloodorange));
     background-size: 4px 4px;
-    grid-area: 19 / 1 / 26 / 7;
+    grid-area: 19 / 1 / 26 / 9;
 }
 article .layers label {
     position: relative;
@@ -74,12 +74,12 @@ article .effects {
     background-image: radial-gradient(circle, var(--color-deepyellow), var(--color-bloodorange));
     background-position: right center;
     background-size: 4px 4px;
-    grid-area: 19 / 17 / 23 / 19;
+    grid-area: 19 / 17 / 26 / 19;
     grid-template-rows: auto;
     display: grid;
 }
 article .effects button:nth-of-type(1) {
-    border-width: 7px;
+    border-width: 4px;
     border-style: solid;
     border-color: rgb(255, 195, 0) rgb(247, 127, 0) rgb(255, 100, 0) rgb(255, 195, 0);
     background: var(--color-orange);
@@ -92,7 +92,7 @@ article .effects button:nth-of-type(1) {
     align-items: center;
 }
 article .effects button:nth-of-type(2) {
-    border-width: 7px;
+    border-width: 4px;
     border-style: solid;
     border-color: rgb(255, 195, 0) rgb(247, 127, 0) rgb(255, 100, 0) rgb(255, 195, 0);
     background: var(--color-orange);
@@ -106,7 +106,7 @@ article .modes {
     display: grid;
     width: 100%;
     overflow: hidden;
-    grid-area: 19 / 7 / 26 / 13;
+    grid-area: 19 / 9 / 26 / 17;
     grid-template-rows: repeat(4, 25%);
     background-image: radial-gradient(circle, var(--color-deepyellow), var(--color-bloodorange));
     background-position: right center;
@@ -154,7 +154,7 @@ article .modes input:checked + * {
 article .controls {
     position: relative;
     overflow: hidden;
-    border-width: 7px;
+    border-width: 4px;
     border-style: solid;
     border-color: rgb(255, 195, 0) rgb(247, 127, 0) rgb(255, 100, 0) rgb(255, 195, 0);
     background: var(--color-orange);
