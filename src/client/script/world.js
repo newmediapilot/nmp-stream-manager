@@ -6,9 +6,6 @@ const configureWorldNav = () => {
         button.addEventListener('click', () => {
             const iframe = document.querySelector('main').children[index];
             axios.get(`${getPath("API_SIGNAL_CREATE")}?type=browser&description=route:${iframe.src.split('/').pop()}`);
-            document.body.querySelectorAll('iframe').forEach((iframe, i) => {
-                iframe.style.display = i === index ? 'flex' : 'none';
-            });
             document.querySelector('aside').style.visibility = 'hidden';
         });
     });
