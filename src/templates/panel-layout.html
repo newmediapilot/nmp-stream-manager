@@ -198,7 +198,7 @@
         document.addEventListener("DOMContentLoaded", () => {
             const updateTransform = () => {
                 const {width} = document.querySelector('.preview').getBoundingClientRect();
-                document.querySelectorAll('iframe').forEach(iframe =>{
+                document.querySelectorAll('iframe').forEach(iframe => {
                     iframe.style.transform = `scale(${width / 1920})`;
                 });
             };
