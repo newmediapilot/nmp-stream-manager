@@ -26,7 +26,7 @@ body {
     overflow-y: hidden;
     background-color: #101010;
     opacity: 1;
-    background-image:  linear-gradient(30deg, #000000 12%, transparent 12.5%, transparent 87%, #000000 87.5%, #000000), linear-gradient(150deg, #000000 12%, transparent 12.5%, transparent 87%, #000000 87.5%, #000000), linear-gradient(30deg, #000000 12%, transparent 12.5%, transparent 87%, #000000 87.5%, #000000), linear-gradient(150deg, #000000 12%, transparent 12.5%, transparent 87%, #000000 87.5%, #000000), linear-gradient(60deg, #00000077 25%, transparent 25.5%, transparent 75%, #00000077 75%, #00000077), linear-gradient(60deg, #00000077 25%, transparent 25.5%, transparent 75%, #00000077 75%, #00000077);
+    background-image: linear-gradient(30deg, #000000 12%, transparent 12.5%, transparent 87%, #000000 87.5%, #000000), linear-gradient(150deg, #000000 12%, transparent 12.5%, transparent 87%, #000000 87.5%, #000000), linear-gradient(30deg, #000000 12%, transparent 12.5%, transparent 87%, #000000 87.5%, #000000), linear-gradient(150deg, #000000 12%, transparent 12.5%, transparent 87%, #000000 87.5%, #000000), linear-gradient(60deg, #00000077 25%, transparent 25.5%, transparent 75%, #00000077 75%, #00000077), linear-gradient(60deg, #00000077 25%, transparent 25.5%, transparent 75%, #00000077 75%, #00000077);
     background-size: 80px 140px;
     background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
 }
@@ -60,6 +60,56 @@ main iframe:nth-of-type(3) {
 }
 
 main iframe:nth-of-type(4) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+aside {
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    position: fixed;
+    display: grid;
+    visibility: hidden;
+    grid-gap: 0;
+    grid-template-columns: repeat(3, var(--index-grid-cell-width));
+    grid-template-rows: repeat(3, var(--index-grid-cell-height));
+    width: calc(var(--index-grid-cell-width) * 3);
+    height: calc(var(--index-grid-cell-height) * 3);
+    left: calc(0vw - var(--index-grid-cell-width));
+    top: calc(0vh - var(--index-grid-cell-height));
+}
+
+aside button {
+    background: rgba(255, 0, 0, 0.25);
+    width: var(--index-grid-cell-width);
+    height: var(--index-grid-cell-height);
+}
+
+aside button:nth-of-type(1) {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+aside button:nth-of-type(2) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+aside button:nth-of-type(3) {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+aside button:nth-of-type(4) {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
