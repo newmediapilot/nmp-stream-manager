@@ -60,8 +60,7 @@ const actionsCreateEditor = (editorEl) => {
     const textInputElBlur = (textInputEl) => {
         if (
             textInputEl.$value !== textInputEl.value &&
-            textInputEl.value.trim().length > 2 &&
-            textInputEl.value.trim().length <= 25
+            textInputEl.value.trim().length > 2
         ) {
             const field = (textInputEl.tagName.toLowerCase() === 'input') ?
                 'label' :
