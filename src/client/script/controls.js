@@ -9,6 +9,9 @@ const initNavControls = () => {
     document.querySelector('nav button:nth-of-type(6)').addEventListener('click', () => window.parent.location.href = getPath('INDEX'));
     document.querySelector('nav button:nth-of-type(7)').addEventListener('click', () => window.parent.location.href = getPath('PANEL_DASHBOARD'));
     document.querySelector('nav button:nth-of-type(8)').addEventListener('click', () => socketEmitReload());
+    document.querySelector('nav button:nth-of-type(11)').addEventListener('click', () => {
+        getURL(getPath('PANEL_DASHBOARD'));
+    });
 };
 const initHomeControls = () => {
     document.querySelector('nav button').addEventListener('click', () => getURL(getPath('PANEL_DASHBOARD')));
