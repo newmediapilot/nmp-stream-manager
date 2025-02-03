@@ -1,16 +1,12 @@
 const enableWorldNav = () => {
     document.querySelector('aside').style.visibility = 'visible';
 };
-const disableWorldNav = () => {
-    document.querySelector('aside').style.visibility = 'hidden';
-};
 const configureWorldNav = () => {
     document.querySelectorAll('aside button').forEach((button, index) => {
-        const {src} = document.querySelector('main').children[index];
-        console.log('src', src);
+        button.addEventListener('click', () => {
+            const iframe = document.querySelector('main').children[index];
+            axios.get(`${getPath("API_SIGNAL_CREATE")}?type=browser&description=route:${iframe.src.split('/').pop()}`);
+            document.querySelector('aside').style.visibility = 'hidden';
+        });
     });
-};
-const navigateWorld = (e) => {
-    console.log(e.target);
-    disableWorldNav();
 };
