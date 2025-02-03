@@ -1,7 +1,6 @@
 :root {
     --controls-filter: 0;
 }
-
 nav {
     position: fixed;
     z-index: 1;
@@ -14,7 +13,6 @@ nav {
     top: 0px;
     pointer-events: none;
 }
-
 nav button {
     background: var(--color-light);
     display: flex;
@@ -26,14 +24,13 @@ nav button {
     justify-content: center;
     align-items: center;
 }
-
 nav.controls {
     top: 0px;
     left: 0px;
     overflow: hidden;
 }
-
-nav.controls button::before, nav.controls button span::before {
+nav.controls button::before,
+nav.controls button span::before {
     display: inline-block;
     visibility: hidden;
     width: 0px;
@@ -41,87 +38,76 @@ nav.controls button::before, nav.controls button span::before {
     line-height: 0;
     opacity: 0;
 }
-
-html.edit-active nav.controls button:nth-of-type(1), html.edit-active nav.controls button:nth-of-type(2), html.edit-active nav.controls button:nth-of-type(3), html.edit-active nav.controls button:nth-of-type(4), html.edit-active nav.controls button:nth-of-type(5), html.edit-active nav.controls button:nth-of-type(6), html.edit-active nav.controls button:nth-of-type(7), html.edit-active nav.controls button:nth-of-type(8) {
+html.edit-active nav.controls button:nth-of-type(1),
+html.edit-active nav.controls button:nth-of-type(2),
+html.edit-active nav.controls button:nth-of-type(3),
+html.edit-active nav.controls button:nth-of-type(4),
+html.edit-active nav.controls button:nth-of-type(5),
+html.edit-active nav.controls button:nth-of-type(6),
+html.edit-active nav.controls button:nth-of-type(7),
+html.edit-active nav.controls button:nth-of-type(8) {
     display: none;
 }
-
 nav.controls button:nth-of-type(1) {
-    grid-area: 10 / 6 / 11 / 7;
+    grid-area: 8 / 6 / 11 / 7;
 }
-
 nav.controls button:nth-of-type(2) {
     grid-area: 10 / 7 / 11 / 8;
 }
-
 nav.controls button:nth-of-type(3) {
-    grid-area: 10 / 5 / 11 / 6;
+    grid-area: 8 / 5 / 9 / 6;
 }
-
 nav.controls button:nth-of-type(4) {
     grid-area: 11 / 5 / 12 / 6;
 }
-
 nav.controls button:nth-of-type(5) {
     grid-area: 11 / 7 / 12 / 8;
 }
-
 nav.controls button:nth-of-type(6) {
     grid-area: 11 / 8 / 12 / 9;
 }
-
 nav.controls button:nth-of-type(7) {
     grid-area: 11 / 4 / 12 / 5;
 }
-
 nav.controls button:nth-of-type(8) {
     grid-area: 10 / 4 / 11 / 5;
 }
-
 nav.controls button:nth-of-type(9) {
-    grid-area: 11 / 6 / 12 / 7;
-}
-
-nav.controls button:nth-of-type(10) {
-    grid-area: 11 / 6 / 12 / 7;
-}
-
-nav.controls button:nth-of-type(11) {
     grid-area: 10 / 8 / 11 / 9;
 }
-
+nav.controls button:nth-of-type(10) {
+    grid-area: 10 / 6 / 11 / 7;
+}
+nav.controls button:nth-of-type(11) {
+    grid-area: 11 / 6 / 12 / 7;
+}
 nav.controls button:nth-of-type(12) {
     grid-area: 11 / 6 / 12 / 7;
 }
-
+nav.controls button:nth-of-type(13) {
+    grid-area: 1 / 1 / 1 / 1;
+}
 nav.top button {
     grid-area: 6 / 1 / 7 / 2;
 }
-
 nav.top button::before {
-    content: "⬆";
+    content: '⬆';
 }
-
 nav.right button {
     grid-area: 6 / 11 / 7 / 12;
 }
-
 nav.right button::before {
-    content: "➡";
+    content: '➡';
 }
-
 nav.left button {
     grid-area: 6 / 1 / 7 / 2;
 }
-
 nav.left button::before {
-    content: "⬅";
+    content: '⬅';
 }
-
 nav.bottom button {
     grid-area: 11 / 6 / 12 / 7;
 }
-
 nav.bottom button::before {
-    content: "⬇";
+    content: '⬇';
 }
