@@ -68,13 +68,19 @@
         }
     </style>
     <style id="public_module_styles"></style>
+    <style>
+        :root {
+            --_feat-layer: 0;
+            --_feat-draw: 1;
+            --_feat-med: 2;
+        }
+    </style>
 </head>
 <body>
 <main>
-    <iframe></iframe>
-    <iframe></iframe>
-    <iframe></iframe>
-    <iframe></iframe>
+    <iframe style="z-index: var(--_feat-layer)"></iframe>
+    <iframe style="z-index: var(--_med-layer)"></iframe>
+    <iframe style="z-index: var(--_draw-layer)"></iframe>
 </main>
 <script>
     document.addEventListener("DOMContentLoaded", () => cssDevWatch());
@@ -99,8 +105,9 @@
     document.addEventListener("DOMContentLoaded", () => {
         const edit = document.documentElement.classList.contains('edit') ? '#edit' : '';
         document.body.querySelectorAll('iframe')[0].src = `${getPath('PANEL_FEATURE_EMBED')}${edit}`;
-        document.body.querySelectorAll('iframe')[1].src = `${getPath('PANEL_DRAW_EMBED')}${edit}`;
-        document.body.querySelectorAll('iframe')[2].src = `${getPath('PANEL_MEDIA_EMBED')}${edit}`;
+        document.body.querySelectorAll('iframe')[1].src = `${getPath('PANEL_MEDIA_EMBED')}${edit}`;
+        document.body.querySelectorAll('iframe')[2].src = `${getPath('PANEL_DRAW_EMBED')}${edit}`;
+        //
         document.body.querySelectorAll('iframe')[3].src = `${getPath('PANEL_SOUND_EMBED')}${edit}`;
     });
 </script>
