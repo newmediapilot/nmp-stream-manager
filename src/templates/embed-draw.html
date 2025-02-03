@@ -45,7 +45,6 @@
     </style>
     <style>
         :root {
-            --_med-lay: 0;
             --_draw-o: 100.0;
             --_draw-tX: 50.0;
             --_draw-tY: 50.0;
@@ -53,7 +52,7 @@
             --_draw-sY: 50.0;
             --_draw-rX: 50.0;
             --_draw-rY: 50.0;
-            --_draw-spin: 50.0;
+            --_draw-spin: 0;
         }
     </style>
     <style id="public_module_styles"></style>
@@ -84,7 +83,12 @@
             width: 100vw;
             height: 100vh;
             box-sizing: border-box;
-            transform: scaleX(calc(calc(var(--_draw-sX) * 0.01) + 0.0)) scaleY(calc(calc(var(--_draw-sY) * 0.01) + 0.0)) rotateX(calc(calc(var(--_draw-rY) * 1.8deg) - 90deg)) rotateY(calc(calc(var(--_draw-rX) * -1.8deg) - 90deg)) rotateZ(0deg) scaleX(-1);
+            transform: scaleX(calc(calc(var(--_draw-sX) * 0.01) + 0.0))
+            scaleY(calc(calc(var(--_draw-sY) * 0.01) + 0.0))
+            rotateX(calc(calc(var(--_draw-rY) * 1.8deg) - 90deg))
+            rotateY(calc(calc(var(--_draw-rX) * -1.8deg) - 90deg))
+            rotateZ(calc(calc(var(--_draw-spin) * -1.8deg)))
+            scaleX(-1);
         }
 
         html.edit aside {
@@ -107,7 +111,12 @@
             box-sizing: border-box;
             object-fit: scale-down;
             opacity: calc(var(--_draw-o) / 100);
-            transform: scaleX(calc(calc(var(--_draw-sX) * 0.01) + 0.0)) scaleY(calc(calc(var(--_draw-sY) * 0.01) + 0.0)) rotateX(calc(calc(var(--_draw-rY) * 1.8deg) - 90deg)) rotateY(calc(calc(var(--_draw-rX) * -1.8deg) - 90deg)) rotateZ(0deg) scaleX(-1);
+            transform: scaleX(calc(calc(var(--_draw-sX) * 0.01) + 0.0))
+            scaleY(calc(calc(var(--_draw-sY) * 0.01) + 0.0))
+            rotateX(calc(calc(var(--_draw-rY) * 1.8deg) - 90deg))
+            rotateY(calc(calc(var(--_draw-rX) * -1.8deg) - 90deg))
+            rotateZ(calc(calc(var(--_draw-spin) * -1.8deg)))
+            scaleX(-1);
         }
     </style>
 </head>
