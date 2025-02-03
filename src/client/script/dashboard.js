@@ -15,6 +15,7 @@ const dashboard = () => {
         },
     });
     sortable.option("disabled", true);
+    document.querySelector('nav #toggle-edit-dashboard-done').style.display = 'none';
     document.querySelector('nav #toggle-edit-dashboard-edit').addEventListener("click", () => {
         document.querySelectorAll('nav button').forEach(button => button.style.display = 'none');
         document.querySelector('nav #toggle-edit-dashboard-done').style.display = 'flex';
@@ -22,7 +23,8 @@ const dashboard = () => {
         sortable.option("disabled", false);
     });
     document.querySelector('nav #toggle-edit-dashboard-done').addEventListener("click", () => {
-        document.querySelectorAll('nav button').forEach(button => button.style.display = 'none');
+        document.querySelectorAll('nav button').forEach(button => button.style.display = 'flex');
+        document.querySelector('nav #toggle-edit-dashboard-done').style.display = 'none';
         notifyEl.classList.remove("edit-active");
         sortable.option("disabled", true);
         axios.get(getPath('API_CONFIG_UPDATE'), {
