@@ -82,6 +82,21 @@
     document.addEventListener("DOMContentLoaded", () => editDetect());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
     document.addEventListener("DOMContentLoaded", () => {
+        const processStyle = (style) => {
+            document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
+            console.log(`processStyle :: set ${style}`);
+        };
+        const res = axios.get(getPath("API_STYLE_GET"));
+        res.then((res) => processStyle(res.data));
+        res.catch((error) => console.log("API_STYLE_GET :: error:", error.response.data));
+        res.finally(_ => console.info("API_STYLE_GET :: complete"));
+    });
+    document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
+        let style = payload.split('style:set:')[1];
+        document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
+        console.log(`socketWatchStyle :: draw :: set ${style}`);
+    }));
+    document.addEventListener("DOMContentLoaded", () => {
         const edit = document.documentElement.classList.contains('edit') ? '#edit' : '';
         document.body.querySelectorAll('iframe')[0].src = `${getPath('PANEL_FEATURE_EMBED')}${edit}`;
         document.body.querySelectorAll('iframe')[1].src = `${getPath('PANEL_DRAW_EMBED')}${edit}`;
