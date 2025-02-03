@@ -47,21 +47,23 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => reducedMotion());
     document.addEventListener("DOMContentLoaded", () => socketConnect());
-    document.addEventListener("DOMContentLoaded", () => socketWatchRoute((payload)=>{
-        if (payload.startsWith('browser:world')) {
-            anime({
-                targets: 'main',
-                scale: 1 / 3.1,
-                duration: 600,
-                easing: 'easeInOutQuad',
-            });
-            return;
-        }
-        if(payload.startsWith('browser:route:')){
-            const currentPath =  payload.split('browser:route:')[1];
-            const iframeEl = Array.from(document.body.querySelectorAll(`iframe[src="${currentPath}"]`))[0];
+    document.addEventListener("DOMContentLoaded", () => socketWatchRoute((payload) => {
+        if (payload.startsWith('browser:route:')) {
+            document.$currentPath = payload.split('browser:route:')[1];
+            console.log(document.$previousPath , document.$currentPath);
+            if (!document.$previousPath || (document.$previousPath === document.$currentPath)) {
+                anime({
+                    targets: 'main',
+                    scale: 1 / 3.1,
+                    duration: 900,
+                    easing: 'easeInOutQuad',
+                });
+                document.$previousPath = document.$currentPath;
+                return;
+            }
+            const iframeEl = Array.from(document.body.querySelectorAll(`iframe[src="${document.$currentPath}"]`))[0];
             const indexOf = Array.from(document.body.querySelectorAll("iframe")).indexOf(iframeEl);
-            if(indexOf === -1) return;
+            if (indexOf === -1) return;
             const vw = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-width'));
             const vh = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--index-grid-cell-height'));
             const translateValues = [
@@ -70,8 +72,9 @@
                 {translateX: `${1 * vw}vw`, translateY: `${0 * vh}vh`},
                 {translateX: `${0 * vw}vw`, translateY: `${1 * vh}vh`},
             ];
+            document.$previousPath = document.$currentPath;
             const {translateX, translateY} = translateValues[indexOf];
-            if(document.documentElement.classList.contains('reduced-motion')){
+            if (document.documentElement.classList.contains('reduced-motion')) {
                 anime({
                     targets: 'main',
                     translateX: translateX,
@@ -80,7 +83,7 @@
                     duration: 1,
                     easing: 'linear',
                 });
-            }else{
+            } else {
                 anime({
                     targets: 'main',
                     translateX: translateX,
