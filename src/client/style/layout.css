@@ -139,6 +139,9 @@ article .modes label:nth-of-type(4) {
     grid-area: 1 / 4 / 1 / 5;
 }
 article .modes label:nth-of-type(5) {
+    grid-area: 3 / 1 / 2 / 3;
+}
+article .modes label:nth-of-type(6) {
     grid-area: 3 / 1 / 5 / 3;
 }
 article .modes input {
