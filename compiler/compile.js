@@ -1,6 +1,8 @@
 const {execSync} = require('child_process');
 const fs = require('fs');
 const hash = process.argv[2] || 'demo';
+execSync('rm -rf .compiled');
+execSync('rm -rf .package');
 execSync('npm run reset');
 fs.mkdirSync('.compiled');
 execSync('cp -r ./src .compiled/src');
