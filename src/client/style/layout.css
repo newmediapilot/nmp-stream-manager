@@ -2,7 +2,6 @@
     --cell-density-X: 4vw;
     --cell-density-Y: 4vh;
 }
-
 section {
     overflow: hidden;
     position: relative;
@@ -10,14 +9,12 @@ section {
     padding: 0px;
     background: repeating-linear-gradient(-45deg, rgb(0, 0, 0), rgb(19, 19, 19) 15px);
 }
-
 article {
     display: grid;
     overflow: visible;
     grid-template-columns: repeat(25, calc(4vw));
     grid-template-rows: repeat(25, calc(4vh));
 }
-
 article .preview {
     position: relative;
     overflow: hidden;
@@ -25,17 +22,17 @@ article .preview {
     height: 100%;
     background-color: rgba(255, 255, 255, 0.3);
     opacity: 0.8;
-    background-position: 0px 0px,
-    0px 0px,
-    40px 70px,
-    40px 70px,
-    0px 0px,
-    40px 70px;
+    background-position:
+        0px 0px,
+        0px 0px,
+        40px 70px,
+        40px 70px,
+        0px 0px,
+        40px 70px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 5px 5px inset;
-    grid-area: 2 / 2 / 18 / 25;
+    grid-area: 1 / 2 / 19 / 25;
     z-index: 100;
 }
-
 article .preview iframe {
     transform-origin: left top;
     pointer-events: none;
@@ -45,7 +42,6 @@ article .preview iframe {
     left: 0px;
     top: 0px;
 }
-
 article .layers {
     display: grid;
     grid-template-rows: auto;
@@ -53,7 +49,6 @@ article .layers {
     background-size: 4px 4px;
     grid-area: 19 / 1 / 26 / 9;
 }
-
 article .layers label {
     position: relative;
     display: flex;
@@ -68,19 +63,52 @@ article .layers label {
     background: var(--color-orange);
     box-sizing: border-box;
 }
-
 article .layers input {
     display: none;
 }
-
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
 article .layers div input:checked + label {
     background: linear-gradient(45deg, var(--color-aqua), var(--color-light));
 }
-
 article .layers.edit-active div input + label {
-    background: linear-gradient(45deg, var(--color-aqua), var(--color-light));
+    background-image:;
+    background-position-x:;
+    background-position-y:;
+    background-repeat:;
+    background-attachment:;
+    background-origin:;
+    background-clip:;
+    background-color:;
+    background-size: 200% 200%;
 }
-
+article .layers.edit-active div:nth-of-type(1) input + label {
+    animation: 2600ms linear 0s infinite normal none running gradientShift;
+}
+article .layers.edit-active div:nth-of-type(2) input + label {
+    animation: 2700ms linear 0s infinite normal none running gradientShift;
+}
+article .layers.edit-active div:nth-of-type(3) input + label {
+    animation: 2800ms linear 0s infinite normal none running gradientShift;
+}
+article .layers.edit-active div:nth-of-type(4) input + label {
+    animation: 2900ms linear 0s infinite normal none running gradientShift;
+}
+article .layers.edit-active div:nth-of-type(5) input + label {
+    animation: 3000ms linear 0s infinite normal none running gradientShift;
+}
+article .layers.edit-active div:nth-of-type(6) input + label {
+    animation: 3100ms linear 0s infinite normal none running gradientShift;
+}
 article .effects {
     overflow: hidden;
     background-image: radial-gradient(circle, var(--color-deepyellow), var(--color-bloodorange));
@@ -90,7 +118,6 @@ article .effects {
     grid-template-rows: auto;
     display: grid;
 }
-
 article .effects button:nth-of-type(1) {
     border-width: 4px;
     border-style: solid;
@@ -104,7 +131,6 @@ article .effects button:nth-of-type(1) {
     justify-content: center;
     align-items: center;
 }
-
 article .effects button:nth-of-type(2) {
     border-width: 4px;
     border-style: solid;
@@ -116,7 +142,6 @@ article .effects button:nth-of-type(2) {
     justify-content: center;
     align-items: center;
 }
-
 article .modes {
     display: grid;
     width: 100%;
@@ -127,7 +152,6 @@ article .modes {
     background-position: right center;
     background-size: 4px 4px;
 }
-
 article .modes label,
 article .modes button {
     position: relative;
@@ -143,39 +167,30 @@ article .modes button {
     background: var(--color-orange);
     box-sizing: border-box;
 }
-
 article .modes label:nth-of-type(1) {
     grid-area: 1 / 1 / 1 / 1;
 }
-
 article .modes label:nth-of-type(2) {
     grid-area: 1 / 2 / 1 / 3;
 }
-
 article .modes label:nth-of-type(3) {
     grid-area: 1 / 3 / 1 / 4;
 }
-
 article .modes label:nth-of-type(4) {
     grid-area: 1 / 4 / 1 / 5;
 }
-
 article .modes label:nth-of-type(5) {
     grid-area: 3 / 1 / 2 / 2;
 }
-
 article .modes label:nth-of-type(6) {
     grid-area: 3 / 1 / 5 / 3;
 }
-
 article .modes input {
     display: none;
 }
-
 article .modes input:checked + * {
     background: linear-gradient(45deg, var(--color-aqua), var(--color-light));
 }
-
 article .controls {
     position: relative;
     overflow: hidden;
@@ -186,7 +201,6 @@ article .controls {
     box-sizing: border-box;
     grid-area: 19 / 19 / 26 / 26;
 }
-
 article .controls label {
     overflow: scroll;
     position: relative;
@@ -195,7 +209,6 @@ article .controls label {
     height: 100%;
     background: none;
 }
-
 article .controls label::after {
     content: '';
     display: block;
@@ -203,52 +216,45 @@ article .controls label::after {
     height: 200%;
     background-blend-mode: revert-layer;
 }
-
 article .controls[id='opacity'] label::after {
     background-image: repeating-linear-gradient(transparent 0px, rgb(0, 0, 0) 27px);
 }
-
 article .controls[id='translate'] label::after {
     background-image: repeating-radial-gradient(
-            circle,
-            rgb(0, 0, 0),
-            rgb(0, 0, 0),
-            17px,
-            transparent 34px,
-            transparent 17px
+        circle,
+        rgb(0, 0, 0),
+        rgb(0, 0, 0),
+        17px,
+        transparent 34px,
+        transparent 17px
     );
 }
-
 article .controls[id='scale'] label::after {
     background-image: repeating-radial-gradient(
-            circle,
-            rgb(0, 0, 0),
-            rgb(0, 0, 0),
-            40px,
-            transparent 80px,
-            transparent 40px
+        circle,
+        rgb(0, 0, 0),
+        rgb(0, 0, 0),
+        40px,
+        transparent 80px,
+        transparent 40px
     );
 }
-
 article .controls[id='rotate'] label::after {
     background-image: repeating-radial-gradient(
-            circle,
-            rgb(0, 0, 0),
-            rgb(0, 0, 0),
-            4px,
-            transparent 8px,
-            transparent 4px
+        circle,
+        rgb(0, 0, 0),
+        rgb(0, 0, 0),
+        4px,
+        transparent 8px,
+        transparent 4px
     );
 }
-
 article .controls[id='pivot'] label::after {
     background-image: repeating-linear-gradient(transparent 0px, rgb(0, 0, 0) 27px);
 }
-
 article input::-webkit-slider-thumb {
     appearance: none;
 }
-
 article .controls label input {
     display: none;
 }
