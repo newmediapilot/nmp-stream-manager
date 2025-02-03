@@ -48,7 +48,6 @@
     </style>
     <style>
         :root {
-            --_med-lay: 0;
             --_med-o: 100.0;
             --_med-tX: 50.0;
             --_med-tY: 50.0;
@@ -56,7 +55,7 @@
             --_med-sY: 50.0;
             --_med-rX: 50.0;
             --_med-rY: 50.0;
-            --_med-spin: 50.0;
+            --_med-spin: 0;
         }
     </style>
     <style id="public_module_styles"></style>
@@ -82,7 +81,7 @@
             scaleY(calc(calc(var(--_med-sY) * 0.01) + 0.0))
             rotateX(calc(calc(var(--_med-rY) * 1.8deg) - 90deg))
             rotateY(calc(calc(var(--_med-rX) * -1.8deg) - 90deg))
-            rotateZ(0deg)
+            rotateZ(calc(calc(var(--_med-spin) * -1.8deg)))
             scaleX(-1);
         }
         html.edit aside {
@@ -95,13 +94,19 @@
         }
         main {
             perspective: calc(1 * 1920px);
-            transform: translateX(calc(calc(var(--_med-tX) * -1%) + 50%)) translateY(calc(calc(var(--_med-tY) * -1%) + 50%))
+            transform: translateX(calc(calc(var(--_med-tX) * -1%) + 50%))
+            translateY(calc(calc(var(--_med-tY) * -1%) + 50%))
         }
 
         #embed {
             box-sizing: border-box;
             opacity: calc(var(--_med-o) / 100);
-            transform: scaleX(calc(calc(var(--_med-sX) * 0.01) + 0.0)) scaleY(calc(calc(var(--_med-sY) * 0.01) + 0.0)) rotateX(calc(calc(var(--_med-rY) * 1.8deg) - 90deg)) rotateY(calc(calc(var(--_med-rX) * -1.8deg) - 90deg)) rotateZ(0deg) scaleX(-1);
+            transform: scaleX(calc(calc(var(--_med-sX) * 0.01) + 0.0))
+            scaleY(calc(calc(var(--_med-sY) * 0.01) + 0.0))
+            rotateX(calc(calc(var(--_med-rY) * 1.8deg) - 90deg))
+            rotateY(calc(calc(var(--_med-rX) * -1.8deg) - 90deg))
+            rotateZ(calc(calc(var(--_med-spin) * -1.8deg)))
+            scaleX(-1);
         }
     </style>
 </head>
