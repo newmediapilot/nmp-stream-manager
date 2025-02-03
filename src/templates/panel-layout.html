@@ -56,6 +56,7 @@
             <div class="preview">
                 <iframe style="z-index: var(--_feat-layer)" name="_feat" width="1920" height="1080" src="{{public_routes.PANEL_FEATURE_EMBED}}#edit"></iframe>
                 <iframe style="z-index: var(--_med-layer)" name="_med" width="1920" height="1080" src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
+                <iframe style="z-index: var(--_med-layer)" name="_med" width="1920" height="1080" src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
                 <iframe style="z-index: var(--_draw-layer)" name="_draw" width="1920" height="1080" src="{{public_routes.PANEL_DRAW_EMBED}}#edit"></iframe>
             </div>
             <div class="layers">
@@ -180,13 +181,17 @@
         });
         document.addEventListener("DOMContentLoaded", () => {
             const processConfig = (signals) => {
-                const media = signals.filter(s => s.type === "media")[0];
-                const feature = signals.filter(s => s.type === "feature")[0];
-                document.querySelector('section article .layers label[for="_feat"]').setAttribute('aria-label', feature.label);
-                document.querySelector('section article .layers label[for="_med"]').setAttribute('aria-label', media.label);
+                const media = signals.filter(s => s.type === "media");
+                const feature = signals.filter(s => s.type === "feature");
+
+                document.querySelector('section article .layers label[for="_feat"]').setAttribute('aria-label', feature[0].label);
+                document.querySelector('section article .layers label[for="_med"]').setAttribute('aria-label', media[0].label);
                 document.querySelector('section article .layers label[for="_draw"]').setAttribute('aria-label', "draw");
-                document.querySelector('iframe:nth-of-type(1)').src = `${getPath('PANEL_FEATURE_EMBED')}?featuredName=${feature.label}#edit`;
-                document.querySelector('iframe:nth-of-type(2)').src = `${getPath('PANEL_MEDIA_EMBED')}?featuredMedia=${media.description}#edit`;
+
+                document.querySelector('iframe:nth-of-type(1)').src = `${getPath('PANEL_FEATURE_EMBED')}?featuredName=${feature[0].label}#edit`;
+                document.querySelector('iframe:nth-of-type(2)').src = `${getPath('PANEL_MEDIA_EMBED')}?featuredMedia=${media[0].description}#edit`;
+                document.querySelector('iframe:nth-of-type(3)').src = `${getPath('PANEL_MEDIA_EMBED')}?featuredMedia=${media[1].description}#edit`;
+
                 console.log('socketWatchConfig :: set', signals);
             };
             const fetchConfig = ()=>{
