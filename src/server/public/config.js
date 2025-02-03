@@ -44,7 +44,7 @@ const DASHBOARD_BUTTON_CONFIG = {
             emoji: "👉",
             theme: "purple",
             type: "mark",
-            description: "match:checkpoint",
+            description: "marker",
             label: "Ping",
             visibility: "ON",
         },
@@ -52,7 +52,15 @@ const DASHBOARD_BUTTON_CONFIG = {
             emoji: "👉",
             theme: "purple",
             type: "mark",
-            description: "match:checkpoint",
+            description: "marker",
+            label: "Ping",
+            visibility: "ON",
+        },
+        {
+            emoji: "👉",
+            theme: "purple",
+            type: "mark",
+            description: "marker",
             label: "Ping",
             visibility: "ON",
         },
@@ -82,6 +90,14 @@ const DASHBOARD_BUTTON_CONFIG = {
         },
         {
             emoji: "👉",
+            label: "MediaC",
+            theme: "blue",
+            type: "media",
+            description: "c,image,jpeg,gif,png,webp,bmp",
+            visibility: "ON",
+        },
+        {
+            emoji: "👉",
             label: "SoundA",
             theme: "red",
             type: "sound",
@@ -96,9 +112,14 @@ const DASHBOARD_BUTTON_CONFIG = {
             description: "b,audio,mp3,wav,webm",
             visibility: "ON",
         },
-        {type: "empty"},
-        {type: "empty"},
-        {type: "empty"},
+        {
+            emoji: "👉",
+            label: "SoundC",
+            theme: "red",
+            type: "sound",
+            description: "c,audio,mp3,wav,webm",
+            visibility: "ON",
+        },
         {type: "empty"},
         {type: "empty"},
         {type: "empty"},
@@ -122,6 +143,7 @@ const DASHBOARD_BUTTON_CONFIG = {
         {type: "empty"},
     ],
 };
+console.log('DASHBOARD_BUTTON_CONFIG.signals.length ::', DASHBOARD_BUTTON_CONFIG.signals.length);
 const fs = require("fs");
 const {sendConfig} = require("../public/memory");
 const {setParam, getParam} = require("../store/manager");
