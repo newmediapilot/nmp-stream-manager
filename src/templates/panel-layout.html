@@ -54,21 +54,21 @@
     <section>
         <article>
             <div class="preview">
-                <iframe name="_feat" width="1920" height="1080" src="{{public_routes.PANEL_FEATURE_EMBED}}#edit"></iframe>
-                <iframe name="_med" width="1920" height="1080" src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
-                <iframe name="_draw" width="1920" height="1080" src="{{public_routes.PANEL_DRAW_EMBED}}#edit"></iframe>
+                <iframe style="z-index: var(--_feat-layer)" name="_feat" width="1920" height="1080" src="{{public_routes.PANEL_FEATURE_EMBED}}#edit"></iframe>
+                <iframe style="z-index: var(--_med-layer)" name="_med" width="1920" height="1080" src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
+                <iframe style="z-index: var(--_draw-layer)" name="_draw" width="1920" height="1080" src="{{public_routes.PANEL_DRAW_EMBED}}#edit"></iframe>
             </div>
             <div class="layers">
                 <div>
-                    <input type="radio" name="layers" id="_feat"/>
+                    <input type="radio" name="layer" id="_feat"/>
                     <label for="_feat" aria-label="..."></label>
                 </div>
                 <div>
-                    <input type="radio" name="layers" id="_draw"/>
+                    <input type="radio" name="layer" id="_draw"/>
                     <label for="_draw" aria-label="..."></label>
                 </div>
                 <div>
-                    <input type="radio" name="layers" id="_med"/>
+                    <input type="radio" name="layer" id="_med"/>
                     <label for="_med" aria-label="..."></label>
                 </div>
             </div>
