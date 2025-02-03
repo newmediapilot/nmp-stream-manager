@@ -208,7 +208,7 @@ article .controls[id='rotate'] label::after {
         transparent 4px
     );
 }
-article .controls[id='spin'] label::after {
+article .controls[id='pivot'] label::after {
     background-image: repeating-linear-gradient(transparent 0px, rgb(0, 0, 0) 27px);
 }
 article input::-webkit-slider-thumb {
