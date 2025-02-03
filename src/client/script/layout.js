@@ -18,7 +18,7 @@ const castLayoutInputValues = () => {
     const label = document.body.querySelector('.controls label');
     const {scrollWidth, scrollHeight} = label;
     const [layer, property] = document.$modes;
-    const [inputX, inputY, inputZ] = Array.from(label.children)
+    const [inputX, inputY] = Array.from(label.children)
         .filter(input => input.name.includes(layer))
         .filter(input => {
             const prop = input.name.split('-').pop().substr(0, 1);
@@ -29,9 +29,6 @@ const castLayoutInputValues = () => {
     inputY.value = (Math.abs(inputY.max) * py);
     inputX.setAttribute("value", (Math.abs(inputX.max) * px));
     inputY.setAttribute("value", (Math.abs(inputY.max) * py));
-    if (inputZ) {
-        console.log('inputZ', inputZ);
-    }
     label.setAttribute('data-px-py', [px, py, label.scrollLeft, scrollWidth, label.scrollHeight, scrollHeight].join(' '));
     const payload = [
         ...Array.from(document.body.querySelectorAll('section .controls label input[type="range"]')).map(el => {
