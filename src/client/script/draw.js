@@ -46,8 +46,8 @@ const draw = () => {
                 return;
             }
             const radius = pixelSize / 2;
-            if (Math.abs(lastX - x) < 100) {
-                const steps = 30;
+            if (Math.abs(lastX - x) < 10) {
+                const steps = 150;
                 if (lastX !== null && lastY !== null) {
                     for (let i = 1; i <= steps; i++) {
                         const interpX = lastX + (x - lastX) * (i / steps);
