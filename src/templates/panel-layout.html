@@ -54,11 +54,9 @@
     <section>
         <article>
             <div class="preview">
-                <iframe style="z-index: var(--_feat-layer)" name="_feat" width="1920" height="1080" src="{{public_routes.PANEL_FEATURE_EMBED}}#edit"></iframe>
-                <iframe style="z-index: var(--_med-layer)" name="_med" width="1920" height="1080" src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
-                <iframe style="z-index: var(--_med-layer)" name="_med" width="1920" height="1080" src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
-                <iframe style="z-index: var(--_med-layer)" name="_med" width="1920" height="1080" src="{{public_routes.PANEL_MEDIA_EMBED}}#edit"></iframe>
-                <iframe style="z-index: var(--_draw-layer)" name="_draw" width="1920" height="1080" src="{{public_routes.PANEL_DRAW_EMBED}}#edit"></iframe>
+                <iframe style="z-index: var(--_feat-layer)" name="_feat" width="1920" height="1080"></iframe>
+                <iframe style="z-index: var(--_med-layer)" name="_med" width="1920" height="1080"></iframe>
+                <iframe style="z-index: var(--_draw-layer)" name="_draw" width="1920" height="1080"></iframe>
             </div>
             <div class="layers">
                 <div>
@@ -68,18 +66,6 @@
                 <div>
                     <input type="radio" name="layer" id="_draw"/>
                     <label for="_draw" aria-label="..."></label>
-                </div>
-                <div>
-                    <input type="radio" name="layer" id="_med"/>
-                    <label for="_med" aria-label="..."></label>
-                </div>
-                <div>
-                    <input type="radio" name="layer" id="_med"/>
-                    <label for="_med" aria-label="..."></label>
-                </div>
-                <div>
-                    <input type="radio" name="layer" id="_med"/>
-                    <label for="_med" aria-label="..."></label>
                 </div>
                 <div>
                     <input type="radio" name="layer" id="_med"/>
@@ -188,13 +174,11 @@
 
                 document.querySelector('section article .layers div:nth-of-type(1) label').setAttribute('aria-label', feature[0].label);
                 document.querySelector('section article .layers div:nth-of-type(2) label').setAttribute('aria-label', media[0].label);
-                document.querySelector('section article .layers div:nth-of-type(3) label').setAttribute('aria-label', media[1].label);
-                document.querySelector('section article .layers div:nth-of-type(4) label').setAttribute('aria-label', "draw");
+                document.querySelector('section article .layers div:nth-of-type(3) label').setAttribute('aria-label', "draw");
 
                 document.querySelector('iframe:nth-of-type(1)').src = `${getPath('PANEL_FEATURE_EMBED')}?featuredName=${feature[0].label}#edit`;
                 document.querySelector('iframe:nth-of-type(2)').src = `${getPath('PANEL_MEDIA_EMBED')}?featuredMedia=${media[0].description}#edit`;
-                document.querySelector('iframe:nth-of-type(3)').src = `${getPath('PANEL_MEDIA_EMBED')}?featuredMedia=${media[1].description}#edit`;
-                document.querySelector('iframe:nth-of-type(4)').src = `${getPath('PANEL_MEDIA_EMBED')}?featuredMedia=${media[2].description}#edit`;
+                document.querySelector('iframe:nth-of-type(3)').src = `${getPath('PANEL_DRAW_EMBED')}`;
 
                 console.log('socketWatchConfig :: set', signals);
             };
