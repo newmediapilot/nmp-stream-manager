@@ -140,7 +140,6 @@ const DASHBOARD_BUTTON_CONFIG = {
         {type: "empty"},
         {type: "empty"},
         {type: "empty"},
-        {type: "empty"},
     ],
 };
 console.log('DASHBOARD_BUTTON_CONFIG.signals.length ::', DASHBOARD_BUTTON_CONFIG.signals.length);
