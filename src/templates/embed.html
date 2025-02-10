@@ -36,10 +36,12 @@
     <meta name="TWITCH_LOGIN" content="https://api.dbdbdbdbdbgroup.com/demo/t/w/i/t/c/h/l/o/g/i/n/">
     <meta name="TWITCH_LOGIN_SUCCESS" content="https://api.dbdbdbdbdbgroup.com/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/">
     <style>
+
         :root {
-            --_feat-layer: 0;
-            --_med-layer: 1;
-            --_draw-layer: 2;
+            --_fld-layer: 0;
+            --_feat-layer: 1;
+            --_med-layer: 2;
+            --_draw-layer: 3;
         }
 
         iframe {
@@ -75,6 +77,7 @@
     <iframe style="z-index: var(--_feat-layer)"></iframe>
     <iframe style="z-index: var(--_med-layer)"></iframe>
     <iframe style="z-index: var(--_draw-layer)"></iframe>
+    <iframe style="z-index: var(--_fld-layer)"></iframe>
     <iframe></iframe>
 </main>
 <script>
@@ -102,6 +105,7 @@
         document.body.querySelectorAll('iframe')[0].src = `${getPath('PANEL_FEATURE_EMBED')}${edit}`;
         document.body.querySelectorAll('iframe')[1].src = `${getPath('PANEL_MEDIA_EMBED')}${edit}`;
         document.body.querySelectorAll('iframe')[2].src = `${getPath('PANEL_DRAW_EMBED')}${edit}`;
+        document.body.querySelectorAll('iframe')[3].src = `${getPath('PANEL_FIELD_EMBED')}${edit}`;
         document.body.querySelectorAll('iframe')[3].src = `${getPath('PANEL_SOUND_EMBED')}${edit}`;
     });
 </script>
