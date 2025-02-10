@@ -216,11 +216,11 @@
     //     res.catch((error) => console.log("API_STYLE_GET :: error:", error.response.data));
     //     res.finally(_ => console.info("API_STYLE_GET :: complete"));
     // });
-    // document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
-    //     let style = payload.split('style:set:')[1];
-    //     document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
-    //     console.log(`socketWatchStyle :: media :: set ${style}`);
-    // }));
+    document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
+        let style = payload.split('style:set:')[1];
+        document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
+        console.log(`socketWatchStyle :: field :: set ${style}`);
+    }));
     // document.addEventListener("DOMContentLoaded", () => socketWatchFieldSet((payload) => {
     //     const urlParams = new URLSearchParams(window.location.search);
     //     const streamerQueryParam = urlParams.get('featuredField');
