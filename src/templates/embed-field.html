@@ -194,16 +194,15 @@
             anime({
                 targets: el,
                 duration: 3000 + Math.random() * 1000,
-                left: ["50%", `${endX}%`],
-                top: ["50%", `${endY}%`],
+                left: ["50%", `100%`],
+                top: ["50%", `100%`],
                 scale: [0, 5],
                 rotateZ: [0, 360],
                 easing: "linear",
-                loop: -1,
-                complete: animateElement
+                complete: () => animateElement(el),
             });
         };
-        document.querySelectorAll('#embed div').forEach(animateElement);
+        document.querySelectorAll('#embed > div').forEach(animateElement);
     });
 </script>
 </body>
