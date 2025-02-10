@@ -107,11 +107,12 @@
         }
 
         #embed div {
+            --font-size: 50px;
             position: absolute;
-            font-size: 32px;
-            width: 32px;
-            height: 32px;
-            line-height: 32px;
+            font-size: var(--font-size);
+            width: var(--font-size);
+            height: var(--font-size);
+            line-height: var(--font-size);
             transform-origin: center;
         }
     </style>
@@ -126,6 +127,62 @@
         <div>⚫</div>
         <div>🟢</div>
         <div>🟡</div>
+        <div>🔶</div>
+        <div>🔷</div>
+        <div>⚪</div>
+        <div>🟠</div>
+        <div>🔺</div>
+        <div>⬛</div>
+        <div>🔵</div>
+        <div>⬜</div>
+        <div>🔴</div>
+        <div>⚫</div>
+        <div>🟢</div>
+        <div>🟡</div>
+        <div>🔶</div>
+        <div>🔷</div>
+        <div>⬛</div>
+        <div>🔵</div>
+        <div>⬜</div>
+        <div>🔴</div>
+        <div>⚫</div>
+        <div>🟢</div>
+        <div>🟡</div>
+        <div>🔶</div>
+        <div>🔷</div>
+        <div>⚪</div>
+        <div>🟠</div>
+        <div>🔺</div>
+        <div>⬛</div>
+        <div>🔵</div>
+        <div>⬜</div>
+        <div>🔴</div>
+        <div>⚫</div>
+        <div>🟢</div>
+        <div>🟡</div>
+        <div>🔶</div>
+        <div>🔷</div>
+        <div>⬛</div>
+        <div>🔵</div>
+        <div>⬜</div>
+        <div>🔴</div>
+        <div>⚫</div>
+        <div>🟢</div>
+        <div>🟡</div>
+        <div>🔶</div>
+        <div>🔷</div>
+        <div>⚪</div>
+        <div>🟠</div>
+        <div>🔺</div>
+        <div>⬛</div>
+        <div>🔵</div>
+        <div>⬜</div>
+        <div>🔴</div>
+        <div>⚫</div>
+        <div>🟢</div>
+        <div>🟡</div>
+        <div>🔶</div>
+        <div>🔷</div>
         <div>🔶</div>
         <div>🔷</div>
         <div>⚪</div>
@@ -175,35 +232,119 @@
     //         window.location.href = (`${window.location.origin}${window.location.pathname}`);
     //     }
     // }));
-    // document.addEventListener("DOMContentLoaded", () => {
-    //     const urlParams = new URLSearchParams(window.location.search);
-    //     const fieldQueryParam = urlParams.get('featuredField');
-    //     if (!fieldQueryParam) {
-    //         console.log('embed-field :: no field found');
-    //     } else {
-    //         document.$field = fieldQueryParam;
-    //     }
-    // });
+    document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const fieldQueryParam = urlParams.get('featuredField');
+        if (!fieldQueryParam) {
+            console.log('embed-field :: no field found');
+        } else {
+            const [type, emoji] = fieldQueryParam.split(",");
+            document.$type = type;
+            document.$emoji = emoji;
+            document.querySelectorAll('#embed > div').forEach(el => {
+                el.innerHTML = document.$emoji;
+            });
+        }
+    });
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.classList.contains('reduced-motion')) {
             return;
         }
-        const animateElement = (el) => {
+        const animateStarfield = (el) => {
             const angle = Math.random() * Math.PI * 2;
             const endX = 50 + Math.cos(angle) * 80;
             const endY = 50 + Math.sin(angle) * 80;
             anime({
                 targets: el,
-                duration: 3000 + Math.random() * 1000,
-                left: ["50%", `100%`],
-                top: ["50%", `100%`],
-                scale: [0, 5],
+                duration: 1000 + Math.random() * 2000,
+                left: ["50%", `${endX}%`],
+                top: ["50%", `${endY}%`],
+                scale: [0, 2],
                 rotateZ: [0, 360],
                 easing: "linear",
-                complete: () => animateElement(el),
+                complete: () => animateStarfield(el),
             });
         };
-        document.querySelectorAll('#embed > div').forEach(animateElement);
+        const animateRain = (el) => {
+            const endX = Math.random() * 100;
+            anime({
+                targets: el,
+                duration: 1000 + Math.random() * 2000,
+                left: [`${endX}%`, `${endX}%`],
+                top: ["-10%", `100%`],
+                rotateZ: [Math.random()*-18, Math.random()*18],
+                easing: "easeInQuad",
+                complete: () => animateRain(el),
+            });
+        };
+        const animateSnow = (el) => {
+            const endX = Math.random() * 100;
+            anime({
+                targets: el,
+                duration: 2500 + Math.random() * 5000,
+                left: [
+                    { value: `${-3 + endX + (Math.random()*3)}%`, duration: 500, easing: "easeInOutSine" },
+                    { value: `${-3 + endX + (Math.random()*3)}%`, duration: 500, easing: "easeInOutSine" },
+                    { value: `${-3 + endX + (Math.random()*3)}%`, duration: 500, easing: "easeInOutSine" },
+                    { value: `${-3 + endX + (Math.random()*3)}%`, duration: 500, easing: "easeInOutSine" },
+                ],
+                top: ["-10%", "110%"],
+                rotateZ: [-180 + Math.random() * 360, -180 + Math.random() * 360],
+                rotateY: [-100 + Math.random() * 200, -100 + Math.random() * 200],
+                easing: "easeInQuad",
+                complete: () => animateSnow(el),
+            });
+        };
+        const animateAsteroid = (el) => {
+            const rect = el.getBoundingClientRect();
+            const startX = (rect.left / window.innerWidth) * 100;
+            const startY = (rect.top / window.innerHeight) * 100;
+            const edges = ["top", "bottom", "left", "right"];
+            const edge = edges[Math.floor(Math.random() * edges.length)];
+            let endX, endY;
+            if (edge === "top") {
+                endX = Math.random() * 100;
+                endY = -5;
+            } else if (edge === "bottom") {
+                endX = Math.random() * 100;
+                endY = 105;
+            } else if (edge === "left") {
+                endX = -5;
+                endY = Math.random() * 100;
+            } else {
+                endX = 105;
+                endY = Math.random() * 100;
+            }
+            anime({
+                targets: el,
+                duration: 1000 + Math.random() * 2000,
+                left: [`${startX}%`, `${endX}%`],
+                top: [`${startY}%`, `${endY}%`],
+                scale: [1, 1],
+                rotateZ: [Math.random() * 360, Math.random() * 360],
+                easing: "linear",
+                complete: () => animateAsteroid(el),
+            });
+        };
+        const animateDroplets = (el) => {
+            const startX = -10 + Math.random() * 110;
+            const startY = -10 + Math.random() * 110;
+            anime({
+                targets: el,
+                duration: 1000 + Math.random() * 3000,
+                left: [`${startX}%`, `${startX}%`],
+                top: [`${startY}%`, `${startY}%`],
+                scale: [0, 2, 0],
+                rotateZ: [Math.random() * 360, Math.random() * 360],
+                easing: "easeOutQuint",
+                complete: () => animateDroplets(el),
+            });
+        };
+        if('starfield' === document.$type) document.querySelectorAll('#embed > div').forEach(animateStarfield);
+        if('rain' === document.$type) document.querySelectorAll('#embed > div').forEach(animateRain);
+        if('snow' === document.$type) document.querySelectorAll('#embed > div').forEach(animateSnow);
+        if('asteroid' === document.$type) document.querySelectorAll('#embed > div').forEach(animateAsteroid);
+        if('droplets' === document.$type) document.querySelectorAll('#embed > div').forEach(animateDroplets);
     });
 </script>
 </body>
