@@ -204,34 +204,34 @@
     document.addEventListener("DOMContentLoaded", () => cssDevWatch());
     document.addEventListener("DOMContentLoaded", () => iframeDetect());
     document.addEventListener("DOMContentLoaded", () => editDetect());
-    // document.addEventListener("DOMContentLoaded", () => socketConnect());
-    // document.addEventListener("DOMContentLoaded", () => socketWatchReload());
-    // document.addEventListener("DOMContentLoaded", () => {
-    //     const processStyle = (style) => {
-    //         document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
-    //         console.log(`processStyle :: set ${style}`);
-    //     };
-    //     const res = axios.get(getPath("API_STYLE_GET"));
-    //     res.then((res) => processStyle(res.data));
-    //     res.catch((error) => console.log("API_STYLE_GET :: error:", error.response.data));
-    //     res.finally(_ => console.info("API_STYLE_GET :: complete"));
-    // });
+    document.addEventListener("DOMContentLoaded", () => socketConnect());
+    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => {
+        const processStyle = (style) => {
+            document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
+            console.log(`processStyle :: set ${style}`);
+        };
+        const res = axios.get(getPath("API_STYLE_GET"));
+        res.then((res) => processStyle(res.data));
+        res.catch((error) => console.log("API_STYLE_GET :: error:", error.response.data));
+        res.finally(_ => console.info("API_STYLE_GET :: complete"));
+    });
     document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
         let style = payload.split('style:set:')[1];
         document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
         console.log(`socketWatchStyle :: field :: set ${style}`);
     }));
-    // document.addEventListener("DOMContentLoaded", () => socketWatchFieldSet((payload) => {
-    //     const urlParams = new URLSearchParams(window.location.search);
-    //     const streamerQueryParam = urlParams.get('featuredField');
-    //     const featuredField = payload.split(':').pop();
-    //     if (streamerQueryParam !== featuredField) {
-    //         window.location.href = (`${window.location.origin}${window.location.pathname}?featuredField=${payload.split(':').pop()}`);
-    //     } else {
-    //         if ('#edit' === window.location.hash) return;
-    //         window.location.href = (`${window.location.origin}${window.location.pathname}`);
-    //     }
-    // }));
+    document.addEventListener("DOMContentLoaded", () => socketWatchFieldSet((payload) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const fieldQueryParam = urlParams.get('featuredField');
+        const featuredField = payload.split(':').pop();
+        if (fieldQueryParam !== featuredField) {
+            window.location.href = (`${window.location.origin}${window.location.pathname}?featuredField=${payload.split(':').pop()}`);
+        } else {
+            if ('#edit' === window.location.hash) return;
+            window.location.href = (`${window.location.origin}${window.location.pathname}`);
+        }
+    }));
     document.addEventListener("DOMContentLoaded", () => {
         const urlParams = new URLSearchParams(window.location.search);
         const fieldQueryParam = urlParams.get('featuredField');
