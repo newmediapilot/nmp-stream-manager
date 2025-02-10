@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Media</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="keyword">
+    <link rel="icon" href="/icon512_rounded.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js?" defer type="text/javascript" crossorigin="anonymous"></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js?" defer type="text/javascript" crossorigin="anonymous"></script>
+    <script src="../client/script/css_dev_watch.js?" defer type="text/javascript"></script>
+    <script src="../client/script/iframe_detect.js?" defer type="text/javascript"></script>
+    <script src="../client/script/edit_detect.js?" defer type="text/javascript"></script>
+    <script src="../client/script/socket.js?" defer type="text/javascript"></script>
+    <script src="../client/script/get_path.js?" defer type="text/javascript"></script>
+    <link href="../client/style/variables.css?" rel="stylesheet">
+    <link href="../client/style/reset.css?" rel="stylesheet">
+    <link href="../client/style/base.css?" rel="stylesheet">
+    <link href="../client/style/iframe.css?" rel="stylesheet">
+    <meta name="INDEX" content="index.html">
+    <meta name="PANEL_DASHBOARD" content="panel-dashboard.html">
+    <meta name="PANEL_ACTIONS" content="panel-actions.html">
+    <meta name="PANEL_LAYOUT" content="panel-layout.html">
+    <meta name="PANEL_DRAW" content="panel-draw.html">
+    <meta name="PANEL_EMBED" content="embed.html">
+    <meta name="PANEL_FEATURE_EMBED" content="embed-field.html">
+    <meta name="PANEL_MEDIA_EMBED" content="embed-media.html">
+    <meta name="PANEL_DRAW_EMBED" content="embed-draw.html">
+    <meta name="PANEL_SOUND_EMBED" content="embed-sound.html">
+    <meta name="API_STYLE_GET" content="https://api.dbdbdbdbdbgroup.com/demo/api/style/get">
+    <meta name="API_CONFIG_GET" content="https://api.dbdbdbdbdbgroup.com/demo/api/config/get">
+    <meta name="API_SIGNAL_CREATE" content="https://api.dbdbdbdbdbgroup.com/demo/api/signal/create">
+    <meta name="API_CONFIG_UPDATE" content="https://api.dbdbdbdbdbgroup.com/demo/api/config/update">
+    <meta name="API_STYLE_UPDATE" content="https://api.dbdbdbdbdbgroup.com/demo/api/style/update">
+    <meta name="API_MEDIA_UPDATE" content="https://api.dbdbdbdbdbgroup.com/demo/api/media/update">
+    <meta name="TWITCH_LOGIN" content="https://api.dbdbdbdbdbgroup.com/demo/t/w/i/t/c/h/l/o/g/i/n/">
+    <meta name="TWITCH_LOGIN_SUCCESS" content="https://api.dbdbdbdbdbgroup.com/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/">
+    <style>
+        #embed {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        #embed[src=''] {
+            visibility: hidden;
+        }
+    </style>
+    <style>
+        :root {
+            --_fld-o: 100.0;
+            --_fld-tX: 50.0;
+            --_fld-tY: 50.0;
+            --_fld-sX: 50.0;
+            --_fld-sY: 50.0;
+            --_fld-rX: 50.0;
+            --_fld-rY: 50.0;
+            --_fld-pZ: 0;
+        }
+    </style>
+    <style id="public_module_styles"></style>
+    <style>
+        @keyframes pulse {
+            0% { opacity: 0; }
+            1% { opacity: 1; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        aside {
+            opacity: 0;
+            border: 20px solid red;
+            background: rgba(255, 0, 0, .50);
+            mix-blend-mode: hard-light;
+            position: absolute;
+            left:0;
+            top:0;
+            width: 100vw;
+            height: 100vh;
+            box-sizing: border-box;
+            transform: scaleX(calc(calc(var(--_fld-sX) * 0.01) + 0.0))
+            scaleY(calc(calc(var(--_fld-sY) * 0.01) + 0.0))
+            rotateX(calc(calc(var(--_fld-rY) * 1.8deg) - 90deg))
+            rotateY(calc(calc(var(--_fld-rX) * -1.8deg) - 90deg))
+            rotateZ(calc(calc(var(--_fld-pZ) * -1.8deg) + 0deg))
+            scaleX(-1);
+        }
+        html.edit aside {
+        }
+        html.selected aside {
+            animation: pulse 1s linear forwards;
+        }
+        html.deselected aside {
+            opacity: 0;
+        }
+        main {
+            perspective: calc(1 * 1920px);
+            transform: translateX(calc(calc(var(--_fld-tX) * -1%) + 50%))
+            translateY(calc(calc(var(--_fld-tY) * -1%) + 50%))
+        }
+        #embed {
+            box-sizing: border-box;
+            opacity: calc(var(--_fld-o) / 100);
+            transform: scaleX(calc(calc(var(--_fld-sX) * 0.01) + 0.0))
+            scaleY(calc(calc(var(--_fld-sY) * 0.01) + 0.0))
+            rotateX(calc(calc(var(--_fld-rY) * 1.8deg) - 90deg))
+            rotateY(calc(calc(var(--_fld-rX) * -1.8deg) - 90deg))
+            rotateZ(calc(calc(var(--_fld-pZ) * -1.8deg) + 0deg))
+            scaleX(-1);
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div id="embed"></div>
+    <aside></aside>
+</main>
+<script>
+    document.addEventListener("DOMContentLoaded", () => cssDevWatch());
+    document.addEventListener("DOMContentLoaded", () => iframeDetect());
+    document.addEventListener("DOMContentLoaded", () => editDetect());
+    document.addEventListener("DOMContentLoaded", () => socketConnect());
+    document.addEventListener("DOMContentLoaded", () => socketWatchReload());
+    document.addEventListener("DOMContentLoaded", () => {
+        const processStyle = (style) => {
+            document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
+            console.log(`processStyle :: set ${style}`);
+        };
+        const res = axios.get(getPath("API_STYLE_GET"));
+        res.then((res) => processStyle(res.data));
+        res.catch((error) => console.log("API_STYLE_GET :: error:", error.response.data));
+        res.finally(_ => console.info("API_STYLE_GET :: complete"));
+    });
+    document.addEventListener("DOMContentLoaded", () => socketWatchStyle((payload) => {
+        let style = payload.split('style:set:')[1];
+        document.head.querySelector('#public_module_styles').innerHTML = `:root{${style};}`;
+        console.log(`socketWatchStyle :: media :: set ${style}`);
+    }));
+    document.addEventListener("DOMContentLoaded", () => socketWatchFieldSet((payload) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const streamerQueryParam = urlParams.get('featuredField');
+        const featuredField = payload.split(':').pop();
+        if (streamerQueryParam !== featuredField) {
+            window.location.href = (`${window.location.origin}${window.location.pathname}?featuredField=${payload.split(':').pop()}`);
+        } else {
+            if ('#edit' === window.location.hash) return;
+            window.location.href = (`${window.location.origin}${window.location.pathname}`);
+        }
+    }));
+    document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const fieldQueryParam = urlParams.get('featuredField');
+        if (!fieldQueryParam) {
+            console.log('embed-field :: no media found');
+        } else {
+            const [name, _, suffix] = fieldQueryParam.split(',');
+            const src = `https://api.dbdbdbdbdbgroup.com/demo/media/${name}.${suffix}`;
+            document.body.querySelector('#embed').setAttribute('src', src);
+            console.log('fieldQueryParam', fieldQueryParam);
+        }
+    });
+</script>
+</body>
+</html>
