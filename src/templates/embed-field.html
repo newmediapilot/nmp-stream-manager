@@ -96,12 +96,12 @@
             position: relative;
             overflow: hidden;
             box-sizing: border-box;
-            opacity: calc(var(--_fld-o) / 100);
+            /*opacity: calc(var(--_fld-o) / 100);*/
             transform:  scaleX(calc(calc(var(--_fld-sX) * 0.01) + 0.0))
                     scaleY(calc(calc(var(--_fld-sY) * 0.01) + 0.0))
                     rotateX(calc(calc(var(--_fld-rY) * 1.8deg) - 90deg))
                     rotateY(calc(calc(var(--_fld-rX) * -1.8deg) - 90deg))
-                    rotateZ(calc(calc(var(--_fld-pZ) * -1.8deg) + 0deg))
+                    rotateZ(calc(calc(var(--_fld-pZ) * -1.8deg) + 0deg));
         }
 
         #embed div {
@@ -347,10 +347,10 @@
         if ('asteroid' === document.$type) document.querySelectorAll('#embed > div').forEach(animateAsteroid);
         if ('droplets' === document.$type) document.querySelectorAll('#embed > div').forEach(animateDroplets);
         if ('#edit' === window.location.hash) {
+            document.querySelectorAll('#embed > div').forEach(animateStarfield);
             document.querySelectorAll('#embed > div').forEach(el => {
                 el.innerHTML = "🪨";
             });
-            document.querySelectorAll('#embed > div').forEach(animateStarfield);
         }
     });
 </script>
