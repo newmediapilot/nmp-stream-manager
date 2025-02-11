@@ -58,6 +58,7 @@
                 <iframe style="z-index: var(--_feat-layer)" name="_feat" width="1920" height="1080"></iframe>
                 <iframe style="z-index: var(--_med-layer)" name="_med" width="1920" height="1080"></iframe>
                 <iframe style="z-index: var(--_draw-layer)" name="_draw" width="1920" height="1080"></iframe>
+                <iframe style="z-index: var(--_fld-layer)" name="_fld" width="1920" height="1080"></iframe>
             </div>
             <div class="layers">
                 <div>
@@ -65,12 +66,16 @@
                     <label for="_feat" aria-label="..."></label>
                 </div>
                 <div>
+                    <input type="radio" name="layer" id="_med"/>
+                    <label for="_med" aria-label="..."></label>
+                </div>
+                <div>
                     <input type="radio" name="layer" id="_draw"/>
                     <label for="_draw" aria-label="..."></label>
                 </div>
                 <div>
-                    <input type="radio" name="layer" id="_med"/>
-                    <label for="_med" aria-label="..."></label>
+                    <input type="radio" name="layer" id="_fld"/>
+                    <label for="_fld" aria-label="..."></label>
                 </div>
             </div>
             <div class="effects">
@@ -99,6 +104,16 @@
                     <input type="range" min="0" max="200" step="1.0" value="200" name="--_draw-o"/>
                     <input type="range" min="0" max="800" step="2.5" value="100" name="--_draw-pZ"/>
                     <input type="range" min="0" max="800" step="2.5" value="100" name="--_draw-pZ"/>
+                    <input type="range" min="0" max="200" step="1.0" value="50" name="--_fld-tX"/>
+                    <input type="range" min="0" max="200" step="1.0" value="50" name="--_fld-tY"/>
+                    <input type="range" min="0" max="200" step="1.0" value="50" name="--_fld-sX"/>
+                    <input type="range" min="0" max="200" step="1.0" value="50" name="--_fld-sY"/>
+                    <input type="range" min="0" max="200" step="2.5" value="100" name="--_fld-rX"/>
+                    <input type="range" min="0" max="200" step="2.5" value="100" name="--_fld-rY"/>
+                    <input type="range" min="0" max="200" step="1.0" value="200" name="--_fld-o"/>
+                    <input type="range" min="0" max="200" step="1.0" value="200" name="--_fld-o"/>
+                    <input type="range" min="0" max="800" step="2.5" value="100" name="--_fld-pZ"/>
+                    <input type="range" min="0" max="800" step="2.5" value="100" name="--_fld-pZ"/>
                     <input type="range" min="0" max="200" step="1.0" value="50" name="--_med-tX"/>
                     <input type="range" min="0" max="200" step="1.0" value="50" name="--_med-tY"/>
                     <input type="range" min="0" max="200" step="1.0" value="50" name="--_med-sX"/>
@@ -176,10 +191,12 @@
                 document.querySelector('section article .layers div:nth-of-type(1) label').setAttribute('aria-label', feature[0].label);
                 document.querySelector('section article .layers div:nth-of-type(2) label').setAttribute('aria-label', media[0].label);
                 document.querySelector('section article .layers div:nth-of-type(3) label').setAttribute('aria-label', "draw");
+                document.querySelector('section article .layers div:nth-of-type(4) label').setAttribute('aria-label', "field");
 
                 document.querySelector('iframe:nth-of-type(1)').src = `${getPath('PANEL_FEATURE_EMBED')}?featuredName=${feature[0].label}#edit`;
                 document.querySelector('iframe:nth-of-type(2)').src = `${getPath('PANEL_MEDIA_EMBED')}?featuredMedia=${media[0].description}#edit`;
-                document.querySelector('iframe:nth-of-type(3)').src = `${getPath('PANEL_DRAW_EMBED')}`;
+                document.querySelector('iframe:nth-of-type(3)').src = `${getPath('PANEL_DRAW_EMBED')}#edit`;
+                document.querySelector('iframe:nth-of-type(4)').src = `${getPath('PANEL_FIELD_EMBED')}#edit`;
 
                 console.log('socketWatchConfig :: set', signals);
             };
