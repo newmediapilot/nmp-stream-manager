@@ -263,7 +263,7 @@
                     -180 + (Math.random() * 360),
                 ],
                 easing: "easeInQuint",
-                complete: () => document.animateStarfield(el),
+                complete: () => document.$animateFunction(el),
             });
         };
         document.animateRain = (el) => {
@@ -275,7 +275,7 @@
                 top: ["-10%", `100%`],
                 rotateZ: [Math.random()*-18, Math.random()*18],
                 easing: "easeInQuint",
-                complete: () => document.animateRain(el),
+                complete: () => document.$animateFunction(el),
             });
         };
         document.animateSnow = (el) => {
@@ -293,7 +293,7 @@
                 rotateZ: [-180 + Math.random() * 360, -180 + Math.random() * 360],
                 rotateY: [-100 + Math.random() * 200, -100 + Math.random() * 200],
                 easing: "easeInQuad",
-                complete: () =>  document.animateSnow(el),
+                complete: () => document.$animateFunction(el),
             });
         };
         document.animateAsteroid = (el) => {
@@ -324,7 +324,7 @@
                 scale: [1, 1],
                 rotateZ: [Math.random() * 360, Math.random() * 360],
                 easing: "linear",
-                complete: () => document.animateAsteroid(el),
+                complete: () => document.$animateFunction(el),
             });
         };
         document.animateDroplets = (el) => {
@@ -338,27 +338,21 @@
                 scale: [0, 2, 0],
                 rotateZ: [Math.random() * 360, Math.random() * 360],
                 easing: "easeOutQuint",
-                complete: () => document.animateDroplets(el),
+                complete: () => document.$animateFunction(el),
             });
         };
-        document.animateNext = (el) =>{
-            if ('starfield' === document.$type) document.querySelectorAll('#embed > div').forEach(document.animateStarfield);
-            if ('rain' === document.$type) document.querySelectorAll('#embed > div').forEach(document.animateRain);
-            if ('snow' === document.$type) document.querySelectorAll('#embed > div').forEach(document.animateSnow);
-            if ('asteroid' === document.$type) document.querySelectorAll('#embed > div').forEach(document.animateAsteroid);
-            if ('droplets' === document.$type) document.querySelectorAll('#embed > div').forEach(document.animateDroplets);
-        };
-        if ('starfield' === document.$type) document.querySelectorAll('#embed > div').forEach(document.animateStarfield);
-        if ('rain' === document.$type) document.querySelectorAll('#embed > div').forEach(document.animateRain);
-        if ('snow' === document.$type) document.querySelectorAll('#embed > div').forEach(document.animateSnow);
-        if ('asteroid' === document.$type) document.querySelectorAll('#embed > div').forEach(document.animateAsteroid);
-        if ('droplets' === document.$type) document.querySelectorAll('#embed > div').forEach(document.animateDroplets);
+        if ('starfield' === document.$type) document.$animateFunction = document.animateStarfield;
+        if ('rain' === document.$type) document.$animateFunction = document.animateRain;
+        if ('snow' === document.$type) document.$animateFunction = document.animateSnow;
+        if ('asteroid' === document.$type) document.$animateFunction = document.animateAsteroid;
+        if ('droplets' === document.$type) document.$animateFunction = document.animateDroplets;
         if ('#edit' === window.location.hash) {
-            document.querySelectorAll('#embed > div').forEach(document.animateStarfield);
+            document.$animateFunction = document.animateStarfield;
             document.querySelectorAll('#embed > div').forEach(el => {
                 el.innerHTML = "🪨";
             });
         }
+        document.querySelectorAll('#embed > div').forEach(document.$animateFunction)
     });
 </script>
 </body>
