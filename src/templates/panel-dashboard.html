@@ -219,6 +219,8 @@
                     buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${label}`);
                 } else if (type === "feature") {
                     buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}:${label}`);
+                } else if (type === "field") {
+                    buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description},${emoji}`);
                 } else {
                     buttonEl.setAttribute('data-href', `${getPath('API_SIGNAL_CREATE')}?type=${type}&description=${description}`);
                 }
