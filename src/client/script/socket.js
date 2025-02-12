@@ -36,7 +36,7 @@ const socketWatchMediaSet = (callback) => {
 const socketWatchFieldSet = (callback) => {
     console.log("socketConnect :: socketWatchFieldSet");
     document.$socketIO.on("payload", (payload) => {
-        payload.startsWith('field:') && callback(payload);
+        payload.startsWith('field:set:') && callback(payload);
     });
 };
 const socketWatchSoundSet = (callback) => {
