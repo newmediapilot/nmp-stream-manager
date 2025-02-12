@@ -146,6 +146,52 @@
             <div class="none">
                 <label id="">
                     <button aria-label="..."></button>
+                    <input type="text" maxlength="25" value="..."/>
+                    <button readonly></button>
+                    <button readonly></button>
+                    <button aria-label="..."></button>
+                </label>
+            </div>
+            <div class="none">
+                <label id="">
+                    <button aria-label="..."></button>
+                    <input type="text" maxlength="25" value="..."/>
+                    <button readonly></button>
+                    <button readonly></button>
+                    <button aria-label="..."></button>
+                </label>
+            </div>
+            <div class="none">
+                <label id="">
+                    <button aria-label="..."></button>
+                    <input type="text" maxlength="25" value="..."/>
+                    <button readonly></button>
+                    <button readonly></button>
+                    <button aria-label="..."></button>
+                </label>
+            </div>
+            <div class="none">
+                <label id="">
+                    <button aria-label="..."></button>
+                    <input type="text" maxlength="25" value="..."/>
+                    <button readonly></button>
+                    <button readonly></button>
+                    <button aria-label="..."></button>
+                </label>
+            </div>
+            <div class="none">
+                <label id="">
+                    <button aria-label="..."></button>
+                    <input type="text" maxlength="25" value="..."/>
+                    <button readonly></button>
+                    <button readonly></button>
+                    <button aria-label="..."></button>
+                </label>
+            </div>
+            <div class="none" aria-label="..."></div>
+            <div class="none">
+                <label id="">
+                    <button aria-label="..."></button>
                     <input type="text" maxlength="25" value=""/>
                     <button readonly></button>
                     <button readonly></button>
@@ -261,6 +307,7 @@
                     signals.find(s => s.type === 'media'),
                     signals.find(s => s.type === 'sound'),
                     signals.find(s => s.type === 'feature'),
+                    signals.find(s => s.type === 'field'),
                     signals.find(s => s.type === 'mark'),
                     signals.find(s => s.type === 'ad'),
                 ].map((signal, index) =>{
@@ -275,6 +322,7 @@
                     ...parsed.filter(s => s.type === 'media'),
                     ...parsed.filter(s => s.type === 'sound'),
                     ...parsed.filter(s => s.type === 'feature'),
+                    ...parsed.filter(s => s.type === 'field'),
                     ...parsed.filter(s => s.type === 'mark'),
                     ...parsed.filter(s => s.type === 'ad'),
                 ]
@@ -306,6 +354,11 @@
                             formEl.querySelector('button:nth-of-type(3)').disabled = "OFF" === visibility;
                         }
                         if (type === 'feature') {
+                            formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
+                            formEl.querySelector('button:nth-of-type(2)').disabled = true;
+                            formEl.querySelector('button:nth-of-type(3)').disabled = true;
+                        }
+                        if (type === 'field') {
                             formEl.querySelector('button:nth-of-type(1)').disabled = "OFF" === visibility;
                             formEl.querySelector('button:nth-of-type(2)').disabled = true;
                             formEl.querySelector('button:nth-of-type(3)').disabled = true;
