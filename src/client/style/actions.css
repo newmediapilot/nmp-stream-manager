@@ -164,6 +164,10 @@ section div.bloodorange, section label.bloodorange, section label.bloodorange + 
     background: var(--color-bloodorange);
 }
 
+section div.lightgreen, section label.lightgreen, section label.lightgreen + #emoji-widget {
+    background: var(--color-lightgreen);
+}
+
 section div.purple, section label.purple, section label.purple + #emoji-widget {
     background: var(--color-purple);
 }
