@@ -52,6 +52,9 @@ async function publicSignalCreate(req, res) {
         if ("style" === type) {
             result = await sendPayload(`style:set:${description}`);
         }
+        if ("field" === type) {
+            result = await sendPayload(`field:set:${description}`);
+        }
         if ("browser" === type) {
             if ("reload" === description) {
                 result = await sendPayload("browser:reload");
