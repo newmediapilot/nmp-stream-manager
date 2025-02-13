@@ -38,6 +38,7 @@ const actionsCreateEmojis = (editorEl) => {
                         },
                     }).finally(() => {
                         socketEmitReload();
+                        emojiWidgetTriggerEl.click();
                     })
                 });
             });
