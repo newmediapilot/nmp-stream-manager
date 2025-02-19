@@ -224,7 +224,14 @@
         const fieldQueryParam = urlParams.get('featuredField');
         const featuredField = payload.split(':').pop();
         if (fieldQueryParam !== featuredField) {
-            window.location.href = (`${window.location.origin}${window.location.pathname}?featuredField=${payload.split(':').pop()}`);
+            // window.location.href = (`${window.location.origin}${window.location.pathname}?featuredField=${payload.split(':').pop()}`);
+            const [type, emoji] = featuredField.split(",");
+            document.$type = type;
+            document.$emoji = emoji;
+            document.querySelectorAll('#embed > div').forEach(el => {
+                el.innerHTML = document.$emoji;
+            });
+            document.setField();
         } else {
             if ('#edit' === window.location.hash) return;
             window.location.href = (`${window.location.origin}${window.location.pathname}`);
@@ -341,18 +348,24 @@
                 complete: () => document.$animateFunction(el),
             });
         };
-        if ('starfield' === document.$type) document.$animateFunction = document.animateStarfield;
-        if ('rain' === document.$type) document.$animateFunction = document.animateRain;
-        if ('snow' === document.$type) document.$animateFunction = document.animateSnow;
-        if ('asteroid' === document.$type) document.$animateFunction = document.animateAsteroid;
-        if ('droplets' === document.$type) document.$animateFunction = document.animateDroplets;
+        document.setField =() =>{
+            if(!document.$type) document.$animateFunction = document.animateStarfield;
+            if ('starfield' === document.$type) document.$animateFunction = document.animateStarfield;
+            if ('rain' === document.$type) document.$animateFunction = document.animateRain;
+            if ('snow' === document.$type) document.$animateFunction = document.animateSnow;
+            if ('asteroid' === document.$type) document.$animateFunction = document.animateAsteroid;
+            if ('droplets' === document.$type) document.$animateFunction = document.animateDroplets;
+        };
         if ('#edit' === window.location.hash) {
             document.$animateFunction = document.animateStarfield;
             document.querySelectorAll('#embed > div').forEach(el => {
                 el.innerHTML = "🪨";
             });
-        }
-        document.querySelectorAll('#embed > div').forEach(document.$animateFunction)
+        };
+        document.setField();
+        document.querySelectorAll('#embed > div').forEach(
+            document.$animateFunction
+        );
     });
 </script>
 </body>
