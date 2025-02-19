@@ -329,6 +329,7 @@
                 top: [`${startY}%`, `${endY}%`],
                 scale: [1, 1],
                 rotateZ: [Math.random() * 360, Math.random() * 360],
+                rotateY: [null, 0],
                 easing: "linear",
                 complete: () => document.$animateFunction(el),
             });
@@ -343,6 +344,7 @@
                 top: [`${startY}%`, `${startY}%`],
                 scale: [0, 2, 0],
                 rotateZ: [Math.random() * 360, Math.random() * 360],
+                rotateY: [null, 0],
                 easing: "easeOutQuint",
                 complete: () => document.$animateFunction(el),
             });
