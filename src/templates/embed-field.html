@@ -224,7 +224,6 @@
         const fieldQueryParam = urlParams.get('featuredField');
         const featuredField = payload.split(':').pop();
         if (fieldQueryParam !== featuredField) {
-            // window.location.href = (`${window.location.origin}${window.location.pathname}?featuredField=${payload.split(':').pop()}`);
             const [type, emoji] = featuredField.split(",");
             document.$type = type;
             document.$emoji = emoji;
