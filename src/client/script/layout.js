@@ -50,8 +50,8 @@ const castLayoutInputValues = () => {
 const initializeLayoutClickTouch = () => {
     Array.from(document.body.querySelectorAll('.controls label')).forEach((label) => {
         label.addEventListener('mousedown', (e) => {
-            label.addEventListener('mousemove', castLayoutInputValues);
             castLayoutInputValues();
+            label.addEventListener('mousemove', castLayoutInputValues);
         });
         label.addEventListener('mouseup', (e) => {
             label.removeEventListener('mousemove', castLayoutInputValues);
@@ -59,8 +59,8 @@ const initializeLayoutClickTouch = () => {
             setModes();
         });
         label.addEventListener('touchstart', (e) => {
-            label.addEventListener('touchmove', castLayoutInputValues, {passive: true});
             castLayoutInputValues();
+            label.addEventListener('touchmove', castLayoutInputValues, {passive: true});
         }, {passive: true});
         label.addEventListener('touchend', (e) => {
             label.removeEventListener('touchmove', castLayoutInputValues);
