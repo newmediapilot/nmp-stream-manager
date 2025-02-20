@@ -11,10 +11,6 @@ const socketConnect = () => {
     });
     console.log("socketConnect :: socket connection start");
 };
-const socketWatchSyncDone = (callback) => {
-    console.log("socketConnect :: socketWatchSyncDone");
-    document.$socketIO.on("sync:done", ()=> callback());
-};
 const socketWatchStyle = (callback) => {
     console.log("socketConnect :: socketWatchStyle");
     document.$socketIO.on("payload", (payload) => {
