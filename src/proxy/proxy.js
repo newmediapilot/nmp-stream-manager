@@ -156,12 +156,10 @@ const memorize = (req, key) => {
         media[hash][`${name}.${type}`] = Buffer.from(data, 'base64');
         console.log(`proxy :: API_MEDIA_UPDATE :: ${media[hash]} ${hash} ${name}.${type}`);
         memorize(req, key);
-    });
-    app.all(`/${key}${ROUTES.API_SIGNAL_CREATE}`, (req, res) => {
-        memorize(req, key);
         res.send(`200 @ ${time}`);
     });
     [
+        `/${key}${ROUTES.API_SIGNAL_CREATE}`,
         `/${key}${ROUTES.API_CONFIG_UPDATE}`,
         `/${key}${ROUTES.API_STYLE_UPDATE}`,
     ].map(path => {
