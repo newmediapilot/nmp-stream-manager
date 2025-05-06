@@ -40,7 +40,6 @@ const dashboard = () => {
                 left: 0,
                 behavior: 'smooth'
             });
-            socketEmitReload();
         });
     });
     document.querySelectorAll('section article button').forEach((button) => {
