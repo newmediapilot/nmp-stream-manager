@@ -24,9 +24,7 @@ const ROUTES = {
     TWITCH_LOGIN: "/t/w/i/t/c/h/l/o/g/i/n/",
     TWITCH_LOGIN_SUCCESS: "/t/w/i/t/c/h/l/o/g/i/n/s/u/c/c/e/s/s/",
 };
-const time = new Date().getTime();
-const salt = ((n) => Array.from({length: n}, () => String.fromCharCode(97 + Math.floor(Math.random() * 26))).join(''))(5);
-const hashify = (ip, key) => `${ip}${key}${salt}`;
+const hashify = (ip, key) => `${ip}_${key}`;
 const memory = {};
 const media = {};
 const config = {};
