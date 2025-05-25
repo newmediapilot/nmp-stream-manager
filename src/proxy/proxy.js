@@ -64,7 +64,7 @@ const memorize = (req, key) => {
         if (!sockets[hash]) return;
         config[hash] = req.query.payload;
         console.log(`proxy :: API_CONFIG_SET :: ${hash} ${JSON.stringify(config[hash]).substr(0, 50)}...`);
-        res.send(`200 @ ${time}`);
+        res.send(`200 @`);
     });
     app.all(`/${key}${ROUTES.API_CONFIG_GET}`, (req, res) => {
         const hash = hashify(req.ip, key);
@@ -77,7 +77,7 @@ const memorize = (req, key) => {
         if (!sockets[hash]) return;
         style[hash] = req.query.payload;
         console.log(`proxy :: API_STYLE_SET :: ${hash} ${style[hash]}`);
-        res.send(`200 @ ${time}`);
+        res.send(`200 @`);
     });
     app.all(`/${key}${ROUTES.API_STYLE_GET}`, (req, res) => {
         const hash = hashify(req.ip, key);
@@ -97,26 +97,26 @@ const memorize = (req, key) => {
             media[hash][reqPath] = Buffer.from(reqPayload, 'base64');
             console.log(`proxy :: API_MEMORY_SET :: ${reqPayload.length}`);
         }
-        res.send(`200 @ ${time}`);
+        res.send(`200 @`);
     });
     app.all(`/${key}${ROUTES.API_MEMORY_GET}`, (req, res) => {
         const hash = hashify(req.ip, key);
         res.setHeader('Content-Type', 'application/json');
         res.send(memory[hash]);
-        console.log(`proxy :: API_MEMORY_GET :: ${memory[hash].length}`);
         memory[hash] = [];
+        console.log(`proxy :: API_MEMORY_GET :: ${memory[hash].length}`);
     });
     app.all(`/${key}${ROUTES.API_MEDIA_GET}`, (req, res) => {
         const hash = hashify(req.ip, key);
-        if (!media[hash]) return res.status(404).send(`404 @ media ${time}`);
+        if (!media[hash]) return res.status(404).send(`404 @ no media`);
         const keys = Object.keys(media[hash]);
-        if (!keys.length) return res.status(404).send(`404 @ keys ${time}`);
+        if (!keys.length) return res.status(404).send(`404 @ no  keys`);
         const reqPath = req.params.path;
         const reqPayload = keys
             .filter(k => k.includes(reqPath))
             .map(k => media[hash][k])
             .pop();
-        if (!reqPayload) return res.status(404).send(`404 @ payload ${time}`);
+        if (!reqPayload) return res.status(404).send(`404 @ no  payload`);
         console.log(`proxy :: API_MEDIA_GET :: keys :: ${Object.keys(media[hash])} :1: ${reqPath} :2: ${reqPayload ? reqPayload.length : reqPayload}`);
         const mimeType = (() => {
             switch (path.extname(reqPath).toLowerCase()) {
@@ -154,7 +154,7 @@ const memorize = (req, key) => {
         media[hash][`${name}.${type}`] = Buffer.from(data, 'base64');
         console.log(`proxy :: API_MEDIA_UPDATE :: ${media[hash]} ${hash} ${name}.${type}`);
         memorize(req, key);
-        res.send(`200 @ ${time}`);
+        res.send(`200 @`);
     });
     [
         `/${key}${ROUTES.API_SIGNAL_CREATE}`,
@@ -163,11 +163,11 @@ const memorize = (req, key) => {
     ].map(path => {
         app.all(path, (req, res) => {
             memorize(req, key);
-            res.send(`200 @ ${time}`);
+            res.send(`200 @`);
         });
     });
 });
-app.all('/', (req, res) => res.send(`200 @ ${time}`));
+app.all('/', (req, res) => res.send(`200 @`));
 const server = https
     .createServer({
         key: `${fs.readFileSync('.cert/cert.key', {encoding: "utf-8"})}`,
